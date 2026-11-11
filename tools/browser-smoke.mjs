@@ -289,10 +289,19 @@ try {
     const wheel=async delta=>{
       await idle();
       const input=await frame.evaluate(()=>window.__showcaseSmokeWork.inputs);
+      const startedAt=await frame.evaluate(()=>performance.now());
       await page.mouse.wheel(0,delta);
-      await inputSent(input);await idle();
+      const outcome=await frame.waitForFunction(({input,startedAt})=>{
+        const event=[...(window.__showcaseSmokeNativeInputs||[])].reverse().find(value=>value.type==='wheel'&&value.time>=startedAt);
+        if(!event)return null;
+        if(event.target==='CANVAS'&&event.inputEnabled==='false')return 'fenced';
+        if(event.target==='CANVAS'&&window.__showcaseSmokeWork.inputs>input)return 'accepted';
+        return null;
+      },{input,startedAt},{timeout:3000});
+      if(outcome==='fenced')await frame.waitForFunction(()=>document.documentElement.dataset.inputEnabled==='true',null,{timeout:15000});
+      await idle();
       assert.equal(await page.evaluate(()=>scrollY),outerBefore,scene+' wheel leaked to the website');
-      const offset=bodyScroll(await nodes());samples.push({delta,offset});return offset;
+      const offset=bodyScroll(await nodes());samples.push({delta,offset,outcome});return offset;
     };
     for(let i=0;i<15;i++){const before=bodyScroll(await nodes());if(await wheel(-650)===before)break;}
     assert.equal(bodyScroll(await nodes()),0,scene+' did not reach its top');
