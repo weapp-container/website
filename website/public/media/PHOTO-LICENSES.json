@@ -1,0 +1,125 @@
+[
+  {
+    "name": "bottle",
+    "path": "miniapp/assets/bottle.jpg",
+    "source": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=640&h=640&q=82",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "bytes": 19969,
+    "sha256": "022bf7ace02fbe367baf2da0da38b5b6d0bd68262827961c9c9da999713dd116"
+  },
+  {
+    "name": "mug",
+    "path": "miniapp/assets/mug.jpg",
+    "source": "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=640&h=640&q=82",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "bytes": 18190,
+    "sha256": "c6dd3feba7c213f2339a04e095da61a9555b512bc639779e82e587dfd008b9cb"
+  },
+  {
+    "name": "headphones",
+    "path": "miniapp/assets/headphones.jpg",
+    "source": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=640&h=640&q=82",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "bytes": 47690,
+    "sha256": "902fec8495a675d35310669b2736986f28402007a899e9702d1d48442e8ff44f"
+  },
+  {
+    "name": "bag",
+    "path": "miniapp/assets/bag.jpg",
+    "source": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=640&h=640&q=82",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "bytes": 45461,
+    "sha256": "b52771a7933fc11e53836de7145d4c051d25b4a8d796cc1778ac3e035765411f"
+  },
+  {
+    "name": "coffee",
+    "path": "miniapp/assets/coffee.jpg",
+    "source": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=640&h=640&q=82",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "bytes": 72182,
+    "sha256": "431a60d279e16e39594835c98440a42ef656dfaeeafa6236f62dcdeed20e1083"
+  },
+  {
+    "name": "salad",
+    "path": "miniapp/assets/salad.jpg",
+    "source": "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=640&h=640&q=82",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "bytes": 135710,
+    "sha256": "0b626a264899f15edb08c69d926cd677dc0b3a48d727138640a13f00bb54bb55"
+  },
+  {
+    "name": "pizza",
+    "path": "miniapp/assets/pizza.jpg",
+    "source": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=640&h=640&q=82",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "bytes": 125628,
+    "sha256": "6ea622ac0996f4d3f80d80a66cf1581a56d3f745dda6ba8d03af9a66b10b4673"
+  },
+  {
+    "name": "shop-editorial",
+    "path": "website/public/media/shop-editorial.jpg",
+    "publicPath": "/media/shop-editorial.jpg",
+    "source": "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=640&h=640&q=82",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "bytes": 13291,
+    "sha256": "3487e24d1a0bc48eb9b3ff552e47eafefdfc24150cf66d0c1aa54272550483d3",
+    "width": 840,
+    "height": 480,
+    "derivedFrom": {
+      "path": "miniapp/assets/mug.jpg",
+      "bytes": 18190,
+      "sha256": "c6dd3feba7c213f2339a04e095da61a9555b512bc639779e82e587dfd008b9cb"
+    },
+    "transform": {
+      "tool": "sharp",
+      "version": "0.34.5",
+      "libvips": "8.17.3",
+      "resize": {
+        "width": 840,
+        "height": 480,
+        "fit": "cover"
+      },
+      "jpeg": {
+        "quality": 86
+      }
+    }
+  },
+  {
+    "name": "coffee-editorial",
+    "path": "website/public/media/coffee-editorial.jpg",
+    "publicPath": "/media/coffee-editorial.jpg",
+    "source": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=640&h=640&q=82",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "bytes": 64221,
+    "sha256": "8d6494b17763de48553e96d02551ca44952e8a6f3ee21ff433346bce22568a4f",
+    "width": 640,
+    "height": 600,
+    "derivedFrom": {
+      "path": "miniapp/assets/coffee.jpg",
+      "bytes": 72182,
+      "sha256": "431a60d279e16e39594835c98440a42ef656dfaeeafa6236f62dcdeed20e1083"
+    },
+    "transform": {
+      "tool": "sharp",
+      "version": "0.34.5",
+      "libvips": "8.17.3",
+      "resize": {
+        "width": 640,
+        "height": 600,
+        "fit": "cover"
+      },
+      "jpeg": {
+        "quality": 86
+      }
+    }
+  }
+]

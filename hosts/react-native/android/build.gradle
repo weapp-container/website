@@ -1,0 +1,23 @@
+buildscript {
+    ext {
+        buildToolsVersion = "37.0.0"
+        minSdkVersion = 24
+        // The restricted RN native producer is built against API 36; keep the
+        // consumer on the same platform so R8 resolves its Android API refs.
+        compileSdkVersion = 36
+        targetSdkVersion = 36
+        ndkVersion = "27.1.12297006"
+        kotlinVersion = "2.2.0"
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle")
+        classpath("com.facebook.react:react-native-gradle-plugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+    }
+}
+
+apply plugin: "com.facebook.react.rootproject"

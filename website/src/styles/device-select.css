@@ -1,0 +1,29 @@
+.device-select-label{display:block;margin-bottom:8px;font-size:11px;color:var(--muted)}
+.device-select-trigger{display:flex;align-items:center;gap:10px;width:100%;min-height:66px;padding:11px 12px;text-align:left;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);box-shadow:0 2px 4px #17231d03}
+.device-select-trigger:hover:not(:disabled){border-color:color-mix(in srgb,var(--accent) 45%,var(--line));background:var(--surface)}
+.device-select-trigger[data-popup-open]{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.device-select-trigger:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.device-select-trigger:disabled{opacity:.55;cursor:wait}
+.device-select-outline{display:grid;place-items:center;flex-shrink:0;width:36px;height:38px;color:var(--muted)}
+.device-select-copy{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.device-select-name{font-size:12px;font-weight:600;line-height:1.5;letter-spacing:-.015em;white-space:nowrap}
+.device-select-trigger .device-select-name{overflow:hidden;text-overflow:ellipsis}
+.device-select-metrics{display:flex;align-items:center;gap:12px;font-size:10px;font-weight:400;line-height:1.5;font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+.device-select-caret{display:flex;color:var(--muted);margin-left:auto;flex-shrink:0}
+.device-select-trigger[data-popup-open] .device-select-outline,.device-select-trigger[data-popup-open] .device-select-caret{color:var(--accent)}
+.device-select-positioner{z-index:50;outline:0}
+.device-select-popup{width:max(var(--anchor-width),292px);max-width:var(--available-width);max-height:var(--available-height);display:flex;flex-direction:column;overflow:hidden;outline:0;padding:6px;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--text);box-shadow:0 18px 50px #081b1529,0 3px 10px #081b150a;transform-origin:var(--transform-origin)}
+.device-select-heading{display:flex;align-items:center;justify-content:space-between;flex-shrink:0;padding:9px 11px 11px;margin-bottom:4px;border-bottom:1px solid var(--line);font-size:10px;font-weight:500;color:var(--muted)}
+.device-select-heading>span:last-child{display:grid;place-items:center;min-width:20px;height:20px;padding-inline:5px;border-radius:5px;background:var(--surface-soft);font-variant-numeric:tabular-nums}
+.device-select-list{min-height:0;overflow-y:auto;overscroll-behavior:contain;scroll-padding:6px;outline:0}
+.device-select-item{display:flex;align-items:center;gap:12px;min-height:63px;padding:9px 11px;border-radius:10px;outline:0;cursor:pointer;user-select:none;touch-action:manipulation}
+.device-select-item+.device-select-item{margin-top:2px}
+.device-select-item .device-select-name{font-size:13px}
+.device-select-item[data-selected]{background:var(--accent-soft)}
+.device-select-item[data-selected] .device-select-name,.device-select-item[data-selected] .device-select-outline{color:var(--accent)}
+.device-select-item[data-highlighted]{background:var(--surface-soft);box-shadow:inset 0 0 0 1px var(--line)}
+.device-select-item[data-selected][data-highlighted]{background:var(--accent-soft);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 30%,transparent)}
+.device-select-dpr{color:var(--muted);font-size:9px;opacity:.8}
+.device-select-check{display:grid;place-items:center;flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--inverse);margin-left:auto}
+@media(prefers-reduced-motion:no-preference){.device-select-trigger{transition:border-color .16s,box-shadow .16s,background .16s}.device-select-popup{transition:opacity .14s,transform .14s}.device-select-popup[data-starting-style],.device-select-popup[data-ending-style]{opacity:0;transform:translateY(-4px) scale(.98)}}
+@media(max-width:767px){.device-select-trigger{min-height:68px;padding-inline:14px;gap:12px}.device-select-trigger .device-select-name{font-size:14px}.device-select-metrics{font-size:11px}.device-select-popup{width:max(var(--anchor-width),292px)}.device-select-item{min-height:66px}}

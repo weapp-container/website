@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import {readFile,mkdir,rm} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
+import {resolve,dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {installWebRuntime} from './install-web-runtime.mjs';
+import {stageWebRuntime} from './stage-web-runtime.mjs';
+import {miniappSources} from './build-miniapp.mjs';
+
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+const pin=JSON.parse(await readFile(resolve(root,'platforms/web-runtime.pin.json')));
+assert.equal(pin.schemaVersion,1);assert.equal(pin.repository,'weapp-container/showcase');
+assert.match(pin.releaseTag,/^showcase-v0\.1\.0-preview\.6\.0(?:-candidate\d+)?$/);
+assert.match(pin.fileName,/^[a-z0-9.-]+\.tar\.gz$/);
+const sha=value=>createHash('sha256').update(value).digest('hex');
+const source=(await miniappSources(resolve(root,'miniapp'))).map(file=>({path:file.path,size:file.bytes.length,sha256:sha(file.bytes)}));
+assert.equal(sha(JSON.stringify(source,null,2)+'\n'),pin.sourceInventorySha256,'Demo source differs from the locked binary; rebuild the candidate');
+const downloads=resolve(root,'artifacts/downloads');await mkdir(downloads,{recursive:true});
+const download=spawnSync('gh',['release','download',pin.releaseTag,'--repo',pin.repository,'--pattern',pin.fileName,'--dir',downloads,'--clobber'],{stdio:'inherit'});
+assert.equal(download.status,0,'Private runtime download failed');
+const installed=await installWebRuntime({manifest:resolve(root,'platforms/web-runtime-artifacts.lock.json'),manifestSha256:pin.manifestSha256,archive:resolve(downloads,pin.fileName)});
+assert.equal(installed.receiptSha256,pin.receiptSha256);assert.equal(installed.packRoot,pin.packRoot);assert.equal(installed.policySha256,pin.policySha256);
+console.log(JSON.stringify(await stageWebRuntime({runtimeDirectory:installed.destination,receiptSha256:pin.receiptSha256}),null,2));

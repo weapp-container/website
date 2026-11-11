@@ -1,0 +1,55 @@
+name: Public site acceptance
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Fixed public site to verify
+        type: choice
+        options: [staging, production]
+        default: staging
+      mode:
+        description: Complete business flow or repeated native scroll validation
+        type: choice
+        options: [devices, smoke, scroll-stability]
+        default: devices
+permissions:
+  contents: read
+concurrency:
+  group: showcase-public-${{ inputs.target || 'staging' }}
+  cancel-in-progress: false
+jobs:
+  acceptance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.18.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Real public browser and HTTP acceptance
+        env:
+          SITE_TARGET: ${{ inputs.target || 'staging' }}
+          SMOKE_MODE: ${{ inputs.mode || 'devices' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "$SITE_TARGET" in
+            staging) site_url=https://staging.container.weapp.dev ;;
+            production) site_url=https://container.weapp.dev ;;
+            *) exit 1 ;;
+          esac
+          node tools/browser-smoke.mjs --url "$site_url" --mode "$SMOKE_MODE" --output artifacts/web/public-site
+          node tools/http-smoke.mjs --url "$site_url" --output artifacts/web/public-site/http.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: public-${{ inputs.target || 'staging' }}-acceptance
+          path: artifacts/web/public-site/
+          retention-days: 30

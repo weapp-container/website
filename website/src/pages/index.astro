@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout>
+  <section class="hero section-wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">WEAPP CONTAINER</p>
+      <h1>小程序，<br />运行在更多地方。</h1>
+      <p class="hero-intro">把熟悉的小程序体验带到浏览器、手机与桌面。<br class="desktop-break" />一份页面与业务逻辑，连接不同的原生宿主。</p>
+      <div class="hero-actions"><a class="button primary" href="/demo/">打开在线演示 <span aria-hidden="true">↗</span></a><a class="text-link" href="/guide/">了解如何接入 <span aria-hidden="true">→</span></a></div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-device"><img src="/media/demo-shop.png" width="750" height="1440" alt="Weapp Container 商城演示真实运行截图" fetchpriority="high" /><span class="device-camera" aria-hidden="true"></span></div>
+      <div class="hero-caption"><span class="caption-mark" aria-hidden="true">↗</span><div><strong>从一次点击开始</strong><p>浏览、加购、下单，亲手体验。</p></div></div>
+    </div>
+  </section>
+  <section class="platform-strip section-wrap" aria-label="目标运行平台"><span>面向七个宿主</span><div><span>Web</span><span>Android</span><span>iOS</span><span>HarmonyOS</span><span>macOS</span><span>Windows</span><span>Linux</span></div><a href="/platforms/">查看验证进展 →</a></section>
+  <section class="section-wrap experience-section">
+    <div class="section-heading"><h2>不止能看，还能操作。</h2><p>三个演示场景，共用一份真实小程序产物。</p></div>
+    <div class="experience-grid">
+      <a class="experience experience-shop" href="/demo/?scene=shop"><div class="experience-copy"><span class="experience-tag">商城</span><h3>把喜欢的东西<br />加入购物车。</h3><p>商品、规格、地址与模拟结算。</p><span class="round-arrow" aria-hidden="true">↗</span></div><img src="/media/shop-editorial.jpg" width="840" height="720" alt="日常用品的产品摄影" loading="lazy" /></a>
+      <a class="experience experience-order" href="/demo/?scene=order"><img src="/media/coffee-editorial.jpg" width="640" height="600" alt="咖啡与餐食的演示场景" loading="lazy" /><div class="experience-copy"><span class="experience-tag">点单</span><h3>来一杯，刚刚好。</h3><p>选菜单、调规格、写备注，等一份模拟订单。</p><span class="round-arrow" aria-hidden="true">↗</span></div></a>
+      <a class="experience experience-basic" href="/demo/?scene=basic"><div class="experience-copy"><span class="experience-tag">基础能力</span><h3>小交互，也认真。</h3><p>点击、滚动、组件、存储与宿主输入。</p><span class="round-arrow" aria-hidden="true">↗</span></div><img src="/media/demo-basic.png" width="750" height="1440" alt="基础能力演示真实截图" loading="lazy" /></a>
+    </div>
+  </section>
+  <section class="section-wrap architecture-section">
+    <div class="section-heading"><h2>页面相同，宿主各有所长。</h2><p>业务运行在独立的 JavaScript 环境，页面交给统一渲染管线，文字输入交给熟悉的系统控件。</p></div>
+    <div class="architecture"><div><span class="arch-symbol">{ }</span><h3>一份小程序</h3><p>WXML、WXSS 与业务 JavaScript</p></div><span class="arch-line" aria-hidden="true">→</span><div><img src="/favicon.svg" width="46" height="46" alt="" /><h3>Weapp Container</h3><p>QuickJS 运行时与 Skia 渲染</p></div><span class="arch-line" aria-hidden="true">→</span><div><span class="arch-symbol">▣</span><h3>不同的宿主</h3><p>Web、原生、Flutter 与 React Native</p></div></div>
+  </section>
+  <section class="section-wrap closing-section"><div><h2>先体验，再决定怎么接入。</h2><p>无需安装。打开浏览器，试一次完整流程。</p></div><a class="button primary" href="/demo/">开始体验 ↗</a></section>
+</Layout>

@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - weapp_container_ios (0.1.0-preview.6.0):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - weapp_container_ios (from `.symlinks/plugins/weapp_container_ios/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  weapp_container_ios:
+    :path: ".symlinks/plugins/weapp_container_ios/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 71a624a5bc0c04062bf19101d501e466baf2fb47
+  weapp_container_ios: 3eec7f429af3b6145f3c49c7beadf319ae6d822e
+
+PODFILE CHECKSUM: 465b9207b7dc0115b1c5db504af0f562f542cd66
+
+COCOAPODS: 1.17.0

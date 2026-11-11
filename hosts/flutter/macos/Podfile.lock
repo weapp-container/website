@@ -1,0 +1,22 @@
+PODS:
+  - FlutterMacOS (1.0.0)
+  - weapp_container_macos (0.1.0-preview.6.0):
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - FlutterMacOS (from `Flutter/ephemeral`)
+  - weapp_container_macos (from `Flutter/ephemeral/.symlinks/plugins/weapp_container_macos/macos`)
+
+EXTERNAL SOURCES:
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+  weapp_container_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/weapp_container_macos/macos
+
+SPEC CHECKSUMS:
+  FlutterMacOS: c232990155153907050900a2e175c7773903ba4e
+  weapp_container_macos: d172e3068a86ba8067161c8d6d355b6a8e92f208
+
+PODFILE CHECKSUM: b29c75ad2244d119e121dd21734fd937374ad360
+
+COCOAPODS: 1.17.0

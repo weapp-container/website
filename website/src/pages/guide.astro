@@ -1,0 +1,7 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="开始接入 · Weapp Container">
+  <section class="section-wrap page-intro"><p class="eyebrow">开始接入</p><h1>业务归业务，宿主归宿主。</h1><p>小程序负责页面与业务，SDK 负责生命周期、呈现和原生能力边界。</p></section>
+  <section class="section-wrap guide-content"><article><h2>先体验这份样例</h2><p>在线演示包含基础能力、商城与点单。页面和业务由同一份 portable pack 提供，原生客户端加载相同的包。</p><a class="text-link" href="/demo/">打开在线体验 →</a></article><article><h2>从源码构建接入产物</h2><p>核心运行时、SDK 和 Showcase 自有源码采用 Apache-2.0。可从主仓库构建匹配的运行库；历史预编译产物保留原许可与访问要求，安装时继续严格核对版本和哈希。</p><a class="text-link" href="https://github.com/weapp-container/showcase" target="_blank" rel="noreferrer">访问展示源码仓库 ↗</a></article><article><h2>连接宿主能力</h2><p>搜索、地址和点单备注通过宿主的原生输入控件编辑，再经消息通道返回小程序。演示状态保存于当前浏览器或应用的私有存储，可随时重置。</p><p>这是宿主输入桥接演示，不表示所有平台已支持完整的小程序原生输入控件。</p></article><article id="license"><h2>许可与使用范围</h2><p>核心运行时、SDK 与展示源码采用 Apache-2.0；单独标识的双许可证组件和第三方资源保留各自许可。已交付的历史二进制继续以随附许可证为准。</p><p>演示版仅允许内置样例和必要能力，不提供真实登录、支付、任意包加载或开发调试。在线演示不构成完整微信兼容性、硬件或性能承诺。</p><p>下载权限与使用许可分别管理，以实际产物随附的许可和适用协议为准。</p></article></section>
+</Layout>

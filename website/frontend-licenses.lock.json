@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 1,
+  "kind": "showcase-frontend-license-lock",
+  "packageLockSha256": "8de2c7b563b0cf0967cb5b120057cd2943c5366a52d5f643506cb1d1b4e20765",
+  "scope": "Reviewed conservative package set; each production client chunk is checked against it during generateBundle. Vite and Rolldown are retained for generated runtime helpers.",
+  "packages": [
+    {
+      "name": "@astrojs/react",
+      "version": "7.1.2",
+      "license": "MIT",
+      "packageJsonSha256": "9cab044744629472b9286641cd29f5b0426bf1a003f584d0d80472fc8c18ee0d",
+      "files": [
+        {
+          "path": "astrojs--react-7.1.2/LICENSE",
+          "size": 3628,
+          "sha256": "4aa72be797aad0e5e21827eaae6a1df9e122d7a401f07d2c308a6b9a5f0e1278"
+        }
+      ]
+    },
+    {
+      "name": "@babel/runtime",
+      "version": "8.1.0",
+      "license": "MIT",
+      "packageJsonSha256": "e7fb0185faf2e1c46d62d5e4103f401eb98ac616d3af18a76d263076df894383",
+      "files": [
+        {
+          "path": "babel--runtime-8.1.0/LICENSE",
+          "size": 1106,
+          "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+        }
+      ]
+    },
+    {
+      "name": "@base-ui/react",
+      "version": "1.9.0",
+      "license": "MIT",
+      "packageJsonSha256": "29c2b0a1b941bdc5335ed31e31f40231dc0ad3b96343c92715029d18a32e42c3",
+      "files": [
+        {
+          "path": "base-ui--react-1.9.0/LICENSE",
+          "size": 1072,
+          "sha256": "07fc1b39d69d14bc7d40482a628f47226258eb01265db68ae684944b916beb2a"
+        }
+      ]
+    },
+    {
+      "name": "@base-ui/utils",
+      "version": "0.5.0",
+      "license": "MIT",
+      "packageJsonSha256": "8dd5a18ad33b363c285872446029ee8947667dcf9dc3ad365298bbfbbcb944eb",
+      "files": [
+        {
+          "path": "base-ui--utils-0.5.0/LICENSE",
+          "size": 1072,
+          "sha256": "07fc1b39d69d14bc7d40482a628f47226258eb01265db68ae684944b916beb2a"
+        }
+      ]
+    },
+    {
+      "name": "@floating-ui/core",
+      "version": "1.8.0",
+      "license": "MIT",
+      "packageJsonSha256": "2f24216dd2a32b10e6c868173832a0667c3cdbee92886797b219aadac48d8b99",
+      "files": [
+        {
+          "path": "floating-ui--core-1.8.0/LICENSE",
+          "size": 1089,
+          "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce"
+        }
+      ]
+    },
+    {
+      "name": "@floating-ui/dom",
+      "version": "1.8.0",
+      "license": "MIT",
+      "packageJsonSha256": "59643af1b1bfc5a80b172c21ccbe21ea56eaa0115378f6077d9934458db25ac1",
+      "files": [
+        {
+          "path": "floating-ui--dom-1.8.0/LICENSE",
+          "size": 1089,
+          "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce"
+        }
+      ]
+    },
+    {
+      "name": "@floating-ui/react-dom",
+      "version": "2.1.9",
+      "license": "MIT",
+      "packageJsonSha256": "cec22283072350feca124ff36678d69127725048cdca2a4cf0deb75d69dba3a8",
+      "files": [
+        {
+          "path": "floating-ui--react-dom-2.1.9/LICENSE",
+          "size": 1089,
+          "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce"
+        }
+      ]
+    },
+    {
+      "name": "@floating-ui/utils",
+      "version": "0.2.12",
+      "license": "MIT",
+      "packageJsonSha256": "b2138e8855520f4313f26ace0d93a9a9c9e6a862f0299a5aeaccb2370dd1bf40",
+      "files": [
+        {
+          "path": "floating-ui--utils-0.2.12/LICENSE",
+          "size": 1089,
+          "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce"
+        }
+      ]
+    },
+    {
+      "name": "@phosphor-icons/react",
+      "version": "2.1.10",
+      "license": "MIT",
+      "packageJsonSha256": "f79b593805c145aa19a1ba4ce7892a8f2baf2e5dbcc20842b5465297a1864bd4",
+      "files": [
+        {
+          "path": "phosphor-icons--react-2.1.10/LICENSE",
+          "size": 1071,
+          "sha256": "6918b72504641180600cbbd4a86b0dfa9dfccf788775694325b71b9a029f6eb4"
+        }
+      ]
+    },
+    {
+      "name": "astro",
+      "version": "7.4.5",
+      "license": "MIT",
+      "packageJsonSha256": "c68541cf765bbaee2dcca23410b62ae55d7b739052bc24680a89bd32f123c8f1",
+      "files": [
+        {
+          "path": "astro-7.4.5/LICENSE",
+          "size": 3628,
+          "sha256": "4aa72be797aad0e5e21827eaae6a1df9e122d7a401f07d2c308a6b9a5f0e1278"
+        }
+      ]
+    },
+    {
+      "name": "react",
+      "version": "19.3.1",
+      "license": "MIT",
+      "packageJsonSha256": "9cc9c3de5441a2eea7f41f52f3f2a15a4fc51f90c0b72741f0d7638643a85e67",
+      "files": [
+        {
+          "path": "react-19.3.1/LICENSE",
+          "size": 1088,
+          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+        }
+      ]
+    },
+    {
+      "name": "react-dom",
+      "version": "19.3.1",
+      "license": "MIT",
+      "packageJsonSha256": "89d54f11575c9b0f7819962d9d72a31970dfb4d103f07e8b1d1b37e6d1fc3258",
+      "files": [
+        {
+          "path": "react-dom-19.3.1/LICENSE",
+          "size": 1088,
+          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+        }
+      ]
+    },
+    {
+      "name": "reselect",
+      "version": "5.3.0",
+      "license": "MIT",
+      "packageJsonSha256": "4acd31021184fa22a08d705568fb7d6e83dec694eba09026cf4fd3fb33d6cde2",
+      "files": [
+        {
+          "path": "reselect-5.3.0/LICENSE",
+          "size": 1093,
+          "sha256": "e98047a5dee068b33f82e8c4b7a63037b5108c93393198efd4097753004af5dd"
+        }
+      ]
+    },
+    {
+      "name": "rolldown",
+      "version": "1.2.16",
+      "license": "MIT",
+      "packageJsonSha256": "525884560d75c4eecb362453e6bbf92b1618d2261ddfbb1a806f164be0813f84",
+      "files": [
+        {
+          "path": "rolldown-1.2.16/LICENSE",
+          "size": 1302,
+          "sha256": "23ecfff35a5a2e80d92142f75228912c3b1abc4b5a8337a821ff4397e2f9f734"
+        }
+      ]
+    },
+    {
+      "name": "scheduler",
+      "version": "0.28.0",
+      "license": "MIT",
+      "packageJsonSha256": "06290718f22bcd93f29eaa1ac8d2ec9a7592ba4fec12bf1230e7cdd9a871b324",
+      "files": [
+        {
+          "path": "scheduler-0.28.0/LICENSE",
+          "size": 1088,
+          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+        }
+      ]
+    },
+    {
+      "name": "use-sync-external-store",
+      "version": "1.7.0",
+      "license": "MIT",
+      "packageJsonSha256": "ba3694aec166f2f53612c4978bc85fb31dd4eee75a2eccc1ad1a1cc49c9428d2",
+      "files": [
+        {
+          "path": "use-sync-external-store-1.7.0/LICENSE",
+          "size": 1088,
+          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+        }
+      ]
+    },
+    {
+      "name": "vite",
+      "version": "8.3.6",
+      "license": "MIT",
+      "packageJsonSha256": "c190c4c3dadb457bedc5d756a2269cd648b134a293da9f4d873c01fc66f4186c",
+      "files": [
+        {
+          "path": "vite-8.3.6/LICENSE.md",
+          "size": 98196,
+          "sha256": "a22152baa1aef74402443008e767e7c689a524c0909d19b0431d97f5ab066a13"
+        }
+      ]
+    }
+  ]
+}

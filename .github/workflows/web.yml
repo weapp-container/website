@@ -1,0 +1,91 @@
+name: Historical Web candidate (manual)
+on:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: Deploy verified candidate to container.weapp.dev
+        type: boolean
+        default: false
+      verify_staging:
+        description: Run full browser and HTTP acceptance against the staging website
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: showcase-web-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    # GitHub hides draft release assets from contents:read tokens. This job
+    # reads the reviewed private candidate in the same repository only.
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.18.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test && pnpm exec tsc --noEmit
+      - run: node tools/prepare-web.mjs
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - run: pnpm build
+      - run: pnpm exec wrangler deploy --dry-run --env ''
+      - name: Real browser acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm exec wrangler dev --local --ip 127.0.0.1 --port 4325 > artifacts/web-preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"; wait "$preview_pid" || true' EXIT
+          for attempt in {1..30}; do
+            if curl --noproxy '*' -fsS http://127.0.0.1:4325/showcase-runtime.json > /dev/null; then break; fi
+            sleep 1
+          done
+          node tools/browser-smoke.mjs --mode devices
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: web-candidate-and-evidence
+          path: |
+            dist/
+            artifacts/web/browser/
+            artifacts/web/staging-receipt.json
+            artifacts/web-preview.log
+          retention-days: 14
+      - name: Deploy verified website
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy
+        run: pnpm exec wrangler deploy --env ''
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Live browser acceptance
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy
+        run: node tools/browser-smoke.mjs --mode devices --url https://container.weapp.dev --output artifacts/web/live
+      - name: Live headers, cache and private-file boundary
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy
+        run: node tools/http-smoke.mjs --url https://container.weapp.dev
+      - name: Staging browser and HTTP acceptance
+        if: github.event_name == 'workflow_dispatch' && inputs.verify_staging
+        run: |
+          node tools/browser-smoke.mjs --mode devices --url https://staging.container.weapp.dev --output artifacts/web/staging-live
+          node tools/http-smoke.mjs --url https://staging.container.weapp.dev --output artifacts/web/staging-live/http.json
+      - name: Preserve live acceptance evidence
+        if: always() && github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-site-acceptance
+          path: |
+            artifacts/web/live/
+            artifacts/web/staging-live/
+          if-no-files-found: ignore
+          retention-days: 30

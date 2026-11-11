@@ -1,0 +1,8 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Demo from '../components/Demo';
+---
+<Layout title="在线体验 · Weapp Container" description="在真实浏览器容器中体验基础能力、商城与点单。无需安装，所有订单均为本地模拟。">
+  <section class="section-wrap demo-intro"><p class="eyebrow">在线体验</p><h1>亲手试一试。</h1><p>你的浏览器，就是小程序宿主。</p></section>
+  <Demo client:load />
+</Layout>
