@@ -21,6 +21,18 @@ The current pins describe historical delivery archives. They keep their original
 license, hashes and access requirements. The source license update does not
 publish replacement binaries or turn old receipts into current verification.
 
+Run the isolated, headless iframe scrolling regression with a local Chrome
+installation, then validate the built or staged website against the real runtime:
+
+```sh
+node tools/browser-scroll-boundary.mjs
+node tools/browser-smoke.mjs --url http://127.0.0.1:4325 --mode scroll-boundary --device iphone-17
+```
+
+The latter checks actual guest scroll offsets in all three scenes, outer-page
+scroll isolation, rotation, restart and the existing business interaction smoke.
+Both commands close their own browser contexts when finished.
+
 ## Demonstrations
 
 Fundamentals, shop and ordering use the same mini-program package. Orders and
@@ -34,7 +46,6 @@ are preserved; source licensing does not change runtime capability negotiation.
 
 ## Deployment and license
 
-Deployments require an explicitly verified build and are separate from source
-preparation. The existing website is not redeployed by this change. Third-party
+Deployments require an explicitly verified build and staging acceptance. Third-party
 assets, fonts and libraries retain their supplied notices. New core builds carry
 Apache-2.0; historical delivered binaries retain their accompanying licenses.

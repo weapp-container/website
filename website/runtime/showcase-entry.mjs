@@ -6,7 +6,11 @@ import {parseDeviceSelection,deviceGeometry,validRequestId} from '../shared/show
 import {createDeviceController} from './showcase-device-controller.mjs';
 import {waitForDevicePresentation} from './showcase-presentation.mjs';
 import {createSceneController,waitForScenePresentation} from './showcase-scene-controller.mjs';
+import {attachShowcaseScrollBoundary} from '../shared/showcase-scroll-boundary.mjs';
 
+// The screen owns browser scrolling for the document's lifetime, including
+// startup, errors and the closed state before React retires this iframe.
+const releaseScrollBoundary = attachShowcaseScrollBoundary(document.documentElement, {nativeScroll: 'dialog[open]'});
 const startup = document.querySelector('#startup');
 const dialog = document.querySelector('#text-dialog');
 const field = document.querySelector('#text-value');
@@ -136,7 +140,7 @@ window.addEventListener('message',event => {
     else void close(value.requestId).catch(fail);
   }
 });
-window.addEventListener('pagehide',() => { void close().catch(fail); },{once:true});
+window.addEventListener('pagehide',() => { releaseScrollBoundary(); void close().catch(fail); },{once:true});
 try {
   notify('loading');
   session = new WorkerWebSession({surfaceRoot:document.querySelector('#surface-root'),

@@ -13,8 +13,8 @@ for(let i=0;i<args.length;i+=2) { assert.ok(['--url','--output','--mode','--devi
 const base = new URL(options['--url'] || 'http://127.0.0.1:4325');
 const output = resolve(options['--output'] || resolve(root,'artifacts/web/browser'));
 const mode = options['--mode'] || 'smoke';
-assert.ok(['smoke','capture','scroll-stability','devices','performance'].includes(mode));
-const business = mode === 'smoke' || mode === 'devices' || mode === 'performance';
+assert.ok(['smoke','capture','scroll-stability','scroll-boundary','devices','performance'].includes(mode));
+const business = ['smoke','scroll-boundary','devices','performance'].includes(mode);
 const deviceRegistry = JSON.parse(await readFile(resolve(root,'website/device-profiles.json'),'utf8'));
 const demoURL = scene => { const url = new URL('/demo/',base); url.searchParams.set('scene',scene); if(options['--device'])url.searchParams.set('device',options['--device']); return url.href; };
 await mkdir(output,{recursive:true});
@@ -274,6 +274,50 @@ try {
   const motion=presented=>presented.find(node=>node.classes.includes('motion-dot'))?.attributes.style;
   const chromeGeometry=presented=>Object.fromEntries(['topbar','body','nav'].map(className=>{const node=presented.find(value=>value.classes.includes(className));return [className,{bounds:node?.bounds,scrollOffset:node?.scrollOffset}];}));
   const bodyScroll=presented=>presented.find(node=>node.classes.includes('body'))?.scrollOffset?.scrollTop||0;
+  async function checkScrollBoundary(scene) {
+    await page.locator('.phone-area').scrollIntoViewIfNeeded();
+    // Leave room in both directions, so a leaked wheel cannot pass merely
+    // because the outer page is already at an edge.
+    await page.evaluate(()=>scrollTo(0,(document.scrollingElement.scrollHeight-innerHeight)/2));
+    await idle();
+    const outerBefore=await page.evaluate(()=>scrollY);
+    const body=(await nodes()).find(node=>node.classes.includes('body'))?.bounds;
+    assert.ok(body,'Scrollable guest body missing');
+    const canvas=await frame.locator('canvas').first().boundingBox(),size=await viewport();
+    await page.mouse.move(canvas.x+(body.x+body.width/2)*canvas.width/size.width,canvas.y+(body.y+body.height/2)*canvas.height/size.height);
+    const samples=[];
+    const wheel=async delta=>{
+      await idle();
+      const input=await frame.evaluate(()=>window.__showcaseSmokeWork.inputs);
+      await page.mouse.wheel(0,delta);
+      await inputSent(input);await idle();
+      assert.equal(await page.evaluate(()=>scrollY),outerBefore,scene+' wheel leaked to the website');
+      const offset=bodyScroll(await nodes());samples.push({delta,offset});return offset;
+    };
+    for(let i=0;i<15;i++){const before=bodyScroll(await nodes());if(await wheel(-650)===before)break;}
+    assert.equal(bodyScroll(await nodes()),0,scene+' did not reach its top');
+    await wheel(-180);
+    assert.ok(await wheel(160)>0,scene+' guest did not consume a wheel from its top');
+    const middle=bodyScroll(await nodes());
+    // A burst also crosses input fences while accepted pictures are pending.
+    for(const delta of [140,110,80,55,34,21,13,8])await page.mouse.wheel(0,delta);
+    await idle();
+    assert.equal(await page.evaluate(()=>scrollY),outerBefore,scene+' inertial wheel leaked');
+    assert.ok(bodyScroll(await nodes())>middle,scene+' inertial wheel did not move guest content');
+    for(let i=0;i<15;i++){const before=bodyScroll(await nodes());if(await wheel(650)===before)break;}
+    const bottom=bodyScroll(await nodes());
+    assert.ok(bottom>0,scene+' did not have scrollable content');
+    assert.equal(await wheel(180),bottom,scene+' bottom was not stable');
+    assert.ok(await wheel(-160)<bottom,scene+' guest did not scroll back from its bottom');
+    // End Chromium's wheel latching before changing targets.
+    await page.waitForTimeout(650);await page.mouse.move(12,350);
+    await page.mouse.wheel(0,100);await page.waitForTimeout(300);
+    const outerAfter=await page.evaluate(()=>scrollY);
+    assert.ok(outerAfter>outerBefore,'The website must still scroll outside the screen');
+    await page.waitForTimeout(650);
+    actions.push({operation:'scroll-boundary',scene,outerBefore,outerAfter,middle,bottom,samples});
+    checks.push(scene+'-guest-top-middle-bottom-inertia-and-outside-scroll');
+  }
   async function observe(){const [presented,persisted,editorOpen,revision]=await Promise.all([nodes(),state(),frame.locator('#text-dialog[open]').count(),frameId()]);return {presented,state:persisted,editorOpen:editorOpen>0,revision};}
   async function preparePointer(point){
     const located=await frameId();
@@ -415,6 +459,7 @@ try {
   assert.ok(color.channels.slice(0,3).some(channel=>channel.stdev > 20),'Rendered screen is blank');
   checks.push('worker-wasm-canvaskit-startup');
   await checkDevicePicker('device-picker-desktop-keyboard');
+  if(mode==='scroll-boundary')await checkScrollBoundary('shop');
   if(mode === 'scroll-stability') {
     for(let cycle=0;cycle<12;cycle++) {
       await tapAction('navigate',{'data-screen':'home'});
@@ -448,6 +493,7 @@ try {
     checks.push('shop-address-mock-pay-order-receipt');
   }
   frame = await switchScene('basic');
+  if(mode==='scroll-boundary')await checkScrollBoundary('basic');
   await capture('demo-basic',frame.locator('#surface-root'));
   if(business) {
     await tapAction('count');checks.push('header-feedback-preserves-viewport-and-scroll');
@@ -461,6 +507,13 @@ try {
   }
   checks.push('worker-preserving-scene-transactions');
   frame = await switchScene('order');
+  if(mode==='scroll-boundary') {
+    await checkScrollBoundary('order');
+    const before=await frame.evaluate(()=>document.documentElement.dataset.rotation);
+    await page.getByRole('button',{name:'旋转屏幕',exact:true}).click();
+    await frame.waitForFunction(previous=>document.documentElement.dataset.rotation!==previous&&document.documentElement.dataset.deviceSwitching==='false',before,{timeout:30000});
+    await frameReady();await checkLayout();await checkScrollBoundary('order-rotated');
+  }
   await capture('demo-order',frame.locator('#surface-root'));
   if(business) {
     assert.equal(await frame.locator('#text-dialog[open]').count(),0,'Prior scene editor leaked');
@@ -580,6 +633,7 @@ try {
   assert.equal(page.workers().length,1,'Restart did not create exactly one new Worker');
   assert.deepEqual(await state(),flushedState,'Restart changed persisted commerce state');
   checks.push('closed-owner-replaced-before-restart-ready');
+  if(mode==='scroll-boundary')await checkScrollBoundary('order-restarted');
   await frame.evaluate(()=>parent.postMessage({type:'test.noop'},location.origin));
   await Promise.all([
     once(page.workers()[0],'close',{signal:AbortSignal.timeout(15000)}),

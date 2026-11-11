@@ -73,10 +73,11 @@ export async function stageWebRuntime({runtimeDirectory,receiptSha256,outputDire
   const config = {schemaVersion:1,runtimeVersion:receipt.sdkVersion,distributionProfile:'restricted-showcase',policySha256,packRoot:index.integrityRoot};
   for (const name of ['index.html','showcase.css','showcase-entry.mjs','showcase-bridge.mjs','showcase-device-controller.mjs','showcase-presentation.mjs','showcase-scene-controller.mjs']) {
     const bytes = await readFile(resolve(root,'website/runtime',name));
-    const source = bytes.toString().replaceAll('../shared/showcase-devices.mjs','./showcase-devices.mjs');
+    const source = bytes.toString().replaceAll('../shared/showcase-devices.mjs','./showcase-devices.mjs').replaceAll('../shared/showcase-scroll-boundary.mjs','./showcase-scroll-boundary.mjs');
     files.set(name,name.endsWith('.mjs') ? Buffer.from((await minify(source,{module:true,mangle:true,compress:true,sourceMap:false})).code+'\n') : bytes);
   }
   files.set('showcase-devices.mjs',Buffer.from((await minify(await readFile(resolve(root,'website/shared/showcase-devices.mjs'),'utf8'),{module:true,mangle:true,compress:true,sourceMap:false})).code+'\n'));
+  files.set('showcase-scroll-boundary.mjs',Buffer.from((await minify(await readFile(resolve(root,'website/shared/showcase-scroll-boundary.mjs'),'utf8'),{module:true,mangle:true,compress:true,sourceMap:false})).code+'\n'));
   files.set('showcase-device-registry.mjs',Buffer.from('export const DEVICE_REGISTRY='+JSON.stringify(registry)+';\n'));
   files.set('showcase-config.mjs',Buffer.from('export const SHOWCASE_CONFIG = '+JSON.stringify(config)+';\n'));
   await verifyModuleClosure(files);

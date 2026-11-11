@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowClockwise, ArrowSquareOut, Check, Monitor, ShoppingBag, Coffee, HandTap, WarningCircle } from '@phosphor-icons/react';
 import { DEVICE_REGISTRY, deviceGeometry, fitDeviceScale, parseDeviceSelection, sameDeviceSelection, selectionSearch, type DeviceSelection } from '../../shared/showcase-devices.mjs';
 import {requestShowcaseOwner} from '../../shared/showcase-owner-channel.mjs';
+import {attachShowcaseScrollBoundary} from '../../shared/showcase-scroll-boundary.mjs';
 import DeviceSelect from './DeviceSelect';
 import '../styles/demo.css';
 
@@ -27,6 +28,7 @@ export default function Demo() {
   const [switching, setSwitching] = useState(false);
   const transition = useRef(false);
   const frame = useRef<HTMLIFrameElement>(null);
+  const screen = useRef<HTMLDivElement>(null);
   const mounted = useRef(false);
   const abortTransition = useRef<(() => void) | null>(null);
   const [available, setAvailable] = useState({width: 1, height: 1});
@@ -34,6 +36,10 @@ export default function Demo() {
   const geometry = deviceGeometry(displaySelection);
   const scale = fitDeviceScale(geometry.screen, available);
   const model = DEVICE_REGISTRY.devices.find(item => item.id === selection.device)!;
+
+  useEffect(() => {
+    if (screen.current) return attachShowcaseScrollBoundary(screen.current);
+  }, []);
 
   useEffect(() => {
     mounted.current = true;
@@ -164,7 +170,7 @@ export default function Demo() {
       <div className="device-fit-area" ref={viewport} style={{height: (geometry.screen.height + 20) * scale}}>
         <div className="phone-area" style={{width: (geometry.screen.width + 20) * scale, height: (geometry.screen.height + 20) * scale}}>
           <div className={`demo-device${displaySelection.device === 'iphone-duo' && displaySelection.display === 'inner' ? ' device-unfolded' : ''}`} style={{width: geometry.screen.width + 20, height: geometry.screen.height + 20, transform: `scale(${scale})`}}>
-            <div className="demo-device-screen" style={{width: geometry.screen.width, height: geometry.screen.height}}>
+            <div className="demo-device-screen" ref={screen} style={{width: geometry.screen.width, height: geometry.screen.height}}>
               {runtime && owner && <iframe ref={frame} key={owner.revision} title={`${active.title}交互演示`} src={`${runtime.entry}${selectionSearch(owner.scene, owner.selection)}`} width={geometry.viewport.width} height={geometry.viewport.height} style={{left: 0, top: 0, width: geometry.viewport.width, height: geometry.viewport.height, pointerEvents: switching ? 'none' : undefined}} inert={switching || !!error} sandbox="allow-scripts allow-same-origin" allow="" />}
               {geometry.safeArea.top >= 20 && <div className="device-safe-top" aria-hidden="true" style={{height: geometry.safeArea.top}}><span>9:41</span><span>•••</span></div>}
               {geometry.safeArea.bottom >= 12 && <div className="device-safe-bottom" aria-hidden="true" style={{height: geometry.safeArea.bottom}}><span /></div>}
