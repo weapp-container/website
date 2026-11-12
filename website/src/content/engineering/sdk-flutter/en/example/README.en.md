@@ -1,0 +1,47 @@
+---
+id: "docs/engineering/sdk-flutter/example/index"
+title: "Flutter SDK consumer"
+section: "Project and maintenance"
+summary: "Flutter SDK consumer. Versioned engineering reference from weapp-container/sdk-flutter."
+route: "/docs/engineering/sdk-flutter/example/index/"
+locale: "en"
+sourceRepository: "weapp-container/sdk-flutter"
+sourceCommit: "2a6a2f0096b894e69d7049064d87072d8e5b3901"
+sourcePath: "example/README.en.md"
+---
+
+<a id="flutter-sdk-消费者"></a>
+# Flutter SDK consumer
+
+[简体中文](/docs/engineering/sdk-flutter/example/index/) · **English**
+
+
+This application consumes the sibling `packages/weapp_container` distribution.
+Keep `consumer` and `packages` together when moving the distribution. No Rust
+checkout or Rust compiler is required. Use Flutter 3.47.7 stable and the normal
+native development tools for the selected target.
+
+```sh
+flutter pub get
+flutter analyze lib
+flutter run -d <device-id>
+```
+
+For Android, install platform SDKs 35 and 36, NDK 27.1.12297006, and CMake 3.22.1.
+The app and its native plugin modules select that NDK. The Gradle wrapper pins
+9.4.1 and verifies its distribution checksum. Build the two supported ABIs with:
+
+```sh
+flutter build apk --debug --target-platform android-arm64,android-x64
+```
+
+iOS requires iOS 16 or later; macOS requires macOS 12 or later. Check the sibling
+`distribution.json` for packaged targets. A blocked target needs its native SDK
+artifact before it can build; this preview does not include a Windows binary.
+
+The app displays a bounded native mini-program view. Tap its first button and
+scroll the list to start the remaining lifecycle, navigation, Unicode, host
+method, remount, reload, and durable-storage checks. Results appear on screen
+and in `sdk-flutter-report.json` inside the app's application-support directory.
+Automation runners and fixture generation are maintained in the source
+standalone repository's `tools/*-smoke.mjs` and `native_desktop/tests`.

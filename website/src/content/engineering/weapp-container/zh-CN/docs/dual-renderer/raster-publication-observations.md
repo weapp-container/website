@@ -1,0 +1,31 @@
+---
+id: "docs/engineering/weapp-container/docs/dual-renderer/raster-publication-observations"
+title: "借用的位图发布事实"
+section: "渲染与布局"
+summary: "借用的位图发布事实。来自 weapp-container/weapp-container 的版本化工程说明。"
+route: "/docs/engineering/weapp-container/docs/dual-renderer/raster-publication-observations/"
+locale: "zh-CN"
+sourceRepository: "weapp-container/weapp-container"
+sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourcePath: "docs/dual-renderer/raster-publication-observations.md"
+---
+
+<a id="borrowed-raster-publication-facts"></a>
+# 借用的位图发布事实
+
+**简体中文** · [English](/en/docs/engineering/weapp-container/docs/dual-renderer/raster-publication-observations/)
+
+
+`WebFrameReservation::identity()` 从实际容量预留临界区内部创建的 `CapturedWebFrameIdentity` 中借取。其字段为私有；没有公开的构造函数、`Clone`、`Serialize` 或 `Deserialize`。会话、选定的传输帧序列、配置生成版本、逻辑视口、物理尺寸以及共享预览时钟epoch从类型化的预留输入和实际存储状态中捕获，编码JSON输出之前。没有从`Value`或最新的UI设置中重建身份字段。
+
+身份只保留一个弱引用分配针，而不是另一个状态所有者。
+`belongs_to` 检查实际分配，因此值相等的独立存储是不同的，克隆的句柄保持等价性。它不获取互斥锁。新的有界会话分配和身份元数据在原始 64 MiB 容量声明内计费；保留计数、帧上限以及所有现有队列和租约边界保持不变。读取身份不消耗序列或纪元。
+
+这些是捕获的候选事实，不是当前预览租约或会话页面的证明。目标会话/配置是由实际租约选定的发布项；运行时验证仍必须将其与实际会话进行比较。调用方必须分别重新验证当前 `PreviewOwnerFence` 的权限和当前页面/配置，才能完成验收。访问者无法刷新过期的租约，最终的存储准备检查仍为强制要求。未启用任何新的 HTTP/CLI 入口、严格位图策略、SSE 令牌、票证数据格式或浏览器行为。
+
+`PreparedDevRasterPresentation::accepted_page_observation()` 获取相同的
+已接受帧、物理目标和已实例化的像素，这些像素已通过其票据进行验证。它重用被动的 `AcceptedPageObservation` 构建器，并拆分现有渲染器和呈现状态字段的借用。不会创建会话、渲染器或帧所有者，不会克隆像素缓冲区，也不会发生读回或视图执行。现有的可变会话准备借用会锁定这些引用，直到候选验收或被丢弃；在传输编码过程中无需进行第二次会话查找。该观察结果不提供就绪/输入或浏览器呈现确认。
+
+源测试验证实际的保留/发布身份，独立存储并处理克隆，处理过期的竞争发布，精确的已验收帧和像素指针，以及真实的 QuickJS/V8 运行时票据加上 Web-保留消费者，该消费者在会话独占借用期间从借用的候选像素中准备传输。发布仍会在收到精确运行时票据确认前不准备输入。这些只是测试定义，直到根集成通道编译并执行它们。
+
+此源码变更不会修改页面-帧的验收或复制根节点的Option风格修复。已知的原始C5文档Option替换以及所有此前披露的锁/生命周期/严格Web集成缺陷仍属于独立的集成工作。

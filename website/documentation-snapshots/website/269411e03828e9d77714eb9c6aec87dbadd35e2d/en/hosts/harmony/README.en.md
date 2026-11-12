@@ -1,0 +1,11 @@
+<a id="和谐展示"></a>
+# Harmony showcase
+
+[简体中文](README.md) · **English**
+
+
+ArkUI owns the native surface, lifecycle, input dialog and local preferences. The shared portable pack owns the demo pages. No Rust or C++ engine implementation is copied into this project.
+
+Install `harmony` using `tools/sdk-install.mjs`, then run `node tools/native-harmony-build.mjs` from the repository root. The private SDK must contain `libs/arm64-v8a/libentry.so` and `libcontainer_host_harmony.so`, bound to the current restricted policy. The build verifies that both libraries remain byte-identical inside the unsigned HAP.
+
+The official DevEco toolchain is required. Device installation and signing are separate from compilation. `entry/src/main/cpp/types/libentry` contains only public N-API declarations. Production engine implementation stays in the private SDK release.

@@ -1,0 +1,27 @@
+---
+id: "docs/engineering/weapp-container/contributing"
+title: "参与贡献"
+section: "项目与维护"
+summary: "参与贡献。来自 weapp-container/weapp-container 的版本化工程说明。"
+route: "/docs/engineering/weapp-container/contributing/"
+locale: "zh-CN"
+sourceRepository: "weapp-container/weapp-container"
+sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourcePath: "CONTRIBUTING.md"
+---
+
+<a id="contributing"></a>
+# 参与贡献
+
+**简体中文** · [English](/en/docs/engineering/weapp-container/contributing/)
+
+
+请先阅读根目录 README、架构和对应模块说明。使用 Node.js 24.x、pnpm 10.15.1 和 Rust stable，递归初始化固定 submodule，运行 `pnpm install --frozen-lockfile`。
+
+从 `main` 建立短期功能或修复分支，例如 `feat/<topic>` 或 `fix/<topic>`。PR 说明触发方式、根因、行为变化和验证结果。SDK 改动先提交独立仓库，再更新主仓库指针。不要提交缓存、签名材料、运行库归档和设备个人数据。
+
+运行 README 的检查命令和改动模块的回归测试。完整 Rust 测试使用 `-- --test-threads=1`，避免有执行期限的引擎测试争用 CPU。官方工具、设备、GPU 和性能验证需要额外环境，请明确实际执行范围和未执行原因。单元测试不能作为真机或完整微信兼容的证据。
+
+修复问题时先理解边界、数据流和生命周期，为可复现的行为问题补充有意义的回归测试。公开 CLI、C ABI 和 SDK 的兼容性变化须明确说明。
+
+贡献采用所在组件的许可证，保留第三方声明，只提交有权分发的内容。[行为准则](/docs/engineering/weapp-container/code_of_conduct/)适用于协作，安全问题请按 [SECURITY.md](/docs/engineering/weapp-container/security/)私下报告。

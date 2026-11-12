@@ -1,0 +1,45 @@
+---
+id: "docs/engineering/weapp-container/examples/apps/embed-runner/index"
+title: "App embedding example"
+section: "Examples"
+summary: "App embedding example. Versioned engineering reference from weapp-container/weapp-container."
+route: "/docs/engineering/weapp-container/examples/apps/embed-runner/index/"
+locale: "en"
+sourceRepository: "weapp-container/weapp-container"
+sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourcePath: "examples/apps/embed-runner/README.en.md"
+---
+
+<a id="应用嵌入示例"></a>
+# App embedding example
+
+[简体中文](/docs/engineering/weapp-container/examples/apps/embed-runner/index/) · **English**
+
+
+`embed-runner` is a small application process that embeds the same runtime
+boundary used by the Web, desktop and native host adapters. It loads a packed
+mini-program from an asset directory, starts the app, sends one capability
+request and reads one complete RGBA snapshot. A real Activity, view controller,
+ArkUI Ability or browser worker can use this sequence with its own surface
+presenter.
+
+Run it after building the reference app pack:
+
+```sh
+cargo run --manifest-path examples/apps/embed-runner/Cargo.toml -- \
+  artifacts/reference-app/pack artifacts/reference-app/embed-report.json
+```
+
+The package script accepts the usual pnpm separator as well:
+
+```sh
+pnpm embed:reference -- \
+  artifacts/reference-app/pack artifacts/reference-app/embed-report.json
+```
+
+The runner ignores that standalone `--` so the two forms are equivalent.
+
+The output is a diagnostic artifact. It does not claim native GPU, emulator or
+WeChat DevTools conformance. Platform hosts should replace the sample's
+`render_snapshot()` read with their one-shot CanvasKit/Skia/Metal/ArkUI upload,
+while keeping the bridge batch and resource ownership rules unchanged.
