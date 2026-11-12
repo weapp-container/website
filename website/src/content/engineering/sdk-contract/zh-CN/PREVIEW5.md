@@ -6,7 +6,7 @@ summary: "开发播放器协议新增功能（预览版.5 源码）。来自 wea
 route: "/docs/engineering/sdk-contract/preview5/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "d92b12077a89acdc85cd54d305bfa6ab3c3eea6c"
+sourceCommit: "0c2388b16a1f648c777ab5849c96da9ee6e3da89"
 sourcePath: "PREVIEW5.md"
 ---
 

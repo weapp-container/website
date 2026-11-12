@@ -6,7 +6,7 @@ summary: "Typography fixture. Versioned engineering reference from weapp-contain
 route: "/docs/engineering/weapp-container/examples/apps/typography-app/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "examples/apps/typography-app/README.en.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "Weapp Container Desktop SDK. Versioned engineering reference from weap
 route: "/docs/engineering/sdk-desktop/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "c27a715b06367957a24af0a91c969a1abec5627e"
+sourceCommit: "a71eeae514f4fe88e471ca519852e87cb6f57511"
 sourcePath: "README.en.md"
 ---
 
@@ -15,12 +15,37 @@ sourcePath: "README.en.md"
 
 [简体中文](/docs/engineering/sdk-desktop/index/) · **English**
 
+<a id="公开发行候选preview7"></a>
+## Public distribution candidate: preview.7
+
+The installation examples below describe the preview.7 distribution candidate. Check the named registry or release before using them; source publication does not establish package publication or device acceptance. The source-build examples later in this document refer to the reviewed preview.6 checkout below. The core builder currently emits preview.6, so do not combine that runtime with preview.7 wrappers.
+
+First public publication is being prepared. Use these commands once this version is visible in its registry. Historical private archives and locks retain their original identities.
+
+Version `0.1.0-preview.7.0` requires CMake 3.21+ and C++17. The public [GitHub prerelease](https://github.com/weapp-container/sdk-desktop/releases/tag/v0.1.0-preview.7.0) provides:
+
+- `WeappContainerDesktop-0.1.0-preview.7.0-macos-universal.tar.gz`: macOS 12+, arm64/x86_64.
+- `WeappContainerDesktop-0.1.0-preview.7.0-linux-x86_64.tar.gz`: x86_64, GTK 3.24+, GIO 2.66+, fontconfig and epoxy.
+- `WeappContainerDesktop-0.1.0-preview.7.0-windows-x86_64.tar.gz`: Windows x86_64, MSVC.
+
+Verify `SHA256SUMS` before extracting to your installation directory. Archives include relocatable CMake configuration, headers, runtime libraries and licenses. Consumers need no Rust or sibling source checkout.
+
+<a id="已复核的源码构建版本"></a>
+### Reviewed source-build checkout
+
+```sh
+git clone https://github.com/weapp-container/sdk-desktop.git sdk-desktop-source
+cd sdk-desktop-source
+git checkout c27a715b06367957a24af0a91c969a1abec5627e
+```
+
+
 
 [Documentation](https://container.weapp.dev/en/docs/) · [Build from source](/en/docs/engineering/weapp-container/docs/sdk-source-build/) · [APIs and contracts](/en/docs/engineering/sdk-contract/index/)
 
 Embed WeChat Mini Programs into existing macOS, Windows, or Linux applications. The SDK provides C/C++ session, native view, message, and lifecycle interfaces, with the host managing the window and main event loop.
 
-Current source version: `0.1.0-preview.6.0`, C ABI: `1`. This repository uses Apache-2.0 for the host wrapper, build tools, and consumption examples; the newly built runtime library is licensed under Apache-2.0 and requires retention of its `RUNTIME-LICENSE` and third-party attribution statements.
+Reviewed source example version: `0.1.0-preview.6.0`, C ABI: `1`. This repository uses Apache-2.0 for the host wrapper, build tools, and consumption examples; the newly built runtime library is licensed under Apache-2.0 and requires retention of its `RUNTIME-LICENSE` and third-party attribution statements.
 
 <a id="从当前源码开始"></a>
 ## Start from Source Code
@@ -178,7 +203,7 @@ The consumption example uses the installed headers and libraries and verifies re
 - [Account, Identity, and Payment Host Services](/en/docs/engineering/sdk-desktop/account-services/)
 - [Windows Sensors](/en/docs/engineering/sdk-desktop/windows-sensors/) · [Windows Audio](/en/docs/engineering/sdk-desktop/windows-audio/)
 - [Shared Adapter Protocol](/en/docs/engineering/sdk-desktop/contract/) · [SDK Contract Repository](/en/docs/engineering/sdk-contract/index/)
-- [Source License](https://github.com/weapp-container/sdk-desktop/blob/c27a715b06367957a24af0a91c969a1abec5627e/LICENSE) · [Original Extraction Records](https://github.com/weapp-container/sdk-desktop/blob/c27a715b06367957a24af0a91c969a1abec5627e/ORIGIN.json) · [Current Source List](https://github.com/weapp-container/sdk-desktop/blob/c27a715b06367957a24af0a91c969a1abec5627e/SOURCE-INVENTORY.json)
+- [Source License](https://github.com/weapp-container/sdk-desktop/blob/a71eeae514f4fe88e471ca519852e87cb6f57511/LICENSE) · [Original Extraction Records](https://github.com/weapp-container/sdk-desktop/blob/a71eeae514f4fe88e471ca519852e87cb6f57511/ORIGIN.json) · [Current Source List](https://github.com/weapp-container/sdk-desktop/blob/a71eeae514f4fe88e471ca519852e87cb6f57511/SOURCE-INVENTORY.json)
 
 The build tool validates the source list. After modifying SDK source code, update the list according to the `tools/source-inventory.mjs` review process. Historical `ORIGIN.json` entries remain unchanged. The actual build and runtime scope for each platform is defined by the verification records of the corresponding build product.
 
@@ -186,7 +211,7 @@ The build tool validates the source list. After modifying SDK source code, updat
 ## Historical Archives and Migration
 Historical issuance audit (2026-11-12): The SDK archive part in the default lock is missing, the runtime pin does not match the current asset with the same name, and the default online preparation will be rejected by the integrity check. Please build from matching clean source, or explicitly select an independently audited companion manifest via `--manifest`; don't just modify the old hash. [Difference and Migration Record](/en/docs/engineering/weapp-container/docs/runtime-artifacts-migration/).
 
-The runtime distribution tool has been moved into [core warehouse](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/tools/runtime-artifacts). The new manifest uses the exact Release version of the core repository; choose this explicitly with `--manifest`. The updated downloader directs the `runtime-artifacts` identifier in the old lock to the private `weapp-container/runtime-artifacts-private-archive`, allows only nine frozen versions, retains the original version, hash and accompanying license, and the receipt records the actual repository. The old version of the downloader needs to be upgraded; the new repository with the same name only retains the source code of the update tool. There is no cross-repository rollback, private files still require read permission, and the source code license does not mean that historical releases are publicly available.
+The runtime distribution tool has been moved into [core warehouse](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/tools/runtime-artifacts). The new manifest uses the exact Release version of the core repository; choose this explicitly with `--manifest`. The updated downloader directs the `runtime-artifacts` identifier in the old lock to the private `weapp-container/runtime-artifacts-private-archive`, allows only nine frozen versions, retains the original version, hash and accompanying license, and the receipt records the actual repository. The old version of the downloader needs to be upgraded; the new repository with the same name only retains the source code of the update tool. There is no cross-repository rollback, private files still require read permission, and the source code license does not mean that historical releases are publicly available.
 
 The core runtime and SDK own source code use Apache-2.0. You can build the current runtime library according to [Main Warehouse Source Code Construction Instructions](/en/docs/engineering/weapp-container/docs/sdk-source-build/). Existing precompiled archives retain the original license, access requirements, precise versions and hash locks; no replacement binaries will be released in this source code update.
 
@@ -195,7 +220,7 @@ The core runtime and SDK own source code use Apache-2.0. You can build the curre
 
 Historical installation commands (not used as the default path for first access):
 
-Prepare script to verify version, ABI, size and SHA-256 by [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-desktop/blob/c27a715b06367957a24af0a91c969a1abec5627e/runtime-artifacts.lock.json). The current lock file contains preview.6.0's macOS and the Linux runtime. There is no Windows runtime entry yet; the Windows source code is available for access, and the default preparation process will fail due to the lack of corresponding entries.
+Prepare script to verify version, ABI, size and SHA-256 by [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-desktop/blob/a71eeae514f4fe88e471ca519852e87cb6f57511/runtime-artifacts.lock.json). The current lock file contains preview.6.0's macOS and the Linux runtime. There is no Windows runtime entry yet; the Windows source code is available for access, and the default preparation process will fail due to the lack of corresponding entries.
 
 After obtaining the authorization to download the runtime library, inject `WEAPP_CONTAINER_RUNTIME_TOKEN` through the key manager or CI secret, and then execute:
 

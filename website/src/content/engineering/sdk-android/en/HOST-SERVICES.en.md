@@ -6,7 +6,7 @@ summary: "Android hosting capabilities. Versioned engineering reference from wea
 route: "/docs/engineering/sdk-android/host-services/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "be2a7c6085bbf2562f0a351855c69ee5167b3770"
+sourceCommit: "34e2862d82250f1202c6e0b9367f2094bb60a523"
 sourcePath: "HOST-SERVICES.en.md"
 ---
 
@@ -87,7 +87,7 @@ is expressed as a non-negative advance in full minutes.
 Camera scanning uses Camera2 actual YUV frames and ZXing Core 3.5.3, supporting ordinary QR codes, barcodes,
 Data Matrix, PDF417; currently does not provide photo album entry or WeChat code decoding. Other camera owners should be released first
 device, and then open the QR code scanning UI. Cancel, hide, and close waits for CameraDevice.onClosed and the decoding thread to end.
-[Maven dependencies and licenses](https://github.com/weapp-container/sdk-android/blob/be2a7c6085bbf2562f0a351855c69ee5167b3770/THIRD-PARTY-NOTICES.md) includes OkHttp, Okio, ZXing and
+[Maven dependencies and licenses](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/THIRD-PARTY-NOTICES.md) includes OkHttp, Okio, ZXing and
 OkHttp public suffix License text for data; Gradle persists these texts to AAR assets.
 
 NFC requires host explicit `enableNfc = true`, NFC permission and actual NfcAdapter, currently only
@@ -236,14 +236,14 @@ Independent SDK checkout also needs to specify the reference service directory t
 Output, test application with the same name and adb reverse port, and uninstall your own application and delete your own UI at the end
 Temporary files, revoke its own reverse mapping, and close its own business services; the simulator is managed by the caller.
 
-Current [Development Record](https://github.com/weapp-container/sdk-android/blob/be2a7c6085bbf2562f0a351855c69ee5167b3770/test/evidence/host-services-development.json) binds unreleased dev library,
+Current [Development Record](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/test/evidence/host-services-development.json) binds unreleased dev library,
 SDK/fixture/JNI Source code and real GPU screenshot hashes, and record a consistent core source code list before and after the build.
 Already redeemed through login and snapshot refresh, independent authorization, server-paid reference order, synchronous/asynchronous operations in the same directory
 File, A/B number change isolation, Camera2 JPEG and Skia synthesis, account data deletion and resource cleaning. Here's
 The camera comes from the simulator virtual scene, and the payment comes from the explicit reference channel, which does not represent physical devices, Bluetooth peripherals,
 Official wallet, merchant transactions, compiler compatibility or official release acceptance.
 
-[Network and recording development record](https://github.com/weapp-container/sdk-android/blob/be2a7c6085bbf2562f0a351855c69ee5167b3770/test/evidence/host-services-network-recording-development.json)
+[Network and recording development record](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/test/evidence/host-services-network-recording-development.json)
 Record 14 passed extension probes: real HTTP response headers/chunks, multipart file, download bytes,
 WebSocket echo/close, actual AAC ADTS frame, account changes close old requests/sockets, and an active injection
 After the cleanup fails, confirm that the core is not closed in advance and the second close is successful. loopback network and emulator
@@ -254,13 +254,13 @@ Written as 10 minutes, SOTER is not available when there is no signer. The probe
 Contacts and temporary calendar account; scan code identification, physical NFC and real SOTER signature are still
 Independent equipment acceptance scope.
 
-[Front-end positioning and authorization policy development record](https://github.com/weapp-container/sdk-android/blob/be2a7c6085bbf2562f0a351855c69ee5167b3770/test/evidence/host-services-location-policy-development.json)
+[Front-end positioning and authorization policy development record](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/test/evidence/host-services-location-policy-development.json)
 Retain 18 independent probes. Explicit `--probe-foreground-location` uses the emulator console to inject GPS,
 The applet receives the real LocationManager coordinates. After stopping and continuing to inject, it still no longer receives events; the original data is different from
 The mobile phone number UI actually displays the back-end registration purpose, authorizes and completes the redemption. Tools, native packaging, fixtures and completeness
 Refer to the backend source code to check the hash file by file before and after execution; this is still simulator evidence for developing snapshots.
 
-[Beacon and recording development record](https://github.com/weapp-container/sdk-android/blob/be2a7c6085bbf2562f0a351855c69ee5167b3770/test/evidence/host-services-beacon-recorder-development.json)
+[Beacon and recording development record](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/test/evidence/host-services-beacon-recorder-development.json)
 Separately record the explicit rejection of the default dual channel in this simulator after it was downgraded from native to mono, and then explicitly mono
 Actual AAC's 8000Hz/channel metadata, and incompatible rate rejection. The default two-channel physical device recording is still
 Pending acceptance. Beacon

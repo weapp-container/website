@@ -6,7 +6,7 @@ summary: "Local Host Account and Reference Payment Integration. Versioned engine
 route: "/docs/engineering/sdk-ios/examples/host-services/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "7ce85729f57e9b60697574e3d6676749dd8d5245"
+sourceCommit: "c5103d009e6fed8271d3ad983b3f01b122ced7b8"
 sourcePath: "examples/host-services/README.en.md"
 ---
 

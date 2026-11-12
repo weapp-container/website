@@ -6,7 +6,7 @@ summary: "License instructions. Versioned engineering reference from weapp-conta
 route: "/docs/engineering/weapp-container/docs/licensing/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "docs/licensing.en.md"
 ---
 
@@ -16,9 +16,9 @@ sourcePath: "docs/licensing.en.md"
 [简体中文](/docs/engineering/weapp-container/docs/licensing/) · **English**
 
 
-In this source code release, Weapp Container’s own runtime, adapters, renderers, build tools and examples are licensed under [Apache License 2.0](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/LICENSE), which allows use, modification, commercial use and distribution under this license without additional non-commercial restrictions or commercial licensing requirements.
+In this source code release, Weapp Container’s own runtime, adapters, renderers, build tools and examples are licensed under [Apache License 2.0](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/LICENSE), which allows use, modification, commercial use and distribution under this license without additional non-commercial restrictions or commercial licensing requirements.
 
-`container-core`, `container-ir`, and `container-bridge` reserve `MIT OR Apache-2.0`. The standalone SDK uses the included Apache-2.0. Third-party source code, fonts, images, and dependencies retain their respective copyrights and licenses; project licenses do not supersede these terms. [NOTICE](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/NOTICE) indicates project ownership, `sdk/licenses` saves dependency notices.
+`container-core`, `container-ir`, and `container-bridge` reserve `MIT OR Apache-2.0`. The standalone SDK uses the included Apache-2.0. Third-party source code, fonts, images, and dependencies retain their respective copyrights and licenses; project licenses do not supersede these terms. [NOTICE](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/NOTICE) indicates project ownership, `sdk/licenses` saves dependency notices.
 
 <a id="构建和分发"></a>
 ## Build and distribute

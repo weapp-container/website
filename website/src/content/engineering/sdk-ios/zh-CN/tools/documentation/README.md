@@ -6,7 +6,7 @@ summary: "双语文档维护。来自 weapp-container/sdk-ios 的版本化工程
 route: "/docs/engineering/sdk-ios/tools/documentation/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "7ce85729f57e9b60697574e3d6676749dd8d5245"
+sourceCommit: "c5103d009e6fed8271d3ad983b3f01b122ced7b8"
 sourcePath: "tools/documentation/README.md"
 ---
 

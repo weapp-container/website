@@ -6,7 +6,7 @@ summary: "Session scrolling. Versioned engineering reference from weapp-containe
 route: "/docs/engineering/weapp-container/docs/scrolling/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "docs/scrolling.en.md"
 ---
 
@@ -46,7 +46,7 @@ towards scrolling ancestors; accepted state drives scroll callbacks and
 observer measurements. Identified touch contacts retain their captured route.
 
 The inspector, `/embed` and standalone Web wrapper share
-[`surface-input.mjs`](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/examples/hosts/web-wasm/surface-input.mjs). It serializes
+[`surface-input.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/surface-input.mjs). It serializes
 bridge batches, preserves wheel event order, drops pending input for a
 replaced session and releases its listeners/capture/RAF at teardown. A touch
 drag does not synthesize a tap. Browser zoom gestures keep their normal host
@@ -94,7 +94,7 @@ condition. V1 compatibility is not evidence of reconstructed source semantics.
 The [WXSS contract](/en/docs/engineering/weapp-container/docs/wxss-ir/) records supported media features, unknown-query
 behavior, metadata-only font/keyframe handling and remaining parser gaps.
 
-The source fixture is [`scroll-contract-app`](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/examples/apps/scroll-contract-app).
+The source fixture is [`scroll-contract-app`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/apps/scroll-contract-app).
 Run it interactively with:
 
 ```sh

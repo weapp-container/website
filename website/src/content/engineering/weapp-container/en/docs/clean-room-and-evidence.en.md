@@ -6,7 +6,7 @@ summary: "Clean-room and Evidence Recording. Versioned engineering reference fro
 route: "/docs/engineering/weapp-container/docs/clean-room-and-evidence/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "docs/clean-room-and-evidence.en.md"
 ---
 
@@ -22,6 +22,6 @@ Evidence does not prove that official package declarations are consistent with u
 
 All products use the Weapp Container name. The simulator CLI is designated as `weapp-simulator`. Product environment variables begin with `WEAPP_CONTAINER_`, and C ABI symbols begin with `weapp_container_`. `pnpm naming:check` validates public CLI, library name, package name, and C ABI declarations; `pnpm naming:test` enforces rejection behavior for missing, inconsistent, or incorrectly exported declarations.
 
-The [public evidence index](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/docs/evidence-ledger.json) retains only distributable historical summaries. Complete original records are stored in the [private archive](/en/docs/engineering/weapp-container/docs/archived-evidence/). The public index is curated without modifying the original evidence bytes, nor does it upgrade historical results to current version acceptance conclusions. When input or original records are missing, the full evidence check continues to report conditions not met. Current container output uses `.weapp-container`.
+The [public evidence index](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/evidence-ledger.json) retains only distributable historical summaries. Complete original records are stored in the [private archive](/en/docs/engineering/weapp-container/docs/archived-evidence/). The public index is curated without modifying the original evidence bytes, nor does it upgrade historical results to current version acceptance conclusions. When input or original records are missing, the full evidence check continues to report conditions not met. Current container output uses `.weapp-container`.
 
 `vendor/weapp-vite` remains a fixed commit clean checkout. For validation tasks requiring modifications to upstream E2E helper or project configuration, a task-specific temporary checkout must be created from the fixed SHA. The task executes and collects reports within this isolated checkout. Upon completion, the local patch, configuration, and original report are archived along with the source SHA, file list, and hashes; after verification, the temporary checkout is cleaned up according to ownership. Do not leave validation configurations or generated artifacts in fixed submodules. Do not treat archived local patches as verified or released upstream capabilities.

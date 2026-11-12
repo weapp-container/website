@@ -6,7 +6,7 @@ summary: "iOS portable-pack embedding. Versioned engineering reference from weap
 route: "/docs/engineering/weapp-container/docs/ios-portable-pack/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "docs/ios-portable-pack.en.md"
 ---
 

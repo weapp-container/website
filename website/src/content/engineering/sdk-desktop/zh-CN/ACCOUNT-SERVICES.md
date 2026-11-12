@@ -6,7 +6,7 @@ summary: "桌面宿主账号、授权与支付。来自 weapp-container/sdk-desk
 route: "/docs/engineering/sdk-desktop/account-services/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "c27a715b06367957a24af0a91c969a1abec5627e"
+sourceCommit: "a71eeae514f4fe88e471ca519852e87cb6f57511"
 sourcePath: "ACCOUNT-SERVICES.md"
 ---
 

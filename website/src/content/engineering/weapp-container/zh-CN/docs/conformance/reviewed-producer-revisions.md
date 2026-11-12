@@ -6,7 +6,7 @@ summary: "已审核的生产者修订版本。来自 weapp-container/weapp-conta
 route: "/docs/engineering/weapp-container/docs/conformance/reviewed-producer-revisions/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "docs/conformance/reviewed-producer-revisions.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "Browser Worker transport. Versioned engineering reference from weapp-c
 route: "/docs/engineering/weapp-container/docs/browser-worker-transport/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "docs/browser-worker-transport.en.md"
 ---
 
@@ -18,7 +18,7 @@ sourcePath: "docs/browser-worker-transport.en.md"
 
 This stage adds a transport and serialized Worker owner for a browser WASM
 session. It does **not** switch the existing page to that transport.
-[`app.mjs`](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/examples/hosts/web-wasm/app.mjs) still imports, constructs and calls
+[`app.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/app.mjs) still imports, constructs and calls
 `WebWasmHost` on the main thread. The new modules alone do not establish actual
 browser Worker execution, GPU presentation, responsiveness or performance
 acceptance. Those require separate integration and recorded browser evidence.
@@ -26,19 +26,19 @@ acceptance. Those require separate integration and recorded browser evidence.
 <a id="所有权和执行边界"></a>
 ## Ownership and execution boundary
 
-- [`worker-session-client.mjs`](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/examples/hosts/web-wasm/worker-session-client.mjs)
+- [`worker-session-client.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/worker-session-client.mjs)
   exports `WorkerRpcClient` and the pure `measureWorkerPayload` helper. The client
   creates one fresh module Worker through its factory and owns that exact
   instance until termination. A factory must not lend it a shared Worker.
-- [`worker-bridge-transport.mjs`](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/examples/hosts/web-wasm/worker-bridge-transport.mjs)
+- [`worker-bridge-transport.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/worker-bridge-transport.mjs)
   exports `WorkerBridgeTransport`. It adapts a borrowed, session-bound RPC client
   to the existing DOM bridge interface and reuses `SseBridgeTransport` for inner
   request correlation, deadlines and retired View candidate cleanup. It creates
   no runtime or Worker of its own.
-- [`runtime-worker.mjs`](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/examples/hosts/web-wasm/runtime-worker.mjs) is the
+- [`runtime-worker.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/runtime-worker.mjs) is the
   Worker entry. It imports the WASM package and creates one owner through
   `createWorkerRuntime`.
-- [`worker-runtime.mjs`](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/examples/hosts/web-wasm/worker-runtime.mjs) validates
+- [`worker-runtime.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/worker-runtime.mjs) validates
   messages, verifies static pack resources, admits bounded work and serializes
   WASM calls. Its message receiver does not enter WASM. Control requests, ordinary
   work and timer turns share one execution lane.
@@ -162,7 +162,7 @@ heap. The client likewise accepts transfer lists only for caller-owned attached
 ArrayBuffers; transferring a typed-array object or shared memory is rejected.
 
 Successful `frame`, `frame.current` and `surface.recover` responses use
-[`worker-frame-wire.mjs`](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/examples/hosts/web-wasm/worker-frame-wire.mjs) for
+[`worker-frame-wire.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/worker-frame-wire.mjs) for
 their `result.frame.images` table. Each tightly packed, straight RGBA8 image is
 validated and copied into a fresh `Uint8Array` with its own transferable backing.
 The source frame and its buffers remain usable after transfer. The client

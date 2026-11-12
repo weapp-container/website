@@ -1,14 +1,18 @@
 ---
 id: "docs/engineering/sdk-flutter/weapp_container_windows/changelog"
-title: "0.1.0-preview.5.3"
+title: "0.1.0-preview.7.0"
 section: "SDK engineering"
-summary: "0.1.0-preview.5.3. Versioned engineering reference from weapp-container/sdk-flutter."
+summary: "0.1.0-preview.7.0. Versioned engineering reference from weapp-container/sdk-flutter."
 route: "/docs/engineering/sdk-flutter/weapp_container_windows/changelog/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "2a6a2f0096b894e69d7049064d87072d8e5b3901"
+sourceCommit: "a6a649d86fbcd48a6b23d47870984e2829e35f3b"
 sourcePath: "weapp_container_windows/CHANGELOG.en.md"
 ---
+
+# 0.1.0-preview.7.0
+
+First public preview; native dependencies use public, versioned release entry points. Publication and device acceptance are recorded separately.
 
 # 0.1.0-preview.5.3
 

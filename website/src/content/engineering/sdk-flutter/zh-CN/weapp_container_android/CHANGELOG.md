@@ -1,14 +1,18 @@
 ---
 id: "docs/engineering/sdk-flutter/weapp_container_android/changelog"
-title: "0.1.0-preview.5.3"
+title: "0.1.0-preview.7.0"
 section: "SDK 工程"
-summary: "0.1.0-preview.5.3。来自 weapp-container/sdk-flutter 的版本化工程说明。"
+summary: "0.1.0-preview.7.0。来自 weapp-container/sdk-flutter 的版本化工程说明。"
 route: "/docs/engineering/sdk-flutter/weapp_container_android/changelog/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "2a6a2f0096b894e69d7049064d87072d8e5b3901"
+sourceCommit: "a6a649d86fbcd48a6b23d47870984e2829e35f3b"
 sourcePath: "weapp_container_android/CHANGELOG.md"
 ---
+
+# 0.1.0-preview.7.0
+
+首次公开预览；原生依赖使用公开、版本化的发行入口。发行发布状态与设备验收分别记录。
 
 # 0.1.0-preview.5.3
 

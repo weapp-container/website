@@ -6,7 +6,7 @@ summary: "Weapp Container for iOS (preview). Versioned engineering reference fro
 route: "/docs/engineering/sdk-ios/docs/embedding/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "7ce85729f57e9b60697574e3d6676749dd8d5245"
+sourceCommit: "c5103d009e6fed8271d3ad983b3f01b122ced7b8"
 sourcePath: "docs/EMBEDDING.en.md"
 ---
 

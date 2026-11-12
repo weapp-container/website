@@ -6,7 +6,7 @@ summary: "Behavior Guidelines. Versioned engineering reference from weapp-contai
 route: "/docs/engineering/weapp-container/code_of_conduct/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "CODE_OF_CONDUCT.en.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "资料、手机号授权撤回与迟到结果隔离。来自 weapp-con
 route: "/docs/engineering/weapp-container/docs/host-services/consent-revocation-design/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "docs/host-services/consent-revocation-design.md"
 ---
 
@@ -29,7 +29,7 @@ sourcePath: "docs/host-services/consent-revocation-design.md"
 <a id="existing-root-causes-and-existing-boundaries"></a>
 ## 现有根因和已有边界
 
-[Desktop adapter](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/sdk/desktop/src/host_services_adapter.cpp) 的 `current(call)` 验证账号、安装、session 和取消状态，没有资料或手机号的授权代际。`disclosure()` 保存成功响应后调用 `refresh_call()`；后者刷新同步快照，然后无条件继续完成原调用。由此可构造：
+[Desktop adapter](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/sdk/desktop/src/host_services_adapter.cpp) 的 `current(call)` 验证账号、安装、session 和取消状态，没有资料或手机号的授权代际。`disclosure()` 保存成功响应后调用 `refresh_call()`；后者刷新同步快照，然后无条件继续完成原调用。由此可构造：
 
 1. 已授权的 `/v1/host/profile` 在服务端生成资料，响应暂不送达。
 2. 宿主 `HostServices::revoke(Profile)` 完成，快照变为 `profileAuthorized:false`。
@@ -37,13 +37,13 @@ sourcePath: "docs/host-services/consent-revocation-design.md"
 
 手机号 code、并发 `HostServices::refresh()` 也缺少对应检查。`revoke()` 没有使既有授权弹窗失效；旧弹窗的“允许”回调还能提交 `granted:true`。失败路径另外存在两个关联问题：`consent_required` 不一定刷新旧快照；原始拒绝后刷新再次失败，可能用第二个错误替换用户拒绝。错误刷新应尽力执行，不能覆盖原始拒绝，也不能绕过授权检查。
 
-[参考服务](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/tools/host-services-reference/src/service.mjs) 的 `setConsent()` 只比较当前 `purpose`、`permissionVersion`，每次写入产生随机 `revision`。`authorizationVersion` 是资料和手机号状态的组合哈希，属于不透明版本，不能排序，也不是写入条件。旧的 `granted:true` 请求若在 `granted:false` 之后才被后端处理，仍会成功。客户端取消连接不能证明后端没有执行该写入。
+[参考服务](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/tools/host-services-reference/src/service.mjs) 的 `setConsent()` 只比较当前 `purpose`、`permissionVersion`，每次写入产生随机 `revision`。`authorizationVersion` 是资料和手机号状态的组合哈希，属于不透明版本，不能排序，也不是写入条件。旧的 `granted:true` 请求若在 `granted:false` 之后才被后端处理，仍会成功。客户端取消连接不能证明后端没有执行该写入。
 
 以下机制已经存在，应继续使用：
 
-- [共享账号管理器](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/crates/container-sdk/src/account.rs) 在账号切换时先提升 epoch；[调用完成路径](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/crates/container-sdk/src/lib.rs) 在应用退出成功时先撤销准确的 application scope，再处理 guest 后续执行。同范围的兄弟版本会退休，其他 app、publisher、environment 保留。
+- [共享账号管理器](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/crates/container-sdk/src/account.rs) 在账号切换时先提升 epoch；[调用完成路径](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/crates/container-sdk/src/lib.rs) 在应用退出成功时先撤销准确的 application scope，再处理 guest 后续执行。同范围的兄弟版本会退休，其他 app、publisher、environment 保留。
 - native snapshot owner context 防止旧 session、旧账号或旧安装写入新 owner；它没有定义同一 owner 内的授权撤回顺序。
-- [Web reference client](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/examples/hosts/web-wasm/reference-identity-client.mjs) 已有客户端实例内的资料/手机号代际，以及披露前后检查。[BrowserHostServices](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/examples/hosts/web-wasm/browser-host-services.mjs) 已区分外部宿主通知与内部刷新，防止迟到刷新覆盖通知，并对不透明版本冲突重新读取。这些保护不构成后端原子写入，也没有建立所有客户端实例共用的持久授权域。
+- [Web reference client](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/reference-identity-client.mjs) 已有客户端实例内的资料/手机号代际，以及披露前后检查。[BrowserHostServices](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/browser-host-services.mjs) 已区分外部宿主通知与内部刷新，防止迟到刷新覆盖通知，并对不透明版本冲突重新读取。这些保护不构成后端原子写入，也没有建立所有客户端实例共用的持久授权域。
 
 <a id="persistent-authorization-domain-and-execution-owner"></a>
 ## 持久授权域与执行 owner
@@ -82,7 +82,7 @@ E = (D, principalEpoch, sessionId, incarnation/ownerRevision)
 | runtime | `capabilities.hostServices.consentRevocation === "1.0"`；Web runtime 入口提供等价能力 | 没有能力不能宣称具备新撤回语义，也不能加载要求该能力的配置 |
 | 配置/归档 | `hostServices.requirements:{consentRevocation:"1.0"}`，SDK 与 runtime 同提交系列构建并锁摘要 | 检查或配置失败即终止，不删除 requirements 后继续 |
 
-base host services `1.0`、C ABI `1` 可以保留，新增 JSON 能力及命令表达扩展。[现有 `HostServicesConfig`](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/crates/container-runtime/src/host_services.rs) 使用 `deny_unknown_fields`；旧 runtime 收到新增的 `requirements` 字段会拒绝，不能只把要求藏在旧 runtime 会接受的 `syncValues` 内。新 runtime、所有 SDK 和 preflight/重建配置重放都须保留并检查该字段。这里没有修改现有 schema。
+base host services `1.0`、C ABI `1` 可以保留，新增 JSON 能力及命令表达扩展。[现有 `HostServicesConfig`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/crates/container-runtime/src/host_services.rs) 使用 `deny_unknown_fields`；旧 runtime 收到新增的 `requirements` 字段会拒绝，不能只把要求藏在旧 runtime 会接受的 `syncValues` 内。新 runtime、所有 SDK 和 preflight/重建配置重放都须保留并检查该字段。这里没有修改现有 schema。
 
 严格模式还必须覆盖可信进程内调用。服务的直接 `setConsent()`、`profile()`、`hostProfile()`、`phoneCode()`、`exchangePhone()` 不能成为 HTTP v2 之外的无 revision 绕行入口。旧签名仅可供明确标识的 legacy app 使用；严格 app 必须走 v2 方法或得到 `identity_protocol_required`。
 
@@ -188,9 +188,9 @@ policy 更新、删除和 grant 到期须在检查时成为原子状态转换：
 | 客户端 | 当前路径 | 需补齐的边界 |
 | --- | --- | --- |
 | Web direct / Worker | `reference-identity-client.mjs` 的 `authorize/disclose/run`；`browser-host-services.mjs` 的 handler/refresh/外部 state；`browser-host-account-manager.mjs` | v2 协商、challenge/CAS、每 kind revision、跨 client/owner 共享 fence；保留当前 owner/外部通知保护。host token/challenge 留 host realm，不能传 Worker；自定义 identity provider 即使没有 getState 也要检查 fence |
-| Android | [HostServicesClient.kt](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/sdk/android/library/src/main/java/com/sonofmagic/weapp/container/sdk/HostServicesClient.kt) 的 transport、`AndroidHostIdentity.install/refreshState/prepareAccountState`、原生 AlertDialog | transport 当前只接受 `/v1/`，须显式增加精确 v2 路径；公开 native future、handler、UI 决定、snapshot/event 与完成队列都检查；拒绝时保留原错误。不能只改错误分支 |
-| iOS | [HostServicesClient.swift](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/sdk/ios/Sources/WeappContainer/HostServicesClient.swift) 的 `WeappHostIdentity.install/refresh/confirm`、`WeappHostIdentitySnapshot` | transport 同样限制 `/v1/`，须增加精确 v2 路径；每次 await 和 UIAlertController continuation 后检查；共享域与 revision/CAS；避免刷新覆写或二次失败替换原拒绝；重建后重放严格要求 |
-| Harmony | [ReferenceHostServices.ts](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/examples/hosts/harmony/entry/src/main/ets/session/ReferenceHostServices.ts) 的 `HarmonyReferenceIdentity.invoke/profile/refresh`；`HostServices.ts` 的完成队列 | 现有 refreshSequence 只表示本实例请求顺序，不能充当后端授权 revision；补 v2 challenge、共享 fence、披露后检查和真实按钮事件隔离 |
+| Android | [HostServicesClient.kt](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/sdk/android/library/src/main/java/com/sonofmagic/weapp/container/sdk/HostServicesClient.kt) 的 transport、`AndroidHostIdentity.install/refreshState/prepareAccountState`、原生 AlertDialog | transport 当前只接受 `/v1/`，须显式增加精确 v2 路径；公开 native future、handler、UI 决定、snapshot/event 与完成队列都检查；拒绝时保留原错误。不能只改错误分支 |
+| iOS | [HostServicesClient.swift](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/sdk/ios/Sources/WeappContainer/HostServicesClient.swift) 的 `WeappHostIdentity.install/refresh/confirm`、`WeappHostIdentitySnapshot` | transport 同样限制 `/v1/`，须增加精确 v2 路径；每次 await 和 UIAlertController continuation 后检查；共享域与 revision/CAS；避免刷新覆写或二次失败替换原拒绝；重建后重放严格要求 |
+| Harmony | [ReferenceHostServices.ts](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/harmony/entry/src/main/ets/session/ReferenceHostServices.ts) 的 `HarmonyReferenceIdentity.invoke/profile/refresh`；`HostServices.ts` 的完成队列 | 现有 refreshSequence 只表示本实例请求顺序，不能充当后端授权 revision；补 v2 challenge、共享 fence、披露后检查和真实按钮事件隔离 |
 | Desktop 三端 | `sdk/desktop/src/host_services.cpp` 的 client/parser；`host_services_adapter.cpp` 的 `disclosure/authorize/refresh_call/refresh/revoke`；平台 consent presenter | 修复本文根因，区分 owner 与授权检查；原始 wire context、native futures 和 mailbox 全程保留 fence；macOS/Windows/Linux 共享相同语义，原生 UI 各自排空 |
 | Flutter / React Native | 对应公开 API handler、native transport、preflight 与重建配置重放；Flutter 桌面 registry 与其引用的 Desktop 源码 | 不能只更新下层 SDK 锁而丢弃 requirements、context 或授权终态；归档内实际源码与公开跨语言链路均须验收。自定义宿主业务实现需遵守同一 v2 合同 |
 

@@ -6,7 +6,7 @@ summary: "原生编辑连续性：后续协议与实现设计。来自 weapp-con
 route: "/docs/engineering/weapp-container/docs/dual-renderer/native-editing-continuity/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "docs/dual-renderer/native-editing-continuity.md"
 ---
 

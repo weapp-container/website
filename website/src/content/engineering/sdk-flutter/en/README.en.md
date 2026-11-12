@@ -6,7 +6,7 @@ summary: "Weapp Container Flutter SDK. Versioned engineering reference from weap
 route: "/docs/engineering/sdk-flutter/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "2a6a2f0096b894e69d7049064d87072d8e5b3901"
+sourceCommit: "a6a649d86fbcd48a6b23d47870984e2829e35f3b"
 sourcePath: "README.en.md"
 ---
 
@@ -14,12 +14,49 @@ sourcePath: "README.en.md"
 
 [简体中文](/docs/engineering/sdk-flutter/index/) · **English**
 
+<a id="公开发行候选preview7"></a>
+## Public distribution candidate: preview.7
+
+The installation examples below describe the preview.7 distribution candidate. Check the named registry or release before using them; source publication does not establish package publication or device acceptance. The source-build examples later in this document refer to the reviewed preview.6 checkout below. The core builder currently emits preview.6, so do not combine that runtime with preview.7 wrappers.
+
+Version: `0.1.0-preview.7.0`；C ABI `1`。
+
+```yaml
+dependencies:
+  weapp_container: 0.1.0-preview.7.0
+```
+
+```sh
+flutter pub get
+```
+
+Android API 26+；iOS 16+；macOS 12+ universal；Linux / Windows x86_64。Flutter 3.22+ / Dart 3.3+。Android uses Maven Central. iOS and macOS use public CocoaPods specifications; add both sources to each Apple Podfile:
+
+```ruby
+source 'https://github.com/weapp-container/Specs.git'
+source 'https://cdn.cocoapods.org/'
+```
+
+Linux / Windows CMake downloads a fixed Desktop archive and verifies SHA-256. For offline builds, prefetch the exact archive and set `FETCHCONTENT_SOURCE_DIR_WEAPP_CONTAINER_RUNTIME` to its extracted directory. Each platform package includes its bridge sources, headers and licenses. Normal application installation requires no Node preparation command or sibling repository.
+
+First public publication is being prepared; registry and device validation results are recorded separately. Historical private locks remain unchanged.
+
+<a id="已复核的源码构建版本"></a>
+### Reviewed source-build checkout
+
+```sh
+git clone https://github.com/weapp-container/sdk-flutter.git sdk-flutter-source
+cd sdk-flutter-source
+git checkout 2a6a2f0096b894e69d7049064d87072d8e5b3901
+```
+
+
 
 [Documentation](https://container.weapp.dev/en/docs/) · [Source builds](/en/docs/engineering/weapp-container/docs/sdk-source-build/) · [APIs and protocols](/en/docs/engineering/sdk-contract/index/)
 
 Embed a mini-program container in a Flutter application. Android and iOS use native Views; desktop platforms use Flutter external textures. One Dart Controller handles local packs, navigation, messages and session ownership.
 
-Current version: `0.1.0-preview.6.0`; native ABI: `1`. This repository contains the Apache-2.0 integration layer. The runtime is a separately authorized binary dependency. Packages currently use local path dependencies and are not published on pub.dev.
+Reviewed source example version: `0.1.0-preview.6.0`; native ABI: `1`. This repository contains the Apache-2.0 integration layer. The runtime is a separately authorized binary dependency. Packages currently use local path dependencies and are not published on pub.dev.
 
 <a id="从当前源码开始"></a>
 ## Start from current source
@@ -143,7 +180,7 @@ SizedBox(
 )
 ```
 
-Once mounted, load a generated, verified local pack. Extract Flutter assets to application-private storage first; see the [example](https://github.com/weapp-container/sdk-flutter/blob/2a6a2f0096b894e69d7049064d87072d8e5b3901/example/lib/main.dart):
+Once mounted, load a generated, verified local pack. Extract Flutter assets to application-private storage first; see the [example](https://github.com/weapp-container/sdk-flutter/blob/a6a649d86fbcd48a6b23d47870984e2829e35f3b/example/lib/main.dart):
 
 ```dart
 await controller.load('/verified/local/portable-pack');
@@ -176,7 +213,7 @@ await controller.close();
 
 Host methods return JSON-compatible values. Asynchronous handlers should observe `call.cancellation`; use `WeappHostError` for explicit error codes.
 
-Configure login, accounts, networking and device capabilities explicitly in the host: call `configureHostServices`, then optionally `installNativeDeviceApis`, before `load()`. The host controls network origin allowlists and OS permissions. Restricted Showcase runtimes also enforce their compiled policy. See [CONTRACT.md](/en/docs/engineering/sdk-flutter/contract/) and the [Controller API](https://github.com/weapp-container/sdk-flutter/blob/2a6a2f0096b894e69d7049064d87072d8e5b3901/weapp_container/lib/src/controller.dart) for configuration and account switching.
+Configure login, accounts, networking and device capabilities explicitly in the host: call `configureHostServices`, then optionally `installNativeDeviceApis`, before `load()`. The host controls network origin allowlists and OS permissions. Restricted Showcase runtimes also enforce their compiled policy. See [CONTRACT.md](/en/docs/engineering/sdk-flutter/contract/) and the [Controller API](https://github.com/weapp-container/sdk-flutter/blob/a6a649d86fbcd48a6b23d47870984e2829e35f3b/weapp_container/lib/src/controller.dart) for configuration and account switching.
 
 <a id="常见问题"></a>
 ## Troubleshooting
@@ -195,11 +232,11 @@ Native text editing, full accessibility semantics and advanced gestures still ha
 ## Documentation and licensing
 
 - [Widget and Controller usage](/en/docs/engineering/sdk-flutter/weapp_container/index/)
-- [Complete example](https://github.com/weapp-container/sdk-flutter/blob/2a6a2f0096b894e69d7049064d87072d8e5b3901/example/lib/main.dart) · [Running the example](/en/docs/engineering/sdk-flutter/example/index/)
+- [Complete example](https://github.com/weapp-container/sdk-flutter/blob/a6a649d86fbcd48a6b23d47870984e2829e35f3b/example/lib/main.dart) · [Running the example](/en/docs/engineering/sdk-flutter/example/index/)
 - [Desktop integration](/en/docs/engineering/sdk-flutter/native_desktop/index/) · [SDK protocol](/en/docs/engineering/sdk-flutter/contract/)
 - [Public types and C ABI](/en/docs/engineering/sdk-contract/index/)
 
-The integration source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/2a6a2f0096b894e69d7049064d87072d8e5b3901/LICENSE). Runtime and third-party components retain the `RUNTIME-LICENSE` and notices in their archives. Historical archives retain their supplied licenses and access requirements.
+The integration source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/a6a649d86fbcd48a6b23d47870984e2829e35f3b/LICENSE). Runtime and third-party components retain the `RUNTIME-LICENSE` and notices in their archives. Historical archives retain their supplied licenses and access requirements.
 
 <a id="历史归档与迁移"></a>
 ## Historical archives and migration
@@ -208,6 +245,6 @@ Historical storage: updated downloaders map the nine frozen legacy `runtime-arti
 
 Historical release audit (2026-11-12): Some default SDK archives are missing and several runtime pins differ from current same-name legacy assets; default online preparation fails integrity checks. Build from matching clean source or explicitly select an independently reviewed matching manifest with `--manifest`; do not merely replace old hashes. See the [audit and migration record](/en/docs/engineering/weapp-container/docs/runtime-artifacts-migration/).
 
-Runtime packaging and publication now live in the [core repository](https://github.com/weapp-container/weapp-container/blob/2c815f079426f3ff9910ed1433eb1f53b1961f3c/tools/runtime-artifacts). New manifests select exact core releases through `--manifest`. The default lock retains its historical `runtime-artifacts` source, version, hashes and bundled licenses. The retired repository remains a read-only archive; downloads never fall back between repositories. Private repositories still require read access; source licensing does not imply public binary availability.
+Runtime packaging and publication now live in the [core repository](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/tools/runtime-artifacts). New manifests select exact core releases through `--manifest`. The default lock retains its historical `runtime-artifacts` source, version, hashes and bundled licenses. The retired repository remains a read-only archive; downloads never fall back between repositories. Private repositories still require read access; source licensing does not imply public binary availability.
 
 The core runtime and SDK source are available under Apache-2.0. Build the current runtime from the [core source guide](/en/docs/engineering/weapp-container/docs/sdk-source-build/). Existing prebuilt archives retain their original licenses, access requirements and exact version/hash pins; this source update does not publish replacement binaries.

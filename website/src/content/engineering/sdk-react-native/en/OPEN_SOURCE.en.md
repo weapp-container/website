@@ -6,7 +6,7 @@ summary: "Open-source runtime integration. Versioned engineering reference from 
 route: "/docs/engineering/sdk-react-native/open_source/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "ccbd7965f644dc21b60bf33b5acc72d299c553c4"
+sourceCommit: "737ecbca691690737d85911b08165293b7d6453d"
 sourcePath: "OPEN_SOURCE.en.md"
 ---
 

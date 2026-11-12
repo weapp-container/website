@@ -6,7 +6,7 @@ summary: "Weapp 容器 Android 实现。来自 weapp-container/sdk-flutter 的�
 route: "/docs/engineering/sdk-flutter/weapp_container_android/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "2a6a2f0096b894e69d7049064d87072d8e5b3901"
+sourceCommit: "a6a649d86fbcd48a6b23d47870984e2829e35f3b"
 sourcePath: "weapp_container_android/README.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "Weapp 容器浏览器 Worker 以及传统嵌入示例。来自 weapp-c
 route: "/docs/engineering/weapp-container/examples/hosts/web-wasm/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "examples/hosts/web-wasm/README.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "iOS 嵌入和 Metal 绘制表面示例。来自 weapp-container/weapp-
 route: "/docs/engineering/weapp-container/examples/hosts/ios-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "examples/hosts/ios-app/README.md"
 ---
 

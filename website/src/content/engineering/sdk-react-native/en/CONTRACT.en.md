@@ -6,7 +6,7 @@ summary: "SDK contract v1. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/sdk-react-native/contract/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "ccbd7965f644dc21b60bf33b5acc72d299c553c4"
+sourceCommit: "737ecbca691690737d85911b08165293b7d6453d"
 sourcePath: "CONTRACT.en.md"
 ---
 

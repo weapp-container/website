@@ -6,7 +6,7 @@ summary: "Build SDKs from public source. Versioned engineering reference from we
 route: "/docs/engineering/weapp-container/docs/sdk-source-build/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c815f079426f3ff9910ed1433eb1f53b1961f3c"
+sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
 sourcePath: "docs/sdk-source-build.en.md"
 ---
 
@@ -14,6 +14,8 @@ sourcePath: "docs/sdk-source-build.en.md"
 # Build SDKs from public source
 
 [简体中文](/docs/engineering/weapp-container/docs/sdk-source-build/) · **English**
+
+This guide uses the core repository’s pinned submodule set. The current core builder emits preview.6 and pins matching preview.6 SDK source. SDK main branches also contain preview.7 public distribution candidates; those require matching preview.7 runtimes. Updating submodules alone does not make this guide’s build artifacts compatible. Registry availability and device acceptance remain subject to each SDK README and the actual release records.
 
 
 This guide covers initial integration and SDK maintenance. Current source is public and does not require credentials for historical binary archives. Building, offline packaging, and device acceptance are separate steps. A successful build does not change a platform's acceptance status.
