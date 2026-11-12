@@ -1,48 +1,75 @@
-# Weapp Container Website
+<a id="weapp-container-website"></a>
+# Weapp 容器网站
 
-Source for [container.weapp.dev](https://container.weapp.dev), maintained in `weapp-container/website`. The website includes developer documentation and a fixed browser demonstration. Native host apps, runtime downloads and build evidence are managed as separate artifacts.
+**简体中文** · [English](README.en.md)
 
-This repository contains a shared, locally simulated mini-program, an Astro/React website, and native consumers for seven hosts. It does not contain the core runtime source implementation. The browser runs a real Dedicated Worker with QuickJS/WASM and a CanvasKit presenter.
 
-## Development
+[container.weapp.dev](https://container.weapp.dev) 的源码，包括开发文档、平台进展和固定浏览器演示。文档默认中文，英文入口为 [/en/](https://container.weapp.dev/)。
 
-Use Node 24.18+ and the pinned pnpm version:
+[开发文档](https://container.weapp.dev/docs/) · [在线体验](https://container.weapp.dev/demo/) · [核心源码](https://github.com/weapp-container/weapp-container/blob/main/README.md) · [部署说明](docs/deployment.md)
+
+网站使用 Astro 和 React。浏览器演示通过 Dedicated Worker 中的 QuickJS/WASM 执行小程序，再由 CanvasKit 呈现。原生宿主示例、通用运行时和 SDK 分别构建、验证与发行，不能仅凭浏览器演示推断原生平台的支持状态。
+
+<a id="development"></a>
+<a id="run-locally"></a>
+## 本地运行
+
+需要 Node.js **24.18+** 和 pnpm **10.15.1**：
 
 ```sh
+corepack enable
 pnpm install --frozen-lockfile
 pnpm runtime:public
-pnpm test
-pnpm exec tsc --noEmit
-pnpm build
 pnpm dev
 ```
 
-`runtime:public` reproduces the already public fixed demo from versioned config and inventory snapshots, with exact file sizes and SHA-256 hashes. It needs no GitHub token or private build receipts. Verified caches work offline; missing or modified files fail closed. The immutable runtime URL must remain hosted; new demo generations require a reviewed lock and snapshot update. Native builds and producing a new demo use the separate explicit artifact workflows in `docs/`.
+打开 `http://127.0.0.1:4325`。`runtime:public` 按固定配置、文件大小与 SHA-256 获取已经公开的演示，不需要 GitHub token 或私有构建回执。完整缓存可离线复用；缺失或被修改的文件会使准备失败。该命令不会生成新运行时或绕过完整性检查。
 
-The complete previous repository, Releases, PR history and Actions remain in the private `weapp-container/website-private-archive`. This source repository has a separate identity and reviewed main history. Updated download tools resolve frozen legacy releases to that private archive. Old clients must upgrade; historical permissions and license terms still apply.
+<a id="demonstrations"></a>
+<a id="documentation-and-content"></a>
+## 文档与内容
 
-## Demonstrations
+- 接入文档包括快速开始、portable pack、平台集成、SDK API、29 组小程序 API、组件与排障。
+- 进阶文档收录架构、渲染、协议、工具、示例与验证说明，保留对应仓库及固定提交的来源信息。
+- GitHub Markdown 是工程文档正文的来源；网站使用已提交的固定内容快照独立构建，不读取父目录中的任意文件。
+- 修改技术行为时同步中英文说明和版本来源；API 名称、能力状态、源码许可与运行库发行许可分别维护。
 
-- Fundamentals: interactions, lists, components, scrolling, images, host information and state.
-- Shop: Chinese search, categories, variants, cart, address editing, simulated payment and orders.
-- Ordering: menu, variants, quantities, notes and simulated preparation/completion.
+<a id="distribution-boundary"></a>
+<a id="checks"></a>
+## 检查
 
-All orders and payments are simulated. State is stored in the current browser or native app private storage. Text fields use real host-native editing through the [shared message protocol](miniapp/BRIDGE.md). See [platform builds](docs/platforms.md) for native commands and actual target requirements.
+```sh
+pnpm test
+pnpm exec tsc --noEmit
+pnpm build
+pnpm exec wrangler deploy --dry-run --env ''
+```
 
-## Distribution boundary
+`build` 同时检查站点链接、文档来源、搜索索引、代码高亮、字体及静态资源。浏览器检查与线上 HTTP 验收见[部署说明](docs/deployment.md)。
 
-The dedicated `restricted-showcase` runtime compiles its pack roots and API ceiling into the binary. A valid but unauthorized pack is rejected before engine startup. Network, devices, real login/payment, canvas APIs, inspection and development update paths are unavailable. The normal runtime and SDK remain separate products.
+<a id="deployment"></a>
+<a id="online-demo"></a>
+## 在线演示
 
-Guest JS is transformed before packing. Release loaders are minified, source maps are omitted, Android uses R8 and Flutter release builds use obfuscation with private symbol files. These measures raise analysis cost; client binaries are not irreversible encryption.
+演示包含基础交互、商城与点单。示例小程序内部使用中文；站点、设备控制和演示说明支持中英文。商品、支付、订单和制作状态均为模拟数据，状态保存在当前浏览器或原生应用私有存储中。
 
-Never publish a raw core producer directory: it may include private source snapshots. `tools/stage-web-runtime.mjs` verifies a pinned delivery receipt, applies the reviewed browser transforms and emits a final deployment inventory. `pnpm build` refuses private source/symbol files, unreviewed runtime bytes, missing assets and files over the hosting limit.
+输入通过[共享消息协议](miniapp/BRIDGE.md)桥接到宿主原生编辑控件。原生构建命令和实际状态见[平台说明](docs/platforms.md)。HarmonyOS 是已有示例，不代表另有通用公开 SDK。
 
-## Deployment
+固定演示使用 `restricted-showcase` 运行库，包根与能力上限编译进二进制，不提供通用网络、设备、真实登录／支付或开发更新能力。通用运行时与 SDK 的源码接入请从[核心仓库](https://github.com/weapp-container/weapp-container/blob/main/README.md)开始。
 
-`wrangler.jsonc` deploys Workers Static Assets to `container.weapp.dev`. A staging Worker is available through `pnpm exec wrangler deploy --env staging`. Deploy a verified candidate with `pnpm deploy`; then run the browser smoke against the live URL. Keep the deployment receipt and previous Worker version for rollback. The [deployment guide](docs/deployment.md) records candidate verification, live acceptance, snapshots and rollback commands. No download token is included in the public site.
+<a id="license"></a>
+<a id="deploy-and-roll-back"></a>
+## 部署与回滚
 
-## License
+Workers Static Assets 部署到 `container.weapp.dev`，预览环境为 `staging.container.weapp.dev`。先验收候选，再部署并执行线上浏览器／HTTP 检查，保留部署回执、静态快照及上一 Worker 版本。步骤与回滚命令见[部署指南](docs/deployment.md)。
 
-Repository-authored source uses Apache-2.0; see LICENSE and NOTICE. The core and SDK source repositories also provide their own licenses. Previously published runtime archives keep the license and third-party notices shipped with each exact archive; source licenses do not replace those terms. The currently pinned public demo includes a Noncommercial Runtime License and is not an Apache-licensed runtime binary distribution. Repository access, artifact availability, and permission to redistribute remain separate questions. See [license and release boundaries](website/src/pages/docs/licensing.astro).
+GitHub 手动部署需要 `CLOUDFLARE_API_TOKEN` 与 `CLOUDFLARE_ACCOUNT_ID`，只通过受保护的环境或 Actions secrets 提供。源构建目录和含私有符号的产物不能直接部署；使用已核验的 staging 工具和最终资源清单。
 
-Demo image attribution and source URLs are recorded in `miniapp/assets/SOURCES.json`; photography follows the Unsplash License. Product names, prices and orders are fictional demo data.
+<a id="license-and-historical-releases"></a>
+## 许可与历史发行
+
+自有源码采用 Apache-2.0，见 [LICENSE](LICENSE) 与 [NOTICE](NOTICE)。核心和 SDK 源码有各自许可。当前固定公开演示携带 Noncommercial Runtime License，其二进制不因网站源码开源而变为 Apache-2.0 发行物。
+
+历史 Release 保留原版本、哈希与随附条款，并存储于私有归档；更新后的下载工具精确映射冻结的旧版本。源码访问、归档下载与再分发授权分别判断，见[平台说明](docs/platforms.md)。
+
+图片来源记录在 `miniapp/assets/SOURCES.json`，摄影资源遵循 Unsplash License。品牌、价格与订单为虚构演示数据。

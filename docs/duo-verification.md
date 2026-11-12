@@ -1,4 +1,8 @@
+<a id="duo-historical-acceptance-summary"></a>
 # Duo 历史验收摘要
+
+**简体中文** · [English](duo-verification.en.md)
+
 
 2026-11-06 的 candidate9 包含 Web 与部分 Apple 模拟器验证。完整原始记录、失败尝试、截图和部署回执位于[私有档案](archived-evidence.md)。它们未在开源整理期间重新执行，不代表当前源码或所有平台通过。
 

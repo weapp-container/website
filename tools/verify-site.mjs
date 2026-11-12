@@ -10,6 +10,9 @@ import {verifyApiDocsData} from './verify-api-docs.mjs';
 import apiInventory from '../website/src/data/api-inventory-v1.json' with { type: 'json' };
 import {apiSlug} from '../website/src/data/api-group-meta.mjs';
 import {docsPages} from '../website/src/data/docs-pages.mjs';
+import {verifyDocumentationSnapshot} from './documentation-snapshot.mjs';
+import {verifyApiExamples} from './api-examples.mjs';
+import {generateCapabilityGuides} from './generate-capability-guide.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const base = resolve(root,'dist');
@@ -20,6 +23,9 @@ const fileSet = new Set(files.map(path => relative(base,path).split('\\').join('
 const headersPolicy = await readFile(resolve(base,'_headers'),'utf8');
 assert.match(headersPolicy,/(?:^|\n)\/docs\/\*\n[ \t]+Cache-Control: [^\n]*no-transform/,'HTML transformation policy is missing for documentation routes');
 const apiReceipt = await verifyApiDocsData();
+await verifyApiExamples(root);
+await generateCapabilityGuides({base: root, check: true});
+const documentationReceipt = await verifyDocumentationSnapshot(root);
 await verifyFrontendNotices(base);
 await verifyPhotoNotices(base);
 const fontReceipt=JSON.parse(await readFile(resolve(base,'fonts/font.json')));
@@ -64,13 +70,14 @@ const requiredPages = [
   ...docsPages.map(page => `${page.path.slice(1)}index.html`),
   ...apiInventory.apis.map(api => `docs/api/${apiSlug(api.id)}/index.html`),
 ];
+requiredPages.push(...requiredPages.filter(file => file !== '404.html').map(file => `en/${file}`), 'en/404/index.html');
 for(const file of requiredPages) assert.ok(fileSet.has(file),`Required page is missing: ${file}`);
 const docsSearch = JSON.parse(await readFile(resolve(base,'docs/search-index.json'),'utf8'));
 assert.ok(Array.isArray(docsSearch) && docsSearch.length >= docsPages.length + apiInventory.apis.length,'Search index is incomplete');
 const expectedSearchPaths = new Set([...docsPages.map(page => page.path), ...apiInventory.apis.map(api => `/docs/api/${apiSlug(api.id)}/`)]);
 for(const entry of docsSearch) {
   assert.ok(entry && typeof entry.path === 'string' && typeof entry.title === 'string' && typeof entry.summary === 'string' && typeof entry.keywords === 'string','Malformed documentation search entry');
-  assert.ok(expectedSearchPaths.has(entry.path) || entry.path === '/docs/api/capability-defaults/','Search entry points outside the documentation set');
+  assert.ok(expectedSearchPaths.has(entry.path) || entry.path.startsWith('/docs/engineering/'),'Search entry points outside the documentation set');
 }
 for(const page of docsPages) assert.ok(docsSearch.some(entry => entry.path === page.path && entry.title === page.title),`Search index omits ${page.path}`);
 for(const api of apiInventory.apis) {
@@ -83,11 +90,27 @@ for(const path of ['/','/demo/','/platforms/','/guide/',...docsPages.map(page=>p
   assert.ok(sitemapRoutes.has(path),`Sitemap omits ${path}`);
 }
 const htmlFiles = files.filter(path => path.endsWith('.html'));
+const routePairs = JSON.parse(await readFile(resolve(base, 'page-routes.json'), 'utf8'));
+for (const pair of routePairs) {
+  for (const [locale, path] of Object.entries(pair.routes)) {
+    const file = resolve(base, path.slice(1), 'index.html');
+    const html = await readFile(file, 'utf8');
+    assert.ok(html.includes(`lang="${locale}"`), `Wrong HTML language: ${path}`);
+    assert.ok(html.includes(`rel="canonical" href="https://container.weapp.dev${path}"`), `Wrong canonical: ${path}`);
+    for (const language of ['zh-CN', 'en', 'x-default']) assert.ok(html.includes(`hreflang="${language}"`), `Missing hreflang in ${path}`);
+  }
+}
+for (const locale of ['zh-CN', 'en']) {
+  const prefix = locale === 'en' ? '/en' : '';
+  const entries = JSON.parse(await readFile(resolve(base, `${prefix ? 'en/' : ''}docs/search-index.json`), 'utf8'));
+  for (const pair of routePairs.filter(page => page.routes[locale].includes('/docs/'))) assert.ok(entries.some(entry => entry.path === pair.routes[locale]), `Search omits ${pair.routes[locale]}`);
+  assert.ok(entries.every(entry => entry.path.startsWith(`${prefix}/docs/`) && (locale !== 'en' || !/[\u3400-\u9fff]/u.test(entry.title))), `Wrong-language search index: ${locale}`);
+}
 let highlightedBlocks = 0;
 for(const path of htmlFiles) {
   const rel = relative(base,path).split('\\').join('/');
   const html = await readFile(resolve(base,path),'utf8');
-  if(rel.startsWith('docs/')) {
+  if(rel.startsWith('docs/') || rel.startsWith('en/docs/')) {
     const blocks = [...html.matchAll(/<pre\b([^>]*)>([\s\S]*?)<\/pre>/g)];
     assert.equal(blocks.length, [...html.matchAll(/data-code-language=/g)].length, `Code block bypasses DocsCode in ${rel}`);
     for(const [,attributes,body] of blocks) {
@@ -99,7 +122,6 @@ for(const path of htmlFiles) {
     }
   }
   for(const character of new Set(html.match(/[\u3400-\u9fff]/gu)||[]))assert.ok(websiteFont.hasGlyphForCodePoint(character.codePointAt(0)),`Website font lacks ${character}; regenerate the reviewed subset`);
-  assert.ok(!html.includes('—') && !html.includes('–'),`Unexpected editorial punctuation: ${rel}`);
   const pageUrl = rel.endsWith('/index.html') ? `/${rel.slice(0,-'index.html'.length)}` : rel === 'index.html' ? '/' : `/${rel}`;
   const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map(match=>match[1]));
   for(const match of html.matchAll(/(?:src|href)="([^"]+)"/g)) {

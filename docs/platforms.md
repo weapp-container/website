@@ -1,6 +1,10 @@
+<a id="full-end-demonstration-and-access-to-historical-products"></a>
 # 全端演示与历史产物接入
 
-当前公开的是源码。下列安装命令复现历史预编译候选，仍需相应私有归档权限；它们不构成新的开源二进制发行。源码运行从[核心 README](https://github.com/weapp-container/weapp-container#readme)开始，各 SDK 源码构建见[SDK 说明](https://github.com/weapp-container/weapp-container/blob/main/docs/sdk-repositories.md)。平台状态尚未针对当前开源源码重新验证。
+**简体中文** · [English](platforms.en.md)
+
+
+当前公开的是源码。下列安装命令复现历史预编译候选，仍需相应私有归档权限；它们不构成新的开源二进制发行。源码运行从[核心 README](https://github.com/weapp-container/weapp-container/blob/main/README.md)开始，各 SDK 源码构建见[SDK 说明](https://github.com/weapp-container/weapp-container/blob/main/docs/sdk-repositories.md)。平台状态尚未针对当前开源源码重新验证。
 
 七个系统使用统一的 portable pack 格式：基础交互、商品详情与规格、购物袋、收货信息、模拟支付、点单、订单记录。每个 SDK 只加载其编译绑定的精确 pack 候选；各端独立升级和验收。业务数据只保存在本机，不连接真实支付、商家或订单后台。Web 在浏览器 Dedicated Worker 内运行 WASM；原生宿主使用平台 SDK 的本地渲染视图。
 
@@ -16,8 +20,9 @@
 
 实际构建、安装、执行、签名状态分别记录在 `platforms/status.json` 和 `artifacts/**/build.json`。源代码存在、静态检查通过或生成 unsigned 包，都不等于设备运行验收。
 
-平台状态是各端的独立记录，不能由 Web 的通过状态推导原生通过。本次 iOS Duo 保留 `duoAcceptance: simulator-partial`：最终原生与 Flutter 应用的四姿态交互和关闭通过，独立 iOS SDK consumer 的 UIKit 指标及只读观测恒等通过；Flutter 最终宿主的精确指标、中文输入和完整结算，以及 Apple 真机与签名仍未验证。详细证据见 [Duo 验收记录](./duo-verification.md)。Windows 的 SDK consumer 通过不等于 Showcase 应用通过；Linux 的窗口生命周期通过仍保留业务交互与 Flutter ABI 的未完成项。
+平台状态是各端的独立记录，不能由 Web 的通过状态推导原生通过。本次 iOS Duo 保留 `duoAcceptance: simulator-partial`：最终原生与 Flutter 应用的四姿态交互和关闭通过，独立 iOS SDK consumer 的 UIKit 指标及只读观测恒等通过；Flutter 最终宿主的精确指标、中文输入和完整结算，以及 Apple 真机与签名仍未验证。详细证据见 [Duo 验收记录](duo-verification.md)。Windows 的 SDK consumer 通过不等于 Showcase 应用通过；Linux 的窗口生命周期通过仍保留业务交互与 Flutter ABI 的未完成项。
 
+<a id="install-the-correct-private-product"></a>
 ## 安装精确的私有产物
 
 `platforms/miniapp-artifact.lock.json` 固定当前已混淆 pack 的版本、根哈希、策略与逐文件 inventory；不带 `--sdk-id` 时安装这一份当前 pack。`platforms/sdk-artifacts.lock.json` 逐项固定 restricted SDK，各条目可属于不同的精确候选 release。
@@ -55,6 +60,7 @@ node tools/native-react-native-build.mjs --platform android
 
 桌面 SDK id 为 `desktop/macos`、`desktop/windows`、`desktop/linux`，iOS 为 `ios`，Harmony 为 `harmony`。共享私有包也固定 Noto Sans SC 与 OFL 字体许可。受限原生运行时在首次布局前安装编译绑定的审核字体，并关闭系统字体回退；宿主不通过注册系统字体掩盖缺字问题。SDK 封装会检查每个原生核心 slice 的字体与许可哈希标记。Harmony 构建要求官方 DevEco SDK/Hvigor/ohpm，可通过 `DEVECO_HOME`、`OHOS_SDK`、`HVIGOR` 和 `OHPM` 指定已安装工具。
 
+<a id="ios-simulator-and-device-build"></a>
 ## iOS 模拟器与 device 构建
 
 Swift 原生消费者使用同一个 `ios` SDK 条目，归档内包含设备和模拟器 slice。安装匹配的 pack 和 SDK 后，可分别构建：
@@ -72,6 +78,7 @@ node tools/native-consumer-build.mjs --platform ios --device
 
 Flutter 使用 `flutter/ios` 条目。`node tools/native-build.mjs --platform ios` 默认构建混淆后的 release device app，未配置 Apple 签名时使用 `--no-codesign`。追加 `--simulator` 则构建仅供本地验证的 debug simulator app，其 receipt 明确标为不适用 release 混淆，不能作为 release 保护或设备分发证据。
 
+<a id="construction-and-acceptance"></a>
 ## 构建与验收
 
 `.github/workflows/native.yml` 提供 `workflow_dispatch`，可选宿主与系统。每个矩阵项将同一个 `matrix.id` 传给 pack 和 SDK 安装器，使用目标操作系统、校验精确匹配的私有产物后编译，并保留独立 receipt。产物缺失、未知 pack root、哈希变化和工具链缺失都使该项失败。Windows/Linux 原生 producer 在对应目标系统的 runner 上执行，不能用 macOS 交叉构建结果冒充。
@@ -88,6 +95,7 @@ Windows/Linux 的实际应用验证从成功 receipt 锁定 delivery 中每个�
 
 本机 `native-signing --create` 生成专属密钥和 0600 私有配置。正式更新必须保留同一密钥；CI 临时生成的 key 只用于该次构建校验。Swift 可提供 unsigned simulator/device app，React Native 默认提供 unsigned simulator app，Flutter release 默认提供 unsigned device app；这些归档不是可直接安装的已签名 IPA。Apple、Harmony 与 Windows 的正式分发签名需要各自真实凭据。
 
+<a id="host-boundary"></a>
 ## 宿主边界
 
 所有宿主按照 `miniapp/BRIDGE.md` 处理状态与文本输入。会话身份、页面身份和请求身份共同约束回复；业务状态有大小限制，写入完成后才关闭 native owner。正常退出与显式关闭等待 storage flush/release；操作系统强制终止无法由应用异步屏障保证，因此状态在变更时即持久化。

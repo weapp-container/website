@@ -71,6 +71,7 @@ jobs:
           done
           node tools/browser-smoke.mjs --mode devices
           node tools/docs-browser-smoke.mjs --url http://127.0.0.1:4325
+          node tools/http-smoke.mjs --url http://127.0.0.1:4325
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -90,7 +91,9 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       - name: Live browser acceptance
         if: github.event_name == 'workflow_dispatch' && inputs.deploy
-        run: node tools/browser-smoke.mjs --mode devices --url https://container.weapp.dev --output artifacts/web/live
+        run: |
+          node tools/browser-smoke.mjs --mode devices --url https://container.weapp.dev --output artifacts/web/live
+          node tools/docs-browser-smoke.mjs --url https://container.weapp.dev --output artifacts/web/live-docs
       - name: Live headers, cache and private-file boundary
         if: github.event_name == 'workflow_dispatch' && inputs.deploy
         run: node tools/http-smoke.mjs --url https://container.weapp.dev
@@ -98,6 +101,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch' && inputs.verify_staging
         run: |
           node tools/browser-smoke.mjs --mode devices --url https://staging.container.weapp.dev --output artifacts/web/staging-live
+          node tools/docs-browser-smoke.mjs --url https://staging.container.weapp.dev --output artifacts/web/staging-docs
           node tools/http-smoke.mjs --url https://staging.container.weapp.dev --output artifacts/web/staging-live/http.json
       - name: Preserve live acceptance evidence
         if: always() && github.event_name == 'workflow_dispatch'
@@ -106,6 +110,8 @@ jobs:
           name: public-site-acceptance
           path: |
             artifacts/web/live/
+            artifacts/web/live-docs/
             artifacts/web/staging-live/
+            artifacts/web/staging-docs/
           if-no-files-found: ignore
           retention-days: 30

@@ -1,15 +1,19 @@
-# Native showcase
+<a id="native-showcase"></a>
+# 原生展示
 
-One Flutter project targets Android, iOS, macOS, Windows and Linux. It embeds the
-native QuickJS/Skia SDK. The host owns native text editing, durable demo state,
-measured layout and awaited session close. Bridge messages follow
-`miniapp/BRIDGE.md`; replies retain the guest session, page and request identities.
+**简体中文** · [English](README.en.md)
 
-Install a matching restricted Flutter SDK distribution into `.runtime/sdk/flutter`,
-then run `node tools/native-build.mjs --platform android`. The builder synchronizes
-the shared `artifacts/miniapp/pack`; the app exposes no arbitrary pack loader.
 
-Release Android uses an independent keystore and R8; Flutter release builds use
-`--obfuscate` with private symbol output. iOS Simulator debug builds are separate
-development checks. Apple device signing and macOS notarization require their
-own configured identities.
+一个 Flutter 项目面向 Android、iOS、macOS、Windows 和 Linux。它嵌入了
+原生 QuickJS/Skia SDK。宿主拥有原生文本编辑，持久的演示状态，
+测量布局并等待会话结束。桥接消息如下
+`miniapp/BRIDGE.md`; 回复保留了访客会话、页面和请求身份。
+
+将匹配的受限 Flutter SDK 发行版安装到 `.runtime/sdk/flutter` 中，
+然后运行 ​​`node tools/native-build.mjs --platform android`。构建器同步
+共享 `artifacts/miniapp/pack`;该应用程序不公开任何包加载器。
+
+Release Android 使用独立的密钥库和 R8； Flutter发布构建使用
+`--obfuscate` 具有私有符号输出。 iOS 模拟器调试版本是分开的
+开发检查。 Apple 设备签名和 macOS 公证需要其
+自己配置的身份。

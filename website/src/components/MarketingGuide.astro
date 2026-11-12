@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {localeFromPath, localizedPath, ui} from '../data/i18n.mjs';
+import copy from '../data/marketing-copy.json';
+const locale = localeFromPath(Astro.url.pathname);
+const t = (value: string) => locale === 'en' ? copy[value.trim() as keyof typeof copy] || value : value;
+const href = (value: string) => localizedPath(value, locale);
+---
+<Layout title={t("开始接入 · Weapp Container")}>
+  <section class="section-wrap page-intro"><p class="eyebrow">{t("开始接入")}</p><h1>{t("从一份小程序包开始。")}</h1><p>{t("选择宿主 SDK，准备经过校验的运行库和 portable pack，再将会话与原生视图接入应用生命周期。")}</p><p><a class="button primary" href={href("/docs/start/")}>{t("打开快速开始")}</a></p></section>
+  <section class="section-wrap guide-content">
+    <article><h2>{t("先体验在线演示")}</h2><p>{t("基础能力、商城与点单运行在隔离的在线演示宿主中。演示包固定且功能受限，不允许加载任意小程序包。")}</p><a class="text-link" href={href("/demo/")}>{t("打开在线体验 →")}</a></article>
+    <article><h2>{t("选择集成方式")}</h2><p>{t("平台接入文档覆盖 Android、iOS、C++ 桌面、Flutter 和 React Native。Web 与 HarmonyOS 页面会标出当前可用的示例与验证范围。")}</p><a class="text-link" href={href("/docs/integrations/")}>{t("浏览集成指南 →")}</a></article>
+    <article><h2>{t("发行、许可与访问权限")}</h2><p>{t("SDK wrapper 源码、运行库归档的许可证、release 下载权限和各平台验证状态分别管理。请按使用版本查看锁文件与随包 notices。")}</p><a class="text-link" href={href("/docs/licensing/")}>{t("查看许可与发行边界 →")}</a></article>
+    <article id="license"><h2>{t("在线体验范围")}</h2><p>{t("演示不提供真实登录、支付、硬件访问、任意包加载或开发调试。其表现不能作为所有微信 API、设备兼容性或性能承诺。")}</p></article>
+  </section>
+</Layout>

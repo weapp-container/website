@@ -1,14 +1,18 @@
-# C++ native hosts
+<a id="c-native-hosts"></a>
+# C++ 原生宿主
 
-CMake consumes `WeappContainer::Desktop` from an exact installed SDK prefix.
-macOS uses AppKit/Metal, Windows uses Win32/WGL and Linux uses GTK3/OpenGL.
-Each UI retains its event loop until the SDK emits `Closed`; JSON demo state
-and native text editing use the shared fenced bridge protocol.
+**简体中文** · [English](README.en.md)
+
+
+CMake 使用确切安装的 SDK 前缀中的 `WeappContainer::Desktop` 。
+macOS 使用 AppKit/Metal，Windows 使用 Win32/WGL，Linux 使用 GTK3/OpenGL.
+每个 UI 都会保留其事件循环，直到 SDK 发出 `Closed`； JSON 演示状态
+和本机文本编辑使用共享围栏桥协议。
 
 Run `node tools/native-consumer-build.mjs --platform macos|windows|linux`.
-The app receives the verified shared pack directory as its only CLI argument.
-The runtime's compiled policy independently rejects arbitrary packs. Build/link,
-GUI execution, actual GPU and operating system signing remain separate checks.
+应用程序接收经过验证的共享包目录作为其唯一的 CLI 参数。
+运行时的编译策略独立拒绝任意包。构建/链接，
+GUI 执行、实际 GPU 和操作系统签名仍然是单独的检查。
 
-The nlohmann JSON header is MIT licensed. Its original version, source and byte
-hash are retained in `third_party/nlohmann/SOURCE.json` with its license.
+nlohmann JSON 标头已获得 MIT 许可。它的原始版本、来源和字节
+哈希值及其许可证保留在 `third_party/nlohmann/SOURCE.json` 中。

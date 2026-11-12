@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "showcase-frontend-license-lock",
-  "packageLockSha256": "8de2c7b563b0cf0967cb5b120057cd2943c5366a52d5f643506cb1d1b4e20765",
+  "packageLockSha256": "8fa58c9f39c84f1cfcf042cfbcd2fee5837ac53504807f02b52ea79cf30f9537",
   "scope": "Reviewed conservative package set; each production client chunk is checked against it during generateBundle. Vite and Rolldown are retained for generated runtime helpers.",
   "packages": [
     {

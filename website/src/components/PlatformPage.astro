@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import status from '../../../platforms/status.json';
+import {localeFromPath, localizedPath} from '../data/i18n.mjs';
+import copy from '../data/platform-copy.json';
+const locale=localeFromPath(Astro.url.pathname);
+const t=(value: string)=>locale==='en' ? copy[value.trim() as keyof typeof copy] || value : value;
+const href=(value: string)=>localizedPath(value,locale);
+const labels: Record<string,string> = { passed: '已通过', pending: '待验证', blocked: '待条件就绪', 'not-run': '未执行', unsigned: '待签名', 'not-required': '不适用', 'emulator-verified': '模拟器已验证', 'simulator-verified': '模拟器已验证', 'device-verified': '真机已验证', 'desktop-verified': '桌面运行已验证', 'local-verified': '本机已验证', 'release-signed': 'Release 已签名', 'verified-release-key': 'Release 签名已验证', 'unsigned-simulator': '真机待签名', 'consumer-verified': '独立消费者已验证' };
+---
+<Layout title={t("全端进展 · Weapp Container")} description={t("Weapp Container 各宿主平台的构建、安装、运行与签名状态，以及对应的接入文档。")}>
+  <section class="section-wrap page-intro"><p class="eyebrow">{t("全端进展")}</p><h1>{t("每个端，都有自己的验证。")}</h1><p>{t("构建、安装和真实运行分别记录。本表展示固定版本的演示证据，当前源码构建需要单独验证。")}</p></section>
+  <section class="section-wrap status-section"><div class="status-table-wrap"><table><thead><tr><th>{t("运行平台")}</th><th>{t("构建")}</th><th>{t("安装")}</th><th>{t("运行")}</th><th>{t("签名")}</th></tr></thead><tbody>{status.platforms.map(item => <tr><th><strong>{item.name}</strong><span>{item.architecture}</span></th><td>{t(labels[item.build] || item.build)}</td><td>{t(labels[item.install] || item.install)}</td><td>{t(labels[item.runtime] || item.runtime)}</td><td>{t(labels[item.signing] || item.signing)}</td></tr>)}</tbody></table></div><p class="table-caption">{t("更新时间：")}{status.updatedAt}{t("。编译通过不代表真机、性能或完整兼容性验收。")}</p><ul class="platform-notes">{status.platforms.filter(item => item.note).map(item => <li><strong>{item.name}{locale === 'en' ? ': ' : '：'}</strong>{t(item.note!)}</li>)}</ul></section>
+  <section class="section-wrap integration-section"><h2>{t("选择适合你的接入方式。")}</h2><div class="integration-list"><article><h3>{t("原生 SDK")}</h3><p>{t("Android、iOS 和 C++ Desktop 独立接入。")}</p><a href={href("/docs/integrations/android/")}>Android</a><a href={href("/docs/integrations/ios/")}>iOS</a><a href={href("/docs/integrations/desktop/")}>Desktop</a></article><article><h3>Flutter</h3><p>{t("Android、iOS、macOS、Windows 与 Linux。")}</p><a href={href("/docs/integrations/flutter/")}>{t("Flutter 接入文档")}</a></article><article><h3>React Native</h3><p>{t("Fabric 与 TurboModules，新架构 Android / iOS。")}</p><a href={href("/docs/integrations/react-native/")}>{t("React Native 接入文档")}</a></article><article><h3>{t("Web 与 HarmonyOS")}</h3><p>{t("当前为固定在线演示与受限原生示例，不提供通用 Web 或 HarmonyOS SDK。")}</p><a href={href("/docs/integrations/web/")}>{t("Web 边界")}</a><a href={href("/docs/integrations/harmony/")}>{t("HarmonyOS 状态")}</a></article></div><a class="button secondary" href="https://github.com/weapp-container/website/releases" target="_blank" rel="noreferrer">{t("查看受限 Showcase 发行记录 ↗")}</a><p class="muted">{t("历史发行物的访问权限与公开源码许可分别管理。当前运行库请从公开源码构建。")}</p></section>
+</Layout>
+<style>.platform-notes{margin:24px 0 0;padding-left:18px;color:var(--muted);font-size:12px;line-height:1.9}.platform-notes li+li{margin-top:8px}.platform-notes strong{font-weight:600;color:var(--text)}</style>

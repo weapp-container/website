@@ -23,7 +23,7 @@ test('API snapshot hashes, source revision, defaults and documented coverage gap
 
 test('every API group has metadata and presents names, limitations and conformance evidence', async () => {
   const inventory = JSON.parse(await readFile(resolve(root, 'website/src/data/api-inventory-v1.json'), 'utf8'));
-  const page = await readFile(resolve(root, 'website/src/pages/docs/api/[slug].astro'), 'utf8');
+  const page = await readFile(resolve(root, 'website/src/components/ApiGroupPage.astro'), 'utf8');
   for (const api of inventory.apis) {
     assert.ok(apiGroupMeta[api.id], `Missing title and section for ${api.id}`);
     assert.ok(api.names.length > 0 && api.difference.length > 0 && api.conformance.length > 0, `Missing evidence or limitation for ${api.id}`);
@@ -32,7 +32,7 @@ test('every API group has metadata and presents names, limitations and conforman
   assert.match(page, /实现差异与限制/);
   assert.match(page, /宿主覆盖/);
   assert.match(page, /核验案例/);
-  assert.match(page, /api-runtime-conformance\.md/);
+  assert.match(page, /api-runtime-conformance/);
 });
 
 test('all documentation navigation pages resolve to source pages and carry searchable summaries', async () => {
@@ -42,9 +42,9 @@ test('all documentation navigation pages resolve to source pages and carry searc
     seen.add(page.path);
     assert.ok(page.title && page.section && page.summary, `Incomplete search metadata: ${page.path}`);
     const relative = page.path.replace(/^\/docs\//, '').replace(/\/$/, '');
-    const direct = relative ? resolve(root, 'website/src/pages/docs', `${relative}.astro`) : resolve(root, 'website/src/pages/docs/index.astro');
-    const nested = relative ? resolve(root, 'website/src/pages/docs', relative, 'index.astro') : direct;
-    await assert.doesNotReject(access(direct).catch(() => access(nested)));
+    const direct = resolve(root, 'website/src/content/guides', `${relative || 'index'}.md`);
+    await assert.doesNotReject(access(direct));
+    assert.match(await readFile(direct, 'utf8'), new RegExp(`route: "${page.path}"`));
   }
 });
 

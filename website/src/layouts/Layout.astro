@@ -1,10 +1,18 @@
 ---
 import '../styles/global.css';
-const { title = 'Weapp Container · 小程序，运行在更多地方', description = '在 Web、手机与桌面体验同一份小程序。探索 Weapp Container 的基础能力、商城和点单演示。' } = Astro.props;
+import {localeFromPath, localizedPath, ui} from '../data/i18n.mjs';
 const path = Astro.url.pathname;
+const locale = localeFromPath(path);
+const text = ui(locale);
+const { title = text.siteTitle, description = text.siteDescription } = Astro.props;
+const href = (value: string) => localizedPath(value, locale);
+const is404 = /\/404(?:\.html|\/)?$/.test(path);
+const pagePath = (language: string) => is404 ? language === 'en' ? '/en/404/' : '/404.html' : localizedPath(path, language);
+const alternate = pagePath(locale === 'en' ? 'zh-CN' : 'en');
+const nav = [['/docs/', text.docs], ['/demo/', text.demo], ['/platforms/', text.platforms], ['/guide/', text.guide]];
 ---
 <!doctype html>
-<html lang="zh-CN">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,7 +22,10 @@ const path = Astro.url.pathname;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://container.weapp.dev/media/showcase-overview.png" />
-    <link rel="canonical" href={new URL(path, 'https://container.weapp.dev')} />
+    <link rel="canonical" href={new URL(pagePath(locale), 'https://container.weapp.dev')} />
+    <link rel="alternate" hreflang="zh-CN" href={new URL(pagePath('zh-CN'), 'https://container.weapp.dev')} />
+    <link rel="alternate" hreflang="en" href={new URL(pagePath('en'), 'https://container.weapp.dev')} />
+    <link rel="alternate" hreflang="x-default" href={new URL(pagePath('zh-CN'), 'https://container.weapp.dev')} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <script is:inline>
@@ -22,33 +33,34 @@ const path = Astro.url.pathname;
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#content">跳至内容</a>
+    <a class="skip-link" href="#content">{text.skip}</a>
     <header class="site-header">
-      <a class="brand" href="/" aria-label="Weapp Container 首页"><img src="/favicon.svg" width="30" height="30" alt="" /><span>Weapp <strong>Container</strong></span></a>
-      <nav aria-label="主导航">
-        <a href="/docs/" aria-current={path.startsWith('/docs/') ? 'page' : undefined}>开发文档</a>
-        <a href="/demo/" aria-current={path === '/demo/' ? 'page' : undefined}>在线体验</a>
-        <a href="/platforms/" aria-current={path === '/platforms/' ? 'page' : undefined}>全端进展</a>
-        <a href="/guide/" aria-current={path === '/guide/' ? 'page' : undefined}>开始接入</a>
+      <a class="brand" href={href('/')} aria-label={`Weapp Container ${text.home}`}><img src="/favicon.svg" width="30" height="30" alt="" /><span>Weapp <strong>Container</strong></span></a>
+      <nav aria-label={text.mainNav}>
+        {nav.map(([route, label]) => <a href={href(route)} aria-current={path.startsWith(href(route)) ? 'page' : undefined}>{label}</a>)}
       </nav>
       <details class="mobile-menu">
-        <summary aria-label="打开或关闭导航菜单" title="导航菜单"><span aria-hidden="true"></span></summary>
-        <nav aria-label="移动导航">
-          <a href="/docs/" aria-current={path.startsWith('/docs/') ? 'page' : undefined}>开发文档</a>
-          <a href="/demo/" aria-current={path === '/demo/' ? 'page' : undefined}>在线体验</a>
-          <a href="/platforms/" aria-current={path === '/platforms/' ? 'page' : undefined}>全端进展</a>
-          <a href="/guide/" aria-current={path === '/guide/' ? 'page' : undefined}>开始接入</a>
+        <summary aria-label={text.menu} title={text.menu}><span aria-hidden="true"></span></summary>
+        <nav aria-label={text.mobileNav}>
+          {nav.map(([route, label]) => <a href={href(route)} aria-current={path.startsWith(href(route)) ? 'page' : undefined}>{label}</a>)}
         </nav>
       </details>
-      <button class="theme-toggle" id="theme-toggle" aria-label="切换深浅主题" title="切换主题"><span aria-hidden="true">◐</span></button>
+      <a class="language-switch" data-language-switch href={alternate} lang={locale === 'en' ? 'zh-CN' : 'en'} hreflang={locale === 'en' ? 'zh-CN' : 'en'}>{locale === 'en' ? '中文' : 'English'}</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label={text.theme} title={text.theme}><span aria-hidden="true">◐</span></button>
     </header>
     <main id="content"><slot /></main>
     <footer class="site-footer">
-      <a class="brand" href="/"><img src="/favicon.svg" width="26" height="26" alt="" /><span>Weapp Container</span></a>
-      <p>同一份小程序，更多运行场景。</p>
-      <div><a href="/docs/licensing/">许可说明</a><a href="https://github.com/weapp-container/website" target="_blank" rel="noreferrer">站点源码 ↗</a><span>© {new Date().getFullYear()} Weapp Container</span></div>
+      <a class="brand" href={href('/')}><img src="/favicon.svg" width="26" height="26" alt="" /><span>Weapp Container</span></a>
+      <p>{text.tagline}</p>
+      <div><a href={href('/docs/licensing/')}>{text.license}</a><a href="https://github.com/weapp-container/website" target="_blank" rel="noreferrer">{text.source} ↗</a><span>© {new Date().getFullYear()} Weapp Container</span></div>
     </footer>
     <script>
+      document.querySelectorAll<HTMLAnchorElement>('[data-language-switch]').forEach(link => {
+        const target = new URL(link.href);
+        target.search = location.search;
+        target.hash = location.hash;
+        link.href = target.href;
+      });
       document.querySelector('#theme-toggle')?.addEventListener('click', () => {
         const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
         document.documentElement.dataset.theme = next;

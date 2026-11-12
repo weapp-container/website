@@ -1,6 +1,10 @@
+<a id="web-presentation-equipment"></a>
 # Web 演示设备
 
-本轮全屏与 `hostLayout` 改动的验证范围见 [Duo 全屏验收记录](./duo-fullscreen-verification.md)。[candidate9 历史记录](./duo-verification.md) 保留其原有候选身份与结论。
+**简体中文** · [English](devices.en.md)
+
+
+本轮全屏与 `hostLayout` 改动的验证范围见 [Duo 全屏验收记录](duo-fullscreen-verification.md)。[candidate9 历史记录](duo-verification.md) 保留其原有候选身份与结论。
 
 设备尺寸统一维护在 [`website/device-profiles.json`](../website/device-profiles.json)。官网和 iframe 消费同一注册表；staging 校验两种方向的几何结构和已核验标记后，将注册表写入哈希资产闭包。来源字段用于追溯独立测量，staging 不会重新运行 UIKit witness 或核对私有原始记录。URL 只接受 `scene`、`device`、`display`、`rotation`，其中 `rotation` 为 `0` 或 `90`，不能指定任意运行库、pack 或权限。
 
@@ -16,8 +20,9 @@
 | iPhone 18 Pro Max | 440 × 956 / 440 × 956 | 956 × 440 / 956 × 440 | 3 |
 | iPhone 17 | 402 × 874 / 402 × 874 | 874 × 402 / 874 × 402 | 3 |
 | Pixel 7 网页预览 | 412 × 839 / 412 × 839 | 863 × 360 / 863 × 360 | 2.625 |
-| iPad mini (A17 Pro) | 744 × 1133 / 744 × 1133 | 1133 × 744 / 1133 × 744 | 2 |
+| iPad mini (A17 Pro)| 744 × 1133 / 744 × 1133| 1133 × 744 / 1133 × 744| 2|
 
+<a id="measurement-source-and-coordinates"></a>
 ## 测量来源与坐标
 
 Apple 数据采样于 2026-11-06，使用 Xcode 27.2（27B52）、Swift 6.4.2 编译的独立 UIKit witness，仅导入 UIKit，没有导入容器 SDK。通过任务专属模拟器和 Device Hub 执行真实 Open / Closed、Rotate Right 操作。Duo 使用 iOS 27.2（24B91016s），其他 iPhone 使用 iOS 27.2（24B8117），iPad mini A17 Pro 使用支持该型号的 iOS 27.0（24A434）。注册表 `source` 记录工具链、runtime build 和 witness 的源码及二进制 SHA-256；原始测量和截图留在私有验证产物中。
@@ -35,6 +40,7 @@ UIKit witness 的测量证明注册表来源，Web 设备验收证明浏览器�
 
 Duo 的完整 surface、局部安全区、`verticalBarEdge` 和有效保留区域已使用链接 iOS 27.2 SDK 的独立 witness 重新采集。外屏和内屏自然方向的实际物理侧栏边缘为右侧，内屏旋转 90 时为无侧栏；这些状态直接存入注册表，运行时不按型号或方向推断。外屏旋转后的遮挡位于右下，侧栏控件避让该有效区域。完全展开没有有效折叠区域，因此不会常驻折痕空隙。部分折叠的区域由原生动态快照提供；网页仅提供已登记的展开／折叠外屏和旋转状态。
 
+<a id="lifecycle-and-rendering"></a>
 ## 生命周期与渲染
 
 切换设备型号或演示场景时，宿主先发送带版本和 request ID 的关闭请求，收到当前 iframe 的实际 Worker 关闭回执后才创建新 owner。超时不会静默替换不确定的 owner。折叠和旋转保留同一会话：宿主先暂停交互并调整外框；iframe 调用 `setWindowMetrics` 安装输入围栏后再调整完整内部渲染窗口和内容布局。匹配的新 viewport 已呈现、metrics fence 已打开且输入可用后，宿主才更新已确认的设备选择与 URL 并恢复交互。失败时显示错误，需重新加载演示。
@@ -48,6 +54,7 @@ URL 的省略值始终回到 Duo 展开内屏的自然方向。设备和场景�
 渲染 viewport 现在覆盖完整屏幕，和屏幕尺寸一致。`hostLayout`（版本 1）单独记录当前 surface 局部安全边距、物理侧栏边缘和有效遮挡／折叠区域；它与旧 fixed-coordinate `safeArea` 独立。业务内容和控件使用该快照避让，背景保留完整覆盖。设备切换确认须匹配精确 metrics fence revision、完整已提交窗口快照和新画面，不能只比较宽高。
 
 
+<a id="page-uses-hostlayout"></a>
 ## 页面使用 hostLayout
 
 `wx.getWindowInfo().hostLayout` 是容器扩展字段。版本 1 的坐标原点是实际渲染 View 的左上角，单位为逻辑 points；嵌入窗口时仍使用该 View 的局部坐标。它与 fixed-coordinate `safeArea` 的语义不同：页面不能从后者直接推算局部安全边距，也不能在宿主和页面中重复扣除同一安全区。

@@ -18,9 +18,10 @@ assert.match(config.deploymentHash,/^[a-f0-9]{64}$/);
 assert.equal(config.entry,`/runtime/${config.deploymentHash}/index.html`);
 const runtime=`/runtime/${config.deploymentHash}/`;
 const paths=['/','/demo/','/guide/','/platforms/','/docs/','/docs/start/','/docs/integrations/android/','/docs/api/','/docs/api/wx-storage/','/docs/search-index.json','/sitemap.xml','/showcase-runtime.json',runtime,runtime+'pkg/container_host_web_bg.wasm',runtime+'vendor/fonts/NotoSansSC.ttf','/.git/config','/Cargo.toml','/source-snapshot.tar.gz'];
+paths.push('/en/', '/en/guide/', '/en/platforms/', '/en/demo/', '/en/docs/', '/en/docs/start/', '/en/docs/api/wx-storage/', '/en/docs/search-index.json', '/en/does-not-exist');
 const results=await Promise.all(paths.map(async path=>{
   const r=await fetch(new URL(path,base),{method:'HEAD',signal:AbortSignal.timeout(30000),redirect:'manual'});
-  const h=Object.fromEntries(r.headers),privateProbe=['/.git/config','/Cargo.toml','/source-snapshot.tar.gz'].includes(path);
+  const h=Object.fromEntries(r.headers),privateProbe=['/.git/config','/Cargo.toml','/source-snapshot.tar.gz','/en/does-not-exist'].includes(path);
   assert.equal(r.status,privateProbe?404:200,`${path}: unexpected HTTP status`);
   assert.equal(h['x-content-type-options'],'nosniff');
   assert.ok(h['content-security-policy']?.includes("object-src 'none'")&&h['content-security-policy'].includes("frame-ancestors 'self'"));
@@ -31,6 +32,12 @@ const results=await Promise.all(paths.map(async path=>{
   if(path.endsWith('.wasm'))assert.match(h['content-type'],/application\/wasm/);
   return {path,status:r.status,headers:h};
 }));
+for (const [path, language] of [['/missing-document-41af', 'zh-CN'], ['/en/docs/missing-document-41af/', 'en']]) {
+  const missing = await fetch(new URL(path, base), {signal: AbortSignal.timeout(30000), redirect: 'error'});
+  assert.equal(missing.status, 404, `${path}: must remain an HTTP 404`);
+  assert.match(await missing.text(), new RegExp(`<html lang="${language}"`), `${path}: wrong error-page language`);
+  results.push({path, status: missing.status, language});
+}
 const report={schemaVersion:1,status:'passed',url:base.href,config,results};
 const output=resolve(options['--output']||resolve(root,'artifacts/web/live/http.json'));
 await mkdir(dirname(output),{recursive:true});await writeFile(output,JSON.stringify(report,null,2)+'\n');

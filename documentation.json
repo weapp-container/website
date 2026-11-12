@@ -1,0 +1,721 @@
+{
+  "schemaVersion": 1,
+  "repository": "weapp-container/website",
+  "defaultLocale": "zh-CN",
+  "locales": [
+    "zh-CN",
+    "en"
+  ],
+  "pages": [
+    {
+      "id": "CODE_OF_CONDUCT",
+      "zh": "CODE_OF_CONDUCT.md",
+      "en": "CODE_OF_CONDUCT.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "CODE_OF_CONDUCT.md"
+      },
+      "reviewedChineseSummary": "社区行为",
+      "reviewedChineseSha256": "3919ea2d9508eec5822d83511fbf8e4f225a63d9ac0944342a00136c12b15fe6",
+      "legacyHeadingIds": [
+        "社区行为"
+      ]
+    },
+    {
+      "id": "CONTRIBUTING",
+      "zh": "CONTRIBUTING.md",
+      "en": "CONTRIBUTING.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "CONTRIBUTING.md"
+      },
+      "reviewedChineseSummary": "参与开发",
+      "reviewedChineseSha256": "aa630fb87007b24581fa4b41b4d6a63dbbaf0e6c9ba1d1381320e2ad91ac8203",
+      "legacyHeadingIds": [
+        "参与开发"
+      ]
+    },
+    {
+      "id": "README",
+      "zh": "README.md",
+      "en": "README.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "README.md"
+      },
+      "reviewedChineseSummary": "Weapp 容器网站；本地运行；文档与内容；检查；在线演示；部署与回滚；许可与历史发行",
+      "reviewedChineseSha256": "d97489ec4a71ee06fc1fb3e8757a2f8d1f58abe324690d5a51a54b421670da5f",
+      "legacyHeadingIds": [
+        "demonstrations",
+        "deployment",
+        "development",
+        "distribution-boundary",
+        "license",
+        "weapp-container-website"
+      ]
+    },
+    {
+      "id": "SECURITY",
+      "zh": "SECURITY.md",
+      "en": "SECURITY.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "SECURITY.md"
+      },
+      "reviewedChineseSummary": "安全报告",
+      "reviewedChineseSha256": "e7145ec40af48df2189f331c12dfd47ce8fe5163d73bcf1e9d05943afa324155",
+      "legacyHeadingIds": [
+        "安全报告"
+      ]
+    },
+    {
+      "id": "docs/archived-evidence",
+      "zh": "docs/archived-evidence.md",
+      "en": "docs/archived-evidence.en.md",
+      "section": "validation",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "docs/archived-evidence.md"
+      },
+      "reviewedChineseSummary": "历史交付与证据",
+      "reviewedChineseSha256": "542981dfaf836c48cec579b8a4270f0af1d5f5fdf19121aaeea5d19a10dec714",
+      "legacyHeadingIds": [
+        "历史交付与证据"
+      ]
+    },
+    {
+      "id": "docs/deployment",
+      "zh": "docs/deployment.md",
+      "en": "docs/deployment.en.md",
+      "section": "runtime",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "docs/deployment.md"
+      },
+      "reviewedChineseSummary": "网站构建、部署与回滚；从公开演示快照构建；新候选输入；发布与回滚",
+      "reviewedChineseSha256": "76cdc462641648646174191c85b7b0d036de3bca317f4a490f6ec77858261e9d",
+      "legacyHeadingIds": [
+        "从公开演示快照构建",
+        "发布与回滚",
+        "新候选输入",
+        "网站构建部署与回滚"
+      ]
+    },
+    {
+      "id": "docs/devices",
+      "zh": "docs/devices.md",
+      "en": "docs/devices.en.md",
+      "section": "runtime",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "docs/devices.md"
+      },
+      "reviewedChineseSummary": "Web 演示设备；测量来源与坐标；生命周期与渲染；页面使用 hostLayout",
+      "reviewedChineseSha256": "c5b9ed064e2287ace41b7f93ad5d88ccc138e60a4841b2a2eef3664ae5d7a26c",
+      "legacyHeadingIds": [
+        "web-演示设备",
+        "测量来源与坐标",
+        "生命周期与渲染",
+        "页面使用-hostlayout"
+      ]
+    },
+    {
+      "id": "docs/duo-fullscreen-verification",
+      "zh": "docs/duo-fullscreen-verification.md",
+      "en": "docs/duo-fullscreen-verification.en.md",
+      "section": "runtime",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "docs/duo-fullscreen-verification.md"
+      },
+      "reviewedChineseSummary": "Duo 全屏历史验收摘要",
+      "reviewedChineseSha256": "491f111eb46df0ea0ae5d0050fa6376f17bdacbd7e63eb6f9329eb3f2c408f63",
+      "legacyHeadingIds": [
+        "duo-全屏历史验收摘要"
+      ]
+    },
+    {
+      "id": "docs/duo-verification",
+      "zh": "docs/duo-verification.md",
+      "en": "docs/duo-verification.en.md",
+      "section": "runtime",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "docs/duo-verification.md"
+      },
+      "reviewedChineseSummary": "Duo 历史验收摘要",
+      "reviewedChineseSha256": "2814cb06f54303c8c9e5e7453f993448244db6c8b6f1fea145eeb62e491875d9",
+      "legacyHeadingIds": [
+        "duo-历史验收摘要"
+      ]
+    },
+    {
+      "id": "docs/platforms",
+      "zh": "docs/platforms.md",
+      "en": "docs/platforms.en.md",
+      "section": "runtime",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "docs/platforms.md"
+      },
+      "reviewedChineseSummary": "全端演示与历史产物接入；安装精确的私有产物；iOS 模拟器与 device 构建；构建与验收；宿主边界",
+      "reviewedChineseSha256": "5db2764a5da428069edbd505731d5355504f02f6bb19b76fb5b1d3909c179be7",
+      "legacyHeadingIds": [
+        "ios-模拟器与-device-构建",
+        "全端演示与历史产物接入",
+        "安装精确的私有产物",
+        "宿主边界",
+        "构建与验收"
+      ]
+    },
+    {
+      "id": "docs/showcase-performance",
+      "zh": "docs/showcase-performance.md",
+      "en": "docs/showcase-performance.en.md",
+      "section": "validation",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "docs/showcase-performance.md"
+      },
+      "reviewedChineseSummary": "H5 演示交互性能与场景事务；场景切换事务；性能采样；2026-11-08 观测；2026-11-10 修复验收",
+      "reviewedChineseSha256": "b35750c03b0fc29a6c14e466737401aa58850112815f699eb420c46cbb81dde2",
+      "legacyHeadingIds": [
+        "2026-11-08-观测",
+        "2026-11-10-修复验收",
+        "h5-演示交互性能与场景事务",
+        "场景切换事务",
+        "性能采样"
+      ]
+    },
+    {
+      "id": "hosts/flutter/README",
+      "zh": "hosts/flutter/README.md",
+      "en": "hosts/flutter/README.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "hosts/flutter/README.md"
+      },
+      "reviewedChineseSummary": "原生的展示",
+      "reviewedChineseSha256": "2ae9ead299ec6d349cc5938d18a2977b9ae9f0c854bb36a70e4c4b0dc1bdecda",
+      "legacyHeadingIds": [
+        "native-showcase"
+      ]
+    },
+    {
+      "id": "hosts/harmony/README",
+      "zh": "hosts/harmony/README.md",
+      "en": "hosts/harmony/README.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "hosts/harmony/README.md"
+      },
+      "reviewedChineseSummary": "和谐展示",
+      "reviewedChineseSha256": "7ace1ffa8e0ac5b2e54449c66301a3c520fef4ae05745d944725c84da0eda25e",
+      "legacyHeadingIds": [
+        "harmony-showcase"
+      ]
+    },
+    {
+      "id": "hosts/native-android/README",
+      "zh": "hosts/native-android/README.md",
+      "en": "hosts/native-android/README.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "hosts/native-android/README.md"
+      },
+      "reviewedChineseSummary": "科特林宿主",
+      "reviewedChineseSha256": "be4a844fd9a57af3e2f7c6fb6cef4314a3cbc55d9582fb5d0625724faf43cc5b",
+      "legacyHeadingIds": [
+        "kotlin-host"
+      ]
+    },
+    {
+      "id": "hosts/native-desktop/README",
+      "zh": "hosts/native-desktop/README.md",
+      "en": "hosts/native-desktop/README.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "hosts/native-desktop/README.md"
+      },
+      "reviewedChineseSummary": "C++ 原生宿主",
+      "reviewedChineseSha256": "8317e4123919c6f7dacad646635f0444bad7332a2196bad1db837c00642a1802",
+      "legacyHeadingIds": [
+        "c-native-hosts"
+      ]
+    },
+    {
+      "id": "hosts/native-ios/README",
+      "zh": "hosts/native-ios/README.md",
+      "en": "hosts/native-ios/README.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "hosts/native-ios/README.md"
+      },
+      "reviewedChineseSummary": "Swift/UIKit 主机",
+      "reviewedChineseSha256": "3ff4c55dfc532e74df1d798a80f1e8b36f554ece8edde461085eeae03436529b",
+      "legacyHeadingIds": [
+        "swiftuikit-host"
+      ]
+    },
+    {
+      "id": "hosts/react-native/README",
+      "zh": "hosts/react-native/README.md",
+      "en": "hosts/react-native/README.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "hosts/react-native/README.md"
+      },
+      "reviewedChineseSummary": "反应原生的展示",
+      "reviewedChineseSha256": "04ccda3717ee0a910a93336c15c27063cdb6610bbe3550b3251bdff5e994e47a",
+      "legacyHeadingIds": [
+        "react-native-showcase"
+      ]
+    },
+    {
+      "id": "miniapp/BRIDGE",
+      "zh": "miniapp/BRIDGE.md",
+      "en": "miniapp/BRIDGE.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "miniapp/BRIDGE.md"
+      },
+      "reviewedChineseSummary": "显示桥 1；State；Close",
+      "reviewedChineseSha256": "bf06f2aeaa5ff695f56be566a1b18e091ee49a9e3623881380246747244f8a9f",
+      "legacyHeadingIds": [
+        "close",
+        "local-business-behavior",
+        "ownership-and-verification",
+        "showcase-bridge-1",
+        "state",
+        "text-editing"
+      ]
+    },
+    {
+      "id": "miniapp/README",
+      "zh": "miniapp/README.md",
+      "en": "miniapp/README.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "miniapp/README.md"
+      },
+      "reviewedChineseSummary": "一包七宿主",
+      "reviewedChineseSha256": "a3cce4885dac74edf97b522f503c0963e6f6ccea889decf77bd494814e620262",
+      "legacyHeadingIds": [
+        "one-pack-seven-hosts"
+      ]
+    },
+    {
+      "id": "tools/TOOLCHAIN",
+      "zh": "tools/TOOLCHAIN.md",
+      "en": "tools/TOOLCHAIN.en.md",
+      "section": "tools",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "tools/TOOLCHAIN.md"
+      },
+      "reviewedChineseSummary": "私人展览包",
+      "reviewedChineseSha256": "7dbd88d590a46d8a61fc94de8b5a210febf344c0ccdaabbc278e7c863cdd5639",
+      "legacyHeadingIds": [
+        "private-showcase-packer"
+      ]
+    },
+    {
+      "id": "tools/documentation/README",
+      "zh": "tools/documentation/README.md",
+      "en": "tools/documentation/README.en.md",
+      "section": "tools",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "tools/documentation/README.md"
+      },
+      "reviewedChineseSummary": "双语文档维护；更新一组文档；网站快照；检查与测试",
+      "reviewedChineseSha256": "6c0d12dd12a6cd4a1076e912f2a09d959772638769da314e76d1708cc7c5a64e",
+      "legacyHeadingIds": []
+    },
+    {
+      "id": "website/src/content/guides/api",
+      "zh": "website/src/content/guides/api.md",
+      "en": "website/src/content/guides/api.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/api.md"
+      },
+      "reviewedChineseSummary": "小程序 API 与能力；基础与生命周期；路由与界面；页面与组件；运行时与存储；媒体与画布；宿主与系统能力",
+      "reviewedChineseSha256": "b594dc8baefba9f4ba5a9e5c6bbebf249016b4fb059572a8759d55f1d4ff9a98",
+      "route": "/docs/api/",
+      "legacyHeadingIds": []
+    },
+    {
+      "id": "website/src/content/guides/api/capability-defaults",
+      "zh": "website/src/content/guides/api/capability-defaults.md",
+      "en": "website/src/content/guides/api/capability-defaults.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/api/capability-defaults.md"
+      },
+      "reviewedChineseSummary": "运行时默认能力；尚无逐平台覆盖记录的能力；全部默认值",
+      "reviewedChineseSha256": "ee022589f575483abf119fbc3813bb10a691773bde284b674f1a402bef369471",
+      "route": "/docs/api/capability-defaults/",
+      "legacyHeadingIds": []
+    },
+    {
+      "id": "website/src/content/guides/architecture",
+      "zh": "website/src/content/guides/architecture.md",
+      "en": "website/src/content/guides/architecture.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/architecture.md"
+      },
+      "reviewedChineseSummary": "运行架构与生命周期；运行分层；会话生命周期；渲染与帧呈现；宿主方法与消息；按证据描述平台",
+      "reviewedChineseSha256": "7b07fe62279b3068c325154ee2afa76e091ccca8643259d67c1cdb532c6f3150",
+      "route": "/docs/architecture/",
+      "legacyHeadingIds": [
+        "host-methods",
+        "layers",
+        "platform-boundaries",
+        "rendering",
+        "session-lifecycle"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/components",
+      "zh": "website/src/content/guides/components.md",
+      "en": "website/src/content/guides/components.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/components.md"
+      },
+      "reviewedChineseSummary": "组件与模板兼容性；WXML 和 WXSS；事件绑定；组件关系与 selection；自定义组件资源；查阅实际案例",
+      "reviewedChineseSha256": "dbf80317afae6fe5c8b3781dc1051c2161aa3f799fd6c537a2dfb1f67c131b9d",
+      "route": "/docs/components/",
+      "legacyHeadingIds": [
+        "component-api",
+        "custom-elements",
+        "events",
+        "examples",
+        "templates"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/index",
+      "zh": "website/src/content/guides/index.md",
+      "en": "website/src/content/guides/index.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/index.md"
+      },
+      "reviewedChineseSummary": "开发文档；开始使用；平台集成；API 参考；发行与支持",
+      "reviewedChineseSha256": "97acec412999c8a82442c09842783f95997bbe091d4504227ea7c54fe1513419",
+      "route": "/docs/",
+      "legacyHeadingIds": []
+    },
+    {
+      "id": "website/src/content/guides/integrations",
+      "zh": "website/src/content/guides/integrations.md",
+      "en": "website/src/content/guides/integrations.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/integrations.md"
+      },
+      "reviewedChineseSummary": "接入方式；SDK 与宿主；共通步骤",
+      "reviewedChineseSha256": "7bbe2dd1cc63a7145d4aef20d5bdd950cca818fdc6093cf0ec58b395fca3b906",
+      "route": "/docs/integrations/",
+      "legacyHeadingIds": [
+        "common-steps"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/integrations/android",
+      "zh": "website/src/content/guides/integrations/android.md",
+      "en": "website/src/content/guides/integrations/android.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/integrations/android.md"
+      },
+      "reviewedChineseSummary": "Android SDK 接入；环境要求；1. 准备 SDK；2. 放入包并嵌入视图；可核对的 Session API；包发布检查",
+      "reviewedChineseSha256": "5e1ef2733783c19b9324b12ecb9f050d7db406b9ff85ffe62ceed04ca252567a",
+      "route": "/docs/integrations/android/",
+      "legacyHeadingIds": [
+        "embed",
+        "host-api",
+        "prepare",
+        "prerequisites",
+        "validation"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/integrations/desktop",
+      "zh": "website/src/content/guides/integrations/desktop.md",
+      "en": "website/src/content/guides/integrations/desktop.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/integrations/desktop.md"
+      },
+      "reviewedChineseSummary": "C++ Desktop SDK 接入；编译目标；连接 CMake consumer；Session 和原生 View；主要接口",
+      "reviewedChineseSha256": "615317ce91ab7e633771fe25e87c370cad844266cd17e81121ef0533e17e26ce",
+      "route": "/docs/integrations/desktop/",
+      "legacyHeadingIds": [
+        "cmake",
+        "main-api",
+        "requirements",
+        "session"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/integrations/flutter",
+      "zh": "website/src/content/guides/integrations/flutter.md",
+      "en": "website/src/content/guides/integrations/flutter.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/integrations/flutter.md"
+      },
+      "reviewedChineseSummary": "Flutter SDK 接入；从当前源码准备原生依赖；1. 添加 SDK 依赖；2. 创建 Controller；3. 挂载 Widget 并加载；主要 API；平台验证",
+      "reviewedChineseSha256": "51971d4774fb628115055feb81eb510428efcd1936734c495098066936be355d",
+      "route": "/docs/integrations/flutter/",
+      "legacyHeadingIds": [
+        "api",
+        "controller",
+        "mount-load",
+        "platforms",
+        "validation"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/integrations/harmony",
+      "zh": "website/src/content/guides/integrations/harmony.md",
+      "en": "website/src/content/guides/integrations/harmony.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/integrations/harmony.md"
+      },
+      "reviewedChineseSummary": "HarmonyOS 示例；当前记录的状态；源码和工具链；如何贡献可验证状态",
+      "reviewedChineseSha256": "e0961091f3cf3ae0229b299756118d448789b64efc7211a6a58cbee2d833a808",
+      "route": "/docs/integrations/harmony/",
+      "legacyHeadingIds": [
+        "next",
+        "source"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/integrations/ios",
+      "zh": "website/src/content/guides/integrations/ios.md",
+      "en": "website/src/content/guides/integrations/ios.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/integrations/ios.md"
+      },
+      "reviewedChineseSummary": "iOS SDK 接入；1. 安装 SDK；2. 挂载 UIKit 视图并加载；事件和宿主方法；模拟器和设备验收",
+      "reviewedChineseSha256": "6a872a30befacba241667e69ada4af27a401a9ceb7e6097e790723542dabbb2b",
+      "route": "/docs/integrations/ios/",
+      "legacyHeadingIds": [
+        "create-session",
+        "events-host",
+        "requirements",
+        "validate"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/integrations/react-native",
+      "zh": "website/src/content/guides/integrations/react-native.md",
+      "en": "website/src/content/guides/integrations/react-native.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/integrations/react-native.md"
+      },
+      "reviewedChineseSummary": "React Native SDK 接入；从当前源码准备原生依赖；1. 安装 SDK；2. 创建 Controller；3. 挂载视图并加载；控制器 API；构建 consumer",
+      "reviewedChineseSha256": "163e397225a80b9973b7aceb53e56163b9b549062af393d7a015cdc5f32ffe87",
+      "route": "/docs/integrations/react-native/",
+      "legacyHeadingIds": [
+        "controller-api",
+        "create-view",
+        "mount-load",
+        "release-consumer",
+        "requirements"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/integrations/web",
+      "zh": "website/src/content/guides/integrations/web.md",
+      "en": "website/src/content/guides/integrations/web.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/integrations/web.md"
+      },
+      "reviewedChineseSummary": "Web 在线演示边界；网站实际运行内容；并非通用 Web SDK；本机预览",
+      "reviewedChineseSha256": "327fc77bd6a26f0ffedac511f86b17887ecf1067e4a554b9679f4482ede7f35b",
+      "route": "/docs/integrations/web/",
+      "legacyHeadingIds": [
+        "not-sdk",
+        "preview",
+        "stack"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/licensing",
+      "zh": "website/src/content/guides/licensing.md",
+      "en": "website/src/content/guides/licensing.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/licensing.md"
+      },
+      "reviewedChineseSummary": "许可、下载与发行；访问权限与许可分开；当前验证与发行状态；产品标识",
+      "reviewedChineseSha256": "0eb34b2529c409a2cd42b114894cc95be849966fe46c21dd583ce9e385c11846",
+      "route": "/docs/licensing/",
+      "legacyHeadingIds": [
+        "binary-availability",
+        "copyright",
+        "download-access"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/pack",
+      "zh": "website/src/content/guides/pack.md",
+      "en": "website/src/content/guides/pack.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/pack.md"
+      },
+      "reviewedChineseSummary": "配置与 portable pack；包里有什么；先试一个现成示例；打包现有小程序；加载前校验；能力和权限协商；完整与部分支持",
+      "reviewedChineseSha256": "0d1b654e750f609ff17913e4f934e52dcb914a3f5958869b71a7bc9651c2895a",
+      "route": "/docs/pack/",
+      "legacyHeadingIds": [
+        "capabilities",
+        "full-vs-partial",
+        "own-miniapp",
+        "portable-pack",
+        "private-demo",
+        "test-pack",
+        "validation"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/platforms",
+      "zh": "website/src/content/guides/platforms.md",
+      "en": "website/src/content/guides/platforms.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/platforms.md"
+      },
+      "reviewedChineseSummary": "平台状态与支持边界；当前平台矩阵；重要限制；每个目标应该如何验收",
+      "reviewedChineseSha256": "874ba6db4740ab436e96c194128a002a0521d209e167b287af722f6ca21bfe7b",
+      "route": "/docs/platforms/",
+      "legacyHeadingIds": [
+        "acceptance",
+        "limitations"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/sdk-api",
+      "zh": "website/src/content/guides/sdk-api.md",
+      "en": "website/src/content/guides/sdk-api.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/sdk-api.md"
+      },
+      "reviewedChineseSummary": "宿主 SDK API；小程序到宿主：weappContainer；跨平台会话操作；创建和配置；加载程序；注册和消息；状态、事件和宿主视图",
+      "reviewedChineseSha256": "00be7c80a7de1f41f216045d7212f8b17e58ff59bfedecd0e3e5a49144a96dbc",
+      "route": "/docs/sdk-api/",
+      "legacyHeadingIds": [
+        "api-close",
+        "api-create",
+        "api-host-events",
+        "api-layout-extension",
+        "api-load",
+        "api-message",
+        "session-apis",
+        "shared-bridge"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/start",
+      "zh": "website/src/content/guides/start.md",
+      "en": "website/src/content/guides/start.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/start.md"
+      },
+      "reviewedChineseSummary": "快速开始；1. 准备一个测试包；2. 把 SDK 加到应用；3. 挂载视图，加载包；下一步",
+      "reviewedChineseSha256": "3e9b72ae499b5937fd01200fb0c94a95a19ebfdc90d12d36b1abe8a69b8f8be6",
+      "route": "/docs/start/",
+      "legacyHeadingIds": [
+        "choose-host",
+        "create-session",
+        "next-steps",
+        "prepare-source"
+      ]
+    },
+    {
+      "id": "website/src/content/guides/troubleshooting",
+      "zh": "website/src/content/guides/troubleshooting.md",
+      "en": "website/src/content/guides/troubleshooting.en.md",
+      "section": "guides",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "website/src/content/guides/troubleshooting.md"
+      },
+      "reviewedChineseSummary": "故障排查；下载或准备时出现版本/ABI 不匹配；pack 文件完整性失败；unsupported capability 或 canIUse 返回 false；View 为空、报 ready 后没有画面；切后台恢复后事件停止；程序可以操作但点击/输入失败",
+      "reviewedChineseSha256": "f20a6c24c5b9d5f768d9d61dcb56faff4831d77f3cff7e5b5d95d28ee2206cc2",
+      "route": "/docs/troubleshooting/",
+      "legacyHeadingIds": [
+        "attach-diagnostics",
+        "blank-view",
+        "integrity-failed",
+        "lifecycle",
+        "render-input",
+        "unsupported-capability",
+        "version-mismatch"
+      ]
+    },
+    {
+      "id": "tools/DOCUMENTATION",
+      "zh": "tools/DOCUMENTATION.md",
+      "en": "tools/DOCUMENTATION.en.md",
+      "section": "tools",
+      "source": {
+        "repository": "weapp-container/website",
+        "path": "tools/DOCUMENTATION.md"
+      },
+      "reviewedChineseSummary": "双语内容维护、固定提交工程文档导入、API 数据、字体与验收流程。",
+      "reviewedChineseSha256": "cef16fce7e9a5c4c2f6d240a262fab4d3ac718c00930f7a8d57b279f8e110bc2",
+      "legacyHeadingIds": []
+    }
+  ],
+  "excluded": [
+    {
+      "path": "hosts/flutter/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md",
+      "reason": "Upstream Flutter image asset template instructions.",
+      "sha256": "a985b626c4f7546a8ba392d135e9226c3547c8e2b46895f5f2bdf40d7b14ef9f"
+    }
+  ],
+  "assets": []
+}

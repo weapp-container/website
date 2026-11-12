@@ -1,0 +1,13 @@
+---
+import {render} from 'astro:content';
+import DocsLayout from '../layouts/DocsLayout.astro';
+import {ui} from '../data/i18n.mjs';
+const {entry} = Astro.props;
+const {Content} = await render(entry);
+const {title, summary, locale, sourceRepository, sourceCommit, sourcePath} = entry.data;
+const text = ui(locale);
+---
+<DocsLayout title={title} description={summary}>
+  {sourceRepository && <p class="docs-source-note"><a href={`https://github.com/${sourceRepository}/blob/${sourceCommit}/${sourcePath}`} target="_blank" rel="noreferrer">{text.sourcePage} ↗</a> · {text.sourceRevision} <code>{sourceCommit?.slice(0, 12)}</code></p>}
+  <Content />
+</DocsLayout>

@@ -1,4 +1,8 @@
+<a id="participate-in-development"></a>
 # 参与开发
+
+**简体中文** · [English](CONTRIBUTING.en.md)
+
 
 使用 Node.js 24.18+ 和仓库固定的 pnpm。运行 `pnpm install --frozen-lockfile`、
 `pnpm runtime:public`、`pnpm test`、`pnpm exec tsc --noEmit` 和 `pnpm build`。

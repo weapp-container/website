@@ -1,26 +1,32 @@
-# One pack, seven hosts
+<a id="one-pack-seven-hosts"></a>
+# 一包七宿主
 
-Native WXML/WXSS/CommonJS application for the Weapp Container showcase. The
-single route has explorer, store, food ordering, product, bag, checkout, order
-list, and order detail screens. The rendering surface follows actual host window dimensions. Local
-`hostLayout` safe insets and active reserved regions protect content independently
-of the background. The resolved physical bar edge enables side navigation;
-otherwise the same business navigation uses top and bottom bars. The scroll area
-and product/menu columns are recalculated without replacing the session. Images are bundled locally.
+**简体中文** · [English](README.en.md)
 
-The source already uses native WeChat file format. Run the repository's
-`tools/build-miniapp.mjs` with a reviewed private toolchain to transform JS and
-pass the frozen native files to the formal `container-pack` tool. The builder
-passes the project with `--project` so `container.config.json` declares Skia.
-It records that no `weapp-vite` compiler was invoked; do not attribute compiler
-execution or conformance to this native-source pack. Do not author a portable
-manifest by hand. The website and every native host load the same verified bytes.
 
-The sample uses no subpackages or custom chunk strategy. This small product
-catalog benefits from one source and one shared state model. Container settings
-stay outside standard `app.json`. No upstream compiler or runtime implementation
-is copied into this repository.
+Weapp 容器展示的本机 WXML/WXSS/CommonJS 应用程序。的
+单条路线有探索、商店、点餐、产品、提包、结帐、订单
+列表和订单详细信息屏幕。渲染表面遵循实际的宿主窗口尺寸。本地
+`hostLayout` 安全插入和活动保留区域独立保护内容
+背景的
+。解析的物理栏边缘可实现侧边导航；
+否则，相同的业务导航使用顶部和底部栏。滚动区域
+重新计算
+和 product/menu 列，而不替换会话。图像在本地捆绑。
 
-See [BRIDGE.md](BRIDGE.md) for host input, state persistence, lifecycle, and launch
-query details. Orders and payments are entirely simulated. All demo identity
-and address data are fictional; visitors should avoid entering real personal data.
+源已使用本机 WeChat 文件格式。运行存储库的
+`tools/build-miniapp.mjs` 使用经过审查的私有工具链来转换 JS 和
+将冻结的本机文件传递给正式的 `container-pack` 工具。建设者
+通过 `--project` 传递项目，因此 `container.config.json` 声明 Skia。
+记录没有调用`weapp-vite`编译器；不指定编译器属性
+执行或符合本机源包。不要创作便携式
+用手显现。网站和每个本机宿主加载相同的经过验证的字节。
+
+该示例没有使用子包或自定义块策略。这个小产品
+目录受益于一种源和一种共享状态模型。容器设置
+保持在标准 `app.json` 之外。没有上游编译器或运行时实现
+被复制到此存储库中。
+
+请参阅 [BRIDGE.md](BRIDGE.md) 了解宿主输入、状态持久性、生命周期和启动
+查询详情。订单和付款完全是模拟的。所有演示身份
+和地址数据均为虚构；访问者应避免输入真实的个人数据。

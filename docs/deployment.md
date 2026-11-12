@@ -1,8 +1,13 @@
+<a id="website-builds-deployment-and-rollback"></a>
 # 网站构建、部署与回滚
+
+**简体中文** · [English](deployment.en.md)
+
 
 官网使用 Cloudflare Workers Static Assets，生产域名为 `container.weapp.dev`。
 仅 `dist/` 可以进入部署；原生应用、符号、原始构建收据和旧私有发行附件不进入站点。
 
+<a id="build-from-the-public-demo-snapshot"></a>
 ## 从公开演示快照构建
 
 使用 Node.js 24.18+ 和固定 pnpm。普通网站开发及公开 PR 不需要 GitHub token：
@@ -24,10 +29,11 @@ pnpm exec wrangler deploy --dry-run --env ''
 `Website checks` 执行测试、构建、dry run 和后台浏览器验收；部署只由手动入口触发。
 Cloudflare 账号及部署凭据通过环境或 CI secrets 提供，不保存到源码或网站。
 
+<a id="new-candidate-inputs"></a>
 ## 新候选输入
 
 新运行库须先从匹配的干净源码构建并完成独立验证。核心源码构建入口见
-[核心 README](https://github.com/weapp-container/weapp-container#readme)，各端工具见
+[核心 README](https://github.com/weapp-container/weapp-container/blob/main/README.md)，各端工具见
 [platforms](platforms.md)。历史候选位于私有 `website-private-archive`，
 新仓库的默认 GitHub token 没有其读取权限。旧发行只读，不能覆盖旧 tag 和资产；
 新的候选使用新版本、匹配的 pack、策略、许可和精确哈希。
@@ -42,6 +48,7 @@ Cloudflare 账号及部署凭据通过环境或 CI secrets 提供，不保存到
 python tools/build-website-font.py /verified/NotoSansSC.ttf
 ```
 
+<a id="release-and-rollback"></a>
 ## 发布与回滚
 
 部署者先记录前一 Worker 版本，并用 `node tools/seal-web.mjs artifacts/web/snapshots`

@@ -1,0 +1,12 @@
+<a id="安全报告"></a>
+# Security Report
+
+[简体中文](SECURITY.md) · **English**
+
+
+Do not post vulnerability details, credentials, device information, or business data in public Issues.
+Report vulnerabilities through the core repository's [GitHub Private Vulnerability Report](https://github.com/weapp-container/weapp-container/security/advisories/new)
+Contact maintainers. Reports should include version, minimal reproduction, impact, and recommended fixes.
+
+Network, pack, host message, and file access restrictions in the online demo are part of the security boundary.
+Security patches must preserve release hash verification, same-origin policies, and credential isolation during downloads.

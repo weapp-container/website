@@ -1,0 +1,9 @@
+---
+import {contentPages} from '../../../data/content-pages';
+import ContentPage from '../../../components/ContentPage.astro';
+export async function getStaticPaths() {
+  return (await contentPages()).filter(entry => entry.data.locale === 'en').map(entry => ({params: {page: entry.path.replace(/^\/en\/docs\//, '').replace(/\/$/, '') || undefined}, props: {entry}}));
+}
+const {entry} = Astro.props;
+---
+<ContentPage entry={entry} />

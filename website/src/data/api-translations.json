@@ -1,0 +1,209 @@
+{
+  "en": {
+    "capability.query": {
+      "title": "Capability queries",
+      "section": "Basics and lifecycle"
+    },
+    "lifecycle.app": {
+      "title": "Application lifecycle",
+      "section": "Basics and lifecycle"
+    },
+    "system.info": {
+      "title": "System and device information",
+      "section": "Basics and lifecycle"
+    },
+    "system.account-info": {
+      "title": "Mini-program account information",
+      "section": "Basics and lifecycle"
+    },
+    "navigation.page-stack": {
+      "title": "Page navigation and stack",
+      "section": "Navigation and UI"
+    },
+    "wx.mini-program-navigation": {
+      "title": "Cross-program navigation",
+      "section": "Navigation and UI"
+    },
+    "wx.permission": {
+      "title": "Permissions",
+      "section": "Host and system capabilities"
+    },
+    "data.setData": {
+      "title": "Page data updates",
+      "section": "Pages and components"
+    },
+    "view.wxml-wxss": {
+      "title": "WXML, WXSS, and template components",
+      "section": "Pages and components"
+    },
+    "event.bindings": {
+      "title": "Template event bindings",
+      "section": "Pages and components"
+    },
+    "timer": {
+      "title": "Timers",
+      "section": "Runtime and storage"
+    },
+    "wx.animation": {
+      "title": "Animation",
+      "section": "Pages and components"
+    },
+    "wx.storage": {
+      "title": "Local storage",
+      "section": "Runtime and storage"
+    },
+    "wx.request": {
+      "title": "Networking",
+      "section": "Host and system capabilities"
+    },
+    "wx.filesystem": {
+      "title": "Filesystem",
+      "section": "Runtime and storage"
+    },
+    "wx.selector-query": {
+      "title": "SelectorQuery",
+      "section": "Pages and components"
+    },
+    "wx.canvas": {
+      "title": "Canvas drawing",
+      "section": "Media and Canvas"
+    },
+    "wx.canvas-offscreen": {
+      "title": "Offscreen Canvas",
+      "section": "Media and Canvas"
+    },
+    "wx.media-camera-location": {
+      "title": "Media, camera, scanning, and location",
+      "section": "Media and Canvas"
+    },
+    "wx.inner-audio-context": {
+      "title": "Audio contexts",
+      "section": "Media and Canvas"
+    },
+    "wx.video-context": {
+      "title": "Video contexts",
+      "section": "Media and Canvas"
+    },
+    "wx.auth-payment": {
+      "title": "Authentication, users, and payment",
+      "section": "Host and system capabilities"
+    },
+    "wx.clipboard-device": {
+      "title": "Clipboard and device state",
+      "section": "Host and system capabilities"
+    },
+    "wx.ui-feedback": {
+      "title": "UI feedback and navigation bars",
+      "section": "Navigation and UI"
+    },
+    "wx.intersection-observer": {
+      "title": "IntersectionObserver",
+      "section": "Pages and components"
+    },
+    "wx.media-query-observer": {
+      "title": "MediaQueryObserver",
+      "section": "Pages and components"
+    },
+    "component.selection": {
+      "title": "Component selection",
+      "section": "Pages and components"
+    },
+    "component.relations": {
+      "title": "Component relations",
+      "section": "Pages and components"
+    },
+    "component.events": {
+      "title": "Component custom events",
+      "section": "Pages and components"
+    }
+  },
+  "zh-CN": {
+    "capability.query": {
+      "difference": "结果由协商后的 manifest 与宿主能力矩阵共同决定。"
+    },
+    "lifecycle.app": {
+      "difference": "生命周期顺序和 getCurrentPages 的页面栈成员由会话状态机管理。QuickJS/V8 接收包含 route/options 快照的实时页面对象；宿主回调仍需 conformance trace 验证。"
+    },
+    "system.info": {
+      "difference": "系统值来自选定的宿主 provider 或确定性沙箱，不编造未知平台值。provider 管理可注入的类型化 getSystemInfo 快照，包含品牌、型号、像素比、语言、SDK 版本、状态栏高度、方向、主题和字号设置；宿主几何、平台、系统版本及 user agent 仍绑定当前 HostMetadata。同步与异步 getSystemInfo 共用该快照，并保留约定的 errMsg 差异。getDeviceInfo 使用经过校验的类型化身份快照（品牌、型号、ABI、CPU、内存、benchmark），其中 platform/system/pixelRatio 仍来自当前宿主；getWindowInfo 从相同快照投影屏幕、窗口、安全区和顶部偏移。getBatteryInfoSync 以同步 provider 快照返回异步电量接口的相同字段。getScreenBrightness/setScreenBrightness 使用闭区间 0..1 的类型化值；原生宿主可用平台显示服务替换沙箱亮度状态。getSystemSetting 明确返回蓝牙、定位、Wi-Fi 开关和设备方向快照。getMenuButtonBoundingClientRect 返回宿主注入的逻辑 CSS 像素几何；无原生安全区信息时，沙箱明确使用零矩形。getExtConfigSync/getExtConfig 返回 provider 注入的扩展配置，沙箱默认为空对象，并保留同步和回调结果封装。"
+    },
+    "system.account-info": {
+      "difference": "确定性 SandboxProvider 在模块求值前校验并返回完整的同步小程序身份快照，QuickJS/V8 每次调用返回独立副本。原生宿主仍需在每个 surface 注入并校验包身份；相应证据案例通过前，宿主覆盖保持 partial。"
+    },
+    "navigation.page-stack": {
+      "difference": "页面栈、查询参数序列化和各页面导航栏标题状态可跨平台使用。两种引擎 facade 都在共享运行时提交并同步页面栈后完成导航回调与 Promise；已处理的拒绝、同一轮取消和有界 continuation 有本地回归测试。原生转场动画和标题呈现由宿主定义；与官方及七个宿主的等价性尚未验证。"
+    },
+    "wx.mini-program-navigation": {
+      "difference": "redirectToMiniProgram 在跨越 provider 边界前校验 appId、path、extraData 和 envVersion。确定性沙箱记录已接受的移交并返回约定的 errMsg，不启动另一个应用；原生宿主可以用平台导航和明确的权限策略替换 provider。"
+    },
+    "wx.permission": {
+      "difference": "authorize 按宿主 provider 的明确权限状态校验已知 scope。getSetting/openSetting 返回确定性的 authSetting 快照；withSubscriptions 为 true 时，还返回经过校验、包含 mainSwitch/itemSettings 的 subscriptionsSetting。getAppAuthorizeSetting 返回 authorized、denied 或 not determined 状态。沙箱不会弹出授权提示，也不会静默授予权限。"
+    },
+    "data.setData": {
+      "difference": "核心实现补丁合并、删除和批处理；WXML diff 等价性仍需 DevTools 证据。"
+    },
+    "view.wxml-wxss": {
+      "difference": "Portable IR 携带模板、绑定、样式和组件关系。WXSS 实线边框、content-box/border-box、独立边、currentColor 和圆角内孔进入共享布局、软件/原生 Skia 与 CanvasKit。包内静态 PNG/JPEG/WebP 使用 manifest 授权的共享 RGBA8 资源和 14 种模式；远程图片、动画、图片 load/error 事件及组件 canIUse 发现尚不支持。显式滚动视口在固定的 padding-edge 裁剪下平移后代；旧式仅含 scrollOffset 的帧仍只是元数据。Session 跨布局代次保留偏移，路由样式按 App/当前页面/组件依赖选择。完整滚动溢出、包含块与 fixed 定位逃逸、官方视觉比较及当前原生宿主/GPU 覆盖仍不完整。直接 Flex 子项支持有界 i32 order，共享稳定的求解、绘制和命中顺序，选择器与文档遍历顺序不变；absolute/fixed 兄弟在 order 组零绘制。混合匿名父文本与非零有效子 order 的类型化帧会明确拒绝，等待共享匿名内容绘制/命中契约。文本流通过带版本和源码哈希的 UTF-8 到 glyph/行计划支持 normal/nowrap/pre/pre-wrap/pre-line/break-spaces、normal/break-all/keep-all，以及 LTR start/end/left/right/center。Rust 按扩展字素边界校验 UAX #14 换行机会；CanvasKit 重放已接受的标量位置，校验源码、哈希、字素、分区和几何，但没有独立完整的 UAX #14 表。保留原始求值文本；文本祖先以外、未绑定且仅有空白并含 CR/LF 的源节点过滤规则不变。完整 shaping、双向文本、嵌套行内格式、官方排版及宿主字体等价性未验证。Opacity 将含自身背景、边框、文本、图片和重叠后代的完整绘制子树合成一次；嵌套组保留独立边界。组 alpha 量化为 RGBA8，额外 backing 采用保守的 32 层/64 MiB 准入预算。opacity:0 隐藏像素但保留布局、选择器、坐标输入和已捕获触点。数值/百分比 opacity 会被钳制，支持显式 inherit/initial/unset 和无效级联拒绝。完整 CSS stacking context、跨祖先 z-index、blend/filter/backdrop 和官方 opacity 视觉等价性未验证。类型化二维 transform 在级联与继承字体解析中保留操作顺序，再按最终 border box 解析百分比平移。实际 affine 矩阵共同驱动原生/软件/CanvasKit 绘制、选择器、滚动几何和坐标输入。无效 transform/origin 在级联前丢弃；已识别但延后解析或三维的值明确失败。transform 继承冻结父字体长度，百分比仍相对各子项。发布帧前拒绝非有限局部/世界 transform 与几何。完整三维、transform 动画、跨祖先 stacking context，以及官方/宿主等价性未验证。"
+    },
+    "event.bindings": {
+      "difference": "事件批量跨越桥接；已提交树的命中测试、currentTarget dataset 补全、捕获/冒泡顺序和处理器传播控制在宿主 conformance 之前统一。原生渲染元数据和受管组件事件元数据对 dataset/mark 共用 JSON 值投影。已提交选择器、observer dataset 和坐标事件保留这些值；已识别触点跨后续补丁保留 touchstart 元数据快照。字面量和旧帧字符串仍为字符串。现有 IR 中 null/undefined 存在性混同、引用身份和固定 SDK 类型行为未验证。RenderNode 的 dataset/mark Rust map 现在包含 Value，旧的严格字符串消费者不能读取新的非字符串输出。参见 docs/event-metadata.md。"
+    },
+    "timer": {
+      "difference": "调度交给宿主时钟，必须保留取消与销毁语义。"
+    },
+    "wx.animation": {
+      "difference": "QuickJS/V8 暴露确定性、可序列化的动画 action 队列，采用兼容 WebAnimation 的链式调用和 export 语义。各宿主提供 conformance 证据前，帧播放、transform 插值和渲染计时保持 partial。"
+    },
+    "wx.storage": {
+      "difference": "可移植会话提供内存存储；宿主可增加持久化，但必须保留会话隔离。QuickJS/V8 的 getStorageInfo* 包含约定的 getStorageInfo:ok 封装，并按每个键和值的 UTF-8 JSON 对计算 currentSize，与 mpcore oracle 一致。"
+    },
+    "wx.request": {
+      "difference": "网络通过宿主 provider 调用，沙箱响应具有确定性。request/uploadFile/downloadFile 返回兼容 Promise、支持 abort 和响应头监听的 RequestTask/UploadTask/DownloadTask。request 校验 url；uploadFile 按内存文件存储校验 url/filePath/name；downloadFile 可把响应字节写到 filePath。connectSocket 返回 provider 支持的 SocketTask，具有确定性的 OPEN/send/close 状态迁移；原生 provider 替换传输和入站消息投递。桥接绝对截止时间、provider 取消令牌和明确的网络权限拒绝映射为稳定的结构化错误。"
+    },
+    "wx.filesystem": {
+      "difference": "文件系统使用宿主作用域 provider、规范化根目录、字节/文本编码和结构化错误。wx.getFileSystemManager.readdir/readdirSync 从 provider 命名空间返回稳定排序的直接子项列表，包含目录前缀。wx.saveFile 将已校验临时文件复制到可选规范化目标或确定性的 SHA-256 保存路径；getFileInfo 返回字节大小及 md5/sha1，getSavedFileInfo/getSavedFileList 返回通过 saveFile 创建的文件元数据。旧全局 API 和 getFileSystemManager.saveFile 共用桥接操作。同步 manager 方法使用受权限约束的 provider 快照，并发出一次批量变更 effect；缺少快照时明确失败，不返回陈旧数据。"
+    },
+    "wx.selector-query": {
+      "difference": "选择器查询读取最近提交的可移植渲染树，支持 id/class/tag、后代/兄弟关系、selectViewport 和 scope 链。几何与绘制、命中共用世界 transform 和已接受滚动偏移。批量 fields 投影 rect、size、scrollOffset、id、dataset、mark、properties、computedStyle、node 和 context 描述符；无效字段列表返回 ERR_INVALID_REQUEST。官方几何和逐宿主命中测试等价性仍需 conformance 证据。dataset/mark 克隆已接受的 JSON 值，不解析旧字符串项；缺失/undefined 存在性语义及官方类型等价性未验证。参见 docs/event-metadata.md。"
+    },
+    "wx.canvas": {
+      "difference": "createCanvasContext 批量记录二维命令，draw() 只跨桥接一次；运行时将 CanvasFrame 命令重放到可通过 canvasId 寻址、保留 reserve 历史的 RGBA8 快照。"
+    },
+    "wx.canvas-offscreen": {
+      "difference": "createOffscreenCanvas 校验 2d 类型及有界尺寸，返回隔离的 CanvasFrame surface，并通过渲染器批量绘制。沙箱提供确定性 CPU RGBA 快照；toDataURL 和原生 GPU 生命周期仍取决于宿主。"
+    },
+    "wx.media-camera-location": {
+      "difference": "媒体选择、相机上下文、相机扫码和定位需要明确的 provider 权限。wx.chooseMedia/wx.chooseImage 校验选择选项；wx.createCameraContext 校验上下文生命周期、takePhoto 质量和 startRecord 超时，沙箱不会编造相机路径或帧，因此返回结构化 unsupported 错误。wx.scanCode 校验扫码类型选项并在沙箱返回完整、确定性的空结果。定位调用校验 type/altitude，返回约定坐标结构或结构化权限、超时、取消、校验错误。"
+    },
+    "wx.inner-audio-context": {
+      "difference": "createInnerAudioContext 返回有状态上下文，其 source、传输命令、seek 位置和播放属性通过一次批量 provider 操作传递。createAudioContext 按 id 定位音频组件，经相同边界提供 setSrc/play/pause/seek。确定性沙箱建模可观察状态并校验 source、范围和 destroy 迁移，不解码或输出音频；原生 provider 管理解码器、焦点、路由和资源生命周期。"
+    },
+    "wx.video-context": {
+      "difference": "createVideoContext 按 id 定位页面 video 组件，通过 provider 批量执行 play、pause、stop、seek、playbackRate、danmu、fullscreen 和状态栏命令。确定性沙箱建模传输/UI 状态并校验参数，不解码或渲染视频；原生 provider 管理解码器、surface、方向和资源生命周期。"
+    },
+    "wx.auth-payment": {
+      "difference": "身份、支付和分享使用明确的 provider 权限及沙箱响应。wx.login 建立 provider 管理的账号会话；会话存在前 wx.checkSession 返回稳定的过期错误。wx.getUserProfile 要求非空 desc 授权用途，返回约定 userInfo 字段及确定性的 rawData、signature、encryptedData、iv 封装。wx.requestPayment 校验非空 timeStamp、nonceStr、package、paySign 和 MD5/HMAC-SHA256/RSA signType 枚举，记录类型化 PaymentRequest，不连接支付服务或声称用户已完成支付。wx.shareAppMessage/wx.shareTimeline 校验字符串/对象/数组选项并记录类型化请求，不打开分享面板或声称用户已完成。真实凭据、授权 UI 和支付/分享界面由宿主实现。"
+    },
+    "wx.clipboard-device": {
+      "difference": "剪贴板和设备调用经宿主 provider 路由，使用确定性沙箱状态和明确权限错误。沙箱保留类型化网络枚举 wifi/5g/4g/3g/2g/unknown/none，校验 keepScreenOn 与振动选项，为原生宿主记录振动 effect，并返回 isConnected/networkType。wx.onNetworkStatusChange 使用类型化宿主迁移 hook；回调在一个引擎批次执行，offNetworkStatusChange 确定性移除回调。"
+    },
+    "wx.ui-feedback": {
+      "difference": "provider 用确定性结果结构记录 toast/loading/dialog/action-sheet 和导航栏状态。pageScrollTo 由 Session 管理，移动实时页面已提交帧，含 selector/offsetTop、钳制、取消/截止时间检查及生命周期回调。正 duration 明确返回 ERR_UNSUPPORTED_CAPABILITY；无已提交帧返回 ERR_RENDER。独立沙箱 provider 不能假装滚动。动画计时、原生浮层和用户操作计时未验证。"
+    },
+    "wx.intersection-observer": {
+      "difference": "Session 管理持久批量订阅，基于有 scope 的已提交渲染树世界 AABB，支持 thresholds/initialRatio、observeAll、多个参考区域及原生祖先路径裁剪。已接受滚动帧更新几何和测量。注册 ACK 不是测量，成功提交才投递变化。disconnect/unload/detach 释放订阅。独立 SandboxProvider 明确返回 unsupported。阈值相等、初始零面积、旋转原生滚动裁剪、官方 DevTools 及逐宿主 GPU/设备等价性未验证。"
+    },
+    "wx.media-query-observer": {
+      "difference": "Session 通过公开 width/height/orientation 描述符订阅宿主逻辑视口；宿主尺寸缺失时使用首个已提交帧视口。注册 ACK 不是测量；提交测量和真实宿主 resize 经去重投递初始/变化匹配。disconnect/unload/detach 释放订阅。独立 SandboxProvider 明确返回 unsupported。正方形方向遵循辅助基线，等待固定 DevTools 验证；官方、GPU 和设备等价性未验证。"
+    },
+    "component.selection": {
+      "difference": "受管声明归属按 ID/class、子项、后代和并集选择器返回同页面的实时组件实例；首个原生匹配返回 null。跨组件 >>>、标签/属性模式及带 export 函数的目标明确失败。Page 直接子项的 owner 行为仍是待固定 SDK oracle 验证的辅助兼容候选；具名 slot 重排使用本地渲染遍历，未证明等价。不声称宿主或官方等价性。"
+    },
+    "component.relations": {
+      "difference": "受管 relations 使用与声明归属分开的组合组件祖先关系，返回同页面的实时实例；hasBehavior 检查已注册 behavior 身份。保存的固定 SDK oracle 只覆盖经 slot 投影内容的 ancestor/descendant 关系及 attached/linked/ready/detached/unlinked 顺序。parent/child、behavior 身份和 targets 仅有本地契约覆盖。View 提供物理移动身份前，声明 linkChanged 明确返回 ERR_UNSUPPORTED_CAPABILITY；数组紧缩不作为移动。更广泛关系语义、原生宿主和设备等价性未证明，本地测试不提升官方 conformance 结论。"
+    },
+    "component.events": {
+      "difference": "受管组件自定义事件通过带版本的页面事件图在所选 JS 引擎内同步分发。本地覆盖 target/bubble/capture/composed/catch、声明 owner 回调和 detail 身份。固定 SDK oracle 仅证明监听别名优先级及连字符/下划线名称；选项、生命周期、原生宿主和设备等价性未证明。无受管事件元数据的旧组件明确失败。"
+    }
+  }
+}

@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "astro dev --host 127.0.0.1 --port 4325",
-    "build": "astro build && node tools/verify-site.mjs",
+    "build": "astro build && node tools/localized-errors.mjs && node tools/verify-site.mjs",
     "preview": "astro preview --host 127.0.0.1 --port 4325",
     "test": "node --test tests/*.test.mjs tools/tests/*.test.mjs",
     "pack": "node tools/build-miniapp.mjs",
@@ -27,9 +27,11 @@
     "native:build": "node tools/native-build.mjs",
     "native:signing": "node tools/native-signing.mjs",
     "sdk:install": "node tools/sdk-install.mjs",
-    "native:sync-pack": "node tools/native-sync-pack.mjs"
+    "native:sync-pack": "node tools/native-sync-pack.mjs",
+    "docs:check": "node tools/documentation/check.mjs && node tools/documentation/check-content.mjs"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "7.3.8",
     "@astrojs/react": "7.1.2",
     "@base-ui/react": "1.9.0",
     "@phosphor-icons/react": "2.1.10",
