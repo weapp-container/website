@@ -33,6 +33,9 @@ const fontReceipt=JSON.parse(await readFile(resolve(base,'fonts/font.json')));
 assert.match(fontReceipt.fileName,/^showcase-sc-[a-f0-9]{16}\.woff2$/);
 const fontBytes=await readFile(resolve(base,'fonts',fontReceipt.fileName));
 assert.equal(sha(fontBytes),fontReceipt.sha256,'Website font differs from its reviewed subset');
+const fontStylesheet=await readFile(resolve(base,'fonts.css'),'utf8');
+const fontSources=[...fontStylesheet.matchAll(/url\(\s*(['"]?)([^)'"\s]+)\1\s*\)/g)].map(match=>match[2]);
+assert.deepEqual(fontSources,[`/fonts/${fontReceipt.fileName}`],'Website font stylesheet must reference the reviewed subset');
 const websiteFont=createFont(fontBytes);
 assert.deepEqual((await readdir(resolve(base,'fonts'))).sort(),['OFL.txt','font.json',fontReceipt.fileName].sort(),'Unreviewed website font asset');
 for(const path of files) {
