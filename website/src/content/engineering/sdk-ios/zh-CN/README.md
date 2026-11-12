@@ -6,7 +6,7 @@ summary: "Weapp Container iOS SDK。来自 weapp-container/sdk-ios 的版本化�
 route: "/docs/engineering/sdk-ios/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "c5103d009e6fed8271d3ad983b3f01b122ced7b8"
+sourceCommit: "6d6359852714470a9c84aa8742c24d7b49d2149e"
 sourcePath: "README.md"
 ---
 
@@ -55,7 +55,7 @@ git checkout 7ce85729f57e9b60697574e3d6676749dd8d5245
 
 在 iOS 应用中嵌入小程序页面。SDK 提供 Swift 会话、UIKit / SwiftUI 视图、宿主消息通道和本地持久化，使用 QuickJS 执行 JavaScript、Skia Metal 渲染页面。
 
-已复核源码示例版本：**0.1.0-preview.6.0**。SDK 封装源码采用 [Apache-2.0](https://github.com/weapp-container/sdk-ios/blob/c5103d009e6fed8271d3ad983b3f01b122ced7b8/LICENSE)；运行时源码在主仓库按 Apache-2.0 提供。本仓库包含 SDK 包装层源码，运行库单独构建或安装。
+已复核源码示例版本：**0.1.0-preview.6.0**。SDK 封装源码采用 [Apache-2.0](https://github.com/weapp-container/sdk-ios/blob/6d6359852714470a9c84aa8742c24d7b49d2149e/LICENSE)；运行时源码在主仓库按 Apache-2.0 提供。本仓库包含 SDK 包装层源码，运行库单独构建或安装。
 
 <a id="starting-from-source-code"></a>
 ## 从当前源码开始
@@ -168,7 +168,7 @@ try session.navigate(route: "pages/detail/index", query: ["id": .string("42")])
 try session.back()
 ```
 
-小程序侧使用 `weappContainer.invoke` 调用宿主方法，使用 `postMessage` / `onMessage` 交换消息，类型见 [weapp-container.d.ts](https://github.com/weapp-container/sdk-ios/blob/c5103d009e6fed8271d3ad983b3f01b122ced7b8/types/weapp-container.d.ts)。宿主方法应在首次 `load` 前注册，参数和结果使用 `WeappJSON`。处理器可以使用 `async throws`；拒绝请求时抛出 `WeappHostError`，异步任务需配合 Swift 任务取消。
+小程序侧使用 `weappContainer.invoke` 调用宿主方法，使用 `postMessage` / `onMessage` 交换消息，类型见 [weapp-container.d.ts](https://github.com/weapp-container/sdk-ios/blob/6d6359852714470a9c84aa8742c24d7b49d2149e/types/weapp-container.d.ts)。宿主方法应在首次 `load` 前注册，参数和结果使用 `WeappJSON`。处理器可以使用 `async throws`；拒绝请求时抛出 `WeappHostError`，异步任务需配合 Swift 任务取消。
 
 <a id="5-lifecycle-and-storage"></a>
 ## 5. 生命周期与存储
@@ -201,7 +201,7 @@ node tools/simulator-smoke.mjs --distribution artifacts/sdk/ios/WeappContainer -
 - [宿主服务接入示例](/docs/engineering/sdk-ios/examples/host-services/index/)
 - [独立 consumer 工程](/docs/engineering/sdk-ios/examples/consumer/index/)
 - [跨端会话契约](/docs/engineering/sdk-ios/contract/)
-- [源文件清单](https://github.com/weapp-container/sdk-ios/blob/c5103d009e6fed8271d3ad983b3f01b122ced7b8/SOURCE-INVENTORY.json) 与 [历史导出记录](https://github.com/weapp-container/sdk-ios/blob/c5103d009e6fed8271d3ad983b3f01b122ced7b8/ORIGIN.json)
+- [源文件清单](https://github.com/weapp-container/sdk-ios/blob/6d6359852714470a9c84aa8742c24d7b49d2149e/SOURCE-INVENTORY.json) 与 [历史导出记录](https://github.com/weapp-container/sdk-ios/blob/6d6359852714470a9c84aa8742c24d7b49d2149e/ORIGIN.json)
 
 运行能力取决于配套运行库及其分发策略；`restricted-showcase` 只允许编译时授权的演示包与 API，不能通过宿主配置重新开启禁用能力。真机运行、GPU 和性能验收需绑定实际产物独立验证。原生输入法、无障碍与复杂手势的支持范围见嵌入文档。分发应用时保留 SDK `LICENSE`、运行库 `RUNTIME-LICENSE` 和第三方声明。
 
@@ -219,6 +219,7 @@ node tools/simulator-smoke.mjs --distribution artifacts/sdk/ios/WeappContainer -
 ```sh
 git clone https://github.com/weapp-container/sdk-ios.git
 cd sdk-ios
+git checkout 7ce85729f57e9b60697574e3d6676749dd8d5245
 ```
 
 获得运行库访问授权后，通过凭据环境提供 `WEAPP_CONTAINER_RUNTIME_TOKEN`，权限限定为私有产物仓库的 **Contents: read**。不要把凭据写进源码或命令参数。
@@ -233,7 +234,7 @@ node tools/prepare-runtime.mjs
 node tools/prepare-runtime.mjs --artifact-dir /absolute/runtime-archives
 ```
 
-工具按 [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-ios/blob/c5103d009e6fed8271d3ad983b3f01b122ced7b8/runtime-artifacts.lock.json) 校验 **0.1.0-preview.6.0**、ABI 1、架构、大小和 SHA-256，安装到 `.runtime/install/native` 和 `.runtime/install/licenses`。缺少归档、无下载权限或校验不符时会失败；已有安装在失败时保留。锁文件中的 pin 不代表运行库可公开下载。
+工具按 [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-ios/blob/6d6359852714470a9c84aa8742c24d7b49d2149e/runtime-artifacts.lock.json) 校验 **0.1.0-preview.6.0**、ABI 1、架构、大小和 SHA-256，安装到 `.runtime/install/native` 和 `.runtime/install/licenses`。缺少归档、无下载权限或校验不符时会失败；已有安装在失败时保留。锁文件中的 pin 不代表运行库可公开下载。
 
 自定义归档清单使用 `--manifest /absolute/reviewed-lock.json`。慢速网络可通过 `WEAPP_CONTAINER_RUNTIME_TIMEOUT_MS` 调整下载超时，范围为 `1`–`3600000` 毫秒，默认 15 分钟。
 

@@ -6,7 +6,7 @@ summary: "Weapp 容器桌面 SDK。来自 weapp-container/sdk-desktop 的版本�
 route: "/docs/engineering/sdk-desktop/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "a71eeae514f4fe88e471ca519852e87cb6f57511"
+sourceCommit: "0969958a40bbc43c7b4f6559a26eaab8157b6986"
 sourcePath: "README.md"
 ---
 
@@ -77,6 +77,7 @@ node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```sh
 git clone https://github.com/weapp-container/sdk-desktop.git
 cd sdk-desktop
+git checkout c27a715b06367957a24af0a91c969a1abec5627e
 ```
 
 <a id="obtain-runtime-and-build"></a>
@@ -202,7 +203,7 @@ npm test
 - [账号、身份与支付宿主服务](/docs/engineering/sdk-desktop/account-services/)
 - [Windows 传感器](/docs/engineering/sdk-desktop/windows-sensors/) · [Windows 音频](/docs/engineering/sdk-desktop/windows-audio/)
 - [共享适配协议](/docs/engineering/sdk-desktop/contract/) · [SDK 合约仓库](/docs/engineering/sdk-contract/index/)
-- [源码许可证](https://github.com/weapp-container/sdk-desktop/blob/a71eeae514f4fe88e471ca519852e87cb6f57511/LICENSE) · [原始提取记录](https://github.com/weapp-container/sdk-desktop/blob/a71eeae514f4fe88e471ca519852e87cb6f57511/ORIGIN.json) · [当前源码清单](https://github.com/weapp-container/sdk-desktop/blob/a71eeae514f4fe88e471ca519852e87cb6f57511/SOURCE-INVENTORY.json)
+- [源码许可证](https://github.com/weapp-container/sdk-desktop/blob/0969958a40bbc43c7b4f6559a26eaab8157b6986/LICENSE) · [原始提取记录](https://github.com/weapp-container/sdk-desktop/blob/0969958a40bbc43c7b4f6559a26eaab8157b6986/ORIGIN.json) · [当前源码清单](https://github.com/weapp-container/sdk-desktop/blob/0969958a40bbc43c7b4f6559a26eaab8157b6986/SOURCE-INVENTORY.json)
 
 构建工具会校验源码清单。修改 SDK 源码后须按 `tools/source-inventory.mjs` 的审核流程更新清单，历史 `ORIGIN.json` 保留原样。各平台实际构建与运行范围以对应产物的验证记录为准。
 
@@ -220,7 +221,7 @@ npm test
 
 历史安装命令（不作为首次接入默认路径）：
 
-准备脚本按 [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-desktop/blob/a71eeae514f4fe88e471ca519852e87cb6f57511/runtime-artifacts.lock.json) 校验版本、ABI、大小和 SHA-256。当前锁文件包含 preview.6.0 的 macOS 与 Linux 运行库，尚无 Windows 运行库条目；Windows 源码可供接入，默认准备流程会因缺少对应条目而失败。
+准备脚本按 [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-desktop/blob/0969958a40bbc43c7b4f6559a26eaab8157b6986/runtime-artifacts.lock.json) 校验版本、ABI、大小和 SHA-256。当前锁文件包含 preview.6.0 的 macOS 与 Linux 运行库，尚无 Windows 运行库条目；Windows 源码可供接入，默认准备流程会因缺少对应条目而失败。
 
 获得运行库下载授权后，通过密钥管理器或 CI secret 注入 `WEAPP_CONTAINER_RUNTIME_TOKEN`，再执行：
 

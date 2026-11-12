@@ -6,7 +6,7 @@ summary: "Android SDK 预览。来自 weapp-container/sdk-android 的版本化�
 route: "/docs/engineering/sdk-android/docs/embedding/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "34e2862d82250f1202c6e0b9367f2094bb60a523"
+sourceCommit: "e50d4dc6f1dd3e180eed574918f50e6484c9fd01"
 sourcePath: "docs/EMBEDDING.md"
 ---
 

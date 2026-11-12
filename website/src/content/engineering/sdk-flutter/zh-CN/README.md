@@ -6,7 +6,7 @@ summary: "Weapp Container Flutter SDK。来自 weapp-container/sdk-flutter 的�
 route: "/docs/engineering/sdk-flutter/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "a6a649d86fbcd48a6b23d47870984e2829e35f3b"
+sourceCommit: "84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60"
 sourcePath: "README.md"
 ---
 
@@ -180,7 +180,7 @@ SizedBox(
 )
 ```
 
-View 挂载后加载已生成并校验的本地 pack。Flutter assets 需要先解包到应用私有目录，具体做法见[示例](https://github.com/weapp-container/sdk-flutter/blob/a6a649d86fbcd48a6b23d47870984e2829e35f3b/example/lib/main.dart)：
+View 挂载后加载已生成并校验的本地 pack。Flutter assets 需要先解包到应用私有目录，具体做法见[示例](https://github.com/weapp-container/sdk-flutter/blob/84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60/example/lib/main.dart)：
 
 ```dart
 await controller.load('/verified/local/portable-pack');
@@ -213,14 +213,13 @@ await controller.close();
 
 宿主方法只返回 JSON 可表示的值。异步方法应观察 `call.cancellation`，错误可使用 `WeappHostError` 返回明确的代码。
 
-登录、账号、网络和设备能力通过宿主显式配置：在 `load()` 前先调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。网络 origin 白名单和系统权限由宿主管理；受限 Showcase 运行库仍按编译时策略限制能力。配置和账号切换协议见 [CONTRACT.md](/docs/engineering/sdk-flutter/contract/) 与 [Controller API](https://github.com/weapp-container/sdk-flutter/blob/a6a649d86fbcd48a6b23d47870984e2829e35f3b/weapp_container/lib/src/controller.dart)。
+登录、账号、网络和设备能力通过宿主显式配置：在 `load()` 前先调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。网络 origin 白名单和系统权限由宿主管理；受限 Showcase 运行库仍按编译时策略限制能力。配置和账号切换协议见 [CONTRACT.md](/docs/engineering/sdk-flutter/contract/) 与 [Controller API](https://github.com/weapp-container/sdk-flutter/blob/84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60/weapp_container/lib/src/controller.dart)。
 
 <a id="troubleshooting"></a>
 ## 常见问题
 
 | 现象 | 检查项 |
 | --- | --- |
-| 找不到原生 SDK / vendor 文件 | 先为当前平台执行 `prepare-native.mjs`，再生成分发包 |
 | `load()` 一直等待 | View 是否已挂载、是否具有正数宽高 |
 | 版本、哈希或目标不匹配 | 使用与源码一致的授权归档及审核过的 lock |
 | Android 安装或链接失败 | minSdk 26、ABI 过滤器、NDK 和 CMake 配置 |
@@ -232,11 +231,11 @@ await controller.close();
 ## 更多资料与许可
 
 - [Widget 与 Controller 用法](/docs/engineering/sdk-flutter/weapp_container/index/)
-- [完整示例](https://github.com/weapp-container/sdk-flutter/blob/a6a649d86fbcd48a6b23d47870984e2829e35f3b/example/lib/main.dart) · [示例运行说明](/docs/engineering/sdk-flutter/example/index/)
+- [完整示例](https://github.com/weapp-container/sdk-flutter/blob/84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60/example/lib/main.dart) · [示例运行说明](/docs/engineering/sdk-flutter/example/index/)
 - [桌面接入](/docs/engineering/sdk-flutter/native_desktop/index/) · [SDK 协议](/docs/engineering/sdk-flutter/contract/)
 - [公共类型和 C ABI](/docs/engineering/sdk-contract/index/)
 
-接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/a6a649d86fbcd48a6b23d47870984e2829e35f3b/LICENSE)。运行库和第三方组件遵循归档中的 `RUNTIME-LICENSE` 及 notices；本仓库的开源许可不授予私有运行库下载权或额外的商用权利。
+接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60/LICENSE)。运行库和第三方组件遵循归档中的 `RUNTIME-LICENSE` 及 notices；本仓库的开源许可不授予私有运行库下载权或额外的商用权利。
 
 <a id="historical-archives-and-migration"></a>
 ## 历史归档与迁移

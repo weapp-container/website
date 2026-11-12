@@ -6,7 +6,7 @@ summary: "Public Flutter host lifecycle acceptance. Versioned engineering refere
 route: "/docs/engineering/sdk-flutter/native_desktop/tests/host-lifecycle/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "a6a649d86fbcd48a6b23d47870984e2829e35f3b"
+sourceCommit: "84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60"
 sourcePath: "native_desktop/tests/host-lifecycle.en.md"
 ---
 

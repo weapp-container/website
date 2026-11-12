@@ -6,7 +6,7 @@ summary: "Weapp Container Flutter SDK. Versioned engineering reference from weap
 route: "/docs/engineering/sdk-flutter/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "a6a649d86fbcd48a6b23d47870984e2829e35f3b"
+sourceCommit: "84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60"
 sourcePath: "README.en.md"
 ---
 
@@ -180,7 +180,7 @@ SizedBox(
 )
 ```
 
-Once mounted, load a generated, verified local pack. Extract Flutter assets to application-private storage first; see the [example](https://github.com/weapp-container/sdk-flutter/blob/a6a649d86fbcd48a6b23d47870984e2829e35f3b/example/lib/main.dart):
+Once mounted, load a generated, verified local pack. Extract Flutter assets to application-private storage first; see the [example](https://github.com/weapp-container/sdk-flutter/blob/84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60/example/lib/main.dart):
 
 ```dart
 await controller.load('/verified/local/portable-pack');
@@ -213,14 +213,13 @@ await controller.close();
 
 Host methods return JSON-compatible values. Asynchronous handlers should observe `call.cancellation`; use `WeappHostError` for explicit error codes.
 
-Configure login, accounts, networking and device capabilities explicitly in the host: call `configureHostServices`, then optionally `installNativeDeviceApis`, before `load()`. The host controls network origin allowlists and OS permissions. Restricted Showcase runtimes also enforce their compiled policy. See [CONTRACT.md](/en/docs/engineering/sdk-flutter/contract/) and the [Controller API](https://github.com/weapp-container/sdk-flutter/blob/a6a649d86fbcd48a6b23d47870984e2829e35f3b/weapp_container/lib/src/controller.dart) for configuration and account switching.
+Configure login, accounts, networking and device capabilities explicitly in the host: call `configureHostServices`, then optionally `installNativeDeviceApis`, before `load()`. The host controls network origin allowlists and OS permissions. Restricted Showcase runtimes also enforce their compiled policy. See [CONTRACT.md](/en/docs/engineering/sdk-flutter/contract/) and the [Controller API](https://github.com/weapp-container/sdk-flutter/blob/84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60/weapp_container/lib/src/controller.dart) for configuration and account switching.
 
 <a id="常见问题"></a>
 ## Troubleshooting
 
 | Symptom | Check |
 | --- | --- |
-| Missing native SDK / vendor files | Run `prepare-native.mjs` for the platform before packaging |
 | `load()` keeps waiting | Mount the View with positive width and height |
 | Version, digest or target mismatch | Use authorized archives and a reviewed lock matching this source |
 | Android installation or linking fails | minSdk 26, ABI filters, NDK and CMake configuration |
@@ -232,11 +231,11 @@ Native text editing, full accessibility semantics and advanced gestures still ha
 ## Documentation and licensing
 
 - [Widget and Controller usage](/en/docs/engineering/sdk-flutter/weapp_container/index/)
-- [Complete example](https://github.com/weapp-container/sdk-flutter/blob/a6a649d86fbcd48a6b23d47870984e2829e35f3b/example/lib/main.dart) · [Running the example](/en/docs/engineering/sdk-flutter/example/index/)
+- [Complete example](https://github.com/weapp-container/sdk-flutter/blob/84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60/example/lib/main.dart) · [Running the example](/en/docs/engineering/sdk-flutter/example/index/)
 - [Desktop integration](/en/docs/engineering/sdk-flutter/native_desktop/index/) · [SDK protocol](/en/docs/engineering/sdk-flutter/contract/)
 - [Public types and C ABI](/en/docs/engineering/sdk-contract/index/)
 
-The integration source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/a6a649d86fbcd48a6b23d47870984e2829e35f3b/LICENSE). Runtime and third-party components retain the `RUNTIME-LICENSE` and notices in their archives. Historical archives retain their supplied licenses and access requirements.
+The integration source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60/LICENSE). Runtime and third-party components retain the `RUNTIME-LICENSE` and notices in their archives. Historical archives retain their supplied licenses and access requirements.
 
 <a id="历史归档与迁移"></a>
 ## Historical archives and migration

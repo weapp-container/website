@@ -6,7 +6,7 @@ summary: "iOS 宿主能力。来自 weapp-container/sdk-ios 的版本化工程�
 route: "/docs/engineering/sdk-ios/host-services/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "c5103d009e6fed8271d3ad983b3f01b122ced7b8"
+sourceCommit: "6d6359852714470a9c84aa8742c24d7b49d2149e"
 sourcePath: "HOST-SERVICES.md"
 ---
 
@@ -183,18 +183,18 @@ WeappWechatAppPay(appID:universalLink:) 和 WeappAlipayAppPay(urlScheme:)；官�
 <a id="compilation-verification-record"></a>
 ## 编译验证记录
 
-[当前开发记录](https://github.com/weapp-container/sdk-ios/blob/c5103d009e6fed8271d3ad983b3f01b122ced7b8/test/evidence/host-services-development.json) 记录完整 Swift 模块和
+[当前开发记录](https://github.com/weapp-container/sdk-ios/blob/6d6359852714470a9c84aa8742c24d7b49d2149e/test/evidence/host-services-development.json) 记录完整 Swift 模块和
 `ReferenceHostServices.swift` 的源码哈希，以及实际微信 OpenSDK 2.0.9、支付宝
 15.8.30 官方包的来源和哈希。本轮以 `arm64-apple-ios16.0-simulator` 发射生产模块，
 启用两个官方 SDK 的 `canImport` 分支，再针对该模块编译示例，均无编译诊断。
 这是编译证据；实际 iOS 二进制链接、设备交互、相机/蓝牙、官方钱包和商户交易仍需
 各自对应的运行验证。
 
-[前台定位与授权政策编译记录](https://github.com/weapp-container/sdk-ios/blob/c5103d009e6fed8271d3ad983b3f01b122ced7b8/test/evidence/host-services-location-policy-development.json)
+[前台定位与授权政策编译记录](https://github.com/weapp-container/sdk-ios/blob/6d6359852714470a9c84aa8742c24d7b49d2149e/test/evidence/host-services-location-policy-development.json)
 另行绑定本批全部生产 Swift 源码与 sample，在官方支付头文件可见时完整发射模块、
 编译示例且无诊断；定位订阅与授权 UI 的 iOS 实际交互仍待运行验收。
 
-[Beacon 与录音编译记录](https://github.com/weapp-container/sdk-ios/blob/c5103d009e6fed8271d3ad983b3f01b122ced7b8/test/evidence/host-services-beacon-recorder-development.json)
+[Beacon 与录音编译记录](https://github.com/weapp-container/sdk-ios/blob/6d6359852714470a9c84aa8742c24d7b49d2149e/test/evidence/host-services-beacon-recorder-development.json)
 保留本批完整模块与 sample 的源码哈希和零诊断日志。真实 Beacon、权限转换、
 前后台 ranging 和 iOS 麦克风录音仍待独立运行验收。
 已完成且未保留的 host call 会释放 setup 取消回调的捕获对象，保留资源的调用仍

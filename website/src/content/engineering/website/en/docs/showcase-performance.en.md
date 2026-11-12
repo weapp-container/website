@@ -6,7 +6,7 @@ summary: "H5 demonstrates interactive performance and scene transactions. Versio
 route: "/docs/engineering/website/docs/showcase-performance/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "9280ea0ed20ae7123267b4008fb527a0f37948bc"
+sourceCommit: "43c9a0c31d57a75930742fe63c50e17045c3a206"
 sourcePath: "docs/showcase-performance.en.md"
 ---
 

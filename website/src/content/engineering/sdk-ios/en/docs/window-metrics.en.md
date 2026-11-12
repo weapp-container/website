@@ -6,7 +6,7 @@ summary: "UIKit window metrics. Versioned engineering reference from weapp-conta
 route: "/docs/engineering/sdk-ios/docs/window-metrics/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "c5103d009e6fed8271d3ad983b3f01b122ced7b8"
+sourceCommit: "6d6359852714470a9c84aa8742c24d7b49d2149e"
 sourcePath: "docs/window-metrics.en.md"
 ---
 

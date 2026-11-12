@@ -6,7 +6,7 @@ summary: "Weapp Container Desktop SDK. Versioned engineering reference from weap
 route: "/docs/engineering/sdk-desktop/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "a71eeae514f4fe88e471ca519852e87cb6f57511"
+sourceCommit: "0969958a40bbc43c7b4f6559a26eaab8157b6986"
 sourcePath: "README.en.md"
 ---
 
@@ -77,6 +77,7 @@ The host application consumes a built installation without Rust or Cargo. Produc
 ```sh
 git clone https://github.com/weapp-container/sdk-desktop.git
 cd sdk-desktop
+git checkout c27a715b06367957a24af0a91c969a1abec5627e
 ```
 
 
@@ -203,7 +204,7 @@ The consumption example uses the installed headers and libraries and verifies re
 - [Account, Identity, and Payment Host Services](/en/docs/engineering/sdk-desktop/account-services/)
 - [Windows Sensors](/en/docs/engineering/sdk-desktop/windows-sensors/) · [Windows Audio](/en/docs/engineering/sdk-desktop/windows-audio/)
 - [Shared Adapter Protocol](/en/docs/engineering/sdk-desktop/contract/) · [SDK Contract Repository](/en/docs/engineering/sdk-contract/index/)
-- [Source License](https://github.com/weapp-container/sdk-desktop/blob/a71eeae514f4fe88e471ca519852e87cb6f57511/LICENSE) · [Original Extraction Records](https://github.com/weapp-container/sdk-desktop/blob/a71eeae514f4fe88e471ca519852e87cb6f57511/ORIGIN.json) · [Current Source List](https://github.com/weapp-container/sdk-desktop/blob/a71eeae514f4fe88e471ca519852e87cb6f57511/SOURCE-INVENTORY.json)
+- [Source License](https://github.com/weapp-container/sdk-desktop/blob/0969958a40bbc43c7b4f6559a26eaab8157b6986/LICENSE) · [Original Extraction Records](https://github.com/weapp-container/sdk-desktop/blob/0969958a40bbc43c7b4f6559a26eaab8157b6986/ORIGIN.json) · [Current Source List](https://github.com/weapp-container/sdk-desktop/blob/0969958a40bbc43c7b4f6559a26eaab8157b6986/SOURCE-INVENTORY.json)
 
 The build tool validates the source list. After modifying SDK source code, update the list according to the `tools/source-inventory.mjs` review process. Historical `ORIGIN.json` entries remain unchanged. The actual build and runtime scope for each platform is defined by the verification records of the corresponding build product.
 
@@ -220,7 +221,7 @@ The core runtime and SDK own source code use Apache-2.0. You can build the curre
 
 Historical installation commands (not used as the default path for first access):
 
-Prepare script to verify version, ABI, size and SHA-256 by [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-desktop/blob/a71eeae514f4fe88e471ca519852e87cb6f57511/runtime-artifacts.lock.json). The current lock file contains preview.6.0's macOS and the Linux runtime. There is no Windows runtime entry yet; the Windows source code is available for access, and the default preparation process will fail due to the lack of corresponding entries.
+Prepare script to verify version, ABI, size and SHA-256 by [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-desktop/blob/0969958a40bbc43c7b4f6559a26eaab8157b6986/runtime-artifacts.lock.json). The current lock file contains preview.6.0's macOS and the Linux runtime. There is no Windows runtime entry yet; the Windows source code is available for access, and the default preparation process will fail due to the lack of corresponding entries.
 
 After obtaining the authorization to download the runtime library, inject `WEAPP_CONTAINER_RUNTIME_TOKEN` through the key manager or CI secret, and then execute:
 

@@ -6,7 +6,7 @@ summary: "Weapp Container SDK 合约。来自 weapp-container/sdk-contract 的�
 route: "/docs/engineering/sdk-contract/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "0c2388b16a1f648c777ab5849c96da9ee6e3da89"
+sourceCommit: "83df14b0b3595116b8408b0a4b911dc89e89c175"
 sourcePath: "README.md"
 ---
 
@@ -72,17 +72,18 @@ node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```sh
 git clone https://github.com/weapp-container/sdk-contract.git
 cd sdk-contract
+git checkout d92b12077a89acdc85cd54d305bfa6ab3c3eea6c
 ```
 
 | 文件 | 用途 |
 | --- | --- |
-| [include/weapp_container_sdk.h](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/include/weapp_container_sdk.h) | C ABI、会话、帧和 GPU 接口及所有权规则 |
-| [include/weapp_container_sdk_gl.h](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/include/weapp_container_sdk_gl.h) | 可选 GL resolver 扩展 |
-| [types/weapp-container.d.ts](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/types/weapp-container.d.ts) | 小程序业务消息、宿主调用及协议类型 |
+| [include/weapp_container_sdk.h](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/include/weapp_container_sdk.h) | C ABI、会话、帧和 GPU 接口及所有权规则 |
+| [include/weapp_container_sdk_gl.h](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/include/weapp_container_sdk_gl.h) | 可选 GL resolver 扩展 |
+| [types/weapp-container.d.ts](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/types/weapp-container.d.ts) | 小程序业务消息、宿主调用及协议类型 |
 | [CONTRACT.md](/docs/engineering/sdk-contract/contract/) | 宿主适配器的调度、事件和生命周期协议 |
 | [FLUTTER_PROTOCOL.md](/docs/engineering/sdk-contract/flutter_protocol/) | Flutter 与原生适配器的通道约定 |
-| [runtime-artifacts.schema.json](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/runtime-artifacts.schema.json) | 精确版本运行库锁文件格式 |
-| [platforms.json](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/platforms.json) | 平台和架构标识，不代表平台已通过验证 |
+| [runtime-artifacts.schema.json](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/runtime-artifacts.schema.json) | 精确版本运行库锁文件格式 |
+| [platforms.json](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/platforms.json) | 平台和架构标识，不代表平台已通过验证 |
 
 <a id="generate-a-loadable-test-pack"></a>
 ## 生成可加载的测试 pack
@@ -159,7 +160,7 @@ int main(void) {
 <a id="retrieve-an-exact-runtime-version"></a>
 ## 按精确版本获取运行库
 
-当前 [默认锁文件](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/runtime-artifacts.lock.json) 仍锁定历史 `0.1.0-preview.5.3` 归档，不能用作当前 `preview.5.7` 源码的配套运行库。当前源码所需的新归档及独立消费验证仍待提供；接入时应选用与目标 SDK 完全匹配的已审核锁文件。
+当前 [默认锁文件](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/runtime-artifacts.lock.json) 仍锁定历史 `0.1.0-preview.5.3` 归档，不能用作当前 `preview.5.7` 源码的配套运行库。当前源码所需的新归档及独立消费验证仍待提供；接入时应选用与目标 SDK 完全匹配的已审核锁文件。
 
 以下命令仅演示按现有历史锁获取 iOS arm64 运行库。获得授权后，通过密钥管理器或 CI secret 注入 `WEAPP_CONTAINER_RUNTIME_TOKEN`：
 
@@ -200,7 +201,7 @@ node --test test/*.test.mjs
 
 - [可选布局、导航与执行状态扩展](/docs/engineering/sdk-contract/preview5/)
 - [原生正确性与生命周期要求](/docs/engineering/sdk-contract/preview5_3/)
-- [源码许可证](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/LICENSE) · [原始提取记录](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/ORIGIN.json)
+- [源码许可证](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/LICENSE) · [原始提取记录](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/ORIGIN.json)
 
 可选协议能力须先查询并按版本协商；新增字段不改变 C ABI `1`。没有能力声明时，不应假定运行库支持相应扩展。
 

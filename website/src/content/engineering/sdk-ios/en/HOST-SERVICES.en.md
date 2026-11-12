@@ -6,7 +6,7 @@ summary: "iOS Host ability. Versioned engineering reference from weapp-container
 route: "/docs/engineering/sdk-ios/host-services/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "c5103d009e6fed8271d3ad983b3f01b122ced7b8"
+sourceCommit: "6d6359852714470a9c84aa8742c24d7b49d2149e"
 sourcePath: "HOST-SERVICES.en.md"
 ---
 
@@ -185,18 +185,18 @@ Link to run the official wallet or complete real merchant, camera, peripheral an
 <a id="编译验证记录"></a>
 ## Compilation verification record
 
-[Current development record](https://github.com/weapp-container/sdk-ios/blob/c5103d009e6fed8271d3ad983b3f01b122ced7b8/test/evidence/host-services-development.json) records the complete Swift module and
+[Current development record](https://github.com/weapp-container/sdk-ios/blob/6d6359852714470a9c84aa8742c24d7b49d2149e/test/evidence/host-services-development.json) records the complete Swift module and
 The source code hash of `ReferenceHostServices.swift`, as well as the actual WeChat OpenSDK 2.0.9, Alipay
 15.8.30 Official package sources and hashes. This round launches the production module with `arm64-apple-ios16.0-simulator`,
 Enable the `canImport` branch of the two official SDKs, and then compile examples for this module, but there is no compilation diagnosis.
 This is compilation proof; actual iOS binary linking, device interaction, camera/Bluetooth, official wallet and merchant transactions are still required
 Corresponding operation verification.
 
-[Front-end positioning and authorization policy compilation record](https://github.com/weapp-container/sdk-ios/blob/c5103d009e6fed8271d3ad983b3f01b122ced7b8/test/evidence/host-services-location-policy-development.json)
+[Front-end positioning and authorization policy compilation record](https://github.com/weapp-container/sdk-ios/blob/6d6359852714470a9c84aa8742c24d7b49d2149e/test/evidence/host-services-location-policy-development.json)
 Separately bind all the Swift source codes and samples produced in this batch, and completely launch the module when the official payment header file is visible.
 Compiled example without diagnostics; actual interaction of iOS locating subscriptions with the authorization UI is still pending run acceptance.
 
-[Beacon and recording compilation record](https://github.com/weapp-container/sdk-ios/blob/c5103d009e6fed8271d3ad983b3f01b122ced7b8/test/evidence/host-services-beacon-recorder-development.json)
+[Beacon and recording compilation record](https://github.com/weapp-container/sdk-ios/blob/6d6359852714470a9c84aa8742c24d7b49d2149e/test/evidence/host-services-beacon-recorder-development.json)
 Keep the source code hashes and zero diagnostic logs of this batch of complete modules and samples. Real Beacon, permission conversion,
 Front and backend ranging and iOS microphone recording are still to be independently run and accepted.
 Completed and unreserved host calls will release the capture object of the setup cancellation callback, and calls that reserve resources will still

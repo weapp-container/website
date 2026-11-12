@@ -6,7 +6,7 @@ summary: "Participate in Development. Versioned engineering reference from weapp
 route: "/docs/engineering/website/contributing/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "9280ea0ed20ae7123267b4008fb527a0f37948bc"
+sourceCommit: "43c9a0c31d57a75930742fe63c50e17045c3a206"
 sourcePath: "CONTRIBUTING.en.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "UIKit Window Information Usage. Versioned engineering reference from w
 route: "/docs/engineering/sdk-ios/docs/window-metrics.zh-cn/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "c5103d009e6fed8271d3ad983b3f01b122ced7b8"
+sourceCommit: "6d6359852714470a9c84aa8742c24d7b49d2149e"
 sourcePath: "docs/window-metrics.zh-CN.en.md"
 ---
 

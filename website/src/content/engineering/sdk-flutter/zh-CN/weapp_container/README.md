@@ -6,7 +6,7 @@ summary: "Flutter 在小程序中的容器（预览版）。来自 weapp-contain
 route: "/docs/engineering/sdk-flutter/weapp_container/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "a6a649d86fbcd48a6b23d47870984e2829e35f3b"
+sourceCommit: "84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60"
 sourcePath: "weapp_container/README.md"
 ---
 
@@ -14,6 +14,8 @@ sourcePath: "weapp_container/README.md"
 # Flutter 在小程序中的容器（预览版）
 
 **简体中文** · [English](/en/docs/engineering/sdk-flutter/weapp_container/index/)
+
+当前主分支准备 preview.7 公开发行；只有对应版本在注册源发布后才使用公开安装入口。安装、平台要求与状态见 [SDK 首页](/docs/engineering/sdk-flutter/index/)。下方保留固定 preview.6 源码的详细说明；该版本须从 SDK 首页给出的精确提交 checkout 构建，不与 preview.7 运行库混用。
 
 
 在 Android、iOS、macOS、Windows 和 Linux 应用中嵌入共享的 QuickJS 小程序运行时和原生渲染器。移动设备使用原生平台的 View 组件；桌面端使用 Flutter 外部纹理。JavaScript、页面状态、存储和宿主调用均保留在共享的原生 SDK 中。没有渲染的图像通过方法通道传递。

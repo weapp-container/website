@@ -6,7 +6,7 @@ summary: "Weapp Container React Native SDK。来自 weapp-container/sdk-react-na
 route: "/docs/engineering/sdk-react-native/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "737ecbca691690737d85911b08165293b7d6453d"
+sourceCommit: "fbc2a1ffe171ea07e109d454a66f208a847a6aef"
 sourcePath: "README.md"
 ---
 
@@ -154,7 +154,7 @@ await controller.sendMessage({type: 'refresh'});
 await controller.back();
 ```
 
-pack 需要符合运行库格式，不能直接传入普通小程序源码目录。完整的 React 页面挂载与资源打包示例见 [example/App.tsx](https://github.com/weapp-container/sdk-react-native/blob/737ecbca691690737d85911b08165293b7d6453d/example/App.tsx) 和[独立示例生成器](https://github.com/weapp-container/sdk-react-native/blob/737ecbca691690737d85911b08165293b7d6453d/tools/create-consumer.mjs)。
+pack 需要符合运行库格式，不能直接传入普通小程序源码目录。完整的 React 页面挂载与资源打包示例见 [example/App.tsx](https://github.com/weapp-container/sdk-react-native/blob/fbc2a1ffe171ea07e109d454a66f208a847a6aef/example/App.tsx) 和[独立示例生成器](https://github.com/weapp-container/sdk-react-native/blob/fbc2a1ffe171ea07e109d454a66f208a847a6aef/tools/create-consumer.mjs)。
 
 <a id="session-lifecycle"></a>
 ## 会话生命周期
@@ -172,11 +172,11 @@ await controller.flushStorage();
 await controller.close();
 ```
 
-在 React effect 中创建会话时，处理“组件已卸载但 create 尚未完成”的情况：新建成功后检查组件状态，已卸载则立即关闭。Effect cleanup 不能返回 Promise，应将异步关闭交给会话管理逻辑，并在下次创建前等待它完成。关闭失败时保留 Controller 供重试。完整实现可参考 [example/App.tsx](https://github.com/weapp-container/sdk-react-native/blob/737ecbca691690737d85911b08165293b7d6453d/example/App.tsx)。
+在 React effect 中创建会话时，处理“组件已卸载但 create 尚未完成”的情况：新建成功后检查组件状态，已卸载则立即关闭。Effect cleanup 不能返回 Promise，应将异步关闭交给会话管理逻辑，并在下次创建前等待它完成。关闭失败时保留 Controller 供重试。完整实现可参考 [example/App.tsx](https://github.com/weapp-container/sdk-react-native/blob/fbc2a1ffe171ea07e109d454a66f208a847a6aef/example/App.tsx)。
 
 宿主方法只接收和返回 JSON 可表示的值。异步操作应观察 `AbortSignal`，在取消后终止对应工作；可抛出导出的 `HostError`，返回 `permission_denied`、`unsupported` 等明确错误代码。
 
-需要登录、账号、网络或设备 API 时，在 `load()` 前调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。宿主负责网络 origin 白名单和系统权限，受限 Showcase 的编译时策略继续生效。配置、账号切换和完整类型见 [src/index.tsx](https://github.com/weapp-container/sdk-react-native/blob/737ecbca691690737d85911b08165293b7d6453d/src/index.tsx) 与 [CONTRACT.md](/docs/engineering/sdk-react-native/contract/)。
+需要登录、账号、网络或设备 API 时，在 `load()` 前调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。宿主负责网络 origin 白名单和系统权限，受限 Showcase 的编译时策略继续生效。配置、账号切换和完整类型见 [src/index.tsx](https://github.com/weapp-container/sdk-react-native/blob/fbc2a1ffe171ea07e109d454a66f208a847a6aef/src/index.tsx) 与 [CONTRACT.md](/docs/engineering/sdk-react-native/contract/)。
 
 <a id="build-a-distribution-from-source"></a>
 ## 从源码生成分发包
@@ -184,6 +184,7 @@ await controller.close();
 ```sh
 git clone https://github.com/weapp-container/sdk-react-native.git
 cd sdk-react-native
+git checkout ccbd7965f644dc21b60bf33b5acc72d299c553c4
 npm install --ignore-scripts
 npm run typecheck
 node tools/prepare-native.mjs --platform android --arch universal \
@@ -222,11 +223,11 @@ node tools/create-consumer.mjs \
 <a id="documentation-and-licensing"></a>
 ## 更多资料与许可
 
-- [公开 API](https://github.com/weapp-container/sdk-react-native/blob/737ecbca691690737d85911b08165293b7d6453d/src/index.tsx) · [协议与能力协商](/docs/engineering/sdk-react-native/contract/)
-- [完整示例](https://github.com/weapp-container/sdk-react-native/blob/737ecbca691690737d85911b08165293b7d6453d/example/App.tsx) · [示例运行说明](/docs/engineering/sdk-react-native/example/index/)
+- [公开 API](https://github.com/weapp-container/sdk-react-native/blob/fbc2a1ffe171ea07e109d454a66f208a847a6aef/src/index.tsx) · [协议与能力协商](/docs/engineering/sdk-react-native/contract/)
+- [完整示例](https://github.com/weapp-container/sdk-react-native/blob/fbc2a1ffe171ea07e109d454a66f208a847a6aef/example/App.tsx) · [示例运行说明](/docs/engineering/sdk-react-native/example/index/)
 - [公共类型和 C ABI](/docs/engineering/sdk-contract/index/)
 
-接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-react-native/blob/737ecbca691690737d85911b08165293b7d6453d/LICENSE)。运行库与第三方组件遵循分发归档中的 `RUNTIME-LICENSE` 和 notices；源码开源不授予私有运行库下载权或额外的商用权利。
+接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-react-native/blob/fbc2a1ffe171ea07e109d454a66f208a847a6aef/LICENSE)。运行库与第三方组件遵循分发归档中的 `RUNTIME-LICENSE` 和 notices；源码开源不授予私有运行库下载权或额外的商用权利。
 
 <a id="historical-archives-and-migration"></a>
 ## 历史归档与迁移
@@ -234,3 +235,7 @@ node tools/create-consumer.mjs \
 运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
 
 核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。
+
+## 发布构建
+
+维护者通过 `tools/package-public.mjs` 使用已验证的 Android/iOS 发行清单构建公开候选。历史离线工具用于复核旧分发，详见[公开发行流程](/docs/engineering/sdk-react-native/public-release/)。

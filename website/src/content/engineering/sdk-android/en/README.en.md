@@ -6,7 +6,7 @@ summary: "Weapp Container Android SDK. Versioned engineering reference from weap
 route: "/docs/engineering/sdk-android/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "34e2862d82250f1202c6e0b9367f2094bb60a523"
+sourceCommit: "e50d4dc6f1dd3e180eed574918f50e6484c9fd01"
 sourcePath: "README.en.md"
 ---
 
@@ -45,7 +45,7 @@ git checkout be2a7c6085bbf2562f0a351855c69ee5167b3770
 
 Embed mini-program pages within Android applications. The SDK provides Kotlin session management, native `TextureView`, host message channel, and local persistence, using QuickJS to execute JavaScript and Skia GLES to render pages.
 
-Reviewed source example version: **0.1.0-preview.6.0**. The SDK wrapper source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/LICENSE); runtime source is provided in the main repository under Apache-2.0. This repository contains the SDK wrapper source code, while the runtime library is built or installed separately.
+Reviewed source example version: **0.1.0-preview.6.0**. The SDK wrapper source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/LICENSE); runtime source is provided in the main repository under Apache-2.0. This repository contains the SDK wrapper source code, while the runtime library is built or installed separately.
 
 <a id="从当前源码开始"></a>
 ## Start from Source Code
@@ -164,7 +164,7 @@ session.navigate("pages/detail/index", JSONObject().put("id", "42"))
 session.back()
 ```
 
-The mini-program side uses `weappContainer.invoke` to invoke host methods, and uses `postMessage` / `onMessage` to exchange messages, with types defined in [weapp-container.d.ts](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/types/weapp-container.d.ts). Host methods must be registered before the first `load`. Asynchronous tasks can be canceled via `call.onCancel`; completion is signaled via `reply.resolve` / `reply.reject`. Replies from canceled or stale sessions do not affect new instances.
+The mini-program side uses `weappContainer.invoke` to invoke host methods, and uses `postMessage` / `onMessage` to exchange messages, with types defined in [weapp-container.d.ts](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/types/weapp-container.d.ts). Host methods must be registered before the first `load`. Asynchronous tasks can be canceled via `call.onCancel`; completion is signaled via `reply.resolve` / `reply.reject`. Replies from canceled or stale sessions do not affect new instances.
 
 <a id="5-生命周期与存储"></a>
 ## 5. Lifecycle and Storage
@@ -198,7 +198,7 @@ node tools/device-smoke.mjs --serial YOUR_ALREADY_RUNNING_TARGET
 - [Host Services: Device Capabilities, Identity, Payment, and Permissions](/en/docs/engineering/sdk-android/host-services/)
 - [Host Service Integration Example](/en/docs/engineering/sdk-android/examples/host-services/index/)
 - [Cross-end Session Contract](/en/docs/engineering/sdk-android/contract/)
-- [Source File List](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/SOURCE-INVENTORY.json) and [Historical Export Records](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/ORIGIN.json)
+- [Source File List](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/SOURCE-INVENTORY.json) and [Historical Export Records](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/ORIGIN.json)
 The runtime capabilities depend on the accompanying runtime libraries and their distribution strategy; `restricted-showcase` permits only demonstration packages and APIs authorized at compile time, and no capabilities can be re-enabled via host configuration. Support for native input methods, accessibility, and complex gestures is detailed in the embedded documentation. When distributing applications, retain SDK `LICENSE`, runtime library `RUNTIME-LICENSE`, and third-party declarations.
 
 <a id="历史归档与迁移"></a>
@@ -216,6 +216,7 @@ Core runtime and SDK source code are licensed under Apache-2.0 and can be built 
 ```sh
 git clone https://github.com/weapp-container/sdk-android.git
 cd sdk-android
+git checkout be2a7c6085bbf2562f0a351855c69ee5167b3770
 ```
 
 After obtaining runtime access authorization, provide credentials via the environment variable `WEAPP_CONTAINER_RUNTIME_TOKEN`, with permissions restricted to **Contents: read** for private product repositories. Do not embed credentials in source code or command-line arguments.
@@ -230,7 +231,7 @@ Use an authorized offline archive:
 node tools/prepare-runtime.mjs --artifact-dir /absolute/runtime-archives
 ```
 
-The tool validates **0.1.0-preview.6.0**, ABI 1, architecture, size, and SHA-256 against [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/runtime-artifacts.lock.json), and installs it into `.runtime/install/native` and `.runtime/install/licenses`. Installation fails if the archive is missing, download permissions are unavailable, or validation does not pass; existing installations are preserved during failure. The pin in the lock file does not imply that the runtime is publicly downloadable.
+The tool validates **0.1.0-preview.6.0**, ABI 1, architecture, size, and SHA-256 against [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/runtime-artifacts.lock.json), and installs it into `.runtime/install/native` and `.runtime/install/licenses`. Installation fails if the archive is missing, download permissions are unavailable, or validation does not pass; existing installations are preserved during failure. The pin in the lock file does not imply that the runtime is publicly downloadable.
 
 Custom archive manifests use `--manifest /absolute/reviewed-lock.json`. On slow networks, download timeouts can be adjusted via `WEAPP_CONTAINER_RUNTIME_TIMEOUT_MS`, ranging from `1` to `3600000` milliseconds, with a default of 15 minutes.
 

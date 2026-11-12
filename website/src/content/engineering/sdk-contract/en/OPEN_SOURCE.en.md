@@ -6,7 +6,7 @@ summary: "Open-source runtime integration. Versioned engineering reference from 
 route: "/docs/engineering/sdk-contract/open_source/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "0c2388b16a1f648c777ab5849c96da9ee6e3da89"
+sourceCommit: "83df14b0b3595116b8408b0a4b911dc89e89c175"
 sourcePath: "OPEN_SOURCE.en.md"
 ---
 

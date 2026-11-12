@@ -6,7 +6,7 @@ summary: "开源运行时集成。来自 weapp-container/sdk-ios 的版本化工
 route: "/docs/engineering/sdk-ios/open_source/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "c5103d009e6fed8271d3ad983b3f01b122ced7b8"
+sourceCommit: "6d6359852714470a9c84aa8742c24d7b49d2149e"
 sourcePath: "OPEN_SOURCE.md"
 ---
 

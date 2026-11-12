@@ -6,7 +6,7 @@ summary: "Weapp Container SDK Contracts. Versioned engineering reference from we
 route: "/docs/engineering/sdk-contract/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "0c2388b16a1f648c777ab5849c96da9ee6e3da89"
+sourceCommit: "83df14b0b3595116b8408b0a4b911dc89e89c175"
 sourcePath: "README.en.md"
 ---
 
@@ -72,17 +72,18 @@ Tools require Node.js 24.x; runtime archive installation also needs Python 3. Th
 ```sh
 git clone https://github.com/weapp-container/sdk-contract.git
 cd sdk-contract
+git checkout d92b12077a89acdc85cd54d305bfa6ab3c3eea6c
 ```
 
 | File | Purpose |
 | --- | --- |
-| [include/weapp_container_sdk.h](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/include/weapp_container_sdk.h) | C ABI, sessions, frames, GPU APIs, and ownership rules |
-| [include/weapp_container_sdk_gl.h](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/include/weapp_container_sdk_gl.h) | Optional GL resolver extension |
-| [types/weapp-container.d.ts](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/types/weapp-container.d.ts) | Mini-app messaging, host calls, and protocol types |
+| [include/weapp_container_sdk.h](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/include/weapp_container_sdk.h) | C ABI, sessions, frames, GPU APIs, and ownership rules |
+| [include/weapp_container_sdk_gl.h](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/include/weapp_container_sdk_gl.h) | Optional GL resolver extension |
+| [types/weapp-container.d.ts](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/types/weapp-container.d.ts) | Mini-app messaging, host calls, and protocol types |
 | [CONTRACT.md](/en/docs/engineering/sdk-contract/contract/) | Host adapter scheduling, events, and lifecycle |
 | [FLUTTER_PROTOCOL.md](/en/docs/engineering/sdk-contract/flutter_protocol/) | Flutter/native adapter channel contract |
-| [runtime-artifacts.schema.json](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/runtime-artifacts.schema.json) | Exact runtime artifact lock format |
-| [platforms.json](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/platforms.json) | Platform and architecture identifiers, not acceptance results |
+| [runtime-artifacts.schema.json](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/runtime-artifacts.schema.json) | Exact runtime artifact lock format |
+| [platforms.json](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/platforms.json) | Platform and architecture identifiers, not acceptance results |
 
 <a id="生成可加载的测试-pack"></a>
 ## Generate a loadable test pack
@@ -159,7 +160,7 @@ Initialize every result buffer to `{NULL, 0}`. Results are length-delimited UTF-
 <a id="按精确版本获取运行库"></a>
 ## Retrieve an exact runtime version
 
-The [default lock](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/runtime-artifacts.lock.json) still pins historical `0.1.0-preview.5.3` archives and cannot serve as the matching runtime for current `preview.5.7` source. New archives and independent consumer validation for the current source remain pending. Choose a reviewed lock that exactly matches your target SDK.
+The [default lock](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/runtime-artifacts.lock.json) still pins historical `0.1.0-preview.5.3` archives and cannot serve as the matching runtime for current `preview.5.7` source. New archives and independent consumer validation for the current source remain pending. Choose a reviewed lock that exactly matches your target SDK.
 
 The following command demonstrates retrieving the iOS arm64 runtime from the existing historical lock. After obtaining access, inject `WEAPP_CONTAINER_RUNTIME_TOKEN` through your secret manager or CI secrets:
 
@@ -200,7 +201,7 @@ Tests use local data and simulated responses without credentials or a real runti
 
 - [Optional layout, navigation, and execution-state extensions](/en/docs/engineering/sdk-contract/preview5/)
 - [Native correctness and lifecycle requirements](/en/docs/engineering/sdk-contract/preview5_3/)
-- [Source license](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/LICENSE) · [Original extraction receipt](https://github.com/weapp-container/sdk-contract/blob/0c2388b16a1f648c777ab5849c96da9ee6e3da89/ORIGIN.json)
+- [Source license](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/LICENSE) · [Original extraction receipt](https://github.com/weapp-container/sdk-contract/blob/83df14b0b3595116b8408b0a4b911dc89e89c175/ORIGIN.json)
 
 Query and negotiate optional capabilities by version before using them. Additive fields preserve C ABI `1`; an absent capability declaration does not imply support.
 

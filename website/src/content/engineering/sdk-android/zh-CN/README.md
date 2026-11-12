@@ -6,7 +6,7 @@ summary: "Weapp Container Android SDK。来自 weapp-container/sdk-android 的�
 route: "/docs/engineering/sdk-android/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "34e2862d82250f1202c6e0b9367f2094bb60a523"
+sourceCommit: "e50d4dc6f1dd3e180eed574918f50e6484c9fd01"
 sourcePath: "README.md"
 ---
 
@@ -45,7 +45,7 @@ git checkout be2a7c6085bbf2562f0a351855c69ee5167b3770
 
 在 Android 应用中嵌入小程序页面。SDK 提供 Kotlin 会话、原生 `TextureView`、宿主消息通道和本地持久化，使用 QuickJS 执行 JavaScript、Skia GLES 渲染页面。
 
-已复核源码示例版本：**0.1.0-preview.6.0**。SDK 封装源码采用 [Apache-2.0](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/LICENSE)；运行时源码在主仓库按 Apache-2.0 提供。本仓库包含 SDK 包装层源码，运行库单独构建或安装。
+已复核源码示例版本：**0.1.0-preview.6.0**。SDK 封装源码采用 [Apache-2.0](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/LICENSE)；运行时源码在主仓库按 Apache-2.0 提供。本仓库包含 SDK 包装层源码，运行库单独构建或安装。
 
 <a id="start-from-source-code"></a>
 ## 从当前源码开始
@@ -164,7 +164,7 @@ session.navigate("pages/detail/index", JSONObject().put("id", "42"))
 session.back()
 ```
 
-小程序侧使用 `weappContainer.invoke` 调用宿主方法，使用 `postMessage` / `onMessage` 交换消息，类型见 [weapp-container.d.ts](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/types/weapp-container.d.ts)。宿主方法应在首次 `load` 前注册。异步任务通过 `call.onCancel` 取消，使用 `reply.resolve` / `reply.reject` 完成；已取消或旧会话的回复不会影响新实例。
+小程序侧使用 `weappContainer.invoke` 调用宿主方法，使用 `postMessage` / `onMessage` 交换消息，类型见 [weapp-container.d.ts](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/types/weapp-container.d.ts)。宿主方法应在首次 `load` 前注册。异步任务通过 `call.onCancel` 取消，使用 `reply.resolve` / `reply.reject` 完成；已取消或旧会话的回复不会影响新实例。
 
 <a id="5-lifecycle-and-storage"></a>
 ## 5. 生命周期与存储
@@ -197,7 +197,7 @@ node tools/device-smoke.mjs --serial YOUR_ALREADY_RUNNING_TARGET
 - [宿主服务：设备能力、身份、支付与权限](/docs/engineering/sdk-android/host-services/)
 - [宿主服务接入示例](/docs/engineering/sdk-android/examples/host-services/index/)
 - [跨端会话契约](/docs/engineering/sdk-android/contract/)
-- [源文件清单](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/SOURCE-INVENTORY.json) 与 [历史导出记录](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/ORIGIN.json)
+- [源文件清单](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/SOURCE-INVENTORY.json) 与 [历史导出记录](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/ORIGIN.json)
 
 运行能力取决于配套运行库及其分发策略；`restricted-showcase` 只允许编译时授权的演示包与 API，不能通过宿主配置重新开启禁用能力。原生输入法、无障碍与复杂手势的支持范围见嵌入文档。分发应用时保留 SDK `LICENSE`、运行库 `RUNTIME-LICENSE` 和第三方声明。
 
@@ -217,6 +217,7 @@ node tools/device-smoke.mjs --serial YOUR_ALREADY_RUNNING_TARGET
 ```sh
 git clone https://github.com/weapp-container/sdk-android.git
 cd sdk-android
+git checkout be2a7c6085bbf2562f0a351855c69ee5167b3770
 ```
 
 获得运行库访问授权后，通过凭据环境提供 `WEAPP_CONTAINER_RUNTIME_TOKEN`，权限限定为私有产物仓库的 **Contents: read**。不要把凭据写进源码或命令参数。
@@ -231,7 +232,7 @@ node tools/prepare-runtime.mjs
 node tools/prepare-runtime.mjs --artifact-dir /absolute/runtime-archives
 ```
 
-工具按 [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-android/blob/34e2862d82250f1202c6e0b9367f2094bb60a523/runtime-artifacts.lock.json) 校验 **0.1.0-preview.6.0**、ABI 1、架构、大小和 SHA-256，安装到 `.runtime/install/native` 和 `.runtime/install/licenses`。缺少归档、无下载权限或校验不符时会失败；已有安装在失败时保留。锁文件中的 pin 不代表运行库可公开下载。
+工具按 [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/runtime-artifacts.lock.json) 校验 **0.1.0-preview.6.0**、ABI 1、架构、大小和 SHA-256，安装到 `.runtime/install/native` 和 `.runtime/install/licenses`。缺少归档、无下载权限或校验不符时会失败；已有安装在失败时保留。锁文件中的 pin 不代表运行库可公开下载。
 
 自定义归档清单使用 `--manifest /absolute/reviewed-lock.json`。慢速网络可通过 `WEAPP_CONTAINER_RUNTIME_TIMEOUT_MS` 调整下载超时，范围为 `1`–`3600000` 毫秒，默认 15 分钟。
 

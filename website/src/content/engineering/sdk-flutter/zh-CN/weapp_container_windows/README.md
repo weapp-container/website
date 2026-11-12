@@ -6,13 +6,15 @@ summary: "weapp_container_windows。来自 weapp-container/sdk-flutter 的版本
 route: "/docs/engineering/sdk-flutter/weapp_container_windows/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "a6a649d86fbcd48a6b23d47870984e2829e35f3b"
+sourceCommit: "84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60"
 sourcePath: "weapp_container_windows/README.md"
 ---
 
 # weapp_container_windows
 
 **简体中文** · [English](/en/docs/engineering/sdk-flutter/weapp_container_windows/index/)
+
+preview.7 平台包包含桥接源码和许可。注册源发布后通过主包安装；平台、架构、Specs 与原生依赖条件见 [SDK 首页](/docs/engineering/sdk-flutter/index/)。
 
 [weapp_container](https://pub.dev/packages/weapp_container) 的 windows 平台实现。
 

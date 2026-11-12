@@ -6,7 +6,7 @@ summary: "SDK 协议 v1。来自 weapp-container/sdk-react-native 的版本化�
 route: "/docs/engineering/sdk-react-native/contract/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "737ecbca691690737d85911b08165293b7d6453d"
+sourceCommit: "fbc2a1ffe171ea07e109d454a66f208a847a6aef"
 sourcePath: "CONTRACT.md"
 ---
 
