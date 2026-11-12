@@ -48,6 +48,9 @@ importers:
       javascript-obfuscator:
         specifier: 5.10.0
         version: 5.10.0
+      parse5:
+        specifier: 8.1.1
+        version: 8.1.1
       playwright:
         specifier: 1.56.1
         version: 1.56.1

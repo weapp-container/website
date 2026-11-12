@@ -49,10 +49,14 @@ export function rewriteLinks(body, source, locale, routes, assets) {
   let fence, prose = '';
   const output = [];
   const flush = () => {
-    output.push(prose.split(/(`+[^`]*`+)/g).map((segment, index) => index % 2 ? segment : segment
+    assert.ok(!prose.includes('\u0000'), 'Markdown contains a reserved code placeholder');
+    const code = [];
+    const protectedProse = prose.replace(/(`+)[\s\S]*?\1(?!`)/g, value => `\u0000${code.push(value) - 1}\u0000`);
+    output.push(protectedProse
       .replace(/(!?\[[^\]]*\]\()([^\s)]+)(\))/g, (match, before, href, after) => before + transform(href) + after)
       .replace(/\b(href|src)=(['"])([^'"]+)\2/g, (match, attribute, quote, href) => `${attribute}=${quote}${transform(href)}${quote}`)
-      .replace(/^(\s*\[[^\]\n]+\]:\s*)(\S+)/gm, (match, before, href) => before + transform(href))).join(''));
+      .replace(/^(\s*\[[^\]\n]+\]:\s*)(\S+)/gm, (match, before, href) => before + transform(href))
+      .replace(/\u0000(\d+)\u0000/g, (match, index) => code[Number(index)]));
     prose = '';
   };
   for (const line of body.split(/(?<=\n)/)) {

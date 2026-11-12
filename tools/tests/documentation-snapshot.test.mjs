@@ -20,6 +20,7 @@ test('routes preserve source identities and map both languages to one page', () 
   assert.equal(rewriteLinks('[Home]: ../README.en.md', source, 'en', routes, new Map()), '[Home]: /en/docs/engineering/sdk-ios/index/');
   assert.equal(rewriteLinks('[Wrapped\nlabel](../README.en.md)', source, 'en', routes, new Map()), '[Wrapped\nlabel](/en/docs/engineering/sdk-ios/index/)');
   assert.equal(rewriteLinks('`[Example](../README.en.md)`', source, 'en', routes, new Map()), '`[Example](../README.en.md)`');
+  assert.equal(rewriteLinks('[The `Session`\nreference](../README.en.md)', source, 'en', routes, new Map()), '[The `Session`\nreference](/en/docs/engineering/sdk-ios/index/)');
 });
 
 async function fixture(t) {

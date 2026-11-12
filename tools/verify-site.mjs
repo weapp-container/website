@@ -13,6 +13,7 @@ import {docsPages} from '../website/src/data/docs-pages.mjs';
 import {verifyDocumentationSnapshot} from './documentation-snapshot.mjs';
 import {verifyApiExamples} from './api-examples.mjs';
 import {generateCapabilityGuides} from './generate-capability-guide.mjs';
+import {siteReferences} from './site-html.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const base = resolve(root,'dist');
@@ -90,6 +91,7 @@ for(const path of ['/','/demo/','/platforms/','/guide/',...docsPages.map(page=>p
   assert.ok(sitemapRoutes.has(path),`Sitemap omits ${path}`);
 }
 const htmlFiles = files.filter(path => path.endsWith('.html'));
+const references = new Map(await Promise.all(htmlFiles.map(async path => [relative(base, path).split('\\').join('/'), siteReferences(await readFile(path, 'utf8'))])));
 const routePairs = JSON.parse(await readFile(resolve(base, 'page-routes.json'), 'utf8'));
 for (const pair of routePairs) {
   for (const [locale, path] of Object.entries(pair.routes)) {
@@ -123,9 +125,7 @@ for(const path of htmlFiles) {
   }
   for(const character of new Set(html.match(/[\u3400-\u9fff]/gu)||[]))assert.ok(websiteFont.hasGlyphForCodePoint(character.codePointAt(0)),`Website font lacks ${character}; regenerate the reviewed subset`);
   const pageUrl = rel.endsWith('/index.html') ? `/${rel.slice(0,-'index.html'.length)}` : rel === 'index.html' ? '/' : `/${rel}`;
-  const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map(match=>match[1]));
-  for(const match of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
-    const value = match[1].replaceAll('&amp;','&');
+  for(const value of references.get(rel).links) {
     if(value.startsWith('//') || /^(?:[a-z][a-z0-9+.-]*:)/i.test(value)) continue;
     const targetUrl = new URL(value,`https://container.weapp.dev${pageUrl}`);
     if(targetUrl.origin !== 'https://container.weapp.dev') continue;
@@ -135,8 +135,7 @@ for(const path of htmlFiles) {
     const targetRel = targetPath.slice(1);
     assert.ok(fileSet.has(targetRel),`Broken internal link or asset in ${rel}: ${value}`);
     if(targetUrl.hash) {
-      const targetHtml = await readFile(resolve(base,targetRel),'utf8');
-      const targetIds = targetRel === rel ? ids : new Set([...targetHtml.matchAll(/\sid="([^"]+)"/g)].map(item=>item[1]));
+      const targetIds = references.get(targetRel)?.ids || new Set();
       assert.ok(targetIds.has(decodeURIComponent(targetUrl.hash.slice(1))),`Broken page fragment in ${rel}: ${value}`);
     }
   }

@@ -17,7 +17,9 @@ export async function searchIndex(locale: 'zh-CN' | 'en') {
       keywords: `${api.id} ${api.names.join(' ')} ${Object.keys(api.hostCoverage || {}).join(' ')}`,
       body: '',
     })),
-    ...Object.keys(capabilities).map(name => ({
+    // APIs with coverage belong to their reference group. Only capability-only
+    // entries need a separate result pointing to the defaults table.
+    ...Object.keys(capabilities).filter(name => !inventory.apis.some(api => api.names.includes(name))).map(name => ({
       path: localizedPath('/docs/api/capability-defaults/', locale), title: name,
       summary: en ? 'Runtime manifest default. Independent platform records are listed in the API inventory.' : '运行时 manifest 默认能力，逐平台覆盖状态以 API 清单为准。',
       keywords: `${en ? 'Default capability' : '能力默认值'} ${name}`, body: '',
