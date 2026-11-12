@@ -1,0 +1,14 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import inventory from '../../../data/api-inventory-v1.json';
+import source from '../../../data/api-source-v1.json';
+import { apiGroupMeta, apiSections, apiSlug } from '../../../data/api-group-meta.mjs';
+const label = (support: string) => support === 'full' ? '清单标为完整' : support === 'partial' ? '部分支持' : '不支持';
+---
+<DocsLayout title="小程序 API 与能力" description="按能力组查询小程序 API 名称、逐平台覆盖、引擎覆盖和版本边界。">
+  <header class="docs-page-heading"><p class="eyebrow">API REFERENCE</p><h1>小程序 API 与能力</h1><p>接口目录包含 {inventory.apis.length} 个能力组。每个分组保留清单中的宿主与引擎状态、权限要求、版本条件和 conformance 案例编号。</p></header>
+  <aside class="docs-callout docs-callout-note"><strong>如何阅读覆盖状态</strong><p>组级状态概览不能替代逐平台状态。请在分组页查看具体宿主和引擎列；只有清单列出逐平台覆盖的能力才显示平台结论。默认 manifest 能力值也不等同于当前宿主已经实现该能力。</p></aside>
+  {apiSections.map((section) => <section class="docs-index-section"><h2>{section}</h2><div class="docs-api-list">{inventory.apis.filter((api) => apiGroupMeta[api.id]?.section === section).map((api) => <a href={`/docs/api/${apiSlug(api.id)}/`}><strong>{apiGroupMeta[api.id]?.title || api.id}</strong><code>{api.id}</code><span>{api.names.length} 个 API 或能力名称 · {label(api.support)}</span></a>)}</div></section>)}
+  <section class="docs-index-section"><h2>默认值与清单差异</h2><div class="docs-api-list"><a href="/docs/api/capability-defaults/"><strong>运行时默认能力</strong><code>{source.capabilities.count} 项默认值</code><span>{source.coverageGaps.capabilityOnly.length} 项能力尚无逐平台覆盖记录。默认值按单独来源列出。</span></a></div></section>
+  <p class="docs-source-note">接口快照来自 <code>{source.source.repository}</code>，来源提交 <code>{source.source.commit.slice(0, 12)}</code>。清单 SHA-256：<code>{source.inventory.canonicalSha256}</code>。</p>
+</DocsLayout>

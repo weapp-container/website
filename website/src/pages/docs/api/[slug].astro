@@ -1,0 +1,24 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import inventory from '../../../data/api-inventory-v1.json';
+import { apiGroupMeta, apiSlug } from '../../../data/api-group-meta.mjs';
+export function getStaticPaths() {
+  return inventory.apis.map((api) => ({ params: { slug: apiSlug(api.id) }, props: { api } }));
+}
+const { api } = Astro.props;
+const meta = apiGroupMeta[api.id] || { title: api.id, section: '其他能力' };
+const hosts = Object.entries(api.hostCoverage || {});
+const engines = Object.entries(api.engineCoverage || {});
+const supportLabel = (support: string) => support === 'full' ? '完整' : support === 'partial' ? '部分' : '不支持';
+const levelClass = (support: string) => `support-${support}`;
+---
+<DocsLayout title={meta.title} description={`${meta.title} 的 API 名称、逐平台和引擎覆盖、权限边界与最低 manifest 协议版本。`}>
+  <header class="docs-page-heading"><p class="eyebrow">{meta.section} / 小程序 API</p><h1>{meta.title}</h1><p>能力组 <code>{api.id}</code> 中的接口以逐项名称列出；本页的覆盖信息来自随站点发布的 API 清单快照。</p></header>
+  <section class="docs-index-section"><h2>包含的名称</h2><ul class="docs-name-list">{api.names.map((name: string) => <li><code>{name}</code></li>)}</ul></section>
+  <section class="docs-index-section"><h2>行为与限制</h2><dl class="docs-definition-list"><div><dt>清单组级状态</dt><dd><span class={`docs-support ${levelClass(api.support)}`}>{supportLabel(api.support)}</span></dd></div><div><dt>实现差异与限制</dt><dd>{api.difference}</dd></div><div><dt>权限</dt><dd><code>{api.permission}</code></dd></div><div><dt>最低 Manifest 版本</dt><dd><code>{api.minimumManifestVersion}</code></dd></div><div><dt>最低协议版本</dt><dd><code>{api.minimumProtocolVersion}</code></dd></div></dl></section>
+  <section class="docs-index-section"><h2>宿主覆盖</h2>{hosts.length > 0 ? <div class="docs-table-scroll"><table class="docs-table"><thead><tr><th scope="col">宿主</th><th scope="col">覆盖状态</th></tr></thead><tbody>{hosts.map(([host, support]) => <tr><th scope="row"><code>{host}</code></th><td><span class={`docs-support ${levelClass(support)}`}>{supportLabel(support)}</span></td></tr>)}</tbody></table></div> : <p>当前清单没有该能力组的逐宿主覆盖记录，平台行为待核验。</p>}</section>
+  {engines.length > 0 && <section class="docs-index-section"><h2>引擎覆盖</h2><div class="docs-table-scroll"><table class="docs-table"><thead><tr><th scope="col">引擎</th><th scope="col">覆盖状态</th></tr></thead><tbody>{engines.map(([engine, support]) => <tr><th scope="row"><code>{engine}</code></th><td><span class={`docs-support ${levelClass(support)}`}>{supportLabel(support)}</span></td></tr>)}</tbody></table></div></section>}
+  <section class="docs-index-section"><h2>核验案例</h2>{api.conformance.length > 0 ? <ul class="docs-name-list">{api.conformance.map((id: string) => <li><code>{id}</code></li>)}</ul> : <p>当前版本没有关联的 conformance 案例，相关行为待核验。</p>}<p><a href="https://github.com/weapp-container/weapp-container/blob/main/docs/api-runtime-conformance.md" target="_blank" rel="noreferrer">查看版本化 API conformance 记录 ↗</a></p><p class="docs-source-note">案例覆盖所列场景和错误边界，不等于 API 在所有宿主平台均已完整支持。宿主覆盖记录缺失时不推断平台状态。</p></section>
+  <aside class="docs-callout docs-callout-warning"><strong>manifest 不会授予宿主能力</strong><p>能力需要同时被 portable pack manifest 声明并由实际宿主提供。运行时依据协商结果开放 API；未支持或未授权的调用会返回结构化错误。请勿仅凭组级状态推断某个设备上的实际结果。</p></aside>
+  <p><a href="/docs/api/">返回小程序 API 分组</a></p>
+</DocsLayout>

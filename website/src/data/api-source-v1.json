@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "repository": "weapp-container/weapp-container",
+    "commit": "08863fba3698b6b41dc2f8807dcd12d86893217d",
+    "inventoryPath": "docs/api-inventory-v1.json",
+    "capabilitySourcePath": "tools/container-manifest/src/index.mjs"
+  },
+  "inventory": {
+    "schemaVersion": 1,
+    "groupCount": 29,
+    "canonicalSha256": "2bc18f6f392d7c4a0b13ec371c412c196c97bc18321b64b9a864543393ad3317",
+    "rawSha256": "03b1b3c18430095e78fa1ab0f24a2f51bb9c045da6c3b892d155f59f3d961518"
+  },
+  "capabilities": {
+    "count": 115,
+    "canonicalSha256": "332f84a27b507bf2a7df9bf1b475f691751d16685cb6ed8be426fcc364effc38"
+  },
+  "coverageGaps": {
+    "capabilityOnly": [
+      "wx.getRandomValues",
+      "wx.hideTabBarRedDot",
+      "wx.offAppRoute",
+      "wx.offBeforeAppRoute",
+      "wx.offError",
+      "wx.onAppRoute",
+      "wx.onBeforeAppRoute",
+      "wx.removeTabBarBadge",
+      "wx.rewriteRoute",
+      "wx.setTabBarBadge",
+      "wx.setTabBarStyle",
+      "wx.showTabBarRedDot"
+    ],
+    "inventoryOnly": [
+      "Animation",
+      "App",
+      "CanvasContext",
+      "IntersectionObserver",
+      "MediaQueryObserver",
+      "Page.setData",
+      "SelectorQuery",
+      "WXML",
+      "WXSS",
+      "bindtap",
+      "capture-bind",
+      "catchtap",
+      "clearInterval",
+      "clearTimeout",
+      "custom-component",
+      "data.patch.batch",
+      "dataset",
+      "onHide",
+      "onLaunch",
+      "onShow",
+      "setInterval",
+      "setTimeout",
+      "slot",
+      "wx.createInnerAudioContext",
+      "wx.fs.accessSync",
+      "wx.fs.readFileSync",
+      "wx.fs.readdir",
+      "wx.fs.readdirSync",
+      "wx.fs.unlinkSync",
+      "wx.fs.writeFileSync",
+      "wx.socketTask.close",
+      "wx.socketTask.send"
+    ]
+  }
+}

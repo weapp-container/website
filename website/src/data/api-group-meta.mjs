@@ -1,0 +1,35 @@
+export const apiGroupMeta = {
+  'capability.query': { title: '能力查询', section: '基础与生命周期' },
+  'lifecycle.app': { title: '应用生命周期', section: '基础与生命周期' },
+  'system.info': { title: '系统与设备信息', section: '基础与生命周期' },
+  'system.account-info': { title: '小程序账号信息', section: '基础与生命周期' },
+  'navigation.page-stack': { title: '页面导航与页面栈', section: '路由与界面' },
+  'wx.mini-program-navigation': { title: '小程序间导航', section: '路由与界面' },
+  'wx.permission': { title: '权限设置', section: '宿主与系统能力' },
+  'data.setData': { title: '页面数据更新', section: '页面与组件' },
+  'view.wxml-wxss': { title: 'WXML、WXSS 与模板组件', section: '页面与组件' },
+  'event.bindings': { title: '模板事件绑定', section: '页面与组件' },
+  timer: { title: '定时器', section: '运行时与存储' },
+  'wx.animation': { title: 'Animation 动画', section: '页面与组件' },
+  'wx.storage': { title: '本地存储', section: '运行时与存储' },
+  'wx.request': { title: '网络请求与连接', section: '宿主与系统能力' },
+  'wx.filesystem': { title: '文件系统', section: '运行时与存储' },
+  'wx.selector-query': { title: 'SelectorQuery', section: '页面与组件' },
+  'wx.canvas': { title: 'Canvas 绘制', section: '媒体与画布' },
+  'wx.canvas-offscreen': { title: '离屏 Canvas', section: '媒体与画布' },
+  'wx.media-camera-location': { title: '媒体、相机、扫码与位置', section: '媒体与画布' },
+  'wx.inner-audio-context': { title: '音频上下文', section: '媒体与画布' },
+  'wx.video-context': { title: '视频上下文', section: '媒体与画布' },
+  'wx.auth-payment': { title: '登录、用户与支付', section: '宿主与系统能力' },
+  'wx.clipboard-device': { title: '剪贴板与设备状态', section: '宿主与系统能力' },
+  'wx.ui-feedback': { title: '界面反馈与导航栏', section: '路由与界面' },
+  'wx.intersection-observer': { title: 'IntersectionObserver', section: '页面与组件' },
+  'wx.media-query-observer': { title: 'MediaQueryObserver', section: '页面与组件' },
+  'component.selection': { title: '组件选择与关系查询', section: '页面与组件' },
+  'component.relations': { title: '组件关系', section: '页面与组件' },
+  'component.events': { title: '组件自定义事件', section: '页面与组件' },
+};
+
+export const apiSections = ['基础与生命周期', '路由与界面', '页面与组件', '运行时与存储', '媒体与画布', '宿主与系统能力'];
+
+export const apiSlug = (id) => id.replaceAll('.', '-');

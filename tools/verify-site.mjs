@@ -6,12 +6,20 @@ import {fileURLToPath} from 'node:url';
 import {create as createFont} from 'fontkit';
 import {verifyFrontendNotices} from './frontend-notices.mjs';
 import {verifyPhotoNotices} from './photo-notices.mjs';
+import {verifyApiDocsData} from './verify-api-docs.mjs';
+import apiInventory from '../website/src/data/api-inventory-v1.json' with { type: 'json' };
+import {apiSlug} from '../website/src/data/api-group-meta.mjs';
+import {docsPages} from '../website/src/data/docs-pages.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const base = resolve(root,'dist');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 async function walk(directory) { const result = []; for(const item of await readdir(directory,{withFileTypes:true})) { const path = resolve(directory,item.name); assert.ok(!item.isSymbolicLink(),'Site symlinks are forbidden'); if(item.isDirectory()) result.push(...await walk(path)); else if(item.isFile()) result.push(path); } return result; }
 const files = await walk(base);
+const fileSet = new Set(files.map(path => relative(base,path).split('\\').join('/')));
+const headersPolicy = await readFile(resolve(base,'_headers'),'utf8');
+assert.match(headersPolicy,/(?:^|\n)\/docs\/\*\n[ \t]+Cache-Control: [^\n]*no-transform/,'HTML transformation policy is missing for documentation routes');
+const apiReceipt = await verifyApiDocsData();
 await verifyFrontendNotices(base);
 await verifyPhotoNotices(base);
 const fontReceipt=JSON.parse(await readFile(resolve(base,'fonts/font.json')));
@@ -51,14 +59,65 @@ for(const file of inventory.files) {
 }
 const actualRuntime = (await walk(runtime)).map(path=>relative(runtime,path)).sort();
 assert.deepEqual(actualRuntime,[...inventory.files.map(file=>file.path),'deployment-inventory.json'].sort(),'Unreviewed runtime file');
-for(const file of ['index.html','demo/index.html','platforms/index.html','guide/index.html','404.html']) {
-  const html = await readFile(resolve(base,file),'utf8');
+const requiredPages = [
+  'index.html','demo/index.html','platforms/index.html','guide/index.html','404.html',
+  ...docsPages.map(page => `${page.path.slice(1)}index.html`),
+  ...apiInventory.apis.map(api => `docs/api/${apiSlug(api.id)}/index.html`),
+];
+for(const file of requiredPages) assert.ok(fileSet.has(file),`Required page is missing: ${file}`);
+const docsSearch = JSON.parse(await readFile(resolve(base,'docs/search-index.json'),'utf8'));
+assert.ok(Array.isArray(docsSearch) && docsSearch.length >= docsPages.length + apiInventory.apis.length,'Search index is incomplete');
+const expectedSearchPaths = new Set([...docsPages.map(page => page.path), ...apiInventory.apis.map(api => `/docs/api/${apiSlug(api.id)}/`)]);
+for(const entry of docsSearch) {
+  assert.ok(entry && typeof entry.path === 'string' && typeof entry.title === 'string' && typeof entry.summary === 'string' && typeof entry.keywords === 'string','Malformed documentation search entry');
+  assert.ok(expectedSearchPaths.has(entry.path) || entry.path === '/docs/api/capability-defaults/','Search entry points outside the documentation set');
+}
+for(const page of docsPages) assert.ok(docsSearch.some(entry => entry.path === page.path && entry.title === page.title),`Search index omits ${page.path}`);
+for(const api of apiInventory.apis) {
+  const path = `/docs/api/${apiSlug(api.id)}/`;
+  assert.ok(docsSearch.some(entry => entry.path === path && entry.keywords.includes(api.id)),`Search index omits API group ${api.id}`);
+}
+const sitemap = await readFile(resolve(base,'sitemap.xml'),'utf8');
+const sitemapRoutes = new Set([...sitemap.matchAll(/<loc>https:\/\/container\.weapp\.dev([^<]*)<\/loc>/g)].map(match => match[1]));
+for(const path of ['/','/demo/','/platforms/','/guide/',...docsPages.map(page=>page.path),...apiInventory.apis.map(api=>`/docs/api/${apiSlug(api.id)}/`)]) {
+  assert.ok(sitemapRoutes.has(path),`Sitemap omits ${path}`);
+}
+const htmlFiles = files.filter(path => path.endsWith('.html'));
+let highlightedBlocks = 0;
+for(const path of htmlFiles) {
+  const rel = relative(base,path).split('\\').join('/');
+  const html = await readFile(resolve(base,path),'utf8');
+  if(rel.startsWith('docs/')) {
+    const blocks = [...html.matchAll(/<pre\b([^>]*)>([\s\S]*?)<\/pre>/g)];
+    assert.equal(blocks.length, [...html.matchAll(/data-code-language=/g)].length, `Code block bypasses DocsCode in ${rel}`);
+    for(const [,attributes,body] of blocks) {
+      assert.match(attributes, /class="[^"]*\bastro-code\b/, `Code block has no syntax highlighting in ${rel}`);
+      assert.match(attributes, /--shiki-light:/, `Code block has no light theme in ${rel}`);
+      assert.match(attributes, /--shiki-dark:/, `Code block has no dark theme in ${rel}`);
+      assert.ok(body.includes('<code>') && body.includes('<span'), `Code block was not rendered in ${rel}`);
+      highlightedBlocks++;
+    }
+  }
   for(const character of new Set(html.match(/[\u3400-\u9fff]/gu)||[]))assert.ok(websiteFont.hasGlyphForCodePoint(character.codePointAt(0)),`Website font lacks ${character}; regenerate the reviewed subset`);
-  assert.ok(!html.includes('—') && !html.includes('–'),`Unexpected editorial punctuation: ${file}`);
-  for(const match of html.matchAll(/(?:src|href)="(\/(?!\/)[^"?#]+)(?:[^"\n]*)?"/g)) {
-    if(match[1] === '/' || match[1].startsWith('/runtime/')) continue;
-    const target = resolve(base,'.'+match[1],...(match[1].endsWith('/') ? ['index.html'] : []));
-    assert.ok((await lstat(target)).isFile(),`Broken site asset: ${match[1]}`);
+  assert.ok(!html.includes('—') && !html.includes('–'),`Unexpected editorial punctuation: ${rel}`);
+  const pageUrl = rel.endsWith('/index.html') ? `/${rel.slice(0,-'index.html'.length)}` : rel === 'index.html' ? '/' : `/${rel}`;
+  const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map(match=>match[1]));
+  for(const match of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
+    const value = match[1].replaceAll('&amp;','&');
+    if(value.startsWith('//') || /^(?:[a-z][a-z0-9+.-]*:)/i.test(value)) continue;
+    const targetUrl = new URL(value,`https://container.weapp.dev${pageUrl}`);
+    if(targetUrl.origin !== 'https://container.weapp.dev') continue;
+    let targetPath = decodeURIComponent(targetUrl.pathname);
+    if(targetPath === '/') targetPath = '/index.html';
+    else if(targetPath.endsWith('/')) targetPath += 'index.html';
+    const targetRel = targetPath.slice(1);
+    assert.ok(fileSet.has(targetRel),`Broken internal link or asset in ${rel}: ${value}`);
+    if(targetUrl.hash) {
+      const targetHtml = await readFile(resolve(base,targetRel),'utf8');
+      const targetIds = targetRel === rel ? ids : new Set([...targetHtml.matchAll(/\sid="([^"]+)"/g)].map(item=>item[1]));
+      assert.ok(targetIds.has(decodeURIComponent(targetUrl.hash.slice(1))),`Broken page fragment in ${rel}: ${value}`);
+    }
   }
 }
-console.log(JSON.stringify({status:'passed',files:files.length,distributionProfile:config.distributionProfile,deploymentHash:config.deploymentHash,packRoot:config.packRoot,policySha256:config.policySha256}));
+assert.ok(highlightedBlocks > 0, 'Documentation has no highlighted code examples');
+console.log(JSON.stringify({status:'passed',files:files.length,docsPages:requiredPages.length,highlightedBlocks,searchEntries:docsSearch.length,apiGroups:apiReceipt.groups,defaultCapabilities:apiReceipt.capabilities,distributionProfile:config.distributionProfile,deploymentHash:config.deploymentHash,packRoot:config.packRoot,policySha256:config.policySha256}));

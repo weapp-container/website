@@ -1,14 +1,8 @@
-Weapp Container
+Weapp Container Website
 Copyright 2026 Weapp Container contributors
 
-Project-owned source in this distribution is licensed under Apache License 2.0,
-except where a file or component states another license. container-core,
-container-ir and container-bridge retain MIT OR Apache-2.0.
-
-Third-party software retains its original copyright and license notices.
-Reviewed dependency notices are in sdk/licenses and in separately licensed
-components. Native/SDK distributions must include their generated licenses/
-inventory and RUNTIME-LICENSE; this notice does not replace those notices.
-
-Previously distributed binaries retain the license supplied with that copy.
-The Weapp Container name and logo are not licensed as trademarks.
+Repository-authored source is licensed under Apache-2.0.
+This notice does not relicense previously distributed runtime binaries.
+Runtime archives and the fixed online demonstration retain their supplied
+runtime license and third-party notices. Noto Sans SC is licensed under OFL;
+photography attribution and terms are recorded in miniapp/assets/SOURCES.json.

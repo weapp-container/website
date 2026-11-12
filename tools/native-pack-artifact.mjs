@@ -3,8 +3,9 @@ import { createHash, randomUUID } from 'node:crypto';
 import { cp, lstat, mkdir, readFile, readdir, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ROOT, VERSION, RELEASE_TAG, exactReleaseTag, run, safePath, selectArtifact, unpack } from './sdk-install.mjs';
+import { ROOT, VERSION, RELEASE_TAG, WEBSITE_REPOSITORY, isWebsiteArtifactRepository, exactReleaseTag, run, safePath, selectArtifact, unpack } from './sdk-install.mjs';
 import { FONT_FILES, verifyFonts } from './native-font.mjs';
+import { releaseStorageRepository } from './legacy-release-storage.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const lockPath = resolve(ROOT, 'platforms/miniapp-artifact.lock.json');
 const sdkLockPath = resolve(ROOT, 'platforms/sdk-artifacts.lock.json');
@@ -38,13 +39,13 @@ with open(sys.argv[2],'xb') as raw:
     path=root/item['path'];info=archive.gettarinfo(str(path),arcname=item['path']);info.uid=info.gid=0;info.uname=info.gname='';info.mtime=0
     with path.open('rb') as content:archive.addfile(info,content)`, source, archivePath, JSON.stringify(files)]);
   const archive = await readFile(archivePath);
-  const lock = { schemaVersion: 1, format: 'showcase-miniapp-artifact/1', runtimeVersion: VERSION, profile: 'restricted-showcase', repository: 'weapp-container/showcase', releaseTag: RELEASE_TAG, packRoot, policySha256, fileName, size: archive.length, sha256: sha(archive), files };
+  const lock = { schemaVersion: 1, format: 'showcase-miniapp-artifact/1', runtimeVersion: VERSION, profile: 'restricted-showcase', repository: WEBSITE_REPOSITORY, releaseTag: RELEASE_TAG, packRoot, policySha256, fileName, size: archive.length, sha256: sha(archive), files };
   await writeFile(lockPath, JSON.stringify(lock, null, 2) + '\n');
   return { archive: archivePath, packRoot, policySha256, sha256: lock.sha256 };
 }
 export function selectPackArtifact(lock) {
   assert.equal(lock.schemaVersion, 1); assert.equal(lock.format, 'showcase-miniapp-artifact/1'); assert.equal(lock.runtimeVersion, VERSION);
-  assert.equal(lock.profile, 'restricted-showcase'); assert.equal(lock.repository, 'weapp-container/showcase'); exactReleaseTag(lock.releaseTag);
+  assert.equal(lock.profile, 'restricted-showcase'); assert.ok(isWebsiteArtifactRepository(lock.repository), 'Use the current website repository or an exact legacy showcase pin'); exactReleaseTag(lock.releaseTag);
   assert.match(lock.packRoot, /^[a-f0-9]{64}$/); assert.match(lock.policySha256, /^[a-f0-9]{64}$/); assert.match(lock.sha256, /^[a-f0-9]{64}$/);
   safePath(lock.fileName); assert.ok(!lock.fileName.includes('/') && lock.fileName.endsWith('.tar.gz'));
   assert.ok(Number.isSafeInteger(lock.size) && lock.size > 0 && lock.size < 64 * 1024 * 1024);
@@ -90,7 +91,7 @@ export async function installPackArtifact({ offline, sdkId, destination = resolv
   const lock = await resolvePackArtifact(sdkId, { readLock });
   await mkdir(dirname(destination), { recursive: true }); const work = resolve(dirname(destination), `.pack-install-${randomUUID()}`); await mkdir(work);
   try {
-    if (!offline) await runCommand('gh', ['release', 'download', lock.releaseTag, '--repo', lock.repository, '--pattern', lock.fileName, '--dir', work]);
+    if (!offline) await runCommand('gh', ['release', 'download', lock.releaseTag, '--repo', releaseStorageRepository(lock.repository, lock.releaseTag), '--pattern', lock.fileName, '--dir', work]);
     const archive = resolve(offline || work, lock.fileName), bytes = await readFile(archive);
     assert.equal(bytes.length, lock.size, 'Pack archive size mismatch'); assert.equal(sha(bytes), lock.sha256, 'Pack archive SHA-256 mismatch');
     const prepared = resolve(work, 'prepared'); await unpack(archive, prepared, lock);

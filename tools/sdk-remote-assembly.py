@@ -15,7 +15,7 @@ import tempfile
 import zlib
 
 ROOT = Path(__file__).resolve().parent.parent
-REPOSITORY = 'weapp-container/showcase'
+REPOSITORY = 'weapp-container/website-private-archive'
 RELEASE_ID = 435160337
 RELEASE_TAG = 'showcase-v0.1.0-preview.6.0-candidate3'
 LIMIT = 2 * 1024 ** 3
@@ -178,7 +178,7 @@ def prepare_recipe(lock, target_id, archive_directory, out, base_ids=None):
 
 def release():
     repository = json.loads(subprocess.check_output(['gh', 'api', 'repos/' + REPOSITORY]))
-    require(repository['private'] and repository['full_name'] == REPOSITORY, 'SDK assembly requires the private showcase repository')
+    require(repository['private'] and repository['full_name'] == REPOSITORY, 'SDK assembly requires the private website repository')
     value = json.loads(subprocess.check_output(['gh', 'api', 'repos/' + REPOSITORY + '/releases/' + str(RELEASE_ID)]))
     require(value['draft'] and value['tag_name'] == RELEASE_TAG, 'Private candidate release changed')
     return value
@@ -197,6 +197,7 @@ def download(entry, directory, current_release):
 
 
 def assemble(recipe_path, recipe_sha256, destination, offline=None, upload=False):
+    require(not upload, 'Historical releases are read-only; publish a new reviewed release instead')
     require(Path(recipe_path).stat().st_size <= 16 * 1024 ** 2, 'Assembly recipe exceeds byte limit')
     checked_file(recipe_path, {'size': Path(recipe_path).stat().st_size, 'sha256': recipe_sha256})
     if str(recipe_path).endswith('.gz'):

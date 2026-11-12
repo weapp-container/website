@@ -1,0 +1,20 @@
+---
+import DocsCode from '../../../components/DocsCode.astro';
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+<DocsLayout title="Web 在线演示边界" description="说明 container.weapp.dev Web 在线演示的运行栈和可用边界。">
+  <header class="docs-page-heading"><p class="eyebrow">WEB DEMONSTRATION</p><h1>Web 在线演示边界</h1><p>在线演示用于检查网站托管的一个经审核、功能受限的 Web runtime 与固定示例 pack。</p></header>
+  <h2 id="stack">网站实际运行内容</h2>
+  <ul><li>Astro 生成公开静态页面，Workers Static Assets 托管经检查的 dist 闭包。</li><li>固定 Web 应用在 Dedicated Worker 中运行 QuickJS/WASM。</li><li>图形显示使用同源 CanvasKit 与小程序模板资产。</li><li>Demo UI 控制设备视口，文字输入透过同源宿主消息桥接处理。</li><li>在线页面只服务固定、受限的演示包；它不是通用 Web SDK，也不提供访客任意加载 pack 的入口。</li></ul>
+  <h2 id="not-sdk">并非通用 Web SDK</h2>
+  <p>现有网页将已批准的示例 pack 和策略绑定于本地 deployment hash，只允许这组打包好的演示能力。网页没有公开任意小程序包的上传/执行入口、后端服务或 Web application SDK；不要把它嵌入商业应用并期待完整的微信 API、系统媒体、摄像头、账户或硬件支持。</p>
+  <p>页面的页面尺寸选择器、Worker 生命周期与互动 smoke 证明这份固定演示的范围，不证明任意浏览器、WebAssembly 引擎或业务网络请求已具有生产 SLA。</p>
+  <h2 id="preview">本机预览</h2>
+  <p>在网站仓库构建演示时，使用精确 Web runtime lock、归档内许可和清单哈希验证：</p>
+  <DocsCode lang="bash" code={`pnpm install --frozen-lockfile
+pnpm test
+node tools/prepare-web.mjs
+pnpm build
+pnpm dev`} />
+  <p>构建不会从开发源码目录自动选择替代 runtime。缺少锁定归档或读取权限时会失败；线上只部署审核过的固定演示闭包。</p>
+</DocsLayout>

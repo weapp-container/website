@@ -563,7 +563,7 @@ try {
         await frame.locator('#text-dialog[open]').waitFor();
         const trigger=page.getByRole('combobox',{name:'演示设备',exact:true});
         if(device.id===deviceRegistry.devices[1].id){
-          await trigger.focus();await page.keyboard.press('ArrowDown');await page.keyboard.press('Home');await page.keyboard.press('ArrowDown');await page.keyboard.press('Enter');
+          await trigger.click();await page.getByRole('option',{name:device.label,exact:true}).click();
         }else{
           await trigger.click();await page.getByRole('option',{name:device.label,exact:true}).click();
         }

@@ -138,6 +138,7 @@ def prepare(sidecar, lock, archive_directory, out):
 
 
 def assemble(recipe_path, recipe_sha256, destination, offline=None, upload=False):
+    require(not upload, 'Historical releases are read-only; publish a new reviewed release instead')
     recipe_path = Path(recipe_path)
     checked_file(recipe_path, {'size': recipe_path.stat().st_size, 'sha256': recipe_sha256})
     require(recipe_path.stat().st_size <= 4 * 1024 ** 2, 'APK recipe exceeds bound')

@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { copyFile, mkdtemp, readFile, realpath, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { exactReleaseTag, install, run, sdkHostId, selectArtifact, VERSION, RELEASE_TAG } from '../sdk-install.mjs';
+import { exactReleaseTag, install, run, sdkHostId, selectArtifact, VERSION, RELEASE_TAG, WEBSITE_REPOSITORY, LEGACY_SHOWCASE_REPOSITORY } from '../sdk-install.mjs';
 const sha = value => createHash('sha256').update(value).digest('hex');
 async function fixture(t, extra = [], { id = 'android', component = 'android-sdk', target = 'android' } = {}) {
   const root = await realpath(await mkdtemp(join(tmpdir(), 'showcase-sdk-test-'))); t.after(() => rm(root, { recursive: true, force: true }));
@@ -19,7 +19,7 @@ with tarfile.open(sys.argv[1],'w:gz') as archive:
   else:archive.addfile(info,io.BytesIO(data))`, archive, JSON.stringify(members)]);
   const bytes = await readFile(archive), files = members.map(item => ({path:item.path, size:Buffer.byteLength(item.data), sha256:sha(item.data)}));
   const entry = {id, fileName, size:bytes.length, sha256:sha(bytes), ...binding, files};
-  const lock = {schemaVersion:1, format:'showcase-sdk-artifacts/1', runtimeVersion:VERSION, profile:binding.profile, repository:'weapp-container/showcase', releaseTag:RELEASE_TAG, artifacts:[entry]};
+  const lock = {schemaVersion:1, format:'showcase-sdk-artifacts/1', runtimeVersion:VERSION, profile:binding.profile, repository:WEBSITE_REPOSITORY, releaseTag:RELEASE_TAG, artifacts:[entry]};
   const manifest = join(root, 'lock.json'); await writeFile(manifest, JSON.stringify(lock));
   return {root, manifest, lock, entry, archive, destination:join(root,'installed')};
 }
@@ -59,7 +59,7 @@ test('mixed candidates download each exact entry release and keep the lock relea
   const runCommand = async (command,args) => {
     const entry = lock.artifacts.find(item => item.fileName === args[args.indexOf('--pattern')+1]);
     assert.ok(entry);assert.equal(command,'gh');
-    assert.deepEqual(args.slice(0,7),['release','download',entry.id === 'android' ? previousTag : RELEASE_TAG,'--repo',lock.repository,'--pattern',entry.fileName]);
+    assert.deepEqual(args.slice(0,7),['release','download',entry.id === 'android' ? previousTag : RELEASE_TAG,'--repo',entry.id === 'android' ? 'weapp-container/website-private-archive' : lock.repository,'--pattern',entry.fileName]);
     downloads.push([entry.id,args[2]]);
     await copyFile(entry.id === 'android' ? android.archive : ios.archive,join(args[args.indexOf('--dir')+1],entry.fileName));
     return '';
@@ -71,6 +71,21 @@ test('mixed candidates download each exact entry release and keep the lock relea
   assert.deepEqual(downloads,[['android',previousTag],['ios',RELEASE_TAG]]);
   const oldLock = {...android.lock,releaseTag:previousTag};
   assert.equal(selectArtifact(oldLock,'android').releaseTag,previousTag);
+});
+test('legacy showcase locks download only their exact historical release from the old repository', async t => {
+  const f = await fixture(t);
+  f.lock.repository = LEGACY_SHOWCASE_REPOSITORY;
+  f.lock.releaseTag = `showcase-v${VERSION}-candidate3`;
+  await writeFile(f.manifest, JSON.stringify(f.lock));
+  const result = await install({manifest:f.manifest,id:'android',destination:f.destination}, {
+    runCommand: async (command,args) => {
+      assert.equal(command,'gh');
+      assert.deepEqual(args.slice(0,7),['release','download',f.lock.releaseTag,'--repo','weapp-container/website-private-archive','--pattern',f.entry.fileName]);
+      await copyFile(f.archive,join(args[args.indexOf('--dir')+1],f.entry.fileName));
+      return '';
+    },
+  });
+  assert.equal(result.status,'installed-verified');
 });
 test('Flutter iOS selects its independent candidate while Android and macOS keep the shared SDK', () => {
   assert.equal(sdkHostId('flutter','ios'),'flutter/ios');

@@ -5,24 +5,31 @@ import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { installPackArtifact, resolvePackArtifact, selectPackArtifact } from '../native-pack-artifact.mjs';
-import { ROOT, VERSION, RELEASE_TAG, run, selectArtifact } from '../sdk-install.mjs';
+import { ROOT, VERSION, RELEASE_TAG, WEBSITE_REPOSITORY, LEGACY_SHOWCASE_REPOSITORY, run, selectArtifact } from '../sdk-install.mjs';
 import { FONT_FILES } from '../native-font.mjs';
 const sha = value => createHash('sha256').update(value).digest('hex');
 
 function fixture(releaseTag) {
   return {
-    schemaVersion:1,format:'showcase-miniapp-artifact/1',runtimeVersion:VERSION,profile:'restricted-showcase',repository:'weapp-container/showcase',releaseTag,
+    schemaVersion:1,format:'showcase-miniapp-artifact/1',runtimeVersion:VERSION,profile:'restricted-showcase',repository:WEBSITE_REPOSITORY,releaseTag,
     packRoot:'1'.repeat(64),policySha256:'2'.repeat(64),fileName:'showcase-miniapp-fixture.tar.gz',size:1,sha256:'3'.repeat(64),
     files:[{path:'policy.json',size:1,sha256:'4'.repeat(64)},{path:'pack/manifest.json',size:1,sha256:'5'.repeat(64)},...FONT_FILES.map(file=>({...file,path:`fonts/${file.path}`}))],
   };
 }
 test('native pack installation retains an old exact candidate independently of the new creation default',async()=>{
   const current=JSON.parse(await readFile(resolve(ROOT,'platforms/miniapp-artifact.lock.json'),'utf8'));
-  assert.equal(RELEASE_TAG,selectPackArtifact(current).releaseTag);
+  assert.notEqual(RELEASE_TAG,selectPackArtifact(current).releaseTag);
+  assert.equal(selectPackArtifact(current).releaseTag,`showcase-v${VERSION}-candidate10`);
+  assert.equal(current.repository, WEBSITE_REPOSITORY);
   for(const releaseTag of [`showcase-v${VERSION}-candidate3`,RELEASE_TAG,`showcase-v${VERSION}-candidate12`]){
     const lock=fixture(releaseTag);
     assert.equal(selectPackArtifact(lock).releaseTag,releaseTag);
   }
+});
+test('native pack locks retain read access to exact releases from the legacy showcase repository',()=>{
+  const lock=fixture(RELEASE_TAG);
+  lock.repository=LEGACY_SHOWCASE_REPOSITORY;
+  assert.equal(selectPackArtifact(lock).repository, LEGACY_SHOWCASE_REPOSITORY);
 });
 test('native pack installation rejects floating tags, other versions and repository redirection',()=>{
   for(const releaseTag of ['latest',`showcase-v${VERSION}`,`showcase-v${VERSION}-candidate0`,`showcase-v${VERSION}-candidate9\n`,`showcase-v0.0.0-candidate9`]){
@@ -38,7 +45,7 @@ function mixedCandidates() {
   const sdk = (id,pack,releaseTag) => ({id,component:'ios-sdk',target:'ios',runtimeVersion:VERSION,profile:'restricted-showcase',releaseTag,
     fileName:id.replaceAll('/','-')+'.tar.gz',size:1,sha256:'8'.repeat(64),packRoot:pack.packRoot,policySha256:pack.policySha256,producerReceiptSha256:'9'.repeat(64),
     files:[{path:'showcase-distribution.json',size:1,sha256:'a'.repeat(64)}]});
-  const sdkLock = {schemaVersion:1,format:'showcase-sdk-artifacts/1',runtimeVersion:VERSION,profile:'restricted-showcase',repository:'weapp-container/showcase',releaseTag:RELEASE_TAG,
+  const sdkLock = {schemaVersion:1,format:'showcase-sdk-artifacts/1',runtimeVersion:VERSION,profile:'restricted-showcase',repository:WEBSITE_REPOSITORY,releaseTag:RELEASE_TAG,
     artifacts:[sdk('ios',current,RELEASE_TAG),sdk('android',previous,previous.releaseTag)]};
   const history = Buffer.from(JSON.stringify(previous));
   const catalog = {schemaVersion:1,format:'showcase-miniapp-history/1',runtimeVersion:VERSION,entries:[{packRoot:previous.packRoot,lockSha256:sha(history)}]};
@@ -118,7 +125,7 @@ test('downloads use each selected candidate and altered archive bytes never reac
   for(const sdkId of ['ios','android']){
     const expected=sdkId==='ios'?f.current:f.previous;
     await assert.rejects(installPackArtifact({sdkId,destination:join(root,sdkId)},{readLock:f.readLock,runCommand:async(command,args)=>{
-      assert.equal(command,'gh');assert.deepEqual(args.slice(0,7),['release','download',expected.releaseTag,'--repo','weapp-container/showcase','--pattern',expected.fileName]);
+      assert.equal(command,'gh');assert.deepEqual(args.slice(0,7),['release','download',expected.releaseTag,'--repo',expected.releaseTag===RELEASE_TAG?expected.repository:'weapp-container/website-private-archive','--pattern',expected.fileName]);
       downloads.push([sdkId,args[2]]);await writeFile(join(args[args.indexOf('--dir')+1],expected.fileName),'x');
     }}),/Pack archive SHA-256 mismatch/);
   }

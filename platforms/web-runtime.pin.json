@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "manifestSha256": "0764be2feb5290d5bba0be9748cdecdc0b5039617bdf0b2cc87f96cca5ba6d57",
   "receiptSha256": "32a28be445ecdc7d3a107947f8c981ef4f15660fbb968a0c97585e432658824a",
-  "repository": "weapp-container/showcase",
+  "repository": "weapp-container/website",
   "releaseTag": "showcase-v0.1.0-preview.6.0-candidate17",
   "fileName": "web-worker-canvaskit-restricted-showcase-0.1.0-preview.6.0.tar.gz",
   "packRoot": "91005c9eb32255f1b6f337c48fd7a4404e55e10cb2b3d67587604f44a4b0e98a",

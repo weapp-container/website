@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "origin": "https://container.weapp.dev",
+  "config": {
+    "size": 469,
+    "sha256": "a0c77887bfdbcf2dd6102027030649d67f4d319aeed39fe453aedf875aeec220"
+  },
+  "inventory": {
+    "size": 79370,
+    "sha256": "865d22103d41fa1e794a1bb1afbb73fdb36b6011f4b999f2033dbb8c63567525"
+  }
+}

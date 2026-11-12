@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "allowedSecrets": [
+    {
+      "path": "hosts/react-native/ios/Podfile.lock",
+      "rule": "generic-api-key",
+      "sha256": "2653ec0db891a1fe4c0dbb554aa180fc2b83fa3026ce8b97a353404b3a39b467",
+      "reason": "CocoaPods specification checksum, not an authentication key"
+    }
+  ],
+  "allowedLocalPaths": [
+    {
+      "path": "tools/audit-public-delivery.mjs",
+      "sha256": "4899316c3df8d4e171501719674377e217e901124b9c57cc56818f0a14418708",
+      "reason": "Authored path-rejection fixture or the pinned CanvasKit virtual filesystem exception"
+    },
+    {
+      "path": "tools/tests/audit-public-delivery.test.mjs",
+      "sha256": "ad1726c94a8d5aa50c17d915b63aa19af8c273f31093fe62bca121351fe5e56d",
+      "reason": "Authored path-rejection fixture or the pinned CanvasKit virtual filesystem exception"
+    },
+    {
+      "path": "tools/tests/audit-public-delivery.test.mjs",
+      "sha256": "664dc156d392670f08a84facba0cec5af974b293e906db8b659b8c59bd23193f",
+      "reason": "Authored path-rejection fixture or the pinned CanvasKit virtual filesystem exception"
+    },
+    {
+      "path": "tools/tests/audit-public-delivery.test.mjs",
+      "sha256": "c5ef5b245178efd15a66b14d10f841cab500aaae46763e11fc89213180312641",
+      "reason": "Authored path-rejection fixture or the pinned CanvasKit virtual filesystem exception"
+    },
+    {
+      "path": "tools/tests/audit-public-delivery.test.mjs",
+      "sha256": "4899316c3df8d4e171501719674377e217e901124b9c57cc56818f0a14418708",
+      "reason": "Authored path-rejection fixture or the pinned CanvasKit virtual filesystem exception"
+    }
+  ]
+}

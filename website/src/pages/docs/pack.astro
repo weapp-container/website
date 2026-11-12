@@ -1,0 +1,43 @@
+---
+import DocsCode from '../../components/DocsCode.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+<DocsLayout title="配置与 portable pack" description="用独立打包工具把已有小程序转为 portable pack，保留自己的开发框架和构建方式。">
+  <header class="docs-page-heading"><p class="eyebrow">PACKAGES</p><h1>配置与 portable pack</h1><p>portable pack 是交给 SDK 加载的小程序包。开发时保留原有工具，分发前把小程序产物转换成这个格式。</p></header>
+  <h2 id="portable-pack">包里有什么</h2>
+  <DocsCode lang="text" code={`hello-pack/
+├── manifest.json
+└── blobs/
+    └── sha256/
+        └── <内容哈希>`} />
+  <p><code>manifest.json</code> 记录页面、入口、能力和内容根哈希，<code>blobs/</code> 保存代码、模板、样式与资源。把整个目录交给 SDK，不要只复制 manifest，也不要直接把开发服务器地址传给 <code>load</code>。</p>
+  <h2 id="test-pack">先试一个现成示例</h2>
+  <p><a href="/docs/start/#prepare-source">快速开始</a>提供零 npm 依赖的测试包生成命令。只想验证宿主接入时，先使用这个包。</p>
+  <h2 id="own-miniapp">打包现有小程序</h2>
+  <p>打包工具独立读取微信小程序目录，需要 <code>app.json</code>、页面和组件的 JS/WXML/WXSS 及其引用资源。原生小程序目录可直接输入；其它框架先用自己的构建命令产出这些文件。Weapp Container 接入不要求更换项目框架。</p>
+  <p>工具目前随<a href="https://github.com/weapp-container/weapp-container/tree/main/tools/container-manifest">核心源码仓库</a>提供，尚无独立公开 npm 安装命令。在该仓库根目录执行：</p>
+  <DocsCode lang="bash" code={`pnpm install --frozen-lockfile
+node tools/container-manifest/bin/container-pack.mjs \\
+  /absolute/path/weapp-output \\
+  --out /absolute/path/portable-pack`} />
+  <p>安装只需该仓库的工具依赖，无需初始化 <code>vendor/weapp-vite</code> 子模块。输入中若有 TypeScript 或框架专用语法，应先编译成小程序产物。具体模板、插件和 API 的兼容范围仍需按<a href="/docs/components/">组件兼容性</a>与<a href="/docs/api/">API 记录</a>验收。</p>
+  <p>命令会检查依赖闭包、转换模板和样式、生成内容哈希，并输出 <code>manifest.json</code>、<code>blobs/</code>、<code>capability-matrix.json</code> 和 <code>diagnostics.json</code>。先处理 diagnostics 中的错误，再将完整输出放进宿主资源目录。</p>
+  <details><summary>为什么 v1 manifest 的 compiler.name 仍显示 weapp-vite？</summary><p>这是 v1 schema 保留的历史格式标识，独立测试包也沿用它。它不要求业务使用对应构建框架。不要手改生成的身份字段，否则会破坏 schema 或内容哈希校验。</p></details>
+  <h2 id="validation">加载前校验</h2>
+  <ul><li>检查清单中的格式版本和运行时/ABI 版本匹配。</li><li>重新计算 manifest 与 blob SHA-256，按锁定 pack root 比较完整性身份。</li><li>检查全部资源均在 pack 根目录，拒绝路径遍历、符号链接、未锁定的二进制和部分解压。</li><li>核对发行策略中允许的 pack root 与 capability ceiling。</li><li>对最终目录和其哈希锁分别留存来源与构建证据。</li></ul>
+  <h2 id="capabilities">能力和权限协商</h2>
+  <p>需要调整包声明的能力时，创建 JSON 文件，并把它传给打包命令的 <code>--capabilities</code> 参数。例如：</p>
+  <DocsCode lang="json" code={`{
+  "wx.getStorage": "partial",
+  "wx.request": "unsupported"
+}`} />
+  <DocsCode lang="bash" code={`node tools/container-manifest/bin/container-pack.mjs \\
+  /absolute/path/weapp-output \\
+  --out /absolute/path/portable-pack \\
+  --capabilities /absolute/path/capabilities.json`} />
+  <p>文件只覆盖列出的能力，其余使用工具默认值。能力分为 <code>full</code>、<code>partial</code> 和 <code>unsupported</code>；包声明与宿主 provider 协商后的较低等级决定可调用范围，<code>wx.canIUse</code> 报告协商结果。声明能力不会自动提供系统权限或宿主实现。</p>
+  <h2 id="full-vs-partial">完整与部分支持</h2>
+  <p><code>partial</code> 表示 bridge contract 或部分行为存在，但参数语义、宿主差异、设备验证或微信对照证据仍有限。详见具体 API 组的 difference、coverage 和 conformance 字段。设备系统能力、登录、付款、网络与文件授权都需要宿主 provider 和应用权限流程。</p>
+  <h2 id="private-demo">受限在线演示</h2>
+  <p>container.weapp.dev 发布的是固定 pack 和编译进运行时的 restricted-showcase 策略。网站只提供该演示的同源运行文件，不接受访客任意上传或指向自己服务器的应用包，也不下发运行库或 SDK 下载凭据。</p>
+</DocsLayout>

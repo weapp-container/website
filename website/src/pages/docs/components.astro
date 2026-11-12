@@ -1,0 +1,19 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import inventory from '../../data/api-inventory-v1.json';
+const names = inventory.apis.filter((api) => ['view.wxml-wxss', 'event.bindings', 'component.relations', 'component.events', 'component.selection'].includes(api.id)).flatMap((api) => api.names);
+---
+<DocsLayout title="组件与模板兼容性" description="WXML、WXSS、自定义组件、slot、事件绑定与组件关系 API 目录。">
+  <header class="docs-page-heading"><p class="eyebrow">TEMPLATE AND COMPONENTS</p><h1>组件与模板兼容性</h1><p>打包工具转换模板和样式，运行时负责渲染。组件的实际表现需要结合模板结构、API 和目标平台验证。</p></header>
+  <h2 id="templates">WXML 和 WXSS</h2>
+  <p>独立 pack 工具将小程序产物中的 WXML、WXSS 转换成运行时读取的模板 IR 和样式资源。应用可以继续使用自己的小程序开发工具，具体命令见<a href="/docs/pack/#own-miniapp">打包现有小程序</a>。当前 API 分组目录列出 WXML、WXSS、自定义组件与 slot；不同标签、指令和样式属性需单独验证，当前记录不代表完整微信小程序模板兼容。</p>
+  <h2 id="events">事件绑定</h2>
+  <p>接口清单包含 <code>bindtap</code>、<code>catchtap</code>、dataset 和 capture-bind 入口。宿主输入经测量好的视图坐标送入渲染 surface，事件中的 page/component target 取决于实际文档树。Android 多指针、iOS one-contact 和 Desktop/Web 输入形态分别记录，宿主滚动协同不跨平台外推。</p>
+  <h2 id="component-api">组件关系与 selection</h2>
+  <ul>{names.filter((name) => !['WXML','WXSS','custom-component','slot','bindtap','catchtap','dataset','capture-bind'].includes(name)).map((name) => <li><code>{name}</code></li>)}</ul>
+  <p>完整名称见 API 分组。嵌套父子关系、owner 向上查找、selector query 的执行时机及组件事件数据需以对应案例和平台实现为准。</p>
+  <h2 id="custom-elements">自定义组件资源</h2>
+  <p>编译结果需要包含组件描述、静态模板、样式表、slots 与 dependencies，且通过 portable pack 的闭包和 SHA-256 校验。支持状态与编译产物格式是两个不同的合同：missing dependency 或无法解析的 runtime schema 应作为打包错误处理，而不是在业务端延迟吞掉。</p>
+  <h2 id="examples">查阅实际案例</h2>
+  <p><a href="/docs/api/event-bindings/">模板事件绑定</a> · <a href="/docs/api/component-selection/">组件选择</a> · <a href="/docs/api/component-relations/">组件关系</a> · <a href="/docs/api/component-events/">组件事件</a></p>
+</DocsLayout>

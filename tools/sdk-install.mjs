@@ -5,10 +5,14 @@ import { lstat, mkdir, readFile, readdir, realpath, rename, rm, stat, writeFile 
 import { spawn } from 'node:child_process';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { releaseStorageRepository } from './legacy-release-storage.mjs';
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const VERSION = '0.1.0-preview.6.0';
-export const RELEASE_TAG = `showcase-v${VERSION}-candidate10`;
+export const RELEASE_TAG = `showcase-v${VERSION}-candidate18`;
+export const WEBSITE_REPOSITORY = 'weapp-container/website';
+export const LEGACY_SHOWCASE_REPOSITORY = 'weapp-container/showcase';
+export const isWebsiteArtifactRepository = repository => [WEBSITE_REPOSITORY, LEGACY_SHOWCASE_REPOSITORY].includes(repository);
 export const sdkHostId = (family, platform) => family === 'react-native' ? 'react-native/android-ios' : family === 'flutter' ? platform === 'ios' ? 'flutter/ios' : ['android','macos'].includes(platform) ? 'flutter/android-ios-macos' : `flutter/${platform}` : `${family}/${platform}`;
 const digest = value => createHash('sha256').update(value).digest('hex');
 const hash = /^[a-f0-9]{64}$/;
@@ -27,7 +31,7 @@ export function validateSdkLock(lock) {
   assert.equal(lock.schemaVersion, 1); assert.equal(lock.format, 'showcase-sdk-artifacts/1');
   assert.equal(lock.runtimeVersion, VERSION, 'A current runtime lock is required');
   assert.equal(lock.profile, 'restricted-showcase');
-  assert.ok(['weapp-container/runtime-artifacts', 'weapp-container/showcase'].includes(lock.repository), 'Use a reviewed private artifact repository');
+  assert.ok(['weapp-container/runtime-artifacts', WEBSITE_REPOSITORY, LEGACY_SHOWCASE_REPOSITORY].includes(lock.repository), 'Use a reviewed private artifact repository');
   exactReleaseTag(lock.releaseTag);
   assert.ok(Array.isArray(lock.artifacts), 'SDK artifact inventory is required');
   for (const entry of lock.artifacts) {
@@ -133,7 +137,7 @@ export async function install({ manifest = resolve(ROOT, 'platforms/sdk-artifact
     if (offline) archive = resolve(offline, entry.fileName);
     else {
       const token = process.env.WEAPP_CONTAINER_RUNTIME_TOKEN || process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
-      await runCommand('gh', ['release', 'download', entry.releaseTag, '--repo', lock.repository, '--pattern', entry.fileName, '--dir', work], { env: { ...process.env, ...(token ? { GH_TOKEN: token } : {}) } });
+      await runCommand('gh', ['release', 'download', entry.releaseTag, '--repo', releaseStorageRepository(lock.repository, entry.releaseTag), '--pattern', entry.fileName, '--dir', work], { env: { ...process.env, ...(token ? { GH_TOKEN: token } : {}) } });
       archive = resolve(work, entry.fileName);
     }
     const metadata = await stat(archive); assert.ok(metadata.isFile() && metadata.size === entry.size, 'SDK archive size mismatch');

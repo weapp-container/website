@@ -5,7 +5,7 @@ import { mkdtemp, mkdir, readFile, realpath, rm, writeFile } from 'node:fs/promi
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { seal } from '../sdk-seal.mjs';
-import { VERSION, RELEASE_TAG, install } from '../sdk-install.mjs';
+import { VERSION, RELEASE_TAG, WEBSITE_REPOSITORY, install } from '../sdk-install.mjs';
 import { FONT_FILES } from '../native-font.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 async function fixture(t) {
@@ -23,7 +23,7 @@ async function fixture(t) {
   const receiptValue={...identity,status:'passed',native:[native]};
   const receipt=join(root,'receipt.json'),policyPath=join(root,'policy.json'),manifest=join(root,'lock.json');
   await writeFile(receipt,JSON.stringify(receiptValue));await writeFile(policyPath,JSON.stringify(policy));
-  await writeFile(manifest,JSON.stringify({schemaVersion:1,format:'showcase-sdk-artifacts/1',runtimeVersion:VERSION,profile:'restricted-showcase',repository:'weapp-container/showcase',releaseTag:RELEASE_TAG,artifacts:[]}));
+  await writeFile(manifest,JSON.stringify({schemaVersion:1,format:'showcase-sdk-artifacts/1',runtimeVersion:VERSION,profile:'restricted-showcase',repository:WEBSITE_REPOSITORY,releaseTag:RELEASE_TAG,artifacts:[]}));
   return {root,source,receipt,receiptValue,manifest,out,policy:policyPath,id:'android',component:'android-sdk',target:'android'};
 }
 test('sealing preserves original producer bytes and binds the exact private policy',async t=>{

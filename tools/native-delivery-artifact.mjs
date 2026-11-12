@@ -3,13 +3,15 @@ import { createHash, randomUUID } from 'node:crypto';
 import { cp, lstat, mkdir, readFile, readdir, readlink, realpath, rename, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, extname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { RELEASE_TAG, ROOT, VERSION, exactReleaseTag, run, safePath, selectArtifact, sdkHostId } from './sdk-install.mjs';
+import { RELEASE_TAG, ROOT, VERSION, WEBSITE_REPOSITORY, exactReleaseTag, run, safePath, selectArtifact, sdkHostId } from './sdk-install.mjs';
+import { assertNewReleaseTag } from './legacy-release-storage.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
-const repository = 'weapp-container/showcase';
+const repository = WEBSITE_REPOSITORY;
 
 export async function uploadApplication(archive, { runCommand = run } = {}) {
   const sidecar=`${archive}.json`,descriptor=JSON.parse(await readFile(sidecar,'utf8'));
   assert.equal(descriptor.schemaVersion,1);assert.equal(descriptor.kind,'showcase-application/1');assert.equal(descriptor.runtimeVersion,VERSION);assert.equal(descriptor.profile,'restricted-showcase');assert.equal(descriptor.repository,repository);const releaseTag=exactReleaseTag(descriptor.releaseTag);assert.equal(basename(archive),descriptor.fileName);
+  assertNewReleaseTag(releaseTag);
   const bytes=await readFile(archive);assert.equal(bytes.length,descriptor.size);assert.equal(sha(bytes),descriptor.sha256);
   assert.equal((await runCommand('gh',['repo','view',repository,'--json','isPrivate','--jq','.isPrivate'])).trim(),'true');
   const paths=[archive,sidecar];

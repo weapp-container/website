@@ -24,7 +24,7 @@
 
 构建已有 SDK 时，pack 安装器必须传入同一个 `--sdk-id`。它先验证 SDK lock，再按 SDK 的 `packRoot` 选择当前 pack 或 `platforms/miniapp-artifacts.catalog.json` 登记的历史 pack。历史 lock 位于固定的 `platforms/miniapp-history/<packRoot>.lock.json`，catalog 校验完整 lock 文件 SHA-256，之后仍校验候选 release、私有仓库、策略及压缩包闭包。没有登记的 root、策略不匹配或被改动的历史 lock 均在下载前失败；安装器不提供自定义 lock 路径、仓库或 tag 入口。
 
-当前 pack 是 candidate9 的 `f64a47603622…`。Android、桌面、鸿蒙、React Native 及尚未单独升级的 Flutter SDK 保留 candidate3 的 `03ebf262fee0…`，其原始 lock 被逐字节保留，原有构建状态可以复现。这些旧候选的状态不代表已通过当前新 pack 的设备验收。iOS 与 Flutter iOS 使用各自独立的 SDK 条目；以 lock 和各端 receipt 为准。所有候选均来自私有 `weapp-container/showcase` release；CI 使用同仓库 `GITHUB_TOKEN`，本机使用已有 `gh` 登录或 release read token。
+当前 pack 是 candidate9 的 `f64a47603622…`。Android、桌面、鸿蒙、React Native 及尚未单独升级的 Flutter SDK 保留 candidate3 的 `03ebf262fee0…`，其原始 lock 被逐字节保留，原有构建状态可以复现。这些旧候选的状态不代表已通过当前新 pack 的设备验收。iOS 与 Flutter iOS 使用各自独立的 SDK 条目；以 lock 和各端 receipt 为准。当前 artifact locks 使用私有 `weapp-container/website` 作为下载仓库，现有 `showcase-*` release tag 与资产哈希保持不变。catalog 登记的历史 lock 保留原始 `weapp-container/showcase` 来源，只允许读取其精确历史资产。CI 使用同仓库 `GITHUB_TOKEN`，本机使用已有 `gh` 登录或 release read token。
 
 ```sh
 node tools/native-pack-artifact.mjs --install --sdk-id android

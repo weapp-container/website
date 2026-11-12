@@ -1,4 +1,4 @@
-name: Historical Web candidate (manual)
+name: Website checks
 on:
   workflow_dispatch:
     inputs:
@@ -10,6 +10,17 @@ on:
         description: Run full browser and HTTP acceptance against the staging website
         type: boolean
         default: false
+  pull_request:
+    paths:
+      - website/**
+      - miniapp/**
+      - tools/**
+      - platforms/web-*
+      - package.json
+      - pnpm-lock.yaml
+      - astro.config.mjs
+      - wrangler.jsonc
+      - .github/workflows/web.yml
 permissions:
   contents: read
 concurrency:
@@ -18,10 +29,6 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-24.04
-    # GitHub hides draft release assets from contents:read tokens. This job
-    # reads the reviewed private candidate in the same repository only.
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,9 +42,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm test && pnpm exec tsc --noEmit
-      - run: node tools/prepare-web.mjs
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - run: node tools/prepare-public-demo.mjs
       - run: pnpm build
       - run: pnpm exec wrangler deploy --dry-run --env ''
       - name: Real browser acceptance
@@ -52,6 +57,7 @@ jobs:
             sleep 1
           done
           node tools/browser-smoke.mjs --mode devices
+          node tools/docs-browser-smoke.mjs --url http://127.0.0.1:4325
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -59,6 +65,7 @@ jobs:
           path: |
             dist/
             artifacts/web/browser/
+            artifacts/web/docs-browser/
             artifacts/web/staging-receipt.json
             artifacts/web-preview.log
           retention-days: 14

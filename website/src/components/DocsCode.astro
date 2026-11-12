@@ -1,0 +1,14 @@
+---
+import { Code } from 'astro:components';
+import type { ComponentProps } from 'astro/types';
+
+type Props = Pick<ComponentProps<typeof Code>, 'code' | 'lang'>;
+const { code, lang = 'text' } = Astro.props;
+---
+<div class="docs-code-block" data-code-language={lang}>
+  <div class="docs-code-toolbar">
+    <span>{lang}</span>
+    <button class="docs-copy-button" type="button" aria-label="复制代码" title="复制代码">复制</button>
+  </div>
+  <Code code={code} lang={lang} themes={{ light: 'github-light', dark: 'github-dark' }} defaultColor={false} />
+</div>

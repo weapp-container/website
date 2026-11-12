@@ -1,0 +1,54 @@
+---
+import DocsCode from '../../../components/DocsCode.astro';
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+<DocsLayout title="React Native SDK 接入" description="通过 Fabric Native View 和 TurboModule Controller 接入 Weapp Container。">
+  <header class="docs-page-heading"><p class="eyebrow">REACT NATIVE / TYPESCRIPT</p><h1>React Native SDK 接入</h1><p>React Native 包将原生 session 控制器通过 TurboModule 暴露给 TypeScript，并通过 Fabric 视图承载原生画面。</p></header>
+  <h2 id="requirements">1. 安装 SDK</h2>
+  <p>使用 React Native 0.88.0 新架构、React 19.3.x 和 TypeScript 5.9.3。原生目标为 Android API 26+ 与 iOS 16+；Android 应用只启用 <code>arm64-v8a</code> 与 <code>x86_64</code>。</p>
+  <p>已有带原生依赖的 SDK 分发包时，在 React Native 应用中安装本地归档：</p>
+  <DocsCode lang="bash" code={`npm install /absolute/packages/weapp-container-react-native-0.1.0-preview.6.0.tgz
+cd ios
+pod install`} />
+  <p>将 <code>hello-pack/</code> 放到 Android 的 <code>android/app/src/main/assets/hello-pack/</code>，或作为完整资源文件夹加入 iOS target。SDK 归档获取与源码打包见<a href="https://github.com/weapp-container/sdk-react-native#readme">React Native SDK README</a>；这里的文件名不表示 npm registry 已发布。</p>
+  <h2 id="create-view">2. 创建 Controller</h2>
+  <p>由页面或路由的初始化逻辑执行一次，使用 state/ref 保留实例：</p>
+  <DocsCode lang="tsx" code={`import {
+  WeappContainerController,
+  WeappContainerView,
+  type ContainerEvent,
+} from '@weapp-container/react-native';
+
+const controller = await WeappContainerController.create({
+  storage: {key: 'catalog/account-7'},
+});
+const unsubscribe = controller.subscribe((event: ContainerEvent) => {
+  if (event.type === 'error') console.error(event.payload);
+});
+await controller.registerHostMethod('app.openProfile', async (payload) => ({
+  profile: payload,
+}));`} />
+  <h2 id="mount-load">3. 挂载视图并加载</h2>
+  <p>将保留的 Controller 传给 JSX 中的视图：</p>
+  <DocsCode lang="tsx" code={`<WeappContainerView
+  controller={controller}
+  style={{height: 480, width: '100%'}}
+  onSurfaceError={error => console.error(error.code, error.message)}
+/>`} />
+  <p>视图挂载后调用加载；SDK 等待原生 surface 的有效布局：</p>
+  <DocsCode lang="typescript" code={`await controller.load({asset: 'hello-pack'});`} />
+  <p>结束功能时关闭会话：</p>
+  <DocsCode lang="typescript" code={`unsubscribe();
+await controller.flushStorage();
+await controller.close();`} />
+  <p>React effect cleanup 不能返回 Promise，应把异步关闭交给页面的会话管理逻辑；若创建期间组件已经卸载，新实例创建完成后应立即关闭。完整的 React 挂载与关闭处理见<a href="https://github.com/weapp-container/sdk-react-native/blob/main/example/App.tsx">示例 App.tsx</a>。</p>
+  <h2 id="controller-api">Controller API</h2>
+  <ul><li><code>create(configuration)</code>：使用稳定 storage key 或明确选择 memoryOnly。</li><li><code>registerHostMethod(name, handler)</code>：登记不占用 <code>wx.</code> 命名空间的宿主 handler。回调收到 AbortSignal。</li><li><code>load(source, options)</code>：从绝对本地目录或 app assets 加载已验证 pack。</li><li><code>subscribe(listener)</code>：订阅 ready、navigation、message、error、closed 和 presented 事件。</li><li><code>sendMessage</code>、<code>navigate</code>、<code>back</code>、<code>setForeground</code>、<code>state</code>、<code>capabilities</code>：驱动与观察会话。</li><li><code>flushStorage</code> 和 <code>close</code>：保证状态写回后关闭 native owner。</li></ul>
+  <h2 id="release-consumer">构建 consumer</h2>
+  <aside class="docs-callout docs-callout-warning"><strong>版本和授权状态</strong><p><code>@weapp-container/react-native</code> 源码当前为 <code>0.1.0-preview.6.0</code>，采用 Apache-2.0。SDK README 记录默认 runtime lock 仍指向历史 preview.5.3；从源码构建时必须显式使用审核过、与 wrapper 匹配的 preview.6.0 lock。源码版本不代表 npm 发布或 runtime archive 已公开。</p></aside>
+  <p>发行构建运行 TypeScript、React Native Codegen 和包文件审核。独立 consumer 消耗完整 npm archive 和预先准备的原生 SDK，不应该隐式依赖工作区内的核心运行时代码。</p>
+  <DocsCode lang="bash" code={`node tools/create-consumer.mjs \\
+  --package /absolute/path/authorized-sdk.tgz \\
+  --out /absolute/path/new-consumer`} />
+  <p>消费者生成成功只证明所指定的包和工程已准备完毕。独立 Android/iOS 编译、GPU 呈现、真机生命周期和发布签名各自另行记录。</p>
+</DocsLayout>

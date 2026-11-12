@@ -1,0 +1,139 @@
+---
+import Layout from './Layout.astro';
+import '../styles/docs.css';
+import inventory from '../data/api-inventory-v1.json';
+import { apiSlug } from '../data/api-group-meta.mjs';
+import { docsNavigation, docsPages } from '../data/docs-pages.mjs';
+const { title = '开发文档', description = 'Weapp Container 开发文档。' } = Astro.props;
+const currentPath = Astro.url.pathname;
+const pageByPath = new Map(docsPages.map((page) => [page.path, page]));
+const apiGroups = inventory.apis.map((api) => ({ ...api, href: `/docs/api/${apiSlug(api.id)}/` }));
+---
+<Layout title={`${title} · Weapp Container`} description={description}>
+  <div class="docs-mobile-nav">
+    <details>
+      <summary>文档导航</summary>
+      <div class="docs-mobile-nav-body">
+        <label class="docs-search-label" for="docs-search-mobile">搜索文档与 API</label>
+        <input id="docs-search-mobile" class="docs-search" type="search" placeholder="搜索文档与 API" autocomplete="off" aria-controls="docs-search-results-mobile" />
+        <div id="docs-search-results-mobile" class="docs-search-results" role="listbox" aria-label="搜索结果" hidden></div>
+        {docsNavigation.map((section) => <section class="docs-nav-section"><h2>{section.title}</h2><ul>{section.paths.map((path) => { const page = pageByPath.get(path); return page && <li><a href={page.path} aria-current={currentPath === page.path ? 'page' : undefined}>{page.title}</a></li>; })}</ul></section>)}
+        <section class="docs-nav-section">
+          <h2><a href="/docs/api/">小程序 API 分组</a></h2>
+          <ul>{apiGroups.map((api) => <li><a href={api.href} aria-current={currentPath === api.href ? 'page' : undefined}>{api.id}</a></li>)}</ul>
+          <ul><li><a href="/docs/api/capability-defaults/" aria-current={currentPath === '/docs/api/capability-defaults/' ? 'page' : undefined}>默认能力清单</a></li></ul>
+        </section>
+      </div>
+    </details>
+  </div>
+  <div class="docs-frame">
+    <aside class="docs-sidebar" aria-label="文档导航">
+      <a class="docs-home-link" href="/docs/">开发文档<span>Weapp Container</span></a>
+      <label class="docs-search-label" for="docs-search">搜索文档与 API</label>
+      <input id="docs-search" class="docs-search" type="search" placeholder="搜索文档与 API" autocomplete="off" aria-controls="docs-search-results" />
+      <div id="docs-search-results" class="docs-search-results" role="listbox" aria-label="搜索结果" hidden></div>
+      {docsNavigation.map((section) => <section class="docs-nav-section"><h2>{section.title}</h2><ul>{section.paths.map((path) => { const page = pageByPath.get(path); return page && <li><a href={page.path} aria-current={currentPath === page.path ? 'page' : undefined}>{page.title}</a></li>; })}</ul></section>)}
+      <section class="docs-nav-section docs-api-nav">
+        <h2><a href="/docs/api/">小程序 API 分组</a></h2>
+        <ul>{apiGroups.map((api) => <li><a href={api.href} aria-current={currentPath === api.href ? 'page' : undefined}>{api.id}</a></li>)}</ul>
+        <ul><li><a href="/docs/api/capability-defaults/" aria-current={currentPath === '/docs/api/capability-defaults/' ? 'page' : undefined}>默认能力清单</a></li></ul>
+      </section>
+    </aside>
+    <div class="docs-main-column">
+      <nav class="docs-breadcrumbs" aria-label="面包屑导航"><a href="/docs/">文档</a><span aria-hidden="true">/</span><span>{title}</span></nav>
+      <main id="docs-content" class="docs-article"><slot /></main>
+      <nav id="docs-page-outline" class="docs-page-outline" aria-label="本页目录" hidden>
+        <strong>本页目录</strong>
+        <ul></ul>
+      </nav>
+      <footer class="docs-article-footer"><a href="/docs/troubleshooting/">问题排查</a><a href="https://github.com/weapp-container/sdk-contract" target="_blank" rel="noreferrer">共享 SDK 协议 ↗</a></footer>
+    </div>
+  </div>
+</Layout>
+<script is:inline>
+  const inputs = [...document.querySelectorAll('.docs-search')];
+  const resultLists = [...document.querySelectorAll('.docs-search-results')];
+  let searchIndex = [];
+  let searchReady = fetch('/docs/search-index.json').then((response) => {
+    if (!response.ok) throw new Error('Search index unavailable');
+    return response.json();
+  }).then((index) => { searchIndex = index; }).catch(() => { searchIndex = []; });
+  const normalize = (value) => value.normalize('NFKC').toLocaleLowerCase();
+  function renderResults(input, results, query) {
+    const normalized = normalize(query.trim());
+    results.replaceChildren();
+    if (!normalized) { results.hidden = true; return []; }
+    const tokens = normalized.split(/\s+/).filter(Boolean);
+    const matches = searchIndex.map((item) => {
+      const haystack = normalize(`${item.title} ${item.summary} ${item.keywords}`);
+      const score = tokens.reduce((total, token) => total + (normalize(item.title).includes(token) ? 3 : haystack.includes(token) ? 1 : -100), 0);
+      return { item, score };
+    }).filter((match) => match.score >= tokens.length).sort((left, right) => right.score - left.score).slice(0, 10);
+    if (matches.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'docs-search-empty';
+      empty.textContent = '没有匹配的文档';
+      results.append(empty);
+    }
+    for (const { item } of matches) {
+      const link = document.createElement('a');
+      link.href = item.path;
+      link.setAttribute('role', 'option');
+      const heading = document.createElement('strong');
+      heading.textContent = item.title;
+      const summary = document.createElement('span');
+      summary.textContent = item.summary;
+      link.append(heading, summary);
+      results.append(link);
+    }
+    results.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+    return matches.map((match) => match.item.path);
+  }
+  inputs.forEach((input, index) => {
+    const results = resultLists[index];
+    input.addEventListener('input', async () => {
+      await searchReady;
+      renderResults(input, results, input.value);
+    });
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') { results.hidden = true; input.blur(); }
+      if (event.key === 'Enter') {
+        const first = results.querySelector('a');
+        if (first) window.location.assign(first.href);
+      }
+    });
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+      event.preventDefault();
+      inputs.find((input) => input.offsetParent !== null)?.focus();
+    }
+  });
+  const outline = document.querySelector('#docs-page-outline');
+  const outlineList = outline?.querySelector('ul');
+  for (const heading of document.querySelectorAll('#docs-content h2[id], #docs-content h3[id]')) {
+    const item = document.createElement('li');
+    if (heading.tagName === 'H3') item.className = 'docs-toc-nested';
+    const link = document.createElement('a');
+    link.href = `#${heading.id}`;
+    link.textContent = heading.textContent;
+    item.append(link);
+    outlineList?.append(item);
+  }
+  if (outlineList?.childElementCount) outline.hidden = false;
+  document.querySelectorAll('#docs-content .docs-code-block').forEach((wrapper) => {
+    const pre = wrapper.querySelector('pre');
+    const button = wrapper.querySelector('button');
+    if (!pre || !button) return;
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(pre.querySelector('code')?.textContent || pre.textContent || '');
+        button.textContent = '已复制';
+        window.setTimeout(() => { button.textContent = '复制'; }, 1200);
+      } catch {
+        button.textContent = '复制失败';
+      }
+    });
+  });
+</script>

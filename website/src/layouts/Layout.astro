@@ -26,17 +26,27 @@ const path = Astro.url.pathname;
     <header class="site-header">
       <a class="brand" href="/" aria-label="Weapp Container 首页"><img src="/favicon.svg" width="30" height="30" alt="" /><span>Weapp <strong>Container</strong></span></a>
       <nav aria-label="主导航">
+        <a href="/docs/" aria-current={path.startsWith('/docs/') ? 'page' : undefined}>开发文档</a>
         <a href="/demo/" aria-current={path === '/demo/' ? 'page' : undefined}>在线体验</a>
         <a href="/platforms/" aria-current={path === '/platforms/' ? 'page' : undefined}>全端进展</a>
         <a href="/guide/" aria-current={path === '/guide/' ? 'page' : undefined}>开始接入</a>
       </nav>
+      <details class="mobile-menu">
+        <summary aria-label="打开或关闭导航菜单" title="导航菜单"><span aria-hidden="true"></span></summary>
+        <nav aria-label="移动导航">
+          <a href="/docs/" aria-current={path.startsWith('/docs/') ? 'page' : undefined}>开发文档</a>
+          <a href="/demo/" aria-current={path === '/demo/' ? 'page' : undefined}>在线体验</a>
+          <a href="/platforms/" aria-current={path === '/platforms/' ? 'page' : undefined}>全端进展</a>
+          <a href="/guide/" aria-current={path === '/guide/' ? 'page' : undefined}>开始接入</a>
+        </nav>
+      </details>
       <button class="theme-toggle" id="theme-toggle" aria-label="切换深浅主题" title="切换主题"><span aria-hidden="true">◐</span></button>
     </header>
     <main id="content"><slot /></main>
     <footer class="site-footer">
       <a class="brand" href="/"><img src="/favicon.svg" width="26" height="26" alt="" /><span>Weapp Container</span></a>
       <p>同一份小程序，更多运行场景。</p>
-      <div><a href="/guide/#license">许可说明</a><a href="https://github.com/weapp-container/showcase" target="_blank" rel="noreferrer">私有仓库 ↗</a><span>© {new Date().getFullYear()} Weapp Container</span></div>
+      <div><a href="/docs/licensing/">许可说明</a><a href="https://github.com/weapp-container/website" target="_blank" rel="noreferrer">站点源码 ↗</a><span>© {new Date().getFullYear()} Weapp Container</span></div>
     </footer>
     <script>
       document.querySelector('#theme-toggle')?.addEventListener('click', () => {

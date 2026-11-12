@@ -3,7 +3,7 @@
   "format": "showcase-miniapp-artifact/1",
   "runtimeVersion": "0.1.0-preview.6.0",
   "profile": "restricted-showcase",
-  "repository": "weapp-container/showcase",
+  "repository": "weapp-container/website",
   "releaseTag": "showcase-v0.1.0-preview.6.0-candidate10",
   "packRoot": "a0f5c48698c911436ce64ef63622c01cce99dbd17bbaaba0f6b25a44de696aaf",
   "policySha256": "57651739c7f50cd8dd0ca7a18c30681077a0a02b04e7e7e668acad64fad18031",

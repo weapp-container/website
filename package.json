@@ -1,8 +1,9 @@
 {
-  "name": "@weapp-container/showcase",
+  "name": "@weapp-container/website",
   "version": "0.1.0-preview.6.0",
   "private": true,
   "type": "module",
+  "license": "Apache-2.0",
   "packageManager": "pnpm@10.15.1",
   "engines": {
     "node": ">=24.18.0"
@@ -15,10 +16,14 @@
     "pack": "node tools/build-miniapp.mjs",
     "runtime:install": "node tools/install-web-runtime.mjs",
     "runtime:stage": "node tools/stage-web-runtime.mjs",
+    "runtime:public": "node tools/prepare-public-demo.mjs",
     "verify": "node tools/verify-site.mjs",
     "deploy:check": "pnpm build && wrangler deploy --dry-run",
     "deploy": "pnpm build && wrangler deploy",
     "browser:test": "node tools/browser-smoke.mjs",
+    "docs:browser": "node tools/docs-browser-smoke.mjs",
+    "docs:verify": "node tools/verify-api-docs.mjs",
+    "docs:sync-api": "node tools/sync-api-doc-snapshot.mjs",
     "native:build": "node tools/native-build.mjs",
     "native:signing": "node tools/native-signing.mjs",
     "sdk:install": "node tools/sdk-install.mjs",

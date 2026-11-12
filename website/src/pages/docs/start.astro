@@ -1,0 +1,23 @@
+---
+import DocsCode from '../../components/DocsCode.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+<DocsLayout title="快速开始" description="三步接入：生成测试包、选择 SDK、在应用中挂载并加载小程序。">
+  <header class="docs-page-heading"><p class="eyebrow">GET STARTED</p><h1>快速开始</h1><p>准备一个小程序包，在应用里放入 SDK 视图，再加载这个包。已有小程序可以继续使用自己的开发工具。</p></header>
+  <h2 id="prepare-source">1. 准备一个测试包</h2>
+  <p>先用独立示例跑通接入。安装 Node.js 24.x，执行下面三条命令即可，不需要安装 npm 依赖或小程序构建框架。</p>
+  <DocsCode lang="bash" code={`git clone https://github.com/weapp-container/sdk-contract.git
+cd sdk-contract
+node fixtures/make-acceptance-pack.mjs --out ../hello-pack`} />
+  <p>生成的 <code>hello-pack/</code> 包含 <code>manifest.json</code> 和 <code>blobs/sha256/</code>。示例页面提供点击计数、滚动和宿主消息，适合检查 SDK 是否接通。</p>
+  <p>已经有自己的小程序？直接阅读<a href="/docs/pack/#own-miniapp">打包现有小程序</a>。原生 JS/WXML/WXSS 目录可直接作为打包输入；使用 TypeScript、Vue 或 React 时，先用现有工具生成小程序产物。</p>
+  <h2 id="choose-host">2. 把 SDK 加到应用</h2>
+  <p>按应用使用的语言或框架选择一份指南。各端都加载同一种 portable pack，平台页会说明安装 SDK 和放置 <code>hello-pack/</code> 的位置。</p>
+  <ul><li><a href="/docs/integrations/android/">Android：Kotlin Session + 原生 View</a></li><li><a href="/docs/integrations/ios/">iOS：Swift Session + UIKit</a></li><li><a href="/docs/integrations/desktop/">桌面：C++ Session + 原生子视图</a></li><li><a href="/docs/integrations/flutter/">Flutter：Controller + Widget</a></li><li><a href="/docs/integrations/react-native/">React Native：Controller + Fabric View</a></li></ul>
+  <h2 id="create-session">3. 挂载视图，加载包</h2>
+  <ol><li>创建一个 Session 或 Controller，并注册需要的宿主方法。</li><li>把 SDK 视图放进应用布局，提供明确的宽高。</li><li>调用平台 SDK 的 <code>load</code>，传入应用资源中的包或本地包目录。</li></ol>
+  <p>各平台的可复制代码见上面的集成指南。会话由页面或路由持有，避免每次界面重绘都重建。页面隐藏时通知前后台状态；结束使用时等待 <code>flushStorage</code> 和异步关闭。</p>
+  <aside class="docs-callout docs-callout-note"><strong>使用当前预览版</strong><p>测试包生成成功只代表输入已准备好。实际加载还需要匹配版本、允许该包的运行库。已有预编译归档的权限和许可证按各自发行处理；网站在线演示仅允许固定包，不能用来加载这里生成的测试包。详见<a href="/docs/licensing/">许可、下载与发行</a>和<a href="/docs/platforms/">平台状态</a>。</p></aside>
+  <h2 id="next-steps">下一步</h2>
+  <ul><li><a href="/docs/pack/">打包自己的小程序、配置能力</a></li><li><a href="/docs/sdk-api/">通过 SDK 导航和收发消息</a></li><li><a href="/docs/api/">查询小程序 API 与组件兼容性</a></li><li><a href="/docs/troubleshooting/">加载失败时排查问题</a></li></ul>
+</DocsLayout>

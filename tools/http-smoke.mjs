@@ -7,7 +7,7 @@ const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const args=process.argv.slice(2),options={};
 for(let i=0;i<args.length;i+=2){assert.ok(['--url','--output'].includes(args[i])&&args[i+1]&&!options[args[i]]);options[args[i]]=args[i+1];}
 const base=new URL(options['--url']||'https://container.weapp.dev');
-assert.ok(base.protocol==='https:'&&!base.username&&!base.password&&base.pathname==='/'&&!base.search&&!base.hash);
+assert.ok((base.protocol==='https:'||base.protocol==='http:'&&base.hostname==='127.0.0.1')&&!base.username&&!base.password&&base.pathname==='/'&&!base.search&&!base.hash);
 const pin=JSON.parse(await readFile(resolve(root,'platforms/web-runtime.pin.json')));
 const response=await fetch(new URL('/showcase-runtime.json',base),{signal:AbortSignal.timeout(30000),redirect:'error'});
 assert.equal(response.status,200);const text=await response.text();assert.ok(Buffer.byteLength(text)<=8192);
@@ -17,7 +17,7 @@ for(const key of ['packRoot','policySha256'])assert.equal(config[key],pin[key]);
 assert.match(config.deploymentHash,/^[a-f0-9]{64}$/);
 assert.equal(config.entry,`/runtime/${config.deploymentHash}/index.html`);
 const runtime=`/runtime/${config.deploymentHash}/`;
-const paths=['/','/demo/','/guide/','/platforms/','/showcase-runtime.json',runtime,runtime+'pkg/container_host_web_bg.wasm',runtime+'vendor/fonts/NotoSansSC.ttf','/.git/config','/Cargo.toml','/source-snapshot.tar.gz'];
+const paths=['/','/demo/','/guide/','/platforms/','/docs/','/docs/start/','/docs/integrations/android/','/docs/api/','/docs/api/wx-storage/','/docs/search-index.json','/sitemap.xml','/showcase-runtime.json',runtime,runtime+'pkg/container_host_web_bg.wasm',runtime+'vendor/fonts/NotoSansSC.ttf','/.git/config','/Cargo.toml','/source-snapshot.tar.gz'];
 const results=await Promise.all(paths.map(async path=>{
   const r=await fetch(new URL(path,base),{method:'HEAD',signal:AbortSignal.timeout(30000),redirect:'manual'});
   const h=Object.fromEntries(r.headers),privateProbe=['/.git/config','/Cargo.toml','/source-snapshot.tar.gz'].includes(path);
