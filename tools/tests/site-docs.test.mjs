@@ -17,7 +17,7 @@ test('API snapshot hashes, source revision, defaults and documented coverage gap
     inventoryNames: 135,
     capabilities: 115,
     capabilityOnly: 12,
-    sourceCommit: '08863fba3698b6b41dc2f8807dcd12d86893217d',
+    sourceCommit: '6b2e8074c9eade41b526cb556fe4542d9b3a1aa5',
   });
 });
 

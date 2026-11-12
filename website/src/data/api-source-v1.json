@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "source": {
     "repository": "weapp-container/weapp-container",
-    "commit": "08863fba3698b6b41dc2f8807dcd12d86893217d",
+    "commit": "6b2e8074c9eade41b526cb556fe4542d9b3a1aa5",
     "inventoryPath": "docs/api-inventory-v1.json",
     "capabilitySourcePath": "tools/container-manifest/src/index.mjs"
   },
