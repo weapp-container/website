@@ -9,6 +9,7 @@
     "node": ">=24.18.0"
   },
   "scripts": {
+    "prepare": "astro sync",
     "dev": "astro dev --host 127.0.0.1 --port 4325",
     "build": "astro build && node tools/localized-errors.mjs && node tools/verify-site.mjs",
     "preview": "astro preview --host 127.0.0.1 --port 4325",
