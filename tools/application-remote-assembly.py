@@ -9,7 +9,6 @@ import io
 import json
 from pathlib import Path
 import struct
-import subprocess
 import tarfile
 import tempfile
 import zipfile
@@ -66,7 +65,7 @@ def prepare(sidecar, lock, archive_directory, out):
     target = json.loads(sidecar.read_text())
     require(target['kind'] == 'showcase-application/1' and target['platform'] == 'android', 'Expected sealed Android application')
     require(target['family'] in ('native', 'react-native', 'flutter') and target['profile'] == 'restricted-showcase', 'Invalid application family/profile')
-    require(target['repository'] == sdk.REPOSITORY and target['releaseTag'] == sdk.RELEASE_TAG, 'Unexpected private application release')
+    require(target['repository'] in sdk.MANIFEST_REPOSITORIES and target['releaseTag'] == sdk.RELEASE_TAG, 'Unexpected private application release')
     sdk.filename(target['fileName'])
     apk = sidecar.parent / target['fileName']
     checked_file(apk, target)
@@ -147,9 +146,9 @@ def assemble(recipe_path, recipe_sha256, destination, offline=None, upload=False
     require(len(raw) <= 16 * 1024 ** 2, 'Expanded recipe exceeds bound')
     recipe = json.loads(raw)
     require(recipe['schemaVersion'] == 1 and recipe['kind'] == 'showcase-apk-exact-range-assembly', 'Invalid APK assembly contract')
-    require(recipe['repository'] == sdk.REPOSITORY and recipe['releaseId'] == sdk.RELEASE_ID and recipe['releaseTag'] == sdk.RELEASE_TAG, 'Private release mismatch')
+    require(recipe['repository'] in sdk.MANIFEST_REPOSITORIES and recipe['releaseId'] == sdk.RELEASE_ID and recipe['releaseTag'] == sdk.RELEASE_TAG, 'Private release mismatch')
     target, base, delta = recipe['target'], recipe['base'], recipe['delta']
-    require(target['repository'] == sdk.REPOSITORY and target['releaseTag'] == sdk.RELEASE_TAG and target['platform'] == 'android'
+    require(target['repository'] in sdk.MANIFEST_REPOSITORIES and target['releaseTag'] == sdk.RELEASE_TAG and target['platform'] == 'android'
             and target['profile'] == 'restricted-showcase' and target['packRoot'] == base['packRoot'] and target['policySha256'] == base['policySha256'], 'Application policy identity differs')
     require(0 < target['size'] <= LIMIT and 0 < len(recipe['pieces']) <= 20, 'APK assembly size/piece bound exceeded')
     destination = Path(destination)
@@ -186,13 +185,11 @@ def assemble(recipe_path, recipe_sha256, destination, offline=None, upload=False
                 stream.write(data)
         checked_file(output, target)
         require(zip_inventory(output) == recipe['apkInventory'], 'Reconstructed APK ZIP closure differs')
-        published = [output]
         require(len(recipe['attachments']) in (1, 2), 'Invalid application attachment closure')
         for attachment in recipe['attachments']:
             path = destination / sdk.filename(attachment['fileName'])
             require(path != output, 'Attachment collides with APK')
             path.write_bytes(resolve_piece(attachment))
-            published.append(path)
         descriptor_path = destination / (target['fileName'] + '.json')
         require(json.loads(descriptor_path.read_bytes()) == target, 'Original application descriptor differs')
         if target.get('notices'):
@@ -200,17 +197,6 @@ def assemble(recipe_path, recipe_sha256, destination, offline=None, upload=False
         result = {'schemaVersion': 1, 'status': 'reassembled-exact', 'recipeSha256': recipe_sha256, 'fileName': target['fileName'],
                   'size': target['size'], 'sha256': target['sha256'], 'apkEntriesVerified': len(recipe['apkInventory']),
                   'originalApkBytesAndSigningBlockPreserved': True, 'assets': []}
-        if upload:
-            require(not offline, 'Offline assembly cannot publish')
-            for path in published:
-                entry = {'fileName': path.name, 'size': path.stat().st_size, 'sha256': sdk.file_digest(path)}
-                matches = [a for a in sdk.release()['assets'] if a['name'] == path.name]
-                if not matches:
-                    subprocess.run(['gh', 'release', 'upload', sdk.RELEASE_TAG, str(path), '--repo', sdk.REPOSITORY], check=True)
-                    matches = [a for a in sdk.release()['assets'] if a['name'] == path.name]
-                require(len(matches) == 1 and matches[0]['state'] == 'uploaded' and matches[0]['size'] == entry['size'] and matches[0]['digest'] == 'sha256:' + entry['sha256'], 'Immutable published application differs')
-                result['assets'].append(entry | {'assetId': matches[0]['id'], 'serverDigest': matches[0]['digest']})
-            result['status'] = 'published-exact-verified'
         (destination / 'assembly-result.json').write_text(json.dumps(result, indent=2) + '\n')
         return result
 
@@ -228,7 +214,7 @@ def main():
     assemble_command.add_argument('--recipe-sha256', required=True)
     assemble_command.add_argument('--destination', required=True)
     assemble_command.add_argument('--offline')
-    assemble_command.add_argument('--upload', action='store_true')
+    assemble_command.add_argument('--upload', action='store_true', help='Retired option; historical releases reject all uploads')
     args = parser.parse_args()
     result = prepare(args.sidecar, json.loads(Path(args.manifest).read_text()), args.archive_dir, args.out) if args.command == 'prepare' else assemble(args.recipe, args.recipe_sha256, args.destination, args.offline, args.upload)
     print(json.dumps(result, indent=2))

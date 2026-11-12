@@ -15,7 +15,10 @@ import tempfile
 import zlib
 
 ROOT = Path(__file__).resolve().parent.parent
-REPOSITORY = 'weapp-container/website-private-archive'
+REPOSITORY = 'weapp-container/website'
+# Frozen manifests retain their original identity; only storage moved.
+MANIFEST_REPOSITORIES = (REPOSITORY, 'weapp-container/showcase')
+STORAGE_REPOSITORY = 'weapp-container/website-private-archive'
 RELEASE_ID = 435160337
 RELEASE_TAG = 'showcase-v0.1.0-preview.6.0-candidate3'
 LIMIT = 2 * 1024 ** 3
@@ -96,7 +99,7 @@ def extract_checked(archive_path, entry, destination):
 
 
 def prepare_recipe(lock, target_id, archive_directory, out, base_ids=None):
-    require(lock['repository'] == REPOSITORY and lock['releaseTag'] == RELEASE_TAG, 'Unexpected private release')
+    require(lock['repository'] in MANIFEST_REPOSITORIES and lock['releaseTag'] == RELEASE_TAG, 'Unexpected private release')
     entries = {entry['id']: entry for entry in lock['artifacts']}
     require(len(entries) == len(lock['artifacts']) and target_id in entries, 'Missing/duplicate target')
     target = entries[target_id]
@@ -177,9 +180,9 @@ def prepare_recipe(lock, target_id, archive_directory, out, base_ids=None):
 
 
 def release():
-    repository = json.loads(subprocess.check_output(['gh', 'api', 'repos/' + REPOSITORY]))
-    require(repository['private'] and repository['full_name'] == REPOSITORY, 'SDK assembly requires the private website repository')
-    value = json.loads(subprocess.check_output(['gh', 'api', 'repos/' + REPOSITORY + '/releases/' + str(RELEASE_ID)]))
+    repository = json.loads(subprocess.check_output(['gh', 'api', 'repos/' + STORAGE_REPOSITORY]))
+    require(repository['private'] and repository['full_name'] == STORAGE_REPOSITORY, 'SDK assembly requires the private website archive')
+    value = json.loads(subprocess.check_output(['gh', 'api', 'repos/' + STORAGE_REPOSITORY + '/releases/' + str(RELEASE_ID)]))
     require(value['draft'] and value['tag_name'] == RELEASE_TAG, 'Private candidate release changed')
     return value
 
@@ -190,7 +193,7 @@ def download(entry, directory, current_release):
     require(len(matches) == 1, 'Required release asset is absent or duplicated: ' + name)
     asset = matches[0]
     require(asset['state'] == 'uploaded' and asset['size'] == entry['size'] and asset['digest'] == 'sha256:' + entry['sha256'], 'Release asset identity differs')
-    subprocess.run(['gh', 'release', 'download', RELEASE_TAG, '--repo', REPOSITORY, '--pattern', name, '--dir', str(directory)], check=True)
+    subprocess.run(['gh', 'release', 'download', RELEASE_TAG, '--repo', STORAGE_REPOSITORY, '--pattern', name, '--dir', str(directory)], check=True)
     path = Path(directory) / name
     checked_file(path, entry)
     return path
@@ -208,7 +211,7 @@ def assemble(recipe_path, recipe_sha256, destination, offline=None, upload=False
         recipe_bytes = Path(recipe_path).read_bytes()
     recipe = json.loads(recipe_bytes)
     require(recipe['schemaVersion'] == 1 and recipe['kind'] == 'showcase-sdk-remote-assembly', 'Unsupported assembly contract')
-    require(recipe['repository'] == REPOSITORY and recipe['releaseId'] == RELEASE_ID and recipe['releaseTag'] == RELEASE_TAG, 'Assembly release mismatch')
+    require(recipe['repository'] in MANIFEST_REPOSITORIES and recipe['releaseId'] == RELEASE_ID and recipe['releaseTag'] == RELEASE_TAG, 'Assembly release mismatch')
     require(recipe['compression'] == {'python': sys.version.split()[0], 'zlib': zlib.ZLIB_RUNTIME_VERSION}, 'Exact producer Python/zlib required to preserve archive bytes')
     target = recipe['target']
     expected = inventory(target['files'])
@@ -256,23 +259,12 @@ def assemble(recipe_path, recipe_sha256, destination, offline=None, upload=False
                 emit(suffix)
         require(seen == set(expected) and tar_size == recipe['tar']['size'] and tar_digest.hexdigest() == recipe['tar']['sha256'], 'Original tar stream differs')
         checked_file(output, target)
-        # Decode the reconstructed archive independently before publishing.
+        # Decode the reconstructed archive independently before accepting it.
         extract_checked(output, target, work / 'final-verification')
         result = {'schemaVersion': 1, 'status': 'reassembled-exact', 'recipeSha256': recipe_sha256, 'expandedRecipeSha256': digest(recipe_bytes),
                   'fileName': target['fileName'], 'size': target['size'], 'sha256': target['sha256'],
                   'tarSha256': recipe['tar']['sha256'], 'filesVerified': len(expected), 'releaseId': RELEASE_ID,
                   'originalArchiveBytesPreserved': True, 'compression': recipe['compression']}
-        if upload:
-            require(not offline, 'Offline assembly cannot publish')
-            current_release = release()
-            matches = [asset for asset in current_release['assets'] if asset['name'] == target['fileName']]
-            if matches:
-                require(len(matches) == 1 and matches[0]['state'] == 'uploaded' and matches[0]['size'] == target['size'] and matches[0]['digest'] == 'sha256:' + target['sha256'], 'Conflicting immutable target asset')
-            else:
-                subprocess.run(['gh', 'release', 'upload', RELEASE_TAG, str(output), '--repo', REPOSITORY], check=True)
-            matches = [asset for asset in release()['assets'] if asset['name'] == target['fileName']]
-            require(len(matches) == 1 and matches[0]['state'] == 'uploaded' and matches[0]['size'] == target['size'] and matches[0]['digest'] == 'sha256:' + target['sha256'], 'Published target identity differs')
-            result.update(status='published-exact-verified', assetId=matches[0]['id'], serverDigest=matches[0]['digest'])
         (destination / 'assembly-result.json').write_text(json.dumps(result, indent=2) + '\n')
         return result
 
@@ -290,7 +282,7 @@ def main():
     assembly.add_argument('--recipe-sha256', required=True)
     assembly.add_argument('--destination', required=True)
     assembly.add_argument('--offline')
-    assembly.add_argument('--upload', action='store_true')
+    assembly.add_argument('--upload', action='store_true', help='Retired option; historical releases reject all uploads')
     args = parser.parse_args()
     if args.command == 'prepare':
         result = prepare_recipe(json.loads(Path(args.manifest).read_text()), args.id, args.archive_dir, args.out)
