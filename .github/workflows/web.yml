@@ -1,5 +1,17 @@
 name: Website checks
 on:
+  push:
+    branches: [main]
+    paths:
+      - website/**
+      - miniapp/**
+      - tools/**
+      - platforms/web-*
+      - package.json
+      - pnpm-lock.yaml
+      - astro.config.mjs
+      - wrangler.jsonc
+      - .github/workflows/web.yml
   workflow_dispatch:
     inputs:
       deploy:
@@ -24,11 +36,12 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: showcase-web-${{ github.ref }}
+  group: website-web-${{ github.ref }}
   cancel-in-progress: false
 jobs:
   verify:
     runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:

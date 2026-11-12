@@ -15,7 +15,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: showcase-public-${{ inputs.target || 'staging' }}
+  group: website-public-${{ inputs.target || 'staging' }}
   cancel-in-progress: false
 jobs:
   acceptance:

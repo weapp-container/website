@@ -1,6 +1,6 @@
 # Weapp Container Website
 
-Source for [container.weapp.dev](https://container.weapp.dev), renamed from `weapp-container/showcase` to `weapp-container/website`. The website includes developer documentation and a fixed browser demonstration. Native host apps, runtime downloads and build evidence are managed as separate artifacts.
+Source for [container.weapp.dev](https://container.weapp.dev), maintained in `weapp-container/website`. The website includes developer documentation and a fixed browser demonstration. Native host apps, runtime downloads and build evidence are managed as separate artifacts.
 
 This repository contains a shared, locally simulated mini-program, an Astro/React website, and native consumers for seven hosts. It does not contain the core runtime source implementation. The browser runs a real Dedicated Worker with QuickJS/WASM and a CanvasKit presenter.
 
