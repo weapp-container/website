@@ -4,6 +4,7 @@ title: "Web 在线演示"
 section: "平台集成"
 summary: "了解固定在线体验的运行范围及通用 Web SDK 的当前状态。"
 route: "/docs/integrations/web/"
+locale: "zh-CN"
 ---
 
 Web 演示

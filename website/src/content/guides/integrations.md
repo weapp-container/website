@@ -1,9 +1,10 @@
 ---
-id: "集成"
+id: "integrations"
 title: "接入方式"
 section: "平台集成"
 summary: "比较原生 Android、iOS、桌面、Flutter、React Native 和在线演示。"
 route: "/docs/integrations/"
+locale: "zh-CN"
 ---
 
 平台集成

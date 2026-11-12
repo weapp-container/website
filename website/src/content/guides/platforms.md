@@ -1,9 +1,10 @@
 ---
-id: "平台"
+id: "platforms"
 title: "平台状态与支持边界"
 section: "发行与支持"
 summary: "按平台查看构建、安装、运行与签名状态。"
 route: "/docs/platforms/"
+locale: "zh-CN"
 ---
 
 平台状态

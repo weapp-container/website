@@ -4,6 +4,7 @@ title: "React Native SDK 接入"
 section: "平台集成"
 summary: "通过 Fabric View 和 WeappContainerController 接入 Android 与 iOS。"
 route: "/docs/integrations/react-native/"
+locale: "zh-CN"
 ---
 
 React Native / TypeScript

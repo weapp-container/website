@@ -4,6 +4,7 @@ title: "配置与 portable pack"
 section: "开始使用"
 summary: "用独立工具打包原生小程序或已有框架产物，配置能力并校验资源。"
 route: "/docs/pack/"
+locale: "zh-CN"
 ---
 
 打包与配置

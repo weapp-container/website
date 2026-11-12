@@ -1,9 +1,10 @@
 ---
-id: "许可"
+id: "licensing"
 title: "许可、下载与发行"
 section: "发行与支持"
 summary: "区分 SDK 源码许可、运行库许可、仓库访问和二进制发行授权。"
 route: "/docs/licensing/"
+locale: "zh-CN"
 ---
 
 许可与发行

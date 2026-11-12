@@ -1,9 +1,10 @@
 ---
 id: "integrations/desktop"
-标题："C++ 桌面"
+title: "C++ Desktop"
 section: "平台集成"
 summary: "用 C++ Session、原生子视图与平台呈现器接入桌面。"
 route: "/docs/integrations/desktop/"
+locale: "zh-CN"
 ---
 
 桌面 / C++17

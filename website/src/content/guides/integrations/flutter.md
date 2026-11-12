@@ -4,6 +4,7 @@ title: "Flutter"
 section: "平台集成"
 summary: "通过 weapp_container Controller 和 Widget 接入五个平台。"
 route: "/docs/integrations/flutter/"
+locale: "zh-CN"
 ---
 
 Flutter / Dart

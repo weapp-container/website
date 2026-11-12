@@ -4,6 +4,7 @@ title: "文档首页"
 section: "文档"
 summary: "Weapp Container 开发文档、集成指南与 API 参考。"
 route: "/docs/"
+locale: "zh-CN"
 ---
 
 开发文档

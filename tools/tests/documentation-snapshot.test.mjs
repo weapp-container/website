@@ -8,7 +8,9 @@ import {documentRoute, hash, rewriteLinks, renderSnapshot, verifyDocumentationSn
 test('routes preserve source identities and map both languages to one page', () => {
   assert.equal(documentRoute('weapp-container/sdk-ios', 'docs/window-metrics.en.md'), '/docs/engineering/sdk-ios/docs/window-metrics/');
   assert.equal(documentRoute('weapp-container/.github', 'profile/README.en.md'), '/docs/engineering/organization/profile/index/');
-  assert.equal(documentRoute('weapp-container/weapp-container', '.github/PULL_REQUEST_TEMPLATE.md'), '/docs/engineering/weapp-container/github/PULL_REQUEST_TEMPLATE/');
+  assert.equal(documentRoute('weapp-container/weapp-container', '.github/PULL_REQUEST_TEMPLATE.md'), '/docs/engineering/weapp-container/github/pull_request_template/');
+  assert.equal(documentRoute('weapp-container/website', 'tools/DOCUMENTATION.md'), '/docs/engineering/website/tools/documentation/');
+  assert.equal(documentRoute('weapp-container/website', 'tools/documentation/README.en.md'), '/docs/engineering/website/tools/documentation/index/');
   const source = {repository: 'weapp-container/sdk-ios', commit: 'a'.repeat(40), path: 'docs/view.en.md'};
   const routes = new Map([['weapp-container/sdk-ios:README.en.md', '/en/docs/engineering/sdk-ios/index/']]);
   assert.equal(rewriteLinks('[Home](../README.en.md#lifecycle) [Code](../Sources/View.swift)', source, 'en', routes, new Map()), `[Home](/en/docs/engineering/sdk-ios/index/#lifecycle) [Code](https://github.com/weapp-container/sdk-ios/blob/${source.commit}/Sources/View.swift)`);
@@ -16,6 +18,8 @@ test('routes preserve source identities and map both languages to one page', () 
   const example = '```md\n[Home](../README.en.md)\n<img src="example.png" />\n```';
   assert.equal(rewriteLinks(example, source, 'en', routes, new Map()), example);
   assert.equal(rewriteLinks('[Home]: ../README.en.md', source, 'en', routes, new Map()), '[Home]: /en/docs/engineering/sdk-ios/index/');
+  assert.equal(rewriteLinks('[Wrapped\nlabel](../README.en.md)', source, 'en', routes, new Map()), '[Wrapped\nlabel](/en/docs/engineering/sdk-ios/index/)');
+  assert.equal(rewriteLinks('`[Example](../README.en.md)`', source, 'en', routes, new Map()), '`[Example](../README.en.md)`');
 });
 
 async function fixture(t) {

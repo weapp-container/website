@@ -354,7 +354,7 @@
         "path": "website/src/content/guides/api.md"
       },
       "reviewedChineseSummary": "小程序 API 与能力；基础与生命周期；路由与界面；页面与组件；运行时与存储；媒体与画布；宿主与系统能力",
-      "reviewedChineseSha256": "b594dc8baefba9f4ba5a9e5c6bbebf249016b4fb059572a8759d55f1d4ff9a98",
+      "reviewedChineseSha256": "3f832323df48566e8f8462281251f35c7e3fd082f8faf3c816af3369d97afc95",
       "route": "/docs/api/",
       "legacyHeadingIds": []
     },
@@ -382,7 +382,7 @@
         "path": "website/src/content/guides/architecture.md"
       },
       "reviewedChineseSummary": "运行架构与生命周期；运行分层；会话生命周期；渲染与帧呈现；宿主方法与消息；按证据描述平台",
-      "reviewedChineseSha256": "7b07fe62279b3068c325154ee2afa76e091ccca8643259d67c1cdb532c6f3150",
+      "reviewedChineseSha256": "9e671448b218f40e45c0c9ac2c43872e7015f6e8caaf7abf7e728ef8a7425e65",
       "route": "/docs/architecture/",
       "legacyHeadingIds": [
         "host-methods",
@@ -402,7 +402,7 @@
         "path": "website/src/content/guides/components.md"
       },
       "reviewedChineseSummary": "组件与模板兼容性；WXML 和 WXSS；事件绑定；组件关系与 selection；自定义组件资源；查阅实际案例",
-      "reviewedChineseSha256": "dbf80317afae6fe5c8b3781dc1051c2161aa3f799fd6c537a2dfb1f67c131b9d",
+      "reviewedChineseSha256": "36f91ccfb35e2e42be537949d38156cca5a097ede7bfde37d1e7a3a390d35fe0",
       "route": "/docs/components/",
       "legacyHeadingIds": [
         "component-api",
@@ -422,7 +422,7 @@
         "path": "website/src/content/guides/index.md"
       },
       "reviewedChineseSummary": "开发文档；开始使用；平台集成；API 参考；发行与支持",
-      "reviewedChineseSha256": "97acec412999c8a82442c09842783f95997bbe091d4504227ea7c54fe1513419",
+      "reviewedChineseSha256": "f1c865b66e792ffa23cfc0910e64efa234a3ccce6721e6e95fbf3692986b64da",
       "route": "/docs/",
       "legacyHeadingIds": []
     },
@@ -436,7 +436,7 @@
         "path": "website/src/content/guides/integrations.md"
       },
       "reviewedChineseSummary": "接入方式；SDK 与宿主；共通步骤",
-      "reviewedChineseSha256": "7bbe2dd1cc63a7145d4aef20d5bdd950cca818fdc6093cf0ec58b395fca3b906",
+      "reviewedChineseSha256": "68b8029fcb05ff04546d526ef5aedcd94348ea2b1573c995778b843cb6d0a247",
       "route": "/docs/integrations/",
       "legacyHeadingIds": [
         "common-steps"
@@ -452,7 +452,7 @@
         "path": "website/src/content/guides/integrations/android.md"
       },
       "reviewedChineseSummary": "Android SDK 接入；环境要求；1. 准备 SDK；2. 放入包并嵌入视图；可核对的 Session API；包发布检查",
-      "reviewedChineseSha256": "5e1ef2733783c19b9324b12ecb9f050d7db406b9ff85ffe62ceed04ca252567a",
+      "reviewedChineseSha256": "df72d24c17f4e5e4d902231ccd711c33ec92fc0247577e76cc792741fb7a42f9",
       "route": "/docs/integrations/android/",
       "legacyHeadingIds": [
         "embed",
@@ -472,7 +472,7 @@
         "path": "website/src/content/guides/integrations/desktop.md"
       },
       "reviewedChineseSummary": "C++ Desktop SDK 接入；编译目标；连接 CMake consumer；Session 和原生 View；主要接口",
-      "reviewedChineseSha256": "615317ce91ab7e633771fe25e87c370cad844266cd17e81121ef0533e17e26ce",
+      "reviewedChineseSha256": "5150c33beb3e95e24af1a6cac3b40e9a44f34639feba737a1ac7b37356cbef27",
       "route": "/docs/integrations/desktop/",
       "legacyHeadingIds": [
         "cmake",
@@ -491,7 +491,7 @@
         "path": "website/src/content/guides/integrations/flutter.md"
       },
       "reviewedChineseSummary": "Flutter SDK 接入；从当前源码准备原生依赖；1. 添加 SDK 依赖；2. 创建 Controller；3. 挂载 Widget 并加载；主要 API；平台验证",
-      "reviewedChineseSha256": "51971d4774fb628115055feb81eb510428efcd1936734c495098066936be355d",
+      "reviewedChineseSha256": "fe9f81b7eea81df7530c5d53750b6456b8c932f94814155311e143221462859f",
       "route": "/docs/integrations/flutter/",
       "legacyHeadingIds": [
         "api",
@@ -511,7 +511,7 @@
         "path": "website/src/content/guides/integrations/harmony.md"
       },
       "reviewedChineseSummary": "HarmonyOS 示例；当前记录的状态；源码和工具链；如何贡献可验证状态",
-      "reviewedChineseSha256": "e0961091f3cf3ae0229b299756118d448789b64efc7211a6a58cbee2d833a808",
+      "reviewedChineseSha256": "c204a6c6f48f191d43c477be8eb4d24496ebf0656d1a098794912a3111c61336",
       "route": "/docs/integrations/harmony/",
       "legacyHeadingIds": [
         "next",
@@ -528,7 +528,7 @@
         "path": "website/src/content/guides/integrations/ios.md"
       },
       "reviewedChineseSummary": "iOS SDK 接入；1. 安装 SDK；2. 挂载 UIKit 视图并加载；事件和宿主方法；模拟器和设备验收",
-      "reviewedChineseSha256": "6a872a30befacba241667e69ada4af27a401a9ceb7e6097e790723542dabbb2b",
+      "reviewedChineseSha256": "1059eb4bc949461f5f8b4d110d613668bbbd2894408460afc0fd4b577a520b39",
       "route": "/docs/integrations/ios/",
       "legacyHeadingIds": [
         "create-session",
@@ -547,7 +547,7 @@
         "path": "website/src/content/guides/integrations/react-native.md"
       },
       "reviewedChineseSummary": "React Native SDK 接入；从当前源码准备原生依赖；1. 安装 SDK；2. 创建 Controller；3. 挂载视图并加载；控制器 API；构建 consumer",
-      "reviewedChineseSha256": "163e397225a80b9973b7aceb53e56163b9b549062af393d7a015cdc5f32ffe87",
+      "reviewedChineseSha256": "a7f6d74c811b545481d74c618628b4f4f42853057ec9d5408231396f8b29e3b6",
       "route": "/docs/integrations/react-native/",
       "legacyHeadingIds": [
         "controller-api",
@@ -567,7 +567,7 @@
         "path": "website/src/content/guides/integrations/web.md"
       },
       "reviewedChineseSummary": "Web 在线演示边界；网站实际运行内容；并非通用 Web SDK；本机预览",
-      "reviewedChineseSha256": "327fc77bd6a26f0ffedac511f86b17887ecf1067e4a554b9679f4482ede7f35b",
+      "reviewedChineseSha256": "264a9cbf2fda38d877585400b49a9f929ccbf0d0bcd55e65789aa495725f3355",
       "route": "/docs/integrations/web/",
       "legacyHeadingIds": [
         "not-sdk",
@@ -585,7 +585,7 @@
         "path": "website/src/content/guides/licensing.md"
       },
       "reviewedChineseSummary": "许可、下载与发行；访问权限与许可分开；当前验证与发行状态；产品标识",
-      "reviewedChineseSha256": "0eb34b2529c409a2cd42b114894cc95be849966fe46c21dd583ce9e385c11846",
+      "reviewedChineseSha256": "b679de9b7267584cc38d20f1de044d533cdf0c18a24c07ecdd38a4fd520e5180",
       "route": "/docs/licensing/",
       "legacyHeadingIds": [
         "binary-availability",
@@ -603,7 +603,7 @@
         "path": "website/src/content/guides/pack.md"
       },
       "reviewedChineseSummary": "配置与 portable pack；包里有什么；先试一个现成示例；打包现有小程序；加载前校验；能力和权限协商；完整与部分支持",
-      "reviewedChineseSha256": "0d1b654e750f609ff17913e4f934e52dcb914a3f5958869b71a7bc9651c2895a",
+      "reviewedChineseSha256": "79560a3e0238f01f2cf537212131e8fb4865b09775b68477416c4f560ac35fec",
       "route": "/docs/pack/",
       "legacyHeadingIds": [
         "capabilities",
@@ -625,7 +625,7 @@
         "path": "website/src/content/guides/platforms.md"
       },
       "reviewedChineseSummary": "平台状态与支持边界；当前平台矩阵；重要限制；每个目标应该如何验收",
-      "reviewedChineseSha256": "874ba6db4740ab436e96c194128a002a0521d209e167b287af722f6ca21bfe7b",
+      "reviewedChineseSha256": "4d7dd8a079e3f9b6e03bbe64f1bb81183538b98f94b55e87bd570b035c669f73",
       "route": "/docs/platforms/",
       "legacyHeadingIds": [
         "acceptance",
@@ -642,7 +642,7 @@
         "path": "website/src/content/guides/sdk-api.md"
       },
       "reviewedChineseSummary": "宿主 SDK API；小程序到宿主：weappContainer；跨平台会话操作；创建和配置；加载程序；注册和消息；状态、事件和宿主视图",
-      "reviewedChineseSha256": "00be7c80a7de1f41f216045d7212f8b17e58ff59bfedecd0e3e5a49144a96dbc",
+      "reviewedChineseSha256": "309f0e1b3a259d10f41b4319ecdeaeb17a86184f9bc953d677e4e377ba030b30",
       "route": "/docs/sdk-api/",
       "legacyHeadingIds": [
         "api-close",
@@ -665,7 +665,7 @@
         "path": "website/src/content/guides/start.md"
       },
       "reviewedChineseSummary": "快速开始；1. 准备一个测试包；2. 把 SDK 加到应用；3. 挂载视图，加载包；下一步",
-      "reviewedChineseSha256": "3e9b72ae499b5937fd01200fb0c94a95a19ebfdc90d12d36b1abe8a69b8f8be6",
+      "reviewedChineseSha256": "7eb35d2c920ab0f3b034827029538728f724b85cf31dedee21d7a7a44e797332",
       "route": "/docs/start/",
       "legacyHeadingIds": [
         "choose-host",
@@ -684,7 +684,7 @@
         "path": "website/src/content/guides/troubleshooting.md"
       },
       "reviewedChineseSummary": "故障排查；下载或准备时出现版本/ABI 不匹配；pack 文件完整性失败；unsupported capability 或 canIUse 返回 false；View 为空、报 ready 后没有画面；切后台恢复后事件停止；程序可以操作但点击/输入失败",
-      "reviewedChineseSha256": "f20a6c24c5b9d5f768d9d61dcb56faff4831d77f3cff7e5b5d95d28ee2206cc2",
+      "reviewedChineseSha256": "d286e5ac6c454f102af5dd91e177594e5f52cc6c1c9cc000a753d400629a5487",
       "route": "/docs/troubleshooting/",
       "legacyHeadingIds": [
         "attach-diagnostics",

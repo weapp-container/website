@@ -1,9 +1,10 @@
 ---
-id: "架构"
+id: "architecture"
 title: "运行架构与生命周期"
 section: "开始使用"
 summary: "了解 JS 引擎、Skia 呈现、宿主视图和会话资源的生命周期边界。"
 route: "/docs/architecture/"
+locale: "zh-CN"
 ---
 
 运行时

@@ -1,9 +1,10 @@
 ---
-id: "故障排除"
+id: "troubleshooting"
 title: "故障排查"
 section: "发行与支持"
 summary: "排查 manifest、哈希、宿主生命周期、布局与渲染问题。"
 route: "/docs/troubleshooting/"
+locale: "zh-CN"
 ---
 
 故障排查

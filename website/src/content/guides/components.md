@@ -1,9 +1,10 @@
 ---
-id: "组件"
+id: "components"
 title: "组件与模板兼容性"
 section: "API 参考"
 summary: "查看 WXML、WXSS、组件关系和交互能力的记录边界。"
 route: "/docs/components/"
+locale: "zh-CN"
 ---
 
 模板与组件

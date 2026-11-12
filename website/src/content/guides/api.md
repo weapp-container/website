@@ -4,6 +4,7 @@ title: "小程序 API 与能力"
 section: "API 参考"
 summary: "按能力组检索 API、宿主覆盖、引擎覆盖和 conformance 证据。"
 route: "/docs/api/"
+locale: "zh-CN"
 ---
 
 API 参考

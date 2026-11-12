@@ -4,6 +4,7 @@ title: "宿主 SDK API"
 section: "API 参考"
 summary: "跨平台 Session、Controller、View、事件和宿主消息 API 概览。"
 route: "/docs/sdk-api/"
+locale: "zh-CN"
 ---
 
 宿主 SDK

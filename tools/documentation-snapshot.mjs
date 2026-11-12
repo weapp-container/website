@@ -16,7 +16,10 @@ const serialize = value => JSON.stringify(value, null, 2) + '\n';
 const repositoryName = repository => repository.endsWith('/.github') ? 'organization' : repository.split('/').at(-1);
 export function documentRoute(repository, path) {
   const name = repositoryName(repository);
-  const slug = path.replace(/\.en\.md$/, '.md').replace(/\.md$/, '').replace(/README$/, 'index').replace(/^\.github\//, 'github/');
+  // A source such as tools/DOCUMENTATION.md can coexist with
+  // tools/documentation/README.md. Use one directory spelling on every host,
+  // including case-insensitive build filesystems.
+  const slug = path.replace(/\.en\.md$/, '.md').replace(/\.md$/, '').replace(/README$/, 'index').replace(/^\.github\//, 'github/').toLowerCase();
   return `/docs/engineering/${name}/${slug}/`;
 }
 export function rewriteLinks(body, source, locale, routes, assets) {
@@ -43,19 +46,27 @@ export function rewriteLinks(body, source, locale, routes, assets) {
   };
   // Examples are source bytes, including Markdown examples. Only prose links
   // participate in the site route transformation.
-  let fence;
-  return body.split('\n').map(line => {
+  let fence, prose = '';
+  const output = [];
+  const flush = () => {
+    output.push(prose.split(/(`+[^`]*`+)/g).map((segment, index) => index % 2 ? segment : segment
+      .replace(/(!?\[[^\]]*\]\()([^\s)]+)(\))/g, (match, before, href, after) => before + transform(href) + after)
+      .replace(/\b(href|src)=(['"])([^'"]+)\2/g, (match, attribute, quote, href) => `${attribute}=${quote}${transform(href)}${quote}`)
+      .replace(/^(\s*\[[^\]\n]+\]:\s*)(\S+)/gm, (match, before, href) => before + transform(href))).join(''));
+    prose = '';
+  };
+  for (const line of body.split(/(?<=\n)/)) {
     const marker = line.match(/^\s*(`{3,}|~{3,})/);
     if (marker) {
-      if (!fence) fence = marker[1];
+      if (!fence) {flush(); fence = marker[1];}
       else if (line.trim() === fence) fence = undefined;
-      return line;
+      output.push(line);
+      continue;
     }
-    if (fence) return line;
-    return line.replace(/(!?\[[^\]\n]*\]\()([^\s)]+)(\))/g, (match, before, href, after) => before + transform(href) + after)
-      .replace(/\b(href|src)=(['"])([^'"]+)\2/g, (match, attribute, quote, href) => `${attribute}=${quote}${transform(href)}${quote}`)
-      .replace(/^(\s*\[[^\]\n]+\]:\s*)(\S+)/, (match, before, href) => before + transform(href));
-  }).join('\n');
+    if (fence) output.push(line); else prose += line;
+  }
+  flush();
+  return output.join('');
 }
 export function renderSnapshot(source, routes, assets) {
   const body = rewriteLinks(source.raw.toString(), source, source.locale, routes, assets);

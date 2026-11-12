@@ -1,9 +1,10 @@
 ---
-id: "开始"
+id: "start"
 title: "快速开始"
 section: "开始使用"
 summary: "三步接入：生成独立测试包、选择 SDK、挂载视图并加载。"
 route: "/docs/start/"
+locale: "zh-CN"
 ---
 
 开始使用

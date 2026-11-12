@@ -4,6 +4,7 @@ title: "Android"
 section: "平台集成"
 summary: "以 Kotlin Session 与 View 将运行库嵌入 Android 应用。"
 route: "/docs/integrations/android/"
+locale: "zh-CN"
 ---
 
 Android / Kotlin

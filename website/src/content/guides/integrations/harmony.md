@@ -4,6 +4,7 @@ title: "HarmonyOS 示例"
 section: "平台集成"
 summary: "查看 ArkTS Showcase 示例与当前构建、安装和运行验证状态。"
 route: "/docs/integrations/harmony/"
+locale: "zh-CN"
 ---
 
 鸿蒙系统 / ArkTS

@@ -4,6 +4,7 @@ title: "iOS"
 section: "平台集成"
 summary: "以 Swift Session 和 UIKit 视图接入 iOS。"
 route: "/docs/integrations/ios/"
+locale: "zh-CN"
 ---
 
 iOS / Swift
