@@ -105,6 +105,6 @@ Widget 卸载与会话关闭分开处理；创建期间页面退出时也要释�
 
 **版本与发行状态**
 
-Flutter wrapper 当前为 `0.1.0-preview.6.0`，Flutter 版本固定为 3.47.7。当前 runtime lock 没有 Windows 条目；Linux 插件 ABI 尚有不匹配记录。Dart 类型检查或某个平台构建通过不代表全部插件和 GPU 后端均可运行。
+Flutter wrapper 当前为 `0.1.0-preview.7.0`，Flutter 版本固定为 3.47.7。当前公开锁包含五个平台的原生输入；旧在线演示的缺口不代表当前源码结论。pub.dev 七包发布与真实 hosted 消费尚未完成，Android 也等待 Central 依赖。继续使用源码构建路径，并以[发行记录](/docs/engineering/weapp-container/docs/public-sdk-release/)区分编译、模拟器和真机验证。
 
 Flutter 仓库维护跨平台 packages 和独立示例。依据当前可用 SDK pin 运行各自 `prepare-native`、插件构建、example consumer 和真实设备检查；Windows/Linux 桌面 graphics 与 Flutter plugin ABI 必须在目标系统本身验收。

@@ -32,7 +32,7 @@ Using React Native 0.88.0 new architecture, React 19.3.x and TypeScript 5.9.3. N
 When there is an SDK distribution package with native dependencies, install the local archive in the React Native application:
 
 ```bash
-npm install /absolute/packages/weapp-container-react-native-0.1.0-preview.6.0.tgz
+npm install /absolute/packages/weapp-container-react-native-0.1.0-preview.7.0.tgz
 cd ios
 pod install
 ```
@@ -108,7 +108,7 @@ React effect cleanup cannot return Promise, and the asynchronous closure should 
 
 **Version and release status**
 
-`@weapp-container/react-native` source code is currently `0.1.0-preview.6.0`, using Apache-2.0. The SDK README records that the default runtime lock still points to the historical preview.5.3; when building from source code, you must explicitly use the audited preview.6.0 lock that matches the wrapper. The source code version does not mean that the npm release or runtime archive has been made public.
+The `@weapp-container/react-native` source is `0.1.0-preview.7.0`, licensed under Apache-2.0. Preparation defaults to the same-version public lock; the old preview.5.3 lock remains for historical compatibility. Local builds still require verified matching native inputs. npm publication, Android Central dependencies and public consumers on both platforms are incomplete; see the [release record](/en/docs/engineering/weapp-container/docs/public-sdk-release/).
 
 Release build runs TypeScript, React Native Codegen, and package file review. The standalone consumer consumes the full npm archive and pre-prepared native SDK and should not implicitly rely on the core runtime code within the workspace.
 

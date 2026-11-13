@@ -21,7 +21,7 @@ The iOS SDK provides Swift Concurrency sessionss, UIKit views, and Metal renderi
 <a id="1-安装-sdk"></a>
 ## 1. Install SDK
 
-Requires macOS, Xcode/Apple SDK, Swift 5.9+ and iOS 16.0+. The runtime should contain arm64 device, arm64 simulator and x86_64 simulator slices. Actual distribution can generate Swift Package or CocoaPods consumption directory; the framework license and third-party notices are retained with the package.
+The current release requires macOS, Xcode 27.2+ and the iOS 27.1+ compilation SDK; the deployment minimum remains iOS 16.0. The runtime should contain arm64 device, arm64 simulator and x86_64 simulator slices. Actual distribution can generate Swift Package or CocoaPods consumption directory; the framework license and third-party notices are retained with the package.
 
 Execute in the clean checkout root directory of the public core repository. For the complete environment, native library slices and licensing steps, see [Build from source](/en/docs/engineering/weapp-container/docs/sdk-source-build/).
 
@@ -82,6 +82,6 @@ Set `session.onEvent` to receive ready, navigation, chrome, message, error and c
 
 **Version and Release Status**
 
-iOS wrapper source code is `0.1.0-preview.6.0`, and the source code license is Apache-2.0. Current platform records are run through the iOS Simulator and are not yet signed by Apple. Precompiled runtime and SDK archive still need to be verified according to their respective locks and package licenses.
+The iOS wrapper source is `0.1.0-preview.7.0`, licensed under Apache-2.0. GitHub prereleases and public CocoaPods Specs are available. Public SwiftPM consumption, device-target compilation and arm64 simulator interaction acceptance passed; physical-device execution is incomplete. See the [release record](/en/docs/engineering/weapp-container/docs/public-sdk-release/). The platform page separately retains the fixed-demo history; verify archives against versioned locks and shipped licenses.
 
 Start by checking routing, persistence, page lifecycle, text input, orientation changes, and surface restoration using the compiled consumer and simulator from the release. A Simulator pass does not represent a signed physical product, Metal performance, or specific device regression pass; these statuses are recorded separately in the Acceptance Evidence.

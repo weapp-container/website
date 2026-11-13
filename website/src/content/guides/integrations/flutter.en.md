@@ -105,6 +105,6 @@ Widget unmounting and session closing are handled separately; when the page exit
 
 **Version and Release Status**
 
-The Flutter wrapper is currently `0.1.0-preview.6.0`, and the Flutter version is fixed at 3.47.7. There is currently no Windows entry for the runtime lock; there is still a mismatch in the Linux plug-in ABI. Dart type checking or a certain platform build pass does not mean that all plugins and GPU backends will work.
+The Flutter wrapper is `0.1.0-preview.7.0`, with Flutter pinned to 3.47.7. The current public lock includes native inputs for all five platforms; gaps in the old online demo do not describe current source. Publication of the seven pub.dev packages and real hosted consumption remain incomplete; Android also awaits Central dependencies. Use the source-build path and the [release record](/en/docs/engineering/weapp-container/docs/public-sdk-release/) to distinguish compilation, simulator and device validation.
 
 The Flutter repository maintains cross-platform packages and standalone examples. Run respective `prepare-native`, plugin build, example consumer and real device check based on currently available SDK pins; Windows/Linux desktop graphics and Flutter plugin ABI must be accepted on the target system itself.

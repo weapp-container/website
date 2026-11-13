@@ -21,7 +21,7 @@ locale: "zh-CN"
 <a id="version-or-abi-mismatch-during-download-or-preparation"></a>
 ## 下载或准备时出现版本/ABI 不匹配
 
-先读取 SDK、runtime distribution 与当前 lock 的版本、ABI、platform、architecture、size、SHA-256 和 profile。部分 SDK 仓库仍保留 preview.5.3 历史 runtime lock，而源码已更新到 preview.6.0；只有使用匹配版本的审核锁才可继续。不要改写锁来匹配旧二进制，也不要从其他机器拷贝未标识的 native 库。
+先读取 SDK、runtime distribution 与当前 lock 的版本、ABI、platform、architecture、size、SHA-256 和 profile。当前 SDK 源码与默认版本化公开锁均为 preview.7.0；未带版本的旧锁仅用于历史兼容。自定义 manifest 必须与源码和归档版本匹配。不要改写锁来匹配旧二进制，也不要从其他机器拷贝未标识的 native 库。
 
 <a id="integrity-failed"></a>
 <a id="pack-integrity-verification-fails"></a>

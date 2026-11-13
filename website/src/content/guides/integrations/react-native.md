@@ -32,12 +32,12 @@ React Native 包将原生 session 控制器通过 TurboModule 暴露给 TypeScri
 已有带原生依赖的 SDK 分发包时，在 React Native 应用中安装本地归档：
 
 ```bash
-npm install /absolute/packages/weapp-container-react-native-0.1.0-preview.6.0.tgz
+npm install /absolute/packages/weapp-container-react-native-0.1.0-preview.7.0.tgz
 cd ios
 pod install
 ```
 
-将 `hello-pack/` 放到 Android 的 `android/app/src/main/assets/hello-pack/`，或作为完整资源文件夹加入 iOS target。SDK 归档获取与源码打包见[反应原生 SDK 读取器](https://github.com/weapp-container/sdk-react-native/blob/main/README.md)；这里的文件名不表示 npm registry 已发布。
+将 `hello-pack/` 放到 Android 的 `android/app/src/main/assets/hello-pack/`，或作为完整资源文件夹加入 iOS target。SDK 归档获取与源码打包见[React Native SDK README](https://github.com/weapp-container/sdk-react-native/blob/main/README.md)；这里的文件名不表示 npm registry 已发布。
 
 <a id="mount-load"></a>
 <a id="2-create-controller"></a>
@@ -108,7 +108,7 @@ React effect cleanup 不能返回 Promise，应把异步关闭交给页面的会
 
 **版本和授权状态**
 
-`@weapp-container/react-native` 源码当前为 `0.1.0-preview.6.0`，采用 Apache-2.0。SDK README 记录默认 runtime lock 仍指向历史 preview.5.3；从源码构建时必须显式使用审核过、与 wrapper 匹配的 preview.6.0 lock。源码版本不代表 npm 发布或 runtime archive 已公开。
+`@weapp-container/react-native` 源码当前为 `0.1.0-preview.7.0`，采用 Apache-2.0。准备工具默认读取同版本公开锁，旧 preview.5.3 锁仅用于历史兼容。本地构建仍须核验配套原生输入；npm 发布、Android Central 依赖和双端公开消费尚未全部完成，见[发行记录](/docs/engineering/weapp-container/docs/public-sdk-release/)。
 
 发行构建运行 TypeScript、React Native Codegen 和包文件审核。独立 consumer 消耗完整 npm archive 和预先准备的原生 SDK，不应该隐式依赖工作区内的核心运行时代码。
 

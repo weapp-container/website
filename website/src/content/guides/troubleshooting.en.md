@@ -21,7 +21,7 @@ Prioritize the use of clear error codes, receipts, and reproducible packs before
 <a id="下载或准备时出现版本abi-不匹配"></a>
 ## Version or ABI mismatch during download or preparation
 
-First read the SDK, runtime distribution and current lock version, ABI, platform, architecture, size, SHA-256 and profile. Some SDK repositories still retain the preview.5.3 historical runtime lock, while the source code has been updated to preview.6.0; you can only continue using the reviewed lock of the matching version. Do not rewrite locks to match older binaries, and do not copy unidentified native libraries from other machines.
+First read the SDK, runtime distribution and current lock version, ABI, platform, architecture, size, SHA-256 and profile. Current SDK source and the default versioned public lock both use preview.7.0; unversioned old locks remain for historical compatibility. Custom manifests must match the source and archive versions. Do not rewrite locks to match older binaries, and do not copy unidentified native libraries from other machines.
 
 <a id="integrity-failed"></a>
 <a id="pack-文件完整性失败"></a>

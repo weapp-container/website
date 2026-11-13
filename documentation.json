@@ -451,8 +451,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/android.md"
       },
-      "reviewedChineseSummary": "Android SDK 接入；环境要求；1. 准备 SDK；2. 放入包并嵌入视图；可核对的 Session API；包发布检查",
-      "reviewedChineseSha256": "df72d24c17f4e5e4d902231ccd711c33ec92fc0247577e76cc792741fb7a42f9",
+      "reviewedChineseSummary": "Android SDK 接入；环境要求；1. 准备 SDK；2. 放入包并嵌入视图；可核对的 Session API；包发布检查；同步 preview.7 公开发行与历史演示边界",
+      "reviewedChineseSha256": "732d2477b047cc2fcac79b21188c85d085cb7695f20d9e8dd443f796380fc8ba",
       "route": "/docs/integrations/android/",
       "legacyHeadingIds": [
         "embed",
@@ -471,8 +471,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/desktop.md"
       },
-      "reviewedChineseSummary": "C++ Desktop SDK 接入；编译目标；连接 CMake consumer；Session 和原生 View；主要接口",
-      "reviewedChineseSha256": "5150c33beb3e95e24af1a6cac3b40e9a44f34639feba737a1ac7b37356cbef27",
+      "reviewedChineseSummary": "C++ Desktop SDK 接入；编译目标；连接 CMake consumer；Session 和原生 View；主要接口；同步 preview.7 公开发行与历史演示边界",
+      "reviewedChineseSha256": "15f7d4b1f4aa08aa7ec52ad7bdd547a8120a9dce869c4d3530c2f3a556285005",
       "route": "/docs/integrations/desktop/",
       "legacyHeadingIds": [
         "cmake",
@@ -490,8 +490,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/flutter.md"
       },
-      "reviewedChineseSummary": "Flutter SDK 接入；从当前源码准备原生依赖；1. 添加 SDK 依赖；2. 创建 Controller；3. 挂载 Widget 并加载；主要 API；平台验证",
-      "reviewedChineseSha256": "fe9f81b7eea81df7530c5d53750b6456b8c932f94814155311e143221462859f",
+      "reviewedChineseSummary": "Flutter SDK 接入；从当前源码准备原生依赖；1. 添加 SDK 依赖；2. 创建 Controller；3. 挂载 Widget 并加载；主要 API；平台验证；同步 preview.7 公开发行与历史演示边界",
+      "reviewedChineseSha256": "7465aa647439a06eac27b21ae9270e31027c3c84ed320c0dd7658616eae13656",
       "route": "/docs/integrations/flutter/",
       "legacyHeadingIds": [
         "api",
@@ -527,8 +527,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/ios.md"
       },
-      "reviewedChineseSummary": "iOS SDK 接入；1. 安装 SDK；2. 挂载 UIKit 视图并加载；事件和宿主方法；模拟器和设备验收",
-      "reviewedChineseSha256": "1059eb4bc949461f5f8b4d110d613668bbbd2894408460afc0fd4b577a520b39",
+      "reviewedChineseSummary": "iOS SDK 接入；1. 安装 SDK；2. 挂载 UIKit 视图并加载；事件和宿主方法；模拟器和设备验收；同步 preview.7 公开发行与历史演示边界",
+      "reviewedChineseSha256": "cebfb395ffd95cbbf022a36d57ab11571965d5fe59ebb5e93fb34aa84d103418",
       "route": "/docs/integrations/ios/",
       "legacyHeadingIds": [
         "create-session",
@@ -546,8 +546,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/react-native.md"
       },
-      "reviewedChineseSummary": "React Native SDK 接入；从当前源码准备原生依赖；1. 安装 SDK；2. 创建 Controller；3. 挂载视图并加载；控制器 API；构建 consumer",
-      "reviewedChineseSha256": "a7f6d74c811b545481d74c618628b4f4f42853057ec9d5408231396f8b29e3b6",
+      "reviewedChineseSummary": "React Native SDK 接入；从当前源码准备原生依赖；1. 安装 SDK；2. 创建 Controller；3. 挂载视图并加载；控制器 API；构建 consumer；同步 preview.7 公开发行与历史演示边界",
+      "reviewedChineseSha256": "eabec53003ea0ebedc7f10fa40d75a2ccc2a6e2d6acd7f14c31ece7df40622dc",
       "route": "/docs/integrations/react-native/",
       "legacyHeadingIds": [
         "controller-api",
@@ -584,8 +584,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/licensing.md"
       },
-      "reviewedChineseSummary": "许可、下载与发行；访问权限与许可分开；当前验证与发行状态；产品标识",
-      "reviewedChineseSha256": "b679de9b7267584cc38d20f1de044d533cdf0c18a24c07ecdd38a4fd520e5180",
+      "reviewedChineseSummary": "许可、下载与发行；访问权限与许可分开；当前验证与发行状态；产品标识；同步 preview.7 公开发行与历史演示边界",
+      "reviewedChineseSha256": "50e31fedd87ca3b61f34dcc19feb47d584cc218fdd29f77b7eec8bb1f0e5a382",
       "route": "/docs/licensing/",
       "legacyHeadingIds": [
         "binary-availability",
@@ -683,8 +683,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/troubleshooting.md"
       },
-      "reviewedChineseSummary": "故障排查；下载或准备时出现版本/ABI 不匹配；pack 文件完整性失败；unsupported capability 或 canIUse 返回 false；View 为空、报 ready 后没有画面；切后台恢复后事件停止；程序可以操作但点击/输入失败",
-      "reviewedChineseSha256": "d286e5ac6c454f102af5dd91e177594e5f52cc6c1c9cc000a753d400629a5487",
+      "reviewedChineseSummary": "故障排查；下载或准备时出现版本/ABI 不匹配；pack 文件完整性失败；unsupported capability 或 canIUse 返回 false；View 为空、报 ready 后没有画面；切后台恢复后事件停止；程序可以操作但点击/输入失败；同步 preview.7 公开发行与历史演示边界",
+      "reviewedChineseSha256": "f1dee6fe4e11cb5065b0b6501b921753e72e22dadb7013fe8f35de8c00397c9e",
       "route": "/docs/troubleshooting/",
       "legacyHeadingIds": [
         "attach-diagnostics",

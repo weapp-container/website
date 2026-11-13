@@ -21,7 +21,7 @@ iOS SDK 提供 Swift Concurrency 会话、UIKit 视图和 Metal 呈现面。最�
 <a id="1-install-sdk"></a>
 ## 1. 安装 SDK
 
-要求 macOS、Xcode/Apple SDK、Swift 5.9+ 与 iOS 16.0+。运行库应包含 arm64 device、arm64 simulator 和 x86_64 simulator slices。实际发行可以生成 Swift Package 或 CocoaPods 消费目录；framework 的 license 和第三方 notices 随包保留。
+当前发行要求 macOS、Xcode 27.2+ 及 iOS 27.1+ 编译 SDK；部署最低版本仍为 iOS 16.0。运行库应包含 arm64 device、arm64 simulator 和 x86_64 simulator slices。实际发行可以生成 Swift Package 或 CocoaPods 消费目录；framework 的 license 和第三方 notices 随包保留。
 
 在公开核心仓库的干净 checkout 根目录执行。完整环境、原生切片及许可步骤见[源码构建](/docs/engineering/weapp-container/docs/sdk-source-build/)。
 
@@ -82,6 +82,6 @@ func mountContainer(in parent: UIViewController, packURL: URL) throws -> WeappCo
 
 **版本与发行状态**
 
-iOS wrapper 源码为 `0.1.0-preview.6.0`，源码许可证为 Apache-2.0。当前平台记录通过 iOS Simulator 运行，尚无 Apple 真机签名。预编译 runtime 和 SDK archive 仍需按各自 lock 与随包许可证核验。
+iOS wrapper 源码为 `0.1.0-preview.7.0`，采用 Apache-2.0。GitHub prerelease 与公开 CocoaPods Specs 已提供；公开 SwiftPM 消费、真机目标编译和 arm64 模拟器交互验收通过，真机运行尚未完成。详见[发行记录](/docs/engineering/weapp-container/docs/public-sdk-release/)。固定在线演示的历史状态另见平台页；归档仍按版本化 lock 和随包许可证核验。
 
 先使用发行中的编译消费者与模拟器检查路由、持久化、页面生命周期、文本输入、方向变化和 surface 恢复。Simulator 通过不代表已签署的真机产物、Metal 性能或特定设备回归通过；这些状态在验收证据中分别记录。

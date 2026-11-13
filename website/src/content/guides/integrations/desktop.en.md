@@ -29,7 +29,7 @@ Build Apple Silicon macOS below. For other triple and target pairings, see the s
 
 ```bash
 pnpm sdk:build:native -- --target aarch64-apple-darwin --profile release
-pnpm sdk:licenses -- --target aarch64-apple-darwin
+pnpm sdk:licenses -- --target aarch64-apple-darwin --features quickjs-native,skia-gpu-metal
 pnpm sdk:build:desktop -- --target macos-arm64 --pack artifacts/hello-pack --verify
 ```
 
@@ -93,6 +93,6 @@ After creating the View, wait for the actual layout to be positive before callin
 
 **Version and Release Status**
 
-Desktop wrapper source code is `0.1.0-preview.6.0`. The current SDK runtime lock has macOS and Linux entries, but no Windows runtime; the Showcase status is macOS, desktop running passed, Linux partially passed, and Windows pending. Just because the C++ interface is visible does not mean that the corresponding platform archive has been released.
+The Desktop wrapper source is `0.1.0-preview.7.0`; the current public lock includes macOS, Linux and Windows. Public archive consumers passed on all three systems; physical-device and hardware GPU acceptance remain separate. Published archives retain a stale preview.6.0 `WEAPP_DESKTOP_VERSION` macro; metadata and runtimes are preview.7.0. Current source corrects it while published bytes remain immutable. See the [SDK erratum](/en/docs/engineering/sdk-desktop/index/#published-preview-erratum) and [release record](/en/docs/engineering/weapp-container/docs/public-sdk-release/). The platform page retains the separate fixed-demo history.
 
 `Session::load`, `navigate`, `back`, `send_message`, `register_host_method`, `complete_host_call`, `set_foreground`, `set_metrics`, `snapshot` and `close`. `View` provides native handles, bounds and visibility updates. Operations returning Status must always check for error codes.

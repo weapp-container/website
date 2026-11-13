@@ -61,7 +61,7 @@ android {
     }
 }
 dependencies {
-    implementation("com.sonofmagic.weapp:weapp-container-android:0.1.0-preview.6.0")
+    implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.0")
 }
 ```
 
@@ -114,6 +114,6 @@ session.load(PackSource.Asset("portable-pack")).whenComplete { _, error ->
 
 **版本与发行状态**
 
-Android wrapper 源码为 `0.1.0-preview.6.0`，源码许可证为 Apache-2.0。runtime archive 有独立许可证和下载权限；当前 Showcase Android 记录为 arm64-v8a / x86_64 模拟器已安装、已运行，详见[平台状态](/docs/platforms/)。锁文件中的预编译件属于 restricted-showcase profile，不代表通用商业发行。
+Android wrapper 源码为 `0.1.0-preview.7.0`，采用 Apache-2.0。当前准备工具默认使用同版本公开运行库锁，历史 restricted-showcase 锁只用于兼容。Maven Central 发布尚未完成；可按上方步骤构建本地 Maven 仓库。公开发行的模拟器与真机验收见[发行记录](/docs/engineering/weapp-container/docs/public-sdk-release/)；[平台状态](/docs/platforms/)保留固定在线演示的独立记录。
 
 SDK 目标支持 Android 26+ 的 arm64 与 x86_64。构建还校验 ELF 和 16 KB 对齐，但这不等于真实设备启动验证。使用代表性模拟器与真实 GPU surface 验收视图、触控、会话后台/恢复、存储重开及异步关闭。

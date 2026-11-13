@@ -29,7 +29,7 @@ macOS、Windows 与 Linux 的 C++ SDK 提供 typed Session、事件回调、固�
 
 ```bash
 pnpm sdk:build:native -- --target aarch64-apple-darwin --profile release
-pnpm sdk:licenses -- --target aarch64-apple-darwin
+pnpm sdk:licenses -- --target aarch64-apple-darwin --features quickjs-native,skia-gpu-metal
 pnpm sdk:build:desktop -- --target macos-arm64 --pack artifacts/hello-pack --verify
 ```
 
@@ -93,6 +93,6 @@ struct MiniAppHost {
 
 **版本与发行状态**
 
-Desktop wrapper 源码为 `0.1.0-preview.6.0`。当前 SDK runtime lock 有 macOS 与 Linux 条目，没有 Windows runtime；Showcase 状态为 macOS 桌面运行通过、Linux 部分通过、Windows 待运行。C++ 接口可见不代表对应平台 archive 已发行。
+Desktop wrapper 源码为 `0.1.0-preview.7.0`；当前公开锁包含 macOS、Linux 和 Windows。三个系统的公开归档消费者已通过，真机与硬件 GPU 验收仍分别记录。已发布归档的 `WEAPP_DESKTOP_VERSION` 宏误留 preview.6.0；元数据和运行库为 preview.7.0，当前源码已修正，已有字节保持不变。详见 [SDK 勘误](/docs/engineering/sdk-desktop/index/#published-preview-erratum)与[发行记录](/docs/engineering/weapp-container/docs/public-sdk-release/)。平台页继续保留固定演示的历史状态。
 
 `Session::load`、`navigate`、`back`、`send_message`、`register_host_method`、`complete_host_call`、`set_foreground`、`set_metrics`、`snapshot` 与 `close`。`View` 提供原生句柄、边界与可见性更新。返回 Status 的操作必须始终检查错误码。

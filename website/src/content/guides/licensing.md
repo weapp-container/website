@@ -21,7 +21,7 @@ locale: "zh-CN"
 | --- | --- | --- |
 | weapp-container 核心源码 | 核心仓库当前源码采用 Apache-2.0；构建输出的许可随对应发行文件提供。 | 以 [核心仓库 LICENSE](https://github.com/weapp-container/weapp-container/blob/main/LICENSE) 为准。源码许可本身不授予其它仓库或归档的读取权。 |
 | Android、iOS、Desktop、Flutter、React Native wrapper | 各 SDK 源码仓库附带 Apache-2.0 LICENSE。 | 源码和本地构建工具可按各自仓库说明取得。npm、pub.dev 或其它公共包服务是否发布，以实际包版本为准。 |
-| 预编译 runtime、SDK 与 pack 归档 | 每个归档携带自己的 `RUNTIME-LICENSE`、LICENSE 与第三方 notices；不要用源码许可证替代归档许可。 | 精确版本、哈希和 release repository 记录在锁文件中。旧锁的 `weapp-container/showcase` 只用于读取其中固定的历史资产；新资产写入 `weapp-container/website`。仓库权限不自动授予使用或再分发权。 |
+| 预编译 runtime、SDK 与 pack 归档 | 每个归档携带自己的 `RUNTIME-LICENSE`、LICENSE 与第三方 notices；不要用源码许可证替代归档许可。 | 精确版本、哈希和 release repository 记录在锁文件中。旧锁的 `weapp-container/showcase` 只用于读取其中固定的历史资产；新站点与演示资产使用 `weapp-container/website`，当前通用运行库使用核心仓库的版本化发行。仓库权限不自动授予使用或再分发权。 |
 | Website 与固定在线演示 | 站点仓库中的源码许可见其根目录许可文件。演示 runtime 另外遵循实际发布归档携带的许可。 | `container.weapp.dev` 公开固定演示所需的同源文件，不提供通用 SDK、任意 pack 加载服务或 runtime CDN。 |
 | 字体与照片 | Noto Sans SC 子集保留 OFL；摄影许可及来源记录在 `PHOTO-LICENSES.json`。 | 再使用前检查各资源自己的 notice 和许可。 |
 
@@ -37,7 +37,7 @@ GitHub token、仓库成员权限、镜像下载和拿到归档只解决访问�
 <a id="current-validation-and-release-status"></a>
 ## 当前验证与发行状态
 
-SDK wrapper 源码当前为 `0.1.0-preview.6.0`，共享协议包为 `0.1.0-preview.5.7`。锁定的 `restricted-showcase` SDK、runtime 和 pack 归档面向固定演示策略，不代表通用 SDK 产品发布。各平台的构建、安装、运行和签名分别显示在[平台状态](/docs/platforms/)中；只有锁中存在的 target 才能下载，未记录的状态不推断为已支持。
+当前 SDK 与共享协议源码为 `0.1.0-preview.7.0`。核心运行库、iOS、Desktop 及 CocoaPods Specs 已公开，npm、Maven Central 和 pub.dev 发布尚未全部完成，见[发行记录](/docs/engineering/weapp-container/docs/public-sdk-release/)。在线演示继续使用固定的历史 `restricted-showcase` runtime 与 pack，其许可和验证记录独立保留。各平台的构建、安装、运行和签名分别显示在[平台状态](/docs/platforms/)中；只有锁中存在的 target 才能下载，未记录的状态不推断为已支持。
 
 旧版 runtime 归档继续使用归档内的历史许可、哈希和发行记录。本次源码版本更新不会把旧二进制改标成新版本，也不会改写历史 release。
 

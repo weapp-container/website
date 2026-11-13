@@ -61,7 +61,7 @@ android {
     }
 }
 dependencies {
-    implementation("com.sonofmagic.weapp:weapp-container-android:0.1.0-preview.6.0")
+    implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.0")
 }
 ```
 
@@ -114,6 +114,6 @@ First mount the View and bind the session, then wait for load. Connect `session.
 
 **Version and Release Status**
 
-Android wrapper source code is `0.1.0-preview.6.0`, and the source code license is Apache-2.0. The runtime archive has an independent license and download permission; the current Showcase Android record is arm64-v8a / x86_64 and the emulator is installed and running. For details, see [Platform Status](/en/docs/platforms/). The precompiled files in the lock file belong to the restricted-showcase profile and do not represent general commercial distribution.
+The Android wrapper source is `0.1.0-preview.7.0`, licensed under Apache-2.0. Preparation now defaults to the same-version public runtime lock; historical restricted-showcase locks remain for compatibility. Maven Central publication is incomplete; build the local Maven repository as shown above. See the [release record](/en/docs/engineering/weapp-container/docs/public-sdk-release/) for release emulator and device acceptance. [Platform status](/en/docs/platforms/) retains the separate fixed-demo record.
 
 SDK target supports arm64 and x86_64 for Android 26+. The build also verifies ELF and 16 KB alignment, but this is not equivalent to real device boot verification. Experience graphics, touch, session background/resume, storage reopening, and asynchronous shutdown using representative emulators and real GPU surfaces.
