@@ -6,7 +6,7 @@ summary: "小程序宿主 Chrome。来自 weapp-container/weapp-container 的版
 route: "/docs/engineering/weapp-container/docs/dev-player/chrome/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/dev-player/chrome.md"
 ---
 
@@ -63,7 +63,7 @@ pnpm simulator:dev -- --project examples/apps/player-chrome-app --surface device
 单元/组件测试不执行原生 UI 或 GPU 呈现器。
 缺失的设备/窗口仍被阻塞；历史 preview.3 运行保留其原始源绑定，且不受此接口变更影响。
 
-[场景清单](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/docs/dev-player/chrome-cases-v1.json) 修复了 20 个场景和 97 个适用平台场景。控件/Rust 测试与这些实际窗口场景的测试分开报告。现有的五平台发布门禁保持不变。
+[场景清单](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/docs/dev-player/chrome-cases-v1.json) 修复了 20 个场景和 97 个适用平台场景。控件/Rust 测试与这些实际窗口场景的测试分开报告。现有的五平台发布门禁保持不变。
 
 <a id="preview4-execution-results-2026-10-29"></a>
 ## 预览.4 执行结果 (2026-10-29)

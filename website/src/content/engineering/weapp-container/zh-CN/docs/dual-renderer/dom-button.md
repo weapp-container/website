@@ -6,7 +6,7 @@ summary: "DOM button 基础适配。来自 weapp-container/weapp-container 的�
 route: "/docs/engineering/weapp-container/docs/dual-renderer/dom-button/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/dual-renderer/dom-button.md"
 ---
 

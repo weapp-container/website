@@ -6,7 +6,7 @@ summary: "nextTick 与 idle 调度实现范围。来自 weapp-container/weapp-co
 route: "/docs/engineering/weapp-container/docs/host-services/nexttick-scheduler-implementation-scope/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/host-services/nexttick-scheduler-implementation-scope.md"
 ---
 

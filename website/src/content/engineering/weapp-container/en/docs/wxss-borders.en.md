@@ -6,7 +6,7 @@ summary: "WXSS border and box contract. Versioned engineering reference from wea
 route: "/docs/engineering/weapp-container/docs/wxss-borders/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/wxss-borders.en.md"
 ---
 

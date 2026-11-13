@@ -6,7 +6,7 @@ summary: "Weapp Container。来自 weapp-container/weapp-container 的版本化�
 route: "/docs/engineering/weapp-container/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "README.md"
 ---
 
@@ -114,7 +114,7 @@ PR 基础检查使用公开依赖；完整平台矩阵、官方开发者工具�
 <a id="license-and-history"></a>
 ## 许可与历史
 
-自有源码采用 **Apache-2.0**。`container-core`、`container-ir` 和 `container-bridge` 保留 **MIT OR Apache-2.0**，第三方组件保留各自许可。新构建携带 `RUNTIME-LICENSE` 和依赖 notices，详见[许可说明](/docs/engineering/weapp-container/docs/licensing/)及 [NOTICE](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/NOTICE)。
+自有源码采用 **Apache-2.0**。`container-core`、`container-ir` 和 `container-bridge` 保留 **MIT OR Apache-2.0**，第三方组件保留各自许可。新构建携带 `RUNTIME-LICENSE` 和依赖 notices，详见[许可说明](/docs/engineering/weapp-container/docs/licensing/)及 [NOTICE](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/NOTICE)。
 
 公开 Git 从整理后的源码快照开始，原开发历史和大型构建证据保存在私有归档。必要回归 fixture 保留在源码中，详见[历史证据说明](/docs/engineering/weapp-container/docs/archived-evidence/)。
 

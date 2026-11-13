@@ -6,7 +6,7 @@ summary: "Weapp Container 0.1.0-preview.7.1 发布状态。来自 weapp-containe
 route: "/docs/engineering/weapp-container/docs/public-sdk-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/public-sdk-release.md"
 ---
 

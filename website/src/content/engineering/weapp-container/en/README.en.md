@@ -6,7 +6,7 @@ summary: "Weapp Container. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/weapp-container/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "README.en.md"
 ---
 
@@ -114,7 +114,7 @@ Baseline PR checks use public dependencies. The full platform matrix, official d
 <a id="许可与历史"></a>
 ## License and history
 
-Repository-authored source uses **Apache-2.0**. `container-core`, `container-ir`, and `container-bridge` retain **MIT OR Apache-2.0**; third-party components retain their own licenses. New builds include `RUNTIME-LICENSE` and dependency notices. See [licensing](/en/docs/engineering/weapp-container/docs/licensing/) and [NOTICE](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/NOTICE).
+Repository-authored source uses **Apache-2.0**. `container-core`, `container-ir`, and `container-bridge` retain **MIT OR Apache-2.0**; third-party components retain their own licenses. New builds include `RUNTIME-LICENSE` and dependency notices. See [licensing](/en/docs/engineering/weapp-container/docs/licensing/) and [NOTICE](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/NOTICE).
 
 Public Git history starts from a prepared source snapshot. Earlier development history and large build records remain in private archives. Necessary regression fixtures stay in source; see [archived evidence](/en/docs/engineering/weapp-container/docs/archived-evidence/).
 

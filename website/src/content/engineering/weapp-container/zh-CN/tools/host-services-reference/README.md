@@ -6,7 +6,7 @@ summary: "宿主账号与支付参考后端。来自 weapp-container/weapp-conta
 route: "/docs/engineering/weapp-container/tools/host-services-reference/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "tools/host-services-reference/README.md"
 ---
 

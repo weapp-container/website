@@ -6,7 +6,7 @@ summary: "路由事务与私有能力策略的实现范围。来自 weapp-contai
 route: "/docs/engineering/weapp-container/docs/host-services/route-transactions-stats-scope/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/host-services/route-transactions-stats-scope.md"
 ---
 

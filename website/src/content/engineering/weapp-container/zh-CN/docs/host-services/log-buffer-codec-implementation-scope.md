@@ -6,7 +6,7 @@ summary: "LogManager、BufferURL 与文件编码实现范围。来自 weapp-cont
 route: "/docs/engineering/weapp-container/docs/host-services/log-buffer-codec-implementation-scope/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/host-services/log-buffer-codec-implementation-scope.md"
 ---
 
@@ -32,7 +32,7 @@ sourcePath: "docs/host-services/log-buffer-codec-implementation-scope.md"
 <a id="session-held-logmanager-logs"></a>
 ## Session 持有的 LogManager 日志
 
-[`log-manager.js`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-core/src/log-manager.js) 提供独立的 runtime factory 和四个方法，QuickJS/V8 回调把记录写入 [`LogManagerJournal`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-core/src/log_manager.rs)。日志不借用 Console 的十六参数、2048 字符格式化器，也不依赖可写 guest effect/drain 全局。Session 从同一 native journal 取记录，投递到已有 native SDK Console consumer 和 Web 诊断 wire；只产生日志的调用和公开 `toJSON` 失败的调用仍能到达该 drain。
+[`log-manager.js`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-core/src/log-manager.js) 提供独立的 runtime factory 和四个方法，QuickJS/V8 回调把记录写入 [`LogManagerJournal`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-core/src/log_manager.rs)。日志不借用 Console 的十六参数、2048 字符格式化器，也不依赖可写 guest effect/drain 全局。Session 从同一 native journal 取记录，投递到已有 native SDK Console consumer 和 Web 诊断 wire；只产生日志的调用和公开 `toJSON` 失败的调用仍能到达该 drain。
 
 factory 和四个成员分别取 manifest、可信 host 和 provider 的最小等级，没有隐式授权；借用旧方法不能越过撤权。首次成功调用 factory 后开始记录。缺省或 `{level:0}` 同时记录显式调用、实际 App/Page hook 和已安装 `wx` 方法调用；`{level:1}` 只记录显式方法。当前返回一个 Session 共用 manager，后一次 factory 调用会更新自动记录策略。这是当前容器策略，尚未证明与固定微信版本的重复 factory 语义相同。
 
@@ -40,20 +40,20 @@ factory 和四个成员分别取 manifest、可信 host 和 provider 的最小�
 
 native journal 最多保留 5 MiB、8192 条易失记录，压力下移除最旧记录并报告 dropped。每次 drain 最多 128 条、256 KiB，预算包含诊断桥第二次 JSON 字符串编码；未消费尾部保留到后续宿主轮次。入队异常、poison 和清理异常不允许穿过 VM ABI，日志不能替换原调用的返回值或异常。
 
-App 隐藏、页面销毁不终止应用级 journal。终态应用/host 调用关闭、账号/服务撤销、引擎 drop 或永久执行故障会关闭 native owner，丢弃残余记录；之后即使重新发布可信能力也不能复活该 incarnation。实现位于 [`async_host.rs`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-runtime/src/async_host.rs)、[QuickJS execution control](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-engine-quickjs/src/execution.rs) 和 [`EngineTerminalResources`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-core/src/engine_terminal_resources.rs)。
+App 隐藏、页面销毁不终止应用级 journal。终态应用/host 调用关闭、账号/服务撤销、引擎 drop 或永久执行故障会关闭 native owner，丢弃残余记录；之后即使重新发布可信能力也不能复活该 incarnation。实现位于 [`async_host.rs`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-runtime/src/async_host.rs)、[QuickJS execution control](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-engine-quickjs/src/execution.rs) 和 [`EngineTerminalResources`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-core/src/engine_terminal_resources.rs)。
 
 五个 API 继续 Partial：任意值的官方投影、100 KiB 计费口径、重复 factory 策略、持久化/上传、Web/native 保留行为与固定微信版本的一致性均未完成。当前诊断 consumer 通过不等于微信日志服务验收。
 
 <a id="immutable-byte-owner-of-bufferurl-and-image-consumption"></a>
 ## BufferURL 的不可变字节 owner 与图像消费
 
-[`buffer-url.js`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-core/src/buffer-url.js) 同步接收 ArrayBuffer 和锁定声明中的九种 TypedArray，按其真实 `byteOffset/byteLength` 快照字节。DataView、BigInt TypedArray、共享缓冲区、伪造 receiver、已 detach 和超预算输入明确拒绝。create/revoke 独立准入，私有 native callback 在 bootstrap 后从全局删除，通用 host descriptor 不能替换这两个 runtime API。
+[`buffer-url.js`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-core/src/buffer-url.js) 同步接收 ArrayBuffer 和锁定声明中的九种 TypedArray，按其真实 `byteOffset/byteLength` 快照字节。DataView、BigInt TypedArray、共享缓冲区、伪造 receiver、已 detach 和超预算输入明确拒绝。create/revoke 独立准入，私有 native callback 在 bootstrap 后从全局删除，通用 host descriptor 不能替换这两个 runtime API。
 
-[`BufferUrlStore`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-core/src/buffer_urls.rs) 为每次创建分配 native 192 位随机身份，字节为不可变 Arc；相同内容仍得到不同 URL。单租约上限 8 MiB、每 owner 32 MiB、1024 个租约。`revokeBufferURL` 同步返回 void，只移除当前 owner 地址对应的租约；重复、未知和其他 owner 的 URL 不会影响有效资源。限额与 URL 形态是容器策略，不能据此宣称完整官方参数域。
+[`BufferUrlStore`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-core/src/buffer_urls.rs) 为每次创建分配 native 192 位随机身份，字节为不可变 Arc；相同内容仍得到不同 URL。单租约上限 8 MiB、每 owner 32 MiB、1024 个租约。`revokeBufferURL` 同步返回 void，只移除当前 owner 地址对应的租约；重复、未知和其他 owner 的 URL 不会影响有效资源。限额与 URL 形态是容器策略，不能据此宣称完整官方参数域。
 
-真实消费链目前覆盖 `<image>` 的 PNG、JPEG、WebP。[`buffer_urls.rs`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-runtime/src/buffer_urls.rs) 从同一 Session 的 live lease 生成 View resource descriptor；[`images.rs`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-runtime/src/images.rs) 在查每帧资源和 decoded cache 前重新验证租约，内容哈希相同不能替代授权。预览使用 live Session 的字节 owner，页面/组件重建不改写资源归属。
+真实消费链目前覆盖 `<image>` 的 PNG、JPEG、WebP。[`buffer_urls.rs`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-runtime/src/buffer_urls.rs) 从同一 Session 的 live lease 生成 View resource descriptor；[`images.rs`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-runtime/src/images.rs) 在查每帧资源和 decoded cache 前重新验证租约，内容哈希相同不能替代授权。预览使用 live Session 的字节 owner，页面/组件重建不改写资源归属。
 
-Web direct/WASM 和生产 Worker/DOM 通过 [`browser_view_resource_at_path`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-runtime/src/browser_view.rs) 按完整 presentation key、精确 descriptor path、SHA-256 和 size 读取。Worker 的 [`resource` RPC](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/examples/hosts/web-wasm/worker-runtime.mjs) 保留 path，[DOM adapter](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/examples/hosts/web-wasm/worker-dom-adapter.mjs) 在创建 Blob URL 前复核回包和实际 digest。动态资源不允许退回只凭 digest 的读取路径，旧 surface、撤销后地址和换 owner 后地址均不再授权新读取。
+Web direct/WASM 和生产 Worker/DOM 通过 [`browser_view_resource_at_path`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-runtime/src/browser_view.rs) 按完整 presentation key、精确 descriptor path、SHA-256 和 size 读取。Worker 的 [`resource` RPC](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/examples/hosts/web-wasm/worker-runtime.mjs) 保留 path，[DOM adapter](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/examples/hosts/web-wasm/worker-dom-adapter.mjs) 在创建 Blob URL 前复核回包和实际 digest。动态资源不允许退回只凭 digest 的读取路径，旧 surface、撤销后地址和换 owner 后地址均不再授权新读取。
 
 应用隐藏和 Page retirement 保留应用级租约。终态应用卸载、服务/账号撤销、terminal host-call shutdown、native engine drop/永久故障会排空 owner，即使公开 revoke 被拒绝也必须清理。已经成功发布的不可变 frame 或 DOM Blob lease 按现有最后使用者生命周期保留；撤销不追溯清除已发布像素，新的资源读取和 cache 使用必须重新过 gate。
 
@@ -62,16 +62,16 @@ Web direct/WASM 和生产 Worker/DOM 通过 [`browser_view_resource_at_path`](ht
 <a id="independent-admission-for-lifecycle-notifications"></a>
 ## 生命周期通知的独立准入
 
-[`lifecycle-notifications.js`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-core/src/lifecycle-notifications.js) 为 `on/offAppShow`、`on/offAppHide`、`on/offBeforePageUnload`、`on/offAfterPageUnload` 各自保存私有准入；Session 先取该方法的 manifest 声明，再与可信 host/provider 求最小等级，保留 Partial，不借 counterpart 授权。通用 installer 的直接或 counterpart descriptor 都不能覆盖这些方法，篡改公开 capability map 不会授予权限。
+[`lifecycle-notifications.js`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-core/src/lifecycle-notifications.js) 为 `on/offAppShow`、`on/offAppHide`、`on/offBeforePageUnload`、`on/offAfterPageUnload` 各自保存私有准入；Session 先取该方法的 manifest 声明，再与可信 host/provider 求最小等级，保留 Partial，不借 counterpart 授权。通用 installer 的直接或 counterpart descriptor 都不能覆盖这些方法，篡改公开 capability map 不会授予权限。
 
 撤销某个 on 方法只清除该事件 listener 并增加 generation，截断已捕获但未执行的尾部；重新授权不重放旧订阅。普通 off 仍按既有 emission snapshot 执行，不等同可信撤权。通知准入不删除内部 departure/receiver 状态，因此 before/after 能继续配对并完成实际页面退休；拒绝公开 show/hide listener 也不取消 scheduler 的暂停/恢复。终态 retire 清空全部 listener 和 pending departure，独立于公开 off 权限。这是已有通知实现的边界修复，不增加本批 Available。
 
 <a id="file-text-encoding-and-utf-16-boundaries"></a>
 ## 文件文本编码与 UTF-16 边界
 
-[`host-bridge.js`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-core/src/host-bridge.js) 在 `writeFileSync`、`appendFileSync`、`writeSync` 进入 Rust JSON 前，把原始 JS 字符串逐 code unit 投影成私有 `__weappSyncText`，并只序列化一次。真正的 ArrayBuffer 继续走二进制路径；`readSync` 仍修改并返回调用方原 buffer。私有标记不是新的公开输入类型，伪造普通对象或 TypedArray 写入不因此获得支持。
+[`host-bridge.js`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-core/src/host-bridge.js) 在 `writeFileSync`、`appendFileSync`、`writeSync` 进入 Rust JSON 前，把原始 JS 字符串逐 code unit 投影成私有 `__weappSyncText`，并只序列化一次。真正的 ArrayBuffer 继续走二进制路径；`readSync` 仍修改并返回调用方原 buffer。私有标记不是新的公开输入类型，伪造普通对象或 TypedArray 写入不因此获得支持。
 
-[`sync_file_codecs.rs`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/crates/container-runtime/src/sync_file_codecs.rs) 支持锁定的全部 11 个别名：`ascii`、`base64`、`binary`、`hex`、`ucs2`、`ucs-2`、`utf16le`、`utf-16le`、`utf-8`、`utf8`、`latin1`。实际磁盘和 descriptor I/O 使用同一 codec。UTF-8 的替换、ASCII 读取高位掩码、hex 截断、Base64 空白/URL 字母表和 UTF-16LE 奇数字节处理以 Node Buffer 有限向量作实现对照，不能代替微信官方语义。
+[`sync_file_codecs.rs`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/crates/container-runtime/src/sync_file_codecs.rs) 支持锁定的全部 11 个别名：`ascii`、`base64`、`binary`、`hex`、`ucs2`、`ucs-2`、`utf16le`、`utf-16le`、`utf-8`、`utf8`、`latin1`。实际磁盘和 descriptor I/O 使用同一 codec。UTF-8 的替换、ASCII 读取高位掩码、hex 截断、Base64 空白/URL 字母表和 UTF-16LE 奇数字节处理以 Node Buffer 有限向量作实现对照，不能代替微信官方语义。
 
 共享受管文件 owner 的文本读取保留 code-unit wire：同步 `readFileSync` 在 guest 返回处还原，异步 managed-file `readFile` 在 guest-facing `result.data` 处还原。Rust/JSON hop 不提前把 UTF-16LE 的孤立 surrogate 改成 Unicode scalar；Harmony 单元测试直接断言私有 units，live FFI 测试验证同步写入、异步读取的 guest 结果。此修正没有扩展 async write 的 lone-surrogate 输入域，也不修复 Storage 的完整 UTF-16/JSON 域。
 

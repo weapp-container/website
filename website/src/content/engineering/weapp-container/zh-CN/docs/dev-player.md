@@ -6,7 +6,7 @@ summary: "五端原生开发客户端。来自 weapp-container/weapp-container �
 route: "/docs/engineering/weapp-container/docs/dev-player/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/dev-player.md"
 ---
 
@@ -16,7 +16,7 @@ sourcePath: "docs/dev-player.md"
 **简体中文** · [English](/en/docs/engineering/weapp-container/docs/dev-player/)
 
 
-Weapp Container Dev Player 使用 Flutter 提供连接、项目、日志和设置界面，小程序在设备本地通过原生 QuickJS＋Skia SDK 执行。Android、iOS、macOS、Windows、Linux 均有源工程；各平台安装、硬件 GPU、交互和性能是否通过，以[冻结验收清单](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/docs/dev-player/gates-v1.json)及其逐项证据为准。
+Weapp Container Dev Player 使用 Flutter 提供连接、项目、日志和设置界面，小程序在设备本地通过原生 QuickJS＋Skia SDK 执行。Android、iOS、macOS、Windows、Linux 均有源工程；各平台安装、硬件 GPU、交互和性能是否通过，以[冻结验收清单](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/docs/dev-player/gates-v1.json)及其逐项证据为准。
 
 当前 Player 为 `0.1.0-preview.5.7+17`（App17），匹配的原生归档、Android APK 与 iOS Simulator ZIP 已实际构建。Android 小屏、大屏、平板和 iPhone SE、Pro Max、iPad 六类模拟设备已完成选定 P0 用例；通用折叠屏、Pixel Fold 仍待修正测试方法后的十轮验收，整个阶段尚未完成。preview.5.7 尚未发布，独立私有下载未完成，六 SDK 默认锁仍为 preview.5.3。精确来源与限制见 [2026-11-02 阶段记录](/docs/engineering/weapp-container/docs/archived-evidence/)；本代继续实施[完整布局、导航、View 故障与开发更新正确性里程碑](/docs/engineering/weapp-container/docs/dev-player/p0-preview5/)。
 

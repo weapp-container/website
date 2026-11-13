@@ -6,7 +6,7 @@ summary: "HarmonyOS RecorderManager. Versioned engineering reference from weapp-
 route: "/docs/engineering/weapp-container/examples/hosts/harmony/recorder/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "examples/hosts/harmony/RECORDER.en.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "Dev Player preview.5：布局、导航与故障恢复。来自 weapp-c
 route: "/docs/engineering/weapp-container/docs/dev-player/p0-preview5/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/dev-player/p0-preview5.md"
 ---
 
@@ -146,7 +146,7 @@ SDK 的独立确定性反例另证明：同一 controller 更换 View 后，旧 
 <a id="public-contract-and-compatibility-boundary"></a>
 ## 公共契约和兼容边界
 
-[SDK preview.5 source 协议](/docs/engineering/sdk-contract/preview5/) 与 [TypeScript 声明](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/sdk/contract/types/weapp-container.d.ts) 定义完整 wire。C ABI 保持 **1**，现有 guest `weappContainer` 消息 API、Java namespace、包名和旧 SDK 方法继续保留。新 Player 必须协商 `chrome.atomicLayout` 与 `pack.devReload.attemptJournal`；旧二进制缺少所需能力时明确失败，不能静默回退成旧坐标/结果猜测。
+[SDK preview.5 source 协议](/docs/engineering/sdk-contract/preview5/) 与 [TypeScript 声明](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/sdk/contract/types/weapp-container.d.ts) 定义完整 wire。C ABI 保持 **1**，现有 guest `weappContainer` 消息 API、Java namespace、包名和旧 SDK 方法继续保留。新 Player 必须协商 `chrome.atomicLayout` 与 `pack.devReload.attemptJournal`；旧二进制缺少所需能力时明确失败，不能静默回退成旧坐标/结果猜测。
 
 完整布局通过 `hostLayout:{protocolVersion:"1.0",atomic:true}` 显式启用。atomic 模式拒绝分开的 `resize/windowMetrics/hostChrome` 绕过入口；未启用的 embedding 保留原路径。新身份以 canonical positive decimal u64 字符串传输，不能经过 JS Number。frame revision、pack acceptance revision、layout revision 和 surface generation 各有归属，互不替代。
 

@@ -6,7 +6,7 @@ summary: "性能证据与门槛。来自 weapp-container/weapp-container 的版�
 route: "/docs/engineering/weapp-container/docs/performance/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/performance.md"
 ---
 
@@ -83,8 +83,8 @@ harness 后，才能将行升级为 `available` 并通过 `--require-complete`�
 被解释为原生窗口、CanvasKit、Skia GPU、模拟器或真机性能。性能 checker 会拒绝该模式
 宣称 `nativeSurfaceAttached` 或 `gpuFrameSamplerAttached`，避免复制报告时丢失证据边界。
 
-报告 schema 位于 [`schemas/performance-report-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/schemas/performance-report-v1.schema.json)，矩阵索引 schema 位于
-[`schemas/performance-matrix-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/schemas/performance-matrix-v1.schema.json)。每次性能回归应保存 JSON artifact，并保留 `commit`、`host`、`engine` 与 `environment`（包括平台、架构、分支和工作树是否干净），以便区分代码变化、宿主差异和测量环境变化。
+报告 schema 位于 [`schemas/performance-report-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/schemas/performance-report-v1.schema.json)，矩阵索引 schema 位于
+[`schemas/performance-matrix-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/schemas/performance-matrix-v1.schema.json)。每次性能回归应保存 JSON artifact，并保留 `commit`、`host`、`engine` 与 `environment`（包括平台、架构、分支和工作树是否干净），以便区分代码变化、宿主差异和测量环境变化。
 
 运行 `pnpm near-parity:gates` 时，性能 gate 会按当前 `HEAD` 选择矩阵：优先使用
 commit 完全匹配的索引，否则从 `artifacts/performance-*` 和已提交的

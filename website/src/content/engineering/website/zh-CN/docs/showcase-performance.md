@@ -6,7 +6,7 @@ summary: "H5 演示交互性能与场景事务。来自 weapp-container/website 
 route: "/docs/engineering/website/docs/showcase-performance/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "2a14c0761dcb531666b1ca0085488a8542c54206"
+sourceCommit: "df46170e0d94fdcf52b0153f689870d34eaeb190"
 sourcePath: "docs/showcase-performance.md"
 ---
 

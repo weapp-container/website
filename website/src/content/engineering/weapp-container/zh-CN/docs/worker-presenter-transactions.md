@@ -6,7 +6,7 @@ summary: "工作呈现器事务（显式 1.0 光入）。来自 weapp-container/
 route: "/docs/engineering/weapp-container/docs/worker-presenter-transactions/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/worker-presenter-transactions.md"
 ---
 
@@ -41,7 +41,7 @@ sourcePath: "docs/worker-presenter-transactions.md"
 版本 1.0 要求 manifest 渲染器策略、QuickJS、原生实际最终追踪、外部呈现/绘制表面恢复以及 DOM 查询预检，才可在 `app.init` 之前完成。混合所有者输入因果时序不会协商。
 初始 DOM 使用浏览器密度；向 DOM 启动提供物理渲染缩放仍被视为明确错误。
 
-[三路静态示例](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/scripts/fixtures/worker-dual-renderer/README.md)
+[三路静态示例](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/scripts/fixtures/worker-dual-renderer/README.md)
 提供了包构建命令和一个真实的浏览器消费者。它使用手工编写的公共输入传递给真实的打包器；它不声称存在 `weapp-vite` 编译器运行。在未使用的 localhost 端口上服务生成的站点。运行时就绪状态为 `window.weappReady`；第一个被接受的启用输入的视图是 `window.weappPresented`。可检查 `window.weapp.status` 以观察后续状态变化，并在调用 `window.weappClose()` 之前停止所拥有的服务器。静态构建和控制台就绪本身并不能证明浏览器或 GPU 的验收。
 
 <a id="identity-and-data-flow"></a>

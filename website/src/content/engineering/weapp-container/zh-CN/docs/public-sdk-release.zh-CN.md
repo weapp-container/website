@@ -6,7 +6,7 @@ summary: "公开 SDK 发布状态。来自 weapp-container/weapp-container 的�
 route: "/docs/engineering/weapp-container/docs/public-sdk-release.zh-cn/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/public-sdk-release.zh-CN.md"
 ---
 
