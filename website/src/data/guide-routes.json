@@ -1,0 +1,135 @@
+[
+  {
+    "id": "index",
+    "title": "文档首页",
+    "section": "文档",
+    "summary": "Weapp Container 开发文档、集成指南与 API 参考。",
+    "route": "/docs/"
+  },
+  {
+    "id": "start",
+    "title": "快速开始",
+    "section": "开始使用",
+    "summary": "三步接入：生成独立测试包、选择 SDK、挂载视图并加载。",
+    "route": "/docs/start/"
+  },
+  {
+    "id": "architecture",
+    "title": "运行架构与生命周期",
+    "section": "开始使用",
+    "summary": "了解 JS 引擎、Skia 呈现、宿主视图和会话资源的生命周期边界。",
+    "route": "/docs/architecture/"
+  },
+  {
+    "id": "pack",
+    "title": "配置与 portable pack",
+    "section": "开始使用",
+    "summary": "用独立工具打包原生小程序或已有框架产物，配置能力并校验资源。",
+    "route": "/docs/pack/"
+  },
+  {
+    "id": "integrations",
+    "title": "接入方式",
+    "section": "平台集成",
+    "summary": "比较原生 Android、iOS、桌面、Flutter、React Native 和在线演示。",
+    "route": "/docs/integrations/"
+  },
+  {
+    "id": "integrations/android",
+    "title": "Android",
+    "section": "平台集成",
+    "summary": "以 Kotlin Session 与 View 将运行库嵌入 Android 应用。",
+    "route": "/docs/integrations/android/"
+  },
+  {
+    "id": "integrations/ios",
+    "title": "iOS",
+    "section": "平台集成",
+    "summary": "以 Swift Session 和 UIKit 视图接入 iOS。",
+    "route": "/docs/integrations/ios/"
+  },
+  {
+    "id": "integrations/desktop",
+    "title": "C++ Desktop",
+    "section": "平台集成",
+    "summary": "用 C++ Session、原生子视图与平台呈现器接入桌面。",
+    "route": "/docs/integrations/desktop/"
+  },
+  {
+    "id": "integrations/flutter",
+    "title": "Flutter",
+    "section": "平台集成",
+    "summary": "通过 weapp_container Controller 和 Widget 接入五个平台。",
+    "route": "/docs/integrations/flutter/"
+  },
+  {
+    "id": "integrations/react-native",
+    "title": "React Native SDK 接入",
+    "section": "平台集成",
+    "summary": "通过 Fabric View 和 WeappContainerController 接入 Android 与 iOS。",
+    "route": "/docs/integrations/react-native/"
+  },
+  {
+    "id": "integrations/web",
+    "title": "Web 在线演示",
+    "section": "平台集成",
+    "summary": "了解固定在线体验的运行范围及通用 Web SDK 的当前状态。",
+    "route": "/docs/integrations/web/"
+  },
+  {
+    "id": "integrations/harmony",
+    "title": "HarmonyOS 示例",
+    "section": "平台集成",
+    "summary": "查看 ArkTS Showcase 示例与当前构建、安装和运行验证状态。",
+    "route": "/docs/integrations/harmony/"
+  },
+  {
+    "id": "sdk-api",
+    "title": "宿主 SDK API",
+    "section": "API 参考",
+    "summary": "跨平台 Session、Controller、View、事件和宿主消息 API 概览。",
+    "route": "/docs/sdk-api/"
+  },
+  {
+    "id": "api",
+    "title": "小程序 API 与能力",
+    "section": "API 参考",
+    "summary": "按能力组检索 API、宿主覆盖、引擎覆盖和 conformance 证据。",
+    "route": "/docs/api/"
+  },
+  {
+    "id": "api/capability-defaults",
+    "title": "运行时默认能力",
+    "section": "API 参考",
+    "summary": "查看运行时 manifest 能力默认值，以及尚无逐平台状态的条目。",
+    "route": "/docs/api/capability-defaults/"
+  },
+  {
+    "id": "components",
+    "title": "组件与模板兼容性",
+    "section": "API 参考",
+    "summary": "查看 WXML、WXSS、组件关系和交互能力的记录边界。",
+    "route": "/docs/components/"
+  },
+  {
+    "id": "platforms",
+    "title": "平台状态与支持边界",
+    "section": "发行与支持",
+    "summary": "按平台查看构建、安装、运行与签名状态。",
+    "route": "/docs/platforms/"
+  },
+  {
+    "id": "licensing",
+    "title": "许可、下载与发行",
+    "section": "发行与支持",
+    "summary": "区分 SDK 源码许可、运行库许可、仓库访问和二进制发行授权。",
+    "route": "/docs/licensing/"
+  },
+  {
+    "id": "troubleshooting",
+    "title": "故障排查",
+    "section": "发行与支持",
+    "summary": "排查 manifest、哈希、宿主生命周期、布局与渲染问题。",
+    "route": "/docs/troubleshooting/"
+  }
+]

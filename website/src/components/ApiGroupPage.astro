@@ -1,0 +1,41 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro';
+import {apiGroupMeta} from '../data/api-group-meta.mjs';
+import {localeFromPath, localizedPath} from '../data/i18n.mjs';
+import translations from '../data/api-translations.json';
+import examples from '../data/api-examples.json';
+import DocsCode from './DocsCode.astro';
+const {api} = Astro.props;
+const locale = localeFromPath(Astro.url.pathname), en = locale === 'en';
+const meta = en ? translations.en[api.id] : apiGroupMeta[api.id];
+const title = meta?.title || api.id;
+const difference = en ? api.difference : translations['zh-CN'][api.id].difference;
+const hosts = Object.entries(api.hostCoverage || {}), engines = Object.entries(api.engineCoverage || {});
+const example = examples.groups[api.id];
+const supportLabel = (support: string) => ({full: en ? 'Full' : '完整', partial: en ? 'Partial' : '部分', unsupported: en ? 'Unsupported' : '不支持'}[support] || support);
+---
+<DocsLayout title={title} description={en ? `${title}: API names, host and engine records, limitations, and conformance references.` : `${title}的 API 名称、宿主和引擎记录、限制及 conformance 参考。`}>
+  <header class="docs-page-heading"><p class="eyebrow">{meta?.section} / {en ? 'MINI-PROGRAM API' : '小程序 API'}</p><h1>{title}</h1><p>{en ? 'Capability group' : '能力组'} <code>{api.id}</code>。{en ? 'Coverage comes from the versioned inventory shipped with this site.' : '覆盖记录来自随站点发布的版本化清单。'}</p></header>
+  <h2 id="names">{en ? 'API names' : '包含的名称'}</h2><ul class="docs-name-list">{api.names.map((name: string) => <li><code>{name}</code></li>)}</ul>
+  <h2 id="behavior">{en ? 'Behavior and limitations' : '行为与限制'}</h2>
+  <dl class="docs-definition-list">
+    <div><dt>{en ? 'Group-level inventory status' : '清单组级状态'}</dt><dd><span class={`docs-support support-${api.support}`}>{supportLabel(api.support)}</span></dd></div>
+    <div><dt>{en ? 'Implementation differences' : '实现差异与限制'}</dt><dd>{difference}</dd></div>
+    <div><dt>{en ? 'Permission' : '权限'}</dt><dd><code>{api.permission}</code></dd></div>
+    <div><dt>{en ? 'Minimum manifest version' : '最低 Manifest 版本'}</dt><dd><code>{api.minimumManifestVersion}</code></dd></div>
+    <div><dt>{en ? 'Minimum protocol version' : '最低协议版本'}</dt><dd><code>{api.minimumProtocolVersion}</code></dd></div>
+  </dl>
+  <h2 id="hosts">{en ? 'Host coverage' : '宿主覆盖'}</h2>
+  {hosts.length ? <div class="docs-table-scroll"><table class="docs-table"><thead><tr><th>{en ? 'Host' : '宿主'}</th><th>{en ? 'Recorded coverage' : '覆盖状态'}</th></tr></thead><tbody>{hosts.map(([host, support]) => <tr><th><code>{host}</code></th><td><span class={`docs-support support-${support}`}>{supportLabel(support as string)}</span></td></tr>)}</tbody></table></div> : <p>{en ? 'No independent host coverage is recorded for this group. Platform behavior remains unverified.' : '当前清单没有该能力组的独立宿主覆盖记录，平台行为待核验。'}</p>}
+  {engines.length > 0 && <section><h2 id="engines">{en ? 'Engine coverage' : '引擎覆盖'}</h2><div class="docs-table-scroll"><table class="docs-table"><thead><tr><th>{en ? 'Engine' : '引擎'}</th><th>{en ? 'Recorded coverage' : '覆盖状态'}</th></tr></thead><tbody>{engines.map(([engine, support]) => <tr><th><code>{engine}</code></th><td>{supportLabel(support as string)}</td></tr>)}</tbody></table></div></section>}
+  <h2 id="conformance">{en ? 'Conformance references' : '核验案例'}</h2>
+  <ul class="docs-name-list">{api.conformance.map((id: string) => <li><code>{id}</code></li>)}</ul>
+  <p><a href={localizedPath('/docs/engineering/weapp-container/docs/api-runtime-conformance/', locale)}>{en ? 'Versioned API conformance records' : '版本化 API conformance 记录'} ↗</a></p>
+  <p>{en ? 'Cases cover their stated scenarios and error boundaries. Group-level status does not establish complete support on every host. Missing records are not inferred.' : '案例覆盖所列场景和错误边界，不代表所有宿主已完整支持。缺失覆盖记录时不推断平台状态。'}</p>
+  <h2 id="example">{en ? 'Source example' : '源码示例'}</h2>
+  <p>{en ? 'This excerpt preserves the versioned source exactly. It requires the surrounding test or application context and does not establish device acceptance or support for every API in this group.' : '以下摘录保留固定提交的源码原文，需要原测试或应用的上下文。它不代表设备验收，也不代表本组所有接口均已支持。'}</p>
+  <DocsCode code={example.code} lang={example.language} />
+  <p><a href={`https://github.com/${examples.repository}/blob/${examples.commit}/${example.path}#L${example.startLine}`}>{example.path} ↗</a> · <code>{examples.commit.slice(0, 12)}</code></p>
+  <aside class="docs-callout docs-callout-warning"><strong>{en ? 'A manifest does not grant host capabilities' : 'manifest 不会授予宿主能力'}</strong><p>{en ? 'The pack must declare the capability and the actual host must provide it. The runtime negotiates access; unsupported or unauthorized calls return structured errors.' : '能力需要同时由 pack 声明并由实际宿主提供。运行时依据协商开放访问，未支持或未授权的调用返回结构化错误。'}</p></aside>
+  <p><a href={localizedPath('/docs/api/', locale)}>{en ? 'All API groups' : '返回小程序 API 分组'}</a></p>
+</DocsLayout>

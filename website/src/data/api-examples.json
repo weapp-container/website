@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 1,
+  "repository": "weapp-container/weapp-container",
+  "commit": "03a8edcf017347b046f62d3a2fd2daf2ff1b31db",
+  "groups": {
+    "capability.query": {
+      "path": "conformance/fixtures/component-custom-events/pages/index/index.js",
+      "name": "wx.canIUse",
+      "sha256": "a8729a8480b918897c131317f858a9f874d853ba5e99106155bcb3f85fb41223",
+      "output": "a8729a8480b918897c131317f858a9f874d853ba5e99106155bcb3f85fb41223.txt",
+      "language": "javascript",
+      "startLine": 31,
+      "endLine": 39,
+      "code": "    ]) scenarios[name] = this.selectComponent('#' + id).emit('signal', options)\n    const boundary = this.selectComponent('#boundary')\n    scenarios.local = boundary.emit({ bubbles: true })\n    scenarios.composed = boundary.emit({ bubbles: true, composed: true })\n    this.setData({ ready: true, summary: { launched: getApp().launched, capability: wx.canIUse('Component.triggerEvent'), aliases, counters, scenarios } })\n  },\n})\nexports.inspect = function() { return currentPage().data.summary }\n"
+    },
+    "lifecycle.app": {
+      "path": "conformance/fixtures/style-module-boundary/app.js",
+      "name": "App",
+      "sha256": "d814a0466bd6df377180ec1f110be48b59761ea41cbc5aba0b27dea0034e0043",
+      "output": "d814a0466bd6df377180ec1f110be48b59761ea41cbc5aba0b27dea0034e0043.txt",
+      "language": "javascript",
+      "startLine": 1,
+      "endLine": 2,
+      "code": "App({})\n"
+    },
+    "system.info": {
+      "path": "conformance/fixtures/wxs-execution-oracle/raw/pages/datatypes/index.js",
+      "name": "wx.getSystemInfo",
+      "sha256": "f76f0be4ec25126d24196b422c69ef24e7a032a30e1e606c812e8390d88c78b2",
+      "output": "f76f0be4ec25126d24196b422c69ef24e7a032a30e1e606c812e8390d88c78b2.txt",
+      "language": "javascript",
+      "startLine": 5,
+      "endLine": 19,
+      "code": "  },\n  onReady: function() { this.setData({ phase: 'ready' }); },\n  snapshot: function() {\n    return { schemaVersion: 1, phase: this.data.phase, caseId: this.data.caseId,\n      environment: wx.getSystemInfoSync(), lifecycle: getApp().oracleTrace.slice() };\n  },\n  sampleDatatype: function() {\n    return new Promise(function(resolve) {\n      wx.createSelectorQuery().select('#datatype-result').fields({ dataset: true }, function(value) {\n        resolve(value || null);\n      }).exec();\n    });\n  },\n});\n"
+    },
+    "system.account-info": {
+      "path": "crates/container-engine-quickjs/tests/account_info.rs",
+      "name": "wx.getAccountInfoSync",
+      "sha256": "97d58ad6c8185e2aeea721be9f0f3108f281d60102c30c6ddaf1ac3346eb0e2b",
+      "output": "97d58ad6c8185e2aeea721be9f0f3108f281d60102c30c6ddaf1ac3346eb0e2b.txt",
+      "language": "rust",
+      "startLine": 8,
+      "endLine": 23,
+      "code": "fn account_info_sync_is_capability_gated_and_returns_a_fresh_snapshot() {\n    let mut engine = QuickJsEngine::default();\n    engine\n        .set_capabilities(\n            &[(\"wx.getAccountInfoSync\".to_owned(), \"full\".to_owned())]\n                .into_iter()\n                .collect(),\n        )\n        .expect(\"account capability installs\");\n    JsEngine::call(\n        &mut engine,\n        CallTarget::Global {\n            name: \"__container_set_sync_api_values\".into(),\n        },\n        vec![\n            json!({"
+    },
+    "navigation.page-stack": {
+      "path": "crates/container-runtime/tests/redirect_mini_program.rs",
+      "name": "wx.redirectTo",
+      "sha256": "b9d43a2210a764ca758e683d115b6313315cde2f0978235d373f02b7eb4e12ce",
+      "output": "b9d43a2210a764ca758e683d115b6313315cde2f0978235d373f02b7eb4e12ce.txt",
+      "language": "rust",
+      "startLine": 9,
+      "endLine": 24,
+      "code": "    manifest.compiler.commit = \"redirect-test\".into();\n    manifest.app.app_json = \"app.json\".into();\n    manifest.app.entry_module = \"app.js\".into();\n    manifest.capabilities.insert(\n        \"wx.redirectToMiniProgram\".into(),\n        CapabilitySupport::Partial,\n    );\n    let mut session = Session::new(manifest, SessionConfig::default()).expect(\"session creates\");\n    let init = session.dispatch(BridgeEnvelope::request(\n        \"session-1\",\n        \"init\",\n        op::APP_INIT,\n        json!({}),\n    ));\n    assert_eq!(init.messages[0].payload[\"ok\"], true);\n"
+    },
+    "wx.mini-program-navigation": {
+      "path": "crates/container-runtime/tests/redirect_mini_program.rs",
+      "name": "wx.redirectToMiniProgram",
+      "sha256": "b9d43a2210a764ca758e683d115b6313315cde2f0978235d373f02b7eb4e12ce",
+      "output": "b9d43a2210a764ca758e683d115b6313315cde2f0978235d373f02b7eb4e12ce.txt",
+      "language": "rust",
+      "startLine": 9,
+      "endLine": 24,
+      "code": "    manifest.compiler.commit = \"redirect-test\".into();\n    manifest.app.app_json = \"app.json\".into();\n    manifest.app.entry_module = \"app.js\".into();\n    manifest.capabilities.insert(\n        \"wx.redirectToMiniProgram\".into(),\n        CapabilitySupport::Partial,\n    );\n    let mut session = Session::new(manifest, SessionConfig::default()).expect(\"session creates\");\n    let init = session.dispatch(BridgeEnvelope::request(\n        \"session-1\",\n        \"init\",\n        op::APP_INIT,\n        json!({}),\n    ));\n    assert_eq!(init.messages[0].payload[\"ok\"], true);\n"
+    },
+    "wx.permission": {
+      "path": "crates/container-engine-quickjs/tests/save_file.rs",
+      "name": "wx.authorize",
+      "sha256": "88a33b3ceda7a99ba106e5db646019d4061cfd2f89d8842acdb7e5e4a25d9907",
+      "output": "88a33b3ceda7a99ba106e5db646019d4061cfd2f89d8842acdb7e5e4a25d9907.txt",
+      "language": "rust",
+      "startLine": 285,
+      "endLine": 300,
+      "code": "    let mut engine = QuickJsEngine::default();\n    engine\n        .set_capabilities(\n            &[\n                (\"wx.authorize\".into(), \"partial\".into()),\n                (\"wx.openSetting\".into(), \"partial\".into()),\n            ]\n            .into_iter()\n            .collect(),\n        )\n        .expect(\"capability map installs\");\n    let module = JsEngine::load_module(\n        &mut engine,\n        br#\"exports.run = function() {\n          wx.authorize({ scope: 'scope.userLocation', success(value) { globalThis.__authorized = value.errMsg; } });\n          wx.openSetting({ success(value) { globalThis.__settings = value.authSetting['scope.userLocation']; } });"
+    },
+    "data.setData": {
+      "path": "crates/container-runtime/tests/storage_transactions.rs",
+      "name": "data.patch.batch",
+      "sha256": "caecd1ec78b9f1101c036a8db165aac5b2e3d1cb887f66d0a93b537628e818ec",
+      "output": "caecd1ec78b9f1101c036a8db165aac5b2e3d1cb887f66d0a93b537628e818ec.txt",
+      "language": "rust",
+      "startLine": 43,
+      "endLine": 58,
+      "code": "  return {value:wx.getStorageSync('admitted')};\n};\nexports.failingPublicEffect=function(){\n  wx.setStorageSync('admitted',{value:1});\n  __container_events.push({type:'data.patch.batch',patches:[{path:42,value:0}]});\n  return {value:true};\n};\nlet poisonEffects=false;\nexports.poisonPublicConversion=function(){\n  wx.setStorageSync('ordered','guest');\n  poisonEffects=true;\n  __container_events.push({toJSON(){\n    if(poisonEffects)throw new Error('public conversion failed');\n    return {type:'probe'};\n  }});\n  return {value:true};"
+    },
+    "view.wxml-wxss": {
+      "path": "conformance/fixtures/component-relations/components/parent/index.wxml",
+      "name": "slot",
+      "sha256": "8371f6ce39b7ea11fea29b5a7ec174fe55ed09ee3bdd6486ed905469f4f89912",
+      "output": "8371f6ce39b7ea11fea29b5a7ec174fe55ed09ee3bdd6486ed905469f4f89912.txt",
+      "language": "xml",
+      "startLine": 1,
+      "endLine": 2,
+      "code": "<view id=\"parent-content\"><slot/></view>\n"
+    },
+    "event.bindings": {
+      "path": "conformance/fixtures/component-relations/components/child/index.wxml",
+      "name": "bindtap",
+      "sha256": "7e39699bfcf29b0d0b97a942d4270c7a0415352cb508a376b8018022454e7e99",
+      "output": "7e39699bfcf29b0d0b97a942d4270c7a0415352cb508a376b8018022454e7e99.txt",
+      "language": "xml",
+      "startLine": 1,
+      "endLine": 2,
+      "code": "<view id=\"relation-marker\" bindtap=\"bump\" data-count=\"{{count}}\" style=\"position:absolute;left:24px;top:32px;width:64px;height:48px;background-color:{{color}}\"/>\n"
+    },
+    "timer": {
+      "path": "fixtures/managed-component-engine.js",
+      "name": "setTimeout",
+      "sha256": "d3d36dca8e5c291eaa9c43a34fba112c4a8e3bb86d1e0d52002c01dff20d43b5",
+      "output": "d3d36dca8e5c291eaa9c43a34fba112c4a8e3bb86d1e0d52002c01dff20d43b5.txt",
+      "language": "javascript",
+      "startLine": 23,
+      "endLine": 31,
+      "code": "    },\n    editLabel(value) { this.setData({ label: value }); },\n    late() {\n      const instance = this;\n      setTimeout(function() { instance.setData({ count: 99 }); }, 1);\n    }\n  }\n});\n"
+    },
+    "wx.animation": {
+      "path": "fixtures/animation-engine.rs",
+      "name": "wx.createAnimation",
+      "sha256": "96511a59ecd3fc2863ba0740d57c3bd68223e459c31b19fe7604a689012f25d1",
+      "output": "96511a59ecd3fc2863ba0740d57c3bd68223e459c31b19fe7604a689012f25d1.txt",
+      "language": "rust",
+      "startLine": 25,
+      "endLine": 40,
+      "code": "#[test]\nfn animation_all_operations_export_serializable_arguments_and_chain() {\n    let (mut engine, id) = fixture(br#\"\n      exports.run = function() {\n        const a=wx.createAnimation({duration:80,timingFunction:'ease-in',transformOrigin:'20% 30% 0'});\n        const chained=a.backgroundColor('#123456').bottom(4).height('auto').left('2em')\n          .matrix().matrix(1,0,0,1,5,6).matrix3d()\n          .matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,3,4,5,1)\n          .opacity(0.5).right('1px').rotate(12).rotate3d(1,0,0,20)\n          .rotateX(1).rotateY(2).rotateZ(3).scale(2).scale3d(1,2,3)\n          .scaleX(4).scaleY(5).scaleZ(6).skew(7,8).skewX(9).skewY(10)\n          .top(11).translate().translate(12).translate3d().translate3d(13,14)\n          .translateX(15).translateY(16).translateZ(17).width('90%').step({delay:20});\n        return {same:chained===a,value:a.export()};\n      };\n    \"#);"
+    },
+    "wx.storage": {
+      "path": "crates/container-runtime/tests/fixtures/showcase-app.js",
+      "name": "wx.setStorage",
+      "sha256": "aea5dc4cf5e0ecf8c58cd1ee5e8540cfc2c8ec235b74f590f2adf0ae55687d8a",
+      "output": "aea5dc4cf5e0ecf8c58cd1ee5e8540cfc2c8ec235b74f590f2adf0ae55687d8a.txt",
+      "language": "javascript",
+      "startLine": 1,
+      "endLine": 8,
+      "code": "App({onLaunch:function(){\n  wx.setStorageSync('cart',{items:[{id:'coffee',quantity:2}],total:36});\n  wx.request({url:'https://example.invalid/never',fail:function(error){\n    wx.setStorageSync('deniedCallback',error.code);\n  }}).catch(function(error){wx.setStorageSync('deniedPromise',error.code);});\n  weappContainer.postMessage({kind:'showcase-ready'});\n}});\n"
+    },
+    "wx.request": {
+      "path": "crates/container-runtime/tests/fixtures/showcase-app.js",
+      "name": "wx.request",
+      "sha256": "aea5dc4cf5e0ecf8c58cd1ee5e8540cfc2c8ec235b74f590f2adf0ae55687d8a",
+      "output": "aea5dc4cf5e0ecf8c58cd1ee5e8540cfc2c8ec235b74f590f2adf0ae55687d8a.txt",
+      "language": "javascript",
+      "startLine": 1,
+      "endLine": 8,
+      "code": "App({onLaunch:function(){\n  wx.setStorageSync('cart',{items:[{id:'coffee',quantity:2}],total:36});\n  wx.request({url:'https://example.invalid/never',fail:function(error){\n    wx.setStorageSync('deniedCallback',error.code);\n  }}).catch(function(error){wx.setStorageSync('deniedPromise',error.code);});\n  weappContainer.postMessage({kind:'showcase-ready'});\n}});\n"
+    },
+    "wx.filesystem": {
+      "path": "crates/container-runtime/src/stats-timestamp-engine-tests.rs",
+      "name": "wx.getFileSystemManager",
+      "sha256": "95859e4ba51b85b24902bc78d70490097e9331d48c98d02ddb06a1ac07d9580d",
+      "output": "95859e4ba51b85b24902bc78d70490097e9331d48c98d02ddb06a1ac07d9580d.txt",
+      "language": "rust",
+      "startLine": 24,
+      "endLine": 39,
+      "code": "        .open(&path)\n        .unwrap();\n    let provider = Arc::new(ManagedSyncFileSystem::new(directory.0.clone()).unwrap());\n    let source = r#\"\nconst fs=wx.getFileSystemManager();let fd,pathStats,descriptorStats;\nfunction shape(stats){return {atime:stats.lastAccessedTime,mtime:stats.lastModifiedTime,\n  accessedType:typeof stats.lastAccessedTime,modifiedType:typeof stats.lastModifiedTime,\n  accessedFinite:Number.isFinite(stats.lastAccessedTime),modifiedFinite:Number.isFinite(stats.lastModifiedTime),\n  size:stats.size,file:stats.isFile(),directory:stats.isDirectory(),marker:Object.prototype.hasOwnProperty.call(stats,'__weappFsStats')};}\nexports.open=()=>{fd=fs.openSync({filePath:'wxfile://user/fixture.bin',flag:'r'});return true;};\nexports.capture=()=>{pathStats=fs.statSync('wxfile://user/fixture.bin');descriptorStats=fs.fstatSync({fd});return {path:shape(pathStats),descriptor:shape(descriptorStats)};};\nexports.current=()=>({path:shape(fs.statSync('wxfile://user/fixture.bin')),descriptor:shape(fs.fstatSync({fd}))});\nexports.retained=()=>({path:shape(pathStats),descriptor:shape(descriptorStats)});\nexports.close=()=>{fs.closeSync({fd});return true;};\nexports.closed=()=>{try{fs.fstatSync({fd});return false;}catch(error){return error.code;}};\nexports.revoked=()=>{try{fs.statSync('wxfile://user/fixture.bin');return false;}catch(error){return error.code;}};"
+    },
+    "wx.selector-query": {
+      "path": "conformance/fixtures/wxs-execution-oracle/raw/pages/datatypes/index.js",
+      "name": "wx.createSelectorQuery",
+      "sha256": "f76f0be4ec25126d24196b422c69ef24e7a032a30e1e606c812e8390d88c78b2",
+      "output": "f76f0be4ec25126d24196b422c69ef24e7a032a30e1e606c812e8390d88c78b2.txt",
+      "language": "javascript",
+      "startLine": 9,
+      "endLine": 19,
+      "code": "      environment: wx.getSystemInfoSync(), lifecycle: getApp().oracleTrace.slice() };\n  },\n  sampleDatatype: function() {\n    return new Promise(function(resolve) {\n      wx.createSelectorQuery().select('#datatype-result').fields({ dataset: true }, function(value) {\n        resolve(value || null);\n      }).exec();\n    });\n  },\n});\n"
+    },
+    "wx.canvas": {
+      "path": "fixtures/nexttick-canvas-engine.rs",
+      "name": "wx.createCanvasContext",
+      "sha256": "1f7d3106eb995b4b9c96b659fcd76d16a268264def18934a688d1bb453131494",
+      "output": "1f7d3106eb995b4b9c96b659fcd76d16a268264def18934a688d1bb453131494.txt",
+      "language": "rust",
+      "startLine": 6,
+      "endLine": 21,
+      "code": "    engine\n        .set_capabilities(&std::collections::BTreeMap::from([\n            (\"getCurrentPages\".into(), \"full\".into()),\n            (\"wx.nextTick\".into(), \"partial\".into()),\n            (\"wx.createCanvasContext\".into(), \"full\".into()),\n            (\"wx.canvas.draw\".into(), \"full\".into()),\n            (\"wx.getSystemInfo\".into(), \"partial\".into()),\n            (\"wx.onError\".into(), \"partial\".into()),\n        ]))\n        .unwrap();\n    engine\n        .dispatch_lifecycle_notification(\"session\", &json!({}))\n        .unwrap();\n    let module = JsEngine::load_module(&mut engine, br#\"\n      let trace=[];Page({data:{number:0}});let page,component,ctx;\n      exports.setup=function(kind){"
+    },
+    "wx.canvas-offscreen": {
+      "path": "crates/container-runtime/src/provider.rs",
+      "name": "wx.createOffscreenCanvas",
+      "sha256": "0a9b40d5476e9e61a1edc7af7be4e331b098d4af5f3a372c27f42f5c5ce4f92f",
+      "output": "0a9b40d5476e9e61a1edc7af7be4e331b098d4af5f3a372c27f42f5c5ce4f92f.txt",
+      "language": "rust",
+      "startLine": 2902,
+      "endLine": 2917,
+      "code": "            \"wx.getFileInfo\",\n            \"wx.getSavedFileInfo\",\n            \"wx.getSavedFileList\",\n            \"wx.canvas.draw\",\n            \"wx.createOffscreenCanvas\",\n            \"wx.setClipboardData\",\n            \"wx.getClipboardData\",\n            \"wx.setKeepScreenOn\",\n            \"wx.getNetworkType\",\n            \"wx.onNetworkStatusChange\",\n            \"wx.vibrateShort\",\n            \"wx.vibrateLong\",\n            \"wx.login\",\n            \"wx.checkSession\",\n            \"wx.getUserProfile\",\n            \"wx.requestPayment\","
+    },
+    "wx.media-camera-location": {
+      "path": "crates/container-runtime/src/distribution.rs",
+      "name": "wx.createCameraContext",
+      "sha256": "5d89a4e3903f2b7804a2c0456b8555fa752d26d0bd9862fbdc80ecbb3fdc92b1",
+      "output": "5d89a4e3903f2b7804a2c0456b8555fa752d26d0bd9862fbdc80ecbb3fdc92b1.txt",
+      "language": "rust",
+      "startLine": 88,
+      "endLine": 103,
+      "code": "                \"wx.socketTask.send\" | \"wx.socketTask.close\" => \"wx.connectSocket\",\n                \"wx.audioContext\" => \"wx.createAudioContext\",\n                \"wx.innerAudioContext\" => \"wx.createInnerAudioContext\",\n                \"wx.videoContext\" => \"wx.createVideoContext\",\n                \"wx.cameraContext\" => \"wx.createCameraContext\",\n                _ => name,\n            }\n        };\n        compiled::ALLOWED_APIS.binary_search(&canonical).is_ok()\n    }\n    #[cfg(not(feature = \"restricted-showcase\"))]\n    {\n        let _ = name;\n        true\n    }\n}"
+    },
+    "wx.inner-audio-context": {
+      "path": "crates/container-runtime/src/capability_policy_tests.rs",
+      "name": "wx.createAudioContext",
+      "sha256": "a934186b6a9b3f063e6f46f02193390c0a8fd6605e83cd22fddd8f59aa79155e",
+      "output": "a934186b6a9b3f063e6f46f02193390c0a8fd6605e83cd22fddd8f59aa79155e.txt",
+      "language": "rust",
+      "startLine": 55,
+      "endLine": 70,
+      "code": "        \"SelectorQuery\",\n        \"wx.getFileSystemManager\",\n        \"wx.fs.readFileSync\",\n        \"wx.audioContext\",\n        \"wx.createAudioContext\",\n        \"wx.videoContext\",\n        \"wx.createVideoContext\",\n        \"wx.socketTask.send\",\n        \"wx.connectSocket\",\n        \"wx.setTabBarStyle\",\n    ] {\n        manifest\n            .capabilities\n            .insert(name.into(), CapabilitySupport::Full);\n    }\n    manifest.refresh_integrity().unwrap();"
+    },
+    "wx.video-context": {
+      "path": "crates/container-runtime/src/capability_policy_tests.rs",
+      "name": "wx.createVideoContext",
+      "sha256": "a934186b6a9b3f063e6f46f02193390c0a8fd6605e83cd22fddd8f59aa79155e",
+      "output": "a934186b6a9b3f063e6f46f02193390c0a8fd6605e83cd22fddd8f59aa79155e.txt",
+      "language": "rust",
+      "startLine": 57,
+      "endLine": 72,
+      "code": "        \"wx.fs.readFileSync\",\n        \"wx.audioContext\",\n        \"wx.createAudioContext\",\n        \"wx.videoContext\",\n        \"wx.createVideoContext\",\n        \"wx.socketTask.send\",\n        \"wx.connectSocket\",\n        \"wx.setTabBarStyle\",\n    ] {\n        manifest\n            .capabilities\n            .insert(name.into(), CapabilitySupport::Full);\n    }\n    manifest.refresh_integrity().unwrap();\n    let mut session = Session::new(manifest, SessionConfig::default()).unwrap();\n    session.config.capabilities.insert("
+    },
+    "wx.auth-payment": {
+      "path": "crates/container-engine-quickjs/tests/share.rs",
+      "name": "wx.shareAppMessage",
+      "sha256": "d217883d89562eeb94def153087a3c1a5cd8427b356db27fa636c4d29db9e95e",
+      "output": "d217883d89562eeb94def153087a3c1a5cd8427b356db27fa636c4d29db9e95e.txt",
+      "language": "rust",
+      "startLine": 9,
+      "endLine": 24,
+      "code": "    let mut engine = QuickJsEngine::default();\n    engine\n        .set_capabilities(\n            &[\n                (\"wx.shareAppMessage\".to_owned(), \"partial\".to_owned()),\n                (\"wx.shareTimeline\".to_owned(), \"partial\".to_owned()),\n            ]\n            .into_iter()\n            .collect(),\n        )\n        .expect(\"share capabilities install\");\n    let module = JsEngine::load_module(\n        &mut engine,\n        br#\"exports.run = function() {\n          wx.shareAppMessage({\n            title: 'Fixture',"
+    },
+    "wx.clipboard-device": {
+      "path": "crates/container-runtime/src/host_environment_tests.rs",
+      "name": "wx.onNetworkStatusChange",
+      "sha256": "4352fa4f3a34dac9f8faa25a20baf78f02b0ac97f59f5dd818e130dae6e85935",
+      "output": "4352fa4f3a34dac9f8faa25a20baf78f02b0ac97f59f5dd818e130dae6e85935.txt",
+      "language": "rust",
+      "startLine": 42,
+      "endLine": 57,
+      "code": "        \"wx.removeStorageSync\",\n        \"wx.getFileSystemManager\",\n        \"wx.fs.readFileSync\",\n        \"wx.fs.writeFileSync\",\n        \"wx.onNetworkStatusChange\",\n    ] {\n        manifest\n            .capabilities\n            .insert(name.into(), CapabilitySupport::Partial);\n    }\n    manifest.refresh_integrity().unwrap();\n    manifest\n}\n\nfn assert_engine_failure(error: &BridgeError) {\n    assert_eq!(error.code, BridgeErrorCode::Engine, \"{error:?}\");"
+    },
+    "wx.ui-feedback": {
+      "path": "crates/container-runtime/tests/external_frame_input.rs",
+      "name": "wx.pageScrollTo",
+      "sha256": "15c8d3aa44f69efdd710ad234eb3e1542eece6a0ba9151b854dc8e031bb00e21",
+      "output": "15c8d3aa44f69efdd710ad234eb3e1542eece6a0ba9151b854dc8e031bb00e21.txt",
+      "language": "rust",
+      "startLine": 63,
+      "endLine": 78,
+      "code": "            using_components: BTreeMap::from([(\"panel\".into(), \"components/panel/index\".into())]),\n            multiple_slots: None,\n        }],\n        capabilities: BTreeMap::from([\n            (\"wx.pageScrollTo\".into(), CapabilitySupport::Full),\n            (\"getCurrentPages\".into(), CapabilitySupport::Full),\n            (\"wx.createSelectorQuery\".into(), CapabilitySupport::Full),\n        ]),\n        ..Default::default()\n    };\n    let mut modules = Vec::new();\n    for (id, source, scope) in [\n        (\"module:app.js\", app, ModuleScope::App),\n        (\"module:pages/index/index.js\", page, ModuleScope::Page),\n        (\n            \"module:components/panel/index.js\","
+    },
+    "wx.intersection-observer": {
+      "path": "crates/container-engine-quickjs/src/event_channel_tests.rs",
+      "name": "IntersectionObserver",
+      "sha256": "f3562eb09a22141e3a3795ca852db8d712bd19f1c5f00b71cf51c1cebc376269",
+      "output": "f3562eb09a22141e3a3795ca852db8d712bd19f1c5f00b71cf51c1cebc376269.txt",
+      "language": "rust",
+      "startLine": 94,
+      "endLine": 109,
+      "code": "        }\n      };\n      exports.observerCleanupFailure = function(){\n        const page=getCurrentPages()[1], channel=page.getOpenerEventChannel();\n        page.createIntersectionObserver();\n        const originalPush=__container_events.push;\n        let failure, state='live';\n        try {\n          __container_events.push=function(){throw new Error('cleanup-queue-unavailable');};\n          __container_invoke_page_instance(22,1,'onUnload',[]);\n        } catch(error) { failure=error.message; }\n        finally { __container_events.push=originalPush; }\n        try { channel.emit('after-failed-cleanup'); }\n        catch(error) { state=error.code; }\n        return {failure:failure,state:state};\n      };"
+    },
+    "wx.media-query-observer": {
+      "path": "fixtures/media-query-engine.rs",
+      "name": "wx.createMediaQueryObserver",
+      "sha256": "d1c5d71950f095264da6852dfb3aa49bcfe20325a6240e9e279102dcb074c3e2",
+      "output": "d1c5d71950f095264da6852dfb3aa49bcfe20325a6240e9e279102dcb074c3e2.txt",
+      "language": "rust",
+      "startLine": 5,
+      "endLine": 20,
+      "code": "    let mut engine = NativeEngine::default();\n    engine\n        .set_capabilities(&std::collections::BTreeMap::from([\n            (\"getCurrentPages\".into(), \"full\".into()),\n            (\"wx.createMediaQueryObserver\".into(), \"full\".into()),\n        ]))\n        .unwrap();\n    assert!(engine\n        .dispatch_lifecycle_notification(\"session\", &Value::Null)\n        .unwrap());\n    let module = JsEngine::load_module(&mut engine, source).unwrap();\n    mirror(\n        &mut engine,\n        \"initial\",\n        json!([{\"index\":0,\"instanceId\":1,\"route\":\"pages/media\",\"options\":{}}]),\n    );"
+    },
+    "component.selection": {
+      "path": "crates/container-runtime/tests/native_selector_owner.rs",
+      "name": "Page.selectComponent",
+      "sha256": "0f720a59129852f2993a1863b0239987e18371c3613ccbe383fa2b89013186ee",
+      "output": "0f720a59129852f2993a1863b0239987e18371c3613ccbe383fa2b89013186ee.txt",
+      "language": "rust",
+      "startLine": 133,
+      "endLine": 148,
+      "code": "    }\n    for name in [\n        \"wx.createSelectorQuery\",\n        \"getCurrentPages\",\n        \"Page.selectComponent\",\n        \"setTimeout\",\n    ] {\n        manifest\n            .capabilities\n            .insert(name.into(), CapabilitySupport::Full);\n    }\n    manifest.refresh_integrity().unwrap();\n    let mut config = SessionConfig {\n        engine,\n        page_render_mode: PageRenderMode::ExternalFrame,\n        ..Default::default()"
+    },
+    "component.relations": {
+      "path": "conformance/fixtures/component-relations/pages/index/index.js",
+      "name": "Component.relations",
+      "sha256": "b292246c964ede2e324f1f08e283a4897e8d8710acf4fb72a4c56527ade198a4",
+      "output": "b292246c964ede2e324f1f08e283a4897e8d8710acf4fb72a4c56527ade198a4.txt",
+      "language": "javascript",
+      "startLine": 32,
+      "endLine": 47,
+      "code": "  const relationArrayIsIsolated = parent.getRelationNodes(PARENT_KEY).length === beforeMutation\n  return {\n    launched: app.launched,\n    capabilities: {\n      relations: wx.canIUse('Component.relations'),\n      getRelationNodes: wx.canIUse('Component.getRelationNodes'),\n    },\n    trace: app.trace.slice(),\n    showChild: page.data.showChild,\n    parentSurvives: parent === app.heldParent,\n    childPresent: Boolean(child),\n    childIsInitial: child === app.heldChild,\n    parentNodes: secondRead.map(node => node.data.label),\n    childNodes: childNodes.map(node => node.data.label),\n    parentRelationUsesLiveChild: Boolean(child) && parentNode === child,\n    childRelationUsesLiveParent: Boolean(child) && childNodes[0] === parent,"
+    },
+    "component.events": {
+      "path": "conformance/fixtures/component-custom-events/pages/index/index.js",
+      "name": "Component.triggerEvent",
+      "sha256": "a8729a8480b918897c131317f858a9f874d853ba5e99106155bcb3f85fb41223",
+      "output": "a8729a8480b918897c131317f858a9f874d853ba5e99106155bcb3f85fb41223.txt",
+      "language": "javascript",
+      "startLine": 31,
+      "endLine": 39,
+      "code": "    ]) scenarios[name] = this.selectComponent('#' + id).emit('signal', options)\n    const boundary = this.selectComponent('#boundary')\n    scenarios.local = boundary.emit({ bubbles: true })\n    scenarios.composed = boundary.emit({ bubbles: true, composed: true })\n    this.setData({ ready: true, summary: { launched: getApp().launched, capability: wx.canIUse('Component.triggerEvent'), aliases, counters, scenarios } })\n  },\n})\nexports.inspect = function() { return currentPage().data.summary }\n"
+    }
+  }
+}

@@ -1,4 +1,8 @@
+<a id="duo-full-screen-historical-acceptance-summary"></a>
 # Duo 全屏历史验收摘要
+
+**简体中文** · [English](duo-fullscreen-verification.en.md)
+
 
 2026-11-06 的 candidate10 涵盖 Web 全屏、安全区和部分 Apple 模拟器场景；完整过程、失败尝试、原始 JSON、截图和私有 instrumentation 保存在[私有档案](archived-evidence.md)。本次开源整理不将这些旧结果视为当前源码的重新验收。
 

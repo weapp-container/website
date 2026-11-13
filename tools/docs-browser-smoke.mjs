@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {once} from 'node:events';
 import { chromium } from 'playwright';
 import { docsPages } from '../website/src/data/docs-pages.mjs';
 import inventory from '../website/src/data/api-inventory-v1.json' with { type: 'json' };
@@ -34,12 +35,15 @@ try {
   const page = await context.newPage();
   for (const path of [
     '/', '/guide/', '/platforms/', '/demo/',
+    '/docs/engineering/weapp-container/docs/architecture/',
+    '/docs/engineering/sdk-ios/index/',
     ...docsPages.map(item => item.path),
     ...inventory.apis.map(api => `/docs/api/${apiSlug(api.id)}/`),
-  ]) {
+  ].flatMap(path => [path, `/en${path}`])) {
     const response = await page.goto(new URL(path, base).href, { waitUntil: 'domcontentloaded' });
     assert.equal(response?.status(), 200, `${path} returned ${response?.status()}`);
     assert.ok(await page.locator('h1').count(), `${path} has no page heading`);
+    assert.equal(await page.locator('html').getAttribute('lang'), path.startsWith('/en/') ? 'en' : 'zh-CN');
     record('route', path);
   }
 
@@ -77,7 +81,7 @@ try {
 
   await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: base.origin });
   const expectedCode = await codeBlock.locator('code').textContent();
-  await codeBlock.getByRole('button', { name: '复制代码' }).click();
+  await codeBlock.getByRole('button', { name: '复制', exact: true }).click();
   assert.equal(await page.evaluate(() => navigator.clipboard.readText()), expectedCode, 'Copied code lost characters or line breaks');
   record('copy-highlighted-code', 'Copied exact source text with original line breaks');
   await page.locator('#theme-toggle').click();
@@ -107,7 +111,7 @@ try {
 
   await page.goto(new URL('/docs/', base).href, { waitUntil: 'domcontentloaded' });
   await waitForStableLayout(page);
-  await page.locator('.docs-mobile-nav summary').click();
+  await page.locator('.docs-mobile-nav summary').first().click();
   const mobileSearch = page.locator('#docs-search-mobile');
   await mobileSearch.fill('React Native');
   const nativeResult = page.locator('#docs-search-results-mobile a').filter({ hasText: 'React Native SDK 接入' }).first();
@@ -127,6 +131,65 @@ try {
   assert.ok(mobileCode.colors >= 3 && parseFloat(mobileCode.fontSize) >= 12, `Mobile code is not readable: ${JSON.stringify(mobileCode)}`);
   record('mobile-code', mobileCode);
 
+  await page.locator('[data-language-switch]').click();
+  await page.waitForURL('**/en/docs/integrations/react-native/');
+  assert.ok((await page.locator('h1').textContent()).includes('React Native'));
+  assert.equal(await page.locator('html').getAttribute('lang'), 'en');
+  await page.screenshot({path: resolve(output, 'mobile-english.png'), fullPage: true});
+  record('mobile-language-switch', page.url());
+
+  await page.setViewportSize({width: 1365, height: 960});
+  await page.goto(new URL('/en/docs/', base).href);
+  await page.locator('#docs-search').fill('wx.getStorageSync');
+  await page.locator('#docs-search-results a[href="/en/docs/api/wx-storage/"]').first().waitFor();
+  await page.locator('#docs-search').press('ArrowDown');
+  assert.ok(await page.locator('#docs-search-results a').first().evaluate(link => document.activeElement === link));
+  await page.keyboard.press('Enter');
+  await page.waitForURL('**/en/docs/api/wx-storage/');
+  record('english-keyboard-search', page.url());
+  await page.screenshot({path: resolve(output, 'desktop-english-api.png'), fullPage: true});
+  const englishCode = page.locator('.docs-code-block').first();
+  const englishSource = await englishCode.locator('code').textContent();
+  await englishCode.getByRole('button', {name: 'Copy', exact: true}).click();
+  assert.equal(await page.evaluate(() => navigator.clipboard.readText()), englishSource);
+  record('english-copy', 'Copied the exact source excerpt');
+
+  await page.locator('#docs-search').fill('unmatched-6b2e8074-translation');
+  await page.getByRole('status').filter({hasText: 'No matching documents'}).waitFor();
+  await page.locator('#docs-search').press('Escape');
+  assert.equal(await page.locator('#docs-search-results').isVisible(), false);
+  record('search-no-results-and-escape', 'No-match state is distinct from index failures');
+
+  await page.route('**/en/docs/search-index.json', route => route.fulfill({status: 503, body: 'unavailable'}));
+  await page.reload();
+  await page.locator('#docs-search').fill('storage');
+  await page.getByRole('status').filter({hasText: 'The search index could not be loaded'}).waitFor();
+  await page.unroute('**/en/docs/search-index.json');
+  record('search-index-failure', 'Index failure is shown explicitly');
+
+  await page.goto(new URL('/docs/start/#prepare-source', base).href);
+  await page.locator('[data-language-switch]').click();
+  await page.waitForURL('**/en/docs/start/#prepare-source');
+  assert.ok(await page.locator('#prepare-source').count());
+  record('language-switch-section', page.url());
+
+  await page.goto(new URL('/demo/?device=pixel-7', base).href);
+  await page.locator('[data-language-switch]').click();
+  await page.waitForURL('**/en/demo/?device=pixel-7');
+  record('language-switch-device-query', page.url());
+  await page.waitForFunction(() => document.querySelector('iframe')?.contentDocument?.documentElement?.dataset.state === 'ready', null, {timeout: 150000});
+  assert.ok(!(await page.locator('iframe').getAttribute('title')).match(/[\u3400-\u9fff]/u));
+  assert.equal(await page.locator('.demo-toolbar [role="status"]').textContent(), 'Ready to explore');
+  await page.getByRole('button', {name: 'Rotate screen', exact: true}).click();
+  await page.waitForFunction(() => {const root = document.querySelector('iframe')?.contentDocument?.documentElement; return root?.dataset.rotation === '90' && root.dataset.inputEnabled === 'true';}, null, {timeout: 30000});
+  await page.screenshot({path: resolve(output, 'english-demo.png')});
+  const retirement = Promise.all(page.workers().map(worker => once(worker, 'close', {signal: AbortSignal.timeout(15000)})));
+  await page.goto(new URL('/en/docs/engineering/sdk-ios/index/', base).href);
+  await retirement;
+  assert.equal(page.workers().length, 0, 'English demo Worker leaked on navigation');
+  assert.match(await page.locator('.docs-source-note a').getAttribute('href'), /\/blob\/[a-f0-9]{40}\/README\.en\.md$/);
+  record('english-demo-and-engineering-source', 'Ready status, rotation, Worker cleanup, and pinned engineering source');
+
   const sitemap = await page.evaluate(async () => {
     const response = await fetch('/sitemap.xml');
     return { status: response.status, body: await response.text() };
@@ -145,8 +208,7 @@ try {
     error: failure ? String(failure.stack || failure) : undefined,
   };
   await writeFile(resolve(output, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
-  await context?.close();
-  await browser?.close();
+  try {await context?.close();} finally {await browser?.close();}
 }
 
 if (failure) {

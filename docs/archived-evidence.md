@@ -1,4 +1,8 @@
+<a id="historical-delivery-and-evidence"></a>
 # 历史交付与证据
+
+**简体中文** · [English](archived-evidence.en.md)
+
 
 开源源码快照保留维护文档、许可、测试输入和历史产物锁定信息。旧部署收据、设备采集、完整截图、二进制、符号及构建日志保存在维护者的私有归档，不包含在公开 Git 历史。
 

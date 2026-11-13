@@ -1,0 +1,169 @@
+---
+id: "docs/engineering/weapp-container/docs/worker-surface-recovery"
+title: "工作者外部绘制表面恢复 1.0"
+section: "运行时与宿主"
+summary: "工作者外部绘制表面恢复 1.0。来自 weapp-container/weapp-container 的版本化工程说明。"
+route: "/docs/engineering/weapp-container/docs/worker-surface-recovery/"
+locale: "zh-CN"
+sourceRepository: "weapp-container/weapp-container"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourcePath: "docs/worker-surface-recovery.md"
+---
+
+<a id="worker-external-surface-recovery-10"></a>
+# 工作者外部绘制表面恢复 1.0
+
+**简体中文** · [English](/en/docs/engineering/weapp-container/docs/worker-surface-recovery/)
+
+
+此可选协议在保留相同 Worker、Rust 会话、QuickJS 域、页面栈、存储和定时器的同时，替代丢失的 CanvasKit/WebGL 绘制表面。
+它将原生输入生命周期撤销、保留帧发布、本地绘制表面提交以及最终运行时回执进行了分离。仅凭 `webglcontextrestored` 事件或 RPC 成功并不能授予输入权限。
+
+该协议扩展了[外部呈现](/docs/engineering/weapp-container/docs/worker-external-presentation/)和[有序观察通道](/docs/engineering/weapp-container/docs/worker-ordered-observations/)。其恢复事务适用于`external-frame`传输；DOM呈现保持自己的事务协议。
+
+<a id="explicit-load-and-hostwasm-negotiation"></a>
+## 显式加载和宿主/WASM协商
+
+```js
+const loaded = await worker.requestHost('load', {
+  renderer: 'external-frame',
+  externalPresentation: { version: '1.0' },
+  observation: { version: '1.0' },
+  surfaceRecovery: { version: '1.0' },
+})
+```
+
+一个清单/强制渲染策略可能会选择外部帧。恢复需要现有的合同和一个外部帧选择。在清单加载或`app.init`之前，Worker需要这些额外的导出：
+
+- `surface_recovery_contract_json()`
+- `recover_external_frame_json(expectedJson)`
+
+第一个导出是纯净的，并且返回 exactly:
+
+```json
+{"version":"1.0","retainedExternalFrame":"1.0"}
+```
+
+加载结果会添加 `surfaceRecovery` 该描述符。缺少导出、旧版/未知描述符、不支持的请求版本或遗漏先决合同会明确抛出 `ERR_PROTOCOL_VERSION`。选择 DOM 传输会抛出 `ERR_UNSUPPORTED_CAPABILITY`。Worker 从未通过运行应用程序代码或回退到正常渲染来测试支持。旧版调用者如果省略了 `surfaceRecovery`，不会探测其导出内容，保留原有的响应形状，也无法调用 `surface.recover`。
+
+<a id="loss-actual-drain-and-exact-expected-input"></a>
+## 丢失、实际耗尽和精确预期输入
+
+在拥有上下文丢失时，会话立即撤销本地输入，重置其输入辅助组件，并暂停调度器和呈现器。它保留工作线程，且不停止应用的定时器泵。恢复控制等待调度器的退休飞行/释放屏障以及适配器的实际本地/远程工作，包括真正的延迟确认最终回执。公共超时或取消回执不能替代该最后使用屏障。
+
+<a id="owned-rpc-finals-and-admission"></a>
+### 所有 RPC 最终值和准入
+
+CanvasKit 适配器需要原始 RPC 客户端的独立
+`actualFinalContract: '1.0'`。对于每一帧/ACK 请求，它会提供一个同步
+`onActualFinal` 回调。该回调接收一个回执：
+
+```js
+{ version: '1.0', status: 'final', requestId: 'request-prefix.7' }
+```
+
+`status` 是以下这些 distinct transport facts 之一：
+
+| 状态 | 绘制表面恢复的含义 |
+| --- | --- |
+| `not-posted` | 在 `postMessage` 之前就停止了准入或设置；没有远程TURN可以使用此请求。预先拒绝的请求具有 `requestId: null`；已准入但未发布的请求保留其发出的ID。 |
+| `final` | 从同一个工作进程、会话、操作和请求中接收到确切的 `ok` 或 `error` 最终值。排队的响应不是最终值。 |
+| `terminated` | 该特定 Worker 的拥有客户端已执行同步终止调用，但此请求并无真正的最终状态。恢复消耗失败；终止不会生成原生结果。 |
+| `uncertain` | 会话终止失败。清理操作报告了不确定性，无法授权另一个绘制表面或替换的所有者成功完成清空。 |
+
+已发出的请求在发生公共中止或超时后仍保留其最终回调和数据负载预留。这些预留项具有自身的有限准入次数，并共享有界中的字节预算；它们不能被普通已退役响应账本的TTL或计数限制所驱逐。当资源耗尽时，系统将在提交前拒绝新的工作，并保留预留的关闭控制预算。延迟效果和ACK元数据会在相应的延迟最终释放释放其预留之前传递给消费者。重复的最终状态不会两次传递这些效果。回调失败被视为传输失败，而不是成功的数据接收回执。
+
+适配器在调用 RPC 之前会注册其实际工作承诺，因此同步的准入拒绝不会留下一个虚构的远程操作待处理。公共请求结算和实际工作结算仍然保持分开。如果已提交的操作没有提供真正的最终状态，恢复将保持等待状态且输入被禁用；经过的时间、日志记录的驱逐或显式重试都无法声明该操作已结束。关闭确切的 Worker 可以将该等待视为清理失败。
+
+<a id="clone-proof-survives-local-cancellation"></a>
+### 克隆证明在本地取消后仍存在
+
+调度器的精确尝试上下文包括一个同步
+`retainFrameProof(proof)` 通道。实际的 CanvasKit 适配器仅在验证原始 Worker `frame`/`frame.current` 响应的会话绑定消耗输入、发布和物理目标后才会调用它。调度器独立地复制并验证所有者、尝试、捕获需求和发布；一个尝试不能用不同的克隆替换其原始回执。
+
+这条通道与创建呈现器或返回已准备好的本地候选者是分开的。在异步创建呈现器期间发生上下文丢失时，可以取消并释放该资源，同时保留其已验证的克隆。一个已取消公共等待的已发布帧，可以通过其真实的最终值传递相同证据，包括在诊断TTL过期之后。它不会创建画布、ACK、已接受的呈现或输入权限。普通的远程最终消耗仍会在恢复之前运行。
+
+票证的 `base` 是调度器本地飞行阶段的不可变快照。一个延迟的远程最终证据可以在之后向同一恢复的内部精确飞行槽提供证明；会话也会等待适配器的实际远程耗尽，然后才使用该槽。导航、不兼容的输入、已退役的恢复或关闭操作将阻止延迟证据重新激活。当原生恢复被 `retained` 时，兼容的证据将选择 `frame.current`，而不是再次执行一个有状态的 View。`render-required` 仍会选择正常的模板渲染。这两条路径都不会从当前状态或回执中填充已消耗的输入。
+
+调度器票据记录原始丢失观测值（`source`）以及任何兼容的历史克隆证明（`base`）。该证明绝不会被作为输入权威接受。会话在 drain 之后从最新的真实有序观测值构造出 `expected`；它不会重标历史证明，也不会伪造绘制表面生成。Worker 请求是一个外部拥有者操作，而不是内部应用桥接 API：
+
+```js
+const result = await worker.requestHost('surface.recover', {
+  version: '1.0',
+  expected: {
+    sessionId: 'session-1',
+    pageId: '1',
+    routePath: 'pages/home/index',
+    viewport: { x: 0, y: 0, width: 375, height: 667 },
+    rendererProfile: 'skia', // or skyline-compat within this transport
+    templateRevision: '12',
+    renderRevision: '8',
+    inputLifetimeRevision: '3',
+    surfaceGeneration: '4',
+  },
+})
+```
+
+请求和预期对象仅允许包含文档中列出的字段。Worker 会将其当前真实的观测结果与确切的会话、页面、路由、逻辑视口、有效渲染器配置、模板版本、渲染版本、原生输入生命周期以及 Worker 绘制表面生成进行比对。生命周期必须为激活状态，且运行时必须健康。Rust 会重复执行所有原生检查；Worker 绘制表面生成仍由观测通道拥有，不会作为原生事实传递给 Rust。`recover_external_frame_json` 最多接受 16 KiB 的预期 JSON，拒绝未知字段，并验证加载的宿主使用外部帧。
+
+所有表示 u64 值的标识符均为完整 u64 范围内的标准十进制**字符串**。不得将其转换为数值，也不接受前导零、小数、负值或溢出。页面和绘制表面生成令牌为正数；原生生命周期可从零开始。渲染版本零仅在生成帧之前可走渲染所需路径。逻辑几何是有限的，受产品 4096 像素边界的限制，并且与原始观测/帧几何精确比较，不进行 DPR 转换或独立舍入。
+
+Worker 在调用原生恢复之前，会预先检查可用的渲染、生命周期、绘制表面生成和观察序列增量。Rust 也在进行突变之前，检查原生的生命周期和渲染增量。耗尽会返回明确的错误（在 Worker 计数器边界返回 `ERR_ENGINE`，在原生计数器边界返回 `ERR_RENDER`）；计数器不会溢出或饱和为虚假恢复。一个过期的预期字段会返回 `ERR_CANCELLED`，且不会进行原生突变、保留证明替换或联系清理。请求格式错误将返回 `ERR_PROTOCOL_VERSION`。
+
+<a id="two-explicit-outcomes"></a>
+## 两个明确的结果
+
+两条路径都返回这个七字段回执，使用原始字符串令牌：
+
+```js
+recovery: {
+  version: '1.0',
+  kind: 'retained', // or render-required
+  sessionId: 'session-1',
+  previousRenderRevision: '8',
+  renderRevision: '9',
+  previousInputLifetimeRevision: '3',
+  inputLifetimeRevision: '4',
+}
+```
+
+包含的结果包含新的真实 `observation`。原生生命周期增加一，这导致 Worker 创建一个新的绘制表面生成和观察序列，在此操作中也恰好延迟一帧。它保留了拥有者身份。两种结果均不运行 JS，不消耗 JS 微任务，不调用 View 表达式或就绪钩子，不布局节点，不执行 CPU 光栅化/读回，不调用呈现器，也不确认呈现。
+
+| 结果 | 原生发布 | 工作程序结果 | 下一呈现 |
+| --- | --- | --- | --- |
+| `retained` | 克隆并提交已布局的外部帧；渲染版本号加一，应用帧ID保持不变 | `recovery`, `frame`, `renderRevision`, `viewRevision`, `scheduling`, `target`, `observation`；批次无影响 | 新的呈现器提交保留命令，然后需要真实的新增版本确认 |
+| `render-required` | 仅撤销证明和输入生命周期；渲染修订保持不变 | `recovery`, `observation`；无帧、调度证明、目标或效果批次 | 调度器在新生命周期中执行正常模板渲染，然后提交并确认其新发布 |
+
+保留重用需要原生已提交的克隆输入与当前期望的页面、路由、模板和视口完全匹配。它还要求保留帧拥有该视口。缺少、显式数据、手动或脏证明确取值为 `render-required`；运行时不会从当前状态填充证明确值。之前的图像可能仍可作为诊断数据使用，但其待呈现、观察者所有权和输入证明确已作废，因此无法通过确认未更改的旧渲染令牌来完成验收。稍后的正常渲染将建立新的所有权元数据。
+
+两种结果均清除原生触摸捕获、接触结束的记录以及`ScrollRegistry`中的触摸位置。这是纯粹的终止操作：它不会触发任何 JS 的 touchcancel 或滚动回调。滚动偏移、延迟的滚动命令、待处理的滚动通知、布局、应用数据和资源均保持不变。在新绘制表面上重新使用的指针 ID 无法继承旧的滚动偏移量。
+
+<a id="new-publication-ready-hooks-and-input-authority"></a>
+## 新版发布，准备好的钩子和输入权限
+
+恢复阶段将原生呈现和观察器几何体设置为未呈现。
+页面适配器构建一个全新的拥有权 CanvasKit 呈现器，并验证原始的新渲染令牌、克隆输入、目标以及绘制表面生成证明。
+它先在本地提交，然后请求运行时的结构化外部回执。
+普通的调度器/适配器验收门控仍然适用；恢复回执本身不包含任何许可或 `inputEnabled` 结果。
+
+一个未被确认的生成帧在重新发布时保留其待呈现的元数据。其就绪钩子仅在实际的新发布确认（ACK）时运行一次。如果旧帧已经得到确认，恢复并再次确认该帧不会重复触发就绪事件。迟到的旧渲染确认无法授权替换绘制表面。只有与当前生成版本、页面/视口生命周期完全匹配的真正最终确认，才能启用输入。排队的、恢复事件的、本地持久化或 HTTP/RPC 回执均无法实现此功能。
+
+<a id="dirtiness-retry-and-close"></a>
+## 污染、重试和关闭
+
+普通的浏览器开发界面显示当前的恢复阶段，并且仅对被阻塞的绘制表面提供**重试画面恢复**功能。其应用/管理入口点 `retrySurfaceRecovery({ ownerKey, lossId })` 将操作绑定到具体的实时拥有者和丢失事件。重复点击会共享该操作；关闭围栏会将准入请求排队，并保留已准入的工作，直到最终结算。重试结果是原生恢复结果，而不是呈现帧的回执。输入在正常 GPU 提交和原生 ACK 验收新绘制表面之前保持禁用。诊断工具 `window.weappContainerDev` 处理程序明确暴露了相同的操作绑定方法，且与 `retryCleanup()` 分离。
+
+定时器和应用状态在呈现暂停时仍遵循现有拥有者语义。
+一个定时器或 setData 可能会使保留的克隆变脏；原生 `render-required` 分支随后会创建一个真实的撤销屏障，再进行正常的视图评估。之后的脏状态观察也会使不兼容的调度器重用失效。页面/路由/视口/配置/生命周期的变化会终止旧的事务；历史证明不会被重新指向新状态。
+
+会话使用指标/生命周期控制来序列化恢复。它最多重试三次精确的 `ERR_CANCELLED` 观察竞争，使用新接收到的真正观察值。持续的竞争将使恢复处于 `blocked` 状态并禁用输入，同时提供明确的重试诊断。后台恢复也被阻塞。隐藏/调整大小的过渡保留各自的屏障；显示时会先获取其真实的生命周期观察值，然后继续执行一次新的恢复事务。`retrySurfaceRecovery()` 会重试被阻塞的事务。如果原生恢复已经成功，且呈现仍在等待或本地被阻塞，则会使用相同的原生回执和保留的证明来重试呈现，而不会生成另一个原生生命周期。`retryPresentation()` 在发生丢失时会路由到该相同的恢复操作。新的上下文丢失可以再次终止正在进行的事务。
+
+本地呈现器创建/提交失败会保留实时工作进程和定时器泵，但恢复被阻止且输入被禁用。显式重试只有在所有本地实际工作和所拥有的远程最终操作完成之后才能清除失败的本地 draining 操作；它不会借用工作进程终止回执。协议、引擎、清单或不支持功能的故障仍会故障于拥有者。失败的呈现器析构函数会保留其确切的不确定资源和清理错误；重试和关闭操作将永远不会再次调用该析构函数或声称已成功释放。
+
+立即关闭会禁用输入，中止公共等待，并退掉所有者。
+清理首先等待调度器/适配器本地 GPU 的最后一次使用，然后退掉其拥有的绘制表面。接着，释放拥有的输入辅助程序、渲染器资源租约和桥接器，关闭精确的 Worker，并在等待队列中的控件和移除拥有的挂载之前，完成适配器剩余拥有的远程操作。如果 Worker 终止时缺少请求的最终确认，这些等待将因清理错误而结束，因此关闭无法在公共取消时死锁，也无法将缺失的原生最终确认报告为干净的清理。关闭后无法恢复/确认回执，也无法重新发布表面或重新打开输入。有限的公共关闭超时时间并不能证明底层资源已完全释放；失败仍属于诊断信息，不授权对无关的 Worker 或画布进行广泛的清理。
+
+<a id="validation-boundary"></a>
+## 验证边界
+
+Node fake-host、调度器、会话和适配器测试验证了协议和所有权合约。它们并不能证明 Rust 执行、编译后的 WASM 导出、实际的 WebGL 恢复、GPU 硬件或延迟。编写的 Rust 测试覆盖了保留状态、未确认就绪、脏撤销、原子拒绝、存储/定时器保留以及指针偏移退役；其执行仍属于一个独立的本地门控。父级集成必须运行 Rust/WASM 检查以及拥有真实浏览器上下文丢失/恢复测试，然后分别报告物理硬件和性能证据。本文件不将这些门控标记为通过，也不更改冻结的双渲染器合规性清单。

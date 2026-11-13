@@ -26,3 +26,35 @@ export const docsNavigation = [
   { title: 'API 参考', paths: ['/docs/sdk-api/', '/docs/api/', '/docs/api/capability-defaults/', '/docs/components/'] },
   { title: '发行与支持', paths: ['/docs/platforms/', '/docs/licensing/', '/docs/troubleshooting/'] },
 ];
+
+const english = [
+  ['Documentation', 'Documentation', 'Developer documentation, integration guides, and API references.'],
+  ['Quick start', 'Get started', 'Create an independent test pack, choose an SDK, mount a view, and load the pack.'],
+  ['Architecture and lifecycle', 'Get started', 'JavaScript engines, presentation, host views, and session resource ownership.'],
+  ['Configuration and portable packs', 'Get started', 'Package native mini-programs or existing builds, configure capabilities, and verify resources.'],
+  ['Integrations', 'Platform integrations', 'Compare Android, iOS, desktop, Flutter, React Native, and browser demonstrations.'],
+  ['Android', 'Platform integrations', 'Embed Kotlin sessions and native views in Android applications.'],
+  ['iOS', 'Platform integrations', 'Integrate Swift sessions and UIKit views.'],
+  ['C++ Desktop', 'Platform integrations', 'Integrate C++ sessions, child views, and native presenters.'],
+  ['Flutter', 'Platform integrations', 'Use Dart controllers and widgets across supported native targets.'],
+  ['React Native integration', 'Platform integrations', 'Integrate Fabric views and controllers on Android and iOS.'],
+  ['Web demonstration', 'Platform integrations', 'Understand the fixed browser demonstration and general Web SDK boundaries.'],
+  ['HarmonyOS example', 'Platform integrations', 'Existing ArkTS example and its actual build, installation, and runtime status.'],
+  ['Host SDK APIs', 'API reference', 'Sessions, controllers, views, events, and host messaging across SDKs.'],
+  ['Mini-program APIs and capabilities', 'API reference', 'API names, host coverage, engines, and conformance evidence by capability group.'],
+  ['Default runtime capabilities', 'API reference', 'Manifest defaults and entries without independent platform coverage records.'],
+  ['Components and templates', 'API reference', 'WXML, WXSS, component relations, and interaction compatibility boundaries.'],
+  ['Platform status and boundaries', 'Releases and support', 'Build, installation, runtime, and signing results by target.'],
+  ['Licensing, downloads, and releases', 'Releases and support', 'Source licensing, archive terms, repository access, and binary availability.'],
+  ['Troubleshooting', 'Releases and support', 'Diagnose manifests, hashes, lifecycle, layout, and rendering problems.'],
+];
+export function localizedDocsPages(locale) {
+  return docsPages.map((page, index) => locale === 'en' ? {...page, path: `/en${page.path}`, title: english[index][0], section: english[index][1], summary: english[index][2]} : page);
+}
+export function localizedDocsNavigation(locale) {
+  return docsNavigation.map((section, index) => ({
+    ...section,
+    title: locale === 'en' ? ['Get started', 'Platform integrations', 'API reference', 'Releases and support'][index] : section.title,
+    paths: section.paths.map(path => locale === 'en' ? `/en${path}` : path),
+  }));
+}

@@ -1,47 +1,53 @@
-# Showcase bridge 1
+<a id="showcase-bridge-1"></a>
+# 展示桥1
 
-The same Skia miniapp runs in all seven hosts. It uses the SDK's existing
-`weappContainer.postMessage`, `onMessage`, and `offMessage` API. The host returns
-messages with SDK `sendMessage` (Web: `WorkerWebSession.request('host.message', message)`).
-This protocol is showcase application data; it is not a new core runtime API.
+**简体中文** · [English](BRIDGE.en.md)
 
-Every message has `protocolVersion: 1` and `sessionId`. The guest generates a
-new session ID at App launch. Hosts must never forward messages between owners.
-The host should register its message listener before loading the pack.
 
-## State
+同一个 Skia 迷你应用程序在所有七个宿主中运行。它使用了SDK现有的
+`weappContainer.postMessage`、`onMessage` 和 `offMessage` API。主人归来
+包含 SDK 的 `sendMessage` 消息（Web: `WorkerWebSession.request('host.message', message)`）。
+该协议是展示应用数据；它不是一个新的核心运行时 API。
 
-Guest → host:
+每条消息都有 `protocolVersion: 1` 和 `sessionId`。客人生成一个
+应用程序启动时的新会话 ID。宿主绝不能在所有者之间转发消息。
+宿主应在加载包之前注册其消息侦听器。
+
+<a id="state"></a>
+## 状态
+
+嘉宾 → 主持人：
 
 ```json
 {"type":"showcase.state.ready","protocolVersion":1,"sessionId":"showcase-…"}
 ```
 
-Host → guest (once per session, repeated ready is harmless):
+主持人→嘉宾（每场一次，重复准备无害）：
 
 ```json
 {"type":"showcase.state.restore","protocolVersion":1,"sessionId":"showcase-…","state":null}
 ```
 
-Use the previously saved state object instead of `null` when available.
-Guest changes produce `showcase.state.changed` with the same envelope and
-`state`. Persist only that `state`; an active `sessionId` must not be saved and
-reused as an identity. A host should return its saved snapshot promptly. A late
-restore is ignored after the user has changed data, so it cannot erase a new
-shopping bag or order. Only the first accepted restore is applied. Native guest
-storage is also used when available; host restore takes precedence before the
-first change. Web hosts should persist in their own origin's localStorage.
+使用之前保存的状态对象而不是 `null` （如果可用）。
+访客更改会产生具有相同信封的 `showcase.state.changed` 且
+__代码_0__。仅保留 `state`；不得保存活动的 `sessionId` 并且
+重复用作身份。宿主应立即返回其保存的快照。迟到了
+用户更改数据后恢复将被忽略，因此无法删除新的
+购物袋或订单。仅应用第一个接受的恢复。本土客人
+存储空间可用时也会使用；宿主恢复优先于
+第一个改变。 Web 宿主应保留其自己来源的 localStorage。
 
-State schema 1 contains `cart`, `foodCart`, `orders`, `address`, `foodNote`,
-`pickup`, `nextOrder`, and `revision`. Do not edit prices or totals: restoration
-reconstructs them from the catalog. Quantities are bounded to 20 per specification,
-orders to the latest 30, and text to the documented field lengths. Unknown product
-IDs and malformed orders are dropped. Reset produces a normal changed snapshot.
-No real name, phone or address is required; all seeded values are fictional.
+状态模式 1 包含 `cart`、`foodCart`、`orders`、`address`、`foodNote`、
+`pickup`、`nextOrder` 和 `revision`。请勿编辑价格或总计：恢复
+从目录中重建它们。每个规格数量限制为 20 个，
+订单为最新 30 个，文本为记录的字段长度。未知产品
+ID 和格式错误的订单被丢弃。重置会生成正常的更改快照。
+无需真实姓名、电话或地址；所有种子值都是虚构的。
 
-## Text editing
+<a id="text-editing"></a>
+## 文字编辑
 
-Guest → host:
+嘉宾 → 主持人：
 
 ```json
 {
@@ -52,58 +58,62 @@ Guest → host:
 }
 ```
 
-Allowed fields: `search` (40), `address.name` (24), `address.phone` (24),
-`address.detail` (160, multiline), `food.note` (120, multiline). Hosts must use
-a native text editor, set maximum length, and support normal Chinese IME.
-Confirm and cancel are explicit user actions. A dismissed editor returns cancel.
+允许的字段：`search` (40)、`address.name` (24)、`address.phone` (24)、
+`address.detail`（160，多行），`food.note`（120，多行）。宿主必须使用
+原生文本编辑器，设置最大长度，支持普通中文输入法。
+确认和取消是显式的用户操作。被解雇的编辑返回取消。
 
-Host → guest:
+主持人→嘉宾：
 
 ```json
 {"type":"showcase.text.commit","protocolVersion":1,"sessionId":"showcase-…","pageId":3,"requestId":"text-1","value":"保温杯"}
 ```
 
-Or use `showcase.text.cancel` with the same identity fields and no value.
-Copy the session/page/request identifiers from the exact request being answered.
-The host must keep only one editor for one owner. Guest sends
-`showcase.text.dismiss` with those identifiers when it navigates away, starts a
-replacement editor, resets, or retires. Close that exact editor and discard late
-native results. A stale session, page, or request never changes guest state.
+或者使用 `showcase.text.cancel` 具有相同的标识字段但没有值。
+从正在应答的确切请求中复制 session/page/request 标识符。
+主持人只能为一名业主保留一名编辑。客人发送
+`showcase.text.dismiss` 与这些标识符当它导航离开时，启动一个
+更换编辑器、重置或退役。关闭该确切的编辑器并稍后丢弃
+原生结果。过时的会话、页面或请求永远不会改变访客状态。
 
-`pageId` is a guest screen generation, not a native page handle. It increments
-on every internal navigation, including leaving and returning to the same screen.
-No arbitrary property paths or evaluation are accepted. A text commit writes
-only the callback selected by the original allowlisted request.
+`pageId` 是访客屏幕生成，而不是本机页面句柄。它递增
+在每个内部导航上，包括离开和返回同一屏幕。
+不接受任意的属性路径或评估。文本提交写入
+仅由原始白名单请求选择的回调。
 
-## Close
+<a id="close"></a>
+## 关闭
 
-The guest owns the visible close button. It sends the current `showcase.state.changed` snapshot followed by `showcase.close.request`, both with `protocolVersion: 1` and the active `sessionId`. The host accepts close only for its current restored guest identity, dismisses its input editor, drains state persistence, then closes that owner. Hosts render the surface to actual view bounds; they do not overlay their own status or close controls. Failure and closed messages can replace the surface after retirement.
+访客拥有可见的关闭按钮。它发送当前的 `showcase.state.changed` 快照，后跟 `showcase.close.request`，均包含 `protocolVersion: 1` 和活动的 `sessionId`。宿主仅接受其当前恢复的来宾身份的关闭，关闭其输入编辑器，耗尽状态持久性，然后关闭该所有者。宿主将表面渲染到实际视图边界；他们不会覆盖自己的状态或关闭控制。失败和关闭消息可以在退役后替换表面。
 
-## Local business behavior
+<a id="local-business-behavior"></a>
+## 本地商业行为
 
-The route is `pages/home/index`. Launch query `scene=basic|shop|order` opens the
-explorer, store, or food menu. Eight internal screens share one Page and one
-business store; no native chrome is required for navigation.
+路线是`pages/home/index`。启动查询 `scene=basic|shop|order` 打开
+探索者、商店或食物菜单。八个内部屏幕共享一页一页
+营业店；导航不需要原生 Chrome。
 
-MORROW store: search → category → product/specification → shopping bag → address
-→ confirmation → simulated payment → order → simulated receipt/cancellation.
-Daily Table: category → meal/specification → food bag → pickup/note → simulated
-payment → preparing order → simulated pickup/cancellation. Completed and cancelled
-orders can be ordered again. Shop and food bags remain independent.
+MORROW商店：搜索→类别→product/specification→购物袋→地址
+→确认→模拟付款→下单→模拟receipt/cancellation.
+每日表：类别→meal/specification→食物袋→pickup/note→模拟
+付款→准备订单→模拟pickup/cancellation.完成并取消
+订单可以再次订购。商店和食品袋保持独立。
 
-Prices are integer cents; specification extras are included exactly once. Placing
-an order takes an immutable copy of its lines/address/note and clears only the
-corresponding bag. Orders never contain a real payment token. The UI makes the
-simulated nature of both payment and fulfillment explicit.
+价格为整数美分；规格附加内容仅包含一次。配售
+订单获取其 lines/address/note 的不可变副本，并仅清除
+对应的包。订单从不包含真正的支付令牌。用户界面使
+支付和履行的模拟性质是明确的。
 
-## Ownership and verification
+<a id="ownership-and-verification"></a>
+## 所有权和验证
 
-The host owns editing UI, persistence, keyboard, and OS resources. The guest owns
-catalog, filtering, bag contents, prices, order transitions, navigation, and feedback.
-Native input bridging does not claim implementation of miniapp `<input>` or IME.
-No network, login, device permission, wallet, arbitrary pack loading, or game API
-is needed by this sample. The host must close its editor before closing its owner.
+宿主拥有编辑UI、持久性、键盘和操作系统资源。客人拥有
+目录、过滤、包内容、价格、订单转换、导航和反馈。
+本机输入桥接不要求实现 miniapp `<input>` 或 IME。
+无网络、登录、设备权限、钱包、任意包加载、游戏API
+该样本需要
+。宿主必须在关闭其所有者之前关闭其编辑器。
 
-Run `node --test tools/tests/miniapp-*.test.mjs` from the showcase repository.
-These tests validate business and bridge state machines; actual Skia rendering,
-Chinese OS input, scrolling, and platform packaging require host acceptance.
+从展示存储库运行 `node --test tools/tests/miniapp-*.test.mjs` 。
+这些测试验证业务和桥接状态机；实际的 Skia 渲染，
+中文操作系统输入、滚动、平台打包需要宿主接受。

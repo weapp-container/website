@@ -1,0 +1,81 @@
+---
+id: "docs/engineering/weapp-container/docs/worker-presenter-transactions"
+title: "工作呈现器事务（显式 1.0 光入）"
+section: "架构与协议"
+summary: "工作呈现器事务（显式 1.0 光入）。来自 weapp-container/weapp-container 的版本化工程说明。"
+route: "/docs/engineering/weapp-container/docs/worker-presenter-transactions/"
+locale: "zh-CN"
+sourceRepository: "weapp-container/weapp-container"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourcePath: "docs/worker-presenter-transactions.md"
+---
+
+<a id="worker-presenter-transactions-explicit-10-opt-in"></a>
+# 工作呈现器事务（显式 1.0 光入）
+
+**简体中文** · [English](/en/docs/engineering/weapp-container/docs/worker-presenter-transactions/)
+
+
+此源代码实现了基于低级别
+[渲染器转换协议](/docs/engineering/weapp-container/docs/worker-renderer-transition-protocol/) 的可选产品交易。它不启用模拟器浏览器自动切换、更改冻结的279个网关，也不建立浏览器、CanvasKit、物理GPU、七宿主或微信一致性证据。编写的合约固定测试用例与根通道的执行报告保持独立。
+
+<a id="entry"></a>
+## 条目
+
+一个静态的 Worker 构建可以接收 `--startup-intent /absolute/startup.json`：
+
+```json
+{
+  "schemaVersion": 1,
+  "execution": "worker",
+  "engine": "quickjs",
+  "viewport": { "width": 375, "height": 667 },
+  "rendererPolicy": { "mode": "manifest" },
+  "rendererTransitions": { "version": "1.0" }
+}
+```
+
+构建器保留了精确的有界 UTF-8 启动字节及其 SHA-256，这些内容存储在 `workerStartupIntent` 中，并在生成的固定产品配置中包含相同的显式授权。混合静态产品需要显式指定 CanvasKit/字体输入（`--renderer canvaskit`）。`workerProductOptions` 将该授权传递给 `WorkerWebSession.load`。该功能不能通过 URL 参数启用。嵌入器可直接将相同的显式对象传递给 `load`。
+
+省略该字段将保留固定字体行为和 v1 观察协商
+版本 1.0 要求 manifest 渲染器策略、QuickJS、原生实际最终追踪、外部呈现/绘制表面恢复以及 DOM 查询预检，才可在 `app.init` 之前完成。混合所有者输入因果时序不会协商。
+初始 DOM 使用浏览器密度；向 DOM 启动提供物理渲染缩放仍被视为明确错误。
+
+[三路静态示例](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/scripts/fixtures/worker-dual-renderer/README.md)
+提供了包构建命令和一个真实的浏览器消费者。它使用手工编写的公共输入传递给真实的打包器；它不声称存在 `weapp-vite` 编译器运行。在未使用的 localhost 端口上服务生成的站点。运行时就绪状态为 `window.weappReady`；第一个被接受的启用输入的视图是 `window.weappPresented`。可检查 `window.weapp.status` 以观察后续状态变化，并在调用 `window.weappClose()` 之前停止所拥有的服务器。静态构建和控制台就绪本身并不能证明浏览器或 GPU 的验收。
+
+<a id="identity-and-data-flow"></a>
+## 身份和数据流
+
+原始加载结果保持不变。V2 观察结果保留其真实序列和精确的三字段运行时所有者（`workerEpoch`、`sessionId`、`packSha256`）。一个独立的原生绑定指定了会话、传输族和呈现器生成版本。本地调度器/适配器/字体资源使用包含 `presenterGeneration` 的派生五字段所有者；它们不是新的运行时或新的启动回执。
+
+每个适配器借用一个 RPC 和一个桥接相关性表的范围。
+其 RPC 和桥接请求在入口处捕获绑定以及页面/输入/绘制表面上下文。旧的范围无法替代当前绑定，无法获取后继者的资源，也无法发送所有者控制（如指标）。所有者的指标/可见性以及呈现器转换共享串行控制队列。原始观测和实际效果仍需经过所有者一次，消费者在看到最终结果之前都必须经过这一过程。
+
+<a id="transaction-and-cleanup"></a>
+## 交易和清理
+
+一个待处理的家庭观察会立即冻结输入并挂起旧的调度器。拥有者会停止该呈现器的新调用，并通过 RPC `onActualFinal` 将所有已进入的请求进行处理；公共超时/取消不是这一屏障。仅凭原生 `renderer.transition` 会终止旧的运行时呈现器，并返回原始效果、绑定和输入生命周期的最终状态。业务 JS、定时器、存储、页面栈以及唯一的 Worker 仍由同一个运行时拥有；启动和业务请求将永不重放。
+
+DOM 候选项清理可以等待整个呈现器的精确退休，而不是发出旧代的 `view.abort`。这是一道真正的原生退休屏障，而不是为每个键发明的中止确认。DOM 适配器在接收之前会检查前一代和源的精确信息。本地调度器、DOM/GPU 资源、输入辅助程序和渲染器租约将在新资源安装前被释放。新的绑定采用并不涉及呈现：只有新适配器的真实确认、几何信息和调度器证明才能重新打开输入。
+
+原生过渡的公共超时在晚些时候实际完成前保留原始操作，而不是发送第二个过渡。本地资产或呈现器创建失败会报告 `presenterTransition.phase = "blocked"`，并保持业务请求可用。当部分资源清理成功时，`retryRendererTransition()` 可以在不重新启动的情况下重试；`retryPresentation()` 会委派给同一个被阻塞的事务。当 `cleanupUncertain` 为 true 时，资源保持已充电状态，重试在分配继任者前被拒绝。部分资源清理失败仍会被记录并限制在范围内；它们无法证明清理成功。
+
+如果在预原生阶段 drain 时导航返回到原始家族，本地已停止的呈现器将被保持阻塞，因为尚未发生原生退休。它不会被静默恢复。后续的待处理请求可以显式重试，或者可以关闭拥有者。在成功退休后，跨越更多家族的导航将按顺序执行，并具有有界的竞争重试预算。
+
+在未完成的交易期间关闭使用相同的RPC真实关闭最终操作作为更广泛的退休屏障，然后清空本地清理。已终止或不确定的请求仍被视为清理错误。不会创建第二个Worker。关闭已验收的生成过程遵循普通“先呈现器后RPC”的关闭路径。重复关闭会重用其拥有的屏障。
+
+<a id="source-contracts-and-evidence-limits"></a>
+## 源合同和证据限制
+
+新的 `scripts/worker-presenter-transaction.test.mjs` 测试用例涵盖了两种家族方向，一次启动，实际-最终的 draining，过期作用域，本地故障和重试，返回家族的竞争，以及原始的延迟原生最终。其他现有套件已附加了附件、真实的桥接上下文、真实的调度器身份和静态启动定义。产品测试用例使用假的原生和呈现器对等体；它们无法建立生成的 WASM 或真实的渲染。
+
+实时生成的 WASM 混合 DOM/Skia 浏览器交互、原生回调错误、上下文丢失、合成器反馈以及释放/输入性能必须由唯一的集成通道进行运行和报告。普通模拟器浏览器自动功能在这些门控提供所需证据之前保持关闭。
+
+
+一个渲染器资源加载器在其成功租用之前拥有所有部分资源；拒绝必须内部释放那些未转移的资源。在租用返回后，所有者先记录该事件，然后再检查是否被取消。所有者在将画布传递给适配器工厂之前，也会记录每个画布。如果该工厂在返回完整适配器之前拒绝，并且清理成功，则所有者会移除其未转移的画布，并在重试前释放已转移的资源租用。如果工厂在抛出异常后仍无法返回其内部的GPU/资源分配，该工厂仍需对此负责；移除所有者的画布并不表示内部未返回的分配已被清理。
+
+本地作用域的准入严格遵循实际最终 1.0，如同原始 RPC 一样：未提交的回调必须同步返回，异步拒绝会被观察到，回调合约失败仍保留在诊断和清理结果中。
+
+
+如果传输的适配器部分的调度器、实际最终回收、析构函数或远程最终清理失败，其本地最后使用状态将不确定。拥有者保留该渲染器租约及其字节费用，并标记 `presenterTransition.cleanupUncertain`，在任何新的资源分配之前拒绝渲染器重试。业务请求将继续，输入被冻结。关闭操作保留原始的清理失败，并不声明本地资源已释放；原生 Worker 停止无法证明抛出的本地 GPU 析构函数已成功执行。清理部分失败会释放其租约，并在允许重试前删除已处置的适配器引用。计数限制不能替代加载器的字节预算。

@@ -1,4 +1,8 @@
+<a id="security-report"></a>
 # 安全报告
+
+**简体中文** · [English](SECURITY.en.md)
+
 
 请勿在公开 Issue 粘贴漏洞利用细节、凭据、设备信息或业务数据。
 通过核心仓库的 [GitHub 私密漏洞报告](https://github.com/weapp-container/weapp-container/security/advisories/new)

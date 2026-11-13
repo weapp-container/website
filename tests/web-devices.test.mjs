@@ -35,8 +35,7 @@ test('the shipped registry is complete and Duo defaults to its observed open nat
   assert.equal(pixel.displays[0].source.descriptorVersion,'1.56.1');
 });
 
-test('documented device sizes and densities match every shipped display and rotation',async () => {
-  const documentation=await readFile(new URL('../docs/devices.md',import.meta.url),'utf8');
+test('both languages document every shipped display, rotation and density',async () => {
   const labels={
     'iphone-duo/inner':'iPhone Duo 内屏',
     'iphone-duo/outer':'iPhone Duo 外屏',
@@ -46,15 +45,20 @@ test('documented device sizes and densities match every shipped display and rota
     'pixel-7/main':'Pixel 7 网页预览',
     'ipad-mini-a17-pro/main':'iPad mini (A17 Pro)',
   };
+  const englishLabels={...labels,'iphone-duo/inner':'iPhone Duo internal screen','iphone-duo/outer':'iPhone Duo external screen','pixel-7/main':'Pixel 7 web preview'};
+  for (const [file, translatedLabels] of [['devices.md',labels],['devices.en.md',englishLabels]]) {
+  const documentation=await readFile(new URL(`../docs/${file}`,import.meta.url),'utf8');
+  const rows=documentation.split('\n').filter(line=>line.startsWith('|')).map(line=>line.split('|').slice(1,-1).map(cell=>cell.trim()));
   let displays=0;
   for(const device of DEVICE_REGISTRY.devices)for(const display of device.displays){
-    const label=labels[device.id+'/'+display.id];assert.ok(label,'New display needs a documented coordinate row');
+    const label=translatedLabels[device.id+'/'+display.id];assert.ok(label,'New display needs a documented coordinate row');
     const columns=[0,90].map(rotation=>{const value=deviceGeometry({device:device.id,display:display.id,rotation});return `${value.screen.width} × ${value.screen.height} / ${value.viewport.width} × ${value.viewport.height}`;});
-    const expected=`| ${label} | ${columns.join(' | ')} | ${display.measurements['0'].pixelRatio} |`;
-    assert.ok(documentation.split('\n').includes(expected),'Device documentation drift: '+expected);
+    const expected=[label,...columns,String(display.measurements['0'].pixelRatio)];
+    assert.deepEqual(rows.find(row=>row[0]===label),expected,`${file} device documentation drift: ${label}`);
     displays++;
   }
   assert.equal(displays,Object.keys(labels).length);
+  }
 });
 
 test('both Pixel browser previews match the installed portrait and landscape descriptors without axis inference',async () => {

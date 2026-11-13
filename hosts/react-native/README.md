@@ -1,7 +1,11 @@
-# React Native showcase
+<a id="react-native-showcase"></a>
+# React Native 展示
 
-This host uses the SDK Fabric native view and TurboModule. The demo runs inside the native engine; Metro supplies only the React Native host UI. Local state uses AsyncStorage and the versioned guest bridge. Android back and the close button await storage flush and native close.
+**简体中文** · [English](README.en.md)
 
-Install the exact combined `react-native/android-ios` SDK to `.runtime/sdk/react-native`, then run `node tools/native-react-native-build.mjs --platform android` (or `ios`) from the repository root. Release Android uses Hermes and R8 with a dedicated signing key. iOS defaults to an unsigned simulator build and requires Xcode/CocoaPods.
 
-The host scaffolding comes from the official React Native Community 0.88.0 template; see `TEMPLATE-ORIGIN.json` and `TEMPLATE-LICENSE`. The runtime dependency is local to the reviewed private SDK and does not fetch a source repository.
+该宿主使用 SDK Fabric 本机视图和 TurboModule。该演示在本机引擎内运行； Metro 仅提供 React Native 宿主 UI。本地状态使用 AsyncStorage 和版本化的访客桥。 Android 后退和关闭按钮等待存储刷新和本机关闭。
+
+将精确组合的 `react-native/android-ios` SDK 安装到 `.runtime/sdk/react-native`，然后从存储库根运行 `node tools/native-react-native-build.mjs --platform android` （或 `ios`）。 Android 版本使用 Hermes 和 R8 以及专用签名密钥。 iOS 默认为未签名的模拟器版本，并且需要 Xcode/CocoaPods.
+
+宿主脚手架来自官方React Native Community 0.88.0模板；请参阅 `TEMPLATE-ORIGIN.json` 和 `TEMPLATE-LICENSE`。运行时依赖项是经过审查的私有 SDK 的本地依赖项，并且不会获取源存储库。

@@ -3,6 +3,7 @@ import { Select } from '@base-ui/react/select';
 import { CaretUpDown, Check } from '@phosphor-icons/react';
 import { DEVICE_REGISTRY, deviceGeometry, type DeviceSelection } from '../../shared/showcase-devices.mjs';
 import '../styles/device-select.css';
+import {demoText, type Locale} from '../data/demo-copy';
 
 const items = DEVICE_REGISTRY.devices.map(device => ({value: device.id, label: device.label}));
 
@@ -20,30 +21,32 @@ function DeviceOutline({device}: {device: string}) {
   </span>;
 }
 
-export default function DeviceSelect({selection, disabled, onSelect}: {
+export default function DeviceSelect({selection, disabled, onSelect, locale = 'zh-CN'}: {
   selection: DeviceSelection;
+  locale?: Locale;
   disabled: boolean;
   onSelect: (id: string) => void;
 }) {
+  const t = (value: string) => demoText(locale, value);
   const [open, setOpen] = useState(false);
   useEffect(() => { if (disabled) setOpen(false); }, [disabled]);
   const geometry = deviceGeometry(selection);
   return <Select.Root value={selection.device} items={items} disabled={disabled}
     open={open && !disabled} onOpenChange={setOpen}
     onValueChange={value => { if (value && !disabled) onSelect(value); }}>
-    <Select.Label className="device-select-label">演示设备</Select.Label>
+    <Select.Label className="device-select-label">{t('演示设备')}</Select.Label>
     <Select.Trigger id="showcase-device" className="device-select-trigger">
       <DeviceOutline device={selection.device} />
       <span className="device-select-copy">
         <Select.Value className="device-select-name" />
-        <span className="device-select-metrics" aria-hidden="true">{geometry.displayLabel} · {geometry.screen.width} × {geometry.screen.height}</span>
+        <span className="device-select-metrics" aria-hidden="true">{t(geometry.displayLabel)} · {geometry.screen.width} × {geometry.screen.height}</span>
       </span>
       <Select.Icon className="device-select-caret"><CaretUpDown size={16} weight="bold" /></Select.Icon>
     </Select.Trigger>
     <Select.Portal>
       <Select.Positioner className="device-select-positioner" side="bottom" align="start" sideOffset={8} collisionPadding={12} alignItemWithTrigger={false}>
         <Select.Popup className="device-select-popup">
-          <div className="device-select-heading" aria-hidden="true"><span>选择体验设备</span><span>{items.length}</span></div>
+          <div className="device-select-heading" aria-hidden="true"><span>{t('选择体验设备')}</span><span>{items.length}</span></div>
           <Select.List className="device-select-list">
             {DEVICE_REGISTRY.devices.map(device => {
               const preview = deviceGeometry({device: device.id, display: device.defaultDisplay, rotation: 0});

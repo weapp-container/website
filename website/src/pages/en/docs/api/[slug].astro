@@ -1,0 +1,8 @@
+---
+import inventory from '../../../../data/api-inventory-v1.json';
+import {apiSlug} from '../../../../data/api-group-meta.mjs';
+import ApiGroupPage from '../../../../components/ApiGroupPage.astro';
+export function getStaticPaths() {return inventory.apis.map(api => ({params: {slug: apiSlug(api.id)}, props: {api}}));}
+const {api} = Astro.props;
+---
+<ApiGroupPage api={api} />

@@ -1,7 +1,12 @@
+<a id="h5-demonstrates-interactive-performance-and-scene-transactions"></a>
 # H5 演示交互性能与场景事务
+
+**简体中文** · [English](showcase-performance.en.md)
+
 
 本文记录官网 H5 演示的交互性能验收方法，以及场景切换必须保持的运行时边界。这里的浏览器指标只说明 Showcase 的交互体验，不代表微信小程序语义一致性；官方 IDE 用例和多端差分仍按各自的 conformance 收据验收。
 
+<a id="scene-switching-transaction"></a>
 ## 场景切换事务
 
 商城、点单和基础交互属于同一个演示实例。切换时保留当前 iframe、Dedicated Worker、运行库会话和业务模型，只切换小程序页面状态。重建 iframe 会重新冷启动 Worker、暂时失去画面，也容易丢失未提交的输入或购物状态。
@@ -12,6 +17,7 @@
 
 相关实现与回归测试：`website/runtime/showcase-scene-controller.mjs`、`website/runtime/showcase-bridge.mjs`、`miniapp/lib/bridge.js`、`miniapp/pages/home/index.js`、`tests/web-scenes.test.mjs`。
 
+<a id="performance-sampling"></a>
 ## 性能采样
 
 在同一台机器分别对 staging 和生产运行后台浏览器采样；Ego Lite 用于独立现场复验，结果单独记录，不能和 Chrome 合并成一个分位数。性能模式会检查至少 20 个画布输入样本、至少 12 次场景切换，并按 `p95 ≤100ms`、`p99 ≤200ms` 和切场景 `p95 ≤1.5s` 判定：
@@ -25,6 +31,7 @@ node tools/browser-smoke.mjs --mode performance --url https://container.weapp.de
 
 不要通过缩小渲染比例、跳过 accepted frame、减少稳定帧条件、降低样本数或放宽阈值来“修复”门禁。先对齐输入 request ID、事件批次、frame RPC 和 accepted revision，再判断耗时落在哪个阶段。分开报告冷启动和热切场景，不能让冷启动影响稳定交互分位数，也不能用少数热切换样本声称通过门禁。
 
+<a id="2026-11-08-observation"></a>
 ## 2026-11-08 观测
 
 2026-11-08 对生产运行库 `e3a8f78a5c7cd4aab08eac102a1681988a3678b838ff7a32da11d4ae07ddb90c` 复跑性能模式：headless Chrome `156.0.8078.80`，视口 `390 × 844`。37 个输入样本未达标，端到端输入 p50 `365.8ms`、p95 `1116.7ms`、p99 `1149ms`。对应 `frame` RPC p50 `345.2ms`、p95 `736.5ms`、p99 `756.3ms`；事件批次 RPC p95 `20.9ms`，accepted frame 稳定等待 p95 `32.8ms`。耗时主要集中在 frame/presentation 路径，事件桥接和 accepted 后的稳定确认不是主要部分。`hostMessageDrain` p95 `717.6ms`，但会与 frame 工作重叠，不能单独解释为消息队列开销。
@@ -33,8 +40,9 @@ node tools/browser-smoke.mjs --mode performance --url https://container.weapp.de
 
 此前失败报告缺少浏览器上下文和场景/冷启动汇总，虽然逐项输入与 RPC 数据仍在。`tools/browser-smoke.mjs` 现已调整为门禁成功与失败都写出统一的性能摘要、样本、浏览器版本、视口和运行库哈希，方便直接复盘失败路径。
 
-部署继续遵循 [官网部署与回滚](./deployment.md)：先 staging 验收，保存线上前快照、当前与上一版 Worker ID，再部署生产并复跑浏览器及 HTTP smoke。部署成功和业务 smoke 通过不能替代性能门禁；所有失败项和回滚身份都要留在发布记录中。
+部署继续遵循 [官网部署与回滚](deployment.md)：先 staging 验收，保存线上前快照、当前与上一版 Worker ID，再部署生产并复跑浏览器及 HTTP smoke。部署成功和业务 smoke 通过不能替代性能门禁；所有失败项和回滚身份都要留在发布记录中。
 
+<a id="2026-11-10-repair-and-acceptance"></a>
 ## 2026-11-10 修复验收
 
 根因包括 DPR 2 的自动上限、共享 CPU 目标尺寸映射与整帧复制、图片的 JSON/重复字节验证、逐字形 JS/WASM 调用、Worker 嵌套 timer 的最小延迟，以及默认字重 100 的字体。新 Web 产物改用完整字符覆盖的 Regular 400 字体和实际 DPR；目标预算不足明确报错，不降采样。历史原生 SDK 仍按其原始字体哈希安装，不能把新 Web 字体算作旧 SDK 已重建。
