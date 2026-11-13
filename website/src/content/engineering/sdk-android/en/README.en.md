@@ -6,7 +6,7 @@ summary: "Weapp Container Android SDK. Versioned engineering reference from weap
 route: "/docs/engineering/sdk-android/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "faf4f55cbcf3fc291afed4b0b14e4568a6ed7581"
+sourceCommit: "890990448903c519c4410537c87dbf6fe9f395c0"
 sourcePath: "README.en.md"
 ---
 
@@ -17,15 +17,15 @@ sourcePath: "README.en.md"
 <a id="公开发行候选preview7"></a>
 ## Public distribution candidate: preview.7
 
-The current core builder and these source examples use preview.7. Core runtime, iOS, Desktop and public CocoaPods Specs downloads are available; npm, Maven Central and pub.dev publication is incomplete. Check the [release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
+This SDK source is the `0.1.0-preview.7.1` candidate, and the `.7.1` core runtime is published; the Android Maven package is not published yet. The iOS, Desktop and CocoaPods `.7.0` entries remain available, while `.7.1` is pending. Check the [release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
 
-First public publication is being prepared. Use these commands once this version is visible in its registry. Historical private archives and locks retain their original identities.
+The Android `.7.1` Maven coordinate can be installed after Central publication and anonymous consumer verification. Historical private archives and locks retain their original identities.
 
-Version `0.1.0-preview.7.0` requires Android API 26+, arm64-v8a / x86_64 and Java 17. Resolve the public coordinate from Maven Central:
+Version `0.1.0-preview.7.1` requires Android API 26+, arm64-v8a / x86_64 and Java 17. Resolve the public coordinate from Maven Central:
 
 ```kotlin
 repositories { google(); mavenCentral() }
-dependencies { implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.0") }
+dependencies { implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1") }
 ```
 
 The AAR includes JNI bindings, both runtime ABIs and dependency licenses. Application installation requires no Node.js, Rust or private repository access. Java/Kotlin namespaces remain `com.sonofmagic.weapp.container.sdk`.
@@ -45,7 +45,7 @@ git checkout ca8c21a4d4a075b7180761875287bf9c7abaee53
 
 Embed mini-program pages within Android applications. The SDK provides Kotlin session management, native `TextureView`, host message channel, and local persistence, using QuickJS to execute JavaScript and Skia GLES to render pages.
 
-Reviewed source example version: **0.1.0-preview.7.0**. The SDK wrapper source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/LICENSE); runtime source is provided in the main repository under Apache-2.0. This repository contains the SDK wrapper source code, while the runtime library is built or installed separately.
+Reviewed source example version: **0.1.0-preview.7.1**. The SDK wrapper source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-android/blob/890990448903c519c4410537c87dbf6fe9f395c0/LICENSE); runtime source is provided in the main repository under Apache-2.0. This repository contains the SDK wrapper source code, while the runtime library is built or installed separately.
 
 <a id="从当前源码开始"></a>
 ## Start from Source Code
@@ -116,7 +116,7 @@ android {
     }
 }
 dependencies {
-    implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.0")
+    implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1")
 }
 ```
 
@@ -164,7 +164,7 @@ session.navigate("pages/detail/index", JSONObject().put("id", "42"))
 session.back()
 ```
 
-The mini-program side uses `weappContainer.invoke` to invoke host methods, and uses `postMessage` / `onMessage` to exchange messages, with types defined in [weapp-container.d.ts](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/types/weapp-container.d.ts). Host methods must be registered before the first `load`. Asynchronous tasks can be canceled via `call.onCancel`; completion is signaled via `reply.resolve` / `reply.reject`. Replies from canceled or stale sessions do not affect new instances.
+The mini-program side uses `weappContainer.invoke` to invoke host methods, and uses `postMessage` / `onMessage` to exchange messages, with types defined in [weapp-container.d.ts](https://github.com/weapp-container/sdk-android/blob/890990448903c519c4410537c87dbf6fe9f395c0/types/weapp-container.d.ts). Host methods must be registered before the first `load`. Asynchronous tasks can be canceled via `call.onCancel`; completion is signaled via `reply.resolve` / `reply.reject`. Replies from canceled or stale sessions do not affect new instances.
 
 <a id="5-生命周期与存储"></a>
 ## 5. Lifecycle and Storage
@@ -198,7 +198,7 @@ node tools/device-smoke.mjs --serial YOUR_ALREADY_RUNNING_TARGET
 - [Host Services: Device Capabilities, Identity, Payment, and Permissions](/en/docs/engineering/sdk-android/host-services/)
 - [Host Service Integration Example](/en/docs/engineering/sdk-android/examples/host-services/index/)
 - [Cross-end Session Contract](/en/docs/engineering/sdk-android/contract/)
-- [Source File List](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/SOURCE-INVENTORY.json) and [Historical Export Records](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/ORIGIN.json)
+- [Source File List](https://github.com/weapp-container/sdk-android/blob/890990448903c519c4410537c87dbf6fe9f395c0/SOURCE-INVENTORY.json) and [Historical Export Records](https://github.com/weapp-container/sdk-android/blob/890990448903c519c4410537c87dbf6fe9f395c0/ORIGIN.json)
 The runtime capabilities depend on the accompanying runtime libraries and their distribution strategy; `restricted-showcase` permits only demonstration packages and APIs authorized at compile time, and no capabilities can be re-enabled via host configuration. Support for native input methods, accessibility, and complex gestures is detailed in the embedded documentation. When distributing applications, retain SDK `LICENSE`, runtime library `RUNTIME-LICENSE`, and third-party declarations.
 
 <a id="历史归档与迁移"></a>
@@ -206,7 +206,7 @@ The runtime capabilities depend on the accompanying runtime libraries and their 
 
 Historical Release Audit (2026-11-12): Both default runtime pins do not match the currently named assets in the old repository; default online preparations will be rejected by integrity checks. Please build from clean source code matching the required version, or explicitly select a standalone-validated manifest via `--manifest`; do not simply modify old hashes. [Differences and Migration Records](/en/docs/engineering/weapp-container/docs/runtime-artifacts-migration/).
 
-The runtime distribution tooling has been migrated to the [Core Repository](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/tools/runtime-artifacts). New manifests use the exact version from the Core Repository's release; use `--manifest` to explicitly select. The updated downloader redirects the old lock's `runtime-artifacts` identifier to a private `weapp-container/runtime-artifacts-private-archive`, permitting only nine frozen versions, preserving the original version, hash, and accompanying licenses, with receipt records of the actual repository. Legacy downloaders must be upgraded; the new repository with the same name retains only deprecated tooling source code. No cross-repository rollback is available; private archives still require read permissions, and source code licensing does not imply historical releases are publicly available.
+The runtime distribution tooling has been migrated to the [Core Repository](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/tools/runtime-artifacts). New manifests use the exact version from the Core Repository's release; use `--manifest` to explicitly select. The updated downloader redirects the old lock's `runtime-artifacts` identifier to a private `weapp-container/runtime-artifacts-private-archive`, permitting only nine frozen versions, preserving the original version, hash, and accompanying licenses, with receipt records of the actual repository. Legacy downloaders must be upgraded; the new repository with the same name retains only deprecated tooling source code. No cross-repository rollback is available; private archives still require read permissions, and source code licensing does not imply historical releases are publicly available.
 
 Core runtime and SDK source code are licensed under Apache-2.0 and can be built as per the [Main Repository Source Code Build Instructions](/en/docs/engineering/weapp-container/docs/sdk-source-build/) to produce the current runtime. Existing precompiled archives retain their original licensing, access requirements, and exact version and hash locks; no alternative binaries are released in this source update.
 
@@ -231,7 +231,7 @@ Use an authorized offline archive:
 node tools/prepare-runtime.mjs --artifact-dir /absolute/runtime-archives
 ```
 
-The tool validates **0.1.0-preview.7.0**, ABI 1, architecture, size, and SHA-256 against the [current public lock](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/runtime-artifacts.0.1.0-preview.7.0.lock.json), and installs it into `.runtime/install/native` and `.runtime/install/licenses`. Installation fails if the archive is missing, download permissions are unavailable, or validation does not pass; existing installations are preserved during failure. The pin in the lock file does not imply that the runtime is publicly downloadable.
+The tool validates **0.1.0-preview.7.1**, ABI 1, architecture, size, and SHA-256 against the [current public lock](https://github.com/weapp-container/sdk-android/blob/890990448903c519c4410537c87dbf6fe9f395c0/runtime-artifacts.0.1.0-preview.7.1.lock.json), and installs it into `.runtime/install/native` and `.runtime/install/licenses`. Installation fails if the archive is missing, download permissions are unavailable, or validation does not pass; existing installations are preserved during failure. The pin in the lock file does not imply that the runtime is publicly downloadable.
 
 Custom archive manifests use `--manifest /absolute/reviewed-lock.json`. On slow networks, download timeouts can be adjusted via `WEAPP_CONTAINER_RUNTIME_TIMEOUT_MS`, ranging from `1` to `3600000` milliseconds, with a default of 15 minutes.
 
@@ -240,3 +240,5 @@ After archive installation, a packaged layer can be built from an independent SD
 ```sh
 node tools/build.mjs --native-root .runtime/install/native --licenses-root .runtime/install/licenses --pack /absolute/verified-portable-pack
 ```
+
+Source candidate `0.1.0-preview.7.1` is prepared for core runtime draft automation. Public downloads and immutable locks still refer to `0.1.0-preview.7.1`; this source update does not publish a new SDK package.

@@ -6,7 +6,7 @@ summary: "工作者静态准入和绘制资源租用。来自 weapp-container/we
 route: "/docs/engineering/weapp-container/docs/worker-admission-loader/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/worker-admission-loader.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "宿主账号与支付参考后端。来自 weapp-container/weapp-conta
 route: "/docs/engineering/weapp-container/tools/host-services-reference/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "tools/host-services-reference/README.md"
 ---
 
@@ -16,7 +16,7 @@ sourcePath: "tools/host-services-reference/README.md"
 **简体中文** · [English](/en/docs/engineering/weapp-container/tools/host-services-reference/index/)
 
 
-这是独立运行的 Node.js 24 ESM 服务，使用内置 `node:sqlite`，没有 npm 依赖。
+这是独立运行的 Node.js 24.22.2 ESM 服务，使用内置 `node:sqlite`，没有 npm 依赖。
 它提供宿主身份、一次性小程序登录码、独立的资料/手机号授权、支付订单与验签回调的
 可执行参考。代码沿用仓库根目录的许可；此包不单独授予额外商业使用权。
 
@@ -68,6 +68,7 @@ Android/iOS 的可编译安装示例位于各 SDK 的 `examples/host-services/`�
 将 `config.example.mjs` 复制到后端的私有配置目录，设置环境变量，再启动：
 
 ```sh
+pnpm --dir tools/host-services-reference build
 HOST_SERVICES_CONFIG=/absolute/private/config.mjs \
   npm --prefix tools/host-services-reference start
 ```

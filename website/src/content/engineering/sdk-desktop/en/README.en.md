@@ -6,7 +6,7 @@ summary: "Weapp Container Desktop SDK. Versioned engineering reference from weap
 route: "/docs/engineering/sdk-desktop/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "fc9ecb66d70dddfb697d386f85a529526fee4ce0"
+sourceCommit: "a9904c6acfba30bdc28191c87377b89dff789a26"
 sourcePath: "README.en.md"
 ---
 
@@ -18,15 +18,15 @@ sourcePath: "README.en.md"
 <a id="公开发行候选preview7"></a>
 ## Public distribution candidate: preview.7
 
-The current core builder and these source examples use preview.7. Core runtime, iOS, Desktop and public CocoaPods Specs downloads are available; npm, Maven Central and pub.dev publication is incomplete. Check the [release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
+This SDK source is the `0.1.0-preview.7.1` candidate, and the `.7.1` core runtime is published; the Desktop GitHub release and CocoaPods Trunk entry are not published yet. The Desktop and CocoaPods `.7.0` entries remain available. Check the [release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
 
-First public publication is being prepared. Use these commands once this version is visible in its registry. Historical private archives and locks retain their original identities.
+The `.7.1` installation entries become usable after the GitHub release and CocoaPods Trunk publication pass anonymous consumer verification. Historical private archives and locks retain their original identities.
 
-Version `0.1.0-preview.7.0` requires CMake 3.21+ and C++17. The public [GitHub prerelease](https://github.com/weapp-container/sdk-desktop/releases/tag/v0.1.0-preview.7.0) provides:
+Version `0.1.0-preview.7.1` requires CMake 3.21+ and C++17. The following archive names are planned; the `.7.1` GitHub prerelease has not been created:
 
-- `WeappContainerDesktop-0.1.0-preview.7.0-macos-universal.tar.gz`: macOS 12+, arm64/x86_64.
-- `WeappContainerDesktop-0.1.0-preview.7.0-linux-x86_64.tar.gz`: x86_64, GTK 3.24+, GIO 2.66+, fontconfig and epoxy.
-- `WeappContainerDesktop-0.1.0-preview.7.0-windows-x86_64.tar.gz`: Windows x86_64, MSVC.
+- `WeappContainerDesktop-0.1.0-preview.7.1-macos-universal.tar.gz`: macOS 12+, arm64/x86_64.
+- `WeappContainerDesktop-0.1.0-preview.7.1-linux-x86_64.tar.gz`: x86_64, GTK 3.24+, GIO 2.66+, fontconfig and epoxy.
+- `WeappContainerDesktop-0.1.0-preview.7.1-windows-x86_64.tar.gz`: Windows x86_64, MSVC.
 
 Verify `SHA256SUMS` before extracting to your installation directory. Archives include relocatable CMake configuration, headers, runtime libraries and licenses. Consumers need no Rust or sibling source checkout.
 
@@ -45,7 +45,7 @@ git checkout 8bcd081a1a08410bc761f58a54b9747cbab89743
 
 Embed WeChat Mini Programs into existing macOS, Windows, or Linux applications. The SDK provides C/C++ session, native view, message, and lifecycle interfaces, with the host managing the window and main event loop.
 
-Reviewed source example version: `0.1.0-preview.7.0`, C ABI: `1`. This repository uses Apache-2.0 for the host wrapper, build tools, and consumption examples; the newly built runtime library is licensed under Apache-2.0 and requires retention of its `RUNTIME-LICENSE` and third-party attribution statements.
+Reviewed source example version: `0.1.0-preview.7.1`, C ABI: `1`. This repository uses Apache-2.0 for the host wrapper, build tools, and consumption examples; the newly built runtime library is licensed under Apache-2.0 and requires retention of its `RUNTIME-LICENSE` and third-party attribution statements.
 
 <a id="从当前源码开始"></a>
 ## Start from Source Code
@@ -204,7 +204,7 @@ The consumption example uses the installed headers and libraries and verifies re
 - [Account, Identity, and Payment Host Services](/en/docs/engineering/sdk-desktop/account-services/)
 - [Windows Sensors](/en/docs/engineering/sdk-desktop/windows-sensors/) · [Windows Audio](/en/docs/engineering/sdk-desktop/windows-audio/)
 - [Shared Adapter Protocol](/en/docs/engineering/sdk-desktop/contract/) · [SDK Contract Repository](/en/docs/engineering/sdk-contract/index/)
-- [Source License](https://github.com/weapp-container/sdk-desktop/blob/fc9ecb66d70dddfb697d386f85a529526fee4ce0/LICENSE) · [Original Extraction Records](https://github.com/weapp-container/sdk-desktop/blob/fc9ecb66d70dddfb697d386f85a529526fee4ce0/ORIGIN.json) · [Current Source List](https://github.com/weapp-container/sdk-desktop/blob/fc9ecb66d70dddfb697d386f85a529526fee4ce0/SOURCE-INVENTORY.json)
+- [Source License](https://github.com/weapp-container/sdk-desktop/blob/a9904c6acfba30bdc28191c87377b89dff789a26/LICENSE) · [Original Extraction Records](https://github.com/weapp-container/sdk-desktop/blob/a9904c6acfba30bdc28191c87377b89dff789a26/ORIGIN.json) · [Current Source List](https://github.com/weapp-container/sdk-desktop/blob/a9904c6acfba30bdc28191c87377b89dff789a26/SOURCE-INVENTORY.json)
 
 The build tool validates the source list. After modifying SDK source code, update the list according to the `tools/source-inventory.mjs` review process. Historical `ORIGIN.json` entries remain unchanged. The actual build and runtime scope for each platform is defined by the verification records of the corresponding build product.
 
@@ -212,7 +212,7 @@ The build tool validates the source list. After modifying SDK source code, updat
 ## Historical Archives and Migration
 Historical issuance audit (2026-11-12): The SDK archive part in the default lock is missing, the runtime pin does not match the current asset with the same name, and the default online preparation will be rejected by the integrity check. Please build from matching clean source, or explicitly select an independently audited companion manifest via `--manifest`; don't just modify the old hash. [Difference and Migration Record](/en/docs/engineering/weapp-container/docs/runtime-artifacts-migration/).
 
-The runtime distribution tool has been moved into [core warehouse](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/tools/runtime-artifacts). The new manifest uses the exact Release version of the core repository; choose this explicitly with `--manifest`. The updated downloader directs the `runtime-artifacts` identifier in the old lock to the private `weapp-container/runtime-artifacts-private-archive`, allows only nine frozen versions, retains the original version, hash and accompanying license, and the receipt records the actual repository. The old version of the downloader needs to be upgraded; the new repository with the same name only retains the source code of the update tool. There is no cross-repository rollback, private files still require read permission, and the source code license does not mean that historical releases are publicly available.
+The runtime distribution tool has been moved into [core warehouse](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/tools/runtime-artifacts). The new manifest uses the exact Release version of the core repository; choose this explicitly with `--manifest`. The updated downloader directs the `runtime-artifacts` identifier in the old lock to the private `weapp-container/runtime-artifacts-private-archive`, allows only nine frozen versions, retains the original version, hash and accompanying license, and the receipt records the actual repository. The old version of the downloader needs to be upgraded; the new repository with the same name only retains the source code of the update tool. There is no cross-repository rollback, private files still require read permission, and the source code license does not mean that historical releases are publicly available.
 
 The core runtime and SDK own source code use Apache-2.0. You can build the current runtime library according to [Main Warehouse Source Code Construction Instructions](/en/docs/engineering/weapp-container/docs/sdk-source-build/). Existing precompiled archives retain the original license, access requirements, precise versions and hash locks; no replacement binaries will be released in this source code update.
 
@@ -221,7 +221,7 @@ The core runtime and SDK own source code use Apache-2.0. You can build the curre
 
 Historical installation commands (not used as the default path for first access):
 
-The preparation script verifies preview.7.0, ABI, size and SHA-256 against the [current public lock](https://github.com/weapp-container/sdk-desktop/blob/fc9ecb66d70dddfb697d386f85a529526fee4ce0/runtime-artifacts.0.1.0-preview.7.0.lock.json), which includes macOS, Linux and Windows runtimes and SDKs. The old `runtime-artifacts.lock.json` remains for historical compatibility; do not use it to build current source. See the published-preview erratum below for the header version macro limitation.
+The preparation script verifies preview.7.0, ABI, size and SHA-256 against the [current public lock](https://github.com/weapp-container/sdk-desktop/blob/a9904c6acfba30bdc28191c87377b89dff789a26/runtime-artifacts.0.1.0-preview.7.1.lock.json), which includes macOS, Linux and Windows runtimes and SDKs. The old `runtime-artifacts.lock.json` remains for historical compatibility; do not use it to build current source. See the published-preview erratum below for the header version macro limitation.
 
 After obtaining the authorization to download the runtime library, inject `WEAPP_CONTAINER_RUNTIME_TOKEN` through the key manager or CI secret, and then execute:
 
@@ -253,4 +253,6 @@ The target options are `macos-universal`, `macos-arm64`, `macos-x64`, `windows-x
 <a id="published-preview-erratum"></a>
 ## Published preview erratum
 
-The immutable `0.1.0-preview.7.0` archives contain a stale `WEAPP_DESKTOP_VERSION` C header macro (`0.1.0-preview.6.0`). Archive metadata and the linked runtime are `0.1.0-preview.7.0`, ABI 1. Current source corrects the macro and checks version coordination. Existing archives, tags and hashes are retained; distributing the corrected header requires a new version. Public archive consumers passed on macOS, Linux and Windows.
+The immutable `0.1.0-preview.7.1` archives contain a stale `WEAPP_DESKTOP_VERSION` C header macro (`0.1.0-preview.6.0`). Archive metadata and the linked runtime are `0.1.0-preview.7.1`, ABI 1. Current source corrects the macro and checks version coordination. Existing archives, tags and hashes are retained; distributing the corrected header requires a new version. Public archive consumers passed on macOS, Linux and Windows.
+
+Source candidate `0.1.0-preview.7.1` is prepared for core runtime draft automation. Public downloads and immutable locks still refer to `0.1.0-preview.7.1`; this source update does not publish a new SDK package.

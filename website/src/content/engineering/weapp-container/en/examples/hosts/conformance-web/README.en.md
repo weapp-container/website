@@ -6,7 +6,7 @@ summary: "Web conformance diagnostics. Versioned engineering reference from weap
 route: "/docs/engineering/weapp-container/examples/hosts/conformance-web/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "examples/hosts/conformance-web/README.en.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "Conformance Verification. Versioned engineering reference from weapp-c
 route: "/docs/engineering/weapp-container/docs/conformance/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/conformance/README.en.md"
 ---
 
@@ -18,7 +18,7 @@ sourcePath: "docs/conformance/README.en.md"
 
 The WeApp Container verifies compatibility through observed, fixed-version tool behavior. Tests are not based on private implementation source code.
 
-Baseline reference: [baseline-v1.json](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/conformance/baseline-v1.json), Use case index: [case-index-v1.json](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/conformance/case-index-v1.json).
+Baseline reference: [baseline-v1.json](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/docs/conformance/baseline-v1.json), Use case index: [case-index-v1.json](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/docs/conformance/case-index-v1.json).
 
 <a id="验证层级"></a>
 ## Verification Levels

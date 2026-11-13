@@ -6,7 +6,7 @@ summary: "Android 宿主能力。来自 weapp-container/sdk-android 的版本化
 route: "/docs/engineering/sdk-android/host-services/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "faf4f55cbcf3fc291afed4b0b14e4568a6ed7581"
+sourceCommit: "890990448903c519c4410537c87dbf6fe9f395c0"
 sourcePath: "HOST-SERVICES.md"
 ---
 
@@ -85,7 +85,7 @@ WRITE_CONTACTS，日历需要 READ_CALENDAR / WRITE_CALENDAR；小程序授权�
 相机扫码使用 Camera2 实际 YUV 帧与 ZXing Core 3.5.3，支持普通二维码、条码、
 Data Matrix、PDF417；当前不提供相册入口或微信码解码。其他相机 owner 应先释放
 设备，再打开扫码 UI。取消、隐藏和关闭等待 CameraDevice.onClosed 与解码线程结束。
-[Maven 依赖与许可证](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/THIRD-PARTY-NOTICES.md) 包括 OkHttp、Okio、ZXing 以及
+[Maven 依赖与许可证](https://github.com/weapp-container/sdk-android/blob/890990448903c519c4410537c87dbf6fe9f395c0/THIRD-PARTY-NOTICES.md) 包括 OkHttp、Okio、ZXing 以及
 OkHttp public suffix 数据的许可文本；Gradle 将这些文本保留到 AAR assets。
 
 NFC 需要宿主显式 `enableNfc = true`、NFC permission 与实际 NfcAdapter，当前只
@@ -234,14 +234,14 @@ node sdk/android/tools/host-services-probe.mjs \
 输出、同名测试应用和 adb reverse 端口，并在结束时卸载自己的应用、删除自己的 UI
 临时文件、撤销自己的 reverse 映射、关闭自己的业务服务；模拟器由调用方管理。
 
-当前 [开发记录](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/test/evidence/host-services-development.json) 绑定未发布的 dev 库、
+当前 [开发记录](https://github.com/weapp-container/sdk-android/blob/890990448903c519c4410537c87dbf6fe9f395c0/test/evidence/host-services-development.json) 绑定未发布的 dev 库、
 SDK/fixture/JNI 源码和真实 GPU 截图哈希，并记录构建前后一致的核心源码清单。
 已通过登录兑换和快照刷新、独立授权、server-paid reference 订单、同步/异步同目录
 文件、A/B 换号隔离、Camera2 JPEG 和 Skia 合成、账号数据删除及资源清理。这里的
 相机来自模拟器虚拟场景，支付来自显式 reference 渠道，不代表物理设备、蓝牙外设、
 官方钱包、商户交易、编译器兼容性或正式发行验收。
 
-[网络与录音开发记录](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/test/evidence/host-services-network-recording-development.json)
+[网络与录音开发记录](https://github.com/weapp-container/sdk-android/blob/890990448903c519c4410537c87dbf6fe9f395c0/test/evidence/host-services-network-recording-development.json)
 另行记录 14 项通过的扩展探针：真实 HTTP 响应头/分块、multipart 文件、下载字节、
 WebSocket echo/close、实际 AAC ADTS 帧、换号关闭旧请求/socket，以及主动注入一次
 清理失败后，确认核心未提前 closed、第二次 close 成功。loopback 网络和模拟器
@@ -252,13 +252,13 @@ WebSocket echo/close、实际 AAC ADTS 帧、换号关闭旧请求/socket，以�
 联系人与临时 calendar account；扫码识别、实体 NFC 与真实 SOTER 签名仍为
 独立设备验收范围。
 
-[前台定位与授权政策开发记录](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/test/evidence/host-services-location-policy-development.json)
+[前台定位与授权政策开发记录](https://github.com/weapp-container/sdk-android/blob/890990448903c519c4410537c87dbf6fe9f395c0/test/evidence/host-services-location-policy-development.json)
 保留独立 18 项探针。显式 `--probe-foreground-location` 使用模拟器 console 注入 GPS，
 小程序收到真实 LocationManager 坐标，停止后继续注入仍不再收到事件；原生资料与
 手机号 UI 实际显示后端登记用途，授权并完成兑换。工具、原生包装、fixture 与完整
 参考后端源码在执行前后逐文件核对哈希；这仍是开发 snapshot 的模拟器证据。
 
-[Beacon 与录音开发记录](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/test/evidence/host-services-beacon-recorder-development.json)
+[Beacon 与录音开发记录](https://github.com/weapp-container/sdk-android/blob/890990448903c519c4410537c87dbf6fe9f395c0/test/evidence/host-services-beacon-recorder-development.json)
 另行记录默认双声道在此模拟器被 native 降为 mono 后的明确拒绝，随后显式 mono
 实际 AAC 的 8000Hz/声道元数据，以及不兼容码率拒绝。默认双声道物理设备录音仍
 待验收。Beacon

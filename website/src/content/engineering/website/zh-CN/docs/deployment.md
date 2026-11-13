@@ -6,7 +6,7 @@ summary: "网站构建、部署与回滚。来自 weapp-container/website 的版
 route: "/docs/engineering/website/docs/deployment/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "c487eff31a98ca75905b66676909cde218e9fb42"
+sourceCommit: "88b099619334a4fb751e7e9f089c6ee9d7ef60d5"
 sourcePath: "docs/deployment.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "Weapp Container platform interface. Versioned engineering reference fr
 route: "/docs/engineering/sdk-flutter/weapp_container_platform_interface/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
+sourceCommit: "36cb4dd8c2dbeb9dd17549fc4c32e1d563693cb9"
 sourcePath: "weapp_container_platform_interface/README.en.md"
 ---
 

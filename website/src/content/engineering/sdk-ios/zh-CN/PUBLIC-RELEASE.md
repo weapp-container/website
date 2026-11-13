@@ -1,16 +1,16 @@
 ---
 id: "docs/engineering/sdk-ios/public-release"
-title: "公开预览发行 0.1.0-preview.7.0"
+title: "公开预览发行 0.1.0-preview.7.1"
 section: "工具"
-summary: "公开预览发行 0.1.0-preview.7.0。来自 weapp-container/sdk-ios 的版本化工程说明。"
+summary: "公开预览发行 0.1.0-preview.7.1。来自 weapp-container/sdk-ios 的版本化工程说明。"
 route: "/docs/engineering/sdk-ios/public-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "efc6a69fd4acb230956310e0d62d29de051e9815"
+sourceCommit: "c15a30cd0a16335c80552c10fbde42b4c6e2fc5c"
 sourcePath: "PUBLIC-RELEASE.md"
 ---
 
-# 公开预览发行 0.1.0-preview.7.0
+# 公开预览发行 0.1.0-preview.7.1
 
 **简体中文** · [English](/en/docs/engineering/sdk-ios/public-release/)
 

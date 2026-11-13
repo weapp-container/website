@@ -6,7 +6,7 @@ summary: "Weapp Container Website. Versioned engineering reference from weapp-co
 route: "/docs/engineering/website/index/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "c487eff31a98ca75905b66676909cde218e9fb42"
+sourceCommit: "88b099619334a4fb751e7e9f089c6ee9d7ef60d5"
 sourcePath: "README.en.md"
 ---
 
@@ -80,7 +80,7 @@ Manual GitHub deployment requires `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT
 <a id="许可与历史发行"></a>
 ## License and historical releases
 
-Repository-authored source uses Apache-2.0; see [LICENSE](https://github.com/weapp-container/website/blob/c487eff31a98ca75905b66676909cde218e9fb42/LICENSE) and [NOTICE](https://github.com/weapp-container/website/blob/c487eff31a98ca75905b66676909cde218e9fb42/NOTICE). Core and SDK source have their own license records. The pinned public demo ships a Noncommercial Runtime License; publishing website source does not turn its binary into an Apache-2.0 distribution.
+Repository-authored source uses Apache-2.0; see [LICENSE](https://github.com/weapp-container/website/blob/88b099619334a4fb751e7e9f089c6ee9d7ef60d5/LICENSE) and [NOTICE](https://github.com/weapp-container/website/blob/88b099619334a4fb751e7e9f089c6ee9d7ef60d5/NOTICE). Core and SDK source have their own license records. The pinned public demo ships a Noncommercial Runtime License; publishing website source does not turn its binary into an Apache-2.0 distribution.
 
 Historical releases retain their original versions, hashes, and shipped terms in private archives. Updated download tools resolve exact frozen legacy versions. Source access, archive download access, and redistribution rights must be evaluated separately; see [platforms](/en/docs/engineering/website/docs/platforms/).
 

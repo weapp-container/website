@@ -6,7 +6,7 @@ summary: "Ticketed Raster browser primitives. Versioned engineering reference fr
 route: "/docs/engineering/weapp-container/docs/dual-renderer/dev-raster-browser-client/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/dual-renderer/dev-raster-browser-client.en.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "Android Wi-Fi. Versioned engineering reference from weapp-container/sd
 route: "/docs/engineering/sdk-android/examples/host-services/wifi-apis/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "faf4f55cbcf3fc291afed4b0b14e4568a6ed7581"
+sourceCommit: "890990448903c519c4410537c87dbf6fe9f395c0"
 sourcePath: "examples/host-services/WIFI-APIS.en.md"
 ---
 
@@ -51,7 +51,7 @@ Official binding source:
 - [Android Wi-Fi scanning overview](https://developer.android.com/develop/connectivity/wifi/wifi-scan): Scanning may be throttled, getScanResults may be an old cache, must be checked for successful broadcast.
 - [Android Wi-Fi Network Request API](https://developer.android.com/develop/connectivity/wifi/wifi-bootstrap): Android 10+ app network requests do not provide Internet, the system can remember to approve.
 
-[Development Evidence](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/test/evidence/host-services-wifi-development.json) Only proves the current development
+[Development Evidence](https://github.com/weapp-container/sdk-android/blob/890990448903c519c4410537c87dbf6fe9f395c0/test/evidence/host-services-wifi-development.json) Only proves the current development
 snapshot real query, scan, partial event, stop/start on the task's own Android emulator
 Subscription, the stop barrier, and unchanged global bindings/radio state. connect confirmation, AP switching, password/system denial,
 Physical radio and Android 13+ permissions still pending device acceptance.

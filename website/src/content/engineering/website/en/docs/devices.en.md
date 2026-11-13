@@ -6,7 +6,7 @@ summary: "Web Presentation Equipment. Versioned engineering reference from weapp
 route: "/docs/engineering/website/docs/devices/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "c487eff31a98ca75905b66676909cde218e9fb42"
+sourceCommit: "88b099619334a4fb751e7e9f089c6ee9d7ef60d5"
 sourcePath: "docs/devices.en.md"
 ---
 
@@ -18,7 +18,7 @@ sourcePath: "docs/devices.en.md"
 
 For the verification scope of this round of full-screen and `hostLayout` changes, see [Duo full-screen acceptance record](/en/docs/engineering/website/docs/duo-fullscreen-verification/). [candidate9 History](/en/docs/engineering/website/docs/duo-verification/) retains its original candidate status and conclusions.
 
-The equipment size is uniformly maintained at [`website/device-profiles.json`](https://github.com/weapp-container/website/blob/c487eff31a98ca75905b66676909cde218e9fb42/website/device-profiles.json). The official website and iframe consume the same registry; after staging verifies the geometric structure and verified tags in both directions, it writes the registry into the hash asset closure. The source field is used to trace independent measurements, staging does not re-run the UIKit witness or reconcile private original records. The URL only accepts `scene`, `device`, `display`, `rotation`, where `rotation` is `0` or `90`, and cannot specify any runtime library, pack or permissions.
+The equipment size is uniformly maintained at [`website/device-profiles.json`](https://github.com/weapp-container/website/blob/88b099619334a4fb751e7e9f089c6ee9d7ef60d5/website/device-profiles.json). The official website and iframe consume the same registry; after staging verifies the geometric structure and verified tags in both directions, it writes the registry into the hash asset closure. The source field is used to trace independent measurements, staging does not re-run the UIKit witness or reconcile private original records. The URL only accepts `scene`, `device`, `display`, `rotation`, where `rotation` is `0` or `90`, and cannot specify any runtime library, pack or permissions.
 
 The default device is **the natural orientation of the unfolded iPhone Duo inner screen**: the entire screen after the actual Open operation is `951 × 669` pt, the direction is landscape, the safe content area is `867 × 635` pt, and the simulated DPR is `3`. The rotated inner screen is `669 × 951` pt and the safe content area is `669 × 835` pt. `0` here represents the real sampling starting attitude; it is not equal to a unified vertical screen, nor can it be derived by exchanging resolution axes.
 

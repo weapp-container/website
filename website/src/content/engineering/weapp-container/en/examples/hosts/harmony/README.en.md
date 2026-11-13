@@ -6,7 +6,7 @@ summary: "HarmonyOS host sample. Versioned engineering reference from weapp-cont
 route: "/docs/engineering/weapp-container/examples/hosts/harmony/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "examples/hosts/harmony/README.en.md"
 ---
 

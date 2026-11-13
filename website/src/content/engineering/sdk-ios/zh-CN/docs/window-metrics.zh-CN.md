@@ -6,7 +6,7 @@ summary: "UIKit 窗口信息用法。来自 weapp-container/sdk-ios 的版本化
 route: "/docs/engineering/sdk-ios/docs/window-metrics.zh-cn/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "efc6a69fd4acb230956310e0d62d29de051e9815"
+sourceCommit: "c15a30cd0a16335c80552c10fbde42b4c6e2fc5c"
 sourcePath: "docs/window-metrics.zh-CN.md"
 ---
 

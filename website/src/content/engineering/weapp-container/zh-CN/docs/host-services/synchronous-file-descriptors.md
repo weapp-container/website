@@ -6,7 +6,7 @@ summary: "受管同步文件句柄的实现范围。来自 weapp-container/weapp
 route: "/docs/engineering/weapp-container/docs/host-services/synchronous-file-descriptors/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/host-services/synchronous-file-descriptors.md"
 ---
 

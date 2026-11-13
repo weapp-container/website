@@ -6,7 +6,7 @@ summary: "Weapp Container Flutter SDK。来自 weapp-container/sdk-flutter 的�
 route: "/docs/engineering/sdk-flutter/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
+sourceCommit: "36cb4dd8c2dbeb9dd17549fc4c32e1d563693cb9"
 sourcePath: "README.md"
 ---
 
@@ -19,11 +19,15 @@ sourcePath: "README.md"
 
 当前核心构建器与本页源码示例均使用 preview.7。核心运行库、iOS、Desktop 及公开 CocoaPods Specs 已提供下载；npm、Maven Central 和 pub.dev 尚未全部发布。使用安装命令前先核对[发布状态](/docs/engineering/weapp-container/docs/public-sdk-release/)，不要混用不同版本的包装层与运行库。源码公开、包发布、编译通过和设备验收分别记录。
 
-版本 / Version: `0.1.0-preview.7.0`；C ABI `1`。
+版本 / Version: `0.1.0-preview.7.1`；C ABI `1`。
+
+发布状态：`.7.0` platform interface 已公开；本页的 `.7.1` 候选尚未发布。五个平台包与主包需按 interface -> 平台插件 -> 主包顺序发布；Android 的 Maven Central 依赖仍待账号与签名配置。以下主包安装方式在全部依赖发布后可用。
+
+每个包都使用 GitHub OIDC，标签格式为 `<package>-v<version>`。推送标签前，须在同一干净提交完成 `package-pub.yml`；发布工作流只读取该提交的成功 staging 产物，验证后冻结并上传同一归档。手动续发未发布包时可使用 `tools/publish-public.mjs --distribution /absolute/staging --package <包名> --execute`，已公开版本始终拒绝重发。
 
 ```yaml
 dependencies:
-  weapp_container: 0.1.0-preview.7.0
+  weapp_container: 0.1.0-preview.7.1
 ```
 
 ```sh
@@ -56,7 +60,7 @@ git checkout d115f7d3ea6f5d7df2e3fe4cef38607ca248dccf
 
 在 Flutter 应用中嵌入小程序容器。Android、iOS 使用原生 View，桌面端使用 Flutter 外部纹理；同一个 Dart Controller 负责加载本地 pack、导航、收发消息和管理会话。
 
-已复核源码示例版本：`0.1.0-preview.7.0`，原生 ABI：`1`。本仓库提供 Apache-2.0 许可的接入层，运行库从公开核心源码构建，或使用另行核验的配套归档。当前使用本地路径依赖，尚未发布到 pub.dev。
+已复核源码示例版本：`0.1.0-preview.7.1`，原生 ABI：`1`。本仓库提供 Apache-2.0 许可的接入层，运行库从公开核心源码构建，或使用另行核验的配套归档。`.7.1` 主包和平台包尚未发布到 pub.dev。
 
 <a id="start-from-current-source"></a>
 ## 从当前源码开始
@@ -180,7 +184,7 @@ SizedBox(
 )
 ```
 
-View 挂载后加载已生成并校验的本地 pack。Flutter assets 需要先解包到应用私有目录，具体做法见[示例](https://github.com/weapp-container/sdk-flutter/blob/ebe436aa98628ceffcdaea0df7037b4f761b7ec7/example/lib/main.dart)：
+View 挂载后加载已生成并校验的本地 pack。Flutter assets 需要先解包到应用私有目录，具体做法见[示例](https://github.com/weapp-container/sdk-flutter/blob/36cb4dd8c2dbeb9dd17549fc4c32e1d563693cb9/example/lib/main.dart)：
 
 ```dart
 await controller.load('/verified/local/portable-pack');
@@ -213,7 +217,7 @@ await controller.close();
 
 宿主方法只返回 JSON 可表示的值。异步方法应观察 `call.cancellation`，错误可使用 `WeappHostError` 返回明确的代码。
 
-登录、账号、网络和设备能力通过宿主显式配置：在 `load()` 前先调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。网络 origin 白名单和系统权限由宿主管理；受限 Showcase 运行库仍按编译时策略限制能力。配置和账号切换协议见 [CONTRACT.md](/docs/engineering/sdk-flutter/contract/) 与 [Controller API](https://github.com/weapp-container/sdk-flutter/blob/ebe436aa98628ceffcdaea0df7037b4f761b7ec7/weapp_container/lib/src/controller.dart)。
+登录、账号、网络和设备能力通过宿主显式配置：在 `load()` 前先调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。网络 origin 白名单和系统权限由宿主管理；受限 Showcase 运行库仍按编译时策略限制能力。配置和账号切换协议见 [CONTRACT.md](/docs/engineering/sdk-flutter/contract/) 与 [Controller API](https://github.com/weapp-container/sdk-flutter/blob/36cb4dd8c2dbeb9dd17549fc4c32e1d563693cb9/weapp_container/lib/src/controller.dart)。
 
 <a id="troubleshooting"></a>
 ## 常见问题
@@ -231,17 +235,17 @@ await controller.close();
 ## 更多资料与许可
 
 - [Widget 与 Controller 用法](/docs/engineering/sdk-flutter/weapp_container/index/)
-- [完整示例](https://github.com/weapp-container/sdk-flutter/blob/ebe436aa98628ceffcdaea0df7037b4f761b7ec7/example/lib/main.dart) · [示例运行说明](/docs/engineering/sdk-flutter/example/index/)
+- [完整示例](https://github.com/weapp-container/sdk-flutter/blob/36cb4dd8c2dbeb9dd17549fc4c32e1d563693cb9/example/lib/main.dart) · [示例运行说明](/docs/engineering/sdk-flutter/example/index/)
 - [桌面接入](/docs/engineering/sdk-flutter/native_desktop/index/) · [SDK 协议](/docs/engineering/sdk-flutter/contract/)
 - [公共类型和 C ABI](/docs/engineering/sdk-contract/index/)
 
-接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/ebe436aa98628ceffcdaea0df7037b4f761b7ec7/LICENSE)。运行库和第三方组件遵循归档中的 `RUNTIME-LICENSE` 及 notices；本仓库的开源许可不授予私有运行库下载权或额外的商用权利。
+接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/36cb4dd8c2dbeb9dd17549fc4c32e1d563693cb9/LICENSE)。运行库和第三方组件遵循归档中的 `RUNTIME-LICENSE` 及 notices；本仓库的开源许可不授予私有运行库下载权或额外的商用权利。
 
 <a id="historical-archives-and-migration"></a>
 ## 历史归档与迁移
 
 历史发行审计（2026-11-12）：默认锁中的 SDK 归档部分缺失，多个 runtime pin 与当前同名资产不符，默认在线准备会被完整性校验拒绝。请从匹配的干净源码构建，或通过 `--manifest` 显式选取独立审核过的配套清单；不要仅修改旧哈希。[差异与迁移记录](/docs/engineering/weapp-container/docs/runtime-artifacts-migration/)。
 
-运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
+运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
 
 核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。

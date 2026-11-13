@@ -6,7 +6,7 @@ summary: "Weapp Container。来自 weapp-container/weapp-container 的版本化�
 route: "/docs/engineering/weapp-container/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "README.md"
 ---
 
@@ -19,7 +19,9 @@ sourcePath: "README.md"
 
 将小程序嵌入自己的应用。Weapp Container 提供 Rust 运行时、portable pack 打包工具、开发模拟器，以及 Android、iOS、C++ Desktop、Flutter 和 React Native 接入层。
 
-[开发文档](https://container.weapp.dev/docs/) · [在线示例](https://container.weapp.dev/demo/) · [源码文档索引](/docs/engineering/weapp-container/docs/index/) · [参与贡献](/docs/engineering/weapp-container/contributing/)
+[开发文档](https://container.weapp.dev/docs/) · [在线示例](https://container.weapp.dev/demo/) · [源码文档索引](/docs/engineering/weapp-container/docs/index/) · [测试运行时](/docs/engineering/weapp-container/docs/testing-runtime/) · [参与贡献](/docs/engineering/weapp-container/contributing/)
+
+[GitHub 预发布下载](https://github.com/weapp-container/weapp-container/releases)
 
 [![公共源检查](https://github.com/weapp-container/weapp-container/actions/workflows/public-ci.yml/badge.svg)](https://github.com/weapp-container/weapp-container/actions/workflows/public-ci.yml)
 
@@ -43,7 +45,7 @@ sourcePath: "README.md"
 <a id="build-from-source"></a>
 ## 从源码开始
 
-需要 Git、Node.js **24.18+ / 24.x**、pnpm **10.15.1**、Rust stable 和宿主 C/C++ 工具链；macOS 使用 Xcode Command Line Tools。下面的无界面路径使用 QuickJS 和软件渲染，不构建 Skia。可视化预览和原生 SDK 还需要下载公开的 Skia 依赖，详见 [Rust 构建说明](/docs/engineering/weapp-container/docs/rust-build-cache/)。
+需要 Git、Node.js **24.22.2 / 24.x**、pnpm **10.15.1**、Rust stable 和宿主 C/C++ 工具链；macOS 使用 Xcode Command Line Tools。下面的无界面路径使用 QuickJS 和软件渲染，不构建 Skia。可视化预览和原生 SDK 还需要下载公开的 Skia 依赖，详见 [Rust 构建说明](/docs/engineering/weapp-container/docs/rust-build-cache/)。
 
 ```sh
 git clone --recurse-submodules https://github.com/weapp-container/weapp-container.git
@@ -83,6 +85,7 @@ pnpm simulator:dev -- --project examples/apps/reference-app --surface web --soft
 | `crates/container-engine-*` | QuickJS 与显式 V8 provider 边界 |
 | `crates/container-render-skia`、`container-host-*` | 绘制、Web 与原生宿主适配 |
 | `crates/container-simulator`、`apps/dev-player` | 开发模拟器和设备客户端 |
+| `packages/node`、`packages/vitest`、`packages/runtime/*` | Node 测试 SDK、Vite/Vitest 接入和预编译测试宿主 |
 | `sdk/*` | 独立的合约及 Android、iOS、Desktop、Flutter、React Native 包装层 |
 | `website` | 文档与展示应用源码 |
 | `tools/runtime-artifacts` | [运行库打包、离线验证与发行工具](/docs/engineering/weapp-container/tools/runtime-artifacts/index/) |
@@ -111,7 +114,7 @@ PR 基础检查使用公开依赖；完整平台矩阵、官方开发者工具�
 <a id="license-and-history"></a>
 ## 许可与历史
 
-自有源码采用 **Apache-2.0**。`container-core`、`container-ir` 和 `container-bridge` 保留 **MIT OR Apache-2.0**，第三方组件保留各自许可。新构建携带 `RUNTIME-LICENSE` 和依赖 notices，详见[许可说明](/docs/engineering/weapp-container/docs/licensing/)及 [NOTICE](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/NOTICE)。
+自有源码采用 **Apache-2.0**。`container-core`、`container-ir` 和 `container-bridge` 保留 **MIT OR Apache-2.0**，第三方组件保留各自许可。新构建携带 `RUNTIME-LICENSE` 和依赖 notices，详见[许可说明](/docs/engineering/weapp-container/docs/licensing/)及 [NOTICE](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/NOTICE)。
 
 公开 Git 从整理后的源码快照开始，原开发历史和大型构建证据保存在私有归档。必要回归 fixture 保留在源码中，详见[历史证据说明](/docs/engineering/weapp-container/docs/archived-evidence/)。
 

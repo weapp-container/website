@@ -6,7 +6,7 @@ summary: "运行库发行工具。来自 weapp-container/weapp-container 的版�
 route: "/docs/engineering/weapp-container/tools/runtime-artifacts/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "tools/runtime-artifacts/README.md"
 ---
 
@@ -34,7 +34,7 @@ pnpm runtime:package -- \
 
 `--target` 可传逗号分隔的明确目标，省略时选择输入目录已有的受支持目标。SDK 包使用 `--component android-sdk|ios-sdk|desktop-sdk --platform <平台> --arch <架构> --install-dir <已验证安装目录>`；通用包还须用 `--architectures` 列出真实切片。完整选项见 `pnpm runtime:package -- --help`。
 
-输出包括 `manifest.json`、`provenance.json`、`SHA256SUMS` 和归档。相同版本可在本地增量添加目标，但同名归档不能改变字节。版本、ABI 和审核过的头文件/许可哈希位于 [policy.json](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/tools/runtime-artifacts/policy.json)，测试会与核心发行版本及独立 contract 同步校验。接口变更时先审核这些身份，再生成新的发行物。
+输出包括 `manifest.json`、`provenance.json`、`SHA256SUMS` 和归档。相同版本可在本地增量添加目标，但同名归档不能改变字节。版本、ABI 和审核过的头文件/许可哈希位于 [policy.json](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/tools/runtime-artifacts/policy.json)，测试会与核心发行版本及独立 contract 同步校验。接口变更时先审核这些身份，再生成新的发行物。
 
 <a id="verification-and-release"></a>
 ## 验证与发布
@@ -51,11 +51,16 @@ pnpm runtime:publish -- --release-dir /absolute/release --notes-file /absolute/n
 
 # 从与生产收据一致的干净源码 checkout 显式发布。
 pnpm runtime:publish -- --release-dir /absolute/release --notes-file /absolute/notes.md --execute
+
+# Create and verify a full 14-archive draft; publish manually in GitHub.
+pnpm runtime:publish -- --release-dir /absolute/release --notes-file /absolute/notes.md --execute --draft-only
 ```
 
 发布器只接受此打包器生成的 full 原生/SDK 清单；Web、Harmony 和 restricted-showcase 使用各自的发行与验收流程。它冻结输入字节、重验哈希和离线安装，拒绝已存在的 release/tag，再创建草稿、上传精确资产、核对服务端 SHA-256 后发布 prerelease，不改变 latest。上传失败保留草稿供人工检查；不要覆盖资产或仅改清单重试。未来重发应使用新版本和新构建证据。
 
 新清单写入 `weapp-container/weapp-container` 与精确的 `runtime-v<版本>`。接入者下载该发行的 `manifest.json`，用 SDK 的 `--manifest` 显式选择即可。源码许可不代表仓库公开；私有核心仓库仍需有读取权限的 `WEAPP_CONTAINER_RUNTIME_TOKEN`，发布需具有内容写权限的 GitHub CLI 登录。仓库公开时，SDK 也支持匿名读取核心发行。
+
+`--draft-only` 必须与 `--execute` 同时使用，要求九个运行库和五个 SDK 归档完整，服务端字节验证后保持未公开草稿。默认命令仍只在本地验证；单独 `--execute` 保留显式直接发布行为。自动化入口见[发行说明](/docs/engineering/weapp-container/docs/public-sdk-release/#automated-prerelease)。
 
 <a id="historical-compatibility"></a>
 ## 历史兼容

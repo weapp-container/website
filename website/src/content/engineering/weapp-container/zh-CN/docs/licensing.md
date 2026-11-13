@@ -6,7 +6,7 @@ summary: "许可说明。来自 weapp-container/weapp-container 的版本化工�
 route: "/docs/engineering/weapp-container/docs/licensing/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/licensing.md"
 ---
 
@@ -16,9 +16,9 @@ sourcePath: "docs/licensing.md"
 **简体中文** · [English](/en/docs/engineering/weapp-container/docs/licensing/)
 
 
-本次源码发行中，Weapp Container 自有的运行时、适配器、渲染器、构建工具和示例采用 [Apache License 2.0](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/LICENSE)，允许按该许可使用、修改、商用和分发，没有额外非商业限制或商业授权要求。
+本次源码发行中，Weapp Container 自有的运行时、适配器、渲染器、构建工具和示例采用 [Apache License 2.0](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/LICENSE)，允许按该许可使用、修改、商用和分发，没有额外非商业限制或商业授权要求。
 
-`container-core`、`container-ir` 和 `container-bridge` 保留 `MIT OR Apache-2.0`。独立 SDK 采用随附的 Apache-2.0。第三方源码、字体、图片和依赖保留各自版权和许可；项目许可不替代这些条款。[NOTICE](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/NOTICE)说明项目归属，`sdk/licenses` 保存依赖 notices。
+`container-core`、`container-ir` 和 `container-bridge` 保留 `MIT OR Apache-2.0`。独立 SDK 采用随附的 Apache-2.0。第三方源码、字体、图片和依赖保留各自版权和许可；项目许可不替代这些条款。[NOTICE](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/NOTICE)说明项目归属，`sdk/licenses` 保存依赖 notices。
 
 <a id="build-and-distribute"></a>
 ## 构建和分发

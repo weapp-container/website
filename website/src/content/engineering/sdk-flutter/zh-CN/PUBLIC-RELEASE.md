@@ -1,16 +1,16 @@
 ---
 id: "docs/engineering/sdk-flutter/public-release"
-title: "公开预览发行 0.1.0-preview.7.0"
+title: "公开预览发行 0.1.0-preview.7.1"
 section: "工具"
-summary: "公开预览发行 0.1.0-preview.7.0。来自 weapp-container/sdk-flutter 的版本化工程说明。"
+summary: "公开预览发行 0.1.0-preview.7.1。来自 weapp-container/sdk-flutter 的版本化工程说明。"
 route: "/docs/engineering/sdk-flutter/public-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
+sourceCommit: "36cb4dd8c2dbeb9dd17549fc4c32e1d563693cb9"
 sourcePath: "PUBLIC-RELEASE.md"
 ---
 
-# 公开预览发行 0.1.0-preview.7.0
+# 公开预览发行 0.1.0-preview.7.1
 
 **简体中文** · [English](/en/docs/engineering/sdk-flutter/public-release/)
 
@@ -42,3 +42,5 @@ sourcePath: "PUBLIC-RELEASE.md"
 
 
 七个 hosted packages 和原生依赖全部公开后，执行 `public-consumer.yml`。它创建五个全新应用，在无 GitHub 凭据的情况下解析精确 hosted 版本，并编译链接 Android、iOS 模拟器、macOS、Linux 和 Windows。每个作业上传依赖身份、构建日志与收据。构建成功仅记录为编译链接验证；pack 交互和设备验收须另行执行。
+
+续发单个未发布包时，增加 `--package <包名>`，避免重放已经发布的包。所有 Flutter 包的 GitHub OIDC 工作流使用 `<package>-v{{version}}` 标签，且只读取同一提交上成功的 `package-pub.yml` 暂存产物；CI 会校验包名、版本标签、已发布依赖和所有暂存文件哈希，再冻结并发布同一份归档。发布顺序固定为 interface、五个平台包、主包。

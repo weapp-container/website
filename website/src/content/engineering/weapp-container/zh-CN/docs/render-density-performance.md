@@ -6,7 +6,7 @@ summary: "渲染密度、帧传输与诊断。来自 weapp-container/weapp-conta
 route: "/docs/engineering/weapp-container/docs/render-density-performance/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/render-density-performance.md"
 ---
 

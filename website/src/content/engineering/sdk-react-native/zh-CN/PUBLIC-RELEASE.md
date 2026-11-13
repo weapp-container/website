@@ -1,16 +1,16 @@
 ---
 id: "docs/engineering/sdk-react-native/public-release"
-title: "公开预览发行 0.1.0-preview.7.0"
+title: "公开预览发行 0.1.0-preview.7.1"
 section: "工具"
-summary: "公开预览发行 0.1.0-preview.7.0。来自 weapp-container/sdk-react-native 的版本化工程说明。"
+summary: "公开预览发行 0.1.0-preview.7.1。来自 weapp-container/sdk-react-native 的版本化工程说明。"
 route: "/docs/engineering/sdk-react-native/public-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "96cc6abe36f4142f6f93efb628f084750a5b16ac"
+sourceCommit: "c7f126867d565099233295b072b2a41b1be10ec0"
 sourcePath: "PUBLIC-RELEASE.md"
 ---
 
-# 公开预览发行 0.1.0-preview.7.0
+# 公开预览发行 0.1.0-preview.7.1
 
 **简体中文** · [English](/en/docs/engineering/sdk-react-native/public-release/)
 

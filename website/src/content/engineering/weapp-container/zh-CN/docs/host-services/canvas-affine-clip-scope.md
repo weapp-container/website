@@ -6,7 +6,7 @@ summary: "Canvas 仿射矩阵与当前路径裁剪。来自 weapp-container/weap
 route: "/docs/engineering/weapp-container/docs/host-services/canvas-affine-clip-scope/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/host-services/canvas-affine-clip-scope.md"
 ---
 

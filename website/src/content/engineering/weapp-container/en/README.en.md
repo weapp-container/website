@@ -6,7 +6,7 @@ summary: "Weapp Container. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/weapp-container/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "README.en.md"
 ---
 
@@ -19,7 +19,9 @@ sourcePath: "README.en.md"
 
 Embed mini-programs in your own applications. Weapp Container provides a Rust runtime, portable pack tooling, a development simulator, and integration layers for Android, iOS, C++ Desktop, Flutter, and React Native.
 
-[Documentation](https://container.weapp.dev/en/docs/) · [Live demo](https://container.weapp.dev/en/demo/) · [Source documentation](/en/docs/engineering/weapp-container/docs/index/) · [Contributing](/en/docs/engineering/weapp-container/contributing/)
+[Documentation](https://container.weapp.dev/en/docs/) · [Live demo](https://container.weapp.dev/en/demo/) · [Source documentation](/en/docs/engineering/weapp-container/docs/index/) · [Testing runtime](/en/docs/engineering/weapp-container/docs/testing-runtime/) · [Contributing](/en/docs/engineering/weapp-container/contributing/)
+
+[GitHub prerelease downloads](https://github.com/weapp-container/weapp-container/releases)
 
 [![Public source checks](https://github.com/weapp-container/weapp-container/actions/workflows/public-ci.yml/badge.svg)](https://github.com/weapp-container/weapp-container/actions/workflows/public-ci.yml)
 
@@ -43,7 +45,7 @@ Core runtime, iOS, Desktop and CocoaPods Specs downloads for `0.1.0-preview.7.0`
 <a id="从源码开始"></a>
 ## Build from source
 
-Install Git, Node.js **24.18+ / 24.x**, pnpm **10.15.1**, Rust stable, and a host C/C++ toolchain. macOS requires Xcode Command Line Tools. The headless path below uses QuickJS and software rendering without building Skia. Visual previews and native SDKs also download public Skia dependencies; see [Rust build requirements](/en/docs/engineering/weapp-container/docs/rust-build-cache/).
+Install Git, Node.js **24.22.2 / 24.x**, pnpm **10.15.1**, Rust stable, and a host C/C++ toolchain. macOS requires Xcode Command Line Tools. The headless path below uses QuickJS and software rendering without building Skia. Visual previews and native SDKs also download public Skia dependencies; see [Rust build requirements](/en/docs/engineering/weapp-container/docs/rust-build-cache/).
 
 ```sh
 git clone --recurse-submodules https://github.com/weapp-container/weapp-container.git
@@ -83,6 +85,7 @@ The default address is `127.0.0.1:5179`. CanvasKit, browser Workers, desktop win
 | `crates/container-engine-*` | QuickJS and explicit V8 provider boundaries |
 | `crates/container-render-skia`, `container-host-*` | Rendering and Web/native host adapters |
 | `crates/container-simulator`, `apps/dev-player` | Development simulator and device clients |
+| `packages/node`, `packages/vitest`, `packages/runtime/*` | Node testing SDK, Vite/Vitest integration and prebuilt test hosts |
 | `sdk/*` | Independent contracts and Android, iOS, Desktop, Flutter, and React Native wrappers |
 | `website` | Documentation and demonstration website |
 | `tools/runtime-artifacts` | [Runtime packaging, offline verification, and release tools](/en/docs/engineering/weapp-container/tools/runtime-artifacts/index/) |
@@ -111,7 +114,7 @@ Baseline PR checks use public dependencies. The full platform matrix, official d
 <a id="许可与历史"></a>
 ## License and history
 
-Repository-authored source uses **Apache-2.0**. `container-core`, `container-ir`, and `container-bridge` retain **MIT OR Apache-2.0**; third-party components retain their own licenses. New builds include `RUNTIME-LICENSE` and dependency notices. See [licensing](/en/docs/engineering/weapp-container/docs/licensing/) and [NOTICE](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/NOTICE).
+Repository-authored source uses **Apache-2.0**. `container-core`, `container-ir`, and `container-bridge` retain **MIT OR Apache-2.0**; third-party components retain their own licenses. New builds include `RUNTIME-LICENSE` and dependency notices. See [licensing](/en/docs/engineering/weapp-container/docs/licensing/) and [NOTICE](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/NOTICE).
 
 Public Git history starts from a prepared source snapshot. Earlier development history and large build records remain in private archives. Necessary regression fixtures stay in source; see [archived evidence](/en/docs/engineering/weapp-container/docs/archived-evidence/).
 

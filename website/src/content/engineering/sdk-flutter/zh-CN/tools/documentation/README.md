@@ -6,7 +6,7 @@ summary: "双语文档维护。来自 weapp-container/sdk-flutter 的版本化�
 route: "/docs/engineering/sdk-flutter/tools/documentation/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
+sourceCommit: "36cb4dd8c2dbeb9dd17549fc4c32e1d563693cb9"
 sourcePath: "tools/documentation/README.md"
 ---
 

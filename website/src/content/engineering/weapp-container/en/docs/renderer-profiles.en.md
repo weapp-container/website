@@ -6,7 +6,7 @@ summary: "Renderer profiles and layout-independent View documents. Versioned eng
 route: "/docs/engineering/weapp-container/docs/renderer-profiles/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/renderer-profiles.en.md"
 ---
 

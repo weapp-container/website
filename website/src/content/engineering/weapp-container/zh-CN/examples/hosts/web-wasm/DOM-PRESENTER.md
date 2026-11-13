@@ -6,7 +6,7 @@ summary: "浏览器 DOM 呈现器边界。来自 weapp-container/weapp-container
 route: "/docs/engineering/weapp-container/examples/hosts/web-wasm/dom-presenter/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "examples/hosts/web-wasm/DOM-PRESENTER.md"
 ---
 

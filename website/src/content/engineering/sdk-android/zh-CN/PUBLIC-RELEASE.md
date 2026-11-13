@@ -1,16 +1,16 @@
 ---
 id: "docs/engineering/sdk-android/public-release"
-title: "公开预览发行 0.1.0-preview.7.0"
+title: "公开预览发行 0.1.0-preview.7.1"
 section: "工具"
-summary: "公开预览发行 0.1.0-preview.7.0。来自 weapp-container/sdk-android 的版本化工程说明。"
+summary: "公开预览发行 0.1.0-preview.7.1。来自 weapp-container/sdk-android 的版本化工程说明。"
 route: "/docs/engineering/sdk-android/public-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "faf4f55cbcf3fc291afed4b0b14e4568a6ed7581"
+sourceCommit: "890990448903c519c4410537c87dbf6fe9f395c0"
 sourcePath: "PUBLIC-RELEASE.md"
 ---
 
-# 公开预览发行 0.1.0-preview.7.0
+# 公开预览发行 0.1.0-preview.7.1
 
 **简体中文** · [English](/en/docs/engineering/sdk-android/public-release/)
 

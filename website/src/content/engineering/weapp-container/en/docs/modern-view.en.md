@@ -6,7 +6,7 @@ summary: "Modern JS/TS View. Versioned engineering reference from weapp-containe
 route: "/docs/engineering/weapp-container/docs/modern-view/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/modern-view.en.md"
 ---
 
@@ -35,7 +35,7 @@ Desktop window uses `--features quickjs-native,desktop-window` and `--surface de
 Dual panel uses `--surface both`. V8 uses `--features v8-native` and `--engine v8`.
 Explicit failure if the selected native engine is not included, no fallback.
 
-[Example](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/apps/modern-view-app) includes TS, ESM shared dependencies, destructuring, optional chaining,
+[Example](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/examples/apps/modern-view-app) includes TS, ESM shared dependencies, destructuring, optional chaining,
 private fields, Map/Set, generator, enum, BigInt converted to string, and legacy WXS subcomponents.
 Editing `view/format.view.ts` can trigger standalone updates for modern source code. Modern executable changes will restart the session,
 compilation failures retain the latest successful generation and display diagnostics.
@@ -144,7 +144,7 @@ Relative regression checks on development machines do not replace absolute perfo
 <a id="ci-专项验证"></a>
 ## CI Special Verification
 
-[`modern-view` workflow](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/.github/workflows/modern-view.yml) and `container-ci` both only accept
+[`modern-view` workflow](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/.github/workflows/modern-view.yml) and `container-ci` both only accept
 manual runs; pushes/PRs will not trigger. Go into the repository's **Actions → modern-view → Run workflow**,
 select the branch and `suite`: `browser` (default) to perform development builds and browser regression, `performance` to perform only release performance regression, `full` to perform both sets simultaneously. `suite` replaces the old boolean input `performance`.
 

@@ -6,7 +6,7 @@ summary: "Web NFC 与冻结 wx NFC 合同。来自 weapp-container/weapp-contain
 route: "/docs/engineering/weapp-container/docs/host-services/web-nfc/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/host-services/WEB-NFC.md"
 ---
 
@@ -39,7 +39,7 @@ Web NFC 接口；它不能证明该接口满足基础库 3.17.3、typings 5.2.3 
 这批修改不实例化 reader，不请求 NFC 权限，也不创建持续扫描或二进制句柄，
 因此不会留下以前 discovery 实现的扫描、过期回调或被覆盖的 AbortController。
 未注册的 66 个冻结标签叶子，以及其中有明确浏览器能力限制的 55 个叶子，完整
-列在 [平台限制清单](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/platform-constraints.json) 与 [API 矩阵](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/api-matrix.json) 中；原始开发记录保存在 [私有档案](/docs/engineering/weapp-container/docs/archived-evidence/)。其余叶子
+列在 [平台限制清单](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/docs/host-services/platform-constraints.json) 与 [API 矩阵](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/docs/host-services/api-matrix.json) 中；原始开发记录保存在 [私有档案](/docs/engineering/weapp-container/docs/archived-evidence/)。其余叶子
 保持未实现，不能仅因配套连接 API 缺失就一概标为浏览器永远不支持。
 
 未来可以单独论证精确的 UID-only discovery 子集，或在冻结目录有相应合同后

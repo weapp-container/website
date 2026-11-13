@@ -6,7 +6,7 @@ summary: "WXSS 条件固定装置。来自 weapp-container/weapp-container 的�
 route: "/docs/engineering/weapp-container/examples/apps/style-conditions-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "examples/apps/style-conditions-app/README.md"
 ---
 

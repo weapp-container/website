@@ -6,7 +6,7 @@ summary: "Dev Player 设备协议 v1。来自 weapp-container/weapp-container �
 route: "/docs/engineering/weapp-container/docs/dev-player/protocol-v1/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/dev-player/protocol-v1.md"
 ---
 

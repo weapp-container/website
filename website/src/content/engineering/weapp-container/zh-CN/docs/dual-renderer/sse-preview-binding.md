@@ -6,7 +6,7 @@ summary: "实际的 SSE 连接和预览功能退役。来自 weapp-container/wea
 route: "/docs/engineering/weapp-container/docs/dual-renderer/sse-preview-binding/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/dual-renderer/sse-preview-binding.md"
 ---
 

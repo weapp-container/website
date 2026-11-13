@@ -6,7 +6,7 @@ summary: "API Source Approval. Versioned engineering reference from weapp-contai
 route: "/docs/engineering/weapp-container/docs/host-services/source-review/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/host-services/source-review.en.md"
 ---
 
@@ -16,9 +16,9 @@ sourcePath: "docs/host-services/source-review.en.md"
 [简体中文](/docs/engineering/weapp-container/docs/host-services/source-review/) · **English**
 
 
-The source identity of the API manifest is saved in [Inspector](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/scripts/core-api-inventory.mjs). The complete file summary is uniformly saved by `reviewedSourceSha256`, and each capability check selects its own fixed source set; the control flow identity of JavaScript uses the canonical AST summary calculated by the fixed Acorn version. Source code changes must be reviewed, and the current summary cannot be automatically accepted when generating the matrix.
+The source identity of the API manifest is saved in [Inspector](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/scripts/core-api-inventory.mjs). The complete file summary is uniformly saved by `reviewedSourceSha256`, and each capability check selects its own fixed source set; the control flow identity of JavaScript uses the canonical AST summary calculated by the fixed Acorn version. Source code changes must be reviewed, and the current summary cannot be automatically accepted when generating the matrix.
 
-These identities only indicate that the specified source code has been reviewed. They do not prove full compiled behavior, full compatibility with official APIs, real-device execution, merchant transactions, or actual acceptance of each SDK. The status of the platform is still determined by the independent [Acceptance Ledger](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/acceptance-ledger.json) and [Acceptance Contract](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/acceptance-contracts.json).
+These identities only indicate that the specified source code has been reviewed. They do not prove full compiled behavior, full compatibility with official APIs, real-device execution, merchant transactions, or actual acceptance of each SDK. The status of the platform is still determined by the independent [Acceptance Ledger](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/docs/host-services/acceptance-ledger.json) and [Acceptance Contract](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/docs/host-services/acceptance-contracts.json).
 
 <a id="2026-11-12-复核范围"></a>
 ## 2026-11-12 Review Scope
@@ -66,6 +66,22 @@ The following changes were reviewed file by file against this PR's baseline, upd
 | `Cargo.lock` | Adds glutin/glow and transitive dependencies for desktop presentation without changing existing dependency versions; duplicate Objective-C dependencies carry explicit versions. |
 
 The review also covers resize, zero-size invalidation, reload, presentation receipts, and shutdown in the standalone desktop host. Linux Xvfb/Mesa integration tests check pixels, resize, reload, and detach on a real GL drawable. These results do not establish Windows, Wayland, or physical-device acceptance and do not raise SDK acceptance status.
+
+<a id="2026-11-13-testing-runtime-review"></a>
+## 2026-11-13 testing runtime and toolchain review
+
+Reviewed the test host and TypeScript migration against production boundaries on `origin/main`. Updated full-file identities for QuickJS, runtime, nativeProvider and manifestPacker, plus the scheduler AST identity. Capability ratings and historical acceptance evidence retain their existing status.
+
+| Source | Changes and preserved boundaries |
+| --- | --- |
+| `container-engine-quickjs/src/lib.rs` | The testing feature uses private transport for instance and node observation. The real engine continues to own authority, execution budgets, exception handling and cleanup. |
+| `container-runtime/src/lib.rs`, `container-sdk/src/lib.rs` | Testing interfaces compile behind a feature and reuse Session, pack verification, providers and shutdown. Controlled time reaches timer registration; real deadlines still bound execution. |
+| `container-core/src/turn-scheduler.js` | The private status command only reports currently ready work for bounded flush convergence. It does not advance future timers or change callback ownership and cancellation semantics. |
+| `tools/container-manifest/src/index.ts` | Migrated JS to TypeScript, added JSON / AST boundary types and moved the CLI into a separate entry. Existing tests validate deterministic manifests, resource digests, errors and WXS semantics. |
+
+The receipt durability unit test explicitly uses a finite 2 s View budget so shared CI startup does not mask its target assertions with the 50 ms initialization budget. This override compiles only into unit tests; production and testing distributions retain their default budgets.
+
+The review covers 24 real-runtime integration tests, 87 Rust SDK tests, scheduler callback compatibility tests, manifest regressions and declaration tests. Test processes and node handles bind to sessions; stale handle rejection, cancellation and cleanup failures have checks. These results do not raise device or WeChat compatibility acceptance status.
 
 <a id="后续更新"></a>
 ## Subsequent updates

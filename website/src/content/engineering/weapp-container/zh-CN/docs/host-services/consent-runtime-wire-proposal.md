@@ -6,7 +6,7 @@ summary: "Consent revocation 1.0：下一批运行时与 SDK wire 提案。来�
 route: "/docs/engineering/weapp-container/docs/host-services/consent-runtime-wire-proposal/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/host-services/consent-runtime-wire-proposal.md"
 ---
 

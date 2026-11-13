@@ -6,7 +6,7 @@ summary: "WXSS IR and conditional cascade. Versioned engineering reference from 
 route: "/docs/engineering/weapp-container/docs/wxss-ir/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "docs/wxss-ir.en.md"
 ---
 
@@ -47,7 +47,7 @@ preserved too. Declaration bodies such as `@font-face` retain descriptors,
 while media, supports and keyframe bodies retain nested rules. Comments outside
 quoted strings normalize to one separating space in both parsers.
 
-The shared [parser fixture](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/tools/container-manifest/test/fixtures/wxss-v2.json)
+The shared [parser fixture](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/tools/container-manifest/test/fixtures/wxss-v2.json)
 checks ordered/nested imports, import-only groups, descriptors, keyframes and
 keyword boundaries against both implementations' canonical JSON.
 

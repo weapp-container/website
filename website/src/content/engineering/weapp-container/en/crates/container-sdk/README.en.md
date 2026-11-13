@@ -6,7 +6,7 @@ summary: "container-sdk. Versioned engineering reference from weapp-container/we
 route: "/docs/engineering/weapp-container/crates/container-sdk/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
 sourcePath: "crates/container-sdk/README.en.md"
 ---
 
@@ -24,6 +24,10 @@ The default feature enables actual QuickJS. Builds without the requested engine
 return `ERR_ENGINE`; they never run a metadata-only engine or choose a fallback.
 Skia CPU, GLES, Metal and V8 have explicit Cargo features. Query `capabilities`
 to distinguish compiled support from a currently attached/rendered GPU surface.
+
+The `testing` feature adds the real QuickJS `weapp-test-host` stdio process and
+typed test controls. The Node SDK and Vitest fixture reuse this session boundary;
+see [testing runtime](/en/docs/engineering/weapp-container/docs/testing-runtime/) for APIs, packaging and checks.
 
 ```rust,no_run
 use container_sdk::{ContainerConfig, ContainerSession};
