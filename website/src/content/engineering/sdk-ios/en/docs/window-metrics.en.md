@@ -6,7 +6,7 @@ summary: "UIKit window metrics. Versioned engineering reference from weapp-conta
 route: "/docs/engineering/sdk-ios/docs/window-metrics/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "6d6359852714470a9c84aa8742c24d7b49d2149e"
+sourceCommit: "efc6a69fd4acb230956310e0d62d29de051e9815"
 sourcePath: "docs/window-metrics.en.md"
 ---
 
@@ -134,3 +134,11 @@ physical-device, signing, or reserved-region acceptance by itself.
 
 References: [Duo preparation](https://developer.apple.com/iphone-duo/prepare/)
 and [Duo design guidance](https://developer.apple.com/design/human-interface-guidelines/designing-for-iphone-duo).
+
+
+During rotation, UIKit can report a changed viewport before its resolved scene
+orientation changes. Each complete observation updates the synchronous APIs;
+`onResize` runs only when the viewport size changes. The consumer checks that
+callback's viewport, then reads a fresh JS snapshot after presentation and
+compares every geometry field, including orientation, with the settled UIKit
+witness. A queued resize message is not evidence of UIKit's later state.

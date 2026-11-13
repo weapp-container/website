@@ -6,7 +6,7 @@ summary: "weapp_container_windows。来自 weapp-container/sdk-flutter 的版本
 route: "/docs/engineering/sdk-flutter/weapp_container_windows/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60"
+sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
 sourcePath: "weapp_container_windows/README.md"
 ---
 

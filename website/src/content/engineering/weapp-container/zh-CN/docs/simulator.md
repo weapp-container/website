@@ -6,7 +6,7 @@ summary: "Weapp Container 模拟器。来自 weapp-container/weapp-container 的
 route: "/docs/engineering/weapp-container/docs/simulator/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/simulator.md"
 ---
 
@@ -327,7 +327,7 @@ HTTP 请求和响应始终使用非阻塞 socket，每个客户端每轮最多�
 未完成请求和响应在 5 秒后关闭。慢客户端不阻塞其他请求、runtime pump、热更新或退出。
 
 `GET /embed` 是一个可直接打开的 Web 植入示例，位于
-[`examples/hosts/web`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web)。它与 simulator 共享同源的
+[`examples/hosts/web`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/hosts/web)。它与 simulator 共享同源的
 `/api/state`、`/api/snapshot`、`/api/bridge` 和 `/api/events`，用一个 canvas
 接收完整 RGBA snapshot，并以批量 envelope 发送诊断请求。生产 Web 宿主应将这套
 顺序替换为 `container-host-web::WebWasmHost` 的 WASM 调用；该页面只证明开发态

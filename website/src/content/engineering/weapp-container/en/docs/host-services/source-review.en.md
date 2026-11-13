@@ -6,7 +6,7 @@ summary: "API Source Approval. Versioned engineering reference from weapp-contai
 route: "/docs/engineering/weapp-container/docs/host-services/source-review/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/host-services/source-review.en.md"
 ---
 
@@ -16,9 +16,9 @@ sourcePath: "docs/host-services/source-review.en.md"
 [简体中文](/docs/engineering/weapp-container/docs/host-services/source-review/) · **English**
 
 
-The source identity of the API manifest is saved in [Inspector](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/scripts/core-api-inventory.mjs). The complete file summary is uniformly saved by `reviewedSourceSha256`, and each capability check selects its own fixed source set; the control flow identity of JavaScript uses the canonical AST summary calculated by the fixed Acorn version. Source code changes must be reviewed, and the current summary cannot be automatically accepted when generating the matrix.
+The source identity of the API manifest is saved in [Inspector](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/scripts/core-api-inventory.mjs). The complete file summary is uniformly saved by `reviewedSourceSha256`, and each capability check selects its own fixed source set; the control flow identity of JavaScript uses the canonical AST summary calculated by the fixed Acorn version. Source code changes must be reviewed, and the current summary cannot be automatically accepted when generating the matrix.
 
-These identities only indicate that the specified source code has been reviewed. They do not prove full compiled behavior, full compatibility with official APIs, real-device execution, merchant transactions, or actual acceptance of each SDK. The status of the platform is still determined by the independent [Acceptance Ledger](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/host-services/acceptance-ledger.json) and [Acceptance Contract](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/host-services/acceptance-contracts.json).
+These identities only indicate that the specified source code has been reviewed. They do not prove full compiled behavior, full compatibility with official APIs, real-device execution, merchant transactions, or actual acceptance of each SDK. The status of the platform is still determined by the independent [Acceptance Ledger](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/acceptance-ledger.json) and [Acceptance Contract](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/acceptance-contracts.json).
 
 <a id="2026-11-12-复核范围"></a>
 ## 2026-11-12 Review Scope

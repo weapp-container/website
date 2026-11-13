@@ -6,7 +6,7 @@ summary: "Clean-room 与证据记录。来自 weapp-container/weapp-container �
 route: "/docs/engineering/weapp-container/docs/clean-room-and-evidence/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/clean-room-and-evidence.md"
 ---
 
@@ -22,6 +22,6 @@ sourcePath: "docs/clean-room-and-evidence.md"
 
 产品统一使用 Weapp Container 名称，模拟器 CLI 为 `weapp-simulator`，产品环境变量以 `WEAPP_CONTAINER_` 开头，C ABI 符号以 `weapp_container_` 开头。`pnpm naming:check` 校验公开 CLI、库名、包名和 C ABI 的声明；`pnpm naming:test` 覆盖声明缺失、名称不一致和错误导出的拒绝行为。
 
-[公开证据索引](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/evidence-ledger.json)只保留可分发的历史摘要。完整原始记录保存在[私有档案](/docs/engineering/weapp-container/docs/archived-evidence/)，公开索引的整理不修改原始证据字节，也不将历史结果升级为当前版本的验收结论。缺少输入或原始记录时，完整证据检查继续报告未满足条件。当前容器输出使用 `.weapp-container`。
+[公开证据索引](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/evidence-ledger.json)只保留可分发的历史摘要。完整原始记录保存在[私有档案](/docs/engineering/weapp-container/docs/archived-evidence/)，公开索引的整理不修改原始证据字节，也不将历史结果升级为当前版本的验收结论。缺少输入或原始记录时，完整证据检查继续报告未满足条件。当前容器输出使用 `.weapp-container`。
 
 `vendor/weapp-vite` 保持为固定 commit 的干净检出。需要改动上游 E2E helper 或项目配置的验证任务，应从该固定 SHA 创建任务专属的临时 checkout，在那里执行和收集报告。结束时将本地 patch、配置和原始报告连同源 SHA、文件清单及哈希归档；校验后按归属清理临时 checkout。不要在固定子模块中留下验证配置或生成物，也不要把归档的本地 patch 当作已经验证或发布的上游能力。

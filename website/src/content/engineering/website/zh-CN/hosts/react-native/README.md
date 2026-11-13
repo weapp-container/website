@@ -6,7 +6,7 @@ summary: "React Native 展示。来自 weapp-container/website 的版本化工�
 route: "/docs/engineering/website/hosts/react-native/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "43c9a0c31d57a75930742fe63c50e17045c3a206"
+sourceCommit: "c487eff31a98ca75905b66676909cde218e9fb42"
 sourcePath: "hosts/react-native/README.md"
 ---
 

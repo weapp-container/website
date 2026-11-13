@@ -6,7 +6,7 @@ summary: "Weapp Container。来自 weapp-container/weapp-container 的版本化�
 route: "/docs/engineering/weapp-container/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "README.md"
 ---
 
@@ -26,6 +26,8 @@ sourcePath: "README.md"
 接入从已有的原生小程序目录或框架构建产物开始，不要求使用 weapp-vite。打包工具将输入转换为可校验的 manifest、IR 和内容寻址资源，运行时管理 JavaScript 执行、页面、导航、存储和宿主通信。QuickJS 是主要引擎；V8、Skia 与浏览器呈现路径按配置和宿主能力选择。
 
 当前为 **preview**。源码可公开获取和构建，各平台的可构建、可安装、已运行与已验收状态分别记录；不承诺微信完整兼容。先查看[能力矩阵](/docs/engineering/weapp-container/docs/capability-matrix/)、[平台状态](https://container.weapp.dev/docs/platforms/)及[验证方法](/docs/engineering/weapp-container/docs/conformance/index/)。
+
+公开预览版 `0.1.0-preview.7.0` 的核心运行库、iOS、Desktop 和 CocoaPods Specs 已提供公开下载。npm、Maven Central 和 pub.dev 尚未全部发布；安装命令、验证范围及阻塞项见[发布状态](/docs/engineering/weapp-container/docs/public-sdk-release/)。
 
 <a id="choose-a-starting-point"></a>
 ## 选择你的入口
@@ -109,7 +111,7 @@ PR 基础检查使用公开依赖；完整平台矩阵、官方开发者工具�
 <a id="license-and-history"></a>
 ## 许可与历史
 
-自有源码采用 **Apache-2.0**。`container-core`、`container-ir` 和 `container-bridge` 保留 **MIT OR Apache-2.0**，第三方组件保留各自许可。新构建携带 `RUNTIME-LICENSE` 和依赖 notices，详见[许可说明](/docs/engineering/weapp-container/docs/licensing/)及 [NOTICE](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/NOTICE)。
+自有源码采用 **Apache-2.0**。`container-core`、`container-ir` 和 `container-bridge` 保留 **MIT OR Apache-2.0**，第三方组件保留各自许可。新构建携带 `RUNTIME-LICENSE` 和依赖 notices，详见[许可说明](/docs/engineering/weapp-container/docs/licensing/)及 [NOTICE](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/NOTICE)。
 
 公开 Git 从整理后的源码快照开始，原开发历史和大型构建证据保存在私有归档。必要回归 fixture 保留在源码中，详见[历史证据说明](/docs/engineering/weapp-container/docs/archived-evidence/)。
 

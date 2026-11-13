@@ -367,8 +367,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/api/capability-defaults.md"
       },
-      "reviewedChineseSummary": "运行时默认能力；尚无逐平台覆盖记录的能力；全部默认值",
-      "reviewedChineseSha256": "ee022589f575483abf119fbc3813bb10a691773bde284b674f1a402bef369471",
+      "reviewedChineseSummary": "运行时默认能力；尚无逐平台覆盖记录的能力；全部默认值；生成器同步 API 来源提交，能力和支持状态不变",
+      "reviewedChineseSha256": "03a706322a804206a2c6fdd19bc5e0d886decbf142ad03aa268238122def91d7",
       "route": "/docs/api/capability-defaults/",
       "legacyHeadingIds": []
     },

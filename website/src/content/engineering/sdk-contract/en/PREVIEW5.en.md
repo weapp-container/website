@@ -6,7 +6,7 @@ summary: "Dev Player protocol additions (preview.5 source). Versioned engineerin
 route: "/docs/engineering/sdk-contract/preview5/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "83df14b0b3595116b8408b0a4b911dc89e89c175"
+sourceCommit: "6d784fb047f20931dc73dbca02a436575a3b4298"
 sourcePath: "PREVIEW5.en.md"
 ---
 

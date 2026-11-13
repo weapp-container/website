@@ -6,7 +6,7 @@ summary: "iOS interaction fixture. Versioned engineering reference from weapp-co
 route: "/docs/engineering/weapp-container/examples/apps/ios-interaction-app/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "examples/apps/ios-interaction-app/README.en.md"
 ---
 

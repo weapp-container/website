@@ -6,7 +6,7 @@ summary: "本地宿主账号与 reference 支付接入。来自 weapp-container/
 route: "/docs/engineering/sdk-android/examples/host-services/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "e50d4dc6f1dd3e180eed574918f50e6484c9fd01"
+sourceCommit: "faf4f55cbcf3fc291afed4b0b14e4568a6ed7581"
 sourcePath: "examples/host-services/README.md"
 ---
 

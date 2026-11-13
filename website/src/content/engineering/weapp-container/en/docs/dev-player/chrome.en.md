@@ -6,7 +6,7 @@ summary: "Mini-program host chrome. Versioned engineering reference from weapp-c
 route: "/docs/engineering/weapp-container/docs/dev-player/chrome/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/dev-player/chrome.en.md"
 ---
 
@@ -113,7 +113,7 @@ result. Unit/widget tests do not execute native UI or GPU presenters. Missing
 devices/windows remain blocked; historical preview.3 runs retain their original
 source bindings and are not upgraded by this interface change.
 
-The [scenario inventory](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/dev-player/chrome-cases-v1.json) fixes 20 scenarios and 97
+The [scenario inventory](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/dev-player/chrome-cases-v1.json) fixes 20 scenarios and 97
 applicable platform cases. Widget/Rust tests are reported separately from these
 actual-window cases. The existing five-platform release gates remain unchanged.
 

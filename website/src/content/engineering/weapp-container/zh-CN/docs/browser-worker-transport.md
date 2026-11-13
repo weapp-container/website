@@ -6,7 +6,7 @@ summary: "浏览器工作程序传输。来自 weapp-container/weapp-container �
 route: "/docs/engineering/weapp-container/docs/browser-worker-transport/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/browser-worker-transport.md"
 ---
 
@@ -17,17 +17,17 @@ sourcePath: "docs/browser-worker-transport.md"
 
 
 此阶段为浏览器 WASM 会话增加了传输和序列化 Worker 所有权。它**不会**将现有页面切换到该传输。
-[`app.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/app.mjs) 仍会在主线程中导入、构造并调用 `WebWasmHost`。仅新的模块本身并不能建立实际的浏览器 Worker 执行、GPU 呈现、响应性或性能验收。这些功能需要单独集成并提供浏览器环境的验证证据。
+[`app.mjs`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/hosts/web-wasm/app.mjs) 仍会在主线程中导入、构造并调用 `WebWasmHost`。仅新的模块本身并不能建立实际的浏览器 Worker 执行、GPU 呈现、响应性或性能验收。这些功能需要单独集成并提供浏览器环境的验证证据。
 
 <a id="ownership-and-execution-boundary"></a>
 ## 所有权和执行边界
 
-- [`worker-session-client.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/worker-session-client.mjs)
+- [`worker-session-client.mjs`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/hosts/web-wasm/worker-session-client.mjs)
   导出 `WorkerRpcClient` 和纯 `measureWorkerPayload` 辅助函数。该客户端通过其工厂创建一个全新的模块 Worker，并在其终止前始终拥有该确切实例。工厂不得将该 Worker 借给其他使用方。
-- [`worker-bridge-transport.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/worker-bridge-transport.mjs)
+- [`worker-bridge-transport.mjs`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/hosts/web-wasm/worker-bridge-transport.mjs)
   导出 `WorkerBridgeTransport`。它将借用的、与会话绑定的 RPC 客户端适配到现有的 DOM 桥接接口，并重用 `SseBridgeTransport` 处理内部请求的相关性、截止时间以及已废弃的 View 候选项清理。它自身不会创建任何运行时或 Worker。
-- [`runtime-worker.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/runtime-worker.mjs) 是 Worker 入口。它导入 WASM 包，并通过 `createWorkerRuntime` 创建一个拥有者。
-- [`worker-runtime.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/worker-runtime.mjs) 验证消息、验证静态包资源、接受有限工作量并序列化 WASM 调用。其消息接收器不会进入 WASM。控制请求、普通工作和定时器共享一条执行通道。
+- [`runtime-worker.mjs`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/hosts/web-wasm/runtime-worker.mjs) 是 Worker 入口。它导入 WASM 包，并通过 `createWorkerRuntime` 创建一个拥有者。
+- [`worker-runtime.mjs`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/hosts/web-wasm/worker-runtime.mjs) 验证消息、验证静态包资源、接受有限工作量并序列化 WASM 调用。其消息接收器不会进入 WASM。控制请求、普通工作和定时器共享一条执行通道。
 
 所有者在首次收到 `load` 或 `close` 请求时，会绑定其纪元和会话。
 加载的会话在该 Worker 内部将永不被替换：另一个应用会话需要一个新的 Worker、纪元和会话 ID。当前所有者需要真实的 QuickJS 提供商；不可用的引擎将明确失败。它没有主线程或 HTTP 运行时的降级方案。
@@ -101,7 +101,7 @@ Worker 事件使用相同的外部身份及其自身的事件请求 ID。
 资源响应会传递一个独立拥有的 `ArrayBuffer`。Worker 在传递前会复制 WASM 字节视图，因此响应永远不会使 WASM 堆脱离。客户端同样只接受调用方拥有的已附加 ArrayBuffer 的传递列表；传递 typed-array 对象或共享内存的操作将被拒绝。
 
 成功 `frame`、`frame.current` 和 `surface.recover` 响应使用
-[`worker-frame-wire.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/worker-frame-wire.mjs) 处理其 `result.frame.images` 表。
+[`worker-frame-wire.mjs`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/hosts/web-wasm/worker-frame-wire.mjs) 处理其 `result.frame.images` 表。
 每个紧密打包、直线RGBA8图像都会被验证，并复制到一个具有独立可传递后端的全新 `Uint8Array` 中。
 源帧及其缓冲区在传输后仍可正常使用。客户端在帧到达适配器之前会验证接收到的尺寸、字节长度和完整后端。
 普通数组和宿主 API 二进制值保留其原有的独立验证和预算。

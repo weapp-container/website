@@ -6,7 +6,7 @@ summary: "Public preview release 0.1.0-preview.7.0. Versioned engineering refere
 route: "/docs/engineering/sdk-desktop/public-release/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "0969958a40bbc43c7b4f6559a26eaab8157b6986"
+sourceCommit: "fc9ecb66d70dddfb697d386f85a529526fee4ce0"
 sourcePath: "PUBLIC-RELEASE.en.md"
 ---
 
@@ -39,3 +39,6 @@ Verify every archive SHA-256/size, architecture, dynamic dependency and license.
 ## Desktop commands
 
 Package each verified installation using `node tools/package-release.mjs --sdk <installation> --out <fresh-directory>`. On the same clean SDK commit, merge all three `release.json` paths with `--merge <comma-separated-paths> --out <fresh-directory>`. This generates `WeappContainerDesktop.podspec` from the actual macOS URL and hash. `--verify` checks local bytes; `--publish` verifies remote digests before publishing a prerelease.
+
+
+The publish workflow accepts only a successful finalized artifact from its exact checkout commit. For iOS, run `finalize-public.yml` after the archive pins have been reviewed and committed, using the original successful `build-public.yml` run ID. Desktop `build-public.yml` merges its three successful platform jobs into `finalized-public-release` automatically, including the hash-pinned macOS Podspec. The finalizer and publisher reuse the original archive bytes.

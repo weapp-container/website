@@ -6,7 +6,7 @@ summary: "Maintaining bilingual documentation. Versioned engineering reference f
 route: "/docs/engineering/sdk-react-native/tools/documentation/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "fbc2a1ffe171ea07e109d454a66f208a847a6aef"
+sourceCommit: "96cc6abe36f4142f6f93efb628f084750a5b16ac"
 sourcePath: "tools/documentation/README.en.md"
 ---
 

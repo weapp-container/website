@@ -6,7 +6,7 @@ summary: "Canvas stroke 状态与页面绘制。来自 weapp-container/weapp-con
 route: "/docs/engineering/weapp-container/docs/host-services/canvas-owned-stroke-scope/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/host-services/canvas-owned-stroke-scope.md"
 ---
 

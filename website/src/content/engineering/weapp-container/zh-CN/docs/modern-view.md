@@ -6,7 +6,7 @@ summary: "现代 JS/TS View。来自 weapp-container/weapp-container 的版本�
 route: "/docs/engineering/weapp-container/docs/modern-view/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/modern-view.md"
 ---
 
@@ -37,7 +37,7 @@ cargo run -p container-simulator --features quickjs-native -- \
 双面板使用 `--surface both`。V8 使用 `--features v8-native` 和 `--engine v8`。
 未编入所选原生引擎时明确失败，不回退。
 
-[示例](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/apps/modern-view-app)包含 TS、ESM 共享依赖、解构、可选链、
+[示例](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/apps/modern-view-app)包含 TS、ESM 共享依赖、解构、可选链、
 private fields、Map/Set、generator、enum、转为字符串的 BigInt，以及旧 WXS 子组件。
 编辑 `view/format.view.ts` 可以触发现代源码单独更新。现代可执行程序变化会重启会话，
 编译失败保留最近成功的 generation，并显示诊断。
@@ -164,7 +164,7 @@ pnpm modern:view:perf --samples 1000 --out-dir artifacts/modern-view-performance
 <a id="ci-special-verification"></a>
 ## CI 专项验证
 
-[`modern-view` workflow](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/.github/workflows/modern-view.yml) 与 `container-ci` 都只接受
+[`modern-view` workflow](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/.github/workflows/modern-view.yml) 与 `container-ci` 都只接受
 手动运行，push/PR 不会触发。进入仓库的 **Actions → modern-view → Run workflow**，
 选择分支与 `suite`：`browser`（默认）执行开发态构建和浏览器回归，`performance` 只执行
 release 相对性能，`full` 同时执行两组。`suite` 取代旧的 `performance` 布尔输入。

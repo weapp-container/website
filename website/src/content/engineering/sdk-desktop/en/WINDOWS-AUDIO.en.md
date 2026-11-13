@@ -6,7 +6,7 @@ summary: "Windows InnerAudioContext source implementation. Versioned engineering
 route: "/docs/engineering/sdk-desktop/windows-audio/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "0969958a40bbc43c7b4f6559a26eaab8157b6986"
+sourceCommit: "fc9ecb66d70dddfb697d386f85a529526fee4ce0"
 sourcePath: "WINDOWS-AUDIO.en.md"
 ---
 

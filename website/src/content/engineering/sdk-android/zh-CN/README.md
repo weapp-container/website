@@ -6,7 +6,7 @@ summary: "Weapp Container Android SDK。来自 weapp-container/sdk-android 的�
 route: "/docs/engineering/sdk-android/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "e50d4dc6f1dd3e180eed574918f50e6484c9fd01"
+sourceCommit: "faf4f55cbcf3fc291afed4b0b14e4568a6ed7581"
 sourcePath: "README.md"
 ---
 
@@ -17,7 +17,7 @@ sourcePath: "README.md"
 <a id="public-distribution-candidate-preview7"></a>
 ## 公开发行候选：preview.7
 
-下列安装示例描述 preview.7 发行候选，使用前须确认对应注册源或 Release 已提供该版本；源码公开不代表包已发布或设备验收完成。本文后续源码构建示例使用下面固定的 preview.6 checkout。当前核心构建器仍输出 preview.6，不要将该运行库与 preview.7 包装层混用。
+当前核心构建器与本页源码示例均使用 preview.7。核心运行库、iOS、Desktop 及公开 CocoaPods Specs 已提供下载；npm、Maven Central 和 pub.dev 尚未全部发布。使用安装命令前先核对[发布状态](/docs/engineering/weapp-container/docs/public-sdk-release/)，不要混用不同版本的包装层与运行库。源码公开、包发布、编译通过和设备验收分别记录。
 
 首次公开发布正在准备；安装命令须在对应注册源出现本版本后使用。历史私有归档及其锁文件保持原样。
 
@@ -36,7 +36,7 @@ AAR 包含 JNI 接入层、两种 ABI 的运行库和第三方许可。普通应
 ```sh
 git clone https://github.com/weapp-container/sdk-android.git sdk-android-source
 cd sdk-android-source
-git checkout be2a7c6085bbf2562f0a351855c69ee5167b3770
+git checkout ca8c21a4d4a075b7180761875287bf9c7abaee53
 ```
 
 
@@ -45,7 +45,7 @@ git checkout be2a7c6085bbf2562f0a351855c69ee5167b3770
 
 在 Android 应用中嵌入小程序页面。SDK 提供 Kotlin 会话、原生 `TextureView`、宿主消息通道和本地持久化，使用 QuickJS 执行 JavaScript、Skia GLES 渲染页面。
 
-已复核源码示例版本：**0.1.0-preview.6.0**。SDK 封装源码采用 [Apache-2.0](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/LICENSE)；运行时源码在主仓库按 Apache-2.0 提供。本仓库包含 SDK 包装层源码，运行库单独构建或安装。
+已复核源码示例版本：**0.1.0-preview.7.0**。SDK 封装源码采用 [Apache-2.0](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/LICENSE)；运行时源码在主仓库按 Apache-2.0 提供。本仓库包含 SDK 包装层源码，运行库单独构建或安装。
 
 <a id="start-from-source-code"></a>
 ## 从当前源码开始
@@ -116,7 +116,7 @@ android {
     }
 }
 dependencies {
-    implementation("com.sonofmagic.weapp:weapp-container-android:0.1.0-preview.6.0")
+    implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.0")
 }
 ```
 
@@ -164,7 +164,7 @@ session.navigate("pages/detail/index", JSONObject().put("id", "42"))
 session.back()
 ```
 
-小程序侧使用 `weappContainer.invoke` 调用宿主方法，使用 `postMessage` / `onMessage` 交换消息，类型见 [weapp-container.d.ts](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/types/weapp-container.d.ts)。宿主方法应在首次 `load` 前注册。异步任务通过 `call.onCancel` 取消，使用 `reply.resolve` / `reply.reject` 完成；已取消或旧会话的回复不会影响新实例。
+小程序侧使用 `weappContainer.invoke` 调用宿主方法，使用 `postMessage` / `onMessage` 交换消息，类型见 [weapp-container.d.ts](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/types/weapp-container.d.ts)。宿主方法应在首次 `load` 前注册。异步任务通过 `call.onCancel` 取消，使用 `reply.resolve` / `reply.reject` 完成；已取消或旧会话的回复不会影响新实例。
 
 <a id="5-lifecycle-and-storage"></a>
 ## 5. 生命周期与存储
@@ -197,7 +197,7 @@ node tools/device-smoke.mjs --serial YOUR_ALREADY_RUNNING_TARGET
 - [宿主服务：设备能力、身份、支付与权限](/docs/engineering/sdk-android/host-services/)
 - [宿主服务接入示例](/docs/engineering/sdk-android/examples/host-services/index/)
 - [跨端会话契约](/docs/engineering/sdk-android/contract/)
-- [源文件清单](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/SOURCE-INVENTORY.json) 与 [历史导出记录](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/ORIGIN.json)
+- [源文件清单](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/SOURCE-INVENTORY.json) 与 [历史导出记录](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/ORIGIN.json)
 
 运行能力取决于配套运行库及其分发策略；`restricted-showcase` 只允许编译时授权的演示包与 API，不能通过宿主配置重新开启禁用能力。原生输入法、无障碍与复杂手势的支持范围见嵌入文档。分发应用时保留 SDK `LICENSE`、运行库 `RUNTIME-LICENSE` 和第三方声明。
 
@@ -206,7 +206,7 @@ node tools/device-smoke.mjs --serial YOUR_ALREADY_RUNNING_TARGET
 
 历史发行审计（2026-11-12）：两个默认 runtime pin 均与旧仓库当前同名资产不符，默认在线准备会被完整性校验拒绝。请从匹配的干净源码构建，或通过 `--manifest` 显式选取独立审核过的配套清单；不要仅修改旧哈希。[差异与迁移记录](/docs/engineering/weapp-container/docs/runtime-artifacts-migration/)。
 
-运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
+运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
 
 核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。
 
@@ -217,7 +217,7 @@ node tools/device-smoke.mjs --serial YOUR_ALREADY_RUNNING_TARGET
 ```sh
 git clone https://github.com/weapp-container/sdk-android.git
 cd sdk-android
-git checkout be2a7c6085bbf2562f0a351855c69ee5167b3770
+git checkout ca8c21a4d4a075b7180761875287bf9c7abaee53
 ```
 
 获得运行库访问授权后，通过凭据环境提供 `WEAPP_CONTAINER_RUNTIME_TOKEN`，权限限定为私有产物仓库的 **Contents: read**。不要把凭据写进源码或命令参数。
@@ -232,7 +232,7 @@ node tools/prepare-runtime.mjs
 node tools/prepare-runtime.mjs --artifact-dir /absolute/runtime-archives
 ```
 
-工具按 [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-android/blob/e50d4dc6f1dd3e180eed574918f50e6484c9fd01/runtime-artifacts.lock.json) 校验 **0.1.0-preview.6.0**、ABI 1、架构、大小和 SHA-256，安装到 `.runtime/install/native` 和 `.runtime/install/licenses`。缺少归档、无下载权限或校验不符时会失败；已有安装在失败时保留。锁文件中的 pin 不代表运行库可公开下载。
+工具按 [当前公开锁](https://github.com/weapp-container/sdk-android/blob/faf4f55cbcf3fc291afed4b0b14e4568a6ed7581/runtime-artifacts.0.1.0-preview.7.0.lock.json) 校验 **0.1.0-preview.7.0**、ABI 1、架构、大小和 SHA-256，安装到 `.runtime/install/native` 和 `.runtime/install/licenses`。缺少归档、无下载权限或校验不符时会失败；已有安装在失败时保留。锁文件中的 pin 不代表运行库可公开下载。
 
 自定义归档清单使用 `--manifest /absolute/reviewed-lock.json`。慢速网络可通过 `WEAPP_CONTAINER_RUNTIME_TIMEOUT_MS` 调整下载超时，范围为 `1`–`3600000` 毫秒，默认 15 分钟。
 

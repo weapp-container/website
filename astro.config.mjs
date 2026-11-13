@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import {frontendNoticesPlugin} from './tools/frontend-notices.mjs';
-import {documentationCodeBlocks, documentationLinks} from './tools/markdown-documentation.mjs';
+import {documentationCodeBlocks, documentationCodeLanguages, documentationLinks} from './tools/markdown-documentation.mjs';
 import {unified} from '@astrojs/markdown-remark';
 
 export default defineConfig({
@@ -13,7 +13,7 @@ export default defineConfig({
   trailingSlash: 'always',
   markdown: {
     shikiConfig: {themes: {light: 'github-light', dark: 'github-dark'}, defaultColor: false},
-    processor: unified({remarkPlugins: [documentationLinks], rehypePlugins: [documentationCodeBlocks]}),
+    processor: unified({remarkPlugins: [documentationLinks, documentationCodeLanguages], rehypePlugins: [documentationCodeBlocks]}),
   },
   vite: {
     plugins: [frontendNoticesPlugin()],

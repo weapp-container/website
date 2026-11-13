@@ -6,7 +6,7 @@ summary: "从公开源码构建 SDK。来自 weapp-container/weapp-container 的
 route: "/docs/engineering/weapp-container/docs/sdk-source-build/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/sdk-source-build.md"
 ---
 
@@ -15,7 +15,7 @@ sourcePath: "docs/sdk-source-build.md"
 
 **简体中文** · [English](/en/docs/engineering/weapp-container/docs/sdk-source-build/)
 
-本页使用核心仓库固定的子模块组合。当前核心构建器输出 preview.6，匹配的 SDK 源码也固定在 preview.6。SDK 主分支另有 preview.7 公开发行候选；它们需要匹配的 preview.7 运行库，不能仅更新子模块后直接复用本页构建产物。发行候选的注册源可用性与设备验收以各 SDK README 和实际发布记录为准。
+本页使用核心仓库固定的 preview.7 子模块与构建器组合。公开运行库、iOS 和 Desktop 已发布，其他注册源状态见[发行记录](/docs/engineering/weapp-container/docs/public-sdk-release/)。源码构建与已发布归档保留各自提交身份，不能将新源码构建的收据绑定到历史二进制；始终使用相同版本和 ABI。
 
 
 本页面向首次接入和维护 SDK 的开发者。当前源码可公开获取，不需要历史二进制仓库的凭据。源码构建、离线打包和真实设备验收是三个独立步骤；完成构建不会提升平台验收等级。

@@ -6,7 +6,7 @@ summary: "Worker presenter transactions (explicit 1.0 opt-in). Versioned enginee
 route: "/docs/engineering/weapp-container/docs/worker-presenter-transactions/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/worker-presenter-transactions.en.md"
 ---
 
@@ -52,7 +52,7 @@ preflight before `app.init`. Mixed-owner input-causal timing is not negotiated.
 Initial DOM uses browser density; supplying physical render scale to a DOM
 startup remains an explicit error.
 
-The [three-route static example](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/scripts/fixtures/worker-dual-renderer/README.md)
+The [three-route static example](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/scripts/fixtures/worker-dual-renderer/README.md)
 provides pack/build commands and a real-browser consumer. It uses hand-authored
 public input to the real packer; it does not claim a `weapp-vite` compiler run.
 Serve the generated site on an unused localhost port. Runtime readiness is

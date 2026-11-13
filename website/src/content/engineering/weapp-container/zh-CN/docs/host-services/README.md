@@ -6,7 +6,7 @@ summary: "宿主能力协议与验收台账。来自 weapp-container/weapp-conta
 route: "/docs/engineering/weapp-container/docs/host-services/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/host-services/README.md"
 ---
 
@@ -19,14 +19,14 @@ sourcePath: "docs/host-services/README.md"
 语义基线固定为微信基础库 **3.17.3**，类型输入固定为
 `miniprogram-api-typings@5.2.3`。清单记录每份输入声明的 SHA-256，不从在线最新版
 推导兼容范围。`scripts/generate-host-api-catalog.mjs` 生成 runtime 使用的
-[`host-api-catalog.json`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/crates/container-runtime/src/host-api-catalog.json)：
+[`host-api-catalog.json`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/crates/container-runtime/src/host-api-catalog.json)：
 495 个 `wx` 全局方法、756 个 Task/Context/对象成员、6 个容器扩展、8 个原生组件
 或组件授权入口，共 1265 项。`cloud`、`env`、`router`、`worklet` 四个非函数全局
 属性单独列入 `globalProperties`，不会伪装成可注册的函数。`env.USER_DATA_PATH`
 属于运行时受管路径；宿主用户身份不进入 `getAccountInfoSync`。
 
-全量七端台账见 [`api-matrix.csv`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/host-services/api-matrix.csv) 与
-[`api-matrix.json`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/host-services/api-matrix.json)，每项均有七个平台单元格。生成命令：
+全量七端台账见 [`api-matrix.csv`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/api-matrix.csv) 与
+[`api-matrix.json`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/api-matrix.json)，每项均有七个平台单元格。生成命令：
 
 ```sh
 node scripts/generate-host-api-catalog.mjs /absolute/path/to/miniprogram-api-typings
@@ -41,7 +41,7 @@ node scripts/generate-host-services-matrix.mjs --check
 条目，不能解释为“代码已全部完成，只差设备”。`implementedAndAccepted` 必须有
 对应版本的真实环境证据；`platformNotApplicable` 必须有平台限制依据，不能用于
 掩盖实现缺失。生成器不会自动把源码或测试成功升级为设备验收；已有明确官方
-平台依据的限制记录在 [platform-constraints.json](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/host-services/platform-constraints.json)，
+平台依据的限制记录在 [platform-constraints.json](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/platform-constraints.json)，
 逐项进入矩阵。部分参数不可用时保留独立的 `parameterLimit`，不把整个 API 判为不适用。
 
 来源身份的复核方式见 [API 来源审定](/docs/engineering/weapp-container/docs/host-services/source-review/)。原始构建日志保存在
@@ -51,7 +51,7 @@ node scripts/generate-host-services-matrix.mjs --check
 
 矩阵 v2 保留 `owner` 的注册与安全边界，新增独立的 `responsibility`，按运行时、
 设备适配器、宿主业务服务及微信生态服务清点全部 1265 项。
-[`api-responsibilities.json`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/host-services/api-responsibilities.json) 用固定名称摘要校验完整性，
+[`api-responsibilities.json`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/api-responsibilities.json) 用固定名称摘要校验完整性，
 不会因为工作归属改变运行时允许宿主注册的范围。
 `implementationState` 独立记录 `missing`、`partial`、`available` 或
 `requiresHostService`。核心实现、JS facade、同步桥、受保护边界和平台数据来源
@@ -70,8 +70,8 @@ node scripts/generate-host-services-matrix.mjs --check
 不能用请求发起时的旧尺寸覆盖已发生的 resize。源码可用状态不表示所有 SDK 已传入
 观测，也不替代七端验收。
 
-验收由 [`acceptance-contracts.json`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/host-services/acceptance-contracts.json) 声明逐项审查的
-参数、平台条件及 SDK/引擎范围，再由 [`acceptance-ledger.json`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/host-services/acceptance-ledger.json)
+验收由 [`acceptance-contracts.json`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/acceptance-contracts.json) 声明逐项审查的
+参数、平台条件及 SDK/引擎范围，再由 [`acceptance-ledger.json`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/acceptance-ledger.json)
 引用绑定源码、产物、日志与清理记录的报告。生成器验证这些证据后才允许升级状态，
 不从旧构建记录自动导入验收结果。历史台账曾记录 Web Base64 链路，以及 `wx.canIUse`、`wx.getWindowInfo`、
 `wx.getSystemSetting`、`wx.getAppBaseInfo`、`wx.getDeviceInfo` 的有限参数范围；这些原始证据未随公开源码分发，当前台账不保留其已验收评级。真实 SDK、硬件和商户证据仍需分别提供。格式和检查规则见
@@ -127,9 +127,9 @@ Web 二进制存储具备 owner 作用域、引用计数、过期、传出失效
 <a id="web-access"></a>
 ## Web 接入
 
-[`BrowserHostServices`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/browser-host-services.mjs)
+[`BrowserHostServices`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/hosts/web-wasm/browser-host-services.mjs)
 实现浏览器设备边界；
-[`loadBrowserHostServices`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/worker-host-services.mjs)
+[`loadBrowserHostServices`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/hosts/web-wasm/worker-host-services.mjs)
 在 Worker 的 `app.init` 之前安装配置，并通过现有 owner 观察通道送回完成和事件。
 它借用 `WorkerWebSession`，不会自行创建浏览器、标签页或第二个 Worker。
 

@@ -6,7 +6,7 @@ summary: "十组通知的私有回调与清理范围。来自 weapp-container/we
 route: "/docs/engineering/weapp-container/docs/host-services/finite-notification-cleanup-scope/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/host-services/finite-notification-cleanup-scope.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "Weapp 容器桌面 SDK。来自 weapp-container/sdk-desktop 的版本�
 route: "/docs/engineering/sdk-desktop/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "0969958a40bbc43c7b4f6559a26eaab8157b6986"
+sourceCommit: "fc9ecb66d70dddfb697d386f85a529526fee4ce0"
 sourcePath: "README.md"
 ---
 
@@ -18,7 +18,7 @@ sourcePath: "README.md"
 <a id="public-distribution-candidate-preview7"></a>
 ## 公开发行候选：preview.7
 
-下列安装示例描述 preview.7 发行候选，使用前须确认对应注册源或 Release 已提供该版本；源码公开不代表包已发布或设备验收完成。本文后续源码构建示例使用下面固定的 preview.6 checkout。当前核心构建器仍输出 preview.6，不要将该运行库与 preview.7 包装层混用。
+当前核心构建器与本页源码示例均使用 preview.7。核心运行库、iOS、Desktop 及公开 CocoaPods Specs 已提供下载；npm、Maven Central 和 pub.dev 尚未全部发布。使用安装命令前先核对[发布状态](/docs/engineering/weapp-container/docs/public-sdk-release/)，不要混用不同版本的包装层与运行库。源码公开、包发布、编译通过和设备验收分别记录。
 
 首次公开发布正在准备；安装命令须在对应注册源出现本版本后使用。历史私有归档及其锁文件保持原样。
 
@@ -36,7 +36,7 @@ sourcePath: "README.md"
 ```sh
 git clone https://github.com/weapp-container/sdk-desktop.git sdk-desktop-source
 cd sdk-desktop-source
-git checkout c27a715b06367957a24af0a91c969a1abec5627e
+git checkout 8bcd081a1a08410bc761f58a54b9747cbab89743
 ```
 
 
@@ -45,7 +45,7 @@ git checkout c27a715b06367957a24af0a91c969a1abec5627e
 
 在现有 macOS、Windows 或 Linux 应用中嵌入小程序。SDK 提供 C/C++ 的会话、原生视图、消息和生命周期接口，由宿主管理窗口及主事件循环。
 
-已复核源码示例版本：`0.1.0-preview.6.0`，C ABI：`1`。本仓库以 Apache-2.0 开源宿主封装、构建工具和消费示例；新构建的运行库采用 Apache-2.0，使用时需要保留其 `RUNTIME-LICENSE` 和第三方声明。
+已复核源码示例版本：`0.1.0-preview.7.0`，C ABI：`1`。本仓库以 Apache-2.0 开源宿主封装、构建工具和消费示例；新构建的运行库采用 Apache-2.0，使用时需要保留其 `RUNTIME-LICENSE` 和第三方声明。
 
 <a id="start-from-source-code"></a>
 ## 从当前源码开始
@@ -77,7 +77,7 @@ node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```sh
 git clone https://github.com/weapp-container/sdk-desktop.git
 cd sdk-desktop
-git checkout c27a715b06367957a24af0a91c969a1abec5627e
+git checkout 8bcd081a1a08410bc761f58a54b9747cbab89743
 ```
 
 <a id="obtain-runtime-and-build"></a>
@@ -203,7 +203,7 @@ npm test
 - [账号、身份与支付宿主服务](/docs/engineering/sdk-desktop/account-services/)
 - [Windows 传感器](/docs/engineering/sdk-desktop/windows-sensors/) · [Windows 音频](/docs/engineering/sdk-desktop/windows-audio/)
 - [共享适配协议](/docs/engineering/sdk-desktop/contract/) · [SDK 合约仓库](/docs/engineering/sdk-contract/index/)
-- [源码许可证](https://github.com/weapp-container/sdk-desktop/blob/0969958a40bbc43c7b4f6559a26eaab8157b6986/LICENSE) · [原始提取记录](https://github.com/weapp-container/sdk-desktop/blob/0969958a40bbc43c7b4f6559a26eaab8157b6986/ORIGIN.json) · [当前源码清单](https://github.com/weapp-container/sdk-desktop/blob/0969958a40bbc43c7b4f6559a26eaab8157b6986/SOURCE-INVENTORY.json)
+- [源码许可证](https://github.com/weapp-container/sdk-desktop/blob/fc9ecb66d70dddfb697d386f85a529526fee4ce0/LICENSE) · [原始提取记录](https://github.com/weapp-container/sdk-desktop/blob/fc9ecb66d70dddfb697d386f85a529526fee4ce0/ORIGIN.json) · [当前源码清单](https://github.com/weapp-container/sdk-desktop/blob/fc9ecb66d70dddfb697d386f85a529526fee4ce0/SOURCE-INVENTORY.json)
 
 构建工具会校验源码清单。修改 SDK 源码后须按 `tools/source-inventory.mjs` 的审核流程更新清单，历史 `ORIGIN.json` 保留原样。各平台实际构建与运行范围以对应产物的验证记录为准。
 
@@ -212,7 +212,7 @@ npm test
 
 历史发行审计（2026-11-12）：默认锁中的 SDK 归档部分缺失，runtime pin 与当前同名资产不符，默认在线准备会被完整性校验拒绝。请从匹配的干净源码构建，或通过 `--manifest` 显式选取独立审核过的配套清单；不要仅修改旧哈希。[差异与迁移记录](/docs/engineering/weapp-container/docs/runtime-artifacts-migration/)。
 
-运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
+运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
 
 核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。
 
@@ -221,7 +221,7 @@ npm test
 
 历史安装命令（不作为首次接入默认路径）：
 
-准备脚本按 [runtime-artifacts.lock.json](https://github.com/weapp-container/sdk-desktop/blob/0969958a40bbc43c7b4f6559a26eaab8157b6986/runtime-artifacts.lock.json) 校验版本、ABI、大小和 SHA-256。当前锁文件包含 preview.6.0 的 macOS 与 Linux 运行库，尚无 Windows 运行库条目；Windows 源码可供接入，默认准备流程会因缺少对应条目而失败。
+准备脚本按 [当前公开锁](https://github.com/weapp-container/sdk-desktop/blob/fc9ecb66d70dddfb697d386f85a529526fee4ce0/runtime-artifacts.0.1.0-preview.7.0.lock.json) 校验 preview.7.0、ABI、大小和 SHA-256，包含 macOS、Linux 和 Windows 的运行库与 SDK。旧 `runtime-artifacts.lock.json` 仅作历史兼容保留；不将它用于当前源码构建。公开归档的头文件版本宏限制见下方勘误。
 
 获得运行库下载授权后，通过密钥管理器或 CI secret 注入 `WEAPP_CONTAINER_RUNTIME_TOKEN`，再执行：
 
@@ -248,3 +248,9 @@ node tools/prepare-runtime.mjs \
 离线输入仍执行相同校验。可用 `--manifest /absolute/reviewed-lock.json` 指定另一份已审核的锁文件；SDK 源码与运行库版本必须匹配，缺少条目或校验失败不会回退到旧版本。
 
 目标可选 `macos-universal`、`macos-arm64`、`macos-x64`、`windows-x64`、`linux-x64`，须在对应系统构建。产物默认位于 `artifacts/desktop/TARGET`。`--verify` 会运行安装后的独立消费程序，需要可用的桌面显示环境；不传该选项只构建、链接，不代表界面运行通过。
+
+
+<a id="published-preview-erratum"></a>
+## 已发布预览版勘误
+
+不可变的 `0.1.0-preview.7.0` 归档中，C 头文件宏 `WEAPP_DESKTOP_VERSION` 仍为 `0.1.0-preview.6.0`。归档元数据和链接的运行库为 `0.1.0-preview.7.0`，ABI 1。当前源码已修正并检查版本协调；已有归档、标签和哈希保持原样，分发修正头文件须使用新版本。macOS、Linux 和 Windows 的公开归档消费者已通过。

@@ -3,6 +3,17 @@ import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
+// Rustdoc fence attributes describe test behavior, not a Shiki language.
+export function documentationCodeLanguages() {
+  return tree => {
+    const visit = node => {
+      if (node.type === 'code' && node.lang?.startsWith('rust,')) node.lang = 'rust';
+      node.children?.forEach(visit);
+    };
+    visit(tree);
+  };
+}
+
 // Repository language links are relative Markdown paths; published links use
 // the catalog's stable page routes, including the target language prefix.
 export function documentationLinks({catalog = JSON.parse(readFileSync(resolve(root, 'documentation.json'), 'utf8'))} = {}) {

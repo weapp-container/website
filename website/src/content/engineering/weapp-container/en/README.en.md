@@ -6,7 +6,7 @@ summary: "Weapp Container. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/weapp-container/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "README.en.md"
 ---
 
@@ -26,6 +26,8 @@ Embed mini-programs in your own applications. Weapp Container provides a Rust ru
 Start with a native mini-program directory or an existing framework build. Integration does not require weapp-vite. The packer produces a verified manifest, IR, and content-addressed resources; the runtime manages JavaScript execution, pages, navigation, storage, and host messaging. QuickJS is the primary engine. V8, Skia, and browser presentation paths depend on the selected configuration and host capabilities.
 
 The project is in **preview**. Source is public and can be built locally. Build, installation, runtime, and acceptance results are recorded separately for each platform; complete WeChat compatibility is not claimed. Read the [capability matrix](/en/docs/engineering/weapp-container/docs/capability-matrix/), [platform status](https://container.weapp.dev/en/docs/platforms/), and [validation methodology](/en/docs/engineering/weapp-container/docs/conformance/index/) before choosing a target.
+
+Core runtime, iOS, Desktop and CocoaPods Specs downloads for `0.1.0-preview.7.0` are public. npm, Maven Central and pub.dev publication is incomplete; see the [release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/) for installation commands, validation scope and blockers.
 
 <a id="选择你的入口"></a>
 ## Choose a starting point
@@ -109,7 +111,7 @@ Baseline PR checks use public dependencies. The full platform matrix, official d
 <a id="许可与历史"></a>
 ## License and history
 
-Repository-authored source uses **Apache-2.0**. `container-core`, `container-ir`, and `container-bridge` retain **MIT OR Apache-2.0**; third-party components retain their own licenses. New builds include `RUNTIME-LICENSE` and dependency notices. See [licensing](/en/docs/engineering/weapp-container/docs/licensing/) and [NOTICE](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/NOTICE).
+Repository-authored source uses **Apache-2.0**. `container-core`, `container-ir`, and `container-bridge` retain **MIT OR Apache-2.0**; third-party components retain their own licenses. New builds include `RUNTIME-LICENSE` and dependency notices. See [licensing](/en/docs/engineering/weapp-container/docs/licensing/) and [NOTICE](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/NOTICE).
 
 Public Git history starts from a prepared source snapshot. Earlier development history and large build records remain in private archives. Necessary regression fixtures stay in source; see [archived evidence](/en/docs/engineering/weapp-container/docs/archived-evidence/).
 

@@ -6,7 +6,7 @@ summary: "公开预览发行 0.1.0-preview.7.0。来自 weapp-container/sdk-reac
 route: "/docs/engineering/sdk-react-native/public-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "fbc2a1ffe171ea07e109d454a66f208a847a6aef"
+sourceCommit: "96cc6abe36f4142f6f93efb628f084750a5b16ac"
 sourcePath: "PUBLIC-RELEASE.md"
 ---
 

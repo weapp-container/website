@@ -6,7 +6,7 @@ summary: "会话滚动。来自 weapp-container/weapp-container 的版本化工�
 route: "/docs/engineering/weapp-container/docs/scrolling/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/scrolling.md"
 ---
 
@@ -29,7 +29,7 @@ sourcePath: "docs/scrolling.md"
 正向增量会增加滚动偏移量。坐标和像素增量使用渲染帧的逻辑坐标。数值模式 `0`、`1`、`2` 表示像素、行和页；字符串 `pixel`、`line`、`page` 形式也受支持。宿主应规范化自身的滚轮约定。Web 适配器在批处理前会将 CSS 像素、16 像素的行和视口大小的页进行转换。桌面适配器会转换 winit 的符号。可识别的触摸接触点会保留其捕获的路径。可用的移动量从命中容器向其滚动祖先消耗；接受的状态驱动滚动回调和观察器测量。
 
 inspectors、`/embed` 和独立 Web 包装器共享
-[`surface-input.mjs`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/hosts/web-wasm/surface-input.mjs)。它序列化桥接批次，保留滚轮事件的顺序，丢弃被替换会话的待处理输入，并在销毁时释放其监听器/捕获/RAF。触摸拖动不会合成点击。浏览器缩放手势保持其正常的宿主行为。
+[`surface-input.mjs`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/hosts/web-wasm/surface-input.mjs)。它序列化桥接批次，保留滚轮事件的顺序，丢弃被替换会话的待处理输入，并在销毁时释放其监听器/捕获/RAF。触摸拖动不会合成点击。浏览器缩放手势保持其正常的宿主行为。
 
 `wx.pageScrollTo` 现在需要一个活动页面以及该页面已验收的帧。
 立即滚动使用 `duration: 0`；正数 duration 返回 `ERR_UNSUPPORTED_CAPABILITY`。缺少帧返回 `ERR_RENDER`。取消和截止检查在变更之前进行。独立的沙箱提供者在没有移动像素的情况下不会记录成功滚动，而是返回不支持。
@@ -42,7 +42,7 @@ inspectors、`/embed` 和独立 Web 包装器共享
 遗留的 WXSS IR v1 将导入规则与本地规则分开存储，并丢失了它们的原始位置和嵌套上下文。其导入规则仍会在该文件规则之前展开；从嵌套 at-规则中提升的导入无法恢复其原始条件。v1 兼容性并不能证明重构了源语义。
 [WXSS 合约](/docs/engineering/weapp-container/docs/wxss-ir/) 记录了支持的媒体特性、未知查询行为、仅元数据字体/关键帧处理以及剩余的解析器缺陷。
 
-源示例为 [`scroll-contract-app`](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/examples/apps/scroll-contract-app)。
+源示例为 [`scroll-contract-app`](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/examples/apps/scroll-contract-app)。
 通过以下命令交互运行它：
 
 ```sh

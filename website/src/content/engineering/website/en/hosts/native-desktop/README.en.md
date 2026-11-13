@@ -6,7 +6,7 @@ summary: "C++ native hosts. Versioned engineering reference from weapp-container
 route: "/docs/engineering/website/hosts/native-desktop/index/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "43c9a0c31d57a75930742fe63c50e17045c3a206"
+sourceCommit: "c487eff31a98ca75905b66676909cde218e9fb42"
 sourcePath: "hosts/native-desktop/README.en.md"
 ---
 

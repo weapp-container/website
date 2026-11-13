@@ -6,7 +6,7 @@ summary: "Flutter 桌面原生支持。来自 weapp-container/sdk-flutter 的版
 route: "/docs/engineering/sdk-flutter/native_desktop/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60"
+sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
 sourcePath: "native_desktop/README.md"
 ---
 
@@ -15,7 +15,7 @@ sourcePath: "native_desktop/README.md"
 
 **简体中文** · [English](/en/docs/engineering/sdk-flutter/native_desktop/index/)
 
-当前主分支准备 preview.7 公开发行；只有对应版本在注册源发布后才使用公开安装入口。安装、平台要求与状态见 [SDK 首页](/docs/engineering/sdk-flutter/index/)。下方保留固定 preview.6 源码的详细说明；该版本须从 SDK 首页给出的精确提交 checkout 构建，不与 preview.7 运行库混用。
+当前主分支准备 preview.7 公开发行；只有对应版本在注册源发布后才使用公开安装入口。安装、平台要求与状态见 [SDK 首页](/docs/engineering/sdk-flutter/index/)。下方源码说明使用 preview.7；从 SDK 首页给出的精确提交构建，并使用同版本运行库。旧锁只用于历史兼容，当前准备工具默认读取版本化的 preview.7 公开锁。
 
 
 三个桌面实现共享此引擎管理的注册表。平台线程独占运行时句柄；光栅回调接收不可变的帧租用（Windows/Linux）或完成的 IOSurface 像素缓冲区（macOS Metal）。像素永远不会通过 Flutter 方法通道传输。

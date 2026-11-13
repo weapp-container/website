@@ -6,7 +6,7 @@ summary: "SDK 合约 v1。来自 weapp-container/sdk-contract 的版本化工程
 route: "/docs/engineering/sdk-contract/contract/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "83df14b0b3595116b8408b0a4b911dc89e89c175"
+sourceCommit: "6d784fb047f20931dc73dbca02a436575a3b4298"
 sourcePath: "CONTRACT.md"
 ---
 

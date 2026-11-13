@@ -6,7 +6,7 @@ summary: "公开预览发行 0.1.0-preview.7.0。来自 weapp-container/sdk-desk
 route: "/docs/engineering/sdk-desktop/public-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "0969958a40bbc43c7b4f6559a26eaab8157b6986"
+sourceCommit: "fc9ecb66d70dddfb697d386f85a529526fee4ce0"
 sourcePath: "PUBLIC-RELEASE.md"
 ---
 
@@ -39,3 +39,6 @@ sourcePath: "PUBLIC-RELEASE.md"
 ## Desktop 命令
 
 使用 `node tools/package-release.mjs --sdk <installation> --out <fresh-directory>` 打包每个已验证安装。在同一干净 SDK 提交上，通过 `--merge <comma-separated-paths> --out <fresh-directory>` 合并三个 `release.json` 路径，根据实际 macOS URL/哈希生成 `WeappContainerDesktop.podspec`。`--verify` 检查本地字节；`--publish` 在发布 prerelease 前验证远程 digest。
+
+
+发布工作流只接受与当前 checkout 提交完全一致且成功完成 finalize 的产物。iOS 在归档 pin 已复核并提交后，使用原成功 `build-public.yml` 的 run ID 执行 `finalize-public.yml`。Desktop 的 `build-public.yml` 自动将三个平台成功作业合并为 `finalized-public-release`，包含固定哈希的 macOS Podspec。finalize 和发布均复用原始归档字节。

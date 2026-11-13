@@ -6,7 +6,7 @@ summary: "Flutter desktop native support. Versioned engineering reference from w
 route: "/docs/engineering/sdk-flutter/native_desktop/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60"
+sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
 sourcePath: "native_desktop/README.en.md"
 ---
 
@@ -15,7 +15,7 @@ sourcePath: "native_desktop/README.en.md"
 
 [简体中文](/docs/engineering/sdk-flutter/native_desktop/index/) · **English**
 
-The main branch prepares the preview.7 public release. Use public installation only after the version appears in its registry; see the [SDK home](/en/docs/engineering/sdk-flutter/index/) for installation, requirements, and status. The details below retain the pinned preview.6 source contract. Build that version from the exact checkout linked on the SDK home and do not mix it with preview.7 runtimes.
+The main branch prepares the preview.7 public release. Use public installation only after the version appears in its registry; see the [SDK home](/en/docs/engineering/sdk-flutter/index/) for installation, requirements, and status. The source instructions below use preview.7. Build the exact checkout linked on the SDK home with same-version runtimes. Old locks remain for historical compatibility; current preparation tools default to the versioned preview.7 public lock.
 
 
 The three desktop implementations share this engine-owned registry. Platform

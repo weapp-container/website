@@ -6,7 +6,7 @@ summary: "UIKit 窗口度量。来自 weapp-container/sdk-ios 的版本化工程
 route: "/docs/engineering/sdk-ios/docs/window-metrics/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "6d6359852714470a9c84aa8742c24d7b49d2149e"
+sourceCommit: "efc6a69fd4acb230956310e0d62d29de051e9815"
 sourcePath: "docs/window-metrics.md"
 ---
 
@@ -14,6 +14,8 @@ sourcePath: "docs/window-metrics.md"
 # UIKit 窗口度量
 
 **简体中文** · [English](/en/docs/engineering/sdk-ios/docs/window-metrics/)
+
+旋转期间，UIKit 可能先更新窗口尺寸，再更新场景方向。每份完整观测都会刷新同步 API；`onResize` 只在窗口尺寸改变时执行。独立消费者先验证 resize 的窗口尺寸，再在画面呈现后读取新的 JS 快照，与稳定后的 UIKit witness 逐字段比较，包括方向。排队送达的 resize 消息不能代表 UIKit 后续状态。
 
 
 语义基线为 WeChat 3.17.3，带有 `miniprogram-api-typings@5.2.3`。

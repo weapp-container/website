@@ -6,7 +6,7 @@ summary: "Weapp 容器 Android 实现。来自 weapp-container/sdk-flutter 的�
 route: "/docs/engineering/sdk-flutter/weapp_container_android/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60"
+sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
 sourcePath: "weapp_container_android/README.md"
 ---
 
@@ -15,7 +15,7 @@ sourcePath: "weapp_container_android/README.md"
 
 **简体中文** · [English](/en/docs/engineering/sdk-flutter/weapp_container_android/index/)
 
-当前主分支准备 preview.7 公开发行；只有对应版本在注册源发布后才使用公开安装入口。安装、平台要求与状态见 [SDK 首页](/docs/engineering/sdk-flutter/index/)。下方保留固定 preview.6 源码的详细说明；该版本须从 SDK 首页给出的精确提交 checkout 构建，不与 preview.7 运行库混用。
+当前主分支准备 preview.7 公开发行；只有对应版本在注册源发布后才使用公开安装入口。安装、平台要求与状态见 [SDK 首页](/docs/engineering/sdk-flutter/index/)。下方源码说明使用 preview.7；从 SDK 首页给出的精确提交构建，并使用同版本运行库。旧锁只用于历史兼容，当前准备工具默认读取版本化的 preview.7 公开锁。
 
 
 `weapp_container` 的联邦原生插件。使用混合组合和已安装的 `com.sonofmagic.weapp:weapp-container-android:0.1.0-preview.5.1` AAR。

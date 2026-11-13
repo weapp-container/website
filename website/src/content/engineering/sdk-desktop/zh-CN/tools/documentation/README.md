@@ -6,7 +6,7 @@ summary: "双语文档维护。来自 weapp-container/sdk-desktop 的版本化�
 route: "/docs/engineering/sdk-desktop/tools/documentation/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "0969958a40bbc43c7b4f6559a26eaab8157b6986"
+sourceCommit: "fc9ecb66d70dddfb697d386f85a529526fee4ce0"
 sourcePath: "tools/documentation/README.md"
 ---
 

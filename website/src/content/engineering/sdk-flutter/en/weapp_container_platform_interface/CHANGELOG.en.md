@@ -6,7 +6,7 @@ summary: "0.1.0-preview.7.0. Versioned engineering reference from weapp-containe
 route: "/docs/engineering/sdk-flutter/weapp_container_platform_interface/changelog/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "84ae8c14ae14c8d2f6fe44abe4a514f8d3e6ff60"
+sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
 sourcePath: "weapp_container_platform_interface/CHANGELOG.en.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "API 来源审定。来自 weapp-container/weapp-container 的版本化
 route: "/docs/engineering/weapp-container/docs/host-services/source-review/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee799c6df3c10e0c52b6e2c09a7632720e3d65c5"
+sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
 sourcePath: "docs/host-services/source-review.md"
 ---
 
@@ -16,9 +16,9 @@ sourcePath: "docs/host-services/source-review.md"
 **简体中文** · [English](/en/docs/engineering/weapp-container/docs/host-services/source-review/)
 
 
-API 清单的来源身份保存在 [检查器](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/scripts/core-api-inventory.mjs) 中。完整文件摘要统一由 `reviewedSourceSha256` 保存，各项能力检查选择自己的固定来源集合；JavaScript 的控制流身份使用固定 Acorn 版本计算的规范 AST 摘要。源码变化必须重新审阅，不能在生成 matrix 时自动接受当前摘要。
+API 清单的来源身份保存在 [检查器](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/scripts/core-api-inventory.mjs) 中。完整文件摘要统一由 `reviewedSourceSha256` 保存，各项能力检查选择自己的固定来源集合；JavaScript 的控制流身份使用固定 Acorn 版本计算的规范 AST 摘要。源码变化必须重新审阅，不能在生成 matrix 时自动接受当前摘要。
 
-这些身份只说明指定源码经过复核。它们不证明编译后的全部行为、官方 API 完整兼容、真机执行、商户交易或各 SDK 的实际验收。平台状态仍由独立的 [验收账本](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/host-services/acceptance-ledger.json) 和 [验收契约](https://github.com/weapp-container/weapp-container/blob/ee799c6df3c10e0c52b6e2c09a7632720e3d65c5/docs/host-services/acceptance-contracts.json) 决定。
+这些身份只说明指定源码经过复核。它们不证明编译后的全部行为、官方 API 完整兼容、真机执行、商户交易或各 SDK 的实际验收。平台状态仍由独立的 [验收账本](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/acceptance-ledger.json) 和 [验收契约](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/acceptance-contracts.json) 决定。
 
 <a id="2026-11-12-review-scope"></a>
 ## 2026-11-12 复核范围
