@@ -6,7 +6,7 @@ summary: "React Native showcase. Versioned engineering reference from weapp-cont
 route: "/docs/engineering/website/hosts/react-native/index/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "88b099619334a4fb751e7e9f089c6ee9d7ef60d5"
+sourceCommit: "2a14c0761dcb531666b1ca0085488a8542c54206"
 sourcePath: "hosts/react-native/README.en.md"
 ---
 

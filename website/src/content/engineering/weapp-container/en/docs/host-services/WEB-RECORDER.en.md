@@ -6,7 +6,7 @@ summary: "Web recording format and resource ownership. Versioned engineering ref
 route: "/docs/engineering/weapp-container/docs/host-services/web-recorder/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "docs/host-services/WEB-RECORDER.en.md"
 ---
 

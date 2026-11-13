@@ -6,7 +6,7 @@ summary: "Build SDKs from public source. Versioned engineering reference from we
 route: "/docs/engineering/weapp-container/docs/sdk-source-build/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "docs/sdk-source-build.en.md"
 ---
 

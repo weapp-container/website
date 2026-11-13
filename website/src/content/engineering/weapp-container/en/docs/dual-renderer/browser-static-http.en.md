@@ -6,7 +6,7 @@ summary: "Static Site's Original Lease HTTP Transfer. Versioned engineering refe
 route: "/docs/engineering/weapp-container/docs/dual-renderer/browser-static-http/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "docs/dual-renderer/browser-static-http.en.md"
 ---
 

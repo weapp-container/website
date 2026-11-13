@@ -6,7 +6,7 @@ summary: "浏览器开发态的受管构建输入。来自 weapp-container/weapp
 route: "/docs/engineering/weapp-container/docs/dual-renderer/browser-source-preparation/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "docs/dual-renderer/browser-source-preparation.md"
 ---
 

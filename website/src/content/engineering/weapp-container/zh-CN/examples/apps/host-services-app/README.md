@@ -6,7 +6,7 @@ summary: "宿主账号与参考支付示例。来自 weapp-container/weapp-conta
 route: "/docs/engineering/weapp-container/examples/apps/host-services-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "examples/apps/host-services-app/README.md"
 ---
 

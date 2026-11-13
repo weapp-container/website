@@ -6,7 +6,7 @@ summary: "Browser DOM presenter boundary. Versioned engineering reference from w
 route: "/docs/engineering/weapp-container/examples/hosts/web-wasm/dom-presenter/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "examples/hosts/web-wasm/DOM-PRESENTER.en.md"
 ---
 

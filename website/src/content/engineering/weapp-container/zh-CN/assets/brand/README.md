@@ -6,7 +6,7 @@ summary: "Weapp 容器品牌资产。来自 weapp-container/weapp-container 的�
 route: "/docs/engineering/weapp-container/assets/brand/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "assets/brand/README.md"
 ---
 

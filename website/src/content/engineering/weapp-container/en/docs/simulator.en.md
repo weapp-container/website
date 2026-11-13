@@ -6,7 +6,7 @@ summary: "Weapp Container Simulator. Versioned engineering reference from weapp-
 route: "/docs/engineering/weapp-container/docs/simulator/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "docs/simulator.en.md"
 ---
 
@@ -254,7 +254,7 @@ Total HTTP and SSE connections capped at 64; unfinished requests and responses a
 Slow clients do not block other requests, runtime pump, hot updates, or exit.
 
 `GET /embed` is a directly openable Web embedding example located at
-[`examples/hosts/web`](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/examples/hosts/web). It shares the same origin as the simulator for
+[`examples/hosts/web`](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/examples/hosts/web). It shares the same origin as the simulator for
 `/api/state`, `/api/snapshot`, `/api/bridge`, and `/api/events`, receives a complete RGBA snapshot via a canvas, and sends diagnostic requests in a batch envelope. A production Web host should replace this sequence with a WASM call to `container-host-web::WebWasmHost`; this page only demonstrates development-state HTTP/Canvas adaptation and does not represent CanvasKit GPU, real DevTools, or device capabilities.
 
 `POST /api/bridge` will first return a queued response, with the actual processing result conveyed via SSE `bridge`/`state` events to maintain batch processing and avoid per-node browser roundtrips. The page defaults to connecting only to local addresses.

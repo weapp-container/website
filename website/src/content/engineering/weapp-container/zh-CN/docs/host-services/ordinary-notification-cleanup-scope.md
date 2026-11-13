@@ -6,7 +6,7 @@ summary: "二十组应用与设备通知的私有清理。来自 weapp-container
 route: "/docs/engineering/weapp-container/docs/host-services/ordinary-notification-cleanup-scope/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "docs/host-services/ordinary-notification-cleanup-scope.md"
 ---
 

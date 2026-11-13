@@ -1,14 +1,18 @@
 ---
 id: "docs/engineering/sdk-flutter/weapp_container_linux/changelog"
-title: "0.1.0-preview.7.0"
+title: "0.1.0-preview.7.1"
 section: "SDK engineering"
-summary: "0.1.0-preview.7.0. Versioned engineering reference from weapp-container/sdk-flutter."
+summary: "0.1.0-preview.7.1. Versioned engineering reference from weapp-container/sdk-flutter."
 route: "/docs/engineering/sdk-flutter/weapp_container_linux/changelog/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "36cb4dd8c2dbeb9dd17549fc4c32e1d563693cb9"
+sourceCommit: "7132d897cbcb28bd85155cad916b4ed73451d667"
 sourcePath: "weapp_container_linux/CHANGELOG.en.md"
 ---
+
+# 0.1.0-preview.7.1
+
+Align the Linux plugin with the preview.7.1 Desktop runtime and public release entry points without changing its API.
 
 # 0.1.0-preview.7.0
 

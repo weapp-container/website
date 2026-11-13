@@ -6,7 +6,7 @@ summary: "Web 与 Harmony 独立产物。来自 weapp-container/weapp-container 
 route: "/docs/engineering/weapp-container/docs/platform-runtime-artifacts/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "docs/platform-runtime-artifacts.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "Dev Player preview.5: Layout, Navigation, and Fault Recovery. Versione
 route: "/docs/engineering/weapp-container/docs/dev-player/p0-preview5/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "docs/dev-player/p0-preview5.en.md"
 ---
 
@@ -146,7 +146,7 @@ Original failure analysis is retained in [C013](/en/docs/engineering/weapp-conta
 <a id="公共契约和兼容边界"></a>
 ## Public Contract and Compatibility Boundary
 
-[SDK preview.5 source protocol](/en/docs/engineering/sdk-contract/preview5/) and [TypeScript declarations](https://github.com/weapp-container/weapp-container/blob/3a7e41ea4af330084b9a8683040f0bb4e61f7833/sdk/contract/types/weapp-container.d.ts) define the complete wire. C ABI remains **1**, existing guest `weappContainer` message API, Java namespace, package name, and old SDK methods are retained. New Player must negotiate `chrome.atomicLayout` and `pack.devReload.attemptJournal`; explicit failure occurs when old binaries lack the required capabilities, and silent fallback to old coordinates/result guesses is not allowed.
+[SDK preview.5 source protocol](/en/docs/engineering/sdk-contract/preview5/) and [TypeScript declarations](https://github.com/weapp-container/weapp-container/blob/df94e03e3bfd506719d6849f45bbb078f3b4f974/sdk/contract/types/weapp-container.d.ts) define the complete wire. C ABI remains **1**, existing guest `weappContainer` message API, Java namespace, package name, and old SDK methods are retained. New Player must negotiate `chrome.atomicLayout` and `pack.devReload.attemptJournal`; explicit failure occurs when old binaries lack the required capabilities, and silent fallback to old coordinates/result guesses is not allowed.
 
 The full layout is explicitly enabled via `hostLayout:{protocolVersion:"1.0",atomic:true}`. The atomic mode rejects separate `resize/windowMetrics/hostChrome` entry points; disabled embedding retains the original path. A new identity is transmitted as a canonical positive decimal u64 string and cannot pass through JS Number. Each frame revision, pack acceptance revision, layout revision, and surface generation has its own ownership and is not interchangeable.
 

@@ -6,7 +6,7 @@ summary: "Desktop native surface smoke. Versioned engineering reference from wea
 route: "/docs/engineering/weapp-container/examples/hosts/desktop/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "examples/hosts/desktop/README.en.md"
 ---
 

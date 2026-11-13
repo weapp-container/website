@@ -6,7 +6,7 @@ summary: "Weapp Container Android implementation. Versioned engineering referenc
 route: "/docs/engineering/sdk-flutter/weapp_container_android/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "36cb4dd8c2dbeb9dd17549fc4c32e1d563693cb9"
+sourceCommit: "7132d897cbcb28bd85155cad916b4ed73451d667"
 sourcePath: "weapp_container_android/README.en.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "DOM 阶段性事务和资源释放协议。来自 weapp-container/weap
 route: "/docs/engineering/weapp-container/docs/dom-phased-transactions/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "docs/dom-phased-transactions.md"
 ---
 

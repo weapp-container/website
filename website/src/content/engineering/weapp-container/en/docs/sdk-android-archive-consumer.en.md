@@ -6,7 +6,7 @@ summary: "Independent consumer of the Android SDK archive. Versioned engineering
 route: "/docs/engineering/weapp-container/docs/sdk-android-archive-consumer/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "docs/sdk-android-archive-consumer.en.md"
 ---
 

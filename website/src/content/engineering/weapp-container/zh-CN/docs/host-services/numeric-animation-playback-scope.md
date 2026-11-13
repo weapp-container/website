@@ -6,7 +6,7 @@ summary: "数值 Animation 播放实现范围。来自 weapp-container/weapp-con
 route: "/docs/engineering/weapp-container/docs/host-services/numeric-animation-playback-scope/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "docs/host-services/numeric-animation-playback-scope.md"
 ---
 

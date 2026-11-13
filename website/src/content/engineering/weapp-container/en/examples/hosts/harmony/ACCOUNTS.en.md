@@ -6,7 +6,7 @@ summary: "Harmony account execution boundary. Versioned engineering reference fr
 route: "/docs/engineering/weapp-container/examples/hosts/harmony/accounts/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "3a7e41ea4af330084b9a8683040f0bb4e61f7833"
+sourceCommit: "df94e03e3bfd506719d6849f45bbb078f3b4f974"
 sourcePath: "examples/hosts/harmony/ACCOUNTS.en.md"
 ---
 

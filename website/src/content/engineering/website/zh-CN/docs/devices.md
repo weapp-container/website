@@ -6,7 +6,7 @@ summary: "Web 演示设备。来自 weapp-container/website 的版本化工程�
 route: "/docs/engineering/website/docs/devices/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "88b099619334a4fb751e7e9f089c6ee9d7ef60d5"
+sourceCommit: "2a14c0761dcb531666b1ca0085488a8542c54206"
 sourcePath: "docs/devices.md"
 ---
 
@@ -18,7 +18,7 @@ sourcePath: "docs/devices.md"
 
 本轮全屏与 `hostLayout` 改动的验证范围见 [Duo 全屏验收记录](/docs/engineering/website/docs/duo-fullscreen-verification/)。[candidate9 历史记录](/docs/engineering/website/docs/duo-verification/) 保留其原有候选身份与结论。
 
-设备尺寸统一维护在 [`website/device-profiles.json`](https://github.com/weapp-container/website/blob/88b099619334a4fb751e7e9f089c6ee9d7ef60d5/website/device-profiles.json)。官网和 iframe 消费同一注册表；staging 校验两种方向的几何结构和已核验标记后，将注册表写入哈希资产闭包。来源字段用于追溯独立测量，staging 不会重新运行 UIKit witness 或核对私有原始记录。URL 只接受 `scene`、`device`、`display`、`rotation`，其中 `rotation` 为 `0` 或 `90`，不能指定任意运行库、pack 或权限。
+设备尺寸统一维护在 [`website/device-profiles.json`](https://github.com/weapp-container/website/blob/2a14c0761dcb531666b1ca0085488a8542c54206/website/device-profiles.json)。官网和 iframe 消费同一注册表；staging 校验两种方向的几何结构和已核验标记后，将注册表写入哈希资产闭包。来源字段用于追溯独立测量，staging 不会重新运行 UIKit witness 或核对私有原始记录。URL 只接受 `scene`、`device`、`display`、`rotation`，其中 `rotation` 为 `0` 或 `90`，不能指定任意运行库、pack 或权限。
 
 默认设备是 **iPhone Duo 展开内屏的自然方向**：实际 Open 操作后的整屏为 `951 × 669` pt，方向为 landscape，安全内容区域为 `867 × 635` pt，模拟 DPR 为 `3`。旋转后的内屏为 `669 × 951` pt，安全内容区域为 `669 × 835` pt。这里的 `0` 表示真实采样起始姿态；它不等于统一的竖屏，也不能通过交换分辨率轴推导。
 
