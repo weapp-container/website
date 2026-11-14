@@ -1,16 +1,16 @@
 ---
 id: "docs/engineering/sdk-desktop/public-release"
-title: "公开预览发行 0.1.0-preview.7.0"
+title: "公开预览发行 0.1.0-preview.7.1"
 section: "工具"
-summary: "公开预览发行 0.1.0-preview.7.0。来自 weapp-container/sdk-desktop 的版本化工程说明。"
+summary: "公开预览发行 0.1.0-preview.7.1。来自 weapp-container/sdk-desktop 的版本化工程说明。"
 route: "/docs/engineering/sdk-desktop/public-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "fc9ecb66d70dddfb697d386f85a529526fee4ce0"
+sourceCommit: "a9904c6acfba30bdc28191c87377b89dff789a26"
 sourcePath: "PUBLIC-RELEASE.md"
 ---
 
-# 公开预览发行 0.1.0-preview.7.0
+# 公开预览发行 0.1.0-preview.7.1
 
 **简体中文** · [English](/en/docs/engineering/sdk-desktop/public-release/)
 

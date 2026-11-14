@@ -6,7 +6,7 @@ summary: "Open-source runtime integration. Versioned engineering reference from 
 route: "/docs/engineering/sdk-ios/open_source/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "efc6a69fd4acb230956310e0d62d29de051e9815"
+sourceCommit: "c15a30cd0a16335c80552c10fbde42b4c6e2fc5c"
 sourcePath: "OPEN_SOURCE.en.md"
 ---
 

@@ -490,8 +490,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/flutter.md"
       },
-      "reviewedChineseSummary": "Flutter SDK 接入；从当前源码准备原生依赖；1. 添加 SDK 依赖；2. 创建 Controller；3. 挂载 Widget 并加载；主要 API；平台验证；同步 preview.7 公开发行与历史演示边界",
-      "reviewedChineseSha256": "7465aa647439a06eac27b21ae9270e31027c3c84ed320c0dd7658616eae13656",
+      "reviewedChineseSummary": "Flutter .7.1 platform interface 已公开；Linux/Windows 首次包受 pub.dev 账号权限阻塞；其余平台包等待原生注册源依赖",
+      "reviewedChineseSha256": "a3be732dee6c0b46f49e2cea8cf798747ad6d65f11a232acdb4e4cc04f0e8391",
       "route": "/docs/integrations/flutter/",
       "legacyHeadingIds": [
         "api",

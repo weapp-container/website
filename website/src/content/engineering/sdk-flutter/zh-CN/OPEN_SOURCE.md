@@ -6,7 +6,7 @@ summary: "开源运行时集成。来自 weapp-container/sdk-flutter 的版本�
 route: "/docs/engineering/sdk-flutter/open_source/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
+sourceCommit: "7132d897cbcb28bd85155cad916b4ed73451d667"
 sourcePath: "OPEN_SOURCE.md"
 ---
 

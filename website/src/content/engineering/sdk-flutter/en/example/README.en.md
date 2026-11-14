@@ -6,7 +6,7 @@ summary: "Flutter SDK consumer. Versioned engineering reference from weapp-conta
 route: "/docs/engineering/sdk-flutter/example/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
+sourceCommit: "7132d897cbcb28bd85155cad916b4ed73451d667"
 sourcePath: "example/README.en.md"
 ---
 

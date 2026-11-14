@@ -6,7 +6,7 @@ summary: "Community Behavior. Versioned engineering reference from weapp-contain
 route: "/docs/engineering/website/code_of_conduct/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "c487eff31a98ca75905b66676909cde218e9fb42"
+sourceCommit: "df46170e0d94fdcf52b0153f689870d34eaeb190"
 sourcePath: "CODE_OF_CONDUCT.en.md"
 ---
 

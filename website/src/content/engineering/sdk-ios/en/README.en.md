@@ -6,7 +6,7 @@ summary: "Weapp Container iOS SDK. Versioned engineering reference from weapp-co
 route: "/docs/engineering/sdk-ios/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "efc6a69fd4acb230956310e0d62d29de051e9815"
+sourceCommit: "c15a30cd0a16335c80552c10fbde42b4c6e2fc5c"
 sourcePath: "README.en.md"
 ---
 
@@ -17,16 +17,16 @@ sourcePath: "README.en.md"
 <a id="公开发行候选preview7"></a>
 ## Public distribution candidate: preview.7
 
-The current core builder and these source examples use preview.7. Core runtime, iOS, Desktop and public CocoaPods Specs downloads are available; npm, Maven Central and pub.dev publication is incomplete. Check the [release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
+This SDK source is the `0.1.0-preview.7.1` candidate, and the `.7.1` core runtime is published; the iOS GitHub release and CocoaPods Trunk entry are not published yet. The iOS, Desktop and CocoaPods `.7.0` entries remain available. Check the [release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
 
-First public publication is being prepared. Use these commands once this version is visible in its registry. Historical private archives and locks retain their original identities.
+The `.7.1` installation entries become usable after the GitHub release and CocoaPods Trunk publication pass anonymous consumer verification. Historical private archives and locks retain their original identities.
 
-Version `0.1.0-preview.7.0` requires iOS 16+ and Xcode 27.2+ (Swift 5.9 language mode). It covers arm64 devices and arm64/x86_64 simulators.
+Version `0.1.0-preview.7.1` requires iOS 16+ and Xcode 27.2+ (Swift 5.9 language mode). It covers arm64 devices and arm64/x86_64 simulators.
 
 Use the exact SwiftPM version; Package.swift pins the binary URL and checksum:
 
 ```swift
-.package(url: "https://github.com/weapp-container/sdk-ios.git", exact: "0.1.0-preview.7.0")
+.package(url: "https://github.com/weapp-container/sdk-ios.git", exact: "0.1.0-preview.7.1")
 ```
 
 For CocoaPods, add the public organization Specs repository alongside the official source:
@@ -35,7 +35,7 @@ For CocoaPods, add the public organization Specs repository alongside the offici
 source 'https://github.com/weapp-container/Specs.git'
 source 'https://cdn.cocoapods.org/'
 platform :ios, '16.0'
-pod 'WeappContainer', '0.1.0-preview.7.0'
+pod 'WeappContainer', '0.1.0-preview.7.1'
 ```
 
 The Pod downloads a fixed HTTP archive containing Swift sources, the XCFramework and licenses, verified by SHA-256. Installation needs no Node.js, Rust or local runtime checkout. Check the [Specs publication record](https://github.com/weapp-container/Specs) for Trunk availability.
@@ -55,7 +55,7 @@ git checkout a5c9d76b8e8068efbcedbf7af073a138b69f54f2
 
 Embed mini-program pages within iOS applications. The SDK provides Swift session management, UIKit / SwiftUI view integration, host messaging channels, and local persistence, with JavaScript execution via QuickJS and page rendering through Skia Metal.
 
-Reviewed source example version: **0.1.0-preview.7.0**. The SDK wrapper source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-ios/blob/efc6a69fd4acb230956310e0d62d29de051e9815/LICENSE); the runtime source is provided in the main repository under Apache-2.0. This repository contains the SDK wrapper layer source, while the runtime is built or installed separately.
+Reviewed source example version: **0.1.0-preview.7.1**. The SDK wrapper source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-ios/blob/c15a30cd0a16335c80552c10fbde42b4c6e2fc5c/LICENSE); the runtime source is provided in the main repository under Apache-2.0. This repository contains the SDK wrapper layer source, while the runtime is built or installed separately.
 
 <a id="从当前源码开始"></a>
 ## Starting from Source Code
@@ -168,7 +168,7 @@ try session.navigate(route: "pages/detail/index", query: ["id": .string("42")])
 try session.back()
 ```
 
-Mini-programs call host methods through `weappContainer.invoke` and exchange messages through `postMessage` / `onMessage`; see [weapp-container.d.ts](https://github.com/weapp-container/sdk-ios/blob/efc6a69fd4acb230956310e0d62d29de051e9815/types/weapp-container.d.ts). Register methods before the first `load`. Arguments and results use `WeappJSON`. Handlers may use `async throws`; reject requests with `WeappHostError` and cooperate with Swift task cancellation.
+Mini-programs call host methods through `weappContainer.invoke` and exchange messages through `postMessage` / `onMessage`; see [weapp-container.d.ts](https://github.com/weapp-container/sdk-ios/blob/c15a30cd0a16335c80552c10fbde42b4c6e2fc5c/types/weapp-container.d.ts). Register methods before the first `load`. Arguments and results use `WeappJSON`. Handlers may use `async throws`; reject requests with `WeappHostError` and cooperate with Swift task cancellation.
 
 <a id="5-生命周期与存储"></a>
 ## 5. Lifecycle and storage
@@ -201,14 +201,14 @@ node tools/simulator-smoke.mjs --distribution artifacts/sdk/ios/WeappContainer -
 - [Host service examples](/en/docs/engineering/sdk-ios/examples/host-services/index/)
 - [Independent consumer project](/en/docs/engineering/sdk-ios/examples/consumer/index/)
 - [Cross-platform session contracts](/en/docs/engineering/sdk-ios/contract/)
-- [Source inventory](https://github.com/weapp-container/sdk-ios/blob/efc6a69fd4acb230956310e0d62d29de051e9815/SOURCE-INVENTORY.json) and [historical extraction receipt](https://github.com/weapp-container/sdk-ios/blob/efc6a69fd4acb230956310e0d62d29de051e9815/ORIGIN.json)
+- [Source inventory](https://github.com/weapp-container/sdk-ios/blob/c15a30cd0a16335c80552c10fbde42b4c6e2fc5c/SOURCE-INVENTORY.json) and [historical extraction receipt](https://github.com/weapp-container/sdk-ios/blob/c15a30cd0a16335c80552c10fbde42b4c6e2fc5c/ORIGIN.json)
 
 Capabilities depend on the matching runtime and its distribution policy. `restricted-showcase` permits only demo packs and APIs authorized at compile time; host configuration cannot enable disabled capabilities. Validate device execution, GPUs, and performance against the actual artifacts. See the embedding guide for native input, accessibility, and complex gesture limitations. Distributions must retain the SDK `LICENSE`, runtime `RUNTIME-LICENSE`, and third-party notices.
 
 <a id="历史归档与迁移"></a>
 ## Historical archives and migration
 
-Runtime release tools now live in the [core repository](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/tools/runtime-artifacts). New manifests select exact core releases through `--manifest`. Updated downloaders map legacy `runtime-artifacts` identities to the private `weapp-container/runtime-artifacts-private-archive` for nine frozen versions, preserving their versions, hashes, and licenses and recording the resolved repository. Older downloaders must upgrade. The repository at the old name contains retired tooling only. There is no cross-repository fallback; private archives require read access, and public source licensing does not imply historical binary availability.
+Runtime release tools now live in the [core repository](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/tools/runtime-artifacts). New manifests select exact core releases through `--manifest`. Updated downloaders map legacy `runtime-artifacts` identities to the private `weapp-container/runtime-artifacts-private-archive` for nine frozen versions, preserving their versions, hashes, and licenses and recording the resolved repository. Older downloaders must upgrade. The repository at the old name contains retired tooling only. There is no cross-repository fallback; private archives require read access, and public source licensing does not imply historical binary availability.
 
 Repository-authored runtime and SDK source uses Apache-2.0. Build the current runtime using the [core source guide](/en/docs/engineering/weapp-container/docs/sdk-source-build/). Existing archives retain their original licenses, access requirements, versions, and hashes. This source update does not publish replacement binaries.
 
@@ -233,7 +233,7 @@ To use authorized offline archives:
 node tools/prepare-runtime.mjs --artifact-dir /absolute/runtime-archives
 ```
 
-The tool validates **0.1.0-preview.7.0**, ABI 1, architectures, sizes, and SHA-256 against the [current public lock](https://github.com/weapp-container/sdk-ios/blob/efc6a69fd4acb230956310e0d62d29de051e9815/runtime-artifacts.0.1.0-preview.7.0.lock.json), then installs under `.runtime/install/native` and `.runtime/install/licenses`. Missing archives, denied access, or integrity mismatches fail while preserving an existing installation. A lock pin does not imply public downloads.
+The tool validates **0.1.0-preview.7.1**, ABI 1, architectures, sizes, and SHA-256 against the [current public lock](https://github.com/weapp-container/sdk-ios/blob/c15a30cd0a16335c80552c10fbde42b4c6e2fc5c/runtime-artifacts.0.1.0-preview.7.1.lock.json), then installs under `.runtime/install/native` and `.runtime/install/licenses`. Missing archives, denied access, or integrity mismatches fail while preserving an existing installation. A lock pin does not imply public downloads.
 
 Select a custom reviewed manifest with `--manifest /absolute/reviewed-lock.json`. `WEAPP_CONTAINER_RUNTIME_TIMEOUT_MS` adjusts download timeouts from `1` to `3600000` milliseconds; the default is 15 minutes.
 
@@ -242,3 +242,5 @@ After installing the archives, build the wrapper from its standalone checkout:
 ```sh
 node tools/build.mjs --native-root .runtime/install/native --licenses-root .runtime/install/licenses --install-framework
 ```
+
+Source candidate `0.1.0-preview.7.1` is prepared for core runtime draft automation. Public downloads and immutable locks still refer to `0.1.0-preview.7.1`; this source update does not publish a new SDK package.

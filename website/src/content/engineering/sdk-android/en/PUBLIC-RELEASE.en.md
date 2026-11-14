@@ -1,16 +1,16 @@
 ---
 id: "docs/engineering/sdk-android/public-release"
-title: "Public preview release 0.1.0-preview.7.0"
+title: "Public preview release 0.1.0-preview.7.1"
 section: "Tools"
-summary: "Public preview release 0.1.0-preview.7.0. Versioned engineering reference from weapp-container/sdk-android."
+summary: "Public preview release 0.1.0-preview.7.1. Versioned engineering reference from weapp-container/sdk-android."
 route: "/docs/engineering/sdk-android/public-release/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "faf4f55cbcf3fc291afed4b0b14e4568a6ed7581"
+sourceCommit: "890990448903c519c4410537c87dbf6fe9f395c0"
 sourcePath: "PUBLIC-RELEASE.en.md"
 ---
 
-# Public preview release 0.1.0-preview.7.0
+# Public preview release 0.1.0-preview.7.1
 
 [简体中文](/docs/engineering/sdk-android/public-release/) · **English**
 

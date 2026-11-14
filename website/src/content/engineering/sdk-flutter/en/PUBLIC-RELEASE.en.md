@@ -1,16 +1,16 @@
 ---
 id: "docs/engineering/sdk-flutter/public-release"
-title: "Public preview release 0.1.0-preview.7.0"
+title: "Public preview release 0.1.0-preview.7.1"
 section: "Tools"
-summary: "Public preview release 0.1.0-preview.7.0. Versioned engineering reference from weapp-container/sdk-flutter."
+summary: "Public preview release 0.1.0-preview.7.1. Versioned engineering reference from weapp-container/sdk-flutter."
 route: "/docs/engineering/sdk-flutter/public-release/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
+sourceCommit: "7132d897cbcb28bd85155cad916b4ed73451d667"
 sourcePath: "PUBLIC-RELEASE.en.md"
 ---
 
-# Public preview release 0.1.0-preview.7.0
+# Public preview release 0.1.0-preview.7.1
 
 [简体中文](/docs/engineering/sdk-flutter/public-release/) · **English**
 
@@ -42,3 +42,5 @@ Verify every archive SHA-256/size, architecture, dynamic dependency and license.
 
 
 After all seven hosted packages and native dependencies are public, dispatch `public-consumer.yml`. It creates five fresh applications, resolves exact hosted versions without GitHub credentials, and compiles/links Android, iOS simulator, macOS, Linux and Windows. Each job uploads dependency identities, build logs and a receipt. A successful build records compile/link validation; pack interaction and device acceptance require separate execution.
+
+To resume one unpublished package, add `--package <name>` to avoid replaying an already published package. Every Flutter package uses a `<package>-v{{version}}` GitHub OIDC tag and selects only a successful `package-pub.yml` staging artifact at that same commit. CI checks the package name, version tag, previously published dependencies and all staged file hashes, then freezes and publishes the same archive. The order is interface, five platform packages, then the main package.

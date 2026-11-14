@@ -6,7 +6,7 @@ summary: "兼容验证。来自 weapp-container/weapp-container 的版本化工�
 route: "/docs/engineering/weapp-container/docs/conformance/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/conformance/README.md"
 ---
 
@@ -17,7 +17,7 @@ sourcePath: "docs/conformance/README.md"
 
 
 Weapp Container 通过固定版本的公开工具行为观察兼容性，测试不以私有实现源码为输入。
-基线见 [baseline-v1.json](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/conformance/baseline-v1.json)，用例索引见 [case-index-v1.json](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/conformance/case-index-v1.json)。
+基线见 [baseline-v1.json](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/docs/conformance/baseline-v1.json)，用例索引见 [case-index-v1.json](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/docs/conformance/case-index-v1.json)。
 
 <a id="verification-levels"></a>
 ## 验证层级

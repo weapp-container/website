@@ -1,14 +1,18 @@
 ---
 id: "docs/engineering/sdk-flutter/weapp_container_android/changelog"
-title: "0.1.0-preview.7.0"
+title: "0.1.0-preview.7.1"
 section: "SDK engineering"
-summary: "0.1.0-preview.7.0. Versioned engineering reference from weapp-container/sdk-flutter."
+summary: "0.1.0-preview.7.1. Versioned engineering reference from weapp-container/sdk-flutter."
 route: "/docs/engineering/sdk-flutter/weapp_container_android/changelog/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
+sourceCommit: "7132d897cbcb28bd85155cad916b4ed73451d667"
 sourcePath: "weapp_container_android/CHANGELOG.en.md"
 ---
+
+# 0.1.0-preview.7.1
+
+Align the Android plugin with the preview.7.1 native runtime and public release entry points without changing its API.
 
 # 0.1.0-preview.7.0
 

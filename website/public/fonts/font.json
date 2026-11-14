@@ -1,8 +1,8 @@
 {
-  "fileName": "showcase-sc-3f2a2969705180d1.woff2",
+  "fileName": "showcase-sc-8648d972a1f1f901.woff2",
   "sourceSha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
-  "sha256": "3f2a2969705180d1eec700e5a949f2183aa61f819c999f7b26475093c5ebd18f",
-  "size": 364168,
+  "sha256": "8648d972a1f1f90125fd3e11c7707a6fe86380154f8c6fd468b32a1e94f414de",
+  "size": 364676,
   "requiredCodePoints": [
     32,
     33,
@@ -1069,6 +1069,7 @@
     32784,
     32791,
     32806,
+    32842,
     32844,
     32852,
     32858,

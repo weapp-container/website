@@ -6,7 +6,7 @@ summary: "`container-manifest`. Versioned engineering reference from weapp-conta
 route: "/docs/engineering/weapp-container/tools/container-manifest/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "tools/container-manifest/README.en.md"
 ---
 
@@ -19,6 +19,8 @@ sourcePath: "tools/container-manifest/README.en.md"
 versioned portable manifest consumed by the Weapp Container runtime. It does not rewrite
 the original WeChat output, so the input directory remains importable by the
 official DevTools.
+
+Use Node 24.22.2. Sources follow repoctl's tsdown CLI / library templates. Builds generate `dist` and declarations; the npm package ships built artifacts. After installation, use the `container-pack` command and import APIs from `@sonofmagic/container-manifest` and its subpaths.
 
 ## CLI
 
@@ -48,7 +50,7 @@ their UTF-8 bytes and emits arrays in semantic order (routes preserve
 ## Library API
 
 ```js
-import { buildManifest, packContainer } from './src/index.mjs';
+import { buildManifest, packContainer } from '@sonofmagic/container-manifest';
 
 const result = await buildManifest('./dist');
 await packContainer('./dist', './artifacts/reference');

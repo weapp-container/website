@@ -6,7 +6,7 @@ summary: "显式位图预览连接管理器。来自 weapp-container/weapp-conta
 route: "/docs/engineering/weapp-container/docs/dual-renderer/dev-raster-preview-manager/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/dual-renderer/dev-raster-preview-manager.md"
 ---
 

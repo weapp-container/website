@@ -1,14 +1,18 @@
 ---
 id: "docs/engineering/sdk-flutter/weapp_container/changelog"
-title: "0.1.0-preview.7.0"
+title: "0.1.0-preview.7.1"
 section: "SDK 工程"
-summary: "0.1.0-preview.7.0。来自 weapp-container/sdk-flutter 的版本化工程说明。"
+summary: "0.1.0-preview.7.1。来自 weapp-container/sdk-flutter 的版本化工程说明。"
 route: "/docs/engineering/sdk-flutter/weapp_container/changelog/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ebe436aa98628ceffcdaea0df7037b4f761b7ec7"
+sourceCommit: "7132d897cbcb28bd85155cad916b4ed73451d667"
 sourcePath: "weapp_container/CHANGELOG.md"
 ---
+
+# 0.1.0-preview.7.1
+
+同步 preview.7.1 原生运行库与公开发行入口，保持 Flutter 主包 API 不变。
 
 # 0.1.0-preview.7.0
 

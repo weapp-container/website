@@ -6,7 +6,7 @@ summary: "SDK 协议 v1。来自 weapp-container/sdk-ios 的版本化工程说�
 route: "/docs/engineering/sdk-ios/contract/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "efc6a69fd4acb230956310e0d62d29de051e9815"
+sourceCommit: "c15a30cd0a16335c80552c10fbde42b4c6e2fc5c"
 sourcePath: "CONTRACT.md"
 ---
 

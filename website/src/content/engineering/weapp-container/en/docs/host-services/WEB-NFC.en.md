@@ -6,7 +6,7 @@ summary: "Web NFC and frozen wx NFC contract. Versioned engineering reference fr
 route: "/docs/engineering/weapp-container/docs/host-services/web-nfc/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/host-services/WEB-NFC.en.md"
 ---
 
@@ -40,7 +40,7 @@ transceive, historical bytes, ATQA, SAK, hardware maximum sending and receiving 
 This batch of modifications does not instantiate the reader, request NFC permissions, or create persistent scan or binary handles.
 Therefore no scans, expiration callbacks or overwritten AbortController from previous discovery implementations are left behind.
 66 unregistered frozen tag leaves, and 55 leaves with clear browser capability limitations, complete
-is listed in the [Platform Restrictions List](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/platform-constraints.json) and the [API Matrix](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/api-matrix.json); original development records are kept in the [Private Archive](/en/docs/engineering/weapp-container/docs/archived-evidence/). remaining leaves
+is listed in the [Platform Restrictions List](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/docs/host-services/platform-constraints.json) and the [API Matrix](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/docs/host-services/api-matrix.json); original development records are kept in the [Private Archive](/en/docs/engineering/weapp-container/docs/archived-evidence/). remaining leaves
 Remain unimplemented and cannot be marked as never supported by browsers just because the supporting connection API is missing.
 
 In the future, precise UID-only discovery subsets can be demonstrated independently, or after the frozen directory has a corresponding contract

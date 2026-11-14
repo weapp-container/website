@@ -6,7 +6,7 @@ summary: "API 来源审定。来自 weapp-container/weapp-container 的版本化
 route: "/docs/engineering/weapp-container/docs/host-services/source-review/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/host-services/source-review.md"
 ---
 
@@ -16,9 +16,9 @@ sourcePath: "docs/host-services/source-review.md"
 **简体中文** · [English](/en/docs/engineering/weapp-container/docs/host-services/source-review/)
 
 
-API 清单的来源身份保存在 [检查器](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/scripts/core-api-inventory.mjs) 中。完整文件摘要统一由 `reviewedSourceSha256` 保存，各项能力检查选择自己的固定来源集合；JavaScript 的控制流身份使用固定 Acorn 版本计算的规范 AST 摘要。源码变化必须重新审阅，不能在生成 matrix 时自动接受当前摘要。
+API 清单的来源身份保存在 [检查器](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/scripts/core-api-inventory.mjs) 中。完整文件摘要统一由 `reviewedSourceSha256` 保存，各项能力检查选择自己的固定来源集合；JavaScript 的控制流身份使用固定 Acorn 版本计算的规范 AST 摘要。源码变化必须重新审阅，不能在生成 matrix 时自动接受当前摘要。
 
-这些身份只说明指定源码经过复核。它们不证明编译后的全部行为、官方 API 完整兼容、真机执行、商户交易或各 SDK 的实际验收。平台状态仍由独立的 [验收账本](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/acceptance-ledger.json) 和 [验收契约](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/host-services/acceptance-contracts.json) 决定。
+这些身份只说明指定源码经过复核。它们不证明编译后的全部行为、官方 API 完整兼容、真机执行、商户交易或各 SDK 的实际验收。平台状态仍由独立的 [验收账本](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/docs/host-services/acceptance-ledger.json) 和 [验收契约](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/docs/host-services/acceptance-contracts.json) 决定。
 
 <a id="2026-11-12-review-scope"></a>
 ## 2026-11-12 复核范围
@@ -71,6 +71,22 @@ Simulator 配置透传运行时已有的有限 `ViewExecutionPolicy`，替换仅
 复核同时覆盖独立桌面宿主的 resize、零尺寸失效、重载、呈现回执及退出清理。
 Linux Xvfb/Mesa 集成测试验证真实 GL drawable 的像素、resize、重载和 detach；
 该结果不代表 Windows、Wayland 或物理设备验收，也不提升任何 SDK 验收状态。
+
+<a id="2026-11-13-testing-runtime-review"></a>
+## 2026-11-13 测试运行时与工具链复核
+
+以 `origin/main` 的生产边界为基线，复核测试宿主及 TypeScript 迁移，更新 QuickJS、runtime、nativeProvider、manifestPacker 的完整文件身份与 scheduler AST 身份。能力评级与历史验收证据保持原样。
+
+| 来源 | 变化与保留的边界 |
+| --- | --- |
+| `container-engine-quickjs/src/lib.rs` | testing feature 使用私有传输调用实例与节点观测；权限、执行预算、异常处理和回收仍由真实引擎管理。 |
+| `container-runtime/src/lib.rs`、`container-sdk/src/lib.rs` | 测试接口按 feature 编译，复用 Session、pack 校验、provider 与关闭机制；受控时钟进入 timer 注册，真实截止时间继续约束执行。 |
+| `container-core/src/turn-scheduler.js` | 私有 status 命令只返回当前就绪工作，供有限 flush 判断收敛；不推进未来 timer，不改变回调所有权与取消语义。 |
+| `tools/container-manifest/src/index.ts` | 从 JS 迁移为 TypeScript，补充 JSON / AST 类型边界，CLI 移至独立入口；确定性 manifest、资源摘要、错误与 WXS 语义由既有测试验证。 |
+
+收据持久性单元测试显式使用 2 s 的有限 View 预算，避免共享 CI 的 50 ms 初始化预算掩盖目标断言。该覆盖只编译到单元测试，生产与 testing 分发默认预算均保持原值。
+
+复核覆盖 24 个真实运行时集成测试、87 个 Rust SDK 测试、scheduler 回调兼容测试、manifest 回归和声明测试。测试进程与节点句柄绑定会话，旧句柄拒绝、取消和回收失败均有验证；这些结果不提升设备或微信兼容性验收状态。
 
 <a id="subsequent-updates"></a>
 ## 后续更新

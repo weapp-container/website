@@ -6,7 +6,7 @@ summary: "开源运行时集成。来自 weapp-container/sdk-react-native 的版
 route: "/docs/engineering/sdk-react-native/open_source/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "96cc6abe36f4142f6f93efb628f084750a5b16ac"
+sourceCommit: "c7f126867d565099233295b072b2a41b1be10ec0"
 sourcePath: "OPEN_SOURCE.md"
 ---
 

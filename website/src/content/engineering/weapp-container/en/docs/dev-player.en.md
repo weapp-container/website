@@ -6,7 +6,7 @@ summary: "Five-end Native Development Client. Versioned engineering reference fr
 route: "/docs/engineering/weapp-container/docs/dev-player/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/dev-player.en.md"
 ---
 
@@ -16,7 +16,7 @@ sourcePath: "docs/dev-player.en.md"
 [简体中文](/docs/engineering/weapp-container/docs/dev-player/) · **English**
 
 
-Weapp Container Dev Player uses Flutter to provide connection, project, log, and settings interfaces. The mini-program runs natively on the device using QuickJS plus Skia SDK. Source code is available for Android, iOS, macOS, Windows, and Linux; platform installation, hardware GPU, interaction, and performance pass/fail are determined by the [frozen acceptance checklist](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/docs/dev-player/gates-v1.json) and its individual evidence items.
+Weapp Container Dev Player uses Flutter to provide connection, project, log, and settings interfaces. The mini-program runs natively on the device using QuickJS plus Skia SDK. Source code is available for Android, iOS, macOS, Windows, and Linux; platform installation, hardware GPU, interaction, and performance pass/fail are determined by the [frozen acceptance checklist](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/docs/dev-player/gates-v1.json) and its individual evidence items.
 
 Current Player is `0.1.0-preview.5.7+17` (App17), native archive, Android APK, and iOS Simulator ZIP have been actually built. Six types of simulation devices—small screen, large screen, tablet, iPhone SE, Pro Max, and iPad—have completed selected P0 use cases; universal fold, Pixel Fold are still pending ten rounds of acceptance after test methods are corrected; the entire phase is not yet complete. preview.5.7 has not been released, independent private downloads are not completed, and six SDKs still default to preview.5.3. Precise sources and limitations are detailed in [2026-11-02 Stage Record](/en/docs/engineering/weapp-container/docs/archived-evidence/); this release continues implementation of [Complete Layout, Navigation, View Failure, and Development Update Correctness Milestones](/en/docs/engineering/weapp-container/docs/dev-player/p0-preview5/).
 

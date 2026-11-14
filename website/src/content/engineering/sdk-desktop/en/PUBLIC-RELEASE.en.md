@@ -1,16 +1,16 @@
 ---
 id: "docs/engineering/sdk-desktop/public-release"
-title: "Public preview release 0.1.0-preview.7.0"
+title: "Public preview release 0.1.0-preview.7.1"
 section: "Tools"
-summary: "Public preview release 0.1.0-preview.7.0. Versioned engineering reference from weapp-container/sdk-desktop."
+summary: "Public preview release 0.1.0-preview.7.1. Versioned engineering reference from weapp-container/sdk-desktop."
 route: "/docs/engineering/sdk-desktop/public-release/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "fc9ecb66d70dddfb697d386f85a529526fee4ce0"
+sourceCommit: "a9904c6acfba30bdc28191c87377b89dff789a26"
 sourcePath: "PUBLIC-RELEASE.en.md"
 ---
 
-# Public preview release 0.1.0-preview.7.0
+# Public preview release 0.1.0-preview.7.1
 
 [简体中文](/docs/engineering/sdk-desktop/public-release/) · **English**
 

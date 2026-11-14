@@ -1,16 +1,16 @@
 ---
 id: "docs/engineering/sdk-react-native/public-release"
-title: "Public preview release 0.1.0-preview.7.0"
+title: "Public preview release 0.1.0-preview.7.1"
 section: "Tools"
-summary: "Public preview release 0.1.0-preview.7.0. Versioned engineering reference from weapp-container/sdk-react-native."
+summary: "Public preview release 0.1.0-preview.7.1. Versioned engineering reference from weapp-container/sdk-react-native."
 route: "/docs/engineering/sdk-react-native/public-release/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "96cc6abe36f4142f6f93efb628f084750a5b16ac"
+sourceCommit: "c7f126867d565099233295b072b2a41b1be10ec0"
 sourcePath: "PUBLIC-RELEASE.en.md"
 ---
 
-# Public preview release 0.1.0-preview.7.0
+# Public preview release 0.1.0-preview.7.1
 
 [简体中文](/docs/engineering/sdk-react-native/public-release/) · **English**
 

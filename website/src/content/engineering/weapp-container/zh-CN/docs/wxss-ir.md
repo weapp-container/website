@@ -6,7 +6,7 @@ summary: "WXSS IR 和条件级联。来自 weapp-container/weapp-container 的�
 route: "/docs/engineering/weapp-container/docs/wxss-ir/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "docs/wxss-ir.md"
 ---
 
@@ -39,7 +39,7 @@ Weapp 容器以标准 UTF-8 JSON 块的形式存储 WXSS。`wxssIr` 引用其 SH
 嵌套组保留自己的规则列表；它们的导入操作永远不会被提升。
 导入不能携带声明或嵌套的子元素。关键字匹配将 `@imported` 视为一个独立的未知 at-规则。非导入分号at-规则也会被保留。像 `@font-face` 这样的声明体保留描述符，而媒体、支持和关键帧体保留嵌套规则。在两个解析器中，引号字符串外的注释都会归一化为一个分隔空格。
 
-共享的 [解析器固定测试用例](https://github.com/weapp-container/weapp-container/blob/5aac7236b56112dc0bde51f5e40f4ce519127fb6/tools/container-manifest/test/fixtures/wxss-v2.json)
+共享的 [解析器固定测试用例](https://github.com/weapp-container/weapp-container/blob/c4c0bd1dc6754d5e9a8de354c5651e756d751e39/tools/container-manifest/test/fixtures/wxss-v2.json)
 检查有序/嵌套导入、仅导入组、描述符、关键帧和关键字边界，与两个实现的规范 JSON 进行对比。
 
 <a id="runtime-evaluation"></a>

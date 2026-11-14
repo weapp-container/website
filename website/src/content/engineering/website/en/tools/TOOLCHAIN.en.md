@@ -6,7 +6,7 @@ summary: "Private showcase packer. Versioned engineering reference from weapp-co
 route: "/docs/engineering/website/tools/toolchain/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "c487eff31a98ca75905b66676909cde218e9fb42"
+sourceCommit: "df46170e0d94fdcf52b0153f689870d34eaeb190"
 sourcePath: "tools/TOOLCHAIN.en.md"
 ---
 

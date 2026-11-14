@@ -6,7 +6,7 @@ summary: "Harmony 参考账户和支付宿主。来自 weapp-container/weapp-con
 route: "/docs/engineering/weapp-container/examples/hosts/harmony/reference_host/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "5aac7236b56112dc0bde51f5e40f4ce519127fb6"
+sourceCommit: "c4c0bd1dc6754d5e9a8de354c5651e756d751e39"
 sourcePath: "examples/hosts/harmony/REFERENCE_HOST.md"
 ---
 
