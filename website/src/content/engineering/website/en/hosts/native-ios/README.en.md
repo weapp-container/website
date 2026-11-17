@@ -6,7 +6,7 @@ summary: "Swift/UIKit host. Versioned engineering reference from weapp-container
 route: "/docs/engineering/website/hosts/native-ios/index/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "d590b235ceebab25a516d13a8caf7d78d857b921"
+sourceCommit: "955a33e7e66c065aa88919aabaeec94ecedc00d6"
 sourcePath: "hosts/native-ios/README.en.md"
 ---
 

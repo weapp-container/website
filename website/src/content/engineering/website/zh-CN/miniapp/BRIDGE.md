@@ -6,7 +6,7 @@ summary: "展示桥1。来自 weapp-container/website 的版本化工程说明�
 route: "/docs/engineering/website/miniapp/bridge/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "d590b235ceebab25a516d13a8caf7d78d857b921"
+sourceCommit: "955a33e7e66c065aa88919aabaeec94ecedc00d6"
 sourcePath: "miniapp/BRIDGE.md"
 ---
 

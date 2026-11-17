@@ -6,7 +6,7 @@ summary: "One pack, seven hosts. Versioned engineering reference from weapp-cont
 route: "/docs/engineering/website/miniapp/index/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "d590b235ceebab25a516d13a8caf7d78d857b921"
+sourceCommit: "955a33e7e66c065aa88919aabaeec94ecedc00d6"
 sourcePath: "miniapp/README.en.md"
 ---
 

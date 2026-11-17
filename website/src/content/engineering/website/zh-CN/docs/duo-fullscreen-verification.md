@@ -6,7 +6,7 @@ summary: "Duo 全屏历史验收摘要。来自 weapp-container/website 的版�
 route: "/docs/engineering/website/docs/duo-fullscreen-verification/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "d590b235ceebab25a516d13a8caf7d78d857b921"
+sourceCommit: "955a33e7e66c065aa88919aabaeec94ecedc00d6"
 sourcePath: "docs/duo-fullscreen-verification.md"
 ---
 
