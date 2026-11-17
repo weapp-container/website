@@ -156,4 +156,4 @@ The APIs below are present in the default capability table but lack matching pla
 | `wx.vibrateLong` | partial |
 | `wx.vibrateShort` | partial |
 
-Source commit: `74fda778b7a4415566e9c9808e7097fb321fb5cc`. Canonical defaults SHA-256: `e5a8e3ef75d34674bd582a9f9a3579b30e3819ecbb6bccff631e1b3c7e3172dd`.
+Source commit: `908b8e74b41345487a5d847681d231ace0b2cde8`. Canonical defaults SHA-256: `e5a8e3ef75d34674bd582a9f9a3579b30e3819ecbb6bccff631e1b3c7e3172dd`.

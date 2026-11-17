@@ -368,7 +368,7 @@
         "path": "website/src/content/guides/api/capability-defaults.md"
       },
       "reviewedChineseSummary": "已复核公开导航与当前源码边界。",
-      "reviewedChineseSha256": "5ba70eb447c0f99069c07979e0adfdc1f24b9c14142c5efd3eca3c839d0914d5",
+      "reviewedChineseSha256": "045b1bcb76a0be12d5fc1bac2187ffea08a686a3336311caac487e017a47ef40",
       "route": "/docs/api/capability-defaults/",
       "legacyHeadingIds": []
     },
