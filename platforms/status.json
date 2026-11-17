@@ -1,0 +1,95 @@
+{
+  "updatedAt": "2026-11-06",
+  "platforms": [
+    {
+      "name": "Web",
+      "architecture": "WASM / Dedicated Worker",
+      "build": "passed",
+      "install": "not-required",
+      "runtime": "passed",
+      "signing": "not-required",
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate9",
+      "packRoot": "f64a47603622916e27a1bf9cbb3778b6ec3498d62c720f4d8fc52cb18807e5b5"
+    },
+    {
+      "name": "Android",
+      "architecture": "arm64-v8a / x86_64",
+      "build": "passed",
+      "install": "emulator-verified",
+      "runtime": "emulator-verified",
+      "signing": "verified-release-key",
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate3"
+    },
+    {
+      "name": "iOS",
+      "architecture": "arm64 device / arm64+x86_64 simulator",
+      "build": "passed",
+      "install": "simulator-verified",
+      "runtime": "simulator-verified",
+      "signing": "unsigned-simulator",
+      "note": "iOS 27.2 模拟器已实际显示最终小程序；未配置 Apple 真机签名",
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate9",
+      "duoAcceptance": "simulator-partial",
+      "duoVerification": {
+        "packRoot": "f64a47603622916e27a1bf9cbb3778b6ec3498d62c720f4d8fc52cb18807e5b5",
+        "nativeRelease": "four-posture-click-navigation-and-close-verified",
+        "flutterSimulator": "four-posture-click-navigation-dialog-and-close-verified",
+        "nativeWindowMetrics": "four-posture-independent-UIKit-witness-verified",
+        "readOnlyCapture": "complete-state-and-nonempty-identities-unchanged",
+        "flutterWindowMetrics": "not-independently-sampled-in-final-host",
+        "flutterChineseInput": "automation-limited-by-external-input; not-proven",
+        "finalCandidateCheckout": "not-completed",
+        "deviceBuilds": "native-and-obfuscated-flutter-release-passed-unsigned",
+        "physicalDevice": "not-run"
+      }
+    },
+    {
+      "name": "HarmonyOS",
+      "architecture": "arm64",
+      "build": "passed",
+      "install": "not-run",
+      "runtime": "not-run",
+      "signing": "unsigned",
+      "note": "最终 ArkTS Release HAP 已构建并核对三个原生库；未进行设备安装运行",
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate3"
+    },
+    {
+      "name": "macOS",
+      "architecture": "arm64 / x86_64",
+      "build": "passed",
+      "install": "local-verified",
+      "runtime": "desktop-verified",
+      "signing": "unsigned",
+      "note": "AppKit 宿主真实显示中文与图片，商城和点单交互通过；未配置 Developer ID 与公证",
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate3"
+    },
+    {
+      "name": "Windows",
+      "architecture": "x86_64",
+      "build": "pending",
+      "install": "not-run",
+      "runtime": "not-run",
+      "signing": "unsigned",
+      "sdkBuild": "passed",
+      "sdkRuntime": "consumer-verified",
+      "sdkEvidence": "https://github.com/weapp-container/weapp-container/actions/runs/42059716732",
+      "note": "最终 C/C++ SDK consumer 和 Common Controls 6 activation manifest 已验证；Showcase 应用待最终私有 SDK 安装后构建运行",
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate3"
+    },
+    {
+      "name": "Linux",
+      "architecture": "x86_64",
+      "build": "passed",
+      "install": "runner-bundle-verified",
+      "runtime": "partial",
+      "signing": "not-required",
+      "sdkBuild": "passed",
+      "sdkRuntime": "consumer-verified",
+      "sdkEvidence": "https://github.com/weapp-container/weapp-container/actions/runs/42052316293",
+      "note": "GTK 在 Linux runner 构建通过；真实窗口、guest ready、截图、storage flush、正常关闭与退出码 0 均通过。商城首个导航的 OCR/状态变更交互仍未通过，Flutter Linux 存在 SDK/plugin ABI 不匹配",
+      "runtimeEvidence": "https://github.com/weapp-container/showcase/actions/runs/42072779848",
+      "lifecycleEvidence": "https://github.com/weapp-container/showcase/actions/runs/42064808311",
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate3"
+    }
+  ]
+}

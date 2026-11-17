@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "repositories": [
+    {
+      "manifestRepositories": [
+        "weapp-container/website",
+        "weapp-container/showcase"
+      ],
+      "storageRepository": "weapp-container/website-private-archive",
+      "releaseTags": [
+        "showcase-site-2026-11-06-device-picker",
+        "showcase-site-2026-11-06-duo-fullscreen",
+        "showcase-v0.1.0-preview.6.0-candidate10",
+        "showcase-v0.1.0-preview.6.0-candidate11",
+        "showcase-v0.1.0-preview.6.0-candidate12",
+        "showcase-v0.1.0-preview.6.0-candidate13",
+        "showcase-v0.1.0-preview.6.0-candidate14",
+        "showcase-v0.1.0-preview.6.0-candidate15",
+        "showcase-v0.1.0-preview.6.0-candidate16",
+        "showcase-v0.1.0-preview.6.0-candidate17",
+        "showcase-v0.1.0-preview.6.0-candidate2",
+        "showcase-v0.1.0-preview.6.0-candidate3",
+        "showcase-v0.1.0-preview.6.0-candidate4",
+        "showcase-v0.1.0-preview.6.0-candidate5",
+        "showcase-v0.1.0-preview.6.0-candidate6",
+        "showcase-v0.1.0-preview.6.0-candidate8",
+        "showcase-v0.1.0-preview.6.0-candidate9"
+      ]
+    },
+    {
+      "manifestRepositories": [
+        "weapp-container/runtime-artifacts"
+      ],
+      "storageRepository": "weapp-container/runtime-artifacts-private-archive",
+      "releaseTags": [
+        "runtime-v0.1.0-preview.2",
+        "runtime-v0.1.0-preview.3",
+        "runtime-v0.1.0-preview.4",
+        "runtime-v0.1.0-preview.5",
+        "runtime-v0.1.0-preview.5.1",
+        "runtime-v0.1.0-preview.5.2",
+        "runtime-v0.1.0-preview.5.3",
+        "runtime-v0.1.0-preview.5.5",
+        "runtime-v0.1.0-preview.6.0"
+      ]
+    }
+  ]
+}

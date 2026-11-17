@@ -1,0 +1,17 @@
+name: Source and artifact contracts
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '24.18.0'}
+      - uses: pnpm/action-setup@v4
+        with: {version: '10.15.1'}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test

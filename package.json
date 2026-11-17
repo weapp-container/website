@@ -1,0 +1,57 @@
+{
+  "name": "@weapp-container/website",
+  "version": "0.1.0-preview.6.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@10.15.1",
+  "engines": {
+    "node": ">=24.18.0"
+  },
+  "scripts": {
+    "prepare": "astro sync",
+    "dev": "astro dev --host 127.0.0.1 --port 4325",
+    "build": "astro build && node tools/localized-errors.mjs && node tools/verify-site.mjs",
+    "preview": "astro preview --host 127.0.0.1 --port 4325",
+    "test": "node --test tests/*.test.mjs tools/tests/*.test.mjs",
+    "pack": "node tools/build-miniapp.mjs",
+    "runtime:install": "node tools/install-web-runtime.mjs",
+    "runtime:stage": "node tools/stage-web-runtime.mjs",
+    "runtime:public": "node tools/prepare-public-demo.mjs",
+    "verify": "node tools/verify-site.mjs",
+    "deploy:check": "pnpm build && wrangler deploy --dry-run",
+    "deploy": "pnpm build && wrangler deploy",
+    "browser:test": "node tools/browser-smoke.mjs",
+    "docs:browser": "node tools/docs-browser-smoke.mjs",
+    "docs:verify": "node tools/verify-api-docs.mjs",
+    "docs:sync-api": "node tools/sync-api-doc-snapshot.mjs",
+    "native:build": "node tools/native-build.mjs",
+    "native:signing": "node tools/native-signing.mjs",
+    "sdk:install": "node tools/sdk-install.mjs",
+    "native:sync-pack": "node tools/native-sync-pack.mjs",
+    "docs:check": "node tools/documentation/check.mjs && node tools/documentation/check-content.mjs"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "7.3.8",
+    "@astrojs/react": "7.1.2",
+    "@base-ui/react": "1.9.0",
+    "@phosphor-icons/react": "2.1.10",
+    "astro": "7.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "acorn": "8.15.0",
+    "es-module-lexer": "3.0.4",
+    "fontkit": "2.0.4",
+    "javascript-obfuscator": "5.10.0",
+    "parse5": "8.1.1",
+    "playwright": "1.56.1",
+    "sharp": "0.34.5",
+    "terser": "5.44.1",
+    "typescript": "5.9.3",
+    "wrangler": "4.151.0"
+  }
+}

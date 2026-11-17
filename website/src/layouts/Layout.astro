@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+import {localeFromPath, localizedPath, ui} from '../data/i18n.mjs';
+const path = Astro.url.pathname;
+const locale = localeFromPath(path);
+const text = ui(locale);
+const { title = text.siteTitle, description = text.siteDescription } = Astro.props;
+const href = (value: string) => localizedPath(value, locale);
+const is404 = /\/404(?:\.html|\/)?$/.test(path);
+const pagePath = (language: string) => is404 ? language === 'en' ? '/en/404/' : '/404.html' : localizedPath(path, language);
+const alternate = pagePath(locale === 'en' ? 'zh-CN' : 'en');
+const nav = [['/docs/', text.docs], ['/demo/', text.demo], ['/platforms/', text.platforms], ['/guide/', text.guide]];
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#087951" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://container.weapp.dev/media/showcase-overview.png" />
+    <link rel="canonical" href={new URL(pagePath(locale), 'https://container.weapp.dev')} />
+    <link rel="alternate" hreflang="zh-CN" href={new URL(pagePath('zh-CN'), 'https://container.weapp.dev')} />
+    <link rel="alternate" hreflang="en" href={new URL(pagePath('en'), 'https://container.weapp.dev')} />
+    <link rel="alternate" hreflang="x-default" href={new URL(pagePath('zh-CN'), 'https://container.weapp.dev')} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <script is:inline>
+      try { const t = localStorage.getItem('showcase-theme'); document.documentElement.dataset.theme = t || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">{text.skip}</a>
+    <header class="site-header">
+      <a class="brand" href={href('/')} aria-label={`Weapp Container ${text.home}`}><img src="/favicon.svg" width="30" height="30" alt="" /><span>Weapp <strong>Container</strong></span></a>
+      <nav aria-label={text.mainNav}>
+        {nav.map(([route, label]) => <a href={href(route)} aria-current={path.startsWith(href(route)) ? 'page' : undefined}>{label}</a>)}
+      </nav>
+      <details class="mobile-menu">
+        <summary aria-label={text.menu} title={text.menu}><span aria-hidden="true"></span></summary>
+        <nav aria-label={text.mobileNav}>
+          {nav.map(([route, label]) => <a href={href(route)} aria-current={path.startsWith(href(route)) ? 'page' : undefined}>{label}</a>)}
+        </nav>
+      </details>
+      <a class="language-switch" data-language-switch href={alternate} lang={locale === 'en' ? 'zh-CN' : 'en'} hreflang={locale === 'en' ? 'zh-CN' : 'en'}>{locale === 'en' ? '中文' : 'English'}</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label={text.theme} title={text.theme}><span aria-hidden="true">◐</span></button>
+    </header>
+    <main id="content"><slot /></main>
+    <footer class="site-footer">
+      <a class="brand" href={href('/')}><img src="/favicon.svg" width="26" height="26" alt="" /><span>Weapp Container</span></a>
+      <p>{text.tagline}</p>
+      <div><a href={href('/docs/licensing/')}>{text.license}</a><a href="https://github.com/weapp-container/website" target="_blank" rel="noreferrer">{text.source} ↗</a><span>© {new Date().getFullYear()} Weapp Container</span></div>
+    </footer>
+    <script>
+      document.querySelectorAll<HTMLAnchorElement>('[data-language-switch]').forEach(link => {
+        const target = new URL(link.href);
+        target.search = location.search;
+        target.hash = location.hash;
+        link.href = target.href;
+      });
+      document.querySelector('#theme-toggle')?.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('showcase-theme', next); } catch {}
+      });
+    </script>
+  </body>
+</html>

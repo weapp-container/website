@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "format": "showcase-miniapp-history/1",
+  "runtimeVersion": "0.1.0-preview.6.0",
+  "entries": [
+    {
+      "packRoot": "03ebf262fee087367eda3ba4b5c326035d952db73253fa321e4dd8892a29ea88",
+      "lockSha256": "50201d87a25020298bb0e3ac0cebc7d6a804693ef6ce918b919e0182f686cde9"
+    },
+    {
+      "packRoot": "f64a47603622916e27a1bf9cbb3778b6ec3498d62c720f4d8fc52cb18807e5b5",
+      "lockSha256": "28f58ff4074e4de22c0db242cc5794f96da1d5d35be531558403c65d40f0e40c"
+    }
+  ]
+}

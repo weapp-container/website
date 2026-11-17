@@ -1,0 +1,10 @@
+{
+  "modelVersion": "5.0.0",
+  "name": "entry",
+  "version": "0.1.0",
+  "description": "Restricted showcase host",
+  "main": "./src/main/ets/Application.ets",
+  "dependencies": {
+    "libentry.so": "file:./src/main/cpp/types/libentry"
+  }
+}

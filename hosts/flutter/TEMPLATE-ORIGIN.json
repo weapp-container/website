@@ -1,0 +1,8 @@
+{
+  "framework": "Flutter",
+  "version": "3.47.7",
+  "frameworkRevision": "abaf9c523780a608bd46686fd5e53740a07077f8",
+  "engineRevision": "deb287481e3ce9468f3434937ced4240a70539ca",
+  "generation": "flutter create --no-pub --platforms=android,ios,macos,windows,linux --org dev.weapp.container --project-name container_showcase hosts/flutter",
+  "licenseFile": "TEMPLATE-LICENSE"
+}

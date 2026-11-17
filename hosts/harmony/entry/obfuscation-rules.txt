@@ -1,0 +1,4 @@
+-enable-toplevel-obfuscation
+-enable-filename-obfuscation
+-keep-global-name
+createOwner

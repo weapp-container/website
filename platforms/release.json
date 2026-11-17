@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0-preview.6.0",
+  "profile": "restricted-showcase",
+  "repositoryVisibility": "private",
+  "website": "https://container.weapp.dev",
+  "platforms": [
+    {
+      "id": "web",
+      "distribution": "public-browser",
+      "status": "runtime-verified",
+      "build": "passed",
+      "runtime": "browser-verified",
+      "signing": "not-required",
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate9",
+      "packRoot": "f64a47603622916e27a1bf9cbb3778b6ec3498d62c720f4d8fc52cb18807e5b5"
+    },
+    {
+      "id": "android",
+      "distribution": "private-apk",
+      "status": "signed-preview",
+      "minimum": "Android 8 / API 26, arm64-v8a or x86_64",
+      "signing": "verified-dedicated-release-key",
+      "build": "passed",
+      "runtime": "native-emulator-verified",
+      "hosts": [
+        "kotlin",
+        "flutter",
+        "react-native"
+      ],
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate3"
+    },
+    {
+      "id": "ios",
+      "distribution": "private-app-archive",
+      "status": "unsigned-preview",
+      "minimum": "iOS 16",
+      "signing": "unsigned-simulator-and-device-app",
+      "build": "passed",
+      "runtime": "native-simulator-verified",
+      "productionSigning": "apple-team-and-provisioning-required",
+      "hosts": [
+        "swift-simulator",
+        "flutter-device",
+        "react-native-simulator"
+      ],
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate9",
+      "duoAcceptance": "simulator-partial",
+      "candidateHosts": [
+        "swift-simulator",
+        "swift-device-unsigned",
+        "flutter-simulator",
+        "flutter-device-unsigned"
+      ],
+      "packRoot": "f64a47603622916e27a1bf9cbb3778b6ec3498d62c720f4d8fc52cb18807e5b5",
+      "verificationScope": "Final native/Flutter simulator four-posture smoke and native independent UIKit/read-only capture passed; final Flutter Chinese input, host metric sampling and complete checkout remain unverified; device signing and physical-device execution pending."
+    },
+    {
+      "id": "harmony",
+      "distribution": "private-hap",
+      "status": "unsigned-preview",
+      "signing": "unsigned",
+      "build": "passed",
+      "runtime": "not-run",
+      "productionSigning": "harmony-certificate-and-profile-required",
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate3"
+    },
+    {
+      "id": "macos",
+      "distribution": "private-app",
+      "status": "unsigned-preview",
+      "minimum": "macOS 12",
+      "signing": "developer-id-not-configured",
+      "build": "passed",
+      "runtime": "native-desktop-verified",
+      "productionSigning": "developer-id-and-notarization-required",
+      "hosts": [
+        "appkit",
+        "flutter"
+      ],
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate3"
+    },
+    {
+      "id": "windows",
+      "distribution": "private-zip",
+      "status": "application-pending",
+      "minimum": "Windows 10 x64",
+      "signing": "authenticode-not-configured",
+      "build": "pending",
+      "runtime": "not-run",
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate3"
+    },
+    {
+      "id": "linux",
+      "distribution": "private-tar",
+      "status": "build-verified",
+      "minimum": "Ubuntu 24.04 x64 / GTK3",
+      "build": "passed",
+      "runtime": "partial",
+      "signing": "not-required",
+      "note": "GTK guest ready、真实窗口截图、storage flush、正常关闭与退出码 0 已通过；商城首个导航的 OCR/状态变更交互仍未通过，Flutter Linux 存在 SDK/plugin ABI 不匹配",
+      "releaseTag": "showcase-v0.1.0-preview.6.0-candidate3"
+    }
+  ],
+  "updatedAt": "2026-11-06",
+  "privateReleaseTag": "showcase-v0.1.0-preview.6.0-candidate9",
+  "releaseScope": "Web and native iOS / Flutter iOS Duo candidate; other platforms retain their independent recorded releases"
+}

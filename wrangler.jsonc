@@ -1,0 +1,25 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "weapp-container-showcase",
+  "compatibility_date": "2026-10-19",
+  "workers_dev": false,
+  "preview_urls": true,
+  "routes": [{ "pattern": "container.weapp.dev", "custom_domain": true }],
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  "env": {
+    "staging": {
+      "name": "weapp-container-showcase-staging",
+      "workers_dev": true,
+      "routes": [{ "pattern": "staging.container.weapp.dev", "custom_domain": true }],
+      "assets": {
+        "directory": "./dist",
+        "not_found_handling": "404-page",
+        "html_handling": "auto-trailing-slash"
+      }
+    }
+  }
+}

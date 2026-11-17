@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "本地商城、点单与基础功能演示"
+    },
+    {
+      "name": "app_name",
+      "value": "Weapp Container"
+    }
+  ]
+}

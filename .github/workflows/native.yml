@@ -1,0 +1,162 @@
+name: Private native consumers
+on:
+  workflow_dispatch:
+    inputs:
+      family:
+        description: Host adapter to build
+        type: choice
+        default: native
+        options: [all, native, flutter, react-native, harmony]
+      platform:
+        description: Target operating system
+        type: choice
+        default: all
+        options: [all, android, ios, macos, windows, linux, harmony]
+permissions:
+  contents: read
+concurrency:
+  group: native-${{ github.ref }}-${{ inputs.family }}-${{ inputs.platform }}
+  cancel-in-progress: false
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '24.18.0'}
+      - id: matrix
+        shell: bash
+        env:
+          FAMILY: ${{ inputs.family }}
+          PLATFORM: ${{ inputs.platform }}
+        run: |
+          matrix=$(node tools/native-ci-matrix.mjs "$FAMILY" "$PLATFORM")
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+  build:
+    needs: plan
+    permissions:
+      contents: write # GitHub requires write permission to read private draft release assets.
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    env:
+      PYTHON: python
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: '24.18.0'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - uses: actions/setup-java@v4
+        if: matrix.platform == 'android'
+        with: {distribution: temurin, java-version: '21'}
+      - name: Install Linux native UI dependencies
+        if: matrix.platform == 'linux'
+        run: |
+          timeout 900s sudo DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update
+          timeout 900s sudo DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 install -y --no-install-recommends libgtk-3-dev libepoxy-dev libfontconfig1-dev libcurl4-openssl-dev ninja-build clang xvfb xdotool imagemagick tesseract-ocr tesseract-ocr-chi-sim
+      - uses: subosito/flutter-action@v2
+        if: matrix.family == 'flutter'
+        with: {flutter-version: '3.47.7', channel: stable, cache: true}
+      - name: Download and verify the exact pack bound to this SDK
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SDK_ID: ${{ matrix.id }}
+        run: node tools/native-pack-artifact.mjs --install --sdk-id "$SDK_ID"
+      - name: Download and verify the exact restricted SDK
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SDK_ID: ${{ matrix.id }}
+          HOST_FAMILY: ${{ matrix.family }}
+        run: |
+          if [ "$HOST_FAMILY" = flutter ]; then
+            node tools/sdk-install.mjs --id "$SDK_ID" --destination .runtime/sdk/flutter
+          elif [ "$HOST_FAMILY" = react-native ]; then
+            node tools/sdk-install.mjs --id "$SDK_ID" --destination .runtime/sdk/react-native
+          else
+            node tools/sdk-install.mjs --id "$SDK_ID"
+          fi
+      - name: Create an isolated CI Android release key
+        if: matrix.platform == 'android'
+        run: node tools/native-signing.mjs --create
+      - name: Build native SDK consumer
+        if: matrix.family == 'native'
+        run: node tools/native-consumer-build.mjs --platform ${{ matrix.platform }}
+      - name: Build Flutter consumer
+        if: matrix.family == 'flutter'
+        run: node tools/native-build.mjs --platform ${{ matrix.platform }}
+      - name: Build React Native consumer
+        if: matrix.family == 'react-native'
+        run: node tools/native-react-native-build.mjs --platform ${{ matrix.platform }}
+      - name: Build Harmony consumer with the official installed SDK
+        if: matrix.family == 'harmony'
+        run: node tools/native-harmony-build.mjs
+      - name: Verify the real Linux application window and graceful close
+        if: matrix.platform == 'linux' && (matrix.family == 'native' || matrix.family == 'flutter')
+        run: xvfb-run -a env GDK_BACKEND=x11 node tools/native-runtime-check.mjs --family ${{ matrix.family }} --platform linux --interaction commerce
+      - name: Verify the real Windows application window and graceful close
+        if: matrix.platform == 'windows' && (matrix.family == 'native' || matrix.family == 'flutter')
+        run: node tools/native-runtime-check.mjs --family ${{ matrix.family }} --platform windows
+      - name: Preserve and verify the final Windows application activation manifest
+        if: always() && matrix.platform == 'windows' && (matrix.family == 'native' || matrix.family == 'flutter')
+        shell: pwsh
+        run: |
+          $executables = @(Get-ChildItem "artifacts/delivery/${{ matrix.family }}/windows" -Recurse -Filter container_showcase.exe)
+          if ($executables.Count -ne 1) { throw 'Expected one delivered application executable' }
+          $manifestTool = Get-ChildItem "${env:ProgramFiles(x86)}/Windows Kits/10/bin/*/x64/mt.exe" | Sort-Object FullName -Descending | Select-Object -First 1
+          if (-not $manifestTool) { throw 'Windows SDK manifest tool is unavailable' }
+          $output = "artifacts/native-runtime/${{ matrix.family }}/windows/application.manifest"
+          & $manifestTool.FullName '-nologo' "-inputresource:$($executables[0].FullName);#1" "-out:$output"
+          if ($LASTEXITCODE -ne 0) { throw 'Could not extract the final application manifest' }
+          if ((Get-Content $output -Raw) -notmatch 'Microsoft.Windows.Common-Controls') { throw 'Common Controls activation dependency is missing' }
+      - name: Preserve the target runtime evidence independently
+        if: always() && (matrix.platform == 'windows' || matrix.platform == 'linux') && (matrix.family == 'native' || matrix.family == 'flutter')
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-${{ matrix.family }}-${{ matrix.platform }}
+          path: artifacts/native-runtime/${{ matrix.family }}/${{ matrix.platform }}/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Seal and publish verified desktop applications privately
+        if: (matrix.platform == 'windows' || matrix.platform == 'linux') && (matrix.family == 'native' || matrix.family == 'flutter')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HOST_FAMILY: ${{ matrix.family }}
+          TARGET_PLATFORM: ${{ matrix.platform }}
+        run: |
+          if [ "$HOST_FAMILY" = native ]; then
+            receipt="artifacts/consumers/$TARGET_PLATFORM/build.json"
+          else
+            receipt="artifacts/native/$TARGET_PLATFORM/build.json"
+          fi
+          node tools/native-delivery-artifact.mjs --family "$HOST_FAMILY" --platform "$TARGET_PLATFORM" --receipt "$receipt" --upload
+      - name: Preserve build receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: receipts-${{ matrix.family }}-${{ matrix.platform }}
+          path: |
+            artifacts/native/${{ matrix.platform }}/build.json
+            artifacts/consumers/${{ matrix.platform }}/build.json
+            artifacts/react-native/${{ matrix.platform }}/build.json
+            artifacts/harmony/build.json
+            artifacts/native-runtime/${{ matrix.family }}/${{ matrix.platform }}/
+            artifacts/private/applications/*.json
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Preserve application outputs privately
+        uses: actions/upload-artifact@v4
+        with:
+          name: application-${{ matrix.family }}-${{ matrix.platform }}
+          path: |
+            artifacts/delivery/${{ matrix.family }}/${{ matrix.platform }}/
+          if-no-files-found: error
+          retention-days: 14

@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {localeFromPath, localizedPath, ui} from '../data/i18n.mjs';
+import copy from '../data/marketing-copy.json';
+const locale = localeFromPath(Astro.url.pathname);
+const t = (value: string) => locale === 'en' ? copy[value.trim() as keyof typeof copy] || value : value;
+const href = (value: string) => localizedPath(value, locale);
+---
+<Layout title={t("页面未找到 · Weapp Container")}>
+  <section class="section-wrap page-intro"><p class="eyebrow">404</p><h1>{t("这个页面暂时不在这里。")}</h1><p>{t("回到首页，或直接打开小程序演示。")}</p><a class="button primary" href={href("/demo/")}>{t("打开演示 ↗")}</a>
+    {locale !== 'en' && <aside lang="en"><p>Page not found. <a href="/en/">English home</a> · <a href="/en/docs/">Documentation</a></p></aside>}
+  </section>
+</Layout>

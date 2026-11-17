@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "runtimeVersion": "0.1.0-preview.6.0",
+  "distributionProfile": "restricted-showcase",
+  "policySha256": "1c4aa7886f2aed8f4c9fc955c6378cf8c76e76cc8b7bb50fa500e9ca7363f02a",
+  "packRoot": "91005c9eb32255f1b6f337c48fd7a4404e55e10cb2b3d67587604f44a4b0e98a",
+  "entry": "/runtime/2ab0c461b0ffc473075a47c01899e0b3b3db1b53d96755d44fc4ddef3c91bb13/index.html",
+  "deploymentHash": "2ab0c461b0ffc473075a47c01899e0b3b3db1b53d96755d44fc4ddef3c91bb13"
+}

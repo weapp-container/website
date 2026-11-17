@@ -1,0 +1,918 @@
+{
+  "schemaVersion": 1,
+  "defaultSelection": {
+    "device": "iphone-duo",
+    "display": "inner",
+    "rotation": 0
+  },
+  "devices": [
+    {
+      "id": "iphone-duo",
+      "label": "iPhone Duo",
+      "defaultDisplay": "inner",
+      "displays": [
+        {
+          "id": "inner",
+          "label": "展开内屏",
+          "measurements": {
+            "0": {
+              "width": 951,
+              "height": 669,
+              "pixelRatio": 3,
+              "statusBarHeight": 2,
+              "safeArea": {
+                "bottom": 34,
+                "left": 0,
+                "right": 84,
+                "top": 0
+              },
+              "orientation": "landscape",
+              "metricsSafeArea": {
+                "bottom": 951,
+                "height": 867,
+                "left": 0,
+                "right": 635,
+                "top": 84,
+                "width": 635
+              },
+              "screenFixed": {
+                "width": 669,
+                "height": 951
+              },
+              "interfaceOrientationRawValue": 4,
+              "provenance": {
+                "deviceType": "iPhone-Duo",
+                "runtime": "iOS-27.2-iPhone19-4",
+                "posture": "Open",
+                "rotation": "0",
+                "uiAction": "Device Hub Open posture button from Closed natural orientation",
+                "witnessSDK": "iPhoneSimulator27.2",
+                "traitsAndActiveReservedRegions": true,
+                "snapshotSha256": "e1b5b92af44ee9b7e52bb7ac8770eac33ac80988ec610a0ccb129d84f599fec1",
+                "snapshotPose": "inner-0"
+              },
+              "hostLayout": {
+                "reservedRegions": [
+                  {
+                    "height": 124,
+                    "id": "occlusion:0",
+                    "kind": "occlusion",
+                    "width": 84,
+                    "x": 867,
+                    "y": 0
+                  }
+                ],
+                "safeInsets": {
+                  "bottom": 34,
+                  "left": 0,
+                  "right": 84,
+                  "top": 0
+                },
+                "version": 1,
+                "verticalBarEdge": "right"
+              }
+            },
+            "90": {
+              "width": 669,
+              "height": 951,
+              "pixelRatio": 3,
+              "statusBarHeight": 2,
+              "safeArea": {
+                "bottom": 34,
+                "left": 0,
+                "right": 0,
+                "top": 82
+              },
+              "orientation": "portrait",
+              "metricsSafeArea": {
+                "bottom": 869,
+                "height": 835,
+                "left": 0,
+                "right": 669,
+                "top": 34,
+                "width": 669
+              },
+              "screenFixed": {
+                "width": 669,
+                "height": 951
+              },
+              "interfaceOrientationRawValue": 2,
+              "provenance": {
+                "deviceType": "iPhone-Duo",
+                "runtime": "iOS-27.2-iPhone19-4",
+                "posture": "Open",
+                "rotation": "90",
+                "uiAction": "Device Hub Rotate Right button from Open natural orientation",
+                "witnessSDK": "iPhoneSimulator27.2",
+                "traitsAndActiveReservedRegions": true,
+                "snapshotSha256": "f63817a7a6eed44ac55188ba70e889dfa7ef53a92c91020fd1e93ac897276a60",
+                "snapshotPose": "inner-90"
+              },
+              "hostLayout": {
+                "reservedRegions": [
+                  {
+                    "height": 82,
+                    "id": "occlusion:0",
+                    "kind": "occlusion",
+                    "width": 144,
+                    "x": 525,
+                    "y": 0
+                  }
+                ],
+                "safeInsets": {
+                  "bottom": 34,
+                  "left": 0,
+                  "right": 0,
+                  "top": 82
+                },
+                "version": 1,
+                "verticalBarEdge": "none"
+              }
+            }
+          },
+          "source": {
+            "status": "verified",
+            "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPhone-Duo",
+            "display": "primary-1",
+            "kind": "independent-uikit-simulator-witness",
+            "runtime": "iOS-27.2-iPhone19-4",
+            "type": "uikit-simulator",
+            "sampledOn": "2026-11-06",
+            "xcode": "Xcode 27.2\nBuild version 27B52",
+            "witnessCompiler": "Apple Swift version 6.4.2 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)\nTarget: arm64-apple-macosx27.2.0",
+            "witnessSourceSha256": "34754c3630e8446a595437c12063e36e1390360884c73c031ebc790a5a346beb",
+            "witnessBinarySha256": "8e71d3e821f673b02d03b58278a53c8b17c9e3b8a4859435ee0d8ba25df9c5e4",
+            "witnessBuildTarget": "arm64-apple-ios16.0-simulator",
+            "witnessImports": [
+              "UIKit"
+            ],
+            "runtimeIdentifier": "com.apple.CoreSimulator.SimRuntime.iOS-27-2-iPhone19-4",
+            "runtimeBuild": "24B91016s",
+            "hostLayoutSampling": {
+              "sampledOn": "2026-11-06",
+              "sdk": "iPhoneSimulator27.2",
+              "xcode": "27.2 (27B52)",
+              "swift": "6.4.2",
+              "runtimeBuild": "24B91016s",
+              "scope": "Full containing View bounds, local safeInsets, resolved verticalBarEdge and active reservedRegions; independent UIKit witness",
+              "regionIdentity": "kind plus ordinal sorted by kind,x,y,width,height; platform opaque IDs are not serialized"
+            }
+          }
+        },
+        {
+          "id": "outer",
+          "label": "折叠外屏",
+          "measurements": {
+            "0": {
+              "width": 466,
+              "height": 678,
+              "pixelRatio": 3,
+              "statusBarHeight": 2,
+              "safeArea": {
+                "bottom": 34,
+                "left": 0,
+                "right": 84,
+                "top": 0
+              },
+              "orientation": "portrait",
+              "metricsSafeArea": {
+                "bottom": 644,
+                "height": 644,
+                "left": 0,
+                "right": 382,
+                "top": 0,
+                "width": 382
+              },
+              "screenFixed": {
+                "width": 466,
+                "height": 678
+              },
+              "interfaceOrientationRawValue": 1,
+              "provenance": {
+                "deviceType": "iPhone-Duo",
+                "runtime": "iOS-27.2-iPhone19-4",
+                "posture": "Closed",
+                "rotation": "0",
+                "uiAction": "Device Hub Closed posture (initial), Controls Rotate Left restored natural",
+                "witnessSDK": "iPhoneSimulator27.2",
+                "traitsAndActiveReservedRegions": true,
+                "snapshotSha256": "50fb6a323651b8aec1cfbb10fc2aa2e93d2b92a084f36487a6526f31020868c8",
+                "snapshotPose": "outer-0"
+              },
+              "hostLayout": {
+                "reservedRegions": [
+                  {
+                    "height": 174,
+                    "id": "occlusion:0",
+                    "kind": "occlusion",
+                    "width": 84,
+                    "x": 382,
+                    "y": 0
+                  },
+                  {
+                    "height": 37,
+                    "id": "occlusion:1",
+                    "kind": "occlusion",
+                    "width": 37,
+                    "x": 399.6666666666667,
+                    "y": 29.333333333333332
+                  }
+                ],
+                "safeInsets": {
+                  "bottom": 34,
+                  "left": 0,
+                  "right": 84,
+                  "top": 0
+                },
+                "version": 1,
+                "verticalBarEdge": "right"
+              }
+            },
+            "90": {
+              "width": 678,
+              "height": 466,
+              "pixelRatio": 3,
+              "statusBarHeight": 0,
+              "safeArea": {
+                "bottom": 34,
+                "left": 0,
+                "right": 84,
+                "top": 0
+              },
+              "orientation": "landscape",
+              "metricsSafeArea": {
+                "bottom": 678,
+                "height": 594,
+                "left": 0,
+                "right": 432,
+                "top": 84,
+                "width": 432
+              },
+              "screenFixed": {
+                "width": 466,
+                "height": 678
+              },
+              "interfaceOrientationRawValue": 4,
+              "provenance": {
+                "deviceType": "iPhone-Duo",
+                "runtime": "iOS-27.2-iPhone19-4",
+                "posture": "Closed",
+                "rotation": "90",
+                "uiAction": "Device Hub Rotate Right button",
+                "witnessSDK": "iPhoneSimulator27.2",
+                "traitsAndActiveReservedRegions": true,
+                "snapshotSha256": "ecc688bd70e89664efc6e898f0919c403e2e4962bd87fef109e50073b68fafad",
+                "snapshotPose": "outer-90"
+              },
+              "hostLayout": {
+                "reservedRegions": [
+                  {
+                    "height": 82,
+                    "id": "occlusion:0",
+                    "kind": "occlusion",
+                    "width": 84,
+                    "x": 594,
+                    "y": 384
+                  },
+                  {
+                    "height": 37,
+                    "id": "occlusion:1",
+                    "kind": "occlusion",
+                    "width": 37,
+                    "x": 611.6666666666666,
+                    "y": 399.6666666666667
+                  }
+                ],
+                "safeInsets": {
+                  "bottom": 34,
+                  "left": 0,
+                  "right": 84,
+                  "top": 0
+                },
+                "version": 1,
+                "verticalBarEdge": "right"
+              }
+            }
+          },
+          "source": {
+            "status": "verified",
+            "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPhone-Duo",
+            "display": "primary",
+            "kind": "independent-uikit-simulator-witness",
+            "runtime": "iOS-27.2-iPhone19-4",
+            "type": "uikit-simulator",
+            "sampledOn": "2026-11-06",
+            "xcode": "Xcode 27.2\nBuild version 27B52",
+            "witnessCompiler": "Apple Swift version 6.4.2 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)\nTarget: arm64-apple-macosx27.2.0",
+            "witnessSourceSha256": "34754c3630e8446a595437c12063e36e1390360884c73c031ebc790a5a346beb",
+            "witnessBinarySha256": "8e71d3e821f673b02d03b58278a53c8b17c9e3b8a4859435ee0d8ba25df9c5e4",
+            "witnessBuildTarget": "arm64-apple-ios16.0-simulator",
+            "witnessImports": [
+              "UIKit"
+            ],
+            "runtimeIdentifier": "com.apple.CoreSimulator.SimRuntime.iOS-27-2-iPhone19-4",
+            "runtimeBuild": "24B91016s",
+            "hostLayoutSampling": {
+              "sampledOn": "2026-11-06",
+              "sdk": "iPhoneSimulator27.2",
+              "xcode": "27.2 (27B52)",
+              "swift": "6.4.2",
+              "runtimeBuild": "24B91016s",
+              "scope": "Full containing View bounds, local safeInsets, resolved verticalBarEdge and active reservedRegions; independent UIKit witness",
+              "regionIdentity": "kind plus ordinal sorted by kind,x,y,width,height; platform opaque IDs are not serialized"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "iphone-18-pro",
+      "label": "iPhone 18 Pro",
+      "defaultDisplay": "main",
+      "displays": [
+        {
+          "id": "main",
+          "label": "主屏",
+          "measurements": {
+            "0": {
+              "width": 402,
+              "height": 874,
+              "pixelRatio": 3,
+              "statusBarHeight": 54,
+              "safeArea": {
+                "bottom": 34,
+                "left": 0,
+                "right": 0,
+                "top": 62
+              },
+              "orientation": "portrait",
+              "metricsSafeArea": {
+                "bottom": 840,
+                "height": 778,
+                "left": 0,
+                "right": 402,
+                "top": 62,
+                "width": 402
+              },
+              "screenFixed": {
+                "width": 402,
+                "height": 874
+              },
+              "interfaceOrientationRawValue": 1,
+              "provenance": {
+                "deviceType": "iPhone-18-Pro",
+                "runtime": "iOS-27-2",
+                "rotation": "0",
+                "uiAction": "Natural initial orientation"
+              },
+              "hostLayout": {
+                "version": 1,
+                "safeInsets": {
+                  "bottom": 34,
+                  "left": 0,
+                  "right": 0,
+                  "top": 62
+                },
+                "verticalBarEdge": "none",
+                "reservedRegions": []
+              }
+            },
+            "90": {
+              "width": 874,
+              "height": 402,
+              "pixelRatio": 3,
+              "statusBarHeight": 0,
+              "safeArea": {
+                "bottom": 20,
+                "left": 62,
+                "right": 62,
+                "top": 0
+              },
+              "orientation": "landscape",
+              "metricsSafeArea": {
+                "bottom": 812,
+                "height": 750,
+                "left": 0,
+                "right": 382,
+                "top": 62,
+                "width": 382
+              },
+              "screenFixed": {
+                "width": 402,
+                "height": 874
+              },
+              "interfaceOrientationRawValue": 4,
+              "provenance": {
+                "deviceType": "iPhone-18-Pro",
+                "runtime": "iOS-27-2",
+                "rotation": "90",
+                "uiAction": "Device Hub Rotate Right control"
+              },
+              "hostLayout": {
+                "version": 1,
+                "safeInsets": {
+                  "bottom": 20,
+                  "left": 62,
+                  "right": 62,
+                  "top": 0
+                },
+                "verticalBarEdge": "none",
+                "reservedRegions": []
+              }
+            }
+          },
+          "source": {
+            "status": "verified",
+            "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPhone-18-Pro",
+            "kind": "independent-uikit-simulator-witness",
+            "runtime": "iOS-27-2",
+            "type": "uikit-simulator",
+            "sampledOn": "2026-11-06",
+            "xcode": "Xcode 27.2\nBuild version 27B52",
+            "witnessCompiler": "Apple Swift version 6.4.2 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)\nTarget: arm64-apple-macosx27.2.0",
+            "witnessSourceSha256": "34754c3630e8446a595437c12063e36e1390360884c73c031ebc790a5a346beb",
+            "witnessBinarySha256": "8e71d3e821f673b02d03b58278a53c8b17c9e3b8a4859435ee0d8ba25df9c5e4",
+            "witnessBuildTarget": "arm64-apple-ios16.0-simulator",
+            "witnessImports": [
+              "UIKit"
+            ],
+            "runtimeIdentifier": "com.apple.CoreSimulator.SimRuntime.iOS-27-2",
+            "runtimeBuild": "24B8117"
+          }
+        }
+      ]
+    },
+    {
+      "id": "iphone-18-pro-max",
+      "label": "iPhone 18 Pro Max",
+      "defaultDisplay": "main",
+      "displays": [
+        {
+          "id": "main",
+          "label": "主屏",
+          "measurements": {
+            "0": {
+              "width": 440,
+              "height": 956,
+              "pixelRatio": 3,
+              "statusBarHeight": 54,
+              "safeArea": {
+                "bottom": 34,
+                "left": 0,
+                "right": 0,
+                "top": 62
+              },
+              "orientation": "portrait",
+              "metricsSafeArea": {
+                "bottom": 922,
+                "height": 860,
+                "left": 0,
+                "right": 440,
+                "top": 62,
+                "width": 440
+              },
+              "screenFixed": {
+                "width": 440,
+                "height": 956
+              },
+              "interfaceOrientationRawValue": 1,
+              "provenance": {
+                "deviceType": "iPhone-18-Pro-Max",
+                "runtime": "iOS-27-2",
+                "rotation": "0",
+                "uiAction": "Natural initial orientation"
+              },
+              "hostLayout": {
+                "version": 1,
+                "safeInsets": {
+                  "bottom": 34,
+                  "left": 0,
+                  "right": 0,
+                  "top": 62
+                },
+                "verticalBarEdge": "none",
+                "reservedRegions": []
+              }
+            },
+            "90": {
+              "width": 956,
+              "height": 440,
+              "pixelRatio": 3,
+              "statusBarHeight": 0,
+              "safeArea": {
+                "bottom": 20,
+                "left": 62,
+                "right": 62,
+                "top": 0
+              },
+              "orientation": "landscape",
+              "metricsSafeArea": {
+                "bottom": 894,
+                "height": 832,
+                "left": 0,
+                "right": 420,
+                "top": 62,
+                "width": 420
+              },
+              "screenFixed": {
+                "width": 440,
+                "height": 956
+              },
+              "interfaceOrientationRawValue": 4,
+              "provenance": {
+                "deviceType": "iPhone-18-Pro-Max",
+                "runtime": "iOS-27-2",
+                "rotation": "90",
+                "uiAction": "Device Hub Rotate Right control"
+              },
+              "hostLayout": {
+                "version": 1,
+                "safeInsets": {
+                  "bottom": 20,
+                  "left": 62,
+                  "right": 62,
+                  "top": 0
+                },
+                "verticalBarEdge": "none",
+                "reservedRegions": []
+              }
+            }
+          },
+          "source": {
+            "status": "verified",
+            "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPhone-18-Pro-Max",
+            "kind": "independent-uikit-simulator-witness",
+            "runtime": "iOS-27-2",
+            "type": "uikit-simulator",
+            "sampledOn": "2026-11-06",
+            "xcode": "Xcode 27.2\nBuild version 27B52",
+            "witnessCompiler": "Apple Swift version 6.4.2 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)\nTarget: arm64-apple-macosx27.2.0",
+            "witnessSourceSha256": "34754c3630e8446a595437c12063e36e1390360884c73c031ebc790a5a346beb",
+            "witnessBinarySha256": "8e71d3e821f673b02d03b58278a53c8b17c9e3b8a4859435ee0d8ba25df9c5e4",
+            "witnessBuildTarget": "arm64-apple-ios16.0-simulator",
+            "witnessImports": [
+              "UIKit"
+            ],
+            "runtimeIdentifier": "com.apple.CoreSimulator.SimRuntime.iOS-27-2",
+            "runtimeBuild": "24B8117"
+          }
+        }
+      ]
+    },
+    {
+      "id": "iphone-17",
+      "label": "iPhone 17",
+      "defaultDisplay": "main",
+      "displays": [
+        {
+          "id": "main",
+          "label": "主屏",
+          "measurements": {
+            "0": {
+              "width": 402,
+              "height": 874,
+              "pixelRatio": 3,
+              "statusBarHeight": 54,
+              "safeArea": {
+                "bottom": 34,
+                "left": 0,
+                "right": 0,
+                "top": 62
+              },
+              "orientation": "portrait",
+              "metricsSafeArea": {
+                "bottom": 840,
+                "height": 778,
+                "left": 0,
+                "right": 402,
+                "top": 62,
+                "width": 402
+              },
+              "screenFixed": {
+                "width": 402,
+                "height": 874
+              },
+              "interfaceOrientationRawValue": 1,
+              "provenance": {
+                "deviceType": "iPhone-17",
+                "runtime": "iOS-27-2",
+                "rotation": "0",
+                "uiAction": "Natural initial orientation"
+              },
+              "hostLayout": {
+                "version": 1,
+                "safeInsets": {
+                  "bottom": 34,
+                  "left": 0,
+                  "right": 0,
+                  "top": 62
+                },
+                "verticalBarEdge": "none",
+                "reservedRegions": []
+              }
+            },
+            "90": {
+              "width": 874,
+              "height": 402,
+              "pixelRatio": 3,
+              "statusBarHeight": 0,
+              "safeArea": {
+                "bottom": 20,
+                "left": 62,
+                "right": 62,
+                "top": 0
+              },
+              "orientation": "landscape",
+              "metricsSafeArea": {
+                "bottom": 812,
+                "height": 750,
+                "left": 0,
+                "right": 382,
+                "top": 62,
+                "width": 382
+              },
+              "screenFixed": {
+                "width": 402,
+                "height": 874
+              },
+              "interfaceOrientationRawValue": 4,
+              "provenance": {
+                "deviceType": "iPhone-17",
+                "runtime": "iOS-27-2",
+                "rotation": "90",
+                "uiAction": "Device Hub Rotate Right control"
+              },
+              "hostLayout": {
+                "version": 1,
+                "safeInsets": {
+                  "bottom": 20,
+                  "left": 62,
+                  "right": 62,
+                  "top": 0
+                },
+                "verticalBarEdge": "none",
+                "reservedRegions": []
+              }
+            }
+          },
+          "source": {
+            "status": "verified",
+            "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPhone-17",
+            "kind": "independent-uikit-simulator-witness",
+            "runtime": "iOS-27-2",
+            "type": "uikit-simulator",
+            "sampledOn": "2026-11-06",
+            "xcode": "Xcode 27.2\nBuild version 27B52",
+            "witnessCompiler": "Apple Swift version 6.4.2 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)\nTarget: arm64-apple-macosx27.2.0",
+            "witnessSourceSha256": "34754c3630e8446a595437c12063e36e1390360884c73c031ebc790a5a346beb",
+            "witnessBinarySha256": "8e71d3e821f673b02d03b58278a53c8b17c9e3b8a4859435ee0d8ba25df9c5e4",
+            "witnessBuildTarget": "arm64-apple-ios16.0-simulator",
+            "witnessImports": [
+              "UIKit"
+            ],
+            "runtimeIdentifier": "com.apple.CoreSimulator.SimRuntime.iOS-27-2",
+            "runtimeBuild": "24B8117"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pixel-7",
+      "label": "Pixel 7",
+      "defaultDisplay": "main",
+      "displays": [
+        {
+          "id": "main",
+          "label": "网页预览",
+          "measurements": {
+            "0": {
+              "width": 412,
+              "height": 839,
+              "pixelRatio": 2.625,
+              "statusBarHeight": 0,
+              "safeArea": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "orientation": "portrait",
+              "metricsSafeArea": {
+                "left": 0,
+                "top": 0,
+                "right": 412,
+                "bottom": 839,
+                "width": 412,
+                "height": 839
+              },
+              "screenFixed": {
+                "width": 412,
+                "height": 839
+              },
+              "provenance": {
+                "descriptor": "Pixel 7",
+                "descriptorVersion": "1.56.1",
+                "descriptorScreen": {
+                  "width": 412,
+                  "height": 915
+                },
+                "descriptorViewport": {
+                  "width": 412,
+                  "height": 839
+                },
+                "note": "Browser content viewport preset; not native Android inset measurements"
+              },
+              "hostLayout": {
+                "version": 1,
+                "safeInsets": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 0
+                },
+                "verticalBarEdge": "none",
+                "reservedRegions": []
+              }
+            },
+            "90": {
+              "width": 863,
+              "height": 360,
+              "pixelRatio": 2.625,
+              "statusBarHeight": 0,
+              "safeArea": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "orientation": "landscape",
+              "metricsSafeArea": {
+                "left": 0,
+                "top": 0,
+                "right": 863,
+                "bottom": 360,
+                "width": 863,
+                "height": 360
+              },
+              "screenFixed": {
+                "width": 863,
+                "height": 360
+              },
+              "provenance": {
+                "descriptor": "Pixel 7 landscape",
+                "descriptorVersion": "1.56.1",
+                "descriptorScreen": {
+                  "width": 915,
+                  "height": 412
+                },
+                "descriptorViewport": {
+                  "width": 863,
+                  "height": 360
+                },
+                "note": "Browser content viewport preset; not native Android inset measurements"
+              },
+              "hostLayout": {
+                "version": 1,
+                "safeInsets": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 0
+                },
+                "verticalBarEdge": "none",
+                "reservedRegions": []
+              }
+            }
+          },
+          "source": {
+            "status": "verified",
+            "type": "playwright-browser-preview",
+            "descriptorVersion": "1.56.1",
+            "scope": "Browser preview viewport only; Android native geometry is not sampled",
+            "descriptors": [
+              "Pixel 7",
+              "Pixel 7 landscape"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ipad-mini-a17-pro",
+      "label": "iPad mini (A17 Pro)",
+      "defaultDisplay": "main",
+      "displays": [
+        {
+          "id": "main",
+          "label": "主屏",
+          "measurements": {
+            "0": {
+              "width": 744,
+              "height": 1133,
+              "pixelRatio": 2,
+              "statusBarHeight": 32,
+              "safeArea": {
+                "bottom": 20,
+                "left": 0,
+                "right": 0,
+                "top": 32
+              },
+              "orientation": "portrait",
+              "metricsSafeArea": {
+                "bottom": 1113,
+                "height": 1081,
+                "left": 0,
+                "right": 744,
+                "top": 32,
+                "width": 744
+              },
+              "screenFixed": {
+                "width": 744,
+                "height": 1133
+              },
+              "interfaceOrientationRawValue": 1,
+              "provenance": {
+                "deviceType": "iPad-mini-A17-Pro",
+                "runtime": "iOS-27-0",
+                "rotation": "0",
+                "uiAction": "Natural initial orientation"
+              },
+              "hostLayout": {
+                "version": 1,
+                "safeInsets": {
+                  "bottom": 20,
+                  "left": 0,
+                  "right": 0,
+                  "top": 32
+                },
+                "verticalBarEdge": "none",
+                "reservedRegions": []
+              }
+            },
+            "90": {
+              "width": 1133,
+              "height": 744,
+              "pixelRatio": 2,
+              "statusBarHeight": 32,
+              "safeArea": {
+                "bottom": 20,
+                "left": 0,
+                "right": 0,
+                "top": 32
+              },
+              "orientation": "landscape",
+              "metricsSafeArea": {
+                "bottom": 1133,
+                "height": 1133,
+                "left": 32,
+                "right": 724,
+                "top": 0,
+                "width": 692
+              },
+              "screenFixed": {
+                "width": 744,
+                "height": 1133
+              },
+              "interfaceOrientationRawValue": 4,
+              "provenance": {
+                "deviceType": "iPad-mini-A17-Pro",
+                "runtime": "iOS-27-0",
+                "rotation": "90",
+                "uiAction": "Device Hub Rotate Right control"
+              },
+              "hostLayout": {
+                "version": 1,
+                "safeInsets": {
+                  "bottom": 20,
+                  "left": 0,
+                  "right": 0,
+                  "top": 32
+                },
+                "verticalBarEdge": "none",
+                "reservedRegions": []
+              }
+            }
+          },
+          "source": {
+            "status": "verified",
+            "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPad-mini-A17-Pro",
+            "kind": "independent-uikit-simulator-witness",
+            "runtime": "iOS-27-0",
+            "type": "uikit-simulator",
+            "sampledOn": "2026-11-06",
+            "xcode": "Xcode 27.2\nBuild version 27B52",
+            "witnessCompiler": "Apple Swift version 6.4.2 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)\nTarget: arm64-apple-macosx27.2.0",
+            "witnessSourceSha256": "34754c3630e8446a595437c12063e36e1390360884c73c031ebc790a5a346beb",
+            "witnessBinarySha256": "8e71d3e821f673b02d03b58278a53c8b17c9e3b8a4859435ee0d8ba25df9c5e4",
+            "witnessBuildTarget": "arm64-apple-ios16.0-simulator",
+            "witnessImports": [
+              "UIKit"
+            ],
+            "runtimeIdentifier": "com.apple.CoreSimulator.SimRuntime.iOS-27-0",
+            "runtimeBuild": "24A434"
+          }
+        }
+      ]
+    }
+  ]
+}

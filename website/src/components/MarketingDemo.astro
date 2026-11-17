@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {localeFromPath, localizedPath, ui} from '../data/i18n.mjs';
+import copy from '../data/marketing-copy.json';
+const locale = localeFromPath(Astro.url.pathname);
+const t = (value: string) => locale === 'en' ? copy[value.trim() as keyof typeof copy] || value : value;
+const href = (value: string) => localizedPath(value, locale);
+import Demo from '../components/Demo';
+---
+<Layout title={t("在线体验 · Weapp Container")} description={t("在真实浏览器容器中体验基础能力、商城与点单。无需安装，所有订单均为本地模拟。")}>
+  <section class="section-wrap demo-intro"><p class="eyebrow">{t("在线体验")}</p><h1>{t("亲手试一试。")}</h1><p>{t("你的浏览器，就是小程序宿主。")}</p></section>
+  <p class="section-wrap muted">{ui(locale).demoChinese}</p>
+  <Demo locale={locale} client:load />
+</Layout>

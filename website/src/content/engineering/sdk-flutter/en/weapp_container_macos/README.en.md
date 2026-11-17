@@ -1,0 +1,21 @@
+---
+id: "docs/engineering/sdk-flutter/weapp_container_macos/index"
+title: "weapp_container_macos"
+section: "Project and maintenance"
+summary: "weapp_container_macos. Versioned engineering reference from weapp-container/sdk-flutter."
+route: "/docs/engineering/sdk-flutter/weapp_container_macos/index/"
+locale: "en"
+sourceRepository: "weapp-container/sdk-flutter"
+sourceCommit: "767a78db0120a3b1a973607008ccacb2193ad8ff"
+sourcePath: "weapp_container_macos/README.en.md"
+---
+
+# weapp_container_macos
+
+[简体中文](/docs/engineering/sdk-flutter/weapp_container_macos/index/) · **English**
+
+The preview.7 platform package includes bridge source and licenses. Install through the main package after registry publication; see the [SDK home](/en/docs/engineering/sdk-flutter/index/) for platforms, architectures, Specs sources, and native dependencies.
+
+The macos platform implementation of [weapp_container](https://pub.dev/packages/weapp_container).
+
+See the [SDK guide](/en/docs/engineering/sdk-flutter/index/) for installation, supported targets, and publication status.
