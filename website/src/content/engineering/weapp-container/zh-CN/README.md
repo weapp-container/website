@@ -6,7 +6,7 @@ summary: "weapp-container。来自 weapp-container/weapp-container 的版本化�
 route: "/docs/engineering/weapp-container/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "74fda778b7a4415566e9c9808e7097fb321fb5cc"
+sourceCommit: "908b8e74b41345487a5d847681d231ace0b2cde8"
 sourcePath: "README.md"
 ---
 
@@ -31,4 +31,4 @@ Node 绑定只消费源码目录或已生成的 portable pack。编译器、宿�
 
 ## 许可证
 
-Apache-2.0。请阅读 [NOTICE](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/NOTICE) 和 [SECURITY.md](/docs/engineering/weapp-container/security/)。
+Apache-2.0。请阅读 [NOTICE](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/NOTICE) 和 [SECURITY.md](/docs/engineering/weapp-container/security/)。

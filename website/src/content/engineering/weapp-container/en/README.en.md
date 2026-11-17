@@ -6,7 +6,7 @@ summary: "weapp-container. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/weapp-container/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "74fda778b7a4415566e9c9808e7097fb321fb5cc"
+sourceCommit: "908b8e74b41345487a5d847681d231ace0b2cde8"
 sourcePath: "README.en.md"
 ---
 
@@ -31,4 +31,4 @@ The Node bindings consume source directories or prebuilt portable packs. Callers
 
 ## License
 
-Apache-2.0. See [NOTICE](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/NOTICE) and [SECURITY.md](/docs/engineering/weapp-container/security/).
+Apache-2.0. See [NOTICE](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/NOTICE) and [SECURITY.md](/docs/engineering/weapp-container/security/).

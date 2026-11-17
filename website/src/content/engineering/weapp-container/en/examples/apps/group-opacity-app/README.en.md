@@ -6,7 +6,7 @@ summary: "Group opacity fixture. Versioned engineering reference from weapp-cont
 route: "/docs/engineering/weapp-container/examples/apps/group-opacity-app/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "74fda778b7a4415566e9c9808e7097fb321fb5cc"
+sourceCommit: "908b8e74b41345487a5d847681d231ace0b2cde8"
 sourcePath: "examples/apps/group-opacity-app/README.en.md"
 ---
 

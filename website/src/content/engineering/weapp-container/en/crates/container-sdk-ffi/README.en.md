@@ -6,7 +6,7 @@ summary: "Weapp Container C ABI v1. Versioned engineering reference from weapp-c
 route: "/docs/engineering/weapp-container/crates/container-sdk-ffi/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "74fda778b7a4415566e9c9808e7097fb321fb5cc"
+sourceCommit: "908b8e74b41345487a5d847681d231ace0b2cde8"
 sourcePath: "crates/container-sdk-ffi/README.en.md"
 ---
 

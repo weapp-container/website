@@ -6,7 +6,7 @@ summary: "Weapp Container。来自 weapp-container/.github 的版本化工程说
 route: "/docs/engineering/organization/profile/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/.github"
-sourceCommit: "7217a1ecfb77941e2675b7a326b3c6c5943bbb1e"
+sourceCommit: "dbf157301b4be84a8da33e5e4081edf1af7b9052"
 sourcePath: "profile/README.md"
 ---
 

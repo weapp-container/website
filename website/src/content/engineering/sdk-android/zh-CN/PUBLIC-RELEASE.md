@@ -6,7 +6,7 @@ summary: "公开预览发行 0.1.0-preview.7.1。来自 weapp-container/sdk-andr
 route: "/docs/engineering/sdk-android/public-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "91d6f1c3f3132f78cc3e4063439bb89cd36da137"
+sourceCommit: "f418bbd55d6ab309e0264c129696b685fee47c6f"
 sourcePath: "PUBLIC-RELEASE.md"
 ---
 

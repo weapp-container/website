@@ -6,7 +6,7 @@ summary: "Weapp Container iOS SDK. Versioned engineering reference from weapp-co
 route: "/docs/engineering/sdk-ios/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "683af9eb54cbe8496940c6131c5c6cfe47d93058"
+sourceCommit: "e800e083bb533656b132ecfd721a4ea3062b8165"
 sourcePath: "README.en.md"
 ---
 
@@ -17,7 +17,7 @@ sourcePath: "README.en.md"
 <a id="公开发行候选preview7"></a>
 ## Public distribution candidate: preview.7
 
-This SDK source is the `0.1.0-preview.7.1` candidate, and the `.7.1` core runtime is published; the iOS GitHub release and CocoaPods Trunk entry are not published yet. The iOS, Desktop and CocoaPods `.7.0` entries remain available. Check the [release status](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/public-sdk-release.en.md) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
+This SDK source is the `0.1.0-preview.7.1` candidate, and the `.7.1` core runtime is published; the iOS GitHub release and CocoaPods Trunk entry are not published yet. The iOS, Desktop and CocoaPods `.7.0` entries remain available. Check the [release status](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/public-sdk-release.en.md) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
 
 The `.7.1` installation entries become usable after the GitHub release and CocoaPods Trunk publication pass anonymous consumer verification. Historical private archives and locks retain their original identities.
 
@@ -51,11 +51,11 @@ git checkout a5c9d76b8e8068efbcedbf7af073a138b69f54f2
 
 
 
-[Documentation](https://container.weapp.dev/en/docs/) · [Build from source](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.en.md) · [APIs and contracts](/en/docs/engineering/sdk-contract/index/)
+[Documentation](https://container.weapp.dev/en/docs/) · [Build from source](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md) · [APIs and contracts](/en/docs/engineering/sdk-contract/index/)
 
 Embed mini-program pages within iOS applications. The SDK provides Swift session management, UIKit / SwiftUI view integration, host messaging channels, and local persistence, with JavaScript execution via QuickJS and page rendering through Skia Metal.
 
-Reviewed source example version: **0.1.0-preview.7.1**. The SDK wrapper source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-ios/blob/683af9eb54cbe8496940c6131c5c6cfe47d93058/LICENSE); the runtime source is provided in the main repository under Apache-2.0. This repository contains the SDK wrapper layer source, while the runtime is built or installed separately.
+Reviewed source example version: **0.1.0-preview.7.1**. The SDK wrapper source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-ios/blob/e800e083bb533656b132ecfd721a4ea3062b8165/LICENSE); the runtime source is provided in the main repository under Apache-2.0. This repository contains the SDK wrapper layer source, while the runtime is built or installed separately.
 
 <a id="从当前源码开始"></a>
 ## Starting from Source Code
@@ -70,7 +70,7 @@ pnpm install --frozen-lockfile
 node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```
 
-Then prepare the platform-specific runtime and notices according to the [source build instructions](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.en.md), and use the build tool from this repository to generate the integration package. The platform toolchain remains a required dependency; public source availability does not imply that binary packages are available in public package repositories. Existing native mini-program or framework build artifacts can be packaged independently using a portable pack tool; the weapp-vite tool is not required.
+Then prepare the platform-specific runtime and notices according to the [source build instructions](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md), and use the build tool from this repository to generate the integration package. The platform toolchain remains a required dependency; public source availability does not imply that binary packages are available in public package repositories. Existing native mini-program or framework build artifacts can be packaged independently using a portable pack tool; the weapp-vite tool is not required.
 
 The following sections retain detailed instructions for installing the SDK, view integration, and lifecycle management. Commands involving `prepare-runtime` / `prepare-native` belong to explicit archiving paths and must use a verified manifest; historical default locks may not be downloadable, see end-of-documentation notes for details.
 
@@ -95,7 +95,7 @@ Execute the following command in the root directory of a clean checkout of the p
 pnpm sdk:build:ios -- --install-framework
 ```
 
-This command builds the runtime, collects notices, and invokes the fixed SDK wrapper to generate the integration package. Output is generated at `artifacts/sdk/ios/`. Full toolchain and input validation are detailed in [Source Build](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.en.md). Historical archive installation is an optional compatibility path mentioned at the end.
+This command builds the runtime, collects notices, and invokes the fixed SDK wrapper to generate the integration package. Output is generated at `artifacts/sdk/ios/`. Full toolchain and input validation are detailed in [Source Build](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md). Historical archive installation is an optional compatibility path mentioned at the end.
 
 <a id="2-构建并接入"></a>
 ## 2. Build and Integrate
@@ -168,7 +168,7 @@ try session.navigate(route: "pages/detail/index", query: ["id": .string("42")])
 try session.back()
 ```
 
-Mini-programs call host methods through `weappContainer.invoke` and exchange messages through `postMessage` / `onMessage`; see [weapp-container.d.ts](https://github.com/weapp-container/sdk-ios/blob/683af9eb54cbe8496940c6131c5c6cfe47d93058/types/weapp-container.d.ts). Register methods before the first `load`. Arguments and results use `WeappJSON`. Handlers may use `async throws`; reject requests with `WeappHostError` and cooperate with Swift task cancellation.
+Mini-programs call host methods through `weappContainer.invoke` and exchange messages through `postMessage` / `onMessage`; see [weapp-container.d.ts](https://github.com/weapp-container/sdk-ios/blob/e800e083bb533656b132ecfd721a4ea3062b8165/types/weapp-container.d.ts). Register methods before the first `load`. Arguments and results use `WeappJSON`. Handlers may use `async throws`; reject requests with `WeappHostError` and cooperate with Swift task cancellation.
 
 <a id="5-生命周期与存储"></a>
 ## 5. Lifecycle and storage
@@ -198,19 +198,19 @@ node tools/simulator-smoke.mjs --distribution artifacts/sdk/ios/WeappContainer -
 
 - [Embedding, window metrics, touch, and lifecycle](/en/docs/engineering/sdk-ios/docs/embedding/)
 - [Host services: device capabilities, extension registration, and permissions](/en/docs/engineering/sdk-ios/host-services/)
-- [Host service examples](https://github.com/weapp-container/sdk-ios/blob/683af9eb54cbe8496940c6131c5c6cfe47d93058/examples/host-services/README.en.md)
+- [Host service examples](https://github.com/weapp-container/sdk-ios/blob/e800e083bb533656b132ecfd721a4ea3062b8165/examples/host-services/README.en.md)
 - [Independent consumer project](/en/docs/engineering/sdk-ios/examples/consumer/index/)
 - [Cross-platform session contracts](/en/docs/engineering/sdk-ios/contract/)
-- [Source inventory](https://github.com/weapp-container/sdk-ios/blob/683af9eb54cbe8496940c6131c5c6cfe47d93058/SOURCE-INVENTORY.json) and [historical extraction receipt](https://github.com/weapp-container/sdk-ios/blob/683af9eb54cbe8496940c6131c5c6cfe47d93058/ORIGIN.json)
+- [Source inventory](https://github.com/weapp-container/sdk-ios/blob/e800e083bb533656b132ecfd721a4ea3062b8165/SOURCE-INVENTORY.json) and [historical extraction receipt](https://github.com/weapp-container/sdk-ios/blob/e800e083bb533656b132ecfd721a4ea3062b8165/ORIGIN.json)
 
 Capabilities depend on the matching runtime and its distribution policy. `restricted-showcase` permits only demo packs and APIs authorized at compile time; host configuration cannot enable disabled capabilities. Validate device execution, GPUs, and performance against the actual artifacts. See the embedding guide for native input, accessibility, and complex gesture limitations. Distributions must retain the SDK `LICENSE`, runtime `RUNTIME-LICENSE`, and third-party notices.
 
 <a id="历史归档与迁移"></a>
 ## Historical archives and migration
 
-Runtime release tools now live in the [core repository](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/tools/runtime-artifacts). New manifests select exact core releases through `--manifest`. Updated downloaders map legacy `runtime-artifacts` identities to the private `weapp-container/runtime-artifacts-private-archive` for nine frozen versions, preserving their versions, hashes, and licenses and recording the resolved repository. Older downloaders must upgrade. The repository at the old name contains retired tooling only. There is no cross-repository fallback; private archives require read access, and public source licensing does not imply historical binary availability.
+Runtime release tools now live in the [core repository](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/tools/runtime-artifacts). New manifests select exact core releases through `--manifest`. Updated downloaders map legacy `runtime-artifacts` identities to the private `weapp-container/runtime-artifacts-private-archive` for nine frozen versions, preserving their versions, hashes, and licenses and recording the resolved repository. Older downloaders must upgrade. The repository at the old name contains retired tooling only. There is no cross-repository fallback; private archives require read access, and public source licensing does not imply historical binary availability.
 
-Repository-authored runtime and SDK source uses Apache-2.0. Build the current runtime using the [core source guide](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.en.md). Existing archives retain their original licenses, access requirements, versions, and hashes. This source update does not publish replacement binaries.
+Repository-authored runtime and SDK source uses Apache-2.0. Build the current runtime using the [core source guide](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md). Existing archives retain their original licenses, access requirements, versions, and hashes. This source update does not publish replacement binaries.
 
 <a id="可选安装已审核的历史归档"></a>
 ### Optional: install reviewed historical archives
@@ -233,7 +233,7 @@ To use authorized offline archives:
 node tools/prepare-runtime.mjs --artifact-dir /absolute/runtime-archives
 ```
 
-The tool validates **0.1.0-preview.7.1**, ABI 1, architectures, sizes, and SHA-256 against the [current public lock](https://github.com/weapp-container/sdk-ios/blob/683af9eb54cbe8496940c6131c5c6cfe47d93058/runtime-artifacts.0.1.0-preview.7.1.lock.json), then installs under `.runtime/install/native` and `.runtime/install/licenses`. Missing archives, denied access, or integrity mismatches fail while preserving an existing installation. A lock pin does not imply public downloads.
+The tool validates **0.1.0-preview.7.1**, ABI 1, architectures, sizes, and SHA-256 against the [current public lock](https://github.com/weapp-container/sdk-ios/blob/e800e083bb533656b132ecfd721a4ea3062b8165/runtime-artifacts.0.1.0-preview.7.1.lock.json), then installs under `.runtime/install/native` and `.runtime/install/licenses`. Missing archives, denied access, or integrity mismatches fail while preserving an existing installation. A lock pin does not imply public downloads.
 
 Select a custom reviewed manifest with `--manifest /absolute/reviewed-lock.json`. `WEAPP_CONTAINER_RUNTIME_TIMEOUT_MS` adjusts download timeouts from `1` to `3600000` milliseconds; the default is 15 minutes.
 

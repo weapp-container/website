@@ -6,7 +6,7 @@ summary: "Flutter SDK 消费者。来自 weapp-container/sdk-flutter 的版本�
 route: "/docs/engineering/sdk-flutter/example/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "767a78db0120a3b1a973607008ccacb2193ad8ff"
+sourceCommit: "ee33a224d9d7dd12f48b71eb4ed21e91981fefdd"
 sourcePath: "example/README.md"
 ---
 

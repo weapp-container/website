@@ -6,7 +6,7 @@ summary: "独立的 UIKit 消费者。来自 weapp-container/sdk-ios 的版本�
 route: "/docs/engineering/sdk-ios/examples/consumer/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "683af9eb54cbe8496940c6131c5c6cfe47d93058"
+sourceCommit: "e800e083bb533656b132ecfd721a4ea3062b8165"
 sourcePath: "examples/consumer/README.md"
 ---
 

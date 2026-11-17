@@ -6,7 +6,7 @@ summary: "Weapp Container SDK 合约。来自 weapp-container/sdk-contract 的�
 route: "/docs/engineering/sdk-contract/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "c792a0bc2976c246987b15f2cc869459974546e9"
+sourceCommit: "42b9eb42d111f21e2b789e05a4e62945c6f59e08"
 sourcePath: "README.md"
 ---
 
@@ -18,7 +18,7 @@ sourcePath: "README.md"
 <a id="public-distribution-candidate-preview7"></a>
 ## 公开发行候选：preview.7
 
-当前核心构建器与本页源码示例均使用 preview.7。核心运行库、iOS、Desktop 及公开 CocoaPods Specs 已提供下载；npm、Maven Central 和 pub.dev 尚未全部发布。使用安装命令前先核对[发布状态](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/public-sdk-release.md)，不要混用不同版本的包装层与运行库。源码公开、包发布、编译通过和设备验收分别记录。
+当前核心构建器与本页源码示例均使用 preview.7。核心运行库、iOS、Desktop 及公开 CocoaPods Specs 已提供下载；npm、Maven Central 和 pub.dev 尚未全部发布。使用安装命令前先核对[发布状态](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/public-sdk-release.md)，不要混用不同版本的包装层与运行库。源码公开、包发布、编译通过和设备验收分别记录。
 
 Contract 已在 npm 公开发布并通过匿名安装验证。其他 SDK 的进度见上述发布状态。历史私有归档及其锁文件保持原样。
 
@@ -43,7 +43,7 @@ git checkout 22cafeb56ac5d214c35fc513b1dbe5691e1b801d
 
 
 
-[开发文档](https://container.weapp.dev/docs/) · [源码构建](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.md) · [API 与协议](/docs/engineering/sdk-contract/index/)
+[开发文档](https://container.weapp.dev/docs/) · [源码构建](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md) · [API 与协议](/docs/engineering/sdk-contract/index/)
 
 Weapp Container 各端 SDK 共用的 C ABI、TypeScript 类型、适配协议、测试 pack 和运行库下载工具。应用开发优先使用 [Android](/docs/engineering/sdk-android/index/)、[iOS](/docs/engineering/sdk-ios/index/)、[Desktop](/docs/engineering/sdk-desktop/index/)、[Flutter](/docs/engineering/sdk-flutter/index/) 或 [React Native](/docs/engineering/sdk-react-native/index/) SDK；本仓库主要供自研宿主、适配器及构建工具使用。
 
@@ -62,7 +62,7 @@ pnpm install --frozen-lockfile
 node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```
 
-随后按[源码构建说明](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.md)准备目标平台的运行库和 notices，再用本仓库的构建工具生成接入包。平台工具链仍是必要依赖；源码公开不表示公共包仓库已有可下载的二进制。已有原生小程序或框架构建产物可以由独立 portable pack 工具打包，不要求 weapp-vite。
+随后按[源码构建说明](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)准备目标平台的运行库和 notices，再用本仓库的构建工具生成接入包。平台工具链仍是必要依赖；源码公开不表示公共包仓库已有可下载的二进制。已有原生小程序或框架构建产物可以由独立 portable pack 工具打包，不要求 weapp-vite。
 
 下面保留独立 SDK 的安装、视图与生命周期说明。涉及 `prepare-runtime` / `prepare-native` 的命令属于显式归档路径，必须使用核验过的配套 manifest；历史默认锁可能无法下载，详见文末说明。
 
@@ -79,13 +79,13 @@ git checkout 22cafeb56ac5d214c35fc513b1dbe5691e1b801d
 
 | 文件 | 用途 |
 | --- | --- |
-| [include/weapp_container_sdk.h](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/include/weapp_container_sdk.h) | C ABI、会话、帧和 GPU 接口及所有权规则 |
-| [include/weapp_container_sdk_gl.h](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/include/weapp_container_sdk_gl.h) | 可选 GL resolver 扩展 |
-| [types/weapp-container.d.ts](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/types/weapp-container.d.ts) | 小程序业务消息、宿主调用及协议类型 |
+| [include/weapp_container_sdk.h](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/include/weapp_container_sdk.h) | C ABI、会话、帧和 GPU 接口及所有权规则 |
+| [include/weapp_container_sdk_gl.h](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/include/weapp_container_sdk_gl.h) | 可选 GL resolver 扩展 |
+| [types/weapp-container.d.ts](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/types/weapp-container.d.ts) | 小程序业务消息、宿主调用及协议类型 |
 | [CONTRACT.md](/docs/engineering/sdk-contract/contract/) | 宿主适配器的调度、事件和生命周期协议 |
 | [FLUTTER_PROTOCOL.md](/docs/engineering/sdk-contract/flutter_protocol/) | Flutter 与原生适配器的通道约定 |
-| [runtime-artifacts.schema.json](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/runtime-artifacts.schema.json) | 精确版本运行库锁文件格式 |
-| [platforms.json](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/platforms.json) | 平台和架构标识，不代表平台已通过验证 |
+| [runtime-artifacts.schema.json](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/runtime-artifacts.schema.json) | 精确版本运行库锁文件格式 |
+| [platforms.json](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/platforms.json) | 平台和架构标识，不代表平台已通过验证 |
 
 <a id="generate-a-loadable-test-pack"></a>
 ## 生成可加载的测试 pack
@@ -162,7 +162,7 @@ int main(void) {
 <a id="retrieve-an-exact-runtime-version"></a>
 ## 按精确版本获取运行库
 
-当前 [公开锁文件](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/runtime-artifacts.0.1.0-preview.7.1.lock.json) 固定 `0.1.0-preview.7.1` 的归档、大小和 SHA-256，来源为主仓库 `runtime-v0.1.0-preview.7.1` Release，可匿名下载。原 [历史锁文件](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/runtime-artifacts.lock.json) 保持原样。
+当前 [公开锁文件](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/runtime-artifacts.0.1.0-preview.7.1.lock.json) 固定 `0.1.0-preview.7.1` 的归档、大小和 SHA-256，来源为主仓库 `runtime-v0.1.0-preview.7.1` Release，可匿名下载。原 [历史锁文件](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/runtime-artifacts.lock.json) 保持原样。
 
 在源码检出中，可按公开锁获取 iOS arm64 运行库：
 
@@ -205,13 +205,13 @@ node --test test/*.test.mjs
 
 - [可选布局、导航与执行状态扩展](/docs/engineering/sdk-contract/preview5/)
 - [原生正确性与生命周期要求](/docs/engineering/sdk-contract/preview5_3/)
-- [源码许可证](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/LICENSE) · [原始提取记录](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/ORIGIN.json)
+- [源码许可证](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/LICENSE) · [原始提取记录](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/ORIGIN.json)
 
 可选协议能力须先查询并按版本协商；新增字段不改变 C ABI `1`。没有能力声明时，不应假定运行库支持相应扩展。
 
 <a id="historical-archives-and-migration"></a>
 ## 历史归档与迁移
 
-运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
+运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
 
-核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.md)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。
+核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。

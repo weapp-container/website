@@ -6,7 +6,7 @@ summary: "iOS Wi-Fi 公共能力范围。来自 weapp-container/sdk-ios 的版�
 route: "/docs/engineering/sdk-ios/examples/host-services/wifi-apis/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "683af9eb54cbe8496940c6131c5c6cfe47d93058"
+sourceCommit: "e800e083bb533656b132ecfd721a4ea3062b8165"
 sourcePath: "examples/host-services/WIFI-APIS.md"
 ---
 

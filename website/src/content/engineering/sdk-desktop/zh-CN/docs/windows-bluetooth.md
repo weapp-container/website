@@ -6,7 +6,7 @@ summary: "Windows Bluetooth LE 宿主后端。来自 weapp-container/sdk-desktop
 route: "/docs/engineering/sdk-desktop/docs/windows-bluetooth/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "0640e563a8148589dab8286b27c3cad516e24670"
+sourceCommit: "3798a667ea66a9cfa25566f8d4302a212cb6238d"
 sourcePath: "docs/windows-bluetooth.md"
 ---
 

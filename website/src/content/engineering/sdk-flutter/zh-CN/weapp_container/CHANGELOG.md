@@ -6,7 +6,7 @@ summary: "0.1.0-preview.7.1。来自 weapp-container/sdk-flutter 的版本化工
 route: "/docs/engineering/sdk-flutter/weapp_container/changelog/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "767a78db0120a3b1a973607008ccacb2193ad8ff"
+sourceCommit: "ee33a224d9d7dd12f48b71eb4ed21e91981fefdd"
 sourcePath: "weapp_container/CHANGELOG.md"
 ---
 

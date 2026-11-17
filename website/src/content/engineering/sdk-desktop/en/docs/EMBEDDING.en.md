@@ -6,7 +6,7 @@ summary: "Weapp Container desktop SDK preview. Versioned engineering reference f
 route: "/docs/engineering/sdk-desktop/docs/embedding/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "0640e563a8148589dab8286b27c3cad516e24670"
+sourceCommit: "3798a667ea66a9cfa25566f8d4302a212cb6238d"
 sourcePath: "docs/EMBEDDING.en.md"
 ---
 

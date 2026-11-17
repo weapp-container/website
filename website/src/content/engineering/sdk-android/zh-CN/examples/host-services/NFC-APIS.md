@@ -6,7 +6,7 @@ summary: "Android NFC。来自 weapp-container/sdk-android 的版本化工程说
 route: "/docs/engineering/sdk-android/examples/host-services/nfc-apis/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "91d6f1c3f3132f78cc3e4063439bb89cd36da137"
+sourceCommit: "f418bbd55d6ab309e0264c129696b685fee47c6f"
 sourcePath: "examples/host-services/NFC-APIS.md"
 ---
 

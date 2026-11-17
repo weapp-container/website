@@ -6,7 +6,7 @@ summary: "Native host routing and scrolling consumer. Versioned engineering refe
 route: "/docs/engineering/sdk-react-native/example/host/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "c5fed6790b3a1e388247991223388e4bfcd4fc48"
+sourceCommit: "9552ce6b5095e3c61bcf089e5ecbda049fad169e"
 sourcePath: "example/host/README.en.md"
 ---
 

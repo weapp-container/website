@@ -6,7 +6,7 @@ summary: "Kotlin host. Versioned engineering reference from weapp-container/webs
 route: "/docs/engineering/website/hosts/native-android/index/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "0f8fc04ccd8b30b03ce96c048b5b759a76403d08"
+sourceCommit: "d590b235ceebab25a516d13a8caf7d78d857b921"
 sourcePath: "hosts/native-android/README.en.md"
 ---
 

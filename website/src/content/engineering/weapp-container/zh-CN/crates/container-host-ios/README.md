@@ -6,7 +6,7 @@ summary: "container-host-ios。来自 weapp-container/weapp-container 的版本�
 route: "/docs/engineering/weapp-container/crates/container-host-ios/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "74fda778b7a4415566e9c9808e7097fb321fb5cc"
+sourceCommit: "908b8e74b41345487a5d847681d231ace0b2cde8"
 sourcePath: "crates/container-host-ios/README.md"
 ---
 
@@ -36,7 +36,7 @@ iOS 静态库和 Swift/Objective-C 桥接边界。共享运行时通过 `load_ma
 原生卸载是幂等的，并且会清除定时器、提供者和引擎状态，同时保留可重用的宿主句柄。它不会调用应用程序钩子：在需要运行这些钩子时，应先分发 `app.lifecycle` 事件并传入 `unload`。抛出异常的钩子不得阻止原生释放。在释放后，直到加载新的清单，状态/调整大小/定时器/分发调用都将失败。每个返回的 FFI 缓冲区仍由调用方拥有，并必须使用匹配的缓冲区释放函数进行释放。
 
 Swift 适配器符合 `WeappContainerSessionRuntime`。
-`WeappContainerSession` 提供整个会话的输入、定时器、前台和导航感知的渲染所有权。UIKit 应用使用 `WeappContainerView`，该视图将这些操作保留在主线程，并直接将其绘制到 `CAMetalLayer` 中。该视图负责会话的销毁，包括显示链接/观察者清理以及 Metal  draining/detach 在卸载前的操作。它支持单指触控/轻点、触控目标捕获、多点触控/长按、原生滚动、文本输入组合、可访问性，以及完整的 iOS 窗口/显示观察均不在本实现中。有关嵌入和验证合约，请参见 [`docs/ios-portable-pack.md`](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/ios-portable-pack.md)。
+`WeappContainerSession` 提供整个会话的输入、定时器、前台和导航感知的渲染所有权。UIKit 应用使用 `WeappContainerView`，该视图将这些操作保留在主线程，并直接将其绘制到 `CAMetalLayer` 中。该视图负责会话的销毁，包括显示链接/观察者清理以及 Metal  draining/detach 在卸载前的操作。它支持单指触控/轻点、触控目标捕获、多点触控/长按、原生滚动、文本输入组合、可访问性，以及完整的 iOS 窗口/显示观察均不在本实现中。有关嵌入和验证合约，请参见 [`docs/ios-portable-pack.md`](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/ios-portable-pack.md)。
 
 `weapp_container_ios_host_render_snapshot` 在完成一个 `render.commit` 后返回一个 JSON `RenderSnapshot`；Swift 可以将预乘 RGBA8 像素上传到一个 Metal 绘制表面，而无需为每个节点进行桥接调用。这是软件回退路径，必须保持报告为 `containerSurfaceAttached: false`。
 

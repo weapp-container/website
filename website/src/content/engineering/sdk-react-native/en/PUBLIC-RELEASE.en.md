@@ -6,7 +6,7 @@ summary: "Public preview release 0.1.0-preview.7.1. Versioned engineering refere
 route: "/docs/engineering/sdk-react-native/public-release/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "c5fed6790b3a1e388247991223388e4bfcd4fc48"
+sourceCommit: "9552ce6b5095e3c61bcf089e5ecbda049fad169e"
 sourcePath: "PUBLIC-RELEASE.en.md"
 ---
 

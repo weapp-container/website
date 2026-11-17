@@ -6,7 +6,7 @@ summary: "Weapp Container SDK Contracts. Versioned engineering reference from we
 route: "/docs/engineering/sdk-contract/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "c792a0bc2976c246987b15f2cc869459974546e9"
+sourceCommit: "42b9eb42d111f21e2b789e05a4e62945c6f59e08"
 sourcePath: "README.en.md"
 ---
 
@@ -18,7 +18,7 @@ sourcePath: "README.en.md"
 <a id="公开发行候选preview7"></a>
 ## Public distribution candidate: preview.7
 
-The current core builder and these source examples use preview.7. Core runtime, iOS, Desktop and public CocoaPods Specs downloads are available; npm, Maven Central and pub.dev publication is incomplete. Check the [release status](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/public-sdk-release.en.md) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
+The current core builder and these source examples use preview.7. Core runtime, iOS, Desktop and public CocoaPods Specs downloads are available; npm, Maven Central and pub.dev publication is incomplete. Check the [release status](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/public-sdk-release.en.md) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
 
 Contract is public on npm and passed anonymous installation checks. See the release status above for the other SDKs. Historical private archives and locks retain their original identities.
 
@@ -43,7 +43,7 @@ git checkout 22cafeb56ac5d214c35fc513b1dbe5691e1b801d
 
 
 
-[Documentation](https://container.weapp.dev/en/docs/) · [Source builds](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.en.md) · [APIs and protocols](/en/docs/engineering/sdk-contract/index/)
+[Documentation](https://container.weapp.dev/en/docs/) · [Source builds](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md) · [APIs and protocols](/en/docs/engineering/sdk-contract/index/)
 
 Shared C ABI, TypeScript types, adapter protocols, test packs, and runtime retrieval tools for Weapp Container SDKs. Application developers should start with the [Android](/en/docs/engineering/sdk-android/index/), [iOS](/en/docs/engineering/sdk-ios/index/), [Desktop](/en/docs/engineering/sdk-desktop/index/), [Flutter](/en/docs/engineering/sdk-flutter/index/), or [React Native](/en/docs/engineering/sdk-react-native/index/) SDK. This repository primarily serves custom hosts, adapters, and build tools.
 
@@ -62,7 +62,7 @@ pnpm install --frozen-lockfile
 node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```
 
-Follow the [source build guide](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.en.md) to prepare the target runtime and notices, then use this SDK's packaging tools. Platform toolchains remain prerequisites. Public source does not imply that prebuilt packages are available from a public registry. Native mini-program directories and existing framework builds can be packaged independently; weapp-vite is optional.
+Follow the [source build guide](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md) to prepare the target runtime and notices, then use this SDK's packaging tools. Platform toolchains remain prerequisites. Public source does not imply that prebuilt packages are available from a public registry. Native mini-program directories and existing framework builds can be packaged independently; weapp-vite is optional.
 
 The remaining sections describe standalone SDK installation, views, and lifecycle. Commands using `prepare-runtime` or `prepare-native` select the explicit archive path and require a reviewed matching manifest. Historical default locks may be unavailable; see the migration section at the end.
 
@@ -79,13 +79,13 @@ git checkout 22cafeb56ac5d214c35fc513b1dbe5691e1b801d
 
 | File | Purpose |
 | --- | --- |
-| [include/weapp_container_sdk.h](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/include/weapp_container_sdk.h) | C ABI, sessions, frames, GPU APIs, and ownership rules |
-| [include/weapp_container_sdk_gl.h](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/include/weapp_container_sdk_gl.h) | Optional GL resolver extension |
-| [types/weapp-container.d.ts](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/types/weapp-container.d.ts) | Mini-app messaging, host calls, and protocol types |
+| [include/weapp_container_sdk.h](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/include/weapp_container_sdk.h) | C ABI, sessions, frames, GPU APIs, and ownership rules |
+| [include/weapp_container_sdk_gl.h](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/include/weapp_container_sdk_gl.h) | Optional GL resolver extension |
+| [types/weapp-container.d.ts](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/types/weapp-container.d.ts) | Mini-app messaging, host calls, and protocol types |
 | [CONTRACT.md](/en/docs/engineering/sdk-contract/contract/) | Host adapter scheduling, events, and lifecycle |
 | [FLUTTER_PROTOCOL.md](/en/docs/engineering/sdk-contract/flutter_protocol/) | Flutter/native adapter channel contract |
-| [runtime-artifacts.schema.json](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/runtime-artifacts.schema.json) | Exact runtime artifact lock format |
-| [platforms.json](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/platforms.json) | Platform and architecture identifiers, not acceptance results |
+| [runtime-artifacts.schema.json](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/runtime-artifacts.schema.json) | Exact runtime artifact lock format |
+| [platforms.json](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/platforms.json) | Platform and architecture identifiers, not acceptance results |
 
 <a id="生成可加载的测试-pack"></a>
 ## Generate a loadable test pack
@@ -162,7 +162,7 @@ Initialize every result buffer to `{NULL, 0}`. Results are length-delimited UTF-
 <a id="按精确版本获取运行库"></a>
 ## Retrieve an exact runtime version
 
-The [public lock](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/runtime-artifacts.0.1.0-preview.7.1.lock.json) pins the archives, sizes and SHA-256 hashes for `0.1.0-preview.7.1` from the core `runtime-v0.1.0-preview.7.1` Release. Downloads support anonymous access. The [historical lock](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/runtime-artifacts.lock.json) remains unchanged.
+The [public lock](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/runtime-artifacts.0.1.0-preview.7.1.lock.json) pins the archives, sizes and SHA-256 hashes for `0.1.0-preview.7.1` from the core `runtime-v0.1.0-preview.7.1` Release. Downloads support anonymous access. The [historical lock](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/runtime-artifacts.lock.json) remains unchanged.
 
 From a source checkout, retrieve the iOS arm64 runtime using the public lock:
 
@@ -205,7 +205,7 @@ Tests use local data and simulated responses without credentials or a real runti
 
 - [Optional layout, navigation, and execution-state extensions](/en/docs/engineering/sdk-contract/preview5/)
 - [Native correctness and lifecycle requirements](/en/docs/engineering/sdk-contract/preview5_3/)
-- [Source license](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/LICENSE) · [Original extraction receipt](https://github.com/weapp-container/sdk-contract/blob/c792a0bc2976c246987b15f2cc869459974546e9/ORIGIN.json)
+- [Source license](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/LICENSE) · [Original extraction receipt](https://github.com/weapp-container/sdk-contract/blob/42b9eb42d111f21e2b789e05a4e62945c6f59e08/ORIGIN.json)
 
 Query and negotiate optional capabilities by version before using them. Additive fields preserve C ABI `1`; an absent capability declaration does not imply support.
 
@@ -214,6 +214,6 @@ Query and negotiate optional capabilities by version before using them. Additive
 
 Historical storage: updated downloaders map the nine frozen legacy `runtime-artifacts` versions to the private `weapp-container/runtime-artifacts-private-archive`, retaining original lock bytes, hashes and licenses and recording the resolved repository. Old downloaders must upgrade. The new repository at the old name contains retired tool source only; new runtime releases use the core repository. Private archive access still requires authorization, with no cross-repository fallback.
 
-Runtime packaging and publication now live in the [core repository](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/tools/runtime-artifacts). New manifests select exact core releases through `--manifest`. The default lock retains its historical `runtime-artifacts` source, version, hashes and bundled licenses. The retired repository remains a read-only archive; downloads never fall back between repositories. Private repositories still require read access; source licensing does not imply public binary availability.
+Runtime packaging and publication now live in the [core repository](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/tools/runtime-artifacts). New manifests select exact core releases through `--manifest`. The default lock retains its historical `runtime-artifacts` source, version, hashes and bundled licenses. The retired repository remains a read-only archive; downloads never fall back between repositories. Private repositories still require read access; source licensing does not imply public binary availability.
 
-The core runtime and SDK source are available under Apache-2.0. Build the current runtime from the [core source guide](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.en.md). Existing prebuilt archives retain their original licenses, access requirements and exact version/hash pins; this source update does not publish replacement binaries.
+The core runtime and SDK source are available under Apache-2.0. Build the current runtime from the [core source guide](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md). Existing prebuilt archives retain their original licenses, access requirements and exact version/hash pins; this source update does not publish replacement binaries.

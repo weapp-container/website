@@ -6,7 +6,7 @@ summary: "iOS NFC. Versioned engineering reference from weapp-container/sdk-ios.
 route: "/docs/engineering/sdk-ios/examples/host-services/nfc-apis/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "683af9eb54cbe8496940c6131c5c6cfe47d93058"
+sourceCommit: "e800e083bb533656b132ecfd721a4ea3062b8165"
 sourcePath: "examples/host-services/NFC-APIS.en.md"
 ---
 

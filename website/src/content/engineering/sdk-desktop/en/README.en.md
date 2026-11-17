@@ -6,7 +6,7 @@ summary: "Weapp Container Desktop SDK. Versioned engineering reference from weap
 route: "/docs/engineering/sdk-desktop/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "0640e563a8148589dab8286b27c3cad516e24670"
+sourceCommit: "3798a667ea66a9cfa25566f8d4302a212cb6238d"
 sourcePath: "README.en.md"
 ---
 
@@ -18,7 +18,7 @@ sourcePath: "README.en.md"
 <a id="公开发行候选preview7"></a>
 ## Public distribution candidate: preview.7
 
-This SDK source is the `0.1.0-preview.7.1` candidate, and the `.7.1` core runtime is published; the Desktop GitHub release and CocoaPods Trunk entry are not published yet. The Desktop and CocoaPods `.7.0` entries remain available. Check the [release status](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/public-sdk-release.en.md) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
+This SDK source is the `0.1.0-preview.7.1` candidate, and the `.7.1` core runtime is published; the Desktop GitHub release and CocoaPods Trunk entry are not published yet. The Desktop and CocoaPods `.7.0` entries remain available. Check the [release status](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/public-sdk-release.en.md) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
 
 The `.7.1` installation entries become usable after the GitHub release and CocoaPods Trunk publication pass anonymous consumer verification. Historical private archives and locks retain their original identities.
 
@@ -41,7 +41,7 @@ git checkout 8bcd081a1a08410bc761f58a54b9747cbab89743
 
 
 
-[Documentation](https://container.weapp.dev/en/docs/) · [Build from source](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.en.md) · [APIs and contracts](/en/docs/engineering/sdk-contract/index/)
+[Documentation](https://container.weapp.dev/en/docs/) · [Build from source](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md) · [APIs and contracts](/en/docs/engineering/sdk-contract/index/)
 
 Run mini-program page packages in existing macOS, Windows, or Linux applications. The SDK provides C/C++ session, native view, message, and lifecycle interfaces, with the host managing the window and main event loop.
 
@@ -60,7 +60,7 @@ pnpm install --frozen-lockfile
 node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```
 
-Then prepare platform-specific runtimes and notices according to the [source build instructions](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.en.md), and use the build tool from this repository to generate the integration package. Platform toolchains remain essential dependencies; the availability of source code does not imply that pre-built binaries are available in public package repositories. Existing native mini-program or framework build artifacts can be packaged independently using a portable pack tool; the weapp-vite tool is not required.
+Then prepare platform-specific runtimes and notices according to the [source build instructions](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md), and use the build tool from this repository to generate the integration package. Platform toolchains remain essential dependencies; the availability of source code does not imply that pre-built binaries are available in public package repositories. Existing native mini-program or framework build artifacts can be packaged independently using a portable pack tool; the weapp-vite tool is not required.
 
 The following sections retain detailed installation, view, and lifecycle instructions. Commands involving `prepare-runtime` / `prepare-native` belong to explicit archival paths and must use verified accompanying manifests. Historical default locks may not be downloadable; see the end of the document for details.
 
@@ -92,7 +92,7 @@ pnpm sdk:licenses -- --target aarch64-apple-darwin --features quickjs-native,ski
 pnpm sdk:build:desktop -- --target macos-arm64 --pack artifacts/hello-pack --verify
 ```
 
-Output is located at `artifacts/sdk/desktop/macos-arm64/`. Intel, universal macOS, Windows, and Linux triples, platform toolchains, and packaging workflows are detailed in [Source Build](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.en.md). Build and window validation records are generated for the target system.
+Output is located at `artifacts/sdk/desktop/macos-arm64/`. Intel, universal macOS, Windows, and Linux triples, platform toolchains, and packaging workflows are detailed in [Source Build](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md). Build and window validation records are generated for the target system.
 
 <a id="接入已有-cmake-工程"></a>
 ## Integrate with Existing CMake Project
@@ -203,24 +203,24 @@ The consumption example uses the installed headers and libraries and verifies re
 - [Embedding, Threads, Events, Native Device Interfaces](/en/docs/engineering/sdk-desktop/docs/embedding/)
 - [Windows Sensors](/en/docs/engineering/sdk-desktop/windows-sensors/) · [Windows Audio](/en/docs/engineering/sdk-desktop/windows-audio/)
 - [Shared Adapter Protocol](/en/docs/engineering/sdk-desktop/contract/) · [SDK Contract Repository](/en/docs/engineering/sdk-contract/index/)
-- [Source License](https://github.com/weapp-container/sdk-desktop/blob/0640e563a8148589dab8286b27c3cad516e24670/LICENSE) · [Original Extraction Records](https://github.com/weapp-container/sdk-desktop/blob/0640e563a8148589dab8286b27c3cad516e24670/ORIGIN.json) · [Current Source List](https://github.com/weapp-container/sdk-desktop/blob/0640e563a8148589dab8286b27c3cad516e24670/SOURCE-INVENTORY.json)
+- [Source License](https://github.com/weapp-container/sdk-desktop/blob/3798a667ea66a9cfa25566f8d4302a212cb6238d/LICENSE) · [Original Extraction Records](https://github.com/weapp-container/sdk-desktop/blob/3798a667ea66a9cfa25566f8d4302a212cb6238d/ORIGIN.json) · [Current Source List](https://github.com/weapp-container/sdk-desktop/blob/3798a667ea66a9cfa25566f8d4302a212cb6238d/SOURCE-INVENTORY.json)
 
 The build tool validates the source list. After modifying SDK source code, update the list according to the `tools/source-inventory.mjs` review process. Historical `ORIGIN.json` entries remain unchanged. The actual build and runtime scope for each platform is defined by the verification records of the corresponding build product.
 
 <a id="历史归档与迁移"></a>
 ## Historical Archives and Migration
-Historical issuance audit (2026-11-12): The SDK archive part in the default lock is missing, the runtime pin does not match the current asset with the same name, and the default online preparation will be rejected by the integrity check. Please build from matching clean source, or explicitly select an independently audited companion manifest via `--manifest`; don't just modify the old hash. [Difference and Migration Record](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/runtime-artifacts-migration.en.md).
+Historical issuance audit (2026-11-12): The SDK archive part in the default lock is missing, the runtime pin does not match the current asset with the same name, and the default online preparation will be rejected by the integrity check. Please build from matching clean source, or explicitly select an independently audited companion manifest via `--manifest`; don't just modify the old hash. [Difference and Migration Record](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/runtime-artifacts-migration.en.md).
 
-The runtime distribution tool has been moved into [core warehouse](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/tools/runtime-artifacts). The new manifest uses the exact Release version of the core repository; choose this explicitly with `--manifest`. The updated downloader directs the `runtime-artifacts` identifier in the old lock to the private `weapp-container/runtime-artifacts-private-archive`, allows only nine frozen versions, retains the original version, hash and accompanying license, and the receipt records the actual repository. The old version of the downloader needs to be upgraded; the new repository with the same name only retains the source code of the update tool. There is no cross-repository rollback, private files still require read permission, and the source code license does not mean that historical releases are publicly available.
+The runtime distribution tool has been moved into [core warehouse](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/tools/runtime-artifacts). The new manifest uses the exact Release version of the core repository; choose this explicitly with `--manifest`. The updated downloader directs the `runtime-artifacts` identifier in the old lock to the private `weapp-container/runtime-artifacts-private-archive`, allows only nine frozen versions, retains the original version, hash and accompanying license, and the receipt records the actual repository. The old version of the downloader needs to be upgraded; the new repository with the same name only retains the source code of the update tool. There is no cross-repository rollback, private files still require read permission, and the source code license does not mean that historical releases are publicly available.
 
-The core runtime and SDK own source code use Apache-2.0. You can build the current runtime library according to [Main Warehouse Source Code Construction Instructions](https://github.com/weapp-container/weapp-container/blob/74fda778b7a4415566e9c9808e7097fb321fb5cc/docs/sdk-source-build.en.md). Existing precompiled archives retain the original license, access requirements, precise versions and hash locks; no replacement binaries will be released in this source code update.
+The core runtime and SDK own source code use Apache-2.0. You can build the current runtime library according to [Main Warehouse Source Code Construction Instructions](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md). Existing precompiled archives retain the original license, access requirements, precise versions and hash locks; no replacement binaries will be released in this source code update.
 
 <a id="可选已审核的归档输入"></a>
 ### Optional: Audited archive input
 
 Historical installation commands (not used as the default path for first access):
 
-The preparation script verifies preview.7.0, ABI, size and SHA-256 against the [current public lock](https://github.com/weapp-container/sdk-desktop/blob/0640e563a8148589dab8286b27c3cad516e24670/runtime-artifacts.0.1.0-preview.7.1.lock.json), which includes macOS, Linux and Windows runtimes and SDKs. The old `runtime-artifacts.lock.json` remains for historical compatibility; do not use it to build current source. See the published-preview erratum below for the header version macro limitation.
+The preparation script verifies preview.7.0, ABI, size and SHA-256 against the [current public lock](https://github.com/weapp-container/sdk-desktop/blob/3798a667ea66a9cfa25566f8d4302a212cb6238d/runtime-artifacts.0.1.0-preview.7.1.lock.json), which includes macOS, Linux and Windows runtimes and SDKs. The old `runtime-artifacts.lock.json` remains for historical compatibility; do not use it to build current source. See the published-preview erratum below for the header version macro limitation.
 
 After obtaining the authorization to download the runtime library, inject `WEAPP_CONTAINER_RUNTIME_TOKEN` through the key manager or CI secret, and then execute:
 
