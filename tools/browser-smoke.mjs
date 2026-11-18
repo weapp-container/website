@@ -143,6 +143,30 @@ try {
     const bytes = await readFile(path); screenshots.push({name,path,sha256:createHash('sha256').update(bytes).digest('hex')});
     return path;
   }
+  async function waitForAdaptiveDensity() {
+    await page.waitForFunction(() => {
+      const iframe=document.querySelector('iframe[title$="交互演示"]'),doc=iframe?.contentDocument,canvas=doc?.querySelector('canvas');
+      const device=document.querySelector('.demo-device'),fit=document.querySelector('.device-fit-area');
+      if(!doc||!canvas||!device||!fit)return false;
+      const maxHeight=Math.max(1,Math.min(innerHeight*(innerWidth<768?.70:.72),innerWidth<768?640:760));
+      const expectedDisplayScale=Math.min(1,fit.clientWidth/device.offsetWidth,maxHeight/device.offsetHeight);
+      const displayScale=device.getBoundingClientRect().width/device.offsetWidth;
+      if(Math.abs(displayScale-expectedDisplayScale)>.002)return false;
+      const target=expectedDisplayScale*devicePixelRatio;
+      const density=[1,1.5,2].reduce((best,value)=>Math.abs(value-target)<Math.abs(best-target)?value:best,1);
+      const width=Number(doc.documentElement.dataset.viewportWidth),height=Number(doc.documentElement.dataset.viewportHeight);
+      return canvas.width===Math.ceil(width*density)&&canvas.height===Math.ceil(height*density);
+    },undefined,{timeout:30000});
+  }
+  async function densitySnapshot() {
+    return page.evaluate(() => {
+      const iframe=document.querySelector('iframe[title$="交互演示"]'),doc=iframe?.contentDocument,canvas=doc?.querySelector('canvas');
+      const device=document.querySelector('.demo-device'),displayScale=device.getBoundingClientRect().width/device.offsetWidth;
+      const target=displayScale*devicePixelRatio,density=[1,1.5,2].reduce((best,value)=>Math.abs(value-target)<Math.abs(best-target)?value:best,1);
+      const width=Number(doc.documentElement.dataset.viewportWidth),height=Number(doc.documentElement.dataset.viewportHeight);
+      return {src:iframe.getAttribute('src'),displayScale,devicePixelRatio,expected:density,width,height,canvasWidth:canvas.width,canvasHeight:canvas.height,actual:canvas.width/width};
+    });
+  }
   async function checkDevicePicker(name,{touch=false}={}) {
     const trigger=page.getByRole('combobox',{name:'演示设备',exact:true});
     await page.waitForFunction(()=>document.querySelector('#showcase-device')?.disabled===false);
@@ -177,6 +201,7 @@ try {
     await frame.waitForFunction(()=>{const root=document.documentElement;return root?.dataset.state === 'ready' || root?.dataset.state === 'error';},null,{timeout:150000});
     assert.equal(await frame.locator('html').getAttribute('data-state'),'ready',await frame.locator('#startup').textContent());
     if(scene)await frame.waitForFunction(value=>document.documentElement.dataset.scene===value,scene,{timeout:15000});
+    await waitForAdaptiveDensity();
     const startup=await frame.evaluate(()=>{if(window.__showcaseSmokeColdRecorded)return null;window.__showcaseSmokeColdRecorded=true;return performance.now()-window.__showcaseSmokeStartedAt;});
     if(startup!==null)coldStarts.push({scene:scene||'initial',durationMs:startup});
     assert.ok(await frame.locator('canvas').count() > 0,'Real CanvasKit surface missing');
@@ -188,8 +213,10 @@ try {
     assert.deepEqual(coverage,{x:0,y:0,width:profile.width,height:profile.height,screenWidth:profile.width,screenHeight:profile.height},'Iframe does not cover screen origin to edge');
     const fit=await page.locator('.device-fit-area').boundingBox(),phone=await page.locator('.phone-area').boundingBox();
     assert.ok(fit&&phone&&Math.abs(fit.height-phone.height)<1,'Device stage retained blank vertical space');
-    assert.equal(measured.canvasWidth,Math.round(measured.width*measured.pixelRatio),'Canvas lost physical horizontal resolution');
-    assert.equal(measured.canvasHeight,Math.round(measured.height*measured.pixelRatio),'Canvas lost physical vertical resolution');
+    const density=await densitySnapshot();
+    assert.equal(measured.canvasWidth,Math.ceil(measured.width*density.expected),'Canvas backing width does not match adaptive render density');
+    assert.equal(measured.canvasHeight,Math.ceil(measured.height*density.expected),'Canvas backing height does not match adaptive render density');
+    resources.push({scene,adaptiveDensity:density});
     assert.ok(measured.graphics&&!measured.graphics.contextLost,'Live WebGL2 presenter unavailable');
     assert.ok(page.workers().length > 0,'AppService must run in an actual Dedicated Worker');
     const timing=await frame.evaluate(()=>performance.getEntriesByType('resource').filter(entry=>/NotoSansSC\.ttf|\.wasm(?:$|\?)/.test(entry.name)).map(entry=>({name:entry.name,durationMs:entry.duration,transferSize:entry.transferSize,encodedBodySize:entry.encodedBodySize,decodedBodySize:entry.decodedBodySize})));
@@ -642,6 +669,19 @@ try {
   assert.equal(page.workers().length,1,'Restart did not create exactly one new Worker');
   assert.deepEqual(await state(),flushedState,'Restart changed persisted commerce state');
   checks.push('closed-owner-replaced-before-restart-ready');
+  if(mode==='devices') {
+    const adaptiveOwner=await page.locator('iframe[title$="交互演示"]').elementHandle(),source=await adaptiveOwner.getAttribute('src');
+    const desktopDensity=await densitySnapshot();
+    await page.setViewportSize({width:390,height:844});await waitForAdaptiveDensity();
+    const mobileDensity=await densitySnapshot();
+    assert.notEqual(mobileDensity.actual,desktopDensity.actual,'Narrow display did not select a lower render density');
+    assert.equal(await adaptiveOwner.evaluate(element=>element===document.querySelector('iframe[title$="交互演示"]')),true,'Window resize replaced the active iframe owner');
+    assert.equal(await adaptiveOwner.getAttribute('src'),source,'Window resize navigated the active iframe');
+    await page.setViewportSize({width:1365,height:1100});await waitForAdaptiveDensity();
+    assert.equal(await adaptiveOwner.evaluate(element=>element===document.querySelector('iframe[title$="交互演示"]')),true,'Restoring the desktop fit replaced the active iframe owner');
+    assert.equal(await adaptiveOwner.getAttribute('src'),source,'Restoring the desktop fit navigated the active iframe');
+    checks.push('adaptive-density-resize-preserves-iframe-owner');
+  }
   if(mode==='scroll-boundary')await checkScrollBoundary('order-restarted');
   await frame.evaluate(()=>parent.postMessage({type:'test.noop'},location.origin));
   await Promise.all([

@@ -71,7 +71,7 @@ export async function stageWebRuntime({runtimeDirectory,receiptSha256,outputDire
   productConfig.viewport = deviceGeometry(registry.defaultSelection,registry).viewport;
   files.set('worker-product-config.mjs',Buffer.from('export const WORKER_PRODUCT_CONFIG='+JSON.stringify(productConfig)+';\n'));
   const config = {schemaVersion:1,runtimeVersion:receipt.sdkVersion,distributionProfile:'restricted-showcase',policySha256,packRoot:index.integrityRoot};
-  for (const name of ['index.html','showcase.css','showcase-entry.mjs','showcase-bridge.mjs','showcase-device-controller.mjs','showcase-presentation.mjs','showcase-scene-controller.mjs']) {
+  for (const name of ['index.html','showcase.css','showcase-entry.mjs','showcase-bridge.mjs','showcase-device-controller.mjs','showcase-density-controller.mjs','showcase-presentation.mjs','showcase-scene-controller.mjs']) {
     const bytes = await readFile(resolve(root,'website/runtime',name));
     const source = bytes.toString().replaceAll('../shared/showcase-devices.mjs','./showcase-devices.mjs').replaceAll('../shared/showcase-scroll-boundary.mjs','./showcase-scroll-boundary.mjs');
     files.set(name,name.endsWith('.mjs') ? Buffer.from((await minify(source,{module:true,mangle:true,compress:true,sourceMap:false})).code+'\n') : bytes);

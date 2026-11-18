@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowClockwise, ArrowSquareOut, Check, Monitor, ShoppingBag, Coffee, HandTap, WarningCircle } from '@phosphor-icons/react';
-import { DEVICE_REGISTRY, deviceGeometry, fitDeviceScale, parseDeviceSelection, sameDeviceSelection, selectionSearch, type DeviceSelection } from '../../shared/showcase-devices.mjs';
+import { DEVICE_REGISTRY, deviceGeometry, fitDeviceScale, parseDeviceSelection, renderScaleForDisplay, runtimeSelectionSearch, sameDeviceSelection, selectionSearch, type DeviceSelection } from '../../shared/showcase-devices.mjs';
 import {requestShowcaseOwner} from '../../shared/showcase-owner-channel.mjs';
 import {attachShowcaseScrollBoundary} from '../../shared/showcase-scroll-boundary.mjs';
 import DeviceSelect from './DeviceSelect';
@@ -29,7 +29,14 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
   const [status, setStatus] = useState<DemoStatus>('preparing');
   const [ready, setReady] = useState(false);
   const [switching, setSwitching] = useState(false);
+  const [layoutMeasured, setLayoutMeasured] = useState(false);
+  const [devicePixelRatio, setDevicePixelRatio] = useState(1);
+  const [ownerDensity, setOwnerDensity] = useState<{revision: number; scale: 1 | 1.5 | 2} | null>(null);
   const transition = useRef(false);
+  const densityTransition = useRef(false);
+  const targetDensity = useRef(1);
+  const appliedDensity = useRef<number | null>(null);
+  const densityOwnerRevision = useRef<number | null>(null);
   const frame = useRef<HTMLIFrameElement>(null);
   const screen = useRef<HTMLDivElement>(null);
   const mounted = useRef(false);
@@ -38,6 +45,8 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
   const viewport = useRef<HTMLDivElement>(null);
   const geometry = deviceGeometry(displaySelection);
   const scale = fitDeviceScale(geometry.screen, available);
+  const renderScale = renderScaleForDisplay(scale, devicePixelRatio);
+  targetDensity.current = renderScale;
   const model = DEVICE_REGISTRY.devices.find(item => item.id === selection.device)!;
 
   useEffect(() => {
@@ -85,6 +94,9 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
     const measure = () => {
       const next = {width: Math.max(1, viewport.current?.clientWidth ?? 1), height: heightLimit()};
       setAvailable(previous => previous.width === next.width && previous.height === next.height ? previous : next);
+      setLayoutMeasured(true);
+      const ratio = window.devicePixelRatio || 1;
+      setDevicePixelRatio(previous => previous === ratio ? previous : ratio);
     };
     const observer = new ResizeObserver(measure);
     if (viewport.current) observer.observe(viewport.current);
@@ -152,6 +164,40 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
       setSelection(next); setStatus('ready'); updateUrl(scene, next);
     });
   };
+  useEffect(() => {
+    if (runtime && owner && layoutMeasured && ownerDensity?.revision !== owner.revision) {
+      setOwnerDensity({revision: owner.revision, scale: renderScale});
+    }
+  }, [runtime, owner?.revision, layoutMeasured, ownerDensity?.revision, renderScale]);
+  useEffect(() => {
+    if (!runtime || !owner || !layoutMeasured || ownerDensity?.revision !== owner.revision || !frame.current?.contentWindow) return;
+    if (densityOwnerRevision.current !== owner.revision) {
+      densityOwnerRevision.current = owner.revision;
+      appliedDensity.current = ownerDensity.scale;
+      if (appliedDensity.current === renderScale || !ready) return;
+    }
+    if (appliedDensity.current === renderScale || densityTransition.current || transition.current) return;
+    void runTransition(async () => {
+      densityTransition.current = true;
+      try {
+        while (mounted.current && appliedDensity.current !== targetDensity.current) {
+          const nextDensity = targetDensity.current;
+          const current = frame.current?.contentWindow;
+          if (!current || !ready) throw new Error('演示尚未就绪。');
+          setStatus('resizing');
+          const id = requestId();
+          const result = await exchange(current,
+            {type: 'showcase.render-scale.request', schemaVersion: 1, requestId: id, renderScale: nextDensity},
+            data => data.type === 'showcase.render-scale.ack' && data.requestId === id, 25000);
+          if (result.status !== 'committed' || result.renderScale !== nextDensity) throw new Error('渲染清晰度调整未完成，请重新启动演示。');
+          appliedDensity.current = nextDensity;
+          if (mounted.current) { setReady(true); setStatus('ready'); }
+        }
+      } finally {
+        densityTransition.current = false;
+      }
+    });
+  }, [runtime, owner?.revision, layoutMeasured, ownerDensity?.revision, ownerDensity?.scale, ready, renderScale, switching]);
   const active = scenes.find(item => item.id === scene)!;
   return <section className="section-wrap demo-workspace">
     <aside className="demo-sidebar">
@@ -174,7 +220,7 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
         <div className="phone-area" style={{width: (geometry.screen.width + 20) * scale, height: (geometry.screen.height + 20) * scale}}>
           <div className={`demo-device${displaySelection.device === 'iphone-duo' && displaySelection.display === 'inner' ? ' device-unfolded' : ''}`} style={{width: geometry.screen.width + 20, height: geometry.screen.height + 20, transform: `scale(${scale})`}}>
             <div className="demo-device-screen" ref={screen} style={{width: geometry.screen.width, height: geometry.screen.height}}>
-              {runtime && owner && <iframe ref={frame} key={owner.revision} title={`${t(active.title)}${t('交互演示')}`} src={`${runtime.entry}${selectionSearch(owner.scene, owner.selection)}`} width={geometry.viewport.width} height={geometry.viewport.height} style={{left: 0, top: 0, width: geometry.viewport.width, height: geometry.viewport.height, pointerEvents: switching ? 'none' : undefined}} inert={switching || !!error} sandbox="allow-scripts allow-same-origin" allow="" />}
+              {runtime && owner && ownerDensity?.revision === owner.revision && <iframe ref={frame} key={owner.revision} title={`${t(active.title)}${t('交互演示')}`} src={`${runtime.entry}${runtimeSelectionSearch(owner.scene, owner.selection, ownerDensity.scale)}`} width={geometry.viewport.width} height={geometry.viewport.height} style={{left: 0, top: 0, width: geometry.viewport.width, height: geometry.viewport.height, pointerEvents: switching ? 'none' : undefined}} inert={switching || !!error} sandbox="allow-scripts allow-same-origin" allow="" />}
               {geometry.safeArea.top >= 20 && <div className="device-safe-top" aria-hidden="true" style={{height: geometry.safeArea.top}}><span>9:41</span><span>•••</span></div>}
               {geometry.safeArea.bottom >= 12 && <div className="device-safe-bottom" aria-hidden="true" style={{height: geometry.safeArea.bottom}}><span /></div>}
             </div>

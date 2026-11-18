@@ -2,10 +2,11 @@ import { WorkerWebSession } from './worker-web-session.mjs';
 import { WORKER_PRODUCT_CONFIG } from './worker-product-config.mjs';
 import { SHOWCASE_CONFIG } from './showcase-config.mjs';
 import { createShowcaseBridge } from './showcase-bridge.mjs';
-import {parseDeviceSelection,deviceGeometry,validRequestId} from '../shared/showcase-devices.mjs';
+import {parseRuntimeSelection,deviceGeometry,validRequestId} from '../shared/showcase-devices.mjs';
 import {createDeviceController} from './showcase-device-controller.mjs';
 import {waitForDevicePresentation} from './showcase-presentation.mjs';
 import {createSceneController,waitForScenePresentation} from './showcase-scene-controller.mjs';
+import {createDensityController,waitForRenderScalePresentation} from './showcase-density-controller.mjs';
 import {attachShowcaseScrollBoundary} from '../shared/showcase-scroll-boundary.mjs';
 
 // The screen owns browser scrolling for the document's lifetime, including
@@ -26,8 +27,8 @@ const fail = error => {
   console.error('Showcase runtime failed', error);
 };
 let loaded = false, restored = false, restoreDrained = false, closed = false, closing = false, draining = null, timer = null, closePromise = null, readyFrame = null;
-const {scene,selection:initialSelection} = (() => {
-  try { return parseDeviceSelection(location.search); }
+const {scene,selection:initialSelection,renderScale:initialRenderScale} = (() => {
+  try { return parseRuntimeSelection(location.search); }
   catch (error) { fail(error); throw error; }
 })();
 const applyGeometry = geometry => {
@@ -92,6 +93,13 @@ const sceneController = createSceneController({
   setScene:value=>{document.documentElement.dataset.scene=value;},
   onTransition:switching=>{document.documentElement.dataset.sceneSwitching=String(switching);},
 });
+const densityController = createDensityController({
+  initialScale: initialRenderScale,
+  getSession: () => loaded && !closing && !closed ? session : null,
+  waitForPresentation: options => waitForRenderScalePresentation(options),
+  post: value => parent.postMessage(value, location.origin), origin: location.origin, source: parent,
+  onTransition: switching => { document.documentElement.dataset.densitySwitching = String(switching); },
+});
 async function drain(final = false) {
   if (!loaded || closed || closing && !final || draining) return draining;
   const wasRestored = restored,started=performance.now();let requestCount=0;
@@ -113,7 +121,7 @@ const close = requestId => {
   if (requestId) closeRequestId = requestId;
   if (closePromise) return closePromise;
   closing = true; clearInterval(timer); timer = null;
-  deviceController.close(); sceneController.close();
+  deviceController.close(); sceneController.close(); densityController.close();
   if (readyFrame !== null) cancelAnimationFrame(readyFrame); readyFrame = null;
   closePromise = (async () => {
     await draining;
@@ -134,6 +142,7 @@ window.addEventListener('message',event => {
   if (event.origin !== location.origin || event.source !== parent) return;
   if (event.data?.type === 'showcase.scene.request') { void sceneController.receive(event); return; }
   if (event.data?.type === 'showcase.device.request') { void deviceController.receive(event); return; }
+  if (event.data?.type === 'showcase.render-scale.request') { void densityController.receive(event); return; }
   const value = event.data;
   if (value?.type === 'showcase.close' && value.schemaVersion === 1 && validRequestId(value.requestId) && Object.keys(value).length === 3) {
     if (closeAcknowledged) notify('closed',value.requestId);
@@ -159,7 +168,7 @@ try {
     engineExecution:{bootstrapTimeoutMs:10000,turnTimeoutMs:1000},
     viewExecution:{batchTimeoutMs:500},
     loadTimeoutMs:120000,
-    viewport:initialGeometry.viewport,rendererPolicy,rendererAssets,renderScale:'auto',query:{scene},
+    viewport:initialGeometry.viewport,rendererPolicy,rendererAssets,renderScale:initialRenderScale,query:{scene},
     metrics:initialGeometry.metrics,
     hostServices:{application:{hostAppId:'dev.weapp.container.showcase.web',tenantId:'showcase',publisherId:'weapp-container',appId:'showcase',environment:'trial',version:SHOWCASE_CONFIG.runtimeVersion,packRoot:SHOWCASE_CONFIG.packRoot},account:{principalId:null,epoch:'1'},apis:[]},
   });

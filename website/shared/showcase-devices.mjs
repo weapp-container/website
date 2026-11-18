@@ -82,15 +82,47 @@ export function parseDeviceSelection(search, registry = DEVICE_REGISTRY) {
   const rotation = params.get('rotation'); check(rotation === null || rotation === '0' || rotation === '90','Unsupported rotation');
   return {scene,selection:resolveDeviceSelection({device:deviceId,display:params.get('display') ?? device.defaultDisplay,rotation:rotation === null ? registry.defaultSelection.rotation : Number(rotation)},registry)};
 }
+const renderScaleValues = [1, 1.5, 2];
+const renderScale = value => {
+  check(renderScaleValues.includes(value), 'Unsupported showcase render scale');
+  return value;
+};
+export function parseRuntimeSelection(search, registry = DEVICE_REGISTRY) {
+  const params = new URLSearchParams(search);
+  const values = params.getAll('renderScale');
+  check(values.length <= 1, 'Unsupported or duplicate showcase render scale');
+  for (const key of params.keys()) check(key === 'renderScale' || ['scene', 'device', 'display', 'rotation'].includes(key), 'Unsupported showcase query');
+  params.delete('renderScale');
+  const parsed = parseDeviceSelection(params.toString(), registry);
+  const value = values.length === 0 || values[0] === 'auto' ? 'auto' : Number(values[0]);
+  if (value !== 'auto') {
+    check(values[0] === String(value), 'Unsupported showcase render scale');
+    renderScale(value);
+  }
+  return {...parsed, renderScale: value};
+}
 export function selectionSearch(scene, selection, registry = DEVICE_REGISTRY) {
   const value = resolveDeviceSelection(selection,registry); check(['shop','order','basic'].includes(scene),'Unknown showcase scene');
   return '?'+new URLSearchParams({scene,device:value.device,display:value.display,rotation:String(value.rotation)});
+}
+export function runtimeSelectionSearch(scene, selection, value, registry = DEVICE_REGISTRY) {
+  renderScale(value);
+  const params = new URLSearchParams(selectionSearch(scene, selection, registry));
+  params.set('renderScale', String(value));
+  return `?${params}`;
 }
 export function sameDeviceSelection(a,b) { return a?.device === b?.device && a?.display === b?.display && a?.rotation === b?.rotation; }
 export function fitDeviceScale(screen, available, bezel = 10) {
   check(record(screen) && record(available) && [screen.width,screen.height,available.width,available.height].every(value => Number.isFinite(value) && value > 0) && Number.isFinite(bezel) && bezel >= 0,'Invalid device fit bounds');
   return Math.min(1,available.width/(screen.width+2*bezel),available.height/(screen.height+2*bezel));
 }
+export function renderScaleForDisplay(displayScale, devicePixelRatio) {
+  check(Number.isFinite(displayScale) && displayScale > 0 && displayScale <= 1, 'Invalid display scale');
+  check(Number.isFinite(devicePixelRatio) && devicePixelRatio > 0 && devicePixelRatio <= 8, 'Invalid display density');
+  const target = devicePixelRatio * displayScale;
+  return renderScaleValues.reduce((best, value) => Math.abs(value - target) < Math.abs(best - target) ? value : best, renderScaleValues[0]);
+}
+export function isRenderScale(value) { return renderScaleValues.includes(value); }
 export function deviceGeometry(selection, registry = DEVICE_REGISTRY) {
   const selected = resolveDeviceSelection(selection,registry), device = registry.devices.find(value => value.id === selected.device), display = device.displays.find(value => value.id === selected.display);
   const measured = validateMeasurement(display.measurements[String(selected.rotation)]);
