@@ -35,7 +35,7 @@ try {
   const page = await context.newPage();
   for (const path of [
     '/', '/guide/', '/platforms/', '/demo/',
-    '/docs/engineering/weapp-container/docs/architecture/',
+    '/docs/architecture/',
     '/docs/engineering/sdk-ios/index/',
     ...docsPages.map(item => item.path),
     ...inventory.apis.map(api => `/docs/api/${apiSlug(api.id)}/`),
