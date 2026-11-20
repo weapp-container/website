@@ -15,10 +15,11 @@ const releaseScrollBoundary = attachShowcaseScrollBoundary(document.documentElem
 const startup = document.querySelector('#startup');
 const dialog = document.querySelector('#text-dialog');
 const field = document.querySelector('#text-value');
-const notify = (state,requestId) => {
+const notify = (state,requestId,progress) => {
   document.documentElement.dataset.state = state;
-  if (parent !== window) parent.postMessage({type:'showcase.status',schemaVersion:1,state,...(requestId ? {requestId} : {})}, location.origin);
+  if (parent !== window) parent.postMessage({type:'showcase.status',schemaVersion:1,state,...(requestId ? {requestId} : {}),...(progress ? {progress} : {})}, location.origin);
 };
+const progress = (stage,step) => notify('loading',undefined,{version:'1.0',stage,step,total:5});
 const fail = error => {
   if (closing || closed) return;
   startup.hidden = false;
@@ -63,7 +64,11 @@ const publishReady = () => {
   // Wait for the following native queue drain and a stable accepted picture.
   readyFrame = requestAnimationFrame(() => { readyFrame = requestAnimationFrame(() => {
     readyFrame = null;
-    if (!closing && !closed && session.status.inputEnabled === true && sequence === session.status.observation?.sequence) { startup.hidden = true; notify('ready'); }
+    if (!closing && !closed && session.status.inputEnabled === true && sequence === session.status.observation?.sequence) {
+      progress('interactive',5);
+      startup.hidden = true;
+      notify('ready');
+    }
   }); });
 };
 const send = async payload => {
@@ -82,6 +87,7 @@ const bridge = createShowcaseBridge({
     dialog.showModal(); field.focus(); field.setSelectionRange(field.value.length,field.value.length);
   },
   hideText() { if (dialog.open) dialog.close(); },
+  onRestore() { progress('restore',4); },
   onReady() { restored = true; publishReady(); },
   onError: fail,
   onClose: () => { queueMicrotask(() => { void close().catch(fail); }); },
@@ -151,11 +157,14 @@ window.addEventListener('message',event => {
 });
 window.addEventListener('pagehide',() => { releaseScrollBoundary(); void close().catch(fail); },{once:true});
 try {
-  notify('loading');
+  progress('prepare',1);
+  progress('resources',2);
+  let runtimeStarted = false;
   session = new WorkerWebSession({surfaceRoot:document.querySelector('#surface-root'),
     onBatch: () => { void drain(); },
     onState: state => {
       document.documentElement.dataset.inputEnabled = state.inputEnabled === true ? 'true' : 'false';
+      if (!runtimeStarted && state.phase === 'loading' && state.observation) { runtimeStarted = true; progress('runtime',3); }
       const measurements=window.__showcaseSmokeMetrics;
       if(measurements&&state.presentation?.accepted){measurements.acceptedFrames.push({at:performance.now(),sequence:state.observation?.sequence,inputEnabled:state.inputEnabled===true});if(measurements.acceptedFrames.length>500)measurements.acceptedFrames.shift();}
       if (state.fault) { fail(state.fault); return; }

@@ -5,7 +5,7 @@ const validText = value => validIdentity(value) && ['string','number'].includes(
   && ['search','address.name','address.phone','address.detail','food.note','basic'].includes(value.field)
   && typeof value.title === 'string' && value.title.length <= 80 && typeof value.value === 'string'
   && Number.isInteger(value.maxLength) && value.maxLength > 0 && value.maxLength <= 1000 && value.value.length <= value.maxLength;
-export function createShowcaseBridge({send,readState,writeState,showText,hideText,onReady = () => {},onError = () => {},onClose = () => {}}) {
+export function createShowcaseBridge({send,readState,writeState,showText,hideText,onRestore = () => {},onReady = () => {},onError = () => {},onClose = () => {}}) {
   let sessionId = null, pending = null, pendingScene = null, closed = false, closeRequested = false;
   const same = value => value.sessionId === sessionId && pending && ['requestId','pageId'].every(key => value[key] === pending[key]);
   const dismiss = () => { pending = null; hideText(); };
@@ -16,6 +16,7 @@ export function createShowcaseBridge({send,readState,writeState,showText,hideTex
       if (value.type === 'showcase.state.ready') {
         if (sessionId === value.sessionId) return true;
         dismiss(); sessionId = value.sessionId; closeRequested = false;
+        onRestore();
         let state = null;
         try { const raw = readState(); if (typeof raw === 'string' && new TextEncoder().encode(raw).length <= MAX_STATE_BYTES) { const parsed = JSON.parse(raw); if (record(parsed) && parsed.schemaVersion === 1) state = parsed; } } catch { state = null; }
         await send({type:'showcase.state.restore',protocolVersion:1,sessionId,state}); if (!closed && sessionId === value.sessionId) onReady(); return true;

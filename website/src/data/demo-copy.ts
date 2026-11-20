@@ -1,5 +1,14 @@
 export type Locale = 'zh-CN' | 'en';
 export type DemoStatus = 'preparing' | 'loading' | 'ready' | 'closed' | 'closing' | 'scene' | 'resizing';
+export type DemoLoadStage = 'prepare' | 'resources' | 'runtime' | 'presenter' | 'restore' | 'interactive';
+export const demoLoadProgress: Record<DemoLoadStage, {step: number; label: string}> = {
+  prepare: {step: 1, label: '正在准备演示运行库'},
+  resources: {step: 2, label: '正在校验资源并启动小程序'},
+  runtime: {step: 3, label: '小程序已启动，正在准备首屏'},
+  presenter: {step: 4, label: '正在准备首屏画布'},
+  restore: {step: 4, label: '正在恢复演示状态'},
+  interactive: {step: 5, label: '正在等待首屏可交互'},
+};
 export const statusText: Record<DemoStatus, [string, string]> = {
   preparing: ['正在准备演示', 'Preparing demo'], loading: ['正在加载小程序', 'Loading mini-program'],
   ready: ['可以开始体验', 'Ready to explore'], closed: ['演示已关闭', 'Demo closed'],
@@ -15,6 +24,11 @@ const english: Record<string, string> = {
   '试试基础交互': 'Try basic interactions', '探索小程序与宿主的连接': 'Explore the connection to the host',
   '点击、组件与滚动': 'Taps, components, and scrolling', '本地状态保存和恢复': 'Save and restore local state',
   '原生文字输入桥接': 'Native text input bridge',
+  '正在准备演示运行库': 'Preparing demo runtime', '正在校验资源并启动小程序': 'Validating resources and starting the mini-program',
+  '小程序已启动，正在准备首屏': 'Mini-program started; preparing the first screen',
+  '正在准备首屏画布': 'Preparing the first-screen canvas',
+  '正在恢复演示状态': 'Restoring demo state', '正在等待首屏可交互': 'Waiting for the first screen to become interactive',
+  '演示启动进度': 'Demo startup progress',
   '演示运行库暂时无法加载，请稍后重试。': 'The demo runtime could not be loaded. Please try again.',
   '演示产物配置不完整。': 'The demo artifact configuration is incomplete.',
   '设备链接无效，请从在线体验页面重新打开。': 'Invalid device link. Please reopen the demo page.',

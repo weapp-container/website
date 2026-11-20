@@ -5,11 +5,11 @@ import {createShowcaseBridge} from '../website/runtime/showcase-bridge.mjs';
 const ready = id => ({type:'showcase.state.ready',protocolVersion:1,sessionId:id});
 const text = (id,pageId=1) => ({type:'showcase.text.request',protocolVersion:1,sessionId:id,pageId,requestId:`r-${pageId}`,field:'search',title:'搜索商品',value:'',maxLength:80,multiline:false});
 test('readiness waits for actual restore completion and retires prior owners',async()=>{
-  const pending=[],seen=[];const bridge=createShowcaseBridge({send:value=>new Promise(resolve=>pending.push({value,resolve})),readState:()=>null,writeState(){},showText(){},hideText(){},onReady:()=>seen.push('ready')});
-  const old=bridge.receive(ready('old'));assert.deepEqual(seen,[]);
-  const current=bridge.receive(ready('current'));pending[0].resolve();await old;assert.deepEqual(seen,[]);
-  pending[1].resolve();await current;assert.deepEqual(seen,['ready']);
-  const closed=bridge.receive(ready('closed'));bridge.close();pending[2].resolve();await closed;assert.deepEqual(seen,['ready']);
+  const pending=[],seen=[];const bridge=createShowcaseBridge({send:value=>new Promise(resolve=>pending.push({value,resolve})),readState:()=>null,writeState(){},showText(){},hideText(){},onRestore:()=>seen.push('restore'),onReady:()=>seen.push('ready')});
+  const old=bridge.receive(ready('old'));assert.deepEqual(seen,['restore']);
+  const current=bridge.receive(ready('current'));assert.deepEqual(seen,['restore','restore']);pending[0].resolve();await old;assert.deepEqual(seen,['restore','restore']);
+  pending[1].resolve();await current;assert.deepEqual(seen,['restore','restore','ready']);
+  const closed=bridge.receive(ready('closed'));bridge.close();pending[2].resolve();await closed;assert.deepEqual(seen,['restore','restore','ready','restore']);
 });
 function harness(raw=null){const sent=[],shown=[];let saved=raw,hidden=0;const bridge=createShowcaseBridge({send:async value=>sent.push(value),readState:()=>saved,writeState:value=>{saved=value},showText:value=>shown.push(value),hideText:()=>hidden++});return {bridge,sent,shown,get saved(){return saved},get hidden(){return hidden}}}
 test('restores at most once per guest owner and rejects prior-owner state',async()=>{const h=harness(JSON.stringify({schemaVersion:1,cart:[]}));await h.bridge.receive(ready('a'));await h.bridge.receive(ready('a'));assert.equal(h.sent.length,1);assert.deepEqual(h.sent[0].state,{schemaVersion:1,cart:[]});await h.bridge.receive(ready('b'));assert.equal(await h.bridge.receive({type:'showcase.state.changed',protocolVersion:1,sessionId:'a',state:{schemaVersion:1,cart:['stale']}}),false);assert.equal(JSON.parse(h.saved).cart.length,0)});

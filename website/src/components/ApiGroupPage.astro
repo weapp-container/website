@@ -32,6 +32,7 @@ const supportLabel = (support: string) => ({full: en ? 'Full' : '完整', partia
   <ul class="docs-name-list">{api.conformance.map((id: string) => <li><code>{id}</code></li>)}</ul>
   <p>{en ? 'Conformance references are listed for each API group; the site does not infer host support beyond those records.' : '每个能力组列出对应的核验案例；站点不会根据这些记录推断未覆盖宿主的支持状态。'}</p>
   <p>{en ? 'Cases cover their stated scenarios and error boundaries. Group-level status does not establish complete support on every host. Missing records are not inferred.' : '案例覆盖所列场景和错误边界，不代表所有宿主已完整支持。缺失覆盖记录时不推断平台状态。'}</p>
+  <p><a href={localizedPath('/docs/platforms/', locale)}>{en ? 'Platform evidence and acceptance boundaries' : '平台证据与验收边界'}</a></p>
   <h2 id="example">{en ? 'Source example' : '源码示例'}</h2>
   <p>{en ? 'This excerpt preserves the versioned source exactly. It requires the surrounding test or application context and does not establish device acceptance or support for every API in this group.' : '以下摘录保留固定提交的源码原文，需要原测试或应用的上下文。它不代表设备验收，也不代表本组所有接口均已支持。'}</p>
   <DocsCode code={example.code} lang={example.language} />

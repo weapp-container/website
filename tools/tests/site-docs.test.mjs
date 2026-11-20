@@ -14,10 +14,10 @@ test('API snapshot hashes, source revision, defaults and documented coverage gap
   const result = await verifyApiDocsData();
   assert.deepEqual(result, {
     groups: 29,
-    inventoryNames: 135,
-    capabilities: 115,
+    inventoryNames: 134,
+    capabilities: 114,
     capabilityOnly: 12,
-    sourceCommit: '5aac7236b56112dc0bde51f5e40f4ce519127fb6',
+    sourceCommit: '908b8e74b41345487a5d847681d231ace0b2cde8',
   });
 });
 
@@ -32,7 +32,7 @@ test('every API group has metadata and presents names, limitations and conforman
   assert.match(page, /实现差异与限制/);
   assert.match(page, /宿主覆盖/);
   assert.match(page, /核验案例/);
-  assert.match(page, /api-runtime-conformance/);
+  assert.match(page, /\/docs\/platforms\//);
 });
 
 test('all documentation navigation pages resolve to source pages and carry searchable summaries', async () => {

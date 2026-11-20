@@ -5,7 +5,7 @@ import {requestShowcaseOwner} from '../../shared/showcase-owner-channel.mjs';
 import {attachShowcaseScrollBoundary} from '../../shared/showcase-scroll-boundary.mjs';
 import DeviceSelect from './DeviceSelect';
 import '../styles/demo.css';
-import {demoText, statusText, type Locale, type DemoStatus} from '../data/demo-copy';
+import {demoLoadProgress, demoText, statusText, type DemoLoadStage, type Locale, type DemoStatus} from '../data/demo-copy';
 import {localizedPath} from '../data/i18n.mjs';
 
 const scenes = [
@@ -14,6 +14,17 @@ const scenes = [
   { id: 'basic', title: '试试基础交互', subtitle: '探索小程序与宿主的连接', icon: HandTap, items: ['点击、组件与滚动', '本地状态保存和恢复', '原生文字输入桥接'] },
 ];
 const requestId = () => crypto.randomUUID();
+type LoadProgress = {stage: DemoLoadStage; step: number; total: number};
+const initialLoadProgress: LoadProgress = {stage: 'prepare', step: 1, total: 5};
+const parseLoadProgress = (value: unknown): LoadProgress | null => {
+  if (!value || typeof value !== 'object') return null;
+  const progress = value as Record<string, unknown>;
+  if (progress.version !== '1.0' || typeof progress.total !== 'number' || progress.total !== 5
+    || typeof progress.step !== 'number' || !Number.isInteger(progress.step)
+    || typeof progress.stage !== 'string' || !Object.hasOwn(demoLoadProgress, progress.stage)
+    || demoLoadProgress[progress.stage as DemoLoadStage].step !== progress.step) return null;
+  return {stage: progress.stage as DemoLoadStage, step: progress.step, total: progress.total};
+};
 type Owner = {scene: string; selection: DeviceSelection; revision: number};
 
 export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
@@ -27,6 +38,8 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
   const [runtime, setRuntime] = useState<{ entry: string } | null>(null);
   const [error, setError] = useState('');
   const [status, setStatus] = useState<DemoStatus>('preparing');
+  const [loadProgress, setLoadProgress] = useState<LoadProgress>(initialLoadProgress);
+  const [startupComplete, setStartupComplete] = useState(false);
   const [ready, setReady] = useState(false);
   const [switching, setSwitching] = useState(false);
   const [layoutMeasured, setLayoutMeasured] = useState(false);
@@ -48,6 +61,12 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
   const renderScale = renderScaleForDisplay(scale, devicePixelRatio);
   targetDensity.current = renderScale;
   const model = DEVICE_REGISTRY.devices.find(item => item.id === selection.device)!;
+  const advanceLoadProgress = (stage: DemoLoadStage) => {
+    const next = demoLoadProgress[stage];
+    setLoadProgress(current => next.step >= current.step
+      ? {stage, step: next.step, total: 5}
+      : current);
+  };
 
   useEffect(() => {
     if (screen.current) return attachShowcaseScrollBoundary(screen.current);
@@ -64,12 +83,17 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
         if (!response.ok) throw new Error('演示运行库暂时无法加载，请稍后重试。');
         const value = await response.json();
         if (value.schemaVersion !== 1 || !/^\/runtime\/[a-f0-9]{64}\/index\.html$/.test(value.entry)) throw new Error('演示产物配置不完整。');
+        advanceLoadProgress('resources');
         setRuntime(value);
       }).catch(cause => { if (!abort.signal.aborted) setError(cause.message); });
     } catch { setError('设备链接无效，请从在线体验页面重新打开。'); }
     const listener = (event: MessageEvent) => {
       if (event.origin !== location.origin || event.source !== frame.current?.contentWindow || event.data?.schemaVersion !== 1) return;
       if (event.data.type === 'showcase.status') {
+        const progress = parseLoadProgress(event.data.progress);
+        if (progress) advanceLoadProgress(progress.stage);
+        else if (event.data.state === 'loading') advanceLoadProgress('runtime');
+        else if (event.data.state === 'ready') advanceLoadProgress('interactive');
         setReady(event.data.state === 'ready');
         setStatus(event.data.state === 'ready' ? 'ready' : event.data.state === 'closed' ? 'closed' : 'loading');
         if (event.data.state === 'error') setError('演示启动失败，请重新启动。');
@@ -121,7 +145,7 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
       await exchange(current, {type: 'showcase.close', schemaVersion: 1, requestId: requestId()}, data => data.type === 'showcase.status' && data.state === 'closed', 15000);
     }
     if (!mounted.current) return;
-    setReady(false); setError(''); setScene(nextScene); setSelection(next); setDisplaySelection(next);
+    setReady(false); setError(''); setLoadProgress(initialLoadProgress); setStartupComplete(false); setScene(nextScene); setSelection(next); setDisplaySelection(next);
     setOwner(previous => ({scene: nextScene, selection: next, revision: (previous?.revision ?? 0) + 1}));
     setStatus('loading'); updateUrl(nextScene, next);
   };
@@ -199,6 +223,53 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
     });
   }, [runtime, owner?.revision, layoutMeasured, ownerDensity?.revision, ownerDensity?.scale, ready, renderScale, switching]);
   const active = scenes.find(item => item.id === scene)!;
+  const runtimeFrameMounted = Boolean(runtime && owner && ownerDensity?.revision === owner.revision);
+  useEffect(() => {
+    if (!runtimeFrameMounted || ready || error) return;
+    const iframe = frame.current;
+    if (!iframe) return;
+    let disposed = false;
+    let childObserver: MutationObserver | undefined;
+    const inspect = () => {
+      if (disposed) return;
+      try {
+        const childWindow = iframe.contentWindow;
+        const childDocument = iframe.contentDocument;
+        const root = childDocument?.documentElement;
+        if (!childWindow || !childDocument || !root) return;
+        if (root.dataset.state === 'loading') advanceLoadProgress('runtime');
+        if (root.dataset.inputEnabled === 'true') advanceLoadProgress('restore');
+        const canvas = childDocument.querySelector('canvas');
+        const width = Number(root.dataset.viewportWidth);
+        const height = Number(root.dataset.viewportHeight);
+        if (canvas) advanceLoadProgress('presenter');
+        if (root.dataset.state === 'ready' || (canvas && width > 0 && height > 0 && canvas.width === width && canvas.height === height)) {
+          advanceLoadProgress('interactive');
+        }
+        if (!childObserver) {
+          childObserver = new MutationObserver(inspect);
+          childObserver.observe(root, {attributes: true, attributeFilter: ['data-state', 'data-input-enabled'], childList: true, subtree: true});
+        }
+      } catch {
+        // The iframe can be between navigation and same-origin document creation.
+      }
+    };
+    iframe.addEventListener('load', inspect);
+    const timer = window.setInterval(inspect, 75);
+    inspect();
+    return () => {
+      disposed = true;
+      window.clearInterval(timer);
+      iframe.removeEventListener('load', inspect);
+      childObserver?.disconnect();
+    };
+  }, [runtimeFrameMounted, ready, error, owner?.revision]);
+  useEffect(() => {
+    if (!ready || loadProgress.step < 5 || startupComplete) return;
+    const frameId = window.requestAnimationFrame(() => setStartupComplete(true));
+    return () => window.cancelAnimationFrame(frameId);
+  }, [ready, loadProgress.step, startupComplete]);
+  const startupLoading = !error && !startupComplete && (status === 'preparing' || status === 'loading' || (ready && loadProgress.step >= 5));
   return <section className="section-wrap demo-workspace">
     <aside className="demo-sidebar">
       <div className="scene-tabs" role="tablist" aria-label={t('演示场景')}>{scenes.map(item => { const Icon = item.icon; return <button key={item.id} role="tab" aria-selected={scene === item.id} disabled={switching || !ready} className={scene === item.id ? 'scene-tab active' : 'scene-tab'} onClick={() => chooseScene(item.id)}><Icon size={23} weight="duotone" /><span><strong>{t(item.title)}</strong><small>{t(item.subtitle)}</small></span></button>; })}</div>
@@ -223,11 +294,17 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
               {runtime && owner && ownerDensity?.revision === owner.revision && <iframe ref={frame} key={owner.revision} title={`${t(active.title)}${t('交互演示')}`} src={`${runtime.entry}${runtimeSelectionSearch(owner.scene, owner.selection, ownerDensity.scale)}`} width={geometry.viewport.width} height={geometry.viewport.height} style={{left: 0, top: 0, width: geometry.viewport.width, height: geometry.viewport.height, pointerEvents: switching ? 'none' : undefined}} inert={switching || !!error} sandbox="allow-scripts allow-same-origin" allow="" />}
               {geometry.safeArea.top >= 20 && <div className="device-safe-top" aria-hidden="true" style={{height: geometry.safeArea.top}}><span>9:41</span><span>•••</span></div>}
               {geometry.safeArea.bottom >= 12 && <div className="device-safe-bottom" aria-hidden="true" style={{height: geometry.safeArea.bottom}}><span /></div>}
+              {startupLoading && <div className="demo-loading" role="status" aria-live="polite" data-demo-progress>
+                <p>{t(demoLoadProgress[loadProgress.stage].label)}</p>
+                <div className="demo-progress-track" role="progressbar" aria-label={t('演示启动进度')} aria-valuemin={1} aria-valuemax={loadProgress.total} aria-valuenow={loadProgress.step} aria-valuetext={`${t(demoLoadProgress[loadProgress.stage].label)} (${loadProgress.step} / ${loadProgress.total})`}>
+                  <span style={{width: `${loadProgress.step / loadProgress.total * 100}%`}} />
+                </div>
+                <small>{loadProgress.step} / {loadProgress.total}</small>
+              </div>}
             </div>
           </div>
         </div>
       </div>
-      {!runtime && !error && <div className="demo-loading" role="status"><span /><span /><span /><p>{t('正在准备演示…')}</p></div>}
       {error && <div className="demo-error" role="alert"><WarningCircle size={28} /><p>{t(error)}</p><button className="button secondary" disabled={switching} onClick={() => location.assign(`${localizedPath('/demo/', locale)}${selectionSearch(scene, selection)}`)}>{t('重新加载')}</button></div>}
       <div className="demo-toolbar"><span role="status">{statusText[status][locale === 'en' ? 1 : 0]}</span><button aria-label={t('重新启动当前演示')} disabled={switching || !runtime || (!ready && status !== 'closed')} onClick={() => chooseScene(scene, true)}><ArrowClockwise size={18} />{t('重新开始')}</button></div>
     </div>

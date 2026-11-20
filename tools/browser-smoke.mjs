@@ -48,6 +48,13 @@ try {
   context = await browser.newContext({viewport:{width:1365,height:1100},deviceScaleFactor:Number(process.env.SHOWCASE_DEVICE_SCALE_FACTOR||2),hasTouch:true,reducedMotion:'reduce'});
   await context.addInitScript(()=>{
     const BaseWorker=window.Worker,trace=[],diagnostics=[],frames=new Map(),pending=new Set();
+    const demoProgressSteps=[];
+    Object.defineProperty(window,'__showcaseDemoProgressSteps',{value:demoProgressSteps});
+    new MutationObserver(()=>{
+      const raw=document.querySelector('[data-demo-progress] [role="progressbar"]')?.getAttribute('aria-valuenow');
+      const step=Number(raw);
+      if(Number.isInteger(step)&&step>=1&&step<=5&&demoProgressSteps.at(-1)!==step)demoProgressSteps.push(step);
+    }).observe(document,{attributes:true,attributeFilter:['aria-valuenow'],childList:true,subtree:true});
     const work={pending:0,inputs:0,last:performance.now()};
     const metrics={inputs:[],workerRpcs:[],acceptedFrames:[],hostQueueDrains:[]};
     const pendingInputs=[];
@@ -56,21 +63,20 @@ try {
     Object.defineProperty(window,'__showcaseSmokeWork',{value:work});
     Object.defineProperty(window,'__showcaseSmokeTrace',{value:trace});
     Object.defineProperty(window,'__showcaseSmokeDiagnostics',{value:diagnostics});
-    const nativeInputs=[],canvasIds=new WeakMap();let nextCanvasId=0;
+    const nativeInputs=[];
     Object.defineProperty(window,'__showcaseSmokeNativeInputs',{value:nativeInputs});
-    const recordNativeInput=(event,observer)=>{
+    const recordNativeInput=event=>{
       const canvas=document.querySelector('canvas');
-      if(event.target.tagName==='CANVAS'&&!canvasIds.has(event.target))canvasIds.set(event.target,++nextCanvasId);
-      const at=performance.now(),input={observer,time:at,type:event.type,target:event.target.tagName,canvasId:canvasIds.get(event.target),currentCanvas:event.target===canvas,connected:event.target.isConnected,ctrlKey:event.ctrlKey,x:event.clientX,y:event.clientY,deltaY:event.deltaY,inputEnabled:document.documentElement.dataset.inputEnabled,rect:canvas?.getBoundingClientRect().toJSON()};
+      const at=performance.now(),input={time:at,type:event.type,target:event.target.tagName,currentCanvas:event.target===canvas,connected:event.target.isConnected,ctrlKey:event.ctrlKey,x:event.clientX,y:event.clientY,deltaY:event.deltaY,inputEnabled:document.documentElement.dataset.inputEnabled,rect:canvas?.getBoundingClientRect().toJSON()};
       nativeInputs.push(input);
-      if(observer==='document'&&event.target.tagName==='CANVAS'&&['pointerup','wheel'].includes(event.type))metrics.inputs.push({id:metrics.inputs.length+1,type:event.type,startedAt:at,beforeRevision:window.__showcaseSmokeFrameRevision,workerRequestId:null});
+      if(event.target.tagName==='CANVAS'&&['pointerup','wheel'].includes(event.type))metrics.inputs.push({id:metrics.inputs.length+1,type:event.type,startedAt:at,beforeRevision:window.__showcaseSmokeFrameRevision,workerRequestId:null});
       if(nativeInputs.length>100)nativeInputs.shift();
       if(metrics.inputs.length>500)metrics.inputs.shift();
     };
     const nativeTypes=['wheel','pointerdown','pointerup','pointercancel','lostpointercapture'];
-    for(const type of nativeTypes)document.addEventListener(type,event=>recordNativeInput(event,'document'),{capture:true,passive:true});
-    const watchedCanvases=new WeakSet();
-    new MutationObserver(()=>{for(const canvas of document.querySelectorAll('canvas'))if(!watchedCanvases.has(canvas)){watchedCanvases.add(canvas);for(const type of nativeTypes)canvas.addEventListener(type,event=>recordNativeInput(event,'canvas'),{capture:true,passive:true});}}).observe(document,{childList:true,subtree:true});
+    // Guest boot can replace its Document. Window capture survives that owner
+    // document lifecycle and observes trusted input before it reaches canvas.
+    for(const type of nativeTypes)window.addEventListener(type,recordNativeInput,{capture:true,passive:true});
     Object.defineProperty(window,'__showcaseSmokeFrame',{value:null,writable:true});
     Object.defineProperty(window,'__showcaseSmokeFrameRevision',{value:null,writable:true});
     const keep=(direction,value)=>{
@@ -228,8 +234,30 @@ try {
     }
     return frame;
   }
+  let delayedRuntimeConfig = false;
+  let resolveInitialRuntimeRequest;
+  const initialRuntimeRequest = new Promise(resolve => { resolveInitialRuntimeRequest = resolve; });
+  await page.route('**/showcase-runtime.json', async route => {
+    const initial = !delayedRuntimeConfig;
+    if (initial) { delayedRuntimeConfig = true; await new Promise(resolve => setTimeout(resolve, 400)); }
+    try {
+      await route.continue();
+    } finally {
+      if (initial) resolveInitialRuntimeRequest();
+    }
+  });
   await page.goto(options['--device']?demoURL('shop'):new URL('/demo/',base).href,{waitUntil:'domcontentloaded',timeout:90000});
+  const startupProgress = page.locator('[data-demo-progress]');
+  await startupProgress.waitFor({state:'visible',timeout:15000});
+  const startupStep = Number(await startupProgress.getByRole('progressbar').getAttribute('aria-valuenow'));
+  assert.equal(startupStep,1,'The runtime config delay should leave the first preparation phase visible');
+  await initialRuntimeRequest;
+  await page.unroute('**/showcase-runtime.json');
   let frame = await frameReady('shop');
+  await startupProgress.waitFor({state:'detached',timeout:10000});
+  const progressSteps=await page.evaluate(()=>window.__showcaseDemoProgressSteps);
+  assert.deepEqual([...new Set(progressSteps)],[1,2,3,4,5],'Startup progress did not report every verified phase');
+  checks.push('startup-progress-phases');
   async function collectRuntimeMetrics(){
     const handle=await page.locator('iframe[title$="交互演示"]').elementHandle().catch(()=>null),ownerFrame=await handle?.contentFrame();
     if(!ownerFrame)return;
@@ -318,13 +346,14 @@ try {
       const input=await frame.evaluate(()=>window.__showcaseSmokeWork.inputs);
       const startedAt=await frame.evaluate(()=>performance.now());
       await page.mouse.wheel(0,delta);
-      const outcome=await frame.waitForFunction(({input,startedAt})=>{
+      const outcomeHandle=await frame.waitForFunction(({input,startedAt})=>{
         const event=[...(window.__showcaseSmokeNativeInputs||[])].reverse().find(value=>value.type==='wheel'&&value.time>=startedAt);
         if(!event)return null;
         if(event.target==='CANVAS'&&event.inputEnabled==='false')return 'fenced';
         if(event.target==='CANVAS'&&window.__showcaseSmokeWork.inputs>input)return 'accepted';
         return null;
       },{input,startedAt},{timeout:3000});
+      const outcome=await outcomeHandle.jsonValue();await outcomeHandle.dispose();
       if(outcome==='fenced')await frame.waitForFunction(()=>document.documentElement.dataset.inputEnabled==='true',null,{timeout:15000});
       await idle();
       assert.equal(await page.evaluate(()=>scrollY),outerBefore,scene+' wheel leaked to the website');

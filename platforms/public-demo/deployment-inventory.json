@@ -1906,6 +1906,11 @@
       "size": 293
     },
     {
+      "path": "showcase-density-controller.mjs",
+      "sha256": "4159a70fb05acf8d51a0b0120da7f7c46f6342a8b0ab2621677f8e5ee91e26cf",
+      "size": 3162
+    },
+    {
       "path": "showcase-device-controller.mjs",
       "sha256": "32feed8f29d3f48f8114ce93a900ce6e5044dbaa1c7dd07194f96f2bac20ef32",
       "size": 1490
@@ -1917,13 +1922,13 @@
     },
     {
       "path": "showcase-devices.mjs",
-      "sha256": "c869392c8ddc03a3ee2a746939410b69986e99b9a7a8429ee1ca54c15910da38",
-      "size": 7177
+      "sha256": "de8825676b7eb5a55bcf1c693ad895aca769f44b74f137616155be2c6d1bafed",
+      "size": 8210
     },
     {
       "path": "showcase-entry.mjs",
-      "sha256": "20f6edabc538eec6a546aa3c70ea1655a8099dcf0b29f51f79ce5baaf6b3a17f",
-      "size": 6779
+      "sha256": "d1fbee21759616142af602af7d69d0d4877d3bea4471b8c5b9c42d4baf1a8154",
+      "size": 7370
     },
     {
       "path": "showcase-presentation.mjs",
@@ -1936,9 +1941,14 @@
       "size": 3095
     },
     {
+      "path": "showcase-scroll-boundary.mjs",
+      "sha256": "95e2a7c1eb73e520721ebc4606b206ba2efab7f84b4a3fb14c8ccf5fe36a9343",
+      "size": 795
+    },
+    {
       "path": "showcase.css",
-      "sha256": "b6c380617c068be087177cbbcd6a8e04e91ff9a23da43aeb576c9896bfe31f41",
-      "size": 1842
+      "sha256": "73b02f953b4f1531decb1dfd90c88df84f267ff4258b1e0212e98c8718eee2eb",
+      "size": 1954
     },
     {
       "path": "surface-input.mjs",
