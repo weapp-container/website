@@ -1,5 +1,4 @@
-import * as native from 'libentry.so';
-import type { NativeOwner } from 'libentry.so';
+import type { NativeModule, NativeOwner } from 'libentry.so';
 import common from '@ohos.app.ability.common';
 import preferences from '@ohos.data.preferences';
 import cryptoFramework from '@ohos.security.cryptoFramework';
@@ -100,6 +99,7 @@ class ShowcaseOwner {
     }
     if (this.closing) return;
     this.manifest = manifest;
+    const native = loadNativeModule('libentry.so') as NativeModule;
     this.owner = native.createOwner();
     const config: SessionConfig = {engine: 'quickjs', session_id: this.sessionId, require_integrity: true, page_render_mode: 'native-gpu', host: {windowWidth: width, windowHeight: height}};
     this.status(this.owner.loadManifestWithConfig(manifestJson, JSON.stringify(config)));
