@@ -6,7 +6,7 @@ summary: "SDK 公开发行状态。来自 weapp-container/weapp-container 的版
 route: "/docs/engineering/weapp-container/docs/public-sdk-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c9c781785926e6f89494651c7d4a3e992e45440"
+sourceCommit: "6fa44b780a7eb7a383f6e44108938c68ec39ebff"
 sourcePath: "docs/public-sdk-release.md"
 ---
 
@@ -52,6 +52,10 @@ Android、Flutter 和 React Native 包版本已通过 Maven Central、pub.dev、
 - [React Native consumer](/docs/engineering/sdk-react-native/example/index/)
 - [Flutter consumer](/docs/engineering/sdk-flutter/example/index/)
 - [Desktop consumer](/docs/engineering/sdk-desktop/consumer/index/)
+
+## 发布渠道
+
+发布工具按 SDK 语义版本选择渠道。`X.Y.Z` 创建 GitHub 稳定版并设为 latest，带 prerelease 标识的版本创建 GitHub prerelease。npm 包分别使用 `latest` 和 `preview` dist-tag；Maven Central、CocoaPods 与 pub.dev 继续按不可变版本号发布。当前公开版本仍是上表所列的 prerelease，尚未生成稳定版本的安装坐标。
 
 ## 稳定版发行门槛
 

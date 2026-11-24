@@ -6,7 +6,7 @@ summary: "Public SDK Release Status. Versioned engineering reference from weapp-
 route: "/docs/engineering/weapp-container/docs/public-sdk-release/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c9c781785926e6f89494651c7d4a3e992e45440"
+sourceCommit: "6fa44b780a7eb7a383f6e44108938c68ec39ebff"
 sourcePath: "docs/public-sdk-release.en.md"
 ---
 
@@ -52,6 +52,10 @@ Each SDK example uses a portable fixture with a matching runtime version. Review
 - [React Native consumer](/en/docs/engineering/sdk-react-native/example/index/)
 - [Flutter consumer](/en/docs/engineering/sdk-flutter/example/index/)
 - [Desktop consumer](/en/docs/engineering/sdk-desktop/consumer/index/)
+
+## Release Channels
+
+The release tools select a channel from the SDK semantic version. `X.Y.Z` creates a GitHub stable release and marks it latest. Versions with a prerelease identifier create GitHub prereleases. npm packages use the `latest` and `preview` dist-tags respectively. Maven Central, CocoaPods, and pub.dev continue to publish immutable version numbers. The currently public versions remain the prereleases listed above, and no stable installation coordinates have been produced.
 
 ## Stable Release Requirements
 

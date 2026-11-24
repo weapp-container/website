@@ -6,7 +6,7 @@ summary: "Dev Player correctness fixture (preview.5 source). Versioned engineeri
 route: "/docs/engineering/weapp-container/examples/apps/player-correctness-app/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c9c781785926e6f89494651c7d4a3e992e45440"
+sourceCommit: "6fa44b780a7eb7a383f6e44108938c68ec39ebff"
 sourcePath: "examples/apps/player-correctness-app/README.en.md"
 ---
 

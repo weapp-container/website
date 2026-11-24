@@ -6,7 +6,7 @@ summary: "container-engine-quickjs. Versioned engineering reference from weapp-c
 route: "/docs/engineering/weapp-container/crates/container-engine-quickjs/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c9c781785926e6f89494651c7d4a3e992e45440"
+sourceCommit: "6fa44b780a7eb7a383f6e44108938c68ec39ebff"
 sourcePath: "crates/container-engine-quickjs/README.en.md"
 ---
 

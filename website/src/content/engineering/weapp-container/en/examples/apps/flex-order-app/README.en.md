@@ -6,7 +6,7 @@ summary: "Flex order fixture. Versioned engineering reference from weapp-contain
 route: "/docs/engineering/weapp-container/examples/apps/flex-order-app/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "2c9c781785926e6f89494651c7d4a3e992e45440"
+sourceCommit: "6fa44b780a7eb7a383f6e44108938c68ec39ebff"
 sourcePath: "examples/apps/flex-order-app/README.en.md"
 ---
 
