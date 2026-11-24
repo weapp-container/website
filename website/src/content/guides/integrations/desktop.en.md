@@ -28,9 +28,11 @@ Execute in the clean checkout root directory of the public core repository. For 
 Build Apple Silicon macOS below. For other triple and target pairings, see the source code build page; Windows/Linux must be built on the corresponding system.
 
 ```bash
-pnpm sdk:build:native -- --target aarch64-apple-darwin --profile release
-pnpm sdk:licenses -- --target aarch64-apple-darwin --features quickjs-native,skia-gpu-metal
-pnpm sdk:build:desktop -- --target macos-arm64 --pack artifacts/hello-pack --verify
+node scripts/sdk-native-build.mjs --target aarch64-apple-darwin --out artifacts/sdk/native
+node scripts/sdk-licenses.mjs --target aarch64-apple-darwin --features quickjs-native,skia-gpu-metal
+node sdk/desktop/tools/build.mjs --target macos-arm64 \
+  --native-root artifacts/sdk/native --licenses-root artifacts/sdk/licenses \
+  --pack artifacts/hello-pack --out artifacts/sdk/desktop --verify
 ```
 
 Windows and Linux desktop targets are built and verified on the respective operating systems. `--skip-consumer` is only packaged and does not prove that the real GUI surface can be started.
@@ -93,6 +95,6 @@ After creating the View, wait for the actual layout to be positive before callin
 
 **Version and Release Status**
 
-The Desktop wrapper source is `0.1.0-preview.7.0`; the current public lock includes macOS, Linux and Windows. Public archive consumers passed on all three systems; physical-device and hardware GPU acceptance remain separate. Published archives retain a stale preview.6.0 `WEAPP_DESKTOP_VERSION` macro; metadata and runtimes are preview.7.0. Current source corrects it while published bytes remain immutable. See the [SDK erratum](/en/docs/engineering/sdk-desktop/index/#published-preview-erratum) and [release record](/en/docs/licensing/). The platform page retains the separate fixed-demo history.
+The Desktop wrapper source is `0.1.0-preview.7.1`; the core prerelease contains macOS, Linux and Windows SDK tarballs, and archive consumers passed for all three targets. The standalone `sdk-desktop` GitHub release has not been published, and the macOS archive URL in the public CocoaPods Specs returns 404. The published tarballs retain a stale preview.6.0 `WEAPP_DESKTOP_VERSION` macro while their metadata and runtimes are preview.7.1. Current source corrects it while published bytes remain immutable. See the [SDK erratum](/en/docs/engineering/sdk-desktop/index/#published-preview-erratum) and [release record](/en/docs/licensing/). This remains a prerelease with no stable version.
 
 `Session::load`, `navigate`, `back`, `send_message`, `register_host_method`, `complete_host_call`, `set_foreground`, `set_metrics`, `snapshot` and `close`. `View` provides native handles, bounds and visibility updates. Operations returning Status must always check for error codes.

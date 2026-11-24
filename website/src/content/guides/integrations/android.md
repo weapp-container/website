@@ -21,18 +21,18 @@ Android SDK 由 Kotlin/JNI wrapper 和独立的预编译运行库组成，使用
 <a id="environmental-requirements"></a>
 ## 环境要求
 
-JDK 17、Android SDK 平台和 build-tools 36、NDK 27.1.12297006、CMake 3.22.1 与 Gradle 8.9。最小 Android API 为 26，运行库需有对应 CPU slice。安装工具还要求 Node.js 24+ 与 Python 3。
+JDK 17、Android SDK 平台和 build-tools 36、NDK 27.1.12297006、CMake 3.22.1 与 Gradle 8.13。最小 Android API 为 26，运行库需有对应 CPU slice。安装工具还要求 Node.js 24+ 与 Python 3。
 
 <a id="prepare"></a>
 <a id="1-prepare-sdk"></a>
 ## 1. 准备 SDK
 
-先从公开核心仓库及其固定 SDK 子模块构建当前运行库与本地 Maven 仓库。安装上述工具链后，按[源码构建](/docs/start/)准备干净 checkout，在核心根目录执行：
-
-在公开核心仓库的干净 checkout 根目录执行。完整环境、原生切片及许可步骤见[源码构建](/docs/start/)。
+从公开核心仓库及其固定 SDK 子模块构建当前运行库与本地 Maven 仓库。完整环境、原生切片及许可步骤见[源码构建](/docs/start/)。
 
 ```bash
-pnpm sdk:build:android -- --pack artifacts/hello-pack
+node sdk/android/tools/build.mjs --native-root artifacts/sdk/native \
+  --licenses-root artifacts/sdk/licenses --pack artifacts/hello-pack \
+  --out artifacts/sdk/android
 ```
 
 输出位于 `artifacts/sdk/android/`。发行构建要求已提交、干净的源码；保留 producer receipt、运行库字节和 notices。显式离线归档属于另一条路径，历史默认 lock 不匹配时必须失败，不能绕过哈希检查。
@@ -61,7 +61,7 @@ android {
     }
 }
 dependencies {
-    implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.0")
+    implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1")
 }
 ```
 
@@ -114,6 +114,6 @@ session.load(PackSource.Asset("portable-pack")).whenComplete { _, error ->
 
 **版本与发行状态**
 
-Android wrapper 源码为 `0.1.0-preview.7.0`，采用 Apache-2.0。当前准备工具默认使用同版本公开运行库锁，历史 restricted-showcase 锁只用于兼容。Maven Central 发布尚未完成；可按上方步骤构建本地 Maven 仓库。公开发行的模拟器与真机验收见[发行记录](/docs/licensing/)；[平台状态](/docs/platforms/)保留固定在线演示的独立记录。
+Android wrapper 源码为 `0.1.0-preview.7.1`，采用 Apache-2.0。该版本已发布到 Maven Central，公开坐标可匿名解析；需要从源码修改或重建时，可按上方步骤生成本地 Maven 仓库。当前仍是预览版，没有稳定版。模拟器与真机验收状态见[发行记录](/docs/licensing/)；[平台状态](/docs/platforms/)保留固定在线演示的独立记录。
 
 SDK 目标支持 Android 26+ 的 arm64 与 x86_64。构建还校验 ELF 和 16 KB 对齐，但这不等于真实设备启动验证。使用代表性模拟器与真实 GPU surface 验收视图、触控、会话后台/恢复、存储重开及异步关闭。

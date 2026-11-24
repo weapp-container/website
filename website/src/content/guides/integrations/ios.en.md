@@ -15,7 +15,7 @@ iOS / Swift
 [简体中文](ios.md) · **English**
 
 
-The iOS SDK provides Swift Concurrency sessionss, UIKit views, and Metal rendering surfaces. The minimum deployment target is iOS 16.0, and the simulator and physical device are locked to the architecture respectively.
+The iOS SDK provides Swift Concurrency sessions, UIKit views, and Metal rendering surfaces. The minimum deployment target is iOS 16.0, and the simulator and physical device are locked to the architecture respectively.
 
 <a id="requirements"></a>
 <a id="1-安装-sdk"></a>
@@ -26,7 +26,8 @@ The current release requires macOS, Xcode 27.2+ and the iOS 27.1+ compilation SD
 Execute in the clean checkout root directory of the public core repository. For the complete environment, native library slices and licensing steps, see [Build from source](/en/docs/start/).
 
 ```bash
-pnpm sdk:build:ios -- --install-framework
+node sdk/ios/tools/build.mjs --native-root artifacts/sdk/native \
+  --licenses-root artifacts/sdk/licenses --out artifacts/sdk/ios --install-framework
 ```
 
 Add the generated `artifacts/sdk/ios/WeappContainer` as a local Swift Package in Xcode, and add the **WeappContainer** product to the application target. Add the entire `hello-pack/` folder to the target as a resource, retaining its directory structure.
@@ -82,6 +83,6 @@ Set `session.onEvent` to receive ready, navigation, chrome, message, error and c
 
 **Version and Release Status**
 
-The iOS wrapper source is `0.1.0-preview.7.0`, licensed under Apache-2.0. GitHub prereleases and public CocoaPods Specs are available. Public SwiftPM consumption, device-target compilation and arm64 simulator interaction acceptance passed; physical-device execution is incomplete. See the [release record](/en/docs/licensing/). The platform page separately retains the fixed-demo history; verify archives against versioned locks and shipped licenses.
+The iOS wrapper source is `0.1.0-preview.7.1`, licensed under Apache-2.0. The core prerelease provides an anonymously downloadable SDK tarball. The standalone `sdk-ios` GitHub release has not been published, and its pinned SwiftPM and CocoaPods archive URLs currently return 404. The archive can be integrated as a local Swift package. This remains a prerelease with no stable version. See the [release record](/en/docs/licensing/); device-target compilation, simulator interaction, and physical-device execution are recorded separately.
 
 Start by checking routing, persistence, page lifecycle, text input, orientation changes, and surface restoration using the compiled consumer and simulator from the release. A Simulator pass does not represent a signed physical product, Metal performance, or specific device regression pass; these statuses are recorded separately in the Acceptance Evidence.

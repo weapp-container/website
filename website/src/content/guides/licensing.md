@@ -37,7 +37,7 @@ GitHub token、仓库成员权限、镜像下载和拿到归档只解决访问�
 <a id="current-validation-and-release-status"></a>
 ## 当前验证与发行状态
 
-当前 SDK 与共享协议源码为 `0.1.0-preview.7.0`。核心运行库、iOS、Desktop 及 CocoaPods Specs 已公开，npm、Maven Central 和 pub.dev 发布尚未全部完成，见[发行记录](/docs/licensing/)。在线演示继续使用固定的历史 `restricted-showcase` runtime 与 pack，其许可和验证记录独立保留。各平台的构建、安装、运行和签名分别显示在[平台状态](/docs/platforms/)中；只有锁中存在的 target 才能下载，未记录的状态不推断为已支持。
+当前公开 SDK 版本为 `0.1.0-preview.7.1`，尚无稳定版。Android、React Native 和 Flutter 的公开包可从对应注册源获取；iOS 与 Desktop 的部分独立固定归档入口仍不可用。各包版本、下载地址与目标限制见[SDK 公开发行状态](https://github.com/weapp-container/weapp-container/blob/main/docs/public-sdk-release.md)。在线演示继续使用固定的历史 `restricted-showcase` runtime 与 pack，其许可和验证记录独立保留。各平台的构建、安装、运行和签名分别显示在[平台状态](/docs/platforms/)中；只有锁中存在的 target 才能下载，未记录的状态不推断为已支持。
 
 旧版 runtime 归档继续使用归档内的历史许可、哈希和发行记录。本次源码版本更新不会把旧二进制改标成新版本，也不会改写历史 release。
 

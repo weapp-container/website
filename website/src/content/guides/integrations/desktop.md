@@ -28,9 +28,11 @@ macOS、Windows 与 Linux 的 C++ SDK 提供 typed Session、事件回调、固�
 下面构建 Apple Silicon macOS。其它 triple 与目标配对见源码构建页；Windows/Linux 必须在对应系统构建。
 
 ```bash
-pnpm sdk:build:native -- --target aarch64-apple-darwin --profile release
-pnpm sdk:licenses -- --target aarch64-apple-darwin --features quickjs-native,skia-gpu-metal
-pnpm sdk:build:desktop -- --target macos-arm64 --pack artifacts/hello-pack --verify
+node scripts/sdk-native-build.mjs --target aarch64-apple-darwin --out artifacts/sdk/native
+node scripts/sdk-licenses.mjs --target aarch64-apple-darwin --features quickjs-native,skia-gpu-metal
+node sdk/desktop/tools/build.mjs --target macos-arm64 \
+  --native-root artifacts/sdk/native --licenses-root artifacts/sdk/licenses \
+  --pack artifacts/hello-pack --out artifacts/sdk/desktop --verify
 ```
 
 Windows 与 Linux 桌面目标在相应操作系统上构建和验证。`--skip-consumer` 只打包，不证明真实 GUI surface 能启动。
@@ -93,6 +95,6 @@ struct MiniAppHost {
 
 **版本与发行状态**
 
-Desktop wrapper 源码为 `0.1.0-preview.7.0`；当前公开锁包含 macOS、Linux 和 Windows。三个系统的公开归档消费者已通过，真机与硬件 GPU 验收仍分别记录。已发布归档的 `WEAPP_DESKTOP_VERSION` 宏误留 preview.6.0；元数据和运行库为 preview.7.0，当前源码已修正，已有字节保持不变。详见 [SDK 勘误](/docs/engineering/sdk-desktop/index/#published-preview-erratum)与[发行记录](/docs/licensing/)。平台页继续保留固定演示的历史状态。
+Desktop wrapper 源码为 `0.1.0-preview.7.1`；核心 prerelease 提供 macOS、Linux 和 Windows SDK tarball，三个目标的公开归档消费者均已通过。独立 `sdk-desktop` GitHub release 尚未发布，公开 CocoaPods Specs 中 macOS 固定归档 URL 返回 404。已发布 tarball 的 `WEAPP_DESKTOP_VERSION` 宏仍为 preview.6.0，而元数据和运行库为 preview.7.1；当前源码已修正，已发布字节保持不变。详见 [SDK 勘误](/docs/engineering/sdk-desktop/index/#published-preview-erratum)与[发行记录](/docs/licensing/)。当前仍是预览版，没有稳定版。
 
 `Session::load`、`navigate`、`back`、`send_message`、`register_host_method`、`complete_host_call`、`set_foreground`、`set_metrics`、`snapshot` 与 `close`。`View` 提供原生句柄、边界与可见性更新。返回 Status 的操作必须始终检查错误码。

@@ -105,6 +105,6 @@ Widget 卸载与会话关闭分开处理；创建期间页面退出时也要释�
 
 **版本与发行状态**
 
-Flutter wrapper 当前源码版本为 `0.1.0-preview.7.1`，Flutter 版本固定为 3.47.7。platform interface `.7.1` 已发布到 pub.dev 并通过匿名归档校验；Linux/Windows 首次包上传被 pub.dev 拒绝（`Only users are allowed to upload new packages`），Android/iOS/macOS 插件仍等待 Maven Central 与 CocoaPods Trunk 前置依赖，因此主包和五个平台的 hosted 消费尚未完成。继续使用源码构建路径，并以[发行记录](/docs/licensing/)区分注册源、编译、模拟器和真机验证。
+Flutter wrapper 当前源码版本为 `0.1.0-preview.7.1`，Flutter 版本固定为 3.47.7。主包、platform interface 和五个原生平台包均已发布到 pub.dev；Android Maven 与 Linux/Windows Desktop 归档可匿名获取，iOS/macOS Podspec 指向的独立 SDK 归档仍不可用。包可下载不代表所有目标已完成构建或设备验收。当前仍是预览版，没有稳定版，详见[发行记录](/docs/licensing/)。
 
 Flutter 仓库维护跨平台 packages 和独立示例。依据当前可用 SDK pin 运行各自 `prepare-native`、插件构建、example consumer 和真实设备检查；Windows/Linux 桌面 graphics 与 Flutter plugin ABI 必须在目标系统本身验收。

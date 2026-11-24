@@ -29,15 +29,15 @@ React Native 包将原生 session 控制器通过 TurboModule 暴露给 TypeScri
 
 使用 React Native 0.88.0 新架构、React 19.3.x 和 TypeScript 5.9.3。原生目标为 Android API 26+ 与 iOS 16+；Android 应用只启用 `arm64-v8a` 与 `x86_64`。
 
-已有带原生依赖的 SDK 分发包时，在 React Native 应用中安装本地归档：
+安装已发布的预览包：
 
 ```bash
-npm install /absolute/packages/weapp-container-react-native-0.1.0-preview.7.0.tgz
-cd ios
-pod install
+npm install @weapp-container/react-native@0.1.0-preview.7.1
 ```
 
-将 `hello-pack/` 放到 Android 的 `android/app/src/main/assets/hello-pack/`，或作为完整资源文件夹加入 iOS target。SDK 归档获取与源码打包见[React Native SDK README](https://github.com/weapp-container/sdk-react-native/blob/main/README.md)；这里的文件名不表示 npm registry 已发布。
+该 npm 版本的 Android Maven 依赖可匿名解析。iOS Podspec 引用的固定 SDK 归档 URL 当前不可用，因此 iOS 消费者需先按[源码构建](/docs/start/)准备配套原生 SDK，再运行 CocoaPods 安装。
+
+将 `hello-pack/` 放到 Android 的 `android/app/src/main/assets/hello-pack/`，或作为完整资源文件夹加入 iOS target。SDK 归档获取与源码打包见[React Native SDK README](https://github.com/weapp-container/sdk-react-native/blob/main/README.md)。
 
 <a id="mount-load"></a>
 <a id="2-create-controller"></a>
@@ -108,7 +108,7 @@ React effect cleanup 不能返回 Promise，应把异步关闭交给页面的会
 
 **版本和授权状态**
 
-`@weapp-container/react-native` 源码当前为 `0.1.0-preview.7.0`，采用 Apache-2.0。准备工具默认读取同版本公开锁，旧 preview.5.3 锁仅用于历史兼容。本地构建仍须核验配套原生输入；npm 发布、Android Central 依赖和双端公开消费尚未全部完成，见[发行记录](/docs/licensing/)。
+`@weapp-container/react-native` 源码当前为 `0.1.0-preview.7.1`，采用 Apache-2.0。该版本已发布到 npm，Android Maven 依赖可匿名解析；iOS Podspec 引用的固定 SDK 归档 URL 尚不可用。iOS 集成请按[源码构建](/docs/start/)准备原生 SDK，不能把 npm 包可安装等同于双端原生构建可用。当前仍是预览版，没有稳定版，详见[发行记录](/docs/licensing/)。
 
 发行构建运行 TypeScript、React Native Codegen 和包文件审核。独立 consumer 消耗完整 npm archive 和预先准备的原生 SDK，不应该隐式依赖工作区内的核心运行时代码。
 

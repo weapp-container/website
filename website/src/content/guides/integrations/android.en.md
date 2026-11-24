@@ -21,18 +21,18 @@ Android SDK consists of Kotlin/JNI wrapper and independent precompiled runtime l
 <a id="环境要求"></a>
 ## Environmental requirements
 
-JDK 17, Android SDK platform and build-tools 36, NDK 27.1.12297006, CMake 3.22.1 and Gradle 8.9. The minimum Android API is 26, and the runtime library must have corresponding CPU slices. The installation tool also requires Node.js 24+ and Python 3.
+JDK 17, Android SDK platform and build-tools 36, NDK 27.1.12297006, CMake 3.22.1 and Gradle 8.13. The minimum Android API is 26, and the runtime library must have corresponding CPU slices. The installation tool also requires Node.js 24+ and Python 3.
 
 <a id="prepare"></a>
 <a id="1-准备-sdk"></a>
 ## 1. Prepare SDK
 
-First build the current runtime library and local Maven repository from the public core repository and its fixed SDK submodules. After installing the tool chain below, press [Source Code Build](/en/docs/start/) to prepare a clean checkout and execute it in the core root directory:
-
-Execute in the clean checkout root directory of the public core repository. For the complete environment, native library slices and licensing steps, see [Build from source](/en/docs/start/).
+Build the current runtime library and local Maven repository from the public core repository and its fixed SDK submodules. For the complete environment, native library slices, and licensing steps, see [Build from source](/en/docs/start/).
 
 ```bash
-pnpm sdk:build:android -- --pack artifacts/hello-pack
+node sdk/android/tools/build.mjs --native-root artifacts/sdk/native \
+  --licenses-root artifacts/sdk/licenses --pack artifacts/hello-pack \
+  --out artifacts/sdk/android
 ```
 
 The output is at `artifacts/sdk/android/`. Release builds require committed, clean source code; producer receipts, runtime bytes, and notices are retained. Explicit offline archiving belongs to another path, must fail when the historical default lock does not match, and cannot bypass hash checks.
@@ -61,7 +61,7 @@ android {
     }
 }
 dependencies {
-    implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.0")
+    implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1")
 }
 ```
 
@@ -114,6 +114,6 @@ First mount the View and bind the session, then wait for load. Connect `session.
 
 **Version and Release Status**
 
-The Android wrapper source is `0.1.0-preview.7.0`, licensed under Apache-2.0. Preparation now defaults to the same-version public runtime lock; historical restricted-showcase locks remain for compatibility. Maven Central publication is incomplete; build the local Maven repository as shown above. See the [release record](/en/docs/licensing/) for release emulator and device acceptance. [Platform status](/en/docs/platforms/) retains the separate fixed-demo record.
+The Android wrapper source is `0.1.0-preview.7.1`, licensed under Apache-2.0. This version is published on Maven Central and its public coordinate resolves anonymously. Build the local Maven repository above when modifying or rebuilding from source. It remains a prerelease with no stable version. See the [release record](/en/docs/licensing/) for emulator and device acceptance. [Platform status](/en/docs/platforms/) retains the separate fixed-demo record.
 
 SDK target supports arm64 and x86_64 for Android 26+. The build also verifies ELF and 16 KB alignment, but this is not equivalent to real device boot verification. Experience graphics, touch, session background/resume, storage reopening, and asynchronous shutdown using representative emulators and real GPU surfaces.

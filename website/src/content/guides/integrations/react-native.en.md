@@ -29,15 +29,15 @@ First build Android/iOS or the corresponding Desktop SDK from the public core re
 
 Using React Native 0.88.0 new architecture, React 19.3.x and TypeScript 5.9.3. Native targets are Android API 26+ and iOS 16+; Android apps only enable `arm64-v8a` and `x86_64`.
 
-When there is an SDK distribution package with native dependencies, install the local archive in the React Native application:
+Install the published prerelease package:
 
 ```bash
-npm install /absolute/packages/weapp-container-react-native-0.1.0-preview.7.0.tgz
-cd ios
-pod install
+npm install @weapp-container/react-native@0.1.0-preview.7.1
 ```
 
-Put `hello-pack/` into Android's `android/app/src/main/assets/hello-pack/`, or add it as a complete resource folder to the iOS target. For SDK archive acquisition and source code packaging, see [React Native SDK README](https://github.com/weapp-container/sdk-react-native/blob/main/README.en.md); the file name here does not mean that the npm registry has been released.
+The Android Maven dependency for this npm version resolves anonymously. The fixed SDK archive URL referenced by the iOS Podspec is currently unavailable, so iOS consumers must prepare the matching native SDK from [source](/en/docs/start/) before running CocoaPods installation.
+
+Put `hello-pack/` into Android's `android/app/src/main/assets/hello-pack/`, or add it as a complete resource folder to the iOS target. For SDK archive acquisition and source packaging, see [React Native SDK README](https://github.com/weapp-container/sdk-react-native/blob/main/README.en.md).
 
 <a id="mount-load"></a>
 <a id="2-创建-controller"></a>
@@ -108,7 +108,7 @@ React effect cleanup cannot return Promise, and the asynchronous closure should 
 
 **Version and release status**
 
-The `@weapp-container/react-native` source is `0.1.0-preview.7.0`, licensed under Apache-2.0. Preparation defaults to the same-version public lock; the old preview.5.3 lock remains for historical compatibility. Local builds still require verified matching native inputs. npm publication, Android Central dependencies and public consumers on both platforms are incomplete; see the [release record](/en/docs/licensing/).
+The `@weapp-container/react-native` source is `0.1.0-preview.7.1`, licensed under Apache-2.0. This version is published on npm, and its Android Maven dependency resolves anonymously. The iOS Podspec references an unavailable fixed SDK archive URL. For iOS integration, prepare the native SDK from [source](/en/docs/start/); npm package availability does not establish that native builds work on both platforms. This remains a prerelease with no stable version. See the [release record](/en/docs/licensing/).
 
 Release build runs TypeScript, React Native Codegen, and package file review. The standalone consumer consumes the full npm archive and pre-prepared native SDK and should not implicitly rely on the core runtime code within the workspace.
 

@@ -451,8 +451,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/android.md"
       },
-      "reviewedChineseSummary": "已复核公开导航与当前源码边界。",
-      "reviewedChineseSha256": "6c0984469405d08a6897a7242fa2125c07bfa622fbd3e29fec1b19204076be29",
+      "reviewedChineseSummary": "Android 集成、公开版本与源码构建说明",
+      "reviewedChineseSha256": "f999cf75b204785f7a9201c241f67c990ebd1c74c611e30cf3b24b784a09a2cf",
       "route": "/docs/integrations/android/",
       "legacyHeadingIds": [
         "embed",
@@ -471,8 +471,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/desktop.md"
       },
-      "reviewedChineseSummary": "已复核公开导航与当前源码边界。",
-      "reviewedChineseSha256": "8f8af32619ee6803a80d819abe434f47c655856dc0a541eb14212b7c1aa4d2da",
+      "reviewedChineseSummary": "Desktop 集成、归档状态与平台验收边界",
+      "reviewedChineseSha256": "5478b576b69b11132ce9f1976ae59cdd41e9fe48656f8bd5de7469337836cca5",
       "route": "/docs/integrations/desktop/",
       "legacyHeadingIds": [
         "cmake",
@@ -490,8 +490,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/flutter.md"
       },
-      "reviewedChineseSummary": "已复核公开导航与当前源码边界。",
-      "reviewedChineseSha256": "84b28e484f50acd28463a256c558e9a78f9b48252f49b6be9fb76425676f0890",
+      "reviewedChineseSummary": "Flutter 集成与各平台发行状态",
+      "reviewedChineseSha256": "59ad7747d03526d1893dc64899edeefefb9cb6d7e9ac5d08d9d4a2ed8e8ddaed",
       "route": "/docs/integrations/flutter/",
       "legacyHeadingIds": [
         "api",
@@ -527,8 +527,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/ios.md"
       },
-      "reviewedChineseSummary": "已复核公开导航与当前源码边界。",
-      "reviewedChineseSha256": "1620510ec1a586ce28945c95eccf7f1a9e14072a199b87f74fde1e474b155e3c",
+      "reviewedChineseSummary": "iOS 集成、归档状态与设备验收边界",
+      "reviewedChineseSha256": "de50b36c2045fc8a45187dedc99bf23f91313de29a8f4e16093dd71beb16dd69",
       "route": "/docs/integrations/ios/",
       "legacyHeadingIds": [
         "create-session",
@@ -546,8 +546,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/react-native.md"
       },
-      "reviewedChineseSummary": "已复核公开导航与当前源码边界。",
-      "reviewedChineseSha256": "ecc25f471433a9e920a30b6285ef554a1decfede36889d4c65d4cbd05a13f121",
+      "reviewedChineseSummary": "React Native 集成与双端依赖状态",
+      "reviewedChineseSha256": "2178b4f262e37ecd9bdac0019ebe4486156969a9c5dd2cdf20c43e2ded53b9a5",
       "route": "/docs/integrations/react-native/",
       "legacyHeadingIds": [
         "controller-api",
@@ -584,8 +584,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/licensing.md"
       },
-      "reviewedChineseSummary": "已复核公开导航与当前源码边界。",
-      "reviewedChineseSha256": "42ef6cecc9411cfaf4899a463de02eef9a40dd1d7244b72618a5dfbce87786e2",
+      "reviewedChineseSummary": "公开 SDK 版本、许可和下载状态",
+      "reviewedChineseSha256": "2d16b3fc9cfec9df56b7197d5ff1d8bf82e26f8b0645dbf287eb2e3ccd9d2ea2",
       "route": "/docs/licensing/",
       "legacyHeadingIds": [
         "binary-availability",
