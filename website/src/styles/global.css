@@ -30,3 +30,35 @@
 @media(min-width:768px){.mobile-menu{display:none}}
 .language-switch{flex-shrink:0;font-size:12px;color:var(--muted);padding:7px 5px}
 .language-switch:hover{color:var(--accent)}
+
+.hero-actions{flex-wrap:wrap}
+.closing-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.download-version{margin-top:18px!important;font-size:13px!important}
+.download-version strong{color:var(--text)}
+.downloads-section{padding-bottom:85px}
+.download-list{border-top:1px solid var(--line)}
+.download-item{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line)}
+.download-platform{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:650}
+.download-item h3{font-size:24px;margin-top:6px}
+.download-item-copy>p:not(.download-platform){font-size:13px;margin-top:6px}
+.download-item-copy>code{display:block;margin-top:16px;color:var(--muted);font-size:11px;overflow-wrap:anywhere}
+.download-item-action{text-align:right}
+.download-item-action .button{min-width:150px}
+.download-item-action>p{font-size:11px;margin-top:12px}
+.download-hash{display:block;margin-top:5px;color:var(--muted);font-size:10px;overflow-wrap:anywhere}
+.download-footer{display:flex;align-items:center;justify-content:space-between;gap:22px;padding-top:24px}
+.download-footer p{font-size:12px}
+.download-next-steps{display:flex;align-items:center;justify-content:space-between;padding-block:72px;border-top:1px solid var(--line)}
+.download-next-steps h2{font-size:27px}
+.download-next-steps p{font-size:13px;margin-top:10px}
+@media(max-width:767px){
+  .download-item{grid-template-columns:1fr;gap:22px;padding-block:25px}
+  .download-item-action{text-align:left}
+  .download-item h3{font-size:22px}
+  .download-item-action .button{min-width:0}
+  .download-footer,.download-next-steps{display:block}
+  .download-footer .text-link,.download-next-steps .button{margin-top:18px}
+  .download-next-steps{padding-block:50px}
+  .download-next-steps h2{font-size:24px}
+  .closing-actions{margin-top:24px}
+}

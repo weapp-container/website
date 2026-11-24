@@ -10,7 +10,7 @@ export const messages = {
   'zh-CN': {
     siteTitle: 'Weapp Container · 小程序，运行在更多地方',
     siteDescription: 'Weapp Container 中文文档、平台接入、API 参考与在线演示。',
-    skip: '跳至内容', home: '首页', docs: '开发文档', demo: '在线体验', platforms: '全端进展', guide: '开始接入',
+    skip: '跳至内容', home: '首页', docs: '开发文档', demo: '在线体验', platforms: '全端进展', guide: '开始接入', downloads: '下载',
     mainNav: '主导航', mobileNav: '移动导航', menu: '打开或关闭导航菜单', theme: '切换深浅主题',
     tagline: '同一份小程序，更多运行场景。', license: '许可说明', source: '站点源码',
     docsNav: '文档导航', search: '搜索文档与 API', searchResults: '搜索结果', empty: '没有匹配的文档',
@@ -23,7 +23,7 @@ export const messages = {
   en: {
     siteTitle: 'Weapp Container · Mini-programs across hosts',
     siteDescription: 'Weapp Container documentation, platform integrations, API references, and live demonstrations.',
-    skip: 'Skip to content', home: 'Home', docs: 'Documentation', demo: 'Live demo', platforms: 'Platform status', guide: 'Get started',
+    skip: 'Skip to content', home: 'Home', docs: 'Documentation', demo: 'Live demo', platforms: 'Platform status', guide: 'Get started', downloads: 'Downloads',
     mainNav: 'Main navigation', mobileNav: 'Mobile navigation', menu: 'Open or close navigation', theme: 'Toggle color theme',
     tagline: 'One mini-program, more places to run.', license: 'Licensing', source: 'Website source',
     docsNav: 'Documentation navigation', search: 'Search documentation and APIs', searchResults: 'Search results', empty: 'No matching documents',

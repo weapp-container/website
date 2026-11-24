@@ -9,7 +9,7 @@ const href = (value: string) => localizedPath(value, locale);
 const is404 = /\/404(?:\.html|\/)?$/.test(path);
 const pagePath = (language: string) => is404 ? language === 'en' ? '/en/404/' : '/404.html' : localizedPath(path, language);
 const alternate = pagePath(locale === 'en' ? 'zh-CN' : 'en');
-const nav = [['/docs/', text.docs], ['/demo/', text.demo], ['/platforms/', text.platforms], ['/guide/', text.guide]];
+const nav = [['/docs/', text.docs], ['/demo/', text.demo], ['/platforms/', text.platforms], ['/guide/', text.guide], ['/downloads/', text.downloads]];
 ---
 <!doctype html>
 <html lang={locale}>

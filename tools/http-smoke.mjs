@@ -17,8 +17,8 @@ for(const key of ['packRoot','policySha256'])assert.equal(config[key],pin[key]);
 assert.match(config.deploymentHash,/^[a-f0-9]{64}$/);
 assert.equal(config.entry,`/runtime/${config.deploymentHash}/index.html`);
 const runtime=`/runtime/${config.deploymentHash}/`;
-const paths=['/','/demo/','/guide/','/platforms/','/docs/','/docs/start/','/docs/integrations/android/','/docs/api/','/docs/api/wx-storage/','/docs/search-index.json','/sitemap.xml','/showcase-runtime.json',runtime,runtime+'pkg/container_host_web_bg.wasm',runtime+'vendor/fonts/NotoSansSC.ttf','/.git/config','/Cargo.toml','/source-snapshot.tar.gz'];
-paths.push('/en/', '/en/guide/', '/en/platforms/', '/en/demo/', '/en/docs/', '/en/docs/start/', '/en/docs/api/wx-storage/', '/en/docs/search-index.json', '/en/does-not-exist');
+const paths=['/','/demo/','/guide/','/platforms/','/downloads/','/docs/','/docs/start/','/docs/integrations/android/','/docs/api/','/docs/api/wx-storage/','/docs/search-index.json','/sitemap.xml','/showcase-runtime.json',runtime,runtime+'pkg/container_host_web_bg.wasm',runtime+'vendor/fonts/NotoSansSC.ttf','/.git/config','/Cargo.toml','/source-snapshot.tar.gz'];
+paths.push('/en/', '/en/guide/', '/en/platforms/', '/en/demo/', '/en/downloads/', '/en/docs/', '/en/docs/start/', '/en/docs/api/wx-storage/', '/en/docs/search-index.json', '/en/does-not-exist');
 const results=await Promise.all(paths.map(async path=>{
   const r=await fetch(new URL(path,base),{method:'HEAD',signal:AbortSignal.timeout(30000),redirect:'manual'});
   const h=Object.fromEntries(r.headers),privateProbe=['/.git/config','/Cargo.toml','/source-snapshot.tar.gz','/en/does-not-exist'].includes(path);

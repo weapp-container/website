@@ -6,6 +6,7 @@ import {once} from 'node:events';
 import { chromium } from 'playwright';
 import { docsPages } from '../website/src/data/docs-pages.mjs';
 import inventory from '../website/src/data/api-inventory-v1.json' with { type: 'json' };
+import devtoolsRelease from '../website/src/data/devtools-release.json' with { type: 'json' };
 import { apiSlug } from '../website/src/data/api-group-meta.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -34,7 +35,7 @@ try {
   context = await browser.newContext({ viewport: { width: 1365, height: 960 }, reducedMotion: 'reduce', colorScheme: 'light' });
   const page = await context.newPage();
   for (const path of [
-    '/', '/guide/', '/platforms/', '/demo/',
+    '/', '/guide/', '/platforms/', '/demo/', '/downloads/',
     '/docs/architecture/',
     '/docs/engineering/sdk-ios/index/',
     ...docsPages.map(item => item.path),
@@ -46,6 +47,37 @@ try {
     assert.equal(await page.locator('html').getAttribute('lang'), path.startsWith('/en/') ? 'en' : 'zh-CN');
     record('route', path);
   }
+
+  await page.goto(new URL('/docs/', base).href, { waitUntil: 'domcontentloaded' });
+  await page.goto(new URL('/downloads/', base).href, { waitUntil: 'domcontentloaded' });
+  for (const asset of devtoolsRelease.assets) {
+    const link = page.locator(`a[href="${asset.url}"]`);
+    assert.equal(await link.count(), 1, `Missing direct download link for ${asset.filename}`);
+    assert.ok((await page.locator('body').textContent()).includes(asset.sha256), `Missing hash for ${asset.filename}`);
+  }
+  await page.screenshot({ path: resolve(output, 'downloads-desktop.png'), fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  const downloadsLayout = await page.evaluate(() => ({ width: document.documentElement.scrollWidth, viewport: window.innerWidth }));
+  assert.ok(downloadsLayout.width <= downloadsLayout.viewport, `Mobile downloads page overflows horizontally: ${JSON.stringify(downloadsLayout)}`);
+  await page.screenshot({ path: resolve(output, 'downloads-mobile.png'), fullPage: true });
+  record('download-layout', downloadsLayout);
+  await page.setViewportSize({ width: 1365, height: 960 });
+  const firstAsset = devtoolsRelease.assets[0];
+  await page.route(firstAsset.url, route => route.fulfill({
+    status: 200,
+    headers: {
+      'content-type': 'application/octet-stream',
+      'content-disposition': `attachment; filename="${firstAsset.filename}"`,
+    },
+    body: 'test archive',
+  }));
+  const directDownloadPromise = page.waitForEvent('download');
+  await page.locator(`a[href="${firstAsset.url}"]`).click();
+  const directDownload = await directDownloadPromise;
+  assert.equal(directDownload.suggestedFilename(), firstAsset.filename);
+  await directDownload.cancel();
+  assert.equal(new URL(page.url()).pathname, '/downloads/', 'Direct download navigated away from the website');
+  record('direct-devtools-download', firstAsset.filename);
 
   await page.goto(new URL('/docs/', base).href, { waitUntil: 'domcontentloaded' });
   const desktopSearch = page.locator('#docs-search');

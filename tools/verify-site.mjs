@@ -8,6 +8,7 @@ import {verifyFrontendNotices} from './frontend-notices.mjs';
 import {verifyPhotoNotices} from './photo-notices.mjs';
 import {verifyApiDocsData} from './verify-api-docs.mjs';
 import apiInventory from '../website/src/data/api-inventory-v1.json' with { type: 'json' };
+import devtoolsRelease from '../website/src/data/devtools-release.json' with { type: 'json' };
 import {apiSlug} from '../website/src/data/api-group-meta.mjs';
 import {docsPages} from '../website/src/data/docs-pages.mjs';
 import {verifyDocumentationSnapshot} from './documentation-snapshot.mjs';
@@ -22,6 +23,7 @@ async function walk(directory) { const result = []; for(const item of await read
 const files = await walk(base);
 const fileSet = new Set(files.map(path => relative(base,path).split('\\').join('/')));
 const headersPolicy = await readFile(resolve(base,'_headers'),'utf8');
+assert.match(headersPolicy,/(?:^|\n)\/downloads\/\n[ \t]+Cache-Control: [^\n]*no-transform/,'HTML transformation policy is missing for the downloads route');
 assert.match(headersPolicy,/(?:^|\n)\/docs\/\*\n[ \t]+Cache-Control: [^\n]*no-transform/,'HTML transformation policy is missing for documentation routes');
 const apiReceipt = await verifyApiDocsData();
 await verifyApiExamples(root);
@@ -70,7 +72,7 @@ for(const file of inventory.files) {
 const actualRuntime = (await walk(runtime)).map(path=>relative(runtime,path)).sort();
 assert.deepEqual(actualRuntime,[...inventory.files.map(file=>file.path),'deployment-inventory.json'].sort(),'Unreviewed runtime file');
 const requiredPages = [
-  'index.html','demo/index.html','platforms/index.html','guide/index.html','404.html',
+  'index.html','demo/index.html','platforms/index.html','guide/index.html','downloads/index.html','404.html',
   ...docsPages.map(page => `${page.path.slice(1)}index.html`),
   ...apiInventory.apis.map(api => `docs/api/${apiSlug(api.id)}/index.html`),
 ];
@@ -90,8 +92,15 @@ for(const api of apiInventory.apis) {
 }
 const sitemap = await readFile(resolve(base,'sitemap.xml'),'utf8');
 const sitemapRoutes = new Set([...sitemap.matchAll(/<loc>https:\/\/container\.weapp\.dev([^<]*)<\/loc>/g)].map(match => match[1]));
-for(const path of ['/','/demo/','/platforms/','/guide/',...docsPages.map(page=>page.path),...apiInventory.apis.map(api=>`/docs/api/${apiSlug(api.id)}/`)]) {
+for(const path of ['/','/demo/','/platforms/','/guide/','/downloads/',...docsPages.map(page=>page.path),...apiInventory.apis.map(api=>`/docs/api/${apiSlug(api.id)}/`)]) {
   assert.ok(sitemapRoutes.has(path),`Sitemap omits ${path}`);
+}
+const downloadsHtml = await readFile(resolve(base, 'downloads/index.html'), 'utf8');
+assert.ok(downloadsHtml.includes(devtoolsRelease.version), 'DevTools version is missing from the download page');
+assert.ok(downloadsHtml.includes(devtoolsRelease.checksumsUrl), 'DevTools checksum download is missing');
+for (const asset of devtoolsRelease.assets) {
+  assert.ok(downloadsHtml.includes(asset.url), `DevTools download link is missing: ${asset.filename}`);
+  assert.ok(downloadsHtml.includes(asset.sha256), `DevTools SHA-256 is missing: ${asset.filename}`);
 }
 const htmlFiles = files.filter(path => path.endsWith('.html'));
 const references = new Map(await Promise.all(htmlFiles.map(async path => [relative(base, path).split('\\').join('/'), siteReferences(await readFile(path, 'utf8'))])));

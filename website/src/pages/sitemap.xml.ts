@@ -9,6 +9,7 @@ const routes = [
   '/demo/',
   '/platforms/',
   '/guide/',
+  '/downloads/',
   ...docsPages.map((page) => page.path),
   ...inventory.apis.map((api) => `/docs/api/${apiSlug(api.id)}/`),
 ];
