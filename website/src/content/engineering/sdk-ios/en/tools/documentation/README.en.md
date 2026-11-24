@@ -6,7 +6,7 @@ summary: "Maintaining bilingual documentation. Versioned engineering reference f
 route: "/docs/engineering/sdk-ios/tools/documentation/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "5f725fd82c21dac44ea19985896b4b75d8015dcf"
+sourceCommit: "92bd5d889a7c6838e61492857f6c7c7899bf5c14"
 sourcePath: "tools/documentation/README.en.md"
 ---
 

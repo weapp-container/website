@@ -6,7 +6,7 @@ summary: "Windows sensors. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/sdk-desktop/windows-sensors/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "fbda74c25b7764c0f4cddafd0cc48a45ac206a1c"
+sourceCommit: "c04a228fa235fd9c010f4055de6a089233dc585c"
 sourcePath: "WINDOWS-SENSORS.en.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "iOS 端小程序容器（预览版）。来自 weapp-container/sdk-ios
 route: "/docs/engineering/sdk-ios/docs/embedding/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "5f725fd82c21dac44ea19985896b4b75d8015dcf"
+sourceCommit: "92bd5d889a7c6838e61492857f6c7c7899bf5c14"
 sourcePath: "docs/EMBEDDING.md"
 ---
 

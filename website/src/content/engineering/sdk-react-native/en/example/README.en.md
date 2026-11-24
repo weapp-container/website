@@ -6,7 +6,7 @@ summary: "Independent React Native consumer. Versioned engineering reference fro
 route: "/docs/engineering/sdk-react-native/example/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "1bb282ee47bc5ee392fd54e0471434cd5ecb502d"
+sourceCommit: "65d27dcce691a69342c4196f1c46c95dc8977a0f"
 sourcePath: "example/README.en.md"
 ---
 

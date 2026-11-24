@@ -6,7 +6,7 @@ summary: "weapp_container_linux. Versioned engineering reference from weapp-cont
 route: "/docs/engineering/sdk-flutter/weapp_container_linux/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156"
+sourceCommit: "6ac71bce3f85a76e697fbc5ac06296aac1618787"
 sourcePath: "weapp_container_linux/README.en.md"
 ---
 

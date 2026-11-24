@@ -6,7 +6,7 @@ summary: "Flutter plugin transport, preview.4. Versioned engineering reference f
 route: "/docs/engineering/sdk-contract/flutter_protocol/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "42b9eb42d111f21e2b789e05a4e62945c6f59e08"
+sourceCommit: "2b4a41a0963aa1dea6e04ec1be6b30666d1235e1"
 sourcePath: "FLUTTER_PROTOCOL.en.md"
 ---
 

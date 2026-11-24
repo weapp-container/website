@@ -6,7 +6,7 @@ summary: "Windows 内部音频上下文源实现。来自 weapp-container/sdk-de
 route: "/docs/engineering/sdk-desktop/windows-audio/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "fbda74c25b7764c0f4cddafd0cc48a45ac206a1c"
+sourceCommit: "c04a228fa235fd9c010f4055de6a089233dc585c"
 sourcePath: "WINDOWS-AUDIO.md"
 ---
 

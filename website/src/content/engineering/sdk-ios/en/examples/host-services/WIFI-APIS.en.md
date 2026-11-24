@@ -6,7 +6,7 @@ summary: "iOS Wi-Fi public capability range. Versioned engineering reference fro
 route: "/docs/engineering/sdk-ios/examples/host-services/wifi-apis/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "5f725fd82c21dac44ea19985896b4b75d8015dcf"
+sourceCommit: "92bd5d889a7c6838e61492857f6c7c7899bf5c14"
 sourcePath: "examples/host-services/WIFI-APIS.en.md"
 ---
 

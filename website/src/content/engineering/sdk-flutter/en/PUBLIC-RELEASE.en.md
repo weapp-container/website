@@ -6,7 +6,7 @@ summary: "Public preview release 0.1.0-preview.7.1. Versioned engineering refere
 route: "/docs/engineering/sdk-flutter/public-release/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156"
+sourceCommit: "6ac71bce3f85a76e697fbc5ac06296aac1618787"
 sourcePath: "PUBLIC-RELEASE.en.md"
 ---
 

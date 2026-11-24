@@ -6,7 +6,7 @@ summary: "preview.5.3 source requirements. Versioned engineering reference from 
 route: "/docs/engineering/sdk-contract/preview5_3/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "42b9eb42d111f21e2b789e05a4e62945c6f59e08"
+sourceCommit: "2b4a41a0963aa1dea6e04ec1be6b30666d1235e1"
 sourcePath: "PREVIEW5_3.en.md"
 ---
 
