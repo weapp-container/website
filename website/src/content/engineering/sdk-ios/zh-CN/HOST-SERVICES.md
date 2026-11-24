@@ -6,7 +6,7 @@ summary: "iOS 宿主能力。来自 weapp-container/sdk-ios 的版本化工程�
 route: "/docs/engineering/sdk-ios/host-services/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "e800e083bb533656b132ecfd721a4ea3062b8165"
+sourceCommit: "5f725fd82c21dac44ea19985896b4b75d8015dcf"
 sourcePath: "HOST-SERVICES.md"
 ---
 
@@ -23,8 +23,9 @@ let toolkit = try WeappNativeDeviceServices(presenter: presenter,
     allowedMediaOrigins: ["https://media.example.com"])
 try session.configureHostServices(trustedConfiguration)
 try toolkit.install(in: session)
-// 此后再加载 pack；宿主持有 toolkit 直至 session 关闭。
 ```
+
+随后再加载 pack，并在 session 关闭前保持 toolkit 存活。
 
 系统权限由宿主接入；应用内授权状态和操作系统权限分别检查。未实现或设备不支持的 API 不会注册，也不会伪装成成功。
 

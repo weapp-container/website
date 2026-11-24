@@ -6,7 +6,7 @@ summary: "公开预览发行 0.1.0-preview.7.1。来自 weapp-container/sdk-ios 
 route: "/docs/engineering/sdk-ios/public-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "e800e083bb533656b132ecfd721a4ea3062b8165"
+sourceCommit: "5f725fd82c21dac44ea19985896b4b75d8015dcf"
 sourcePath: "PUBLIC-RELEASE.md"
 ---
 

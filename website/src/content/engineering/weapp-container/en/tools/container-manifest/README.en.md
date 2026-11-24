@@ -6,7 +6,7 @@ summary: "`container-manifest`. Versioned engineering reference from weapp-conta
 route: "/docs/engineering/weapp-container/tools/container-manifest/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "908b8e74b41345487a5d847681d231ace0b2cde8"
+sourceCommit: "2c9c781785926e6f89494651c7d4a3e992e45440"
 sourcePath: "tools/container-manifest/README.en.md"
 ---
 
@@ -35,7 +35,7 @@ node tools/container-manifest/dist/cli.mjs \
 
 The output directory contains:
 
-- `manifest.json`: canonical UTF-8 JSON, schema v1, modern View v2, or explicit renderer profiles v3;
+- `manifest.json`: canonical UTF-8 JSON, schema v1, modern View v2, explicit renderer profiles v3, or mini-game v4;
 - `blobs/sha256/<digest>`: content-addressed original modules, normalized
   WXML/WXSS IR, separately compiled WXS/WXML executables and assets;
 - `capability-matrix.json`: host/engine support records used by `wx.canIUse`;
@@ -76,7 +76,7 @@ that the runtime will explicitly reject when active. Declaration bodies such
 as `@font-face` stay separate from nested rule lists. Parsing an at-rule does
 not claim that its execution or rendering is supported. The manifest schema
 remains v1 for legacy packs; the Rust decoder continues to read legacy WXSS IR v1. See
-[the WXSS contract](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/wxss-ir.en.md) for compatibility boundaries.
+[the WXSS contract](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/docs/wxss-ir.en.md) for compatibility boundaries.
 The `wxmlAst`/`wxssIr` manifest fields point to those blobs with
 `sha256:<digest>` pointers. `usingComponents` entries from app/page/component
 config are emitted as deterministic relation records. Missing optional
@@ -89,6 +89,16 @@ arrays containing `module:<path>` IDs. Relative, root-relative and emitted
 to an emitted module produces `ERR_UNDECLARED_MODULE_DEPENDENCY` and prevents
 writing a pack; manifests produced before dependency extraction remain valid
 because an empty dependencies field is omitted from canonical JSON.
+
+For an unpacked, unencrypted mini-game output directory, pass `--game`. The
+directory must contain `game.json` and `game.js`. The schema-v4 manifest has
+no page routes and rejects WXML, WXSS, and WXS View resources. This option does
+not decrypt platform packages or imply complete mini-game API compatibility.
+
+```bash
+node tools/container-manifest/bin/container-pack.mjs ./game-dist \
+  --game --out ./artifacts/game
+```
 
 AppService `.js` modules containing static `import` or `export` declarations
 are classified as `esm`; other `.js` modules remain `commonjs`. Classification

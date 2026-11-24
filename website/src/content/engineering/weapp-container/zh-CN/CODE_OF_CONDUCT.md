@@ -6,7 +6,7 @@ summary: "行为准则。来自 weapp-container/weapp-container 的版本化工�
 route: "/docs/engineering/weapp-container/code_of_conduct/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "908b8e74b41345487a5d847681d231ace0b2cde8"
+sourceCommit: "2c9c781785926e6f89494651c7d4a3e992e45440"
 sourcePath: "CODE_OF_CONDUCT.md"
 ---
 

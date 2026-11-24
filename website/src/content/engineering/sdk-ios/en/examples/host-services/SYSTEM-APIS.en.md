@@ -6,7 +6,7 @@ summary: "Native System API. Versioned engineering reference from weapp-containe
 route: "/docs/engineering/sdk-ios/examples/host-services/system-apis/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "e800e083bb533656b132ecfd721a4ea3062b8165"
+sourceCommit: "5f725fd82c21dac44ea19985896b4b75d8015dcf"
 sourcePath: "examples/host-services/SYSTEM-APIS.en.md"
 ---
 

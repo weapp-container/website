@@ -18,7 +18,7 @@ sourcePath: "README.md"
 <a id="public-distribution-candidate-preview7"></a>
 ## 公开发行候选：preview.7
 
-当前核心构建器与本页源码示例均使用 preview.7。核心运行库、iOS、Desktop 及公开 CocoaPods Specs 已提供下载；npm、Maven Central 和 pub.dev 尚未全部发布。使用安装命令前先核对[发布状态](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/public-sdk-release.md)，不要混用不同版本的包装层与运行库。源码公开、包发布、编译通过和设备验收分别记录。
+当前核心构建器与本页源码示例均使用 preview.7。核心运行库、iOS、Desktop 及公开 CocoaPods Specs 已提供下载；npm、Maven Central 和 pub.dev 尚未全部发布。使用安装命令前先核对[发布状态](/docs/engineering/weapp-container/docs/public-sdk-release/)，不要混用不同版本的包装层与运行库。源码公开、包发布、编译通过和设备验收分别记录。
 
 Contract 已在 npm 公开发布并通过匿名安装验证。其他 SDK 的进度见上述发布状态。历史私有归档及其锁文件保持原样。
 
@@ -43,7 +43,7 @@ git checkout 22cafeb56ac5d214c35fc513b1dbe5691e1b801d
 
 
 
-[开发文档](https://container.weapp.dev/docs/) · [源码构建](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md) · [API 与协议](/docs/engineering/sdk-contract/index/)
+[开发文档](https://container.weapp.dev/docs/) · [源码构建](/docs/engineering/weapp-container/docs/sdk-source-build/) · [API 与协议](/docs/engineering/sdk-contract/index/)
 
 Weapp Container 各端 SDK 共用的 C ABI、TypeScript 类型、适配协议、测试 pack 和运行库下载工具。应用开发优先使用 [Android](/docs/engineering/sdk-android/index/)、[iOS](/docs/engineering/sdk-ios/index/)、[Desktop](/docs/engineering/sdk-desktop/index/)、[Flutter](/docs/engineering/sdk-flutter/index/) 或 [React Native](/docs/engineering/sdk-react-native/index/) SDK；本仓库主要供自研宿主、适配器及构建工具使用。
 
@@ -62,7 +62,7 @@ pnpm install --frozen-lockfile
 node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```
 
-随后按[源码构建说明](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)准备目标平台的运行库和 notices，再用本仓库的构建工具生成接入包。平台工具链仍是必要依赖；源码公开不表示公共包仓库已有可下载的二进制。已有原生小程序或框架构建产物可以由独立 portable pack 工具打包，不要求 weapp-vite。
+随后按[源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)准备目标平台的运行库和 notices，再用本仓库的构建工具生成接入包。平台工具链仍是必要依赖；源码公开不表示公共包仓库已有可下载的二进制。已有原生小程序或框架构建产物可以由独立 portable pack 工具打包，不要求 weapp-vite。
 
 下面保留独立 SDK 的安装、视图与生命周期说明。涉及 `prepare-runtime` / `prepare-native` 的命令属于显式归档路径，必须使用核验过的配套 manifest；历史默认锁可能无法下载，详见文末说明。
 
@@ -212,6 +212,6 @@ node --test test/*.test.mjs
 <a id="historical-archives-and-migration"></a>
 ## 历史归档与迁移
 
-运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
+运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
 
-核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。
+核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。

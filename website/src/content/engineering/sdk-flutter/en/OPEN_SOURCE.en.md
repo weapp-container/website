@@ -6,7 +6,7 @@ summary: "Open-source runtime integration. Versioned engineering reference from 
 route: "/docs/engineering/sdk-flutter/open_source/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ee33a224d9d7dd12f48b71eb4ed21e91981fefdd"
+sourceCommit: "6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156"
 sourcePath: "OPEN_SOURCE.en.md"
 ---
 
@@ -17,7 +17,7 @@ sourcePath: "OPEN_SOURCE.en.md"
 
 
 The current core runtime and SDK source are Apache-2.0, with separately identified
-components retaining their licenses. See the [core source build guide](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-repositories.en.md).
+components retaining their licenses. See the [core source build guide](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/docs/sdk-repositories.en.md).
 
 This repository's existing runtime lock describes previously built archives. Its
 versions, sizes, hashes, distribution profiles and download authorization remain

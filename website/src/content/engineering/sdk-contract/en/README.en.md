@@ -18,7 +18,7 @@ sourcePath: "README.en.md"
 <a id="公开发行候选preview7"></a>
 ## Public distribution candidate: preview.7
 
-The current core builder and these source examples use preview.7. Core runtime, iOS, Desktop and public CocoaPods Specs downloads are available; npm, Maven Central and pub.dev publication is incomplete. Check the [release status](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/public-sdk-release.en.md) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
+The current core builder and these source examples use preview.7. Core runtime, iOS, Desktop and public CocoaPods Specs downloads are available; npm, Maven Central and pub.dev publication is incomplete. Check the [release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
 
 Contract is public on npm and passed anonymous installation checks. See the release status above for the other SDKs. Historical private archives and locks retain their original identities.
 
@@ -43,7 +43,7 @@ git checkout 22cafeb56ac5d214c35fc513b1dbe5691e1b801d
 
 
 
-[Documentation](https://container.weapp.dev/en/docs/) · [Source builds](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md) · [APIs and protocols](/en/docs/engineering/sdk-contract/index/)
+[Documentation](https://container.weapp.dev/en/docs/) · [Source builds](/en/docs/engineering/weapp-container/docs/sdk-source-build/) · [APIs and protocols](/en/docs/engineering/sdk-contract/index/)
 
 Shared C ABI, TypeScript types, adapter protocols, test packs, and runtime retrieval tools for Weapp Container SDKs. Application developers should start with the [Android](/en/docs/engineering/sdk-android/index/), [iOS](/en/docs/engineering/sdk-ios/index/), [Desktop](/en/docs/engineering/sdk-desktop/index/), [Flutter](/en/docs/engineering/sdk-flutter/index/), or [React Native](/en/docs/engineering/sdk-react-native/index/) SDK. This repository primarily serves custom hosts, adapters, and build tools.
 
@@ -62,7 +62,7 @@ pnpm install --frozen-lockfile
 node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```
 
-Follow the [source build guide](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md) to prepare the target runtime and notices, then use this SDK's packaging tools. Platform toolchains remain prerequisites. Public source does not imply that prebuilt packages are available from a public registry. Native mini-program directories and existing framework builds can be packaged independently; weapp-vite is optional.
+Follow the [source build guide](/en/docs/engineering/weapp-container/docs/sdk-source-build/) to prepare the target runtime and notices, then use this SDK's packaging tools. Platform toolchains remain prerequisites. Public source does not imply that prebuilt packages are available from a public registry. Native mini-program directories and existing framework builds can be packaged independently; weapp-vite is optional.
 
 The remaining sections describe standalone SDK installation, views, and lifecycle. Commands using `prepare-runtime` or `prepare-native` select the explicit archive path and require a reviewed matching manifest. Historical default locks may be unavailable; see the migration section at the end.
 
@@ -214,6 +214,6 @@ Query and negotiate optional capabilities by version before using them. Additive
 
 Historical storage: updated downloaders map the nine frozen legacy `runtime-artifacts` versions to the private `weapp-container/runtime-artifacts-private-archive`, retaining original lock bytes, hashes and licenses and recording the resolved repository. Old downloaders must upgrade. The new repository at the old name contains retired tool source only; new runtime releases use the core repository. Private archive access still requires authorization, with no cross-repository fallback.
 
-Runtime packaging and publication now live in the [core repository](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/tools/runtime-artifacts). New manifests select exact core releases through `--manifest`. The default lock retains its historical `runtime-artifacts` source, version, hashes and bundled licenses. The retired repository remains a read-only archive; downloads never fall back between repositories. Private repositories still require read access; source licensing does not imply public binary availability.
+Runtime packaging and publication now live in the [core repository](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/tools/runtime-artifacts). New manifests select exact core releases through `--manifest`. The default lock retains its historical `runtime-artifacts` source, version, hashes and bundled licenses. The retired repository remains a read-only archive; downloads never fall back between repositories. Private repositories still require read access; source licensing does not imply public binary availability.
 
-The core runtime and SDK source are available under Apache-2.0. Build the current runtime from the [core source guide](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md). Existing prebuilt archives retain their original licenses, access requirements and exact version/hash pins; this source update does not publish replacement binaries.
+The core runtime and SDK source are available under Apache-2.0. Build the current runtime from the [core source guide](/en/docs/engineering/weapp-container/docs/sdk-source-build/). Existing prebuilt archives retain their original licenses, access requirements and exact version/hash pins; this source update does not publish replacement binaries.

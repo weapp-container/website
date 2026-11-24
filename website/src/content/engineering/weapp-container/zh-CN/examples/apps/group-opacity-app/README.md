@@ -6,7 +6,7 @@ summary: "组透明度测试fixture。来自 weapp-container/weapp-container 的
 route: "/docs/engineering/weapp-container/examples/apps/group-opacity-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "908b8e74b41345487a5d847681d231ace0b2cde8"
+sourceCommit: "2c9c781785926e6f89494651c7d4a3e992e45440"
 sourcePath: "examples/apps/group-opacity-app/README.md"
 ---
 

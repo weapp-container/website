@@ -6,7 +6,7 @@ summary: "UIKit 窗口度量。来自 weapp-container/sdk-ios 的版本化工程
 route: "/docs/engineering/sdk-ios/docs/window-metrics/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "e800e083bb533656b132ecfd721a4ea3062b8165"
+sourceCommit: "5f725fd82c21dac44ea19985896b4b75d8015dcf"
 sourcePath: "docs/window-metrics.md"
 ---
 

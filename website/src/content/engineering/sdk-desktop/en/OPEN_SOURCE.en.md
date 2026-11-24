@@ -6,7 +6,7 @@ summary: "Open-source runtime integration. Versioned engineering reference from 
 route: "/docs/engineering/sdk-desktop/open_source/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "3798a667ea66a9cfa25566f8d4302a212cb6238d"
+sourceCommit: "fbda74c25b7764c0f4cddafd0cc48a45ac206a1c"
 sourcePath: "OPEN_SOURCE.en.md"
 ---
 
@@ -17,7 +17,7 @@ sourcePath: "OPEN_SOURCE.en.md"
 
 
 The current core runtime and SDK source are Apache-2.0, with separately identified
-components retaining their licenses. See the [core source build guide](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-repositories.en.md).
+components retaining their licenses. See the [core source build guide](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/docs/sdk-repositories.en.md).
 
 This repository's existing runtime lock describes previously built archives. Its
 versions, sizes, hashes, distribution profiles and download authorization remain

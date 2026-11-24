@@ -6,7 +6,7 @@ summary: "@weapp-container/node. Versioned engineering reference from weapp-cont
 route: "/docs/engineering/weapp-container/packages/node/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "908b8e74b41345487a5d847681d231ace0b2cde8"
+sourceCommit: "2c9c781785926e6f89494651c7d4a3e992e45440"
 sourcePath: "packages/node/README.en.md"
 ---
 
@@ -72,7 +72,7 @@ Handlers install before business execution, including App startup requests. Sync
 
 Ordinary wx requests preserve the existing callback compatibility contract after page unload; late results cannot reuse a new page instance. Explicit RequestTask abort and container disposal cancel host work.
 
-Default turn execution budget is 1000 ms, bootstrap budget 5000 ms, and RPC/cleanup watchdog 10000 ms. Configure them with `turnTimeoutMs`, `bootstrapTimeoutMs` and `timeout`. A Session interrupted for infinite execution must be recreated.
+Default turn execution budget is 1000 ms, guest bootstrap budget 5000 ms, test-host process handshake budget 10000 ms, and RPC/cleanup watchdog 10000 ms. Configure them with `turnTimeoutMs`, `bootstrapTimeoutMs`, `processStartupTimeoutMs` and `timeout`. A Session interrupted for infinite execution must be recreated.
 
 ## Binaries
 

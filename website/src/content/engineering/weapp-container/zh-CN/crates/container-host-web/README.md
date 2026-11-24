@@ -6,7 +6,7 @@ summary: "container-host-web。来自 weapp-container/weapp-container 的版本�
 route: "/docs/engineering/weapp-container/crates/container-host-web/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "908b8e74b41345487a5d847681d231ace0b2cde8"
+sourceCommit: "2c9c781785926e6f89494651c7d4a3e992e45440"
 sourcePath: "crates/container-host-web/README.md"
 ---
 
@@ -15,7 +15,7 @@ sourcePath: "crates/container-host-web/README.md"
 **简体中文** · [English](/en/docs/engineering/weapp-container/crates/container-host-web/index/)
 
 
-Web 生命周期边界。`load_manifest_json` 进行验证并拥有一个共享的 `container-runtime::Session`；`dispatch_json` 在 WASM/JavaScript 之间完全桥接并以批次形式传递。`wasm,quickjs-native` 构建一个浏览器的 cdylib，可在 QuickJS/WASM 内部执行相同的可移植模块。参见 [`web-wasm` 应用示例](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/examples/hosts/web-wasm/README.md) 了解静态部署和构建命令。`canvas-kit` 仍保留为一个预留的渲染边界；它不附加 CanvasKit 或 GPU 上下文。能力元数据和原生宿主测试并不能确立浏览器合规性。
+Web 生命周期边界。`load_manifest_json` 进行验证并拥有一个共享的 `container-runtime::Session`；`dispatch_json` 在 WASM/JavaScript 之间完全桥接并以批次形式传递。`wasm,quickjs-native` 构建一个浏览器的 cdylib，可在 QuickJS/WASM 内部执行相同的可移植模块。参见 [`web-wasm` 应用示例](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/examples/hosts/web-wasm/README.md) 了解静态部署和构建命令。`canvas-kit` 仍保留为一个预留的渲染边界；它不附加 CanvasKit 或 GPU 上下文。能力元数据和原生宿主测试并不能确立浏览器合规性。
 
 `start_session` 发送 `app.init`，而 `dispatch_lifecycle` 通过核心状态机路由有序的启动/显示/隐藏/卸载过渡。
 `poll_timers` 让浏览器事件循环提供 Unix 时间戳纳秒，并接收一个包含该时刻所有待执行回调的 JSON 批量。传递经过检查的 `BigInt(Date.now()) * 1_000_000n`，而不是 RAF 的相对时间戳；[共享定时器时钟合约](/docs/engineering/weapp-container/crates/container-host-common/index/) 定义了其范围和时钟域。

@@ -6,7 +6,7 @@ summary: "双语文档维护。来自 weapp-container/sdk-react-native 的版本
 route: "/docs/engineering/sdk-react-native/tools/documentation/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "9552ce6b5095e3c61bcf089e5ecbda049fad169e"
+sourceCommit: "1bb282ee47bc5ee392fd54e0471434cd5ecb502d"
 sourcePath: "tools/documentation/README.md"
 ---
 

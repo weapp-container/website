@@ -6,7 +6,7 @@ summary: "Windows Bluetooth LE host backend. Versioned engineering reference fro
 route: "/docs/engineering/sdk-desktop/docs/windows-bluetooth/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "3798a667ea66a9cfa25566f8d4302a212cb6238d"
+sourceCommit: "fbda74c25b7764c0f4cddafd0cc48a45ac206a1c"
 sourcePath: "docs/windows-bluetooth.en.md"
 ---
 

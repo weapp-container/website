@@ -6,7 +6,7 @@ summary: "小程序容器平台接口。来自 weapp-container/sdk-flutter 的�
 route: "/docs/engineering/sdk-flutter/weapp_container_platform_interface/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ee33a224d9d7dd12f48b71eb4ed21e91981fefdd"
+sourceCommit: "6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156"
 sourcePath: "weapp_container_platform_interface/README.md"
 ---
 

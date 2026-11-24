@@ -6,7 +6,7 @@ summary: "Public preview release 0.1.0-preview.7.1. Versioned engineering refere
 route: "/docs/engineering/sdk-android/public-release/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "f418bbd55d6ab309e0264c129696b685fee47c6f"
+sourceCommit: "f7b0d32da1614e7f52262ba42c9a70da647593a1"
 sourcePath: "PUBLIC-RELEASE.en.md"
 ---
 

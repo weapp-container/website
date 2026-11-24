@@ -6,7 +6,7 @@ summary: "双语文档维护。来自 weapp-container/sdk-android 的版本化�
 route: "/docs/engineering/sdk-android/tools/documentation/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "f418bbd55d6ab309e0264c129696b685fee47c6f"
+sourceCommit: "f7b0d32da1614e7f52262ba42c9a70da647593a1"
 sourcePath: "tools/documentation/README.md"
 ---
 

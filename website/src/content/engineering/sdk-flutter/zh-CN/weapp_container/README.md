@@ -6,7 +6,7 @@ summary: "Weapp Container Flutter SDK。来自 weapp-container/sdk-flutter 的�
 route: "/docs/engineering/sdk-flutter/weapp_container/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ee33a224d9d7dd12f48b71eb4ed21e91981fefdd"
+sourceCommit: "6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156"
 sourcePath: "weapp_container/README.md"
 ---
 
@@ -15,27 +15,22 @@ sourcePath: "weapp_container/README.md"
 
 **简体中文** · [English](/en/docs/engineering/sdk-flutter/weapp_container/index/)
 
-版本： `0.1.0-preview.7.0`；C ABI `1`。
+版本： `0.1.0-preview.7.1`；C ABI `1`。
 
 ```yaml
 dependencies:
-  weapp_container: 0.1.0-preview.7.0
+  weapp_container: 0.1.0-preview.7.1
 ```
 
 ```sh
 flutter pub get
 ```
 
-Android API 26+；iOS 16+；macOS 12+ universal；Linux / Windows x86_64。Flutter 3.22+ / Dart 3.3+。Android 通过 Maven Central 获取依赖；iOS 和 macOS 使用公开 CocoaPods Specs，请在对应 Podfile 中添加两个源：
-
-```ruby
-source 'https://github.com/weapp-container/Specs.git'
-source 'https://cdn.cocoapods.org/'
-```
+Android API 26+；iOS 16+；macOS 12+ universal；Linux / Windows x86_64。Flutter 3.22+ / Dart 3.3+。Android 通过 Maven Central 获取依赖。iOS 的独立 CocoaPods 归档尚未发布，可从核心 prerelease 获取 iOS SDK tarball，并在应用 Podfile 以本地路径覆盖 `WeappContainer` 依赖。macOS 的独立 Desktop CocoaPods 归档尚未发布，不能按公开 Pod 路径完成构建。
 
 Linux / Windows 通过 CMake 下载固定版本的 Desktop 归档并校验 SHA-256。离线构建时，提前下载并校验该归档，将 `FETCHCONTENT_SOURCE_DIR_WEAPP_CONTAINER_RUNTIME` 指向解压目录。每个平台包包含桥接源码、头文件和许可，普通安装无需 Node 准备命令或兄弟仓库。
 
-首次公开发布正在准备中；注册源发布和设备验证结果分别记录，历史私有锁文件保留原样。
+`0.1.0-preview.7.1` 已发布到 pub.dev。原生构建和设备验证结果按目标平台分别记录，历史私有锁文件保留原样。
 
 先创建 Controller，并在首次 `load` 前注册宿主方法和事件。以下代码由页面或路由的会话管理逻辑执行，不放在 `build()` 中：
 
@@ -69,7 +64,7 @@ SizedBox(
 )
 ```
 
-View 挂载后加载已生成并校验的本地 pack。Flutter assets 需要先解包到应用私有目录，具体做法见[示例](https://github.com/weapp-container/sdk-flutter/blob/ee33a224d9d7dd12f48b71eb4ed21e91981fefdd/example/lib/main.dart)：
+View 挂载后加载已生成并校验的本地 pack。Flutter assets 需要先解包到应用私有目录，具体做法见[示例](https://github.com/weapp-container/sdk-flutter/blob/6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156/example/lib/main.dart)：
 
 ```dart
 await controller.load('/verified/local/portable-pack');
@@ -101,7 +96,7 @@ await controller.close();
 
 宿主方法只返回 JSON 可表示的值。异步方法应观察 `call.cancellation`，错误可使用 `WeappHostError` 返回明确的代码。
 
-登录、账号、网络和设备能力通过宿主显式配置：在 `load()` 前先调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。网络 origin 白名单和系统权限由宿主管理；受限 Showcase 运行库仍按编译时策略限制能力。配置和账号切换协议见 [CONTRACT.md](/docs/engineering/sdk-flutter/contract/) 与 [Controller API](https://github.com/weapp-container/sdk-flutter/blob/ee33a224d9d7dd12f48b71eb4ed21e91981fefdd/weapp_container/lib/src/controller.dart)。
+登录、账号、网络和设备能力通过宿主显式配置：在 `load()` 前先调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。网络 origin 白名单和系统权限由宿主管理；受限 Showcase 运行库仍按编译时策略限制能力。配置和账号切换协议见 [CONTRACT.md](/docs/engineering/sdk-flutter/contract/) 与 [Controller API](https://github.com/weapp-container/sdk-flutter/blob/6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156/weapp_container/lib/src/controller.dart)。
 
 ## 常见问题
 
@@ -117,11 +112,11 @@ await controller.close();
 ## 更多资料与许可
 
 - [Widget 与 Controller 用法](/docs/engineering/sdk-flutter/weapp_container/index/)
-- [完整示例](https://github.com/weapp-container/sdk-flutter/blob/ee33a224d9d7dd12f48b71eb4ed21e91981fefdd/example/lib/main.dart) · [示例运行说明](/docs/engineering/sdk-flutter/example/index/)
+- [完整示例](https://github.com/weapp-container/sdk-flutter/blob/6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156/example/lib/main.dart) · [示例运行说明](/docs/engineering/sdk-flutter/example/index/)
 - [桌面接入](/docs/engineering/sdk-flutter/native_desktop/index/) · [SDK 协议](/docs/engineering/sdk-flutter/contract/)
 - [公共类型和 C ABI](/docs/engineering/sdk-contract/index/)
 
-接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/ee33a224d9d7dd12f48b71eb4ed21e91981fefdd/weapp_container/LICENSE)。运行库和第三方组件遵循归档中的 `RUNTIME-LICENSE` 及 notices；历史归档保留各自随附的许可和访问要求。
+接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156/weapp_container/LICENSE)。运行库和第三方组件遵循归档中的 `RUNTIME-LICENSE` 及 notices；历史归档保留各自随附的许可和访问要求。
 
 ## 开发客户端与生命周期细节
 

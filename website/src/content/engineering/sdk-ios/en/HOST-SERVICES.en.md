@@ -6,7 +6,7 @@ summary: "iOS Host Capabilities. Versioned engineering reference from weapp-cont
 route: "/docs/engineering/sdk-ios/host-services/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "e800e083bb533656b132ecfd721a4ea3062b8165"
+sourceCommit: "5f725fd82c21dac44ea19985896b4b75d8015dcf"
 sourcePath: "HOST-SERVICES.en.md"
 ---
 
@@ -23,8 +23,9 @@ let toolkit = try WeappNativeDeviceServices(presenter: presenter,
     allowedMediaOrigins: ["https://media.example.com"])
 try session.configureHostServices(trustedConfiguration)
 try toolkit.install(in: session)
-// Load the pack afterward; keep the toolkit alive until the session closes.
 ```
+
+Load the pack afterward and keep the toolkit alive until the session closes.
 
 The host connects operating-system permissions. App-level authorization and operating-system permissions are checked separately. APIs that are unimplemented or unavailable on the device are not registered and do not report success.
 

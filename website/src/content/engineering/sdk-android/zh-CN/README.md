@@ -6,7 +6,7 @@ summary: "Weapp Container Android SDK。来自 weapp-container/sdk-android 的�
 route: "/docs/engineering/sdk-android/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "f418bbd55d6ab309e0264c129696b685fee47c6f"
+sourceCommit: "f7b0d32da1614e7f52262ba42c9a70da647593a1"
 sourcePath: "README.md"
 ---
 
@@ -17,9 +17,7 @@ sourcePath: "README.md"
 <a id="public-distribution-candidate-preview7"></a>
 ## 公开发行候选：preview.7
 
-当前 SDK 源码是 `0.1.0-preview.7.1` 候选，核心运行库 `.7.1` 已发布；Android Maven 包尚未发布。iOS、Desktop 与 CocoaPods `.7.0` 入口仍可用，`.7.1` 尚待发布。使用安装命令前先核对[发布状态](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/public-sdk-release.md)，不要混用不同版本的包装层与运行库。源码公开、包发布、编译通过和设备验收分别记录。
-
-Android `.7.1` Maven 坐标在 Central 发布并完成匿名消费验证后才可安装。历史私有归档及其锁文件保持原样。
+`0.1.0-preview.7.1` 已发布到 Maven Central，可按下方坐标安装。当前仍是预览版，没有稳定版。源码、包发布、编译和设备验收状态分别记录，详见[SDK 发行状态](/docs/engineering/weapp-container/docs/public-sdk-release/)。
 
 版本 `0.1.0-preview.7.1`；Android API 26+，arm64-v8a / x86_64；Java 17。配置 Maven Central 后直接依赖公开坐标：
 
@@ -41,11 +39,11 @@ git checkout ca8c21a4d4a075b7180761875287bf9c7abaee53
 
 
 
-[开发文档](https://container.weapp.dev/docs/) · [源码构建](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md) · [API 与协议](/docs/engineering/sdk-contract/index/)
+[开发文档](https://container.weapp.dev/docs/) · [源码构建](/docs/engineering/weapp-container/docs/sdk-source-build/) · [API 与协议](/docs/engineering/sdk-contract/index/)
 
 在 Android 应用中嵌入小程序页面。SDK 提供 Kotlin 会话、原生 `TextureView`、宿主消息通道和本地持久化，使用 QuickJS 执行 JavaScript、Skia GLES 渲染页面。
 
-已复核源码示例版本：**0.1.0-preview.7.1**。SDK 封装源码采用 [Apache-2.0](https://github.com/weapp-container/sdk-android/blob/f418bbd55d6ab309e0264c129696b685fee47c6f/LICENSE)；运行时源码在主仓库按 Apache-2.0 提供。本仓库包含 SDK 包装层源码，运行库单独构建或安装。
+已复核源码示例版本：**0.1.0-preview.7.1**。SDK 封装源码采用 [Apache-2.0](https://github.com/weapp-container/sdk-android/blob/f7b0d32da1614e7f52262ba42c9a70da647593a1/LICENSE)；运行时源码在主仓库按 Apache-2.0 提供。本仓库包含 SDK 包装层源码，运行库单独构建或安装。
 
 <a id="start-from-source-code"></a>
 ## 从当前源码开始
@@ -60,7 +58,7 @@ pnpm install --frozen-lockfile
 node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```
 
-随后按[源码构建说明](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)准备目标平台的运行库和 notices，再用本仓库的构建工具生成接入包。平台工具链仍是必要依赖；源码公开不表示公共包仓库已有可下载的二进制。已有原生小程序或框架构建产物可以由独立 portable pack 工具打包，不要求 weapp-vite。
+随后按[源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)准备目标平台的运行库和 notices，再用本仓库的构建工具生成接入包。平台工具链仍是必要依赖；源码公开不表示公共包仓库已有可下载的二进制。已有原生小程序或框架构建产物可以由独立 portable pack 工具打包，不要求 weapp-vite。
 
 下面保留独立 SDK 的安装、视图与生命周期说明。涉及 `prepare-runtime` / `prepare-native` 的命令属于显式归档路径，必须使用核验过的配套 manifest；历史默认锁可能无法下载，详见文末说明。
 
@@ -71,7 +69,7 @@ node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 | --- | --- |
 | 应用系统 | Android API 26+ |
 | 原生架构 | `arm64-v8a`、`x86_64` |
-| 构建工具 | Node.js 24+、Python 3、JDK 17+、Gradle 8.9 |
+| 构建工具 | Node.js 24+、Python 3、JDK 17+、Gradle 8.13 |
 | Android 工具链 | SDK / Build Tools 36、NDK `27.1.12297006`、CMake `3.22.1` |
 
 配置 `ANDROID_HOME`；可用 `ANDROID_NDK_HOME` 和 `GRADLE` 指定工具路径。应用链接构建后的运行库；只有运行库构建过程需要 Rust 和核心源码。
@@ -79,18 +77,20 @@ node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 <a id="1-obtain-the-runtime-library"></a>
 ## 1. 获取运行库
 
-在公开核心仓库的干净 checkout 根目录执行：
+在公开核心仓库根目录按[源码构建指南](/docs/engineering/weapp-container/docs/sdk-source-build/)构建两个 Android runtime target 和依赖 notices，然后执行：
 
 ```sh
-pnpm sdk:build:android -- --pack artifacts/hello-pack
+node sdk/android/tools/build.mjs --native-root artifacts/sdk/native \
+  --licenses-root artifacts/sdk/licenses --pack artifacts/hello-pack \
+  --out artifacts/sdk/android
 ```
 
-该命令从当前源码构建运行库，收集 notices，并调用固定的 SDK 包装层生成接入包。输出在 `artifacts/sdk/android/`。完整工具链和输入检查见[源码构建](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)。历史归档安装属于文末的可选兼容路径。
+该命令调用固定的 SDK 包装层生成 AAR、本地 Maven 仓库和独立 consumer。输出在 `artifacts/sdk/android/`。历史归档安装属于文末的可选兼容路径。
 
 <a id="2-build-aar-and-maven-repository"></a>
 ## 2. 构建 AAR 与 Maven 仓库
 
-上一节的源码构建已在 `artifacts/sdk/android/` 生成 release AAR、本地 `maven/` 仓库、独立 R8 consumer 及校验报告。`--pack` 使用前面生成并校验的 portable pack 构建该 consumer。独立 SDK checkout 的包装层构建命令见历史归档章节。
+上一节的包装层构建已在 `artifacts/sdk/android/` 生成 release AAR、本地 `maven/` 仓库、独立 R8 consumer 及校验报告。`--pack` 使用前面生成并校验的 portable pack 构建该 consumer。独立 SDK checkout 的包装层构建命令见历史归档章节。
 
 在应用的 `settings.gradle.kts` 中加入生成的仓库，路径按实际目录调整：
 
@@ -155,6 +155,17 @@ fun mountContainer(context: Context, parent: ViewGroup): WeappContainerSession {
 
 `PackSource.Directory(File(...))` 可加载宿主已下载、解包的本地目录。`LoadOptions(route = "pages/detail/index", options = JSONObject())` 可传入初始路由和启动参数。首次加载等待 View 的真实布局和窗口信息；把 View 挂到窗口后再等待加载完成。
 
+### 运行 Android 示例应用
+
+第 1 节的构建命令会把 portable pack 放入独立 consumer，并构建可安装的 APK。连接已运行的模拟器或设备后，可手动启动：
+
+```sh
+adb -s <serial> install -t artifacts/sdk/android/consumer/build/outputs/apk/release/*.apk
+adb -s <serial> shell am start -n com.sonofmagic.weapp.container.sdkconsumer/com.sonofmagic.weapp.container.consumer.ConsumerActivity
+```
+
+示例屏幕顶部的操作会直接调用当前会话：`Reload` 重载 pack，`Detail` / `Back` 执行原生导航，`Echo` 发送宿主消息，`Store` 写入示例值，`Flush` 等待持久化完成，`Read` 读取回执，`Pause` / `Resume` 更改前后台状态，`Close` 先解绑 View 再关闭会话，`Reopen` 使用相同 storage key 创建新会话。状态栏显示最近事件或操作结果。consumer 使用测试签名，仅用于开发和验收。
+
 <a id="4-communication-and-navigation"></a>
 ## 4. 通信与导航
 
@@ -164,7 +175,7 @@ session.navigate("pages/detail/index", JSONObject().put("id", "42"))
 session.back()
 ```
 
-小程序侧使用 `weappContainer.invoke` 调用宿主方法，使用 `postMessage` / `onMessage` 交换消息，类型见 [weapp-container.d.ts](https://github.com/weapp-container/sdk-android/blob/f418bbd55d6ab309e0264c129696b685fee47c6f/types/weapp-container.d.ts)。宿主方法应在首次 `load` 前注册。异步任务通过 `call.onCancel` 取消，使用 `reply.resolve` / `reply.reject` 完成；已取消或旧会话的回复不会影响新实例。
+小程序侧使用 `weappContainer.invoke` 调用宿主方法，使用 `postMessage` / `onMessage` 交换消息，类型见 [weapp-container.d.ts](https://github.com/weapp-container/sdk-android/blob/f7b0d32da1614e7f52262ba42c9a70da647593a1/types/weapp-container.d.ts)。宿主方法应在首次 `load` 前注册。异步任务通过 `call.onCancel` 取消，使用 `reply.resolve` / `reply.reject` 完成；已取消或旧会话的回复不会影响新实例。
 
 <a id="5-lifecycle-and-storage"></a>
 ## 5. 生命周期与存储
@@ -193,22 +204,28 @@ node tools/device-smoke.mjs --serial YOUR_ALREADY_RUNNING_TARGET
 
 `npm test` 检查封装层输入契约。设备测试需先构建 consumer，并显式指定已运行的设备；工具只安装、清理本次测试应用。构建报告不代表真机、GPU 或性能验收通过，各端结果需绑定实际运行库独立验证。
 
+```sh
+node tools/device-smoke.mjs --serial <serial> --artifacts /absolute/path/to/artifacts/sdk/android --out /absolute/path/to/validation/android-device
+```
+
+设备验收会点击示例应用的导航、消息、存储、生命周期、重载和关闭/重开控件，再覆盖触摸、渲染、网络、持久化及会话隔离。结果只适用于回执中记录的运行库、设备类型和 SDK 版本。
+
 - [嵌入、窗口尺寸、触摸与生命周期](/docs/engineering/sdk-android/docs/embedding/)
 - [宿主服务：设备能力、扩展注册与权限](/docs/engineering/sdk-android/host-services/)
-- [宿主服务接入示例](https://github.com/weapp-container/sdk-android/blob/f418bbd55d6ab309e0264c129696b685fee47c6f/examples/host-services/README.md)
+- [宿主服务 API 指南](/docs/engineering/sdk-android/examples/host-services/index/)
 - [跨端会话契约](/docs/engineering/sdk-android/contract/)
-- [源文件清单](https://github.com/weapp-container/sdk-android/blob/f418bbd55d6ab309e0264c129696b685fee47c6f/SOURCE-INVENTORY.json) 与 [历史导出记录](https://github.com/weapp-container/sdk-android/blob/f418bbd55d6ab309e0264c129696b685fee47c6f/ORIGIN.json)
+- [源文件清单](https://github.com/weapp-container/sdk-android/blob/f7b0d32da1614e7f52262ba42c9a70da647593a1/SOURCE-INVENTORY.json) 与 [历史导出记录](https://github.com/weapp-container/sdk-android/blob/f7b0d32da1614e7f52262ba42c9a70da647593a1/ORIGIN.json)
 
 运行能力取决于配套运行库及其分发策略；`restricted-showcase` 只允许编译时授权的演示包与 API，不能通过宿主配置重新开启禁用能力。原生输入法、无障碍与复杂手势的支持范围见嵌入文档。分发应用时保留 SDK `LICENSE`、运行库 `RUNTIME-LICENSE` 和第三方声明。
 
 <a id="historical-archiving-and-migration"></a>
 ## 历史归档与迁移
 
-历史发行审计（2026-11-12）：两个默认 runtime pin 均与旧仓库当前同名资产不符，默认在线准备会被完整性校验拒绝。请从匹配的干净源码构建，或通过 `--manifest` 显式选取独立审核过的配套清单；不要仅修改旧哈希。[差异与迁移记录](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/runtime-artifacts-migration.md)。
+历史发行审计（2026-11-12）：两个默认 runtime pin 均与旧仓库当前同名资产不符，默认在线准备会被完整性校验拒绝。请从匹配的干净源码构建，或通过 `--manifest` 显式选取独立审核过的配套清单；不要仅修改旧哈希。[差异与迁移记录](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/docs/runtime-artifacts-migration.md)。
 
-运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
+运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
 
-核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。
+核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。
 
 <a id="optional-install-a-historically-audited-archive"></a>
 ### 可选：安装已审核的历史归档
@@ -232,7 +249,7 @@ node tools/prepare-runtime.mjs
 node tools/prepare-runtime.mjs --artifact-dir /absolute/runtime-archives
 ```
 
-工具按 [当前公开锁](https://github.com/weapp-container/sdk-android/blob/f418bbd55d6ab309e0264c129696b685fee47c6f/runtime-artifacts.0.1.0-preview.7.1.lock.json) 校验 **0.1.0-preview.7.1**、ABI 1、架构、大小和 SHA-256，安装到 `.runtime/install/native` 和 `.runtime/install/licenses`。缺少归档、无下载权限或校验不符时会失败；已有安装在失败时保留。锁文件中的 pin 不代表运行库可公开下载。
+工具按 [当前公开锁](https://github.com/weapp-container/sdk-android/blob/f7b0d32da1614e7f52262ba42c9a70da647593a1/runtime-artifacts.0.1.0-preview.7.1.lock.json) 校验 **0.1.0-preview.7.1**、ABI 1、架构、大小和 SHA-256，安装到 `.runtime/install/native` 和 `.runtime/install/licenses`。缺少归档、无下载权限或校验不符时会失败；已有安装在失败时保留。锁文件中的 pin 不代表运行库可公开下载。
 
 自定义归档清单使用 `--manifest /absolute/reviewed-lock.json`。慢速网络可通过 `WEAPP_CONTAINER_RUNTIME_TIMEOUT_MS` 调整下载超时，范围为 `1`–`3600000` 毫秒，默认 15 分钟。
 

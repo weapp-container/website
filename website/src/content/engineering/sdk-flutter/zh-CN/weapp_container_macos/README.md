@@ -6,7 +6,7 @@ summary: "weapp_container_macos。来自 weapp-container/sdk-flutter 的版本�
 route: "/docs/engineering/sdk-flutter/weapp_container_macos/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ee33a224d9d7dd12f48b71eb4ed21e91981fefdd"
+sourceCommit: "6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156"
 sourcePath: "weapp_container_macos/README.md"
 ---
 
@@ -14,7 +14,7 @@ sourcePath: "weapp_container_macos/README.md"
 
 **简体中文** · [English](/en/docs/engineering/sdk-flutter/weapp_container_macos/index/)
 
-preview.7 平台包包含桥接源码和许可。注册源发布后通过主包安装；平台、架构、Specs 与原生依赖条件见 [SDK 首页](/docs/engineering/sdk-flutter/index/)。
+preview.7.1 平台包包含桥接源码和许可。macOS 的独立 Desktop CocoaPods 归档尚未发布；平台、架构和原生依赖条件见 [SDK 首页](/docs/engineering/sdk-flutter/index/)。
 
 [weapp_container](https://pub.dev/packages/weapp_container) 的 macos 平台实现。
 

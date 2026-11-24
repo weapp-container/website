@@ -6,7 +6,7 @@ summary: "Independent React Native consumer. Versioned engineering reference fro
 route: "/docs/engineering/sdk-react-native/example/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "9552ce6b5095e3c61bcf089e5ecbda049fad169e"
+sourceCommit: "1bb282ee47bc5ee392fd54e0471434cd5ecb502d"
 sourcePath: "example/README.en.md"
 ---
 
@@ -16,7 +16,19 @@ sourcePath: "example/README.en.md"
 [简体中文](/docs/engineering/sdk-react-native/example/index/) · **English**
 
 
-From the standalone SDK root, run `node tools/create-consumer.mjs --package /absolute/path/sdk.tgz --out /absolute/path/new-consumer`. The shared fixture is authored entirely from included source; it does not borrow a private base pack or assert a compiler/conformance pass.
+Run the following from the standalone SDK root. `create-consumer.mjs` generates the fixture and adds it to the Android project:
+
+```sh
+mkdir -p /tmp/weapp-rn-package
+npm pack @weapp-container/react-native@0.1.0-preview.7.1 --pack-destination /tmp/weapp-rn-package
+node tools/create-consumer.mjs \
+  --package /tmp/weapp-rn-package/weapp-container-react-native-0.1.0-preview.7.1.tgz \
+  --out /tmp/weapp-rn-consumer
+cd /tmp/weapp-rn-consumer
+npx react-native run-android --deviceId <serial>
+```
+
+The public prerelease currently supports this Android native dependency path. The iOS Pod references an unavailable SDK archive, so public-package `pod install` cannot currently complete. The example screen provides `Rerender`, `RapidRemount`, `Navigate`, `Back`, `Detach`, `Reattach`, `Pause`, `Resume`, `Close`, `Reopen`, and `Finish` actions. `App.tsx` demonstrates the full Controller, Fabric View, host-method, AbortSignal, message, and stable-storage-key lifecycle.
 
 The pinned official React Native 0.88.0 template installs the exact npm archive, checks its file inventory, and adds the shared portable fixture. `App.tsx` exercises native sessions. `tools/smoke.mjs --consumer /absolute/path/consumer --platform ios|android --device EXISTING_DEVICE_ID --out FRESH_EVIDENCE_DIRECTORY` performs explicit device validation when dependencies and hardware are available. Release is the default; `--development` tests actual refresh/reload. Preparation alone is not a device or GPU pass.
 

@@ -6,7 +6,7 @@ summary: "container-engine-v8. Versioned engineering reference from weapp-contai
 route: "/docs/engineering/weapp-container/crates/container-engine-v8/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "908b8e74b41345487a5d847681d231ace0b2cde8"
+sourceCommit: "2c9c781785926e6f89494651c7d4a3e992e45440"
 sourcePath: "crates/container-engine-v8/README.en.md"
 ---
 
@@ -28,7 +28,11 @@ There is no fallback between modes. A host that requests V8 must build with
 module. Rusty V8 downloads the release archive for the target during the
 feature-enabled build. Set `RUSTY_V8_MIRROR`/`RUSTY_V8_ARCHIVE` and
 `RUSTY_V8_ARCHIVE_SHA256` in a reproducible build environment when the archive
-must come from an internal mirror.
+must come from an internal mirror. iOS simulator builds of V8 152.2.0 also
+must pass the repository input contract in `scripts/ios-v8-build-inputs.mjs`.
+It pins the verified archive, `RUSTY_V8_SRC_BINDING_PATH`, snapshot magic, and
+the lite/jitless GN recipe, and explicitly blocks when any required input is
+missing.
 
 The provider keeps all JavaScript execution on the isolate thread and exposes
 only the batch `container_core::JsEngine` boundary. Module loading wraps the

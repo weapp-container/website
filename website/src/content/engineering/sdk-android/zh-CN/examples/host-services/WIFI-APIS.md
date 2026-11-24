@@ -6,7 +6,7 @@ summary: "Android Wi-Fi。来自 weapp-container/sdk-android 的版本化工程�
 route: "/docs/engineering/sdk-android/examples/host-services/wifi-apis/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "f418bbd55d6ab309e0264c129696b685fee47c6f"
+sourceCommit: "f7b0d32da1614e7f52262ba42c9a70da647593a1"
 sourcePath: "examples/host-services/WIFI-APIS.md"
 ---
 
@@ -50,7 +50,7 @@ callback，不删除宿主已保存的网络，不关闭系统设置页面或 ra
 - [Android Wi-Fi scanning overview](https://developer.android.com/develop/connectivity/wifi/wifi-scan)：扫描可能被节流，getScanResults 可以是旧缓存，必须核对成功广播。
 - [Android Wi-Fi Network Request API](https://developer.android.com/develop/connectivity/wifi/wifi-bootstrap)：Android 10+ 的应用网络请求不提供互联网，系统可记住批准。
 
-[开发证据](https://github.com/weapp-container/sdk-android/blob/f418bbd55d6ab309e0264c129696b685fee47c6f/test/evidence/host-services-wifi-development.json) 只证明当前开发
-snapshot 在任务自有 Android emulator 上的真实查询、扫描、partial 事件、stop/start
-订阅、停止屏障和未修改全局绑定/radio。connect 确认、AP 切换、密码/系统拒绝、
-物理射频和 Android 13+ 权限仍待设备验收。
+当前公开源码未附带该开发 snapshot 的设备回执，因此查询、扫描、partial 事件、
+stop/start 订阅和停止屏障的设备结果尚无法从仓库独立核验。不得仅凭实现或构建
+结果将其标记为通过。connect 确认、AP 切换、密码/系统拒绝、物理射频和 Android
+13+ 权限也需要分别进行目标设备验收。

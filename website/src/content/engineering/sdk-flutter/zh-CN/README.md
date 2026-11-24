@@ -6,7 +6,7 @@ summary: "Weapp Container Flutter SDK。来自 weapp-container/sdk-flutter 的�
 route: "/docs/engineering/sdk-flutter/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ee33a224d9d7dd12f48b71eb4ed21e91981fefdd"
+sourceCommit: "6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156"
 sourcePath: "README.md"
 ---
 
@@ -17,13 +17,11 @@ sourcePath: "README.md"
 <a id="public-distribution-candidate-preview7"></a>
 ## 公开发行候选：preview.7
 
-当前核心构建器与本页源码示例均使用 preview.7。核心运行库、iOS、Desktop 及公开 CocoaPods Specs 已提供下载；npm、Maven Central 和 pub.dev 尚未全部发布。使用安装命令前先核对[发布状态](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/public-sdk-release.md)，不要混用不同版本的包装层与运行库。源码公开、包发布、编译通过和设备验收分别记录。
+`0.1.0-preview.7.1` 的 Flutter 主包、platform interface 和五个原生平台包均已发布到 pub.dev。当前仍是预览版，没有稳定版。Android Maven 与 Linux/Windows Desktop 归档可匿名获取；iOS/macOS CocoaPods 规格引用的独立 SDK 归档仍不可用，不能据此宣称 Apple 平台公开构建可用。请按[SDK 发行状态](/docs/engineering/weapp-container/docs/public-sdk-release/)核对平台边界。
 
 版本 / Version: `0.1.0-preview.7.1`；C ABI `1`。
 
-发布状态：platform interface `.7.1` 已公开（[pub.dev](https://pub.dev/packages/weapp_container_platform_interface/versions/0.1.0-preview.7.1)）。staging run `43490236246` 与发布 run `43490337704` 通过，匿名归档 SHA-256 为 `c3eabcc357977df5d440f12a6a22adf58a09263e95ceb589a77773550c0a0a36`。Linux/Windows 首次包上传被 pub.dev 拒绝（`Only users are allowed to upload new packages`）；Android/iOS/macOS 插件和主包需等原生注册源依赖公开后按 interface -> 平台插件 -> 主包顺序发布。以下主包安装方式在全部依赖发布后可用。
-
-每个包都使用 GitHub OIDC，标签格式为 `<package>-v<version>`。推送标签前，须在同一干净提交完成 `package-pub.yml`；发布工作流只读取该提交的成功 staging 产物，验证后冻结并上传同一归档。手动续发未发布包时可使用 `tools/publish-public.mjs --distribution /absolute/staging --package <包名> --execute`，已公开版本始终拒绝重发。
+七个公开包分别为 `weapp_container`、`weapp_container_platform_interface`、`weapp_container_android`、`weapp_container_ios`、`weapp_container_macos`、`weapp_container_linux` 和 `weapp_container_windows`。主包依赖按目标平台选择对应插件；注册源可下载不代表每个原生目标都已完成构建或设备验收。
 
 ```yaml
 dependencies:
@@ -43,7 +41,7 @@ source 'https://cdn.cocoapods.org/'
 
 Linux / Windows 的 CMake 下载固定 Desktop 归档并验证 SHA-256。离线构建需预先获取精确归档，将 `FETCHCONTENT_SOURCE_DIR_WEAPP_CONTAINER_RUNTIME` 设为解压目录。各平台包包含桥接源码、头文件和许可，普通应用安装无需 Node 准备命令或兄弟仓库。
 
-其余包的首次公开发行仍在准备；注册源发布和设备验证分别记录，历史私有锁保持原样。
+安装归档包含桥接源码和许可。iOS/macOS 当前受制于 Podspec 指向的独立 SDK 归档缺失；Linux/Windows 使用核心 preview release 中的 Desktop SDK tarball。源码构建与目标验证步骤见下文。
 
 <a id="reviewed-source-build-checkout"></a>
 ### 已复核的源码构建版本
@@ -56,11 +54,11 @@ git checkout d115f7d3ea6f5d7df2e3fe4cef38607ca248dccf
 
 
 
-[开发文档](https://container.weapp.dev/docs/) · [源码构建](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md) · [API 与协议](/docs/engineering/sdk-contract/index/)
+[开发文档](https://container.weapp.dev/docs/) · [源码构建](/docs/engineering/weapp-container/docs/sdk-source-build/) · [API 与协议](/docs/engineering/sdk-contract/index/)
 
 在 Flutter 应用中嵌入小程序容器。Android、iOS 使用原生 View，桌面端使用 Flutter 外部纹理；同一个 Dart Controller 负责加载本地 pack、导航、收发消息和管理会话。
 
-已复核源码示例版本：`0.1.0-preview.7.1`，原生 ABI：`1`。本仓库提供 Apache-2.0 许可的接入层，运行库从公开核心源码构建，或使用另行核验的配套归档。platform interface 已发布；`.7.1` 主包和其余平台包尚未发布到 pub.dev。
+已复核源码示例版本：`0.1.0-preview.7.1`，原生 ABI：`1`。本仓库提供 Apache-2.0 许可的接入层，运行库从公开核心源码构建，或使用另行核验的配套归档。七个 Flutter 包均已发布到 pub.dev，原生构建和设备验收仍按目标平台分别记录。
 
 <a id="start-from-current-source"></a>
 ## 从当前源码开始
@@ -75,7 +73,7 @@ pnpm install --frozen-lockfile
 node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```
 
-随后按[源码构建说明](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)准备目标平台的运行库和 notices，再用本仓库的构建工具生成接入包。平台工具链仍是必要依赖；源码公开不表示公共包仓库已有可下载的二进制。已有原生小程序或框架构建产物可以由独立 portable pack 工具打包，不要求 weapp-vite。
+随后按[源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)准备目标平台的运行库和 notices，再用本仓库的构建工具生成接入包。平台工具链仍是必要依赖；pub.dev 上有对应版本不代表该目标引用的原生归档也都可下载，平台状态见上方发行说明。已有原生小程序或框架构建产物可以由独立 portable pack 工具打包，不要求 weapp-vite。
 
 下面保留独立 SDK 的安装、视图与生命周期说明。涉及 `prepare-runtime` / `prepare-native` 的命令属于显式归档路径，必须使用核验过的配套 manifest；历史默认锁可能无法下载，详见文末说明。
 
@@ -103,7 +101,7 @@ node sdk/flutter/tools/prepare-native.mjs --platform android --arch universal \
   --manifest artifacts/local-release/manifest.json --artifact-dir artifacts/local-release
 ```
 
-先按[源码构建说明](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)构建对应 SDK，并生成本地 `manifest.json` 和归档。上面的命令在核心仓库根目录消费这些本地输入，不需要历史归档 token。路径按实际输出调整，不要提交原生归档。
+先按[源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)构建对应 SDK，并生成本地 `manifest.json` 和归档。上面的命令在核心仓库根目录消费这些本地输入，不需要历史归档 token。路径按实际输出调整，不要提交原生归档。
 
 按目标选择命令，无需准备全部平台：
 
@@ -121,19 +119,18 @@ node sdk/flutter/tools/prepare-native.mjs --platform linux --arch x86_64 \
 <a id="2-build-a-distribution-and-run-the-example"></a>
 ## 2. 生成分发包并运行示例
 
-在核心仓库根目录执行；固定的 SDK 子模块须已提交并通过源码清单校验：
+示例应用位于 SDK checkout 的 `example/`，通过 path dependency 使用同仓库的 `weapp_container` 包：
 
 ```sh
-pnpm sdk:build:flutter -- --platform android --flutter /absolute/flutter/bin/flutter \
-  --manifest artifacts/local-release/manifest.json \
-  --out /absolute/new-flutter-distribution
-cd /absolute/new-flutter-distribution/consumer
+cd sdk/flutter/example
+flutter pub get
+flutter analyze lib
 flutter run -d DEVICE_ID
 ```
 
-输出包括 `packages/`、`consumer/`、`distribution.json` 和 `consumer.json`。示例包含本仓库生成的测试 pack，可体验点击、滚动、导航、消息、存储和会话重建。移动分发目录时，保留 `packages/` 与 `consumer/` 的相对关系。
+Android 工程生成后，在 `android/app/build.gradle.kts` 的 `defaultConfig` 中设置 `minSdk = 26`。这是 `weapp_container_android` 的最低支持版本；`tools/package.mjs` 生成的分发工程会自动写入该值。
 
-脚本默认准备示例、解析依赖并执行静态分析；追加 `--platform android`、`ios`、`macos`、`linux` 或 `windows` 可构建指定客户端。构建需要对应平台工具链和可用的原生 SDK。
+示例包含测试 pack，可体验点击、滚动、导航、消息、存储和会话重建。Android、iOS、macOS、Windows 或 Linux 构建需要对应平台工具链与可用的原生 SDK。公开 package 的安装坐标和目标可用性见[发行状态](/docs/engineering/weapp-container/docs/public-sdk-release/)。
 
 Android 示例使用 NDK `27.1.12297006`、CMake `3.22.1`，仅包含两个受支持的 ABI：
 
@@ -144,7 +141,7 @@ flutter build apk --debug --target-platform android-arm64,android-x64
 <a id="3-add-the-sdk-to-your-flutter-application"></a>
 ## 3. 接入你的 Flutter 应用
 
-在应用的 `pubspec.yaml` 中引用生成的分发包。七个 federated packages 之间存在相对路径依赖，请保留整个 `packages/` 目录：
+在本地示例中，七个 federated packages 之间通过相对路径依赖。将它们作为本地 package 分发时，请保留整个 `packages/` 目录：
 
 ```yaml
 dependencies:
@@ -184,7 +181,7 @@ SizedBox(
 )
 ```
 
-View 挂载后加载已生成并校验的本地 pack。Flutter assets 需要先解包到应用私有目录，具体做法见[示例](https://github.com/weapp-container/sdk-flutter/blob/ee33a224d9d7dd12f48b71eb4ed21e91981fefdd/example/lib/main.dart)：
+View 挂载后加载已生成并校验的本地 pack。Flutter assets 需要先解包到应用私有目录，具体做法见[示例](https://github.com/weapp-container/sdk-flutter/blob/6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156/example/lib/main.dart)：
 
 ```dart
 await controller.load('/verified/local/portable-pack');
@@ -218,7 +215,7 @@ await controller.close();
 
 宿主方法只返回 JSON 可表示的值。异步方法应观察 `call.cancellation`，错误可使用 `WeappHostError` 返回明确的代码。
 
-登录、账号、网络和设备能力通过宿主显式配置：在 `load()` 前先调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。网络 origin 白名单和系统权限由宿主管理；受限 Showcase 运行库仍按编译时策略限制能力。配置和账号切换协议见 [CONTRACT.md](/docs/engineering/sdk-flutter/contract/) 与 [Controller API](https://github.com/weapp-container/sdk-flutter/blob/ee33a224d9d7dd12f48b71eb4ed21e91981fefdd/weapp_container/lib/src/controller.dart)。
+登录、账号、网络和设备能力通过宿主显式配置：在 `load()` 前先调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。网络 origin 白名单和系统权限由宿主管理；受限 Showcase 运行库仍按编译时策略限制能力。配置和账号切换协议见 [CONTRACT.md](/docs/engineering/sdk-flutter/contract/) 与 [Controller API](https://github.com/weapp-container/sdk-flutter/blob/6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156/weapp_container/lib/src/controller.dart)。
 
 <a id="troubleshooting"></a>
 ## 常见问题
@@ -236,17 +233,17 @@ await controller.close();
 ## 更多资料与许可
 
 - [Widget 与 Controller 用法](/docs/engineering/sdk-flutter/weapp_container/index/)
-- [完整示例](https://github.com/weapp-container/sdk-flutter/blob/ee33a224d9d7dd12f48b71eb4ed21e91981fefdd/example/lib/main.dart) · [示例运行说明](/docs/engineering/sdk-flutter/example/index/)
+- [完整示例](https://github.com/weapp-container/sdk-flutter/blob/6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156/example/lib/main.dart) · [示例运行说明](/docs/engineering/sdk-flutter/example/index/)
 - [桌面接入](/docs/engineering/sdk-flutter/native_desktop/index/) · [SDK 协议](/docs/engineering/sdk-flutter/contract/)
 - [公共类型和 C ABI](/docs/engineering/sdk-contract/index/)
 
-接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/ee33a224d9d7dd12f48b71eb4ed21e91981fefdd/LICENSE)。运行库和第三方组件遵循归档中的 `RUNTIME-LICENSE` 及 notices；本仓库的开源许可不授予私有运行库下载权或额外的商用权利。
+接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156/LICENSE)。运行库和第三方组件遵循归档中的 `RUNTIME-LICENSE` 及 notices；本仓库的开源许可不授予私有运行库下载权或额外的商用权利。
 
 <a id="historical-archives-and-migration"></a>
 ## 历史归档与迁移
 
-历史发行审计（2026-11-12）：默认锁中的 SDK 归档部分缺失，多个 runtime pin 与当前同名资产不符，默认在线准备会被完整性校验拒绝。请从匹配的干净源码构建，或通过 `--manifest` 显式选取独立审核过的配套清单；不要仅修改旧哈希。[差异与迁移记录](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/runtime-artifacts-migration.md)。
+历史发行审计（2026-11-12）：默认锁中的 SDK 归档部分缺失，多个 runtime pin 与当前同名资产不符，默认在线准备会被完整性校验拒绝。请从匹配的干净源码构建，或通过 `--manifest` 显式选取独立审核过的配套清单；不要仅修改旧哈希。[差异与迁移记录](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/docs/runtime-artifacts-migration.md)。
 
-运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
+运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
 
-核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。
+核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。

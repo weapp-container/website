@@ -6,7 +6,7 @@ summary: "Showcase bridge 1. Versioned engineering reference from weapp-containe
 route: "/docs/engineering/website/miniapp/bridge/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "955a33e7e66c065aa88919aabaeec94ecedc00d6"
+sourceCommit: "445d54cf90f8c4a4dcafa42923f613ae440c82b4"
 sourcePath: "miniapp/BRIDGE.en.md"
 ---
 

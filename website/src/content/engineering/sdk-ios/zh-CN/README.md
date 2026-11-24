@@ -6,7 +6,7 @@ summary: "Weapp Container iOS SDK。来自 weapp-container/sdk-ios 的版本化�
 route: "/docs/engineering/sdk-ios/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "e800e083bb533656b132ecfd721a4ea3062b8165"
+sourceCommit: "5f725fd82c21dac44ea19985896b4b75d8015dcf"
 sourcePath: "README.md"
 ---
 
@@ -17,28 +17,20 @@ sourcePath: "README.md"
 <a id="public-distribution-candidate-preview7"></a>
 ## 公开发行候选：preview.7
 
-当前 SDK 源码是 `0.1.0-preview.7.1` 候选，核心运行库 `.7.1` 已发布；iOS GitHub release 和 CocoaPods Trunk `.7.1` 尚未发布。iOS、Desktop 与 CocoaPods `.7.0` 入口仍可用。使用安装命令前先核对[发布状态](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/public-sdk-release.md)，不要混用不同版本的包装层与运行库。源码公开、包发布、编译通过和设备验收分别记录。
+核心 prerelease `runtime-v0.1.0-preview.7.1` 已包含可匿名下载的 iOS SDK tarball，SHA-256 为 `bcb142018b078663533ff988b6288208ecb1834fb126de90b1a678aa2beaa6cf`。独立 `sdk-ios` GitHub release、SwiftPM 和 CocoaPods Trunk `.7.1` 入口仍未发布，因此下方公开安装元数据当前不可用。当前仍是预览版，没有稳定版。状态见[SDK 发行状态](/docs/engineering/weapp-container/docs/public-sdk-release/)。
 
-`.7.1` 安装入口在 GitHub release 与 CocoaPods Trunk 发布并完成匿名消费验证后可用。历史私有归档及其锁文件保持原样。
+版本 `0.1.0-preview.7.1`；iOS 16+，Xcode 27.2+（Swift 5.9 语言模式）；包含 arm64 真机和 arm64/x86_64 模拟器。核心发行页提供[配套 iOS SDK 归档](https://github.com/weapp-container/weapp-container/releases/download/runtime-v0.1.0-preview.7.1/ios-sdk-0.1.0-preview.7.1-ios-universal.tar.gz)，SHA-256 为 `bcb142018b078663533ff988b6288208ecb1834fb126de90b1a678aa2beaa6cf`。
 
-版本 `0.1.0-preview.7.1`；iOS 16+，Xcode 27.2+（Swift 5.9 语言模式）；包含 arm64 真机和 arm64/x86_64 模拟器。
-
-Swift Package Manager 使用固定版本标签；二进制归档由 Package.swift 的 URL 与 checksum 锁定：
-
-```swift
-.package(url: "https://github.com/weapp-container/sdk-ios.git", exact: "0.1.0-preview.7.1")
-```
-
-CocoaPods 在 Podfile 添加组织公开 Specs 源和已配置的其他源：
+下载并校验后，将归档解压到本地目录。在 Xcode 中将该目录作为本地 Swift package 添加。若使用 CocoaPods，在应用 Podfile 中用本地路径引用归档中的 `WeappContainer.podspec`：
 
 ```ruby
-source 'https://github.com/weapp-container/Specs.git'
-source 'https://cdn.cocoapods.org/'
 platform :ios, '16.0'
-pod 'WeappContainer', '0.1.0-preview.7.1'
+target 'YourApp' do
+  pod 'WeappContainer', :path => '/absolute/path/to/WeappContainer'
+end
 ```
 
-Pod 使用包含 Swift 层、XCFramework 和许可的固定 HTTP 归档，验证 SHA-256。普通安装无需 Node.js、Rust 或本地运行库目录。Trunk 投稿状态以 [Specs 发布记录](https://github.com/weapp-container/Specs) 为准。
+独立 `sdk-ios` GitHub release 和 CocoaPods Trunk `.7.1` 入口尚未发布，`Package.swift` 与 podspec 中的远程 URL 当前不可用。上述本地归档路径不依赖这些远程入口。
 
 <a id="reviewed-source-build-checkout"></a>
 ### 已复核的源码构建版本
@@ -51,11 +43,11 @@ git checkout a5c9d76b8e8068efbcedbf7af073a138b69f54f2
 
 
 
-[开发文档](https://container.weapp.dev/docs/) · [源码构建](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md) · [API 与协议](/docs/engineering/sdk-contract/index/)
+[开发文档](https://container.weapp.dev/docs/) · [源码构建](/docs/engineering/weapp-container/docs/sdk-source-build/) · [API 与协议](/docs/engineering/sdk-contract/index/)
 
 在 iOS 应用中嵌入小程序页面。SDK 提供 Swift 会话、UIKit / SwiftUI 视图、宿主消息通道和本地持久化，使用 QuickJS 执行 JavaScript、Skia Metal 渲染页面。
 
-已复核源码示例版本：**0.1.0-preview.7.1**。SDK 封装源码采用 [Apache-2.0](https://github.com/weapp-container/sdk-ios/blob/e800e083bb533656b132ecfd721a4ea3062b8165/LICENSE)；运行时源码在主仓库按 Apache-2.0 提供。本仓库包含 SDK 包装层源码，运行库单独构建或安装。
+已复核源码示例版本：**0.1.0-preview.7.1**。SDK 封装源码采用 [Apache-2.0](https://github.com/weapp-container/sdk-ios/blob/5f725fd82c21dac44ea19985896b4b75d8015dcf/LICENSE)；运行时源码在主仓库按 Apache-2.0 提供。本仓库包含 SDK 包装层源码，运行库单独构建或安装。
 
 <a id="starting-from-source-code"></a>
 ## 从当前源码开始
@@ -70,7 +62,7 @@ pnpm install --frozen-lockfile
 node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```
 
-随后按[源码构建说明](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)准备目标平台的运行库和 notices，再用本仓库的构建工具生成接入包。平台工具链仍是必要依赖；源码公开不表示公共包仓库已有可下载的二进制。已有原生小程序或框架构建产物可以由独立 portable pack 工具打包，不要求 weapp-vite。
+随后按[源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)准备目标平台的运行库和 notices，再用本仓库的构建工具生成接入包。平台工具链仍是必要依赖；源码公开不表示公共包仓库已有可下载的二进制。已有原生小程序或框架构建产物可以由独立 portable pack 工具打包，不要求 weapp-vite。
 
 下面保留独立 SDK 的安装、视图与生命周期说明。涉及 `prepare-runtime` / `prepare-native` 的命令属于显式归档路径，必须使用核验过的配套 manifest；历史默认锁可能无法下载，详见文末说明。
 
@@ -89,18 +81,19 @@ node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 <a id="1-obtain-runtime-library"></a>
 ## 1. 获取运行库
 
-在公开核心仓库的干净 checkout 根目录执行：
+在公开核心仓库根目录按[源码构建指南](/docs/engineering/weapp-container/docs/sdk-source-build/)构建 iOS device 与 simulator runtime target 及 notices，然后执行：
 
 ```sh
-pnpm sdk:build:ios -- --install-framework
+node sdk/ios/tools/build.mjs --native-root artifacts/sdk/native \
+  --licenses-root artifacts/sdk/licenses --out artifacts/sdk/ios --install-framework
 ```
 
-该命令从当前源码构建运行库，收集 notices，并调用固定的 SDK 包装层生成接入包。输出在 `artifacts/sdk/ios/`。完整工具链和输入检查见[源码构建](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)。历史归档安装属于文末的可选兼容路径。
+该命令调用固定的 SDK 包装层生成 XCFramework 与本地 Swift package。输出在 `artifacts/sdk/ios/`。历史归档安装属于文末的可选兼容路径。
 
 <a id="2-build-and-integrate"></a>
 ## 2. 构建并接入
 
-上一节的源码构建已在 `artifacts/sdk/ios/` 生成本地接入包。独立 SDK checkout 的包装层构建命令见历史归档章节。
+上一节的包装层构建已在 `artifacts/sdk/ios/` 生成本地接入包。独立 SDK checkout 的包装层构建命令见历史归档章节。
 
 输出目录为 `artifacts/sdk/ios/WeappContainer`，包含 Swift 源码、XCFramework、SwiftPM / CocoaPods 配置、许可证和构建记录。`--install-framework` 同时安装到本仓库忽略的 `Frameworks/` 目录，供根 `Package.swift` 使用。
 
@@ -168,7 +161,7 @@ try session.navigate(route: "pages/detail/index", query: ["id": .string("42")])
 try session.back()
 ```
 
-小程序侧使用 `weappContainer.invoke` 调用宿主方法，使用 `postMessage` / `onMessage` 交换消息，类型见 [weapp-container.d.ts](https://github.com/weapp-container/sdk-ios/blob/e800e083bb533656b132ecfd721a4ea3062b8165/types/weapp-container.d.ts)。宿主方法应在首次 `load` 前注册，参数和结果使用 `WeappJSON`。处理器可以使用 `async throws`；拒绝请求时抛出 `WeappHostError`，异步任务需配合 Swift 任务取消。
+小程序侧使用 `weappContainer.invoke` 调用宿主方法，使用 `postMessage` / `onMessage` 交换消息，类型见 [weapp-container.d.ts](https://github.com/weapp-container/sdk-ios/blob/5f725fd82c21dac44ea19985896b4b75d8015dcf/types/weapp-container.d.ts)。宿主方法应在首次 `load` 前注册，参数和结果使用 `WeappJSON`。处理器可以使用 `async throws`；拒绝请求时抛出 `WeappHostError`，异步任务需配合 Swift 任务取消。
 
 <a id="5-lifecycle-and-storage"></a>
 ## 5. 生命周期与存储
@@ -198,19 +191,19 @@ node tools/simulator-smoke.mjs --distribution artifacts/sdk/ios/WeappContainer -
 
 - [嵌入、窗口尺寸、触摸与生命周期](/docs/engineering/sdk-ios/docs/embedding/)
 - [宿主服务：设备能力、扩展注册与权限](/docs/engineering/sdk-ios/host-services/)
-- [宿主服务接入示例](https://github.com/weapp-container/sdk-ios/blob/e800e083bb533656b132ecfd721a4ea3062b8165/examples/host-services/README.md)
+- [宿主服务接入示例](/docs/engineering/sdk-ios/examples/host-services/index/)
 - [独立 consumer 工程](/docs/engineering/sdk-ios/examples/consumer/index/)
 - [跨端会话契约](/docs/engineering/sdk-ios/contract/)
-- [源文件清单](https://github.com/weapp-container/sdk-ios/blob/e800e083bb533656b132ecfd721a4ea3062b8165/SOURCE-INVENTORY.json) 与 [历史导出记录](https://github.com/weapp-container/sdk-ios/blob/e800e083bb533656b132ecfd721a4ea3062b8165/ORIGIN.json)
+- [源文件清单](https://github.com/weapp-container/sdk-ios/blob/5f725fd82c21dac44ea19985896b4b75d8015dcf/SOURCE-INVENTORY.json) 与 [历史导出记录](https://github.com/weapp-container/sdk-ios/blob/5f725fd82c21dac44ea19985896b4b75d8015dcf/ORIGIN.json)
 
 运行能力取决于配套运行库及其分发策略；`restricted-showcase` 只允许编译时授权的演示包与 API，不能通过宿主配置重新开启禁用能力。真机运行、GPU 和性能验收需绑定实际产物独立验证。原生输入法、无障碍与复杂手势的支持范围见嵌入文档。分发应用时保留 SDK `LICENSE`、运行库 `RUNTIME-LICENSE` 和第三方声明。
 
 <a id="historical-archives-and-migration"></a>
 ## 历史归档与迁移
 
-运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
+运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
 
-核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.md)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。
+核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。
 
 <a id="optional-install-reviewed-historical-archives"></a>
 ### 可选：安装已审核的历史归档
@@ -234,7 +227,7 @@ node tools/prepare-runtime.mjs
 node tools/prepare-runtime.mjs --artifact-dir /absolute/runtime-archives
 ```
 
-工具按 [当前公开锁](https://github.com/weapp-container/sdk-ios/blob/e800e083bb533656b132ecfd721a4ea3062b8165/runtime-artifacts.0.1.0-preview.7.1.lock.json) 校验 **0.1.0-preview.7.1**、ABI 1、架构、大小和 SHA-256，安装到 `.runtime/install/native` 和 `.runtime/install/licenses`。缺少归档、无下载权限或校验不符时会失败；已有安装在失败时保留。锁文件中的 pin 不代表运行库可公开下载。
+工具按 [当前公开锁](https://github.com/weapp-container/sdk-ios/blob/5f725fd82c21dac44ea19985896b4b75d8015dcf/runtime-artifacts.0.1.0-preview.7.1.lock.json) 校验 **0.1.0-preview.7.1**、ABI 1、架构、大小和 SHA-256，安装到 `.runtime/install/native` 和 `.runtime/install/licenses`。缺少归档、无下载权限或校验不符时会失败；已有安装在失败时保留。锁文件中的 pin 不代表运行库可公开下载。
 
 自定义归档清单使用 `--manifest /absolute/reviewed-lock.json`。慢速网络可通过 `WEAPP_CONTAINER_RUNTIME_TIMEOUT_MS` 调整下载超时，范围为 `1`–`3600000` 毫秒，默认 15 分钟。
 

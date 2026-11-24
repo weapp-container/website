@@ -6,7 +6,7 @@ summary: "公共 Flutter 宿主生命周期验证。来自 weapp-container/sdk-f
 route: "/docs/engineering/sdk-flutter/native_desktop/tests/host-lifecycle/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ee33a224d9d7dd12f48b71eb4ed21e91981fefdd"
+sourceCommit: "6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156"
 sourcePath: "native_desktop/tests/host-lifecycle.md"
 ---
 

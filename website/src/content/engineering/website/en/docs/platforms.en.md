@@ -6,7 +6,7 @@ summary: "Full-end demonstration and access to historical products. Versioned en
 route: "/docs/engineering/website/docs/platforms/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "955a33e7e66c065aa88919aabaeec94ecedc00d6"
+sourceCommit: "445d54cf90f8c4a4dcafa42923f613ae440c82b4"
 sourcePath: "docs/platforms.en.md"
 ---
 
@@ -16,7 +16,7 @@ sourcePath: "docs/platforms.en.md"
 [简体中文](/docs/engineering/website/docs/platforms/) · **English**
 
 
-What is currently public is the source code. The following installation commands reproduce historical precompiled candidates and still require corresponding private archive permissions; they do not constitute a new open source binary release. Source code execution starts from [Core README](/en/docs/engineering/weapp-container/index/). For each SDK source code construction, see [SDK Description](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-repositories.en.md). The platform status has not been revalidated against the current open source source code.
+What is currently public is the source code. The following installation commands reproduce historical precompiled candidates and still require corresponding private archive permissions; they do not constitute a new open source binary release. Source code execution starts from [Core README](/en/docs/engineering/weapp-container/index/). For each SDK source code construction, see [SDK Description](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/docs/sdk-repositories.en.md). The platform status has not been revalidated against the current open source source code.
 
 Seven systems use a unified portable pack format: basic interaction, product details and specifications, shopping bags, receipt information, simulated checkout, ordering, and order records. Each host adapter only loads the exact pack candidates for which it was compiled and bundled; each end is upgraded and accepted independently. Business data is only saved locally and is not connected to external services or an order backend. Web runs WASM within a browser Dedicated Worker; native hosting uses each host's native views.
 

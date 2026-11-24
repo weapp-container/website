@@ -6,7 +6,7 @@ summary: "SDK contract v1. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/sdk-android/contract/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "f418bbd55d6ab309e0264c129696b685fee47c6f"
+sourceCommit: "f7b0d32da1614e7f52262ba42c9a70da647593a1"
 sourcePath: "CONTRACT.en.md"
 ---
 

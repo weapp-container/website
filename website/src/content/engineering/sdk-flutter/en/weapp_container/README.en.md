@@ -6,7 +6,7 @@ summary: "Weapp Container Flutter SDK. Versioned engineering reference from weap
 route: "/docs/engineering/sdk-flutter/weapp_container/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "ee33a224d9d7dd12f48b71eb4ed21e91981fefdd"
+sourceCommit: "6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156"
 sourcePath: "weapp_container/README.en.md"
 ---
 
@@ -15,27 +15,22 @@ sourcePath: "weapp_container/README.en.md"
 
 [简体中文](/docs/engineering/sdk-flutter/weapp_container/index/) · **English**
 
-Version: `0.1.0-preview.7.0`; C ABI `1`.
+Version: `0.1.0-preview.7.1`; C ABI `1`.
 
 ```yaml
 dependencies:
-  weapp_container: 0.1.0-preview.7.0
+  weapp_container: 0.1.0-preview.7.1
 ```
 
 ```sh
 flutter pub get
 ```
 
-Android API 26+; iOS 16+; macOS 12+ universal; Linux / Windows x86_64. Flutter 3.22+ / Dart 3.3+. Android uses Maven Central. iOS and macOS use public CocoaPods specifications; add both sources to each Apple Podfile:
-
-```ruby
-source 'https://github.com/weapp-container/Specs.git'
-source 'https://cdn.cocoapods.org/'
-```
+Android API 26+; iOS 16+; macOS 12+ universal; Linux / Windows x86_64. Flutter 3.22+ / Dart 3.3+. Android uses Maven Central. The standalone iOS CocoaPods archive is not published. For iOS, download the iOS SDK tarball from the core prerelease and override `WeappContainer` with its local Podspec path in the app Podfile. The standalone Desktop CocoaPods archive is also unavailable, so the public Pod path cannot currently build macOS apps.
 
 Linux / Windows CMake downloads a fixed Desktop archive and verifies SHA-256. For offline builds, prefetch the exact archive and set `FETCHCONTENT_SOURCE_DIR_WEAPP_CONTAINER_RUNTIME` to its extracted directory. Each platform package includes its bridge sources, headers and licenses. Normal application installation requires no Node preparation command or sibling repository.
 
-First public publication is being prepared; registry and device validation results are recorded separately. Historical private locks remain unchanged.
+`0.1.0-preview.7.1` is published on pub.dev. Native builds and device validation remain recorded per target platform. Historical private locks remain unchanged.
 
 Create a Controller and register host methods and event listeners before the first `load`. Run this in your page or route's session owner, outside `build()`:
 
@@ -69,7 +64,7 @@ SizedBox(
 )
 ```
 
-Once mounted, load a generated, verified local pack. Extract Flutter assets to application-private storage first; see the [example](https://github.com/weapp-container/sdk-flutter/blob/ee33a224d9d7dd12f48b71eb4ed21e91981fefdd/example/lib/main.dart):
+Once mounted, load a generated, verified local pack. Extract Flutter assets to application-private storage first; see the [example](https://github.com/weapp-container/sdk-flutter/blob/6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156/example/lib/main.dart):
 
 ```dart
 await controller.load('/verified/local/portable-pack');
@@ -101,7 +96,7 @@ await controller.close();
 
 Host methods return JSON-compatible values. Asynchronous handlers should observe `call.cancellation`; use `WeappHostError` for explicit error codes.
 
-Configure login, accounts, networking and device capabilities explicitly in the host: call `configureHostServices`, then optionally `installNativeDeviceApis`, before `load()`. The host controls network origin allowlists and OS permissions. Restricted Showcase runtimes also enforce their compiled policy. See [CONTRACT.md](/en/docs/engineering/sdk-flutter/contract/) and the [Controller API](https://github.com/weapp-container/sdk-flutter/blob/ee33a224d9d7dd12f48b71eb4ed21e91981fefdd/weapp_container/lib/src/controller.dart) for configuration and account switching.
+Configure login, accounts, networking and device capabilities explicitly in the host: call `configureHostServices`, then optionally `installNativeDeviceApis`, before `load()`. The host controls network origin allowlists and OS permissions. Restricted Showcase runtimes also enforce their compiled policy. See [CONTRACT.md](/en/docs/engineering/sdk-flutter/contract/) and the [Controller API](https://github.com/weapp-container/sdk-flutter/blob/6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156/weapp_container/lib/src/controller.dart) for configuration and account switching.
 
 ## Troubleshooting
 
@@ -117,11 +112,11 @@ Native text editing, full accessibility semantics and advanced gestures still ha
 ## Documentation and licensing
 
 - [Widget and Controller usage](/en/docs/engineering/sdk-flutter/weapp_container/index/)
-- [Complete example](https://github.com/weapp-container/sdk-flutter/blob/ee33a224d9d7dd12f48b71eb4ed21e91981fefdd/example/lib/main.dart) · [Running the example](/en/docs/engineering/sdk-flutter/example/index/)
+- [Complete example](https://github.com/weapp-container/sdk-flutter/blob/6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156/example/lib/main.dart) · [Running the example](/en/docs/engineering/sdk-flutter/example/index/)
 - [Desktop integration](/en/docs/engineering/sdk-flutter/native_desktop/index/) · [SDK protocol](/en/docs/engineering/sdk-flutter/contract/)
 - [Public types and C ABI](/en/docs/engineering/sdk-contract/index/)
 
-The integration source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/ee33a224d9d7dd12f48b71eb4ed21e91981fefdd/weapp_container/LICENSE). Runtime and third-party components retain the `RUNTIME-LICENSE` and notices in their archives. Historical archives retain their supplied licenses and access requirements.
+The integration source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/6f251a5edb9b4dba21f5a3a43cb5f8f9ac522156/weapp_container/LICENSE). Runtime and third-party components retain the `RUNTIME-LICENSE` and notices in their archives. Historical archives retain their supplied licenses and access requirements.
 
 ## Development clients and lifecycle details
 

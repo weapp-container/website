@@ -6,7 +6,7 @@ summary: "Weapp Container React Native SDK. Versioned engineering reference from
 route: "/docs/engineering/sdk-react-native/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "9552ce6b5095e3c61bcf089e5ecbda049fad169e"
+sourceCommit: "1bb282ee47bc5ee392fd54e0471434cd5ecb502d"
 sourcePath: "README.en.md"
 ---
 
@@ -17,9 +17,7 @@ sourcePath: "README.en.md"
 <a id="公开发行候选preview7"></a>
 ## Public distribution candidate: preview.7
 
-This SDK source is the `0.1.0-preview.7.1` candidate, and the `.7.1` core runtime is published; the React Native npm package, Android Maven dependency, iOS Pod and matching native releases are not published yet. Check the [release status](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/public-sdk-release.en.md) before using installation commands. Match wrapper and runtime versions. Source availability, package publication, compilation and device acceptance are recorded separately.
-
-The `.7.1` installation entries become usable after npm, Maven Central, CocoaPods and matching native releases are public and pass anonymous consumer verification. Historical private archives and locks retain their original identities.
+`0.1.0-preview.7.1` is published to npm, and its Android Maven dependency resolves anonymously. It remains a prerelease, with no stable version available. The React Native iOS Pod currently points to an unavailable standalone iOS SDK archive, so public installation is currently limited to Android. Build the iOS dependency from source. See the [SDK release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/).
 
 Version `0.1.0-preview.7.1` targets React Native 0.88 with the New Architecture, Android API 26+ / Java 17, and iOS 16+. Install the public preview:
 
@@ -27,14 +25,7 @@ Version `0.1.0-preview.7.1` targets React Native 0.88 with the New Architecture,
 npm install @weapp-container/react-native@0.1.0-preview.7.1
 ```
 
-Android resolves `io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1` from Maven Central. Add these sources to the iOS Podfile:
-
-```ruby
-source 'https://github.com/weapp-container/Specs.git'
-source 'https://cdn.cocoapods.org/'
-```
-
-Then run `pod install`. The bridge depends on the matching `WeappContainer` Pod without embedding a second runtime. Installation needs no preparation script, Rust or sibling SDK checkout.
+Android resolves `io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1` from Maven Central. The npm package is installable, but its iOS Pod depends on a fixed SDK archive that currently returns 404, so it cannot complete an iOS native build. For iOS, use the source-build guide to produce the matching XCFramework and Pod. Normal Android installation needs no Node preparation script, Rust or sibling SDK checkout.
 
 <a id="已复核的源码构建版本"></a>
 ### Reviewed source-build checkout
@@ -47,13 +38,13 @@ git checkout 7565c32125b8e4a76ec4e17213f773ef6fc64e93
 
 
 
-[Documentation](https://container.weapp.dev/en/docs/) · [Source builds](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md) · [APIs and protocols](/en/docs/engineering/sdk-contract/index/)
+[Documentation](https://container.weapp.dev/en/docs/) · [Source builds](/en/docs/engineering/weapp-container/docs/sdk-source-build/) · [APIs and protocols](/en/docs/engineering/sdk-contract/index/)
 
 Embed a native mini-program container in React Native applications on Android and iOS, using a Fabric component and TurboModule. A TypeScript Controller handles packs, navigation, messages and session ownership.
 
 Package: `@weapp-container/react-native`; reviewed source example version: `0.1.0-preview.7.1`; native ABI: `1`. This repository contains the Apache-2.0 integration layer. The runtime is a separately authorized binary dependency.
 
-> Current source and the default public lock both use preview.7.1. Preparation reads `runtime-artifacts.0.1.0-preview.7.1.lock.json` by default; `runtime-artifacts.lock.json` retains historical preview.5.3 inputs only. Custom local archives still require a reviewed same-version lock selected with `--manifest`. Check the registry and release record for npm availability.
+> Current source and the default public lock both use preview.7.1. Preparation reads `runtime-artifacts.0.1.0-preview.7.1.lock.json` by default; `runtime-artifacts.lock.json` retains historical preview.5.3 inputs only. Custom local archives still require a reviewed same-version lock selected with `--manifest`. The npm and Android Maven prereleases are public; the iOS native archive is not.
 
 <a id="从当前源码开始"></a>
 ## Start from current source
@@ -68,7 +59,7 @@ pnpm install --frozen-lockfile
 node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 ```
 
-Follow the [source build guide](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md) to prepare the target runtime and notices, then use this SDK's packaging tools. Platform toolchains remain prerequisites. Public source does not imply that prebuilt packages are available from a public registry. Native mini-program directories and existing framework builds can be packaged independently; weapp-vite is optional.
+Follow the [source build guide](/en/docs/engineering/weapp-container/docs/sdk-source-build/) to prepare the target runtime and notices, then use this SDK's packaging tools. Platform toolchains remain prerequisites. The npm `.7.1` package and Android Maven dependency are available, while the SDK archive referenced by the iOS Podspec is unavailable. Native mini-program directories and existing framework builds can be packaged independently; weapp-vite is optional.
 
 The remaining sections describe standalone SDK installation, views, and lifecycle. Commands using `prepare-runtime` or `prepare-native` select the explicit archive path and require a reviewed matching manifest. Historical default locks may be unavailable; see the migration section at the end.
 
@@ -154,7 +145,7 @@ await controller.sendMessage({type: 'refresh'});
 await controller.back();
 ```
 
-The pack must use the runtime's supported format. An ordinary mini-program source directory is insufficient. See [example/App.tsx](https://github.com/weapp-container/sdk-react-native/blob/9552ce6b5095e3c61bcf089e5ecbda049fad169e/example/App.tsx) and the [independent consumer generator](https://github.com/weapp-container/sdk-react-native/blob/9552ce6b5095e3c61bcf089e5ecbda049fad169e/tools/create-consumer.mjs) for full React mounting and resource setup.
+The pack must use the runtime's supported format. An ordinary mini-program source directory is insufficient. See [example/App.tsx](https://github.com/weapp-container/sdk-react-native/blob/1bb282ee47bc5ee392fd54e0471434cd5ecb502d/example/App.tsx) and the [independent consumer generator](https://github.com/weapp-container/sdk-react-native/blob/1bb282ee47bc5ee392fd54e0471434cd5ecb502d/tools/create-consumer.mjs) for full React mounting and resource setup.
 
 <a id="会话生命周期"></a>
 ## Session lifecycle
@@ -172,11 +163,11 @@ await controller.flushStorage();
 await controller.close();
 ```
 
-When creating a session in a React effect, handle unmounts that happen before `create` resolves: check the component's state and immediately close a newly created orphan. An effect cleanup cannot return a Promise; let the session owner track asynchronous closing and await it before creating a replacement. Retain the Controller for retry if closing fails. See [example/App.tsx](https://github.com/weapp-container/sdk-react-native/blob/9552ce6b5095e3c61bcf089e5ecbda049fad169e/example/App.tsx) for a full implementation.
+When creating a session in a React effect, handle unmounts that happen before `create` resolves: check the component's state and immediately close a newly created orphan. An effect cleanup cannot return a Promise; let the session owner track asynchronous closing and await it before creating a replacement. Retain the Controller for retry if closing fails. See [example/App.tsx](https://github.com/weapp-container/sdk-react-native/blob/1bb282ee47bc5ee392fd54e0471434cd5ecb502d/example/App.tsx) for a full implementation.
 
 Host methods accept and return JSON-compatible values. Asynchronous work should observe its `AbortSignal` and stop the corresponding work on cancellation. Throw the exported `HostError` for explicit codes such as `permission_denied` or `unsupported`.
 
-For login, accounts, networking or device APIs, call `configureHostServices`, then optionally `installNativeDeviceApis`, before `load()`. The host controls network origin allowlists and OS permissions. Restricted Showcase runtimes continue to enforce their compiled policy. See [src/index.tsx](https://github.com/weapp-container/sdk-react-native/blob/9552ce6b5095e3c61bcf089e5ecbda049fad169e/src/index.tsx) and [CONTRACT.md](/en/docs/engineering/sdk-react-native/contract/) for configuration, account switching and full types.
+For login, accounts, networking or device APIs, call `configureHostServices`, then optionally `installNativeDeviceApis`, before `load()`. The host controls network origin allowlists and OS permissions. Restricted Showcase runtimes continue to enforce their compiled policy. See [src/index.tsx](https://github.com/weapp-container/sdk-react-native/blob/1bb282ee47bc5ee392fd54e0471434cd5ecb502d/src/index.tsx) and [CONTRACT.md](/en/docs/engineering/sdk-react-native/contract/) for configuration, account switching and full types.
 
 <a id="从源码生成分发包"></a>
 ## Build a distribution from source
@@ -223,20 +214,20 @@ The generator uses a pinned React Native template, installs the SDK and prepares
 <a id="更多资料与许可"></a>
 ## Documentation and licensing
 
-- [Public API](https://github.com/weapp-container/sdk-react-native/blob/9552ce6b5095e3c61bcf089e5ecbda049fad169e/src/index.tsx) · [Protocol and capability negotiation](/en/docs/engineering/sdk-react-native/contract/)
-- [Complete example](https://github.com/weapp-container/sdk-react-native/blob/9552ce6b5095e3c61bcf089e5ecbda049fad169e/example/App.tsx) · [Running the example](/en/docs/engineering/sdk-react-native/example/index/)
+- [Public API](https://github.com/weapp-container/sdk-react-native/blob/1bb282ee47bc5ee392fd54e0471434cd5ecb502d/src/index.tsx) · [Protocol and capability negotiation](/en/docs/engineering/sdk-react-native/contract/)
+- [Complete example](https://github.com/weapp-container/sdk-react-native/blob/1bb282ee47bc5ee392fd54e0471434cd5ecb502d/example/App.tsx) · [Running the example](/en/docs/engineering/sdk-react-native/example/index/)
 - [Public types and C ABI](/en/docs/engineering/sdk-contract/index/)
 
-The integration source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-react-native/blob/9552ce6b5095e3c61bcf089e5ecbda049fad169e/LICENSE). Runtime and third-party components retain the `RUNTIME-LICENSE` and notices in their archives. Historical archives retain their supplied licenses and access requirements.
+The integration source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-react-native/blob/1bb282ee47bc5ee392fd54e0471434cd5ecb502d/LICENSE). Runtime and third-party components retain the `RUNTIME-LICENSE` and notices in their archives. Historical archives retain their supplied licenses and access requirements.
 
 <a id="历史归档与迁移"></a>
 ## Historical archives and migration
 
 Historical storage: updated downloaders map the nine frozen legacy `runtime-artifacts` versions to the private `weapp-container/runtime-artifacts-private-archive`, retaining original lock bytes, hashes and licenses and recording the resolved repository. Old downloaders must upgrade. The new repository at the old name contains retired tool source only; new runtime releases use the core repository. Private archive access still requires authorization, with no cross-repository fallback.
 
-Runtime packaging and publication now live in the [core repository](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/tools/runtime-artifacts). New manifests select exact core releases through `--manifest`. The default lock retains its historical `runtime-artifacts` source, version, hashes and bundled licenses. The retired repository remains a read-only archive; downloads never fall back between repositories. Private repositories still require read access; source licensing does not imply public binary availability.
+Runtime packaging and publication now live in the [core repository](https://github.com/weapp-container/weapp-container/blob/2c9c781785926e6f89494651c7d4a3e992e45440/tools/runtime-artifacts). New manifests select exact core releases through `--manifest`. The default lock retains its historical `runtime-artifacts` source, version, hashes and bundled licenses. The retired repository remains a read-only archive; downloads never fall back between repositories. Private repositories still require read access; source licensing does not imply public binary availability.
 
-The core runtime and SDK source are available under Apache-2.0. Build the current runtime from the [core source guide](https://github.com/weapp-container/weapp-container/blob/908b8e74b41345487a5d847681d231ace0b2cde8/docs/sdk-source-build.en.md). Existing prebuilt archives retain their original licenses, access requirements and exact version/hash pins; this source update does not publish replacement binaries.
+The core runtime and SDK source are available under Apache-2.0. Build the current runtime from the [core source guide](/en/docs/engineering/weapp-container/docs/sdk-source-build/). Existing prebuilt archives retain their original licenses, access requirements and exact version/hash pins; this source update does not publish replacement binaries.
 
 ## Release builds
 
