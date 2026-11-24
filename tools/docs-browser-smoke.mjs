@@ -50,10 +50,16 @@ try {
 
   await page.goto(new URL('/docs/', base).href, { waitUntil: 'domcontentloaded' });
   await page.goto(new URL('/downloads/', base).href, { waitUntil: 'domcontentloaded' });
-  for (const asset of devtoolsRelease.assets) {
-    const link = page.locator(`a[href="${asset.url}"]`);
-    assert.equal(await link.count(), 1, `Missing direct download link for ${asset.filename}`);
-    assert.ok((await page.locator('body').textContent()).includes(asset.sha256), `Missing hash for ${asset.filename}`);
+  for (const platform of devtoolsRelease.platforms) {
+    const platformItem = page.locator(`article[data-platform="${platform.id}"]`);
+    assert.equal(await platformItem.count(), 1, `Missing download row for ${platform.id}`);
+    assert.equal(await platformItem.locator('.download-installer').getAttribute('href'), platform.installer.url);
+    assert.equal(await platformItem.locator('.download-portable').getAttribute('href'), platform.portable.url);
+    for (const asset of [platform.installer, platform.portable]) {
+      const link = page.locator(`a[href="${asset.url}"]`);
+      assert.equal(await link.count(), 1, `Missing direct download link for ${asset.filename}`);
+      assert.ok((await page.locator('body').textContent()).includes(asset.sha256), `Missing hash for ${asset.filename}`);
+    }
   }
   await page.screenshot({ path: resolve(output, 'downloads-desktop.png'), fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
@@ -62,7 +68,7 @@ try {
   await page.screenshot({ path: resolve(output, 'downloads-mobile.png'), fullPage: true });
   record('download-layout', downloadsLayout);
   await page.setViewportSize({ width: 1365, height: 960 });
-  const firstAsset = devtoolsRelease.assets[0];
+  const firstAsset = devtoolsRelease.platforms[0].installer;
   await page.route(firstAsset.url, route => route.fulfill({
     status: 200,
     headers: {

@@ -26,6 +26,7 @@
   .site-header .mobile-menu nav a,.site-header .mobile-menu nav a:last-child{display:flex;align-items:center;min-height:44px;padding:9px 12px;border-radius:5px;font-size:14px}
   .site-header .mobile-menu nav a:hover,.site-header .mobile-menu nav a[aria-current=page]{background:var(--surface-soft);color:var(--accent)}
 }
+.download-portable{margin-top:16px}
 
 @media(min-width:768px){.mobile-menu{display:none}}
 .language-switch{flex-shrink:0;font-size:12px;color:var(--muted);padding:7px 5px}

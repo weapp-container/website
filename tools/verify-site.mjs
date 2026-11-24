@@ -98,9 +98,11 @@ for(const path of ['/','/demo/','/platforms/','/guide/','/downloads/',...docsPag
 const downloadsHtml = await readFile(resolve(base, 'downloads/index.html'), 'utf8');
 assert.ok(downloadsHtml.includes(devtoolsRelease.version), 'DevTools version is missing from the download page');
 assert.ok(downloadsHtml.includes(devtoolsRelease.checksumsUrl), 'DevTools checksum download is missing');
-for (const asset of devtoolsRelease.assets) {
-  assert.ok(downloadsHtml.includes(asset.url), `DevTools download link is missing: ${asset.filename}`);
-  assert.ok(downloadsHtml.includes(asset.sha256), `DevTools SHA-256 is missing: ${asset.filename}`);
+for (const platform of devtoolsRelease.platforms) {
+  for (const asset of [platform.installer, platform.portable]) {
+    assert.ok(downloadsHtml.includes(asset.url), `DevTools download link is missing: ${asset.filename}`);
+    assert.ok(downloadsHtml.includes(asset.sha256), `DevTools SHA-256 is missing: ${asset.filename}`);
+  }
 }
 const htmlFiles = files.filter(path => path.endsWith('.html'));
 const references = new Map(await Promise.all(htmlFiles.map(async path => [relative(base, path).split('\\').join('/'), siteReferences(await readFile(path, 'utf8'))])));
