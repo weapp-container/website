@@ -200,11 +200,20 @@ try {
   }
   async function frameReady(scene) {
     const selector='iframe[title$="交互演示"]';
-    await page.locator(selector).waitFor();
-    const owner = await page.locator(selector).elementHandle();
+    const iframe = page.locator(selector);
+    await iframe.waitFor();
+    // The iframe element is rendered before its runtime document navigates.
+    // Waiting on a Frame obtained from that initial about:blank document can
+    // leave Playwright polling a retired execution context forever. The
+    // parent is same-origin, so observe the child state there and only then
+    // obtain the live content frame for the remaining checks.
+    await page.waitForFunction((frameSelector) => {
+      const root = document.querySelector(frameSelector)?.contentDocument?.documentElement;
+      return root?.dataset.state === 'ready' || root?.dataset.state === 'error';
+    }, selector, {timeout: 150000});
+    const owner = await iframe.elementHandle();
     const frame = await owner.contentFrame();
     assert.ok(frame,'Showcase iframe missing');
-    await frame.waitForFunction(()=>{const root=document.documentElement;return root?.dataset.state === 'ready' || root?.dataset.state === 'error';},null,{timeout:150000});
     assert.equal(await frame.locator('html').getAttribute('data-state'),'ready',await frame.locator('#startup').textContent());
     if(scene)await frame.waitForFunction(value=>document.documentElement.dataset.scene===value,scene,{timeout:15000});
     await waitForAdaptiveDensity();
