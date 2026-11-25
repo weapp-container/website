@@ -6,7 +6,7 @@ summary: "SDK contract v1. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/sdk-flutter/contract/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "6ac71bce3f85a76e697fbc5ac06296aac1618787"
+sourceCommit: "0cbeb4d1eb69cc3b08a315082f607cf786875044"
 sourcePath: "CONTRACT.en.md"
 ---
 

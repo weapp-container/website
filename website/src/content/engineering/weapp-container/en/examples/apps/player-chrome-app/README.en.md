@@ -6,7 +6,7 @@ summary: "Dev Player chrome fixture. Versioned engineering reference from weapp-
 route: "/docs/engineering/weapp-container/examples/apps/player-chrome-app/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "c6c44bd2fd8cf855985784ee275212228c85a858"
+sourceCommit: "15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c"
 sourcePath: "examples/apps/player-chrome-app/README.en.md"
 ---
 

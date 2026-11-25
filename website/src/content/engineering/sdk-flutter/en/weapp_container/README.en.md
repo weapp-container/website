@@ -6,7 +6,7 @@ summary: "Weapp Container Flutter SDK. Versioned engineering reference from weap
 route: "/docs/engineering/sdk-flutter/weapp_container/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "6ac71bce3f85a76e697fbc5ac06296aac1618787"
+sourceCommit: "0cbeb4d1eb69cc3b08a315082f607cf786875044"
 sourcePath: "weapp_container/README.en.md"
 ---
 
@@ -64,7 +64,7 @@ SizedBox(
 )
 ```
 
-Once mounted, load a generated, verified local pack. Extract Flutter assets to application-private storage first; see the [example](https://github.com/weapp-container/sdk-flutter/blob/6ac71bce3f85a76e697fbc5ac06296aac1618787/example/lib/main.dart):
+Once mounted, load a generated, verified local pack. Extract Flutter assets to application-private storage first; see the [example](https://github.com/weapp-container/sdk-flutter/blob/0cbeb4d1eb69cc3b08a315082f607cf786875044/example/lib/main.dart):
 
 ```dart
 await controller.load('/verified/local/portable-pack');
@@ -96,7 +96,7 @@ await controller.close();
 
 Host methods return JSON-compatible values. Asynchronous handlers should observe `call.cancellation`; use `WeappHostError` for explicit error codes.
 
-Configure login, accounts, networking and device capabilities explicitly in the host: call `configureHostServices`, then optionally `installNativeDeviceApis`, before `load()`. The host controls network origin allowlists and OS permissions. Restricted Showcase runtimes also enforce their compiled policy. See [CONTRACT.md](/en/docs/engineering/sdk-flutter/contract/) and the [Controller API](https://github.com/weapp-container/sdk-flutter/blob/6ac71bce3f85a76e697fbc5ac06296aac1618787/weapp_container/lib/src/controller.dart) for configuration and account switching.
+Configure login, accounts, networking and device capabilities explicitly in the host: call `configureHostServices`, then optionally `installNativeDeviceApis`, before `load()`. The host controls network origin allowlists and OS permissions. Restricted Showcase runtimes also enforce their compiled policy. See [CONTRACT.md](/en/docs/engineering/sdk-flutter/contract/) and the [Controller API](https://github.com/weapp-container/sdk-flutter/blob/0cbeb4d1eb69cc3b08a315082f607cf786875044/weapp_container/lib/src/controller.dart) for configuration and account switching.
 
 ## Troubleshooting
 
@@ -112,11 +112,11 @@ Native text editing, full accessibility semantics and advanced gestures still ha
 ## Documentation and licensing
 
 - [Widget and Controller usage](/en/docs/engineering/sdk-flutter/weapp_container/index/)
-- [Complete example](https://github.com/weapp-container/sdk-flutter/blob/6ac71bce3f85a76e697fbc5ac06296aac1618787/example/lib/main.dart) · [Running the example](/en/docs/engineering/sdk-flutter/example/index/)
+- [Complete example](https://github.com/weapp-container/sdk-flutter/blob/0cbeb4d1eb69cc3b08a315082f607cf786875044/example/lib/main.dart) · [Running the example](/en/docs/engineering/sdk-flutter/example/index/)
 - [Desktop integration](/en/docs/engineering/sdk-flutter/native_desktop/index/) · [SDK protocol](/en/docs/engineering/sdk-flutter/contract/)
 - [Public types and C ABI](/en/docs/engineering/sdk-contract/index/)
 
-The integration source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/6ac71bce3f85a76e697fbc5ac06296aac1618787/weapp_container/LICENSE). Runtime and third-party components retain the `RUNTIME-LICENSE` and notices in their archives. Historical archives retain their supplied licenses and access requirements.
+The integration source is licensed under [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/0cbeb4d1eb69cc3b08a315082f607cf786875044/weapp_container/LICENSE). Runtime and third-party components retain the `RUNTIME-LICENSE` and notices in their archives. Historical archives retain their supplied licenses and access requirements.
 
 ## Development clients and lifecycle details
 

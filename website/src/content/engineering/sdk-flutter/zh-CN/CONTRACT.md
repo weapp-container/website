@@ -6,7 +6,7 @@ summary: "SDK 协议 v1。来自 weapp-container/sdk-flutter 的版本化工程�
 route: "/docs/engineering/sdk-flutter/contract/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "6ac71bce3f85a76e697fbc5ac06296aac1618787"
+sourceCommit: "0cbeb4d1eb69cc3b08a315082f607cf786875044"
 sourcePath: "CONTRACT.md"
 ---
 

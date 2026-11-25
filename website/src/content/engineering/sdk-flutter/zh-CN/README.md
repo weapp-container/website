@@ -6,7 +6,7 @@ summary: "Weapp Container Flutter SDK。来自 weapp-container/sdk-flutter 的�
 route: "/docs/engineering/sdk-flutter/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "6ac71bce3f85a76e697fbc5ac06296aac1618787"
+sourceCommit: "0cbeb4d1eb69cc3b08a315082f607cf786875044"
 sourcePath: "README.md"
 ---
 
@@ -123,14 +123,19 @@ node sdk/flutter/tools/prepare-native.mjs --platform linux --arch x86_64 \
 
 ```sh
 cd sdk/flutter/example
+# Generate the example pack, then add the Flutter platform project folders.
+node shared/make-fixture.mjs --out assets/portable-pack
+flutter create --empty --platforms=android,ios,macos,linux,windows .
 flutter pub get
 flutter analyze lib
 flutter run -d DEVICE_ID
 ```
 
-Android 工程生成后，在 `android/app/build.gradle.kts` 的 `defaultConfig` 中设置 `minSdk = 26`。这是 `weapp_container_android` 的最低支持版本；`tools/package.mjs` 生成的分发工程会自动写入该值。
+Android 工程生成后，在 `android/app/build.gradle.kts` 的 `defaultConfig` 中将 `minSdk = flutter.minSdkVersion` 替换为 `minSdk = 26`。这是 `weapp_container_android` 的最低支持版本；`tools/package.mjs` 生成的分发工程会自动写入该值。
 
 示例包含测试 pack，可体验点击、滚动、导航、消息、存储和会话重建。Android、iOS、macOS、Windows 或 Linux 构建需要对应平台工具链与可用的原生 SDK。公开 package 的安装坐标和目标可用性见[发行状态](/docs/engineering/weapp-container/docs/public-sdk-release/)。
+
+`make-fixture.mjs` 会生成 `assets/fixture-index.json` 和示例使用的 portable pack；示例 `.gitignore` 会排除平台目录和生成资源，干净 checkout 或重新克隆后需再次生成。只运行单个平台时，可将 `flutter create --platforms` 改成目标平台。启动后等待状态进入 `ready-for-input`，按屏幕提示完成点击、滚动和会话重开检查，结果会写入应用支持目录的 `sdk-flutter-report.json`。
 
 Android 示例使用 NDK `27.1.12297006`、CMake `3.22.1`，仅包含两个受支持的 ABI：
 
@@ -181,7 +186,7 @@ SizedBox(
 )
 ```
 
-View 挂载后加载已生成并校验的本地 pack。Flutter assets 需要先解包到应用私有目录，具体做法见[示例](https://github.com/weapp-container/sdk-flutter/blob/6ac71bce3f85a76e697fbc5ac06296aac1618787/example/lib/main.dart)：
+View 挂载后加载已生成并校验的本地 pack。Flutter assets 需要先解包到应用私有目录，具体做法见[示例](https://github.com/weapp-container/sdk-flutter/blob/0cbeb4d1eb69cc3b08a315082f607cf786875044/example/lib/main.dart)：
 
 ```dart
 await controller.load('/verified/local/portable-pack');
@@ -215,7 +220,7 @@ await controller.close();
 
 宿主方法只返回 JSON 可表示的值。异步方法应观察 `call.cancellation`，错误可使用 `WeappHostError` 返回明确的代码。
 
-登录、账号、网络和设备能力通过宿主显式配置：在 `load()` 前先调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。网络 origin 白名单和系统权限由宿主管理；受限 Showcase 运行库仍按编译时策略限制能力。配置和账号切换协议见 [CONTRACT.md](/docs/engineering/sdk-flutter/contract/) 与 [Controller API](https://github.com/weapp-container/sdk-flutter/blob/6ac71bce3f85a76e697fbc5ac06296aac1618787/weapp_container/lib/src/controller.dart)。
+登录、账号、网络和设备能力通过宿主显式配置：在 `load()` 前先调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。网络 origin 白名单和系统权限由宿主管理；受限 Showcase 运行库仍按编译时策略限制能力。配置和账号切换协议见 [CONTRACT.md](/docs/engineering/sdk-flutter/contract/) 与 [Controller API](https://github.com/weapp-container/sdk-flutter/blob/0cbeb4d1eb69cc3b08a315082f607cf786875044/weapp_container/lib/src/controller.dart)。
 
 <a id="troubleshooting"></a>
 ## 常见问题
@@ -233,17 +238,17 @@ await controller.close();
 ## 更多资料与许可
 
 - [Widget 与 Controller 用法](/docs/engineering/sdk-flutter/weapp_container/index/)
-- [完整示例](https://github.com/weapp-container/sdk-flutter/blob/6ac71bce3f85a76e697fbc5ac06296aac1618787/example/lib/main.dart) · [示例运行说明](/docs/engineering/sdk-flutter/example/index/)
+- [完整示例](https://github.com/weapp-container/sdk-flutter/blob/0cbeb4d1eb69cc3b08a315082f607cf786875044/example/lib/main.dart) · [示例运行说明](/docs/engineering/sdk-flutter/example/index/)
 - [桌面接入](/docs/engineering/sdk-flutter/native_desktop/index/) · [SDK 协议](/docs/engineering/sdk-flutter/contract/)
 - [公共类型和 C ABI](/docs/engineering/sdk-contract/index/)
 
-接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/6ac71bce3f85a76e697fbc5ac06296aac1618787/LICENSE)。运行库和第三方组件遵循归档中的 `RUNTIME-LICENSE` 及 notices；本仓库的开源许可不授予私有运行库下载权或额外的商用权利。
+接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-flutter/blob/0cbeb4d1eb69cc3b08a315082f607cf786875044/LICENSE)。运行库和第三方组件遵循归档中的 `RUNTIME-LICENSE` 及 notices；本仓库的开源许可不授予私有运行库下载权或额外的商用权利。
 
 <a id="historical-archives-and-migration"></a>
 ## 历史归档与迁移
 
-历史发行审计（2026-11-12）：默认锁中的 SDK 归档部分缺失，多个 runtime pin 与当前同名资产不符，默认在线准备会被完整性校验拒绝。请从匹配的干净源码构建，或通过 `--manifest` 显式选取独立审核过的配套清单；不要仅修改旧哈希。[差异与迁移记录](https://github.com/weapp-container/weapp-container/blob/c6c44bd2fd8cf855985784ee275212228c85a858/docs/runtime-artifacts-migration.md)。
+历史发行审计（2026-11-12）：默认锁中的 SDK 归档部分缺失，多个 runtime pin 与当前同名资产不符，默认在线准备会被完整性校验拒绝。请从匹配的干净源码构建，或通过 `--manifest` 显式选取独立审核过的配套清单；不要仅修改旧哈希。[差异与迁移记录](https://github.com/weapp-container/weapp-container/blob/15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c/docs/runtime-artifacts-migration.md)。
 
-运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/c6c44bd2fd8cf855985784ee275212228c85a858/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
+运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
 
 核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。

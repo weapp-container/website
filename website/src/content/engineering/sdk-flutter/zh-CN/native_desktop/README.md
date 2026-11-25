@@ -6,7 +6,7 @@ summary: "Flutter 桌面原生支持。来自 weapp-container/sdk-flutter 的版
 route: "/docs/engineering/sdk-flutter/native_desktop/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "6ac71bce3f85a76e697fbc5ac06296aac1618787"
+sourceCommit: "0cbeb4d1eb69cc3b08a315082f607cf786875044"
 sourcePath: "native_desktop/README.md"
 ---
 

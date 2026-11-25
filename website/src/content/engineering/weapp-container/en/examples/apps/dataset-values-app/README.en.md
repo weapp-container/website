@@ -6,7 +6,7 @@ summary: "Dataset and mark fixture. Versioned engineering reference from weapp-c
 route: "/docs/engineering/weapp-container/examples/apps/dataset-values-app/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "c6c44bd2fd8cf855985784ee275212228c85a858"
+sourceCommit: "15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c"
 sourcePath: "examples/apps/dataset-values-app/README.en.md"
 ---
 
@@ -39,7 +39,7 @@ values deliberately conflict: event mark uses the nearest node, while selector
 
 The dual-engine runner is `pnpm runtime:dataset-values:smoke`; its required
 compiler/binary arguments and limits are documented in
-[`docs/event-metadata.md`](https://github.com/weapp-container/weapp-container/blob/c6c44bd2fd8cf855985784ee275212228c85a858/docs/event-metadata.en.md). This is a local
+[`docs/event-metadata.md`](https://github.com/weapp-container/weapp-container/blob/15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c/docs/event-metadata.en.md). This is a local
 container consistency fixture. The tourist AppID does not establish official
 DevTools behavior, object identity, undefined/presence semantics, GPU, device
 or performance acceptance.

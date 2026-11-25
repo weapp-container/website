@@ -6,7 +6,7 @@ summary: "Weapp Container. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/weapp-container/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "c6c44bd2fd8cf855985784ee275212228c85a858"
+sourceCommit: "15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c"
 sourcePath: "README.en.md"
 ---
 
@@ -56,7 +56,7 @@ cargo run -p container-simulator --features quickjs-native -- \
   run --pack ./artifacts/game --snapshot ./artifacts/game/snapshot.json
 ```
 
-This path requires `game.json` and `game.js`. It does not decrypt platform packages. The portable game runtime provides a Canvas 2D subset, frame scheduling, and normalized host events through `game.event` for touch, keyboard, sensor, audio interruption and memory warnings. App visibility uses `app.lifecycle`; viewport updates resize the game Canvas and notify `wx.onWindowResize`. Event payloads follow [`schemas/game-event-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/c6c44bd2fd8cf855985784ee275212228c85a858/schemas/game-event-v1.schema.json). API support remains capability-negotiated. Official DevTools, GPU and device parity remain unverified.
+This path requires `game.json` and `game.js`. It does not decrypt platform packages. The portable game runtime provides a Canvas 2D subset, frame scheduling, and normalized host events through `game.event` for touch, keyboard, sensor, audio interruption and memory warnings. App visibility uses `app.lifecycle`; viewport updates resize the game Canvas and notify `wx.onWindowResize`. Event payloads follow [`schemas/game-event-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c/schemas/game-event-v1.schema.json). API support remains capability-negotiated. Official DevTools, GPU and device parity remain unverified.
 
 ## Open-source mini-program examples
 
@@ -75,7 +75,7 @@ pnpm simulator:dev:smoke -- \
   --project examples/apps/community/miniprogram-demo-text
 ```
 
-Replace `miniprogram-demo-text` with `ant-design-button` or `taro-blended` for the other samples. See [`examples/apps/community/README.en.md`](https://github.com/weapp-container/weapp-container/blob/c6c44bd2fd8cf855985784ee275212228c85a858/examples/apps/community/README.en.md) for the complete sample list, commands, and source records.
+Replace `miniprogram-demo-text` with `ant-design-button` or `taro-blended` for the other samples. See [`examples/apps/community/README.en.md`](https://github.com/weapp-container/weapp-container/blob/15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c/examples/apps/community/README.en.md) for the complete sample list, commands, and source records.
 
 To keep the simulator running in a browser:
 
@@ -86,4 +86,4 @@ cargo run -p container-simulator --features quickjs-native -- \
 
 ## License
 
-Apache-2.0. See [NOTICE](https://github.com/weapp-container/weapp-container/blob/c6c44bd2fd8cf855985784ee275212228c85a858/NOTICE) and [SECURITY](/en/docs/engineering/weapp-container/security/).
+Apache-2.0. See [NOTICE](https://github.com/weapp-container/weapp-container/blob/15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c/NOTICE) and [SECURITY](/en/docs/engineering/weapp-container/security/).

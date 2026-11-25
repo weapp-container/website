@@ -6,7 +6,7 @@ summary: "C++ 原生宿主。来自 weapp-container/website 的版本化工程�
 route: "/docs/engineering/website/hosts/native-desktop/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "f670e603929d73e7f50dae5ac184185aba5d5138"
+sourceCommit: "6895559f7cfde08992fd5a12622e63813d560caf"
 sourcePath: "hosts/native-desktop/README.md"
 ---
 
