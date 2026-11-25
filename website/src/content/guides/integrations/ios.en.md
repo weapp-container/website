@@ -21,16 +21,11 @@ The iOS SDK provides Swift Concurrency sessions, UIKit views, and Metal renderin
 <a id="1-安装-sdk"></a>
 ## 1. Install SDK
 
-The current release requires macOS, Xcode 27.2+ and the iOS 27.1+ compilation SDK; the deployment minimum remains iOS 16.0. The runtime should contain arm64 device, arm64 simulator and x86_64 simulator slices. Actual distribution can generate Swift Package or CocoaPods consumption directory; the framework license and third-party notices are retained with the package.
+The public prerelease provides an iOS SDK archive with arm64 device, arm64 simulator and x86_64 simulator slices. It requires macOS, Xcode 27.2+ and iOS 16.0+. Download the [core prerelease archive](https://github.com/weapp-container/weapp-container/releases/download/runtime-v0.1.0-preview.7.1/ios-sdk-0.1.0-preview.7.1-ios-universal.tar.gz), verify its SHA-256 from the release page, extract it, and add the directory as a local Swift Package in Xcode with the **WeappContainer** product in the app target.
 
-Execute in the clean checkout root directory of the public core repository. For the complete environment, native library slices and licensing steps, see [Build from source](/en/docs/start/).
+For CocoaPods, reference the included `WeappContainer.podspec` by local path in the Podfile. The standalone sdk-ios release is not published, and its fixed remote SwiftPM/CocoaPods URLs are unavailable. Maintainers rebuilding the SDK should follow the [maintainer source build guide](/en/docs/engineering/weapp-container/docs/sdk-source-build/).
 
-```bash
-node sdk/ios/tools/build.mjs --native-root artifacts/sdk/native \
-  --licenses-root artifacts/sdk/licenses --out artifacts/sdk/ios --install-framework
-```
-
-Add the generated `artifacts/sdk/ios/WeappContainer` as a local Swift Package in Xcode, and add the **WeappContainer** product to the application target. Add the entire `hello-pack/` folder to the target as a resource, retaining its directory structure.
+Add the entire `hello-pack/` folder to the target as a resource, retaining its directory structure.
 
 <a id="create-session"></a>
 <a id="2-挂载-uikit-视图并加载"></a>

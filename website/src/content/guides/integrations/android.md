@@ -21,51 +21,35 @@ Android SDK 由 Kotlin/JNI wrapper 和独立的预编译运行库组成，使用
 <a id="environmental-requirements"></a>
 ## 环境要求
 
-JDK 17、Android SDK 平台和 build-tools 36、NDK 27.1.12297006、CMake 3.22.1 与 Gradle 8.13。最小 Android API 为 26，运行库需有对应 CPU slice。安装工具还要求 Node.js 24+ 与 Python 3。
+JDK 17、Android SDK 平台和 build-tools 36、Gradle 8.13。最低 Android API 为 26，支持 arm64-v8a 与 x86_64。
 
 <a id="prepare"></a>
 <a id="1-prepare-sdk"></a>
 ## 1. 准备 SDK
 
-从公开核心仓库及其固定 SDK 子模块构建当前运行库与本地 Maven 仓库。完整环境、原生切片及许可步骤见[源码构建](/docs/start/)。
-
-```bash
-node sdk/android/tools/build.mjs --native-root artifacts/sdk/native \
-  --licenses-root artifacts/sdk/licenses --pack artifacts/hello-pack \
-  --out artifacts/sdk/android
-```
-
-输出位于 `artifacts/sdk/android/`。发行构建要求已提交、干净的源码；保留 producer receipt、运行库字节和 notices。显式离线归档属于另一条路径，历史默认 lock 不匹配时必须失败，不能绕过哈希检查。
-
-在宿主应用的 `settings.gradle.kts` 中加入生成的本地仓库：
+`0.1.0-preview.7.1` 已发布到 Maven Central。在宿主应用的 `settings.gradle.kts` 中确认包含公开仓库：
 
 ```kotlin
 dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("/absolute/weapp-container/artifacts/sdk/android/maven") }
     }
 }
 ```
 
-在应用的 `build.gradle.kts` 添加依赖，并保留运行库字节：
+在应用的 `build.gradle.kts` 添加依赖：
 
 ```kotlin
 android {
     defaultConfig { minSdk = 26 }
-    packaging {
-        jniLibs.keepDebugSymbols += setOf(
-            "**/libweapp_container_sdk.so", "**/libc++_shared.so",
-        )
-    }
 }
 dependencies {
     implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1")
 }
 ```
 
-这是本地 Maven 仓库依赖，不要求该坐标已发布到公共 Maven 服务。
+普通应用安装不需要核心仓库源码、Rust、Node.js 或 Python。维护者重建运行库时可按[维护者源码构建指南](/docs/engineering/weapp-container/docs/sdk-source-build/)生成本地 Maven 仓库。当前发行版本、哈希与限制见[SDK 发行状态](https://github.com/weapp-container/weapp-container/blob/main/docs/public-sdk-release.md)。
 
 <a id="embed"></a>
 <a id="2-put-it-into-the-package-and-embed-the-view"></a>
@@ -114,6 +98,6 @@ session.load(PackSource.Asset("portable-pack")).whenComplete { _, error ->
 
 **版本与发行状态**
 
-Android wrapper 源码为 `0.1.0-preview.7.1`，采用 Apache-2.0。该版本已发布到 Maven Central，公开坐标可匿名解析；需要从源码修改或重建时，可按上方步骤生成本地 Maven 仓库。当前仍是预览版，没有稳定版。模拟器与真机验收状态见[发行记录](/docs/licensing/)；[平台状态](/docs/platforms/)保留固定在线演示的独立记录。
+Android wrapper 源码为 `0.1.0-preview.7.1`，采用 Apache-2.0。该版本已发布到 Maven Central，公开坐标可匿名解析；维护者可按源码构建指南重建本地 Maven 仓库。当前仍是预览版，没有稳定版。模拟器与真机验收状态见[发行记录](/docs/licensing/)；[平台状态](/docs/platforms/)保留固定在线演示的独立记录。
 
 SDK 目标支持 Android 26+ 的 arm64 与 x86_64。构建还校验 ELF 和 16 KB 对齐，但这不等于真实设备启动验证。使用代表性模拟器与真实 GPU surface 验收视图、触控、会话后台/恢复、存储重开及异步关闭。

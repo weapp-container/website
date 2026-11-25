@@ -15,21 +15,20 @@ GET STARTED
 [简体中文](start.md) · **English**
 
 
-Prepare a mini-program package, put the SDK view in the application, and then load the package. Existing mini-programs can continue to use their own development tools.
+Prepare a mini-program package, put the SDK view in the application, and then load the package. Existing mini-programs can continue to use their own development tools. Start with a published SDK package or prebuilt archive for your platform. A source checkout is not required for normal integration.
 
 <a id="prepare-source"></a>
 <a id="1-准备一个测试包"></a>
 ## 1. Prepare a test package
 
-Start with the independent fixture to verify integration. Install Node.js 24.x and run these three commands. No npm dependencies or mini-program build framework are required.
+Use the published Contract npm package to create an independent test package. Install Node.js 24.x and run this in your application project:
 
 ```bash
-git clone https://github.com/weapp-container/sdk-contract.git
-cd sdk-contract
-node fixtures/make-acceptance-pack.mjs --out ../hello-pack
+npm install --save-dev @weapp-container/sdk-contract@0.1.0-preview.7.1
+node --input-type=module -e "import { makeAcceptancePack } from '@weapp-container/sdk-contract/fixtures'; makeAcceptancePack('./hello-pack')"
 ```
 
-The generated `hello-pack/` contains `manifest.json` and `blobs/sha256/`. The sample page provides click count, scrolling and host messages, suitable for checking whether the SDK is connected.
+The generated `hello-pack/` contains `manifest.json` and `blobs/sha256/`. Its sample page provides click count, scrolling and host messaging. The Contract package contains protocol types and test tools, not a native runtime library.
 
 Already have your own mini-program? See [Packaging existing mini-programs](/en/docs/pack/#own-miniapp). The native JS/WXML/WXSS directory can be directly used as packaging input; when using TypeScript, Vue or React, first use existing tools to generate mini-program products.
 
@@ -55,9 +54,9 @@ Select a guide by the language or framework your app uses. Each platform loads t
 
 The platform guides above contain integration examples. Keep the session in a stable page or route owner across UI renders. Report foreground and background transitions. Before disposing of the owner, await `flushStorage` and asynchronous shutdown.
 
-**Using the current preview**
+**Preview release status**
 
-The successful generation of the test package only means that the input is ready. Actual loading requires a matching version of the runtime library. The current source code can be built from the public core repository without historical archive credentials. For details, see [Build from source](/en/docs/start/). Permissions and licenses for existing precompiled archives are processed according to their respective releases; the online demo of the website only allows fixed packages and cannot be used to load the test packages generated here. See [Licensing, Downloading and Distribution](/en/docs/licensing/) and [Platform Status](/en/docs/platforms/) for details.
+Generating the test package only prepares the input. Loading it requires the SDK and matching runtime library for your platform. Use the published dependency or prebuilt archive listed in each platform guide. Platforms without a usable public release are marked there. The website demo accepts only fixed packages and cannot load this test package. See [Licensing, Downloading and Distribution](/en/docs/licensing/) and [Platform Status](/en/docs/platforms/).
 
 <a id="下一步"></a>
 ## Next steps

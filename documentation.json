@@ -162,8 +162,8 @@
         "repository": "weapp-container/website",
         "path": "docs/platforms.md"
       },
-      "reviewedChineseSummary": "公开宿主适配器、历史产物和验收边界已复核",
-      "reviewedChineseSha256": "7d4be42e6c688169d047b93f62a6e30e5fe8db5fe5cb32afa39ba1b24adaaac1",
+      "reviewedChineseSummary": "普通开发者使用 DevTools 和公开 SDK 发行物，维护者流程与历史归档边界单独记录",
+      "reviewedChineseSha256": "2822548a26b645a70083602eee1995d4e9eef43404e04702410e2e2c173ed2d7",
       "legacyHeadingIds": [
         "ios-模拟器与-device-构建",
         "全端演示与历史产物接入",
@@ -435,8 +435,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations.md"
       },
-      "reviewedChineseSummary": "接入方式；SDK 与宿主；共通步骤",
-      "reviewedChineseSha256": "68b8029fcb05ff04546d526ef5aedcd94348ea2b1573c995778b843cb6d0a247",
+      "reviewedChineseSummary": "集成总览改为公开包管理器依赖和预编译归档，并列出平台可用状态",
+      "reviewedChineseSha256": "6b7dfd752d9af12aa9ff24521878243e61435e98b3c28e4f10a3d7b94562cb96",
       "route": "/docs/integrations/",
       "legacyHeadingIds": [
         "common-steps"
@@ -451,8 +451,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/android.md"
       },
-      "reviewedChineseSummary": "Android 集成、公开版本与源码构建说明",
-      "reviewedChineseSha256": "f999cf75b204785f7a9201c241f67c990ebd1c74c611e30cf3b24b784a09a2cf",
+      "reviewedChineseSummary": "Android 指南使用 Maven Central 公开坐标，源码构建仅供维护者",
+      "reviewedChineseSha256": "9410c7deae4e0980638ead57ac4cc44d6851bc9d0af3efdb3186fb030331d134",
       "route": "/docs/integrations/android/",
       "legacyHeadingIds": [
         "embed",
@@ -471,8 +471,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/desktop.md"
       },
-      "reviewedChineseSummary": "Desktop 集成、归档状态与平台验收边界",
-      "reviewedChineseSha256": "5478b576b69b11132ce9f1976ae59cdd41e9fe48656f8bd5de7469337836cca5",
+      "reviewedChineseSummary": "Desktop 指南下载并校验公开归档，不要求核心源码 checkout",
+      "reviewedChineseSha256": "644d0a8d96f66f124c11254ed6d551be354158058c20e9d1d4d36e902599a199",
       "route": "/docs/integrations/desktop/",
       "legacyHeadingIds": [
         "cmake",
@@ -490,8 +490,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/flutter.md"
       },
-      "reviewedChineseSummary": "Flutter 集成与各平台发行状态",
-      "reviewedChineseSha256": "59ad7747d03526d1893dc64899edeefefb9cb6d7e9ac5d08d9d4a2ed8e8ddaed",
+      "reviewedChineseSummary": "Flutter 指南使用 pub.dev 依赖并明确 Apple 平台归档限制",
+      "reviewedChineseSha256": "7c5286971ae6b373645dd6f0fffffa51682a00757909939d656d89cb36330b9e",
       "route": "/docs/integrations/flutter/",
       "legacyHeadingIds": [
         "api",
@@ -527,8 +527,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/ios.md"
       },
-      "reviewedChineseSummary": "iOS 集成、归档状态与设备验收边界",
-      "reviewedChineseSha256": "de50b36c2045fc8a45187dedc99bf23f91313de29a8f4e16093dd71beb16dd69",
+      "reviewedChineseSummary": "iOS 指南从公开归档接入并区分签名和平台状态",
+      "reviewedChineseSha256": "83cf88565529e5484688d1a3f095bc50b65b934290c798fdb1166b48a72936f5",
       "route": "/docs/integrations/ios/",
       "legacyHeadingIds": [
         "create-session",
@@ -546,8 +546,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/integrations/react-native.md"
       },
-      "reviewedChineseSummary": "React Native 集成与双端依赖状态",
-      "reviewedChineseSha256": "2178b4f262e37ecd9bdac0019ebe4486156969a9c5dd2cdf20c43e2ded53b9a5",
+      "reviewedChineseSummary": "React Native 指南使用 npm 预览包并明确 Android 可用与 iOS 限制",
+      "reviewedChineseSha256": "c985e1f86adb5f59c1d179d7fc8b631779023801c04dfa6423d41591da4087e8",
       "route": "/docs/integrations/react-native/",
       "legacyHeadingIds": [
         "controller-api",
@@ -664,8 +664,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/start.md"
       },
-      "reviewedChineseSummary": "已复核公开导航与当前源码边界。",
-      "reviewedChineseSha256": "4ba27eb9b9048e162fa6648090f2dcce7153c382a2d305a5e09d5d9241a0c9ca",
+      "reviewedChineseSummary": "快速开始使用公开 SDK 包或预编译归档生成测试包，不需要下载项目源码",
+      "reviewedChineseSha256": "d169a60baadd710a97ca7bb1ad227a4693e0196abe6f7a131a758c5474680c19",
       "route": "/docs/start/",
       "legacyHeadingIds": [
         "choose-host",

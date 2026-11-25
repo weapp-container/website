@@ -23,7 +23,7 @@
   "Web 边界": "Web boundaries",
   "HarmonyOS 状态": "HarmonyOS status",
   "查看受限 Showcase 发行记录 ↗": "Historical restricted Showcase releases ↗",
-  "历史发行物的访问权限与公开源码许可分别管理。当前运行库请从公开源码构建。": "Historical archive access is separate from the public source license. Build current runtimes from the public source checkout.",
+  "历史发行物的访问权限与公开源码许可分别管理。当前运行库请从公开发行物下载。": "Historical archive access is separate from the public source license. Download current runtimes from the public release assets.",
   "runner-bundle-verified": "Runner bundle verified",
   "partial": "Partial",
   "已通过": "Passed",

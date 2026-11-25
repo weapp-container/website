@@ -19,9 +19,9 @@ Flutter / Dart
 
 <a id="platforms"></a>
 <a id="prepare-native-dependencies-from-current-source-code"></a>
-## 从当前源码准备原生依赖
+## 发行依赖
 
-先从公开核心仓库及固定 SDK 子模块构建 Android/iOS 或对应 Desktop SDK，再生成本地 reviewed manifest。框架包装层会核验原生归档和安装收据，不会隐式下载匹配不明的历史二进制。[源码构建](/docs/start/)提供完整打包、离线准备和框架构建顺序。以下示例使用该流程生成的本地 SDK。
+Flutter 主包、platform interface 和五个原生平台包已发布到 pub.dev。普通应用从 pub.dev 安装，Android 使用 Maven Central，Linux/Windows 使用核心 prerelease 的 Desktop SDK 归档。iOS/macOS Podspec 引用的独立 SDK 归档当前不可用，因此 Apple 平台不能按公开依赖完成原生构建。维护者需要重建原生归档时，才按[维护者源码构建指南](/docs/engineering/weapp-container/docs/sdk-source-build/)处理。
 
 <a id="controller"></a>
 <a id="1-add-sdk-dependency"></a>
@@ -31,11 +31,10 @@ Flutter / Dart
 
 ```yaml
 dependencies:
-  weapp_container:
-    path: /absolute/path/sdk-flutter/weapp_container
+  weapp_container: 0.1.0-preview.7.1
 ```
 
-本地 checkout 与 npm/pub registry 发布不是同一件事；只有经审核的 runtime 及 license archive 才应被包含在可分发 SDK 中。
+然后运行 `flutter pub get`。只有经审核的 runtime 及 license archive 才应被包含在可分发应用中。
 
 安装与原生依赖准备见[Flutter SDK README](https://github.com/weapp-container/sdk-flutter/blob/main/README.md)。将 `hello-pack/` 解包到应用可读的本地目录；可参考[完整示例](https://github.com/weapp-container/sdk-flutter/blob/main/example/lib/main.dart)从 Flutter assets 复制包文件的实现。
 

@@ -15,21 +15,20 @@ locale: "zh-CN"
 **简体中文** · [English](start.en.md)
 
 
-准备一个小程序包，在应用里放入 SDK 视图，再加载这个包。已有小程序可以继续使用自己的开发工具。
+准备一个小程序包，在应用里放入 SDK 视图，再加载这个包。已有小程序可以继续使用自己的开发工具。正常接入从各平台已发布的 SDK 包或预编译归档开始，不需要下载项目源码。
 
 <a id="prepare-source"></a>
 <a id="1-prepare-a-test-package"></a>
 ## 1. 准备一个测试包
 
-先用独立示例跑通接入。安装 Node.js 24.x，执行下面三条命令即可，不需要安装 npm 依赖或小程序构建框架。
+使用公开发布的 Contract npm 包生成独立测试包。安装 Node.js 24.x，在应用项目目录执行：
 
 ```bash
-git clone https://github.com/weapp-container/sdk-contract.git
-cd sdk-contract
-node fixtures/make-acceptance-pack.mjs --out ../hello-pack
+npm install --save-dev @weapp-container/sdk-contract@0.1.0-preview.7.1
+node --input-type=module -e "import { makeAcceptancePack } from '@weapp-container/sdk-contract/fixtures'; makeAcceptancePack('./hello-pack')"
 ```
 
-生成的 `hello-pack/` 包含 `manifest.json` 和 `blobs/sha256/`。示例页面提供点击计数、滚动和宿主消息，适合检查 SDK 是否接通。
+生成的 `hello-pack/` 包含 `manifest.json` 和 `blobs/sha256/`。示例页面提供点击计数、滚动和宿主消息，适合检查 SDK 是否接通。Contract 包只提供协议类型和测试工具，不包含原生运行库。
 
 已经有自己的小程序？直接阅读[打包现有小程序](/docs/pack/#own-miniapp)。原生 JS/WXML/WXSS 目录可直接作为打包输入；使用 TypeScript、Vue 或 React 时，先用现有工具生成小程序产物。
 
@@ -55,9 +54,9 @@ node fixtures/make-acceptance-pack.mjs --out ../hello-pack
 
 各平台的可复制代码见上面的集成指南。会话由页面或路由持有，避免每次界面重绘都重建。页面隐藏时通知前后台状态；结束使用时等待 `flushStorage` 和异步关闭。
 
-**使用当前预览版**
+**预览版发行状态**
 
-测试包生成成功只代表输入已准备好。实际加载需要匹配版本的运行库。当前源码可从公开核心仓库构建，不需要历史归档凭据，详见[源码构建](/docs/start/)。已有预编译归档的权限和许可证按各自发行处理；网站在线演示仅允许固定包，不能用来加载这里生成的测试包。详见[许可、下载与发行](/docs/licensing/)和[平台状态](/docs/platforms/)。
+测试包生成成功只代表输入已准备好。实际加载需要对应平台 SDK 和匹配版本的运行库。按平台指南使用已发布的依赖或预编译归档；尚无可用公开发行物的平台会明确标注。网站在线演示仅允许固定包，不能用来加载这里生成的测试包。详见[许可、下载与发行](/docs/licensing/)和[平台状态](/docs/platforms/)。
 
 <a id="next-steps"></a>
 ## 下一步

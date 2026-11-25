@@ -19,9 +19,9 @@ React Native 包将原生 session 控制器通过 TurboModule 暴露给 TypeScri
 
 <a id="requirements"></a>
 <a id="prepare-native-dependencies-from-current-source-code"></a>
-## 从当前源码准备原生依赖
+## 发行依赖
 
-先从公开核心仓库及固定 SDK 子模块构建 Android/iOS 或对应 Desktop SDK，再生成本地 reviewed manifest。框架包装层会核验原生归档和安装收据，不会隐式下载匹配不明的历史二进制。[源码构建](/docs/start/)提供完整打包、离线准备和框架构建顺序。以下示例使用该流程生成的本地 SDK。
+普通 Android 应用直接安装 npm 预览包，原生 Android 依赖从 Maven Central 解析。当前 iOS Podspec 引用的固定 SDK 归档不可用，因此公开依赖暂时只能完成 Android 原生构建。维护者需要生成 iOS 配套原生 SDK 时，才按[维护者源码构建指南](/docs/engineering/weapp-container/docs/sdk-source-build/)处理。
 
 <a id="create-view"></a>
 <a id="1-install-sdk"></a>
@@ -35,7 +35,7 @@ React Native 包将原生 session 控制器通过 TurboModule 暴露给 TypeScri
 npm install @weapp-container/react-native@0.1.0-preview.7.1
 ```
 
-该 npm 版本的 Android Maven 依赖可匿名解析。iOS Podspec 引用的固定 SDK 归档 URL 当前不可用，因此 iOS 消费者需先按[源码构建](/docs/start/)准备配套原生 SDK，再运行 CocoaPods 安装。
+该 npm 版本的 Android Maven 依赖可匿名解析。iOS Podspec 引用的固定 SDK 归档 URL 当前不可用，iOS 原生构建暂不属于公开安装路径。
 
 将 `hello-pack/` 放到 Android 的 `android/app/src/main/assets/hello-pack/`，或作为完整资源文件夹加入 iOS target。SDK 归档获取与源码打包见[React Native SDK README](https://github.com/weapp-container/sdk-react-native/blob/main/README.md)。
 
@@ -108,7 +108,7 @@ React effect cleanup 不能返回 Promise，应把异步关闭交给页面的会
 
 **版本和授权状态**
 
-`@weapp-container/react-native` 源码当前为 `0.1.0-preview.7.1`，采用 Apache-2.0。该版本已发布到 npm，Android Maven 依赖可匿名解析；iOS Podspec 引用的固定 SDK 归档 URL 尚不可用。iOS 集成请按[源码构建](/docs/start/)准备原生 SDK，不能把 npm 包可安装等同于双端原生构建可用。当前仍是预览版，没有稳定版，详见[发行记录](/docs/licensing/)。
+`@weapp-container/react-native` 版本为 `0.1.0-preview.7.1`，采用 Apache-2.0。该版本已发布到 npm，Android Maven 依赖可匿名解析；iOS Podspec 引用的固定 SDK 归档 URL 尚不可用，不能把 npm 包可安装等同于双端原生构建可用。当前仍是预览版，没有稳定版，详见[发行记录](/docs/licensing/)。
 
 发行构建运行 TypeScript、React Native Codegen 和包文件审核。独立 consumer 消耗完整 npm archive 和预先准备的原生 SDK，不应该隐式依赖工作区内的核心运行时代码。
 

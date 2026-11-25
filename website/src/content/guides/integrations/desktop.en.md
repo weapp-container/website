@@ -21,21 +21,17 @@ The C++ SDK for macOS, Windows, and Linux provides typed sessions, event callbac
 <a id="编译目标"></a>
 ## Build requirements
 
-Requires C++17 compiler and CMake 3.21+. macOS Minimum 12.0, platform rendering uses AppKit/Metal; Windows 10 x64 adapter uses C++20; Linux runs baseline Ubuntu 22.04, glibc 2.35, GTK 3.24, and OpenGL 3.3. The target system must have a corresponding runtime lock and matching architecture.
+Requires a C++17 compiler and CMake 3.21+. macOS minimum is 12.0, Windows is 10 x64, and Linux uses Ubuntu 22.04, glibc 2.35, GTK 3.24 and OpenGL 3.3.
 
-Execute in the clean checkout root directory of the public core repository. For the complete environment, native library slices and licensing steps, see [Build from source](/en/docs/start/).
+Download the matching Desktop SDK archive from the core prerelease and verify its SHA-256 before extracting it. Archives include C/C++ headers, runtime libraries, licenses and relocatable CMake configuration. A core source checkout is unnecessary.
 
-Build Apple Silicon macOS below. For other triple and target pairings, see the source code build page; Windows/Linux must be built on the corresponding system.
+| Platform | Download | SHA-256 |
+| --- | --- | --- |
+| macOS universal | [SDK archive](https://github.com/weapp-container/weapp-container/releases/download/runtime-v0.1.0-preview.7.1/desktop-sdk-0.1.0-preview.7.1-macos-universal.tar.gz) | `51523e43c6d7298fbd6798e7de5a55b51428e0eaaa1818f70586b3d49ec16f65` |
+| Linux x86_64 | [SDK archive](https://github.com/weapp-container/weapp-container/releases/download/runtime-v0.1.0-preview.7.1/desktop-sdk-0.1.0-preview.7.1-linux-x86_64.tar.gz) | `7bfcc4dbbf75334a6981f3a28c51a39607729423b443f9787db7ab46f75cc1cc` |
+| Windows x86_64 | [SDK archive](https://github.com/weapp-container/weapp-container/releases/download/runtime-v0.1.0-preview.7.1/desktop-sdk-0.1.0-preview.7.1-windows-x86_64.tar.gz) | `81a185890d93f1806f2d15c4fcb51bade2ddd96640ce90827e9adde19306126f` |
 
-```bash
-node scripts/sdk-native-build.mjs --target aarch64-apple-darwin --out artifacts/sdk/native
-node scripts/sdk-licenses.mjs --target aarch64-apple-darwin --features quickjs-native,skia-gpu-metal
-node sdk/desktop/tools/build.mjs --target macos-arm64 \
-  --native-root artifacts/sdk/native --licenses-root artifacts/sdk/licenses \
-  --pack artifacts/hello-pack --out artifacts/sdk/desktop --verify
-```
-
-Windows and Linux desktop targets are built and verified on the respective operating systems. `--skip-consumer` is only packaged and does not prove that the real GUI surface can be started.
+Maintainers rebuilding the runtime or updating archives should follow the [maintainer source build guide](/en/docs/engineering/weapp-container/docs/sdk-source-build/).
 
 <a id="cmake"></a>
 <a id="连接-cmake-consumer"></a>

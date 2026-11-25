@@ -21,16 +21,11 @@ iOS SDK 提供 Swift Concurrency 会话、UIKit 视图和 Metal 呈现面。最�
 <a id="1-install-sdk"></a>
 ## 1. 安装 SDK
 
-当前发行要求 macOS、Xcode 27.2+ 及 iOS 27.1+ 编译 SDK；部署最低版本仍为 iOS 16.0。运行库应包含 arm64 device、arm64 simulator 和 x86_64 simulator slices。源码构建可以生成本地 Swift Package 或 CocoaPods 消费目录；framework 的 license 和第三方 notices 随包保留。
+当前公开预览版提供包含 arm64 device、arm64 simulator 和 x86_64 simulator slices 的 iOS SDK 归档。要求 macOS、Xcode 27.2+、iOS 16.0+。从[核心 prerelease](https://github.com/weapp-container/weapp-container/releases/download/runtime-v0.1.0-preview.7.1/ios-sdk-0.1.0-preview.7.1-ios-universal.tar.gz)下载并按发行页 SHA-256 校验，解压后在 Xcode 中将目录作为本地 Swift Package 添加，并把 **WeappContainer** product 加到应用 target。
 
-在公开核心仓库的干净 checkout 根目录执行。完整环境、原生切片及许可步骤见[源码构建](/docs/start/)。
+若使用 CocoaPods，在 Podfile 中以本地路径引用归档中的 `WeappContainer.podspec`。独立 sdk-ios release 尚未发布，远程 SwiftPM/CocoaPods 固定 URL 当前不可用。维护者需要重建 SDK 时，才按[维护者源码构建指南](/docs/engineering/weapp-container/docs/sdk-source-build/)准备源码。
 
-```bash
-node sdk/ios/tools/build.mjs --native-root artifacts/sdk/native \
-  --licenses-root artifacts/sdk/licenses --out artifacts/sdk/ios --install-framework
-```
-
-在 Xcode 中将生成的 `artifacts/sdk/ios/WeappContainer` 添加为本地 Swift Package，并把 **WeappContainer** product 加到应用 target。将整个 `hello-pack/` 文件夹作为资源加入 target，保留其目录结构。
+将整个 `hello-pack/` 文件夹作为资源加入 target，保留其目录结构。
 
 <a id="create-session"></a>
 <a id="2-mount-the-uikit-view-and-load-it"></a>

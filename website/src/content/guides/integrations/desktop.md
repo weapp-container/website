@@ -21,21 +21,17 @@ macOS、Windows 与 Linux 的 C++ SDK 提供 typed Session、事件回调、固�
 <a id="build-requirements"></a>
 ## 编译目标
 
-要求 C++17 编译器与 CMake 3.21+。macOS 最低 12.0，平台呈现使用 AppKit/Metal；Windows 10 x64 适配器使用 C++20；Linux 的运行基线为 Ubuntu 22.04、glibc 2.35、GTK 3.24 和 OpenGL 3.3。目标系统必须有对应 runtime lock 和匹配架构。
+要求 C++17 编译器与 CMake 3.21+。macOS 最低 12.0；Windows 10 x64；Linux Ubuntu 22.04、glibc 2.35、GTK 3.24 和 OpenGL 3.3。
 
-在公开核心仓库的干净 checkout 根目录执行。完整环境、原生切片及许可步骤见[源码构建](/docs/start/)。
+从核心 prerelease 下载对应平台的 Desktop SDK 归档，核对 SHA-256 后解压。归档包含 C/C++ headers、运行库、许可和可迁移 CMake 配置，无需下载核心仓库源码。
 
-下面构建 Apple Silicon macOS。其它 triple 与目标配对见源码构建页；Windows/Linux 必须在对应系统构建。
+| 平台 | 下载 | SHA-256 |
+| --- | --- | --- |
+| macOS universal | [SDK archive](https://github.com/weapp-container/weapp-container/releases/download/runtime-v0.1.0-preview.7.1/desktop-sdk-0.1.0-preview.7.1-macos-universal.tar.gz) | `51523e43c6d7298fbd6798e7de5a55b51428e0eaaa1818f70586b3d49ec16f65` |
+| Linux x86_64 | [SDK archive](https://github.com/weapp-container/weapp-container/releases/download/runtime-v0.1.0-preview.7.1/desktop-sdk-0.1.0-preview.7.1-linux-x86_64.tar.gz) | `7bfcc4dbbf75334a6981f3a28c51a39607729423b443f9787db7ab46f75cc1cc` |
+| Windows x86_64 | [SDK archive](https://github.com/weapp-container/weapp-container/releases/download/runtime-v0.1.0-preview.7.1/desktop-sdk-0.1.0-preview.7.1-windows-x86_64.tar.gz) | `81a185890d93f1806f2d15c4fcb51bade2ddd96640ce90827e9adde19306126f` |
 
-```bash
-node scripts/sdk-native-build.mjs --target aarch64-apple-darwin --out artifacts/sdk/native
-node scripts/sdk-licenses.mjs --target aarch64-apple-darwin --features quickjs-native,skia-gpu-metal
-node sdk/desktop/tools/build.mjs --target macos-arm64 \
-  --native-root artifacts/sdk/native --licenses-root artifacts/sdk/licenses \
-  --pack artifacts/hello-pack --out artifacts/sdk/desktop --verify
-```
-
-Windows 与 Linux 桌面目标在相应操作系统上构建和验证。`--skip-consumer` 只打包，不证明真实 GUI surface 能启动。
+维护者需要重建运行库或更新归档时，才按[维护者源码构建指南](/docs/engineering/weapp-container/docs/sdk-source-build/)构建并验证目标系统。
 
 <a id="cmake"></a>
 <a id="link-a-cmake-consumer"></a>

@@ -15,7 +15,7 @@ INTEGRATIONS
 [简体中文](integrations.md) · **English**
 
 
-Select SDK by the application’s existing language or UI framework. Each platform uses the same portable pack, and there is no need to change mini-program development tools.
+Select an SDK by your application's existing language or UI framework. Each platform uses the same portable pack, so you can keep your mini-program development tools. Normal integration uses the public package-manager dependency or prebuilt SDK archive listed in each platform guide.
 
 <a id="sdk-与宿主"></a>
 ## SDK and host
@@ -31,12 +31,12 @@ Select SDK by the application’s existing language or UI framework. Each platfo
 <a id="共通步骤"></a>
 ## Common steps
 
-1. Add the SDK to the application according to the platform guide and prepare the matching runtime library.
+1. Install the currently available SDK release from the platform guide. Check whether your target platform has a usable public release.
 2. Put [test package](/en/docs/start/#prepare-source) or [self-made package](/en/docs/pack/#own-miniapp) into the application resource directory.
 3. Create session, mount view, call `load`. Wait for storage writeback and session close when leaving the page or route.
 
 **Preview Release Notes**
 
-The SDK packaging layer source code and precompiled runtime library have their own versions, licenses and release records. When using an archive, check its version lock and hash; restricted demo archives only allow specified packages. See [Licensing, Downloading and Distribution](/en/docs/licensing/) for details.
+Android is available from Maven Central, Contract and React Native packages from npm, and Flutter packages from pub.dev. iOS and Desktop use prebuilt archives in the core prerelease. Public React Native native builds are currently limited to Android, and Flutter Apple-platform archives are unavailable. SDK wrappers and runtimes have separate versions, licenses and release records. Check the published hash and license before using an archive. See [Licensing, Downloading and Distribution](/en/docs/licensing/) and [SDK release status](https://github.com/weapp-container/weapp-container/blob/main/docs/public-sdk-release.en.md).
 
 Please continue reading [Platform Status and Supported Boundaries](/en/docs/platforms/) for applicable platforms and measured boundaries.
