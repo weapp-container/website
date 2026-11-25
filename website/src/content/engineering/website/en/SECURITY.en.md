@@ -6,7 +6,7 @@ summary: "Security Report. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/website/security/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "a245025199739e12fdf53e2aa711d21d270de5f4"
+sourceCommit: "7a55b4eff3fcfdffc7498ff6656c99d2f87bdceb"
 sourcePath: "SECURITY.en.md"
 ---
 

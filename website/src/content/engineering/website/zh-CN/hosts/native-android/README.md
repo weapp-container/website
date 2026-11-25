@@ -6,7 +6,7 @@ summary: "Kotlin 宿主。来自 weapp-container/website 的版本化工程说�
 route: "/docs/engineering/website/hosts/native-android/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "a245025199739e12fdf53e2aa711d21d270de5f4"
+sourceCommit: "7a55b4eff3fcfdffc7498ff6656c99d2f87bdceb"
 sourcePath: "hosts/native-android/README.md"
 ---
 

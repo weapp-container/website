@@ -6,7 +6,7 @@ summary: "Dual Rendering Development Example. Versioned engineering reference fr
 route: "/docs/engineering/weapp-container/examples/apps/dual-renderer-app/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "77f36ebfbc77de1e2b537eca9b55204e72d8712c"
+sourceCommit: "0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077"
 sourcePath: "examples/apps/dual-renderer-app/README.en.md"
 ---
 

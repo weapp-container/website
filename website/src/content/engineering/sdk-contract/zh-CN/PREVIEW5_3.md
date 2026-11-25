@@ -6,7 +6,7 @@ summary: "preview.5.3 源码要求。来自 weapp-container/sdk-contract 的版�
 route: "/docs/engineering/sdk-contract/preview5_3/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "2b4a41a0963aa1dea6e04ec1be6b30666d1235e1"
+sourceCommit: "083742acfbfea6e56136ddebfecb9d0d1d7d3781"
 sourcePath: "PREVIEW5_3.md"
 ---
 

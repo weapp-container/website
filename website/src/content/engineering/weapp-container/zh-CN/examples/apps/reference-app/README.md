@@ -6,7 +6,7 @@ summary: "参考小程序。来自 weapp-container/weapp-container 的版本化�
 route: "/docs/engineering/weapp-container/examples/apps/reference-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "77f36ebfbc77de1e2b537eca9b55204e72d8712c"
+sourceCommit: "0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077"
 sourcePath: "examples/apps/reference-app/README.md"
 ---
 

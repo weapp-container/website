@@ -6,7 +6,7 @@ summary: "SDK Source Build Guide. Versioned engineering reference from weapp-con
 route: "/docs/engineering/weapp-container/docs/sdk-source-build/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "77f36ebfbc77de1e2b537eca9b55204e72d8712c"
+sourceCommit: "0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077"
 sourcePath: "docs/sdk-source-build.en.md"
 ---
 

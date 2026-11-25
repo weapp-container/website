@@ -6,7 +6,7 @@ summary: "Public preview release 0.1.0-preview.7.1. Versioned engineering refere
 route: "/docs/engineering/sdk-contract/public-release/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "2b4a41a0963aa1dea6e04ec1be6b30666d1235e1"
+sourceCommit: "083742acfbfea6e56136ddebfecb9d0d1d7d3781"
 sourcePath: "PUBLIC-RELEASE.en.md"
 ---
 

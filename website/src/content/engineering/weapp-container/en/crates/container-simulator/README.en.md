@@ -6,7 +6,7 @@ summary: "container-simulator. Versioned engineering reference from weapp-contai
 route: "/docs/engineering/weapp-container/crates/container-simulator/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "77f36ebfbc77de1e2b537eca9b55204e72d8712c"
+sourceCommit: "0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077"
 sourcePath: "crates/container-simulator/README.en.md"
 ---
 
@@ -15,7 +15,7 @@ sourcePath: "crates/container-simulator/README.en.md"
 [简体中文](/docs/engineering/weapp-container/crates/container-simulator/index/) · **English**
 
 
-The explicit [modern JS/TS View profile](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/modern-view.en.md) supports
+The explicit [modern JS/TS View profile](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/modern-view.en.md) supports
 synchronous ES2022 in a separate realm. Run the example with
 `dev --project examples/apps/modern-view-app --surface web`; modern-only edits
 repack independently and executable changes restart the session. Legacy WXS
@@ -30,7 +30,7 @@ Native QuickJS/V8 sessions evaluate declared WXS in a separate View realm,
 with retained page/component state and whole-document render batches. Style
 reloads reuse evaluated work; WXS document/program changes restart the session.
 Legacy packs without View module metadata remain unsupported. See the
-[isolated View contract](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/isolated-view-engine.en.md) for execution and
+[isolated View contract](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/isolated-view-engine.en.md) for execution and
 dialect limits.
 
 It is intended for fast development feedback and reproducible conformance
@@ -42,7 +42,7 @@ device.
 software Raster HTTP/SSE/ACK/input on one original runtime. The experimental
 `serve_dev_raster` example owns its own port and cleanup. It does not enable the
 normal CLI, attach legacy HTML to binary frame v2, or provide browser/GPU
-acceptance. See the [strict wire, limits and lifecycle](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/dev-raster-http.en.md).
+acceptance. See the [strict wire, limits and lifecycle](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/dev-raster-http.en.md).
 
 <a id="浏览器运行时嵌入准备"></a>
 ## Browser runtime preparation for embedding
@@ -54,7 +54,7 @@ resource bytes. `BrowserRuntimePrepared` reports static readiness only;
 `runtimeReady` and `presentedReady` remain false. Release resource borrowers and
 retry `try_shutdown()` until it confirms cleanup. The example
 `cargo run -p container-simulator --example prepare_browser_runtime -- <project> <producer> <pins.json>`
-drives this real supervisor path. See [input pins, limits and lifecycle](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/dual-renderer/browser-dev-artifacts.en.md).
+drives this real supervisor path. See [input pins, limits and lifecycle](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/dual-renderer/browser-dev-artifacts.en.md).
 This does not enable the browser watch CLI or start a Worker/browser.
 
 Set `DevConfig.managed_browser_sources = true` to use the explicit owned
@@ -67,7 +67,7 @@ pack remains owned when a new build fails. Watcher/process barriers and actual
 input borrowers must drain before parent cleanup; a failed cleanup is retryable.
 The profile reserves logical capacity for root/input/tools, one runtime, two
 raw inputs and two portable outputs, with one finite artifact job. It does not
-admit a browser site or stage. See [owned source preparation](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/dual-renderer/browser-source-preparation.en.md).
+admit a browser site or stage. See [owned source preparation](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/dual-renderer/browser-source-preparation.en.md).
 
 `DevConfig.managed_browser_stages = true` additionally admits actual
 `stage-pack` jobs on that same ledger. `begin_browser_stage` borrows the current
@@ -76,7 +76,7 @@ returns a verified static `StageArtifact`. `browser_stage_resource` borrows
 the original captured bytes and charge. Two stage slots include retired sites
 whose bodies remain borrowed; release bodies and retry retirement/shutdown.
 The executable example is `prepare_browser_stage`. This does not enable HTTP,
-the browser CLI, Worker execution or presentation. See [consuming stages](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/dual-renderer/browser-consuming-stage.en.md).
+the browser CLI, Worker execution or presentation. See [consuming stages](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/dual-renderer/browser-consuming-stage.en.md).
 
 ## CLI
 
@@ -105,7 +105,7 @@ keyboard, sensor, audio-interruption and memory-warning events through the
 platform-neutral `game.event` bridge operation. App visibility uses the shared
 `app.lifecycle` operation, and viewport updates resize the game Canvas and
 notify `wx.onWindowResize`. Payloads follow
-[`game-event-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/schemas/game-event-v1.schema.json). The
+[`game-event-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/schemas/game-event-v1.schema.json). The
 legacy `game.touch` operation remains available for touch-only callers.
 
 ```sh
@@ -152,7 +152,7 @@ pnpm submodule:verify
 
 Use the Node and pnpm versions declared by `vendor/weapp-vite/package.json`.
 Installing the root package alone does not build the vendor compiler. See
-[the preparation notes](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/simulator.en.md#开发态监督器).
+[the preparation notes](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/simulator.en.md#开发态监督器).
 
 `dev` starts the pinned weapp-vite watcher through a separate public-API adapter.
 The adapter freezes the output during the build completion event and publishes
@@ -285,7 +285,7 @@ and software mode before starting the watcher. Default `auto + remote` behavior
 is unchanged. Each original run keeps
 its own `runs/<runId>/browser-dev-summary.json`, so sequential launches may reuse
 the output root without overwriting evidence. Keep the original preview open
-through Stop; refresh/crash takeover is not implemented. See [Browser development](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/dual-renderer/browser-dev-loop.en.md).
+through Stop; refresh/crash takeover is not implemented. See [Browser development](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/dual-renderer/browser-dev-loop.en.md).
 
 The Browser panel reports Worker/runtime and renderer separately. A Skia
 `submitted` receipt describes one bounded local WebGL2 picture submission;
@@ -296,10 +296,10 @@ waits for physical GPU completion. Existing DOM development evidence does not
 validate the new Skia CLI path; actual smoke, hardware and performance results
 remain separate evidence gates.
 
-Native WebView (`desktop|both`), and `webview` with `--software` still fail explicitly. DOM SelectorQuery has an explicitly negotiated partial implementation awaiting native/browser validation; Remote initial startup remains unsupported. DOM intersection/scroll command adapters and some CSS/components remain unsupported. See [query limits](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/dual-renderer/browser-selector-queries.en.md). Reload preflight validates
+Native WebView (`desktop|both`), and `webview` with `--software` still fail explicitly. DOM SelectorQuery has an explicitly negotiated partial implementation awaiting native/browser validation; Remote initial startup remains unsupported. DOM intersection/scroll command adapters and some CSS/components remain unsupported. See [query limits](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/dual-renderer/browser-selector-queries.en.md). Reload preflight validates
 IR and resources; a later browser-only preparation failure retains the previous
 image with invalid input suspended. It does not roll back arbitrary JS effects
-or promise a live-manifest rollback. See [the transaction boundary](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/dual-renderer/browser-presentation.en.md)
+or promise a live-manifest rollback. See [the transaction boundary](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/dual-renderer/browser-presentation.en.md)
 and the frozen goal checklist in `docs/dual-renderer/`.
 
 <a id="网页解析和呈现"></a>
@@ -353,7 +353,7 @@ HTTP 202 is only a queue receipt. A later `presentation` SSE event carries
 revisions return 409. A client keeps one in-flight frame and one latest RAF
 candidate, rejects obsolete session/generation frames, and suspends old-image
 input while logical geometry is changing. See the [full Web
-protocol](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/simulator.en.md#开发态监督器) for field and budget details.
+protocol](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/simulator.en.md#开发态监督器) for field and budget details.
 
 Each start atomically reserves its own run namespace and session id. Reusing
 an output directory preserves earlier generations; concurrent runs have
@@ -382,7 +382,7 @@ the separate WXS dialect compiler rejects unsupported forms with
 Independent native QuickJS/V8 `ViewEngine` adapters now provide batched
 execution, scope/document module ownership and timeout/cancellation disposal.
 The runtime connects them to WXML evaluation. See
-[the execution contract](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/isolated-view-engine.en.md) for the supported
+[the execution contract](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/isolated-view-engine.en.md) for the supported
 subset, tests and remaining official behavior evidence; local native tests do
 not establish full WXS, DevTools, GPU or device parity.
 
@@ -616,13 +616,13 @@ Harmony, desktop and Web examples can use the same startup and dispatch
 contract.
 
 The [Rust app example](/en/docs/engineering/weapp-container/examples/apps/embed-runner/index/) takes a pack
-directory. The [Web example](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/examples/hosts/web/README.en.md) shares the
+directory. The [Web example](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/examples/hosts/web/README.en.md) shares the
 development supervisor's verified pack/session through `/embed`. Native examples
 have separate asset entry points: Android loads `app/src/main/assets/portable-pack`,
 and Harmony loads `entry/src/main/resources/rawfile`; their README files describe
 the pack sync commands. The iOS Swift Package and UIKit `ios-app` smoke still use
 inline fixtures, so a business app must supply bundle manifest/module/blob loading.
-See [the host entry points](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/simulator.en.md#app-植入边界) for the exact paths.
+See [the host entry points](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/simulator.en.md#app-植入边界) for the exact paths.
 
 The default Android native build has no QuickJS provider. It validates the pack
 and submits module bytes, then returns explicit `ERR_ENGINE` for execution.

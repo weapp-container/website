@@ -6,7 +6,7 @@ summary: "公开预览发行 0.1.0-preview.7.1。来自 weapp-container/sdk-cont
 route: "/docs/engineering/sdk-contract/public-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "2b4a41a0963aa1dea6e04ec1be6b30666d1235e1"
+sourceCommit: "083742acfbfea6e56136ddebfecb9d0d1d7d3781"
 sourcePath: "PUBLIC-RELEASE.md"
 ---
 

@@ -48,4 +48,4 @@ node fixtures/make-acceptance-pack.mjs --out ../hello-pack
 
 自有源码以 Apache-2.0 公开，少数核心 crate 保留 MIT OR Apache-2.0；第三方组件遵循各自许可。具体以每个仓库和获得的副本所附 LICENSE、NOTICE 及 RUNTIME-LICENSE 为准。
 
-历史运行库归档保留原有许可与哈希，公开源码不重新授权旧二进制，也不保证旧下载 pin 可用。当前接入优先从匹配公开源码构建；历史迁移与归档边界见[迁移文档](https://container.weapp.dev/docs/engineering/weapp-container/docs/runtime-artifacts-migration/)。
+历史运行库归档保留原有许可与哈希，公开源码不重新授权旧二进制，也不保证旧下载 pin 可用。当前接入优先从匹配公开源码构建；历史迁移与归档边界见[迁移文档](https://container.weapp.dev/docs/platforms/)。

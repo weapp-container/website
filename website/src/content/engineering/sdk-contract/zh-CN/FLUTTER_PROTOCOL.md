@@ -6,7 +6,7 @@ summary: "Flutter 插件传输，预览版 4。来自 weapp-container/sdk-contra
 route: "/docs/engineering/sdk-contract/flutter_protocol/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "2b4a41a0963aa1dea6e04ec1be6b30666d1235e1"
+sourceCommit: "083742acfbfea6e56136ddebfecb9d0d1d7d3781"
 sourcePath: "FLUTTER_PROTOCOL.md"
 ---
 
