@@ -6,7 +6,7 @@ summary: "container-engine-v8. Versioned engineering reference from weapp-contai
 route: "/docs/engineering/weapp-container/crates/container-engine-v8/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
+sourceCommit: "75e06c2b571d0507d334902ba1148eb3ca71d91c"
 sourcePath: "crates/container-engine-v8/README.en.md"
 ---
 

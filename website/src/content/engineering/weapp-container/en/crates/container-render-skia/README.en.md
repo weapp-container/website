@@ -6,7 +6,7 @@ summary: "container-render-skia. Versioned engineering reference from weapp-cont
 route: "/docs/engineering/weapp-container/crates/container-render-skia/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
+sourceCommit: "75e06c2b571d0507d334902ba1148eb3ca71d91c"
 sourcePath: "crates/container-render-skia/README.en.md"
 ---
 
@@ -20,7 +20,7 @@ strings. Legacy string entries and omitted maps remain valid frame input;
 typed output requires an updated consumer. The runtime supplies these values
 from WXML and uses the accepted tree for selectors and input. The renderer does
 not infer JSON from attribute strings. See
-[event metadata](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/event-metadata.en.md) for compatibility and evidence limits.
+[event metadata](https://github.com/weapp-container/weapp-container/blob/75e06c2b571d0507d334902ba1148eb3ca71d91c/docs/event-metadata.en.md) for compatibility and evidence limits.
 
 Rendering contract for the portable container. `SoftwareRenderer` is the deterministic
 headless fallback used in CI. `SkiaRenderer` is the stable host-facing type; enabling
@@ -40,7 +40,7 @@ reported separately from the software tests.
 Software, native Skia and CanvasKit use the same content-box crop/fit geometry
 and nearest sampling, with existing transform, opacity, radius and overflow
 boundaries. Resources and references are validated before publication. See
-[the image contract](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/images.en.md) for limits, provenance and remaining
+[the image contract](https://github.com/weapp-container/weapp-container/blob/75e06c2b571d0507d334902ba1148eb3ca71d91c/docs/images.en.md) for limits, provenance and remaining
 asynchronous/provider differences.
 
 <a id="wxss-布局合约"></a>
@@ -59,7 +59,7 @@ can stretch an out-of-flow node and negative offsets remain observable. A
 the next hit-test or snapshot.
 
 Older serialized frames with no `flow` use their original physical-pixel
-layout path. See [the flow contract](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/layout-flow.en.md) for supported
+layout path. See [the flow contract](https://github.com/weapp-container/weapp-container/blob/75e06c2b571d0507d334902ba1148eb3ca71d91c/docs/layout-flow.en.md) for supported
 values and remaining inline/text differences; a solver integration alone does
 not prove official WXSS equivalence.
 

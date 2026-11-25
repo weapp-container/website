@@ -6,7 +6,7 @@ summary: "Contributing. Versioned engineering reference from weapp-container/wea
 route: "/docs/engineering/weapp-container/contributing/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
+sourceCommit: "75e06c2b571d0507d334902ba1148eb3ca71d91c"
 sourcePath: "CONTRIBUTING.en.md"
 ---
 

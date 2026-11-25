@@ -6,7 +6,7 @@ summary: "Maintaining bilingual documentation. Versioned engineering reference f
 route: "/docs/engineering/website/tools/documentation/index/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "0151aabded71273137e181d375907e521f0ad31a"
+sourceCommit: "5925cfa8001368e21d6a37ddfb346e6d208cde3e"
 sourcePath: "tools/documentation/README.en.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "container-render-skia。来自 weapp-container/weapp-container 的版�
 route: "/docs/engineering/weapp-container/crates/container-render-skia/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
+sourceCommit: "75e06c2b571d0507d334902ba1148eb3ca71d91c"
 sourcePath: "crates/container-render-skia/README.md"
 ---
 
@@ -15,7 +15,7 @@ sourcePath: "crates/container-render-skia/README.md"
 **简体中文** · [English](/en/docs/engineering/weapp-container/crates/container-render-skia/index/)
 
 
-`RenderNode.dataset` 和 `RenderNode.mark` 传递 JSON 值，而不仅仅是字符串。旧的字符串条目和省略的映射仍有效作为帧输入；类型化的输出需要更新的消费者。运行时从 WXML 中获取这些值，并使用已验收的树进行选择器和输入处理。渲染器不会从属性字符串中推断出 JSON。有关兼容性和证据限制，请参见 [事件元数据](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/event-metadata.md)。
+`RenderNode.dataset` 和 `RenderNode.mark` 传递 JSON 值，而不仅仅是字符串。旧的字符串条目和省略的映射仍有效作为帧输入；类型化的输出需要更新的消费者。运行时从 WXML 中获取这些值，并使用已验收的树进行选择器和输入处理。渲染器不会从属性字符串中推断出 JSON。有关兼容性和证据限制，请参见 [事件元数据](https://github.com/weapp-container/weapp-container/blob/75e06c2b571d0507d334902ba1148eb3ca71d91c/docs/event-metadata.md)。
 
 渲染合约用于便携容器。`SoftwareRenderer` 是 CI 中使用的确定性无界面备用方案。`SkiaRenderer` 是稳定且面向宿主的类型；启用 `skia-backend` 可启用 `skia-safe` 0.157.0。位图模式将已验收的帧树绘制到 CPU 绘制表面；外部帧和原生 GPU 模式保持其独立的呈现器合约，无需常规的全页 CPU 位图绘制/读回。该功能为可选，因为其需要下载或构建大型 Skia 工具链；为每个目标提供匹配的 `skia-binaries` 缓存或源码构建。默认构建保持确定性和无界面。原生 Skia/设备验证与软件测试分开报告。
 
@@ -24,14 +24,14 @@ sourcePath: "crates/container-render-skia/README.md"
 
 `RenderFrame.images` 根据 ID 共享已解码的直方 RGBA8 资源；
 `RenderNode.image` 引用一个资源和 14 种图像模式之一。
-软件、原生 Skia 和 CanvasKit 使用相同的 content-box 截取/缩放几何形状和最近邻采样，以及现有的变换、不透明度、半径和溢出边界。在发布前会对资源和引用进行验证。有关限制、来源以及剩余的异步/提供者差异，请参见 [图像合约](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/images.md)。
+软件、原生 Skia 和 CanvasKit 使用相同的 content-box 截取/缩放几何形状和最近邻采样，以及现有的变换、不透明度、半径和溢出边界。在发布前会对资源和引用进行验证。有关限制、来源以及剩余的异步/提供者差异，请参见 [图像合约](https://github.com/weapp-container/weapp-container/blob/75e06c2b571d0507d334902ba1148eb3ca71d91c/docs/images.md)。
 
 <a id="wxss-layout-contract"></a>
 ## WXSS 布局合约
 
 `LayoutStyle.flow` 包含针对共享 Taffy 0.15 求解器的带类型 Block/Flex 输入。运行时将物理单位、字体相对单位和视口单位进行转换；百分比和 `auto` 会一直保留，直到知道其实际的包含块。显式 Flex 默认为行布局；普通视图节点使用 Block 布局。接受的绝对矩形和分配宽度的文本布局方案用于绘画、选择器、输入和滚动。静态和相对节点保留在父级的流中，绝对节点使用最近的定位祖先，固定节点使用视口。`top`、`right`、`bottom` 和 `left` 仍保持可选，以便对流外节点施加反方向约束并保持负偏移的可观察性。一个 `display:none` 节点将从流中移除，并在下一次命中测试或快照之前清除其过时的边界。
 
-较旧的序列化帧在没有 `flow` 时使用其原始物理像素布局路径。有关支持的值及剩余的内联/文本差异，请参见[布局流合约](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/layout-flow.md)；仅集成求解器并不能证明官方 WXSS 等效性。
+较旧的序列化帧在没有 `flow` 时使用其原始物理像素布局路径。有关支持的值及剩余的内联/文本差异，请参见[布局流合约](https://github.com/weapp-container/weapp-container/blob/75e06c2b571d0507d334902ba1148eb3ca71d91c/docs/layout-flow.md)；仅集成求解器并不能证明官方 WXSS 等效性。
 
 `LayoutStyle.border` 包含带类型化的顶部/右侧/底部/左侧 `BorderSide` 值，每个值都有自己的宽度、颜色和样式。`solid` 会绘制外侧圆角矩形减去内侧圆角矩形；不同边的颜色在对应外角和内角的对角线处相交。透明的内孔永远不会被填充，以模拟边框效果。`none` 和 `hidden` 使用零宽度且不进行任何绘制。其他 CSS 边框样式在传输格式中被识别，但在运行时会返回明确的不支持错误；负值或非有限宽度将拒绝该帧。验证在上一帧被替换之前完成。
 
