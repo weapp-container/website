@@ -11,12 +11,6 @@
         "size": 365743960,
         "sha256": "e1163da19ad3ea693c1b85e56b6926cdecec0fff82a874b2ef01f686140d7a47",
         "url": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.2/weapp-container-devtools-macos-universal.dmg"
-      },
-      "portable": {
-        "filename": "weapp-container-devtools-macos-universal.tar.gz",
-        "size": 243695667,
-        "sha256": "d78ab822813f9609ee4cb10f4d62d9e929df93b4b169e91c640a49c5ec312e94",
-        "url": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.2/weapp-container-devtools-macos-universal.tar.gz"
       }
     },
     {
@@ -26,12 +20,6 @@
         "size": 143672648,
         "sha256": "39dbcdb052152a0172fa689b665d9950773e4bdaf0fad7121c9789a97aa331d8",
         "url": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.2/weapp-container-devtools-linux-x86_64.deb"
-      },
-      "portable": {
-        "filename": "weapp-container-devtools-linux-x86_64.tar.gz",
-        "size": 195784600,
-        "sha256": "582d06d8bdec0941f581b4089f98d1df81e78e4f7d72c52d5d8c9aa4c58e3ef6",
-        "url": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.2/weapp-container-devtools-linux-x86_64.tar.gz"
       }
     },
     {
@@ -41,12 +29,6 @@
         "size": 147012123,
         "sha256": "883ea082bf5b34adce0fdeb1de44d64abbbcf912db54e9c785ad85173e74c227",
         "url": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.2/weapp-container-devtools-windows-x86_64.msi"
-      },
-      "portable": {
-        "filename": "weapp-container-devtools-windows-x86_64.zip",
-        "size": 150501741,
-        "sha256": "5c4a77db65b0373334b53ac0f1d028e17bdaa16089102aa5f07730953659368d",
-        "url": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.2/weapp-container-devtools-windows-x86_64.zip"
       }
     }
   ]

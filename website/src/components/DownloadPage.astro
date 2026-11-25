@@ -28,17 +28,16 @@ const installInstructions = {
   <section class="section-wrap page-intro download-intro">
     <p class="eyebrow">{t("下载调试工具")}</p>
     <h1>{t("直接下载 Weapp Container DevTools")}</h1>
-    <p>{t("下载后即可安装图形调试工具，也可以选择便携包启动 Web Player 或 Desktop Player。")}</p>
+    <p>{t("下载后即可安装图形调试工具并启动 Web Player 或 Desktop Player。")}</p>
     <p class="download-version">{t("当前版本")}: <strong>{release.version}</strong> · {t("预览版")}</p>
   </section>
   <section class="section-wrap downloads-section" aria-labelledby="downloads-heading">
-    <div class="section-heading"><h2 id="downloads-heading">{t("选择你的运行平台")}</h2><p>{t("浏览器会直接下载文件，不需要打开 GitHub Release 页面。每个平台优先提供可安装包，也保留便携归档；两种包都包含模拟器、Node.js、固定版 weapp-vite 和 renderer assets。")}</p></div>
+    <div class="section-heading"><h2 id="downloads-heading">{t("选择你的运行平台")}</h2><p>{t("浏览器会直接下载可安装文件，不需要打开 GitHub Release 页面。安装包包含模拟器、Node.js、固定版 weapp-vite 和 renderer assets。")}</p></div>
     <div class="download-list">
       {release.platforms.map(platformRelease => {
         const [name, detail, platform] = labels[platformRelease.id as keyof typeof labels];
         const installerFormat = installerFormats[platformRelease.id as keyof typeof installerFormats];
         const installer = platformRelease.installer;
-        const portable = platformRelease.portable;
         return <article class="download-item" data-platform={platformRelease.id}>
           <div class="download-item-copy">
             <p class="download-platform">{platform}</p>
@@ -51,15 +50,12 @@ const installInstructions = {
             <a class="button primary download-installer" href={installer.url} aria-label={`${t("下载安装包")} ${t(name)}`}>{t("下载安装包")} ({installerFormat}) <span aria-hidden="true">↓</span></a>
             <p>{formatSize(installer.size)} · SHA-256</p>
             <code class="download-hash">{installer.sha256}</code>
-            <a class="text-link download-portable" href={portable.url} aria-label={`${t("下载便携包")} ${t(name)}`}>{t("下载便携包")} <span aria-hidden="true">↓</span></a>
-            <p>{portable.filename} · {formatSize(portable.size)}</p>
-            <code class="download-hash">{portable.sha256}</code>
           </div>
         </article>;
       })}
     </div>
     <div class="download-footer">
-      <p>{t("使用便携包时，请先解压并阅读归档内的 README.md，再根据系统安装必要的图形依赖。")}</p>
+      <p>{t("下载前请使用发布页的 SHA256SUMS 核对文件哈希。预览版安装包可能触发系统安全提示。")}</p>
       <a class="text-link" href={release.checksumsUrl}>{t("下载 SHA256SUMS")} <span aria-hidden="true">↓</span></a>
     </div>
   </section>
