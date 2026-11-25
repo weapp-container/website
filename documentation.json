@@ -162,8 +162,8 @@
         "repository": "weapp-container/website",
         "path": "docs/platforms.md"
       },
-      "reviewedChineseSummary": "普通开发者使用 DevTools 和公开 SDK 发行物，维护者流程与历史归档边界单独记录",
-      "reviewedChineseSha256": "2822548a26b645a70083602eee1995d4e9eef43404e04702410e2e2c173ed2d7",
+      "reviewedChineseSummary": "普通用户从 DevTools 下载页和公开 SDK 发行物开始，平台构建与历史产物内容仅供维护者参考",
+      "reviewedChineseSha256": "f1531c806fa6138cfee552fa3e6a564ec22ec337d8a257bcf5753e1de0346259",
       "legacyHeadingIds": [
         "ios-模拟器与-device-构建",
         "全端演示与历史产物接入",
