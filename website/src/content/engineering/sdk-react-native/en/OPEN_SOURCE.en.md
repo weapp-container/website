@@ -17,7 +17,7 @@ sourcePath: "OPEN_SOURCE.en.md"
 
 
 The current core runtime and SDK source are Apache-2.0, with separately identified
-components retaining their licenses. See the [core source build guide](https://github.com/weapp-container/weapp-container/blob/df595d6768dc1dfb70fa6c93f834b12751b4637d/docs/sdk-repositories.en.md).
+components retaining their licenses. See the [core source build guide](https://github.com/weapp-container/weapp-container/blob/6a8377db1e809377d567a472f4c740b20f9335af/docs/sdk-repositories.en.md).
 
 This repository's existing runtime lock describes previously built archives. Its
 versions, sizes, hashes, distribution profiles and download authorization remain

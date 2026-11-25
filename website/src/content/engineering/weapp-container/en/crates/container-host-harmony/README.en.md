@@ -6,7 +6,7 @@ summary: "container-host-harmony. Versioned engineering reference from weapp-con
 route: "/docs/engineering/weapp-container/crates/container-host-harmony/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df595d6768dc1dfb70fa6c93f834b12751b4637d"
+sourceCommit: "6a8377db1e809377d567a472f4c740b20f9335af"
 sourcePath: "crates/container-host-harmony/README.en.md"
 ---
 

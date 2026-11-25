@@ -6,7 +6,7 @@ summary: "安全问题报告。来自 weapp-container/weapp-container 的版本�
 route: "/docs/engineering/weapp-container/security/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "df595d6768dc1dfb70fa6c93f834b12751b4637d"
+sourceCommit: "6a8377db1e809377d567a472f4c740b20f9335af"
 sourcePath: "SECURITY.md"
 ---
 
