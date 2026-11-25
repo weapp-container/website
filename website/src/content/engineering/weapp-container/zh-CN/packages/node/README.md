@@ -6,7 +6,7 @@ summary: "@weapp-container/node。来自 weapp-container/weapp-container 的版�
 route: "/docs/engineering/weapp-container/packages/node/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "835ab59a8f6dfcce42699decac0e8ea65922c65d"
+sourceCommit: "f4dab7049ac27a57ca67e1a17c32abf61f1a7266"
 sourcePath: "packages/node/README.md"
 ---
 

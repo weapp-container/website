@@ -4,7 +4,7 @@
 **简体中文** · [English](platforms.en.md)
 
 
-普通开发者请从 [DevTools 下载页](https://container.weapp.dev/downloads/)获取可直接运行的桌面工具，并从[公开 SDK 发行状态](https://github.com/weapp-container/weapp-container/blob/main/docs/public-sdk-release.md)选择已发布的包或平台归档。安装与预览无需克隆源码。本页记录仓库维护者使用的全端构建、历史 Showcase 产物和验收流程；其中部分冻结归档需要单独授权，也不代表相应 SDK 当前可公开安装。
+普通开发者请从 [DevTools 下载页](https://container.weapp.dev/downloads/)获取可直接运行的桌面工具，并从[公开 SDK 发行状态](https://github.com/weapp-container/weapp-container/blob/main/docs/public-sdk-release.md)选择已发布的包或平台归档。本页其余内容记录仓库维护者使用的全端构建、历史 Showcase 产物和验收流程；其中部分冻结归档需要单独授权，也不代表相应 SDK 当前可公开安装。
 
 七个系统使用统一的 portable pack 格式：基础交互、商品详情与规格、购物袋、收货信息、模拟结算、点单、订单记录。每个宿主适配器只加载其编译绑定的精确 pack 候选；各端独立升级和验收。业务数据只保存在本机，不连接外部服务或订单后台。Web 在浏览器 Dedicated Worker 内运行 WASM；原生宿主使用各自的本地渲染视图。
 

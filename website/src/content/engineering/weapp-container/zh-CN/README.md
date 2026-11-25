@@ -6,7 +6,7 @@ summary: "Weapp Container。来自 weapp-container/weapp-container 的版本化�
 route: "/docs/engineering/weapp-container/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "835ab59a8f6dfcce42699decac0e8ea65922c65d"
+sourceCommit: "f4dab7049ac27a57ca67e1a17c32abf61f1a7266"
 sourcePath: "README.md"
 ---
 
@@ -90,7 +90,7 @@ cargo run -p container-simulator --features quickjs-native -- \
   run --pack ./artifacts/game --snapshot ./artifacts/game/snapshot.json
 ```
 
-运行时提供 Canvas 2D 子集和 requestAnimationFrame。宿主通过平台无关的 `game.event` 提交规范化触摸、键盘、传感器、音频中断和内存告警事件。显示/隐藏沿用 `app.lifecycle`，viewport 更新会调整游戏 Canvas 并通知 `wx.onWindowResize`。事件载荷见 [game-event-v1.schema.json](https://github.com/weapp-container/weapp-container/blob/835ab59a8f6dfcce42699decac0e8ea65922c65d/schemas/game-event-v1.schema.json)。小游戏 API 仍按清单和宿主能力协商，官方 DevTools、GPU 与设备一致性尚未验证。
+运行时提供 Canvas 2D 子集和 requestAnimationFrame。宿主通过平台无关的 `game.event` 提交规范化触摸、键盘、传感器、音频中断和内存告警事件。显示/隐藏沿用 `app.lifecycle`，viewport 更新会调整游戏 Canvas 并通知 `wx.onWindowResize`。事件载荷见 [game-event-v1.schema.json](https://github.com/weapp-container/weapp-container/blob/f4dab7049ac27a57ca67e1a17c32abf61f1a7266/schemas/game-event-v1.schema.json)。小游戏 API 仍按清单和宿主能力协商，官方 DevTools、GPU 与设备一致性尚未验证。
 
 ## 开源小程序示例
 
@@ -109,7 +109,7 @@ pnpm simulator:dev:smoke -- \
   --project examples/apps/community/miniprogram-demo-text
 ```
 
-另外两个样例将命令中的 `miniprogram-demo-text` 分别替换为 `ant-design-button` 和 `taro-blended`。样例列表、逐项命令和来源见 [`examples/apps/community/README.md`](https://github.com/weapp-container/weapp-container/blob/835ab59a8f6dfcce42699decac0e8ea65922c65d/examples/apps/community/README.md)。
+另外两个样例将命令中的 `miniprogram-demo-text` 分别替换为 `ant-design-button` 和 `taro-blended`。样例列表、逐项命令和来源见 [`examples/apps/community/README.md`](https://github.com/weapp-container/weapp-container/blob/f4dab7049ac27a57ca67e1a17c32abf61f1a7266/examples/apps/community/README.md)。
 
 在浏览器中保持模拟器运行：
 
@@ -120,4 +120,4 @@ cargo run -p container-simulator --features quickjs-native -- \
 
 ## 许可证
 
-Apache-2.0。请阅读 [NOTICE](https://github.com/weapp-container/weapp-container/blob/835ab59a8f6dfcce42699decac0e8ea65922c65d/NOTICE) 和 [SECURITY.md](/docs/engineering/weapp-container/security/)。
+Apache-2.0。请阅读 [NOTICE](https://github.com/weapp-container/weapp-container/blob/f4dab7049ac27a57ca67e1a17c32abf61f1a7266/NOTICE) 和 [SECURITY.md](/docs/engineering/weapp-container/security/)。

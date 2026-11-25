@@ -6,7 +6,7 @@ summary: "container-sdk. Versioned engineering reference from weapp-container/we
 route: "/docs/engineering/weapp-container/crates/container-sdk/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "835ab59a8f6dfcce42699decac0e8ea65922c65d"
+sourceCommit: "f4dab7049ac27a57ca67e1a17c32abf61f1a7266"
 sourcePath: "crates/container-sdk/README.en.md"
 ---
 
@@ -27,7 +27,7 @@ to distinguish compiled support from a currently attached/rendered GPU surface.
 
 The `testing` feature adds the real QuickJS `weapp-test-host` stdio process and
 typed test controls. The Node SDK and Vitest fixture reuse this session boundary;
-see [testing runtime](https://github.com/weapp-container/weapp-container/blob/835ab59a8f6dfcce42699decac0e8ea65922c65d/docs/testing-runtime.en.md) for APIs, packaging and checks.
+see [testing runtime](https://github.com/weapp-container/weapp-container/blob/f4dab7049ac27a57ca67e1a17c32abf61f1a7266/docs/testing-runtime.en.md) for APIs, packaging and checks.
 
 ```rust,no_run
 use container_sdk::{ContainerConfig, ContainerSession};

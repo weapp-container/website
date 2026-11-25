@@ -6,7 +6,7 @@ summary: "Full-end demonstration and access to historical products. Versioned en
 route: "/docs/engineering/website/docs/platforms/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "c45989e7ca2d2a3881ef7b837fab8577e7ed906c"
+sourceCommit: "7ba78e06526ee2a23b2024f2c0744edea6742b0c"
 sourcePath: "docs/platforms.en.md"
 ---
 
@@ -16,7 +16,7 @@ sourcePath: "docs/platforms.en.md"
 [简体中文](/docs/engineering/website/docs/platforms/) · **English**
 
 
-Application developers can download the directly runnable desktop tool from the [DevTools downloads page](https://container.weapp.dev/downloads/) and select a published package or platform archive from the [public SDK release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/). Installation and preview do not require a source checkout. This page records maintainer workflows for native builds, historical Showcase artifacts, and platform acceptance. Some frozen archives require separate authorization and do not indicate that an SDK is currently available for public installation.
+Application developers can download the directly runnable desktop tool from the [DevTools downloads page](https://container.weapp.dev/downloads/) and select a published package or platform archive from the [public SDK release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/). The remaining sections record maintainer workflows for native builds, historical Showcase artifacts, and platform acceptance. Some frozen archives require separate authorization and do not indicate that an SDK is currently available for public installation.
 
 Seven systems use a unified portable pack format: basic interaction, product details and specifications, shopping bags, receipt information, simulated checkout, ordering, and order records. Each host adapter only loads the exact pack candidates for which it was compiled and bundled; each end is upgraded and accepted independently. Business data is only saved locally and is not connected to external services or an order backend. Web runs WASM within a browser Dedicated Worker; native hosting uses each host's native views.
 
