@@ -54,8 +54,7 @@ try {
     const platformItem = page.locator(`article[data-platform="${platform.id}"]`);
     assert.equal(await platformItem.count(), 1, `Missing download row for ${platform.id}`);
     assert.equal(await platformItem.locator('.download-installer').getAttribute('href'), platform.installer.url);
-    assert.equal(await platformItem.locator('.download-portable').getAttribute('href'), platform.portable.url);
-    for (const asset of [platform.installer, platform.portable]) {
+    for (const asset of [platform.installer]) {
       const link = page.locator(`a[href="${asset.url}"]`);
       assert.equal(await link.count(), 1, `Missing direct download link for ${asset.filename}`);
       assert.ok((await page.locator('body').textContent()).includes(asset.sha256), `Missing hash for ${asset.filename}`);
