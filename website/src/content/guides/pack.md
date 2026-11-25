@@ -43,13 +43,27 @@ hello-pack/
 
 打包工具独立读取微信小程序目录，需要 `app.json`、页面和组件的 JS/WXML/WXSS 及其引用资源。原生小程序目录可直接输入；其它框架先用自己的构建命令产出这些文件。Weapp Container 接入不要求更换项目框架。
 
-工具目前随[核心源码仓库](https://github.com/weapp-container/weapp-container/tree/main/tools/container-manifest)提供，尚无独立公开 npm 安装命令。在该仓库根目录执行：
+普通开发者不需要下载核心源码。请从 [DevTools 下载页](https://container.weapp.dev/downloads/)安装对应平台的开发工具，选择已有的小程序项目后直接启动 Web Player 或 Desktop Player。命令行启动方式如下：
 
 ```bash
-pnpm install --frozen-lockfile
-node tools/container-manifest/bin/container-pack.mjs \
+bin/weapp-devtools dev --project /absolute/path/to/project --surface web
+bin/weapp-devtools dev --project /absolute/path/to/project --surface desktop
+```
+
+DevTools 安装包内置固定版本的编译器、`container-pack` 和 Node.js。macOS app bundle 的安装根目录是 `Weapp Container DevTools.app/Contents/Resources`，Debian/Ubuntu 安装根目录是 `/opt/weapp-container-devtools`，Windows MSI 安装根目录是 `%LOCALAPPDATA%\Weapp Container DevTools`；便携归档的根目录是解压后的 `weapp-container-devtools` 文件夹。需要把自己的构建产物交给原生 SDK 时，使用随包 Node.js 和 `tools/container-manifest/bin/container-pack.mjs` 生成 portable pack，不需要准备核心仓库或初始化子模块。
+
+```bash
+DEVTOOLS_ROOT="/Applications/Weapp Container DevTools.app/Contents/Resources"
+"$DEVTOOLS_ROOT/node/bin/node" "$DEVTOOLS_ROOT/tools/container-manifest/bin/container-pack.mjs" \
   /absolute/path/weapp-output \
   --out /absolute/path/portable-pack
+```
+
+Windows PowerShell：
+
+```powershell
+$devToolsRoot = Join-Path $env:LOCALAPPDATA 'Weapp Container DevTools'
+& "$devToolsRoot\node\node.exe" "$devToolsRoot\tools\container-manifest\bin\container-pack.mjs" 'C:\path\weapp-output' --out 'C:\path\portable-pack'
 ```
 
 安装只需该仓库的工具依赖，无需初始化 `vendor/weapp-vite` 子模块。输入中若有 TypeScript 或框架专用语法，应先编译成小程序产物。具体模板、插件和 API 的兼容范围仍需按[组件兼容性](/docs/components/)与[API 记录](/docs/api/)验收。

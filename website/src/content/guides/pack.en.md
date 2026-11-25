@@ -43,13 +43,27 @@ hello-pack/
 
 The packaging tool independently reads the WeChat mini-program directory and requires `app.json`, JS/WXML/WXSS of pages and components, and their reference resources. The native mini-program directory can be imported directly; other frameworks first use their own build commands to generate these files. Weapp Container access does not require changing the project framework.
 
-The tool is currently provided with the [Core Source Code Repository](https://github.com/weapp-container/weapp-container/tree/main/tools/container-manifest), and there is no independent public npm installation command. Execute in the root directory of the repository:
+Application developers do not need to download the core source. Install the matching tool from the [DevTools downloads page](https://container.weapp.dev/downloads/), choose an existing mini-program project, and start the Web Player or Desktop Player. The command-line form is:
 
 ```bash
-pnpm install --frozen-lockfile
-node tools/container-manifest/bin/container-pack.mjs \
+bin/weapp-devtools dev --project /absolute/path/to/project --surface web
+bin/weapp-devtools dev --project /absolute/path/to/project --surface desktop
+```
+
+The DevTools installer includes a pinned compiler, `container-pack`, and Node.js. The macOS app bundle root is `Weapp Container DevTools.app/Contents/Resources`, Debian/Ubuntu installs to `/opt/weapp-container-devtools`, and the Windows MSI installs to `%LOCALAPPDATA%\Weapp Container DevTools`. For a portable archive, use its extracted `weapp-container-devtools` directory. When a native SDK needs your own build output, use the bundled Node.js and `tools/container-manifest/bin/container-pack.mjs` to create a portable pack. No core repository or submodule setup is required.
+
+```bash
+DEVTOOLS_ROOT="/Applications/Weapp Container DevTools.app/Contents/Resources"
+"$DEVTOOLS_ROOT/node/bin/node" "$DEVTOOLS_ROOT/tools/container-manifest/bin/container-pack.mjs" \
   /absolute/path/weapp-output \
   --out /absolute/path/portable-pack
+```
+
+Windows PowerShell:
+
+```powershell
+$devToolsRoot = Join-Path $env:LOCALAPPDATA 'Weapp Container DevTools'
+& "$devToolsRoot\node\node.exe" "$devToolsRoot\tools\container-manifest\bin\container-pack.mjs" 'C:\path\weapp-output' --out 'C:\path\portable-pack'
 ```
 
 Installation only requires the tool dependencies of this repository, and there is no need to initialize the `vendor/weapp-vite` submodule. If there is TypeScript or framework-specific syntax in the input, it should be compiled into a mini-program build output first. The compatibility range of specific templates, plug-ins and APIs still needs to be accepted according to [Component Compatibility](/en/docs/components/) and [API Record](/en/docs/api/).
