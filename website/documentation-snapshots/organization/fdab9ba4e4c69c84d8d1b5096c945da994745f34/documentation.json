@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "repository": "weapp-container/.github",
+  "defaultLocale": "zh-CN",
+  "locales": [
+    "zh-CN",
+    "en"
+  ],
+  "pages": [
+    {
+      "id": "profile/README",
+      "zh": "profile/README.md",
+      "en": "profile/README.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/.github",
+        "path": "profile/README.md"
+      },
+      "reviewedChineseSummary": "公开源码、独立测试包、宿主入口、验证与历史许可",
+      "reviewedChineseSha256": "65f3665e03a74f0424ad51477699ed3ca9e290e635fc696d61a12536cc2250ed",
+      "legacyHeadingIds": [
+        "development",
+        "getting-started",
+        "integrations",
+        "license-and-history",
+        "weapp-container",
+        "从工程到应用的闭环",
+        "开发与贡献",
+        "开始使用",
+        "开放与许可",
+        "许可与历史",
+        "选择接入入口"
+      ]
+    },
+    {
+      "id": "tools/documentation/README",
+      "zh": "tools/documentation/README.md",
+      "en": "tools/documentation/README.en.md",
+      "section": "tools",
+      "source": {
+        "repository": "weapp-container/.github",
+        "path": "tools/documentation/README.md"
+      },
+      "reviewedChineseSummary": "配对清单、翻译复核、快照和验收",
+      "reviewedChineseSha256": "6c0d12dd12a6cd4a1076e912f2a09d959772638769da314e76d1708cc7c5a64e",
+      "legacyHeadingIds": [
+        "checks-and-tests",
+        "maintaining-bilingual-documentation",
+        "update-a-document-pair",
+        "website-snapshots",
+        "双语文档维护",
+        "更新一组文档",
+        "检查与测试",
+        "网站快照"
+      ]
+    },
+    {
+      "id": "contributing",
+      "zh": "CONTRIBUTING.md",
+      "en": "CONTRIBUTING.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/.github",
+        "path": "CONTRIBUTING.md"
+      },
+      "reviewedChineseSummary": "同步组织主分支的贡献、安全私密报告与社区规则，保留权限、来源和预览版本边界。",
+      "reviewedChineseSha256": "9d2b130b2ade5dcb970db187938e4d512868642f54e9cd65f8bc4e6e6c212e07",
+      "legacyHeadingIds": []
+    },
+    {
+      "id": "security",
+      "zh": "SECURITY.md",
+      "en": "SECURITY.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/.github",
+        "path": "SECURITY.md"
+      },
+      "reviewedChineseSummary": "同步组织主分支的贡献、安全私密报告与社区规则，保留权限、来源和预览版本边界。",
+      "reviewedChineseSha256": "d1ce809a018f9e6a9c47d24f9f2870c6edb6b39e7c2a95e23583d646ade07d1e",
+      "legacyHeadingIds": []
+    },
+    {
+      "id": "code_of_conduct",
+      "zh": "CODE_OF_CONDUCT.md",
+      "en": "CODE_OF_CONDUCT.en.md",
+      "section": "overview",
+      "source": {
+        "repository": "weapp-container/.github",
+        "path": "CODE_OF_CONDUCT.md"
+      },
+      "reviewedChineseSummary": "同步组织主分支的贡献、安全私密报告与社区规则，保留权限、来源和预览版本边界。",
+      "reviewedChineseSha256": "147525dd23582787357617008ab7cbab5212d0eda20e1719489c78c389aa2a08",
+      "legacyHeadingIds": []
+    }
+  ],
+  "excluded": [],
+  "assets": [
+    {
+      "path": "profile/assets/weapp-container.svg",
+      "sha256": "e9cc10702f6ab5856a0b21dfa0f1f7f77aaecceb8b2c914a39b079f53fae5c84"
+    }
+  ]
+}

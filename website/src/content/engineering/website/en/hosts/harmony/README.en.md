@@ -6,7 +6,7 @@ summary: "Harmony showcase. Versioned engineering reference from weapp-container
 route: "/docs/engineering/website/hosts/harmony/index/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "6895559f7cfde08992fd5a12622e63813d560caf"
+sourceCommit: "ad7813c97517df53177e34a23224edcbada3f2a5"
 sourcePath: "hosts/harmony/README.en.md"
 ---
 

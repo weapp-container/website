@@ -6,7 +6,7 @@ summary: "现代同步 View 示例。来自 weapp-container/weapp-container 的�
 route: "/docs/engineering/weapp-container/examples/apps/modern-view-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c"
+sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
 sourcePath: "examples/apps/modern-view-app/README.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "container-host-common。来自 weapp-container/weapp-container 的版�
 route: "/docs/engineering/weapp-container/crates/container-host-common/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c"
+sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
 sourcePath: "crates/container-host-common/README.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "Public SDK Release Status. Versioned engineering reference from weapp-
 route: "/docs/engineering/weapp-container/docs/public-sdk-release/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c"
+sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
 sourcePath: "docs/public-sdk-release.en.md"
 ---
 
@@ -47,6 +47,30 @@ dependencies:
 ```
 
 Android, Flutter, Contract, and React Native package versions were checked through anonymous Maven Central, pub.dev, and npm metadata requests. Contract's `preview` dist-tag points to `0.1.0-preview.7.1`, while `latest` still retains historical `0.1.0-preview.7.0`. React Native's `latest` and `preview` tags both point to prerelease `0.1.0-preview.7.1`. Consumers should use exact versions or the `preview` tag until a stable release exists. The iOS and Desktop status also checks their GitHub releases, CocoaPods Specs, and pinned archive URLs. No `WeappContainer` or `WeappContainerDesktop` entry was found on CocoaPods Trunk.
+
+## Unsigned DevTools prerelease installation
+
+The current `devtools-v0.1.0-preview.7.2` macOS and Windows installers are not platform-signed, so the first launch may show an operating-system warning. Download only from the matching GitHub Release and compare the downloaded file's SHA-256 with the `SHA256SUMS` entry published there before removing its download marker.
+
+On macOS, open the `.dmg`, drag `Weapp Container DevTools.app` to Applications, then run:
+
+```sh
+shasum -a 256 "$HOME/Downloads/weapp-container-devtools-macos-universal.dmg"
+xattr -dr com.apple.quarantine "/Applications/Weapp Container DevTools.app"
+open "/Applications/Weapp Container DevTools.app"
+```
+
+`xattr` removes only this app's quarantine metadata. It does not create a signature or notarization. Replace the path when the app is installed elsewhere. Do not disable Gatekeeper globally.
+
+For the Windows MSI, verify the hash, remove that file's Zone Identifier, and start it from PowerShell:
+
+```powershell
+Get-FileHash "$env:USERPROFILE\Downloads\weapp-container-devtools-windows-x86_64.msi" -Algorithm SHA256
+Unblock-File -Path "$env:USERPROFILE\Downloads\weapp-container-devtools-windows-x86_64.msi"
+Start-Process "$env:USERPROFILE\Downloads\weapp-container-devtools-windows-x86_64.msi"
+```
+
+For a ZIP package, run `Unblock-File` on the ZIP before extracting it. If SmartScreen still appears, choose **More info** > **Run anyway** only after verifying the release source and hash. `Unblock-File` removes only the downloaded file's Zone Identifier. It does not create an Authenticode signature. Do not disable Defender or SmartScreen globally. Platform-signed stable packages, with notarization on macOS, should not require these manual steps.
 
 ## Example Applications
 

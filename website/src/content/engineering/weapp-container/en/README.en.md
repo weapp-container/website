@@ -6,7 +6,7 @@ summary: "Weapp Container. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/weapp-container/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c"
+sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
 sourcePath: "README.en.md"
 ---
 
@@ -46,6 +46,30 @@ The desktop DevTools packages include pinned Node.js, weapp-vite, the manifest p
 
 Each package includes `weapp-devtools.json` with source, compiler, Node, compatibility and file-hash metadata. Stable releases use a signed update manifest, Developer ID signing and notarization for macOS, and Authenticode signing for Windows MSI. The release workflow fails before publishing when stable signing inputs are missing. Preview releases do not participate in stable updates. Release signing, platform installation and official-tool evidence remain platform-specific and are not replaced by local headless checks.
 
+### Launch unsigned prereleases
+
+The current GitHub prerelease macOS and Windows installers are not platform-signed, so the first launch may show an operating-system warning. Download only from the matching GitHub Release and compare the file with the `SHA256SUMS` entry published there before removing the download marker.
+
+On macOS, open the `.dmg`, drag `Weapp Container DevTools.app` to Applications, then run:
+
+```sh
+shasum -a 256 "$HOME/Downloads/weapp-container-devtools-macos-universal.dmg"
+xattr -dr com.apple.quarantine "/Applications/Weapp Container DevTools.app"
+open "/Applications/Weapp Container DevTools.app"
+```
+
+`xattr` removes only this app's macOS quarantine metadata. It does not create a signature or notarization. Replace the path when the app is installed elsewhere. Do not disable Gatekeeper globally to run a prerelease.
+
+For the Windows MSI, verify the hash, remove that file's Zone Identifier, and start it from PowerShell:
+
+```powershell
+Get-FileHash "$env:USERPROFILE\Downloads\weapp-container-devtools-windows-x86_64.msi" -Algorithm SHA256
+Unblock-File -Path "$env:USERPROFILE\Downloads\weapp-container-devtools-windows-x86_64.msi"
+Start-Process "$env:USERPROFILE\Downloads\weapp-container-devtools-windows-x86_64.msi"
+```
+
+For a ZIP package, run `Unblock-File` on the ZIP before extracting it. If SmartScreen still appears, choose **More info** > **Run anyway** only after the release source and hash have been verified. `Unblock-File` removes only the downloaded file's Zone Identifier. It does not create an Authenticode signature. Do not disable Defender or SmartScreen globally. Platform-signed stable packages, with notarization on macOS, should not require these manual steps.
+
 ## Mini-games
 
 Pack and run an unpacked mini-game build with the QuickJS simulator:
@@ -56,7 +80,7 @@ cargo run -p container-simulator --features quickjs-native -- \
   run --pack ./artifacts/game --snapshot ./artifacts/game/snapshot.json
 ```
 
-This path requires `game.json` and `game.js`. It does not decrypt platform packages. The portable game runtime provides a Canvas 2D subset, frame scheduling, and normalized host events through `game.event` for touch, keyboard, sensor, audio interruption and memory warnings. App visibility uses `app.lifecycle`; viewport updates resize the game Canvas and notify `wx.onWindowResize`. Event payloads follow [`schemas/game-event-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c/schemas/game-event-v1.schema.json). API support remains capability-negotiated. Official DevTools, GPU and device parity remain unverified.
+This path requires `game.json` and `game.js`. It does not decrypt platform packages. The portable game runtime provides a Canvas 2D subset, frame scheduling, and normalized host events through `game.event` for touch, keyboard, sensor, audio interruption and memory warnings. App visibility uses `app.lifecycle`; viewport updates resize the game Canvas and notify `wx.onWindowResize`. Event payloads follow [`schemas/game-event-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/schemas/game-event-v1.schema.json). API support remains capability-negotiated. Official DevTools, GPU and device parity remain unverified.
 
 ## Open-source mini-program examples
 
@@ -75,7 +99,7 @@ pnpm simulator:dev:smoke -- \
   --project examples/apps/community/miniprogram-demo-text
 ```
 
-Replace `miniprogram-demo-text` with `ant-design-button` or `taro-blended` for the other samples. See [`examples/apps/community/README.en.md`](https://github.com/weapp-container/weapp-container/blob/15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c/examples/apps/community/README.en.md) for the complete sample list, commands, and source records.
+Replace `miniprogram-demo-text` with `ant-design-button` or `taro-blended` for the other samples. See [`examples/apps/community/README.en.md`](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/examples/apps/community/README.en.md) for the complete sample list, commands, and source records.
 
 To keep the simulator running in a browser:
 
@@ -86,4 +110,4 @@ cargo run -p container-simulator --features quickjs-native -- \
 
 ## License
 
-Apache-2.0. See [NOTICE](https://github.com/weapp-container/weapp-container/blob/15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c/NOTICE) and [SECURITY](/en/docs/engineering/weapp-container/security/).
+Apache-2.0. See [NOTICE](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/NOTICE) and [SECURITY](/en/docs/engineering/weapp-container/security/).

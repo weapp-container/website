@@ -6,7 +6,7 @@ summary: "Flex 布局测试 fixture。来自 weapp-container/weapp-container 的
 route: "/docs/engineering/weapp-container/examples/apps/flex-layout-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c"
+sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
 sourcePath: "examples/apps/flex-layout-app/README.md"
 ---
 

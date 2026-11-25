@@ -6,7 +6,7 @@ summary: "数据集和标记固定装置。来自 weapp-container/weapp-containe
 route: "/docs/engineering/weapp-container/examples/apps/dataset-values-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c"
+sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
 sourcePath: "examples/apps/dataset-values-app/README.md"
 ---
 
@@ -27,4 +27,4 @@ pnpm simulator:dev -- --project examples/apps/dataset-values-app --viewport 320x
 纯绑定携带 JSON 值；字面量数字/布尔值/空值/JSON 写法、空字符串以及混合插值保持为字符串。父级和目标标记值存在故意冲突：事件标记使用最近的节点，而选择器 `fields({dataset:true, mark:true})` 返回每个节点自身的值。
 
 双引擎运行器为 `pnpm runtime:dataset-values:smoke`；其所需的编译/二进制参数和限制已在
-[`docs/event-metadata.md`](https://github.com/weapp-container/weapp-container/blob/15e710233af1e9f39c9bdbd87ade6bbbbdfa7b1c/docs/event-metadata.md) 中文档化。这是一个本地容器一致性测试环境。旅游类 AppID 无法确立官方 DevTools 行为、对象身份、未定义/存在语义、GPU、设备或性能验收。
+[`docs/event-metadata.md`](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/docs/event-metadata.md) 中文档化。这是一个本地容器一致性测试环境。旅游类 AppID 无法确立官方 DevTools 行为、对象身份、未定义/存在语义、GPU、设备或性能验收。
