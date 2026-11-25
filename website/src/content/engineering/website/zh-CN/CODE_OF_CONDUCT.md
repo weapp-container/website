@@ -6,7 +6,7 @@ summary: "社区行为。来自 weapp-container/website 的版本化工程说明
 route: "/docs/engineering/website/code_of_conduct/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "8c07018b4bc76ba5861f682c19edf32fbecfeb2e"
+sourceCommit: "a245025199739e12fdf53e2aa711d21d270de5f4"
 sourcePath: "CODE_OF_CONDUCT.md"
 ---
 

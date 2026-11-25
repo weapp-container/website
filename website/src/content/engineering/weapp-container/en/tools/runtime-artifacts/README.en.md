@@ -6,7 +6,7 @@ summary: "Runtime Distribution Tool. Versioned engineering reference from weapp-
 route: "/docs/engineering/weapp-container/tools/runtime-artifacts/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "6fa44b780a7eb7a383f6e44108938c68ec39ebff"
+sourceCommit: "77f36ebfbc77de1e2b537eca9b55204e72d8712c"
 sourcePath: "tools/runtime-artifacts/README.en.md"
 ---
 
@@ -34,7 +34,7 @@ pnpm runtime:package -- \
 
 `--target` accepts explicit comma-separated targets; when omitted, it selects supported targets present in the input directory. SDK packages use `--component android-sdk|ios-sdk|desktop-sdk --platform <平台> --arch <架构> --install-dir <已验证安装目录>`; universal packages must also list their actual slices with `--architectures`. See `pnpm runtime:package -- --help` for all options.
 
-Output includes `manifest.json`, `provenance.json`, `SHA256SUMS` and archive. Identical versions can have target additions made incrementally locally, but archives with the same name cannot change bytes. Version, ABI, and verified header/file/license hash values are located in [policy.json](https://github.com/weapp-container/weapp-container/blob/6fa44b780a7eb7a383f6e44108938c68ec39ebff/tools/runtime-artifacts/policy.json), and tests will verify against core release versions and independent contract versions. Before generating a new release, these identities must first be reviewed.
+Output includes `manifest.json`, `provenance.json`, `SHA256SUMS` and archive. Identical versions can have target additions made incrementally locally, but archives with the same name cannot change bytes. Version, ABI, and verified header/file/license hash values are located in [policy.json](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/tools/runtime-artifacts/policy.json), and tests will verify against core release versions and independent contract versions. Before generating a new release, these identities must first be reviewed.
 
 <a id="验证与发布"></a>
 ## Verification and Release

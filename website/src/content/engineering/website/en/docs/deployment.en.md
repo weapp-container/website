@@ -6,7 +6,7 @@ summary: "Website builds, deployment, and rollback. Versioned engineering refere
 route: "/docs/engineering/website/docs/deployment/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "8c07018b4bc76ba5861f682c19edf32fbecfeb2e"
+sourceCommit: "a245025199739e12fdf53e2aa711d21d270de5f4"
 sourcePath: "docs/deployment.en.md"
 ---
 

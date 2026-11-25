@@ -1,8 +1,8 @@
 {
-  "fileName": "showcase-sc-da315046d03e1507.woff2",
+  "fileName": "showcase-sc-01cc86308a4e9608.woff2",
   "sourceSha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
-  "sha256": "da315046d03e150771956d93a32062135498040f9a7ac0c766f470d009ba69db",
-  "size": 319424,
+  "sha256": "01cc86308a4e9608466eea244bd2bbc7a93d6ef3411faa61fb558fbb032a7c1e",
+  "size": 319516,
   "requiredCodePoints": [
     32,
     33,
@@ -136,6 +136,7 @@
     20107,
     20108,
     20110,
+    20113,
     20114,
     20116,
     20123,
@@ -811,6 +812,7 @@
     29983,
     29992,
     30001,
+    30003,
     30005,
     30011,
     30028,

@@ -6,7 +6,7 @@ summary: "container-runtime. Versioned engineering reference from weapp-containe
 route: "/docs/engineering/weapp-container/crates/container-runtime/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "6fa44b780a7eb7a383f6e44108938c68ec39ebff"
+sourceCommit: "77f36ebfbc77de1e2b537eca9b55204e72d8712c"
 sourcePath: "crates/container-runtime/README.en.md"
 ---
 
@@ -42,7 +42,7 @@ uses an independent `CanvasService` before page initialization, then transfers
 that exact command/snapshot/font owner into the concrete renderer on first
 explicit page access. Subsequent operations use the currently stored renderer;
 whole-renderer replacement cannot revive the retired pre-page store.
-See [the backend boundary](https://github.com/weapp-container/weapp-container/blob/6fa44b780a7eb7a383f6e44108938c68ec39ebff/docs/dual-renderer/skia-backend-boundary.en.md).
+See [the backend boundary](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/dual-renderer/skia-backend-boundary.en.md).
 
 Host bindings call `Session::dispatch` with a `container_bridge::BridgeEnvelope`.
 The method always returns a `BridgeBatch`; invalid protocol, capability,
@@ -151,7 +151,7 @@ using one projection for the native tree and managed component event graph.
 Selector fields, observer dataset and coordinate input read committed metadata;
 identified contacts retain the touchstart snapshot through later data patches.
 Literal and legacy frame strings are never parsed as JSON. See
-[event metadata](https://github.com/weapp-container/weapp-container/blob/6fa44b780a7eb7a383f6e44108938c68ec39ebff/docs/event-metadata.en.md) for the Rust/wire compatibility
+[event metadata](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/event-metadata.en.md) for the Rust/wire compatibility
 change, null/presence limits and remaining official conformance work.
 
 Host `data.patch.batch` requests update the selected live Page instance inside
@@ -194,7 +194,7 @@ After typography resolves, typed Block/Flex dimensions retain containing-block
 percentages and auto values for the shared renderer solver. This includes
 grow/shrink/basis, wrapping, alignment, edges and min/max constraints. Legal
 unsupported values reject the candidate instead of silently drawing another
-layout. See [the layout contract](https://github.com/weapp-container/weapp-container/blob/6fa44b780a7eb7a383f6e44108938c68ec39ebff/docs/layout-flow.en.md).
+layout. See [the layout contract](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/layout-flow.en.md).
 
 WXSS IR v2 preserves import sites and conditional groups. Before cascading,
 the runtime expands leading local imports at each site and evaluates media
@@ -206,7 +206,7 @@ subset. Active `@supports`, unknown at-rules and late/nested imports return
 does not implement font loading or animation. Legacy v1 imports still expand
 before their owner's rules and cannot recover lost source positions or group
 context. Local `.wxss` and `.css` resources use the same resolver, matching the
-packer. See [the WXSS contract](https://github.com/weapp-container/weapp-container/blob/6fa44b780a7eb7a383f6e44108938c68ec39ebff/docs/wxss-ir.en.md) for query semantics and
+packer. See [the WXSS contract](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/wxss-ir.en.md) for query semantics and
 resource failures.
 
 Solid WXSS borders now project independently cascaded width/style/colour edges
@@ -214,7 +214,7 @@ into the shared render model. CSS content-box is the WXSS default; explicit
 border-box, padding, currentColor/inheritance and the padding-edge overflow clip
 feed layout, pixels and input together. Other legal border styles reject the
 candidate frame instead of pretending to draw a solid border. The previous
-accepted frame survives rejection. See [the border contract](https://github.com/weapp-container/weapp-container/blob/6fa44b780a7eb7a383f6e44108938c68ec39ebff/docs/wxss-borders.en.md)
+accepted frame survives rejection. See [the border contract](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/wxss-borders.en.md)
 for supported values, legacy frame defaults and remaining oracle/host gaps.
 
 Native-enabled sessions own a second, isolated View engine for batched WXML/WXS
@@ -222,7 +222,7 @@ rendering. Verified View modules never enter AppService. Retained render tickets
 prevent component discovery from replaying stateful work, and disposal releases
 the exact occurrence scopes. WXS document/program edits restart the session;
 style-only previews reuse cached ASTs. Legacy WXS without module metadata stays
-unsupported. See [the View contract](https://github.com/weapp-container/weapp-container/blob/6fa44b780a7eb7a383f6e44108938c68ec39ebff/docs/isolated-view-engine.en.md) for
+unsupported. See [the View contract](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/isolated-view-engine.en.md) for
 budget, failure and dialect limitations.
 
 Development validation tools run separately from the production runtime.

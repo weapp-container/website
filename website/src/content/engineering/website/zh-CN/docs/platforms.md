@@ -6,7 +6,7 @@ summary: "全端演示与历史产物接入。来自 weapp-container/website 的
 route: "/docs/engineering/website/docs/platforms/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "8c07018b4bc76ba5861f682c19edf32fbecfeb2e"
+sourceCommit: "a245025199739e12fdf53e2aa711d21d270de5f4"
 sourcePath: "docs/platforms.md"
 ---
 
@@ -16,7 +16,7 @@ sourcePath: "docs/platforms.md"
 **简体中文** · [English](/en/docs/engineering/website/docs/platforms/)
 
 
-当前公开的是源码。下列安装命令复现历史预编译候选，仍需相应私有归档权限；它们不构成新的开源二进制发行。源码运行从[核心 README](/docs/engineering/weapp-container/index/)开始，各 SDK 源码构建见[SDK 说明](https://github.com/weapp-container/weapp-container/blob/6fa44b780a7eb7a383f6e44108938c68ec39ebff/docs/sdk-repositories.md)。平台状态尚未针对当前开源源码重新验证。
+当前公开的是源码。下列安装命令复现历史预编译候选，仍需相应私有归档权限；它们不构成新的开源二进制发行。源码运行从[核心 README](/docs/engineering/weapp-container/index/)开始，各 SDK 源码构建见[SDK 说明](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/sdk-repositories.md)。平台状态尚未针对当前开源源码重新验证。
 
 七个系统使用统一的 portable pack 格式：基础交互、商品详情与规格、购物袋、收货信息、模拟结算、点单、订单记录。每个宿主适配器只加载其编译绑定的精确 pack 候选；各端独立升级和验收。业务数据只保存在本机，不连接外部服务或订单后台。Web 在浏览器 Dedicated Worker 内运行 WASM；原生宿主使用各自的本地渲染视图。
 

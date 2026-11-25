@@ -6,7 +6,7 @@ summary: "Modern synchronous View example. Versioned engineering reference from 
 route: "/docs/engineering/weapp-container/examples/apps/modern-view-app/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "6fa44b780a7eb7a383f6e44108938c68ec39ebff"
+sourceCommit: "77f36ebfbc77de1e2b537eca9b55204e72d8712c"
 sourcePath: "examples/apps/modern-view-app/README.en.md"
 ---
 

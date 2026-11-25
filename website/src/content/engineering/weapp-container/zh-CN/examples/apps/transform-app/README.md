@@ -6,7 +6,7 @@ summary: "转换交互小程序。来自 weapp-container/weapp-container 的版�
 route: "/docs/engineering/weapp-container/examples/apps/transform-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "6fa44b780a7eb7a383f6e44108938c68ec39ebff"
+sourceCommit: "77f36ebfbc77de1e2b537eca9b55204e72d8712c"
 sourcePath: "examples/apps/transform-app/README.md"
 ---
 

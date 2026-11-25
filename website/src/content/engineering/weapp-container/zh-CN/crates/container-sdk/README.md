@@ -6,7 +6,7 @@ summary: "container-sdk。来自 weapp-container/weapp-container 的版本化工
 route: "/docs/engineering/weapp-container/crates/container-sdk/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "6fa44b780a7eb7a383f6e44108938c68ec39ebff"
+sourceCommit: "77f36ebfbc77de1e2b537eca9b55204e72d8712c"
 sourcePath: "crates/container-sdk/README.md"
 ---
 
@@ -19,7 +19,7 @@ Weapp 容器的原生嵌入边界。该 crates 拥有一个经过验证的可移
 
 默认功能启用实际的 QuickJS。未请求引擎的构建会返回 `ERR_ENGINE`；它们从不运行仅元数据的引擎，也不会选择备用引擎。Skia CPU、GLES、Metal 和 V8 有明确的 Cargo 特性。通过查询 `capabilities` 可以区分编译支持与当前附加/渲染的 GPU 绘制表面。
 
-`testing` feature 提供真实 QuickJS 的 `weapp-test-host` stdio 进程和类型化测试接口。Node SDK 与 Vitest fixture 复用这一会话边界；API、打包及验证见[测试运行时](https://github.com/weapp-container/weapp-container/blob/6fa44b780a7eb7a383f6e44108938c68ec39ebff/docs/testing-runtime.md)。
+`testing` feature 提供真实 QuickJS 的 `weapp-test-host` stdio 进程和类型化测试接口。Node SDK 与 Vitest fixture 复用这一会话边界；API、打包及验证见[测试运行时](https://github.com/weapp-container/weapp-container/blob/77f36ebfbc77de1e2b537eca9b55204e72d8712c/docs/testing-runtime.md)。
 
 ```rust,no_run
 use container_sdk::{ContainerConfig, ContainerSession};
