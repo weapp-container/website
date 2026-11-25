@@ -6,7 +6,7 @@ summary: "Public SDK Release Status. Versioned engineering reference from weapp-
 route: "/docs/engineering/weapp-container/docs/public-sdk-release/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "75e06c2b571d0507d334902ba1148eb3ca71d91c"
+sourceCommit: "c6c44bd2fd8cf855985784ee275212228c85a858"
 sourcePath: "docs/public-sdk-release.en.md"
 ---
 
@@ -21,7 +21,8 @@ Checked on 2026-11-25. Every currently visible release is a prerelease. There is
 | Core runtime | GitHub prerelease `runtime-v0.1.0-preview.7.1` is anonymously downloadable | Prerelease only |
 | DevTools | GitHub prerelease `devtools-v0.1.0-preview.7.2` is anonymously downloadable | macOS and Windows packages are unsigned; prerelease only |
 | Android | Maven Central coordinate `io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1` resolves | Prerelease only |
-| React Native | npm package `@weapp-container/react-native@0.1.0-preview.7.1` installs, and its Android dependency resolves | The pinned iOS native archive URL is unavailable |
+| Contract | npm `@weapp-container/sdk-contract@0.1.0-preview.7.1` installs, and its `preview` dist-tag points to that version | `latest` still points to historical `0.1.0-preview.7.0`, which is not stable |
+| React Native | npm package `@weapp-container/react-native@0.1.0-preview.7.1` installs, its `preview` dist-tag points to that version, and its Android dependency resolves | `latest` also points to a prerelease; the pinned iOS native archive URL is unavailable |
 | Flutter | All seven hosted `.7.1` packages are published on pub.dev | Native builds still require platform-specific verification |
 | iOS | The core prerelease contains an iOS SDK tarball | The pinned SwiftPM and CocoaPods archive URLs in `sdk-ios` return 404; its GitHub release does not exist |
 | Desktop | The core prerelease contains macOS, Linux, and Windows SDK tarballs | The standalone `sdk-desktop` GitHub release does not exist; the macOS archive URL in the public CocoaPods Specs returns 404 |
@@ -36,12 +37,16 @@ implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.
 npm install @weapp-container/react-native@0.1.0-preview.7.1
 ```
 
+```sh
+npm install @weapp-container/sdk-contract@0.1.0-preview.7.1
+```
+
 ```yaml
 dependencies:
   weapp_container: 0.1.0-preview.7.1
 ```
 
-Android, Flutter, and React Native package versions were checked through anonymous Maven Central, pub.dev, and npm metadata requests. The iOS and Desktop status also checks their GitHub releases, CocoaPods Specs, and pinned archive URLs. No `WeappContainer` or `WeappContainerDesktop` entry was found on CocoaPods Trunk.
+Android, Flutter, Contract, and React Native package versions were checked through anonymous Maven Central, pub.dev, and npm metadata requests. Contract's `preview` dist-tag points to `0.1.0-preview.7.1`, while `latest` still retains historical `0.1.0-preview.7.0`. React Native's `latest` and `preview` tags both point to prerelease `0.1.0-preview.7.1`. Consumers should use exact versions or the `preview` tag until a stable release exists. The iOS and Desktop status also checks their GitHub releases, CocoaPods Specs, and pinned archive URLs. No `WeappContainer` or `WeappContainerDesktop` entry was found on CocoaPods Trunk.
 
 ## Example Applications
 
@@ -87,6 +92,14 @@ Ask an App Store Connect administrator to open **Users and Access > Integrations
 Obtain an organization Authenticode code-signing certificate from a CA trusted by Windows. Submit the organization records, contact verification, and CSR required by the CA. Certificate products store private keys in different ways, so confirm in writing before ordering that the private key can be exported in a `.pfx`. The current workflow imports that PFX on an ephemeral Windows runner. A certificate usable only through a hardware token or cloud-signing service cannot be used by the current workflow directly. Export the PFX after issuance and store its password separately.
 
 ### SDK registry credentials
+
+Prepare credentials in the order used by the release pipeline:
+
+1. **Publish Android first**: an organization administrator verifies the `io.github.weapp-container` namespace in Central Portal and generates a User Token. The maintainer generates a GPG key locally and publishes its public key. Store the token username and password as `MAVEN_CENTRAL_USERNAME` and `MAVEN_CENTRAL_PASSWORD` in `sdk-android`, the ASCII-armored private key as `WEAPP_SIGNING_KEY`, and `WEAPP_SIGNING_PASSWORD` when the key is protected by a passphrase.
+2. **Publish the iOS and Desktop Pods next**: the account owner runs `pod trunk register`, completes email verification, and reads the `password` field for `trunk.cocoapods.org` from `~/.netrc`. Store that Trunk token separately as `COCOAPODS_TRUNK_TOKEN` in `sdk-ios` and `sdk-desktop`.
+3. **Publish Contract and React Native npm packages**: for each new package, a maintainer with npm publish access signs in and completes 2FA, then runs `npm publish --access public --tag preview`. After the package exists, bind the exact GitHub repository and workflow in npm package settings. Later releases use OIDC and need no long-lived npm token.
+4. **Publish Flutter packages on pub.dev**: the owner manually publishes each package once. In pub.dev Automated publishing, bind `weapp-container/sdk-flutter`, the release workflow, and the package name. Later releases use GitHub OIDC and do not store a pub.dev token.
+5. **Sign DevTools**: Apple Developer ID, the App Store Connect API key, and the Windows Authenticode certificate must be issued by the relevant organization account or certificate authority. They serve macOS signing, notarization, and Windows signing respectively, and cannot be replaced by the GPG or DevTools update keys.
 
 - **Maven Central (`sdk-android`)**: Verify the `io.github.weapp-container` namespace in Central Portal, then generate a **User Token** from account settings. Set its username and password as `MAVEN_CENTRAL_USERNAME` and `MAVEN_CENTRAL_PASSWORD`. These are CI credentials, not the Portal login password. Generate an OpenPGP key with GnuPG that supports detached signing, publish its public key to a public keyserver, and set the ASCII-armored private key as `WEAPP_SIGNING_KEY`. Set `WEAPP_SIGNING_PASSWORD` when that private key has a passphrase. The Android workflow reads these Actions secrets in the `sdk-android` repository.
 - **Historical private runtime archives**: `WEAPP_CONTAINER_RUNTIME_TOKEN` is required only when a manifest selects a frozen historical version. Ask a repository maintainer to grant access to `weapp-container/runtime-artifacts-private-archive`, then create a fine-grained GitHub token with **Contents: read** access to that repository and inject it through the environment. The current preview.7.1 and source-build paths do not require this token.

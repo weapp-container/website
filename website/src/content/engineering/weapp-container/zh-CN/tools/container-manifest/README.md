@@ -6,7 +6,7 @@ summary: "`container-manifest`。来自 weapp-container/weapp-container 的版�
 route: "/docs/engineering/weapp-container/tools/container-manifest/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "75e06c2b571d0507d334902ba1148eb3ca71d91c"
+sourceCommit: "c6c44bd2fd8cf855985784ee275212228c85a858"
 sourcePath: "tools/container-manifest/README.md"
 ---
 
@@ -59,7 +59,7 @@ node tools/container-manifest/bin/container-pack.mjs ./game-dist \
   --game --out ./artifacts/game
 ```
 
-扫描器识别 `.js/.mjs/.cjs/.json`、`.wxml`、`.wxss/.css`，并将其他所有文件作为资源保留。WXML 和 WXSS 源代码会被解析为版本化的、规范化的 JSON 块，然后进行哈希处理。WXML 块包含元素节点、文本节点和注释节点，排序后的属性、mustache 绑定以及与 Rust 的 `WxmlDirectives` 匹配的结构化控制流/事件指令。原始属性保持无损。Rust 解码器还对早期 v1 打包器生成的仅属性源块进行归一化处理；明确的指令和已评估的键/绑定元数据仍具权威性，因此不会重建重复项。WXSS 块使用 IR v2，包含选择器、声明（包括 `!important`）以及嵌套的 at-规则。每个导入都作为空体 at-规则存在于有序的 `rules` 数组中；旧版的 `imports` 数组保持为空。导入源位置和包含的组信息被保留，包括运行时在激活时会明确拒绝的放置位置。如 `@font-face` 等声明体仍与嵌套规则列表分离。解析 at-规则并不表示其执行或渲染被支持。清单模式仍保持 v1 以兼容旧版打包包；Rust 解码器继续读取旧版 WXSS IR v1。有关兼容性边界，请参见 [WXSS 合约](https://github.com/weapp-container/weapp-container/blob/75e06c2b571d0507d334902ba1148eb3ca71d91c/docs/wxss-ir.md)。`wxmlAst`/`wxssIr` 清单字段指向包含 `sha256:<digest>` 指针的这些块。来自应用/页面/组件配置的 `usingComponents` 条目将被输出为确定性关系记录。缺少可选的 `app.js` 会发出警告，而缺少或无效的 `app.json`、WXML 或 WXSS 则会报错。CommonJS 的 `require("./module")` 和 ESM 的 `import`/`export ... from` 引用将按词法扫描，并作为可选的 `modules[].dependencies` 数组输出，其中包含 `module:<path>` ID。相对路径、根路径相对路径以及生成的 `miniprogram_npm`/`node_modules` 路径将使用打包器使用的相同扩展名和 `index` 降级规则进行解析。无法解析到已生成模块的静态引用将产生 `ERR_UNDECLARED_MODULE_DEPENDENCY` 错误，并阻止打包操作；在依赖项提取之前生成的清单仍然有效，因为规范 JSON 中不会包含空的依赖项字段。
+扫描器识别 `.js/.mjs/.cjs/.json`、`.wxml`、`.wxss/.css`，并将其他所有文件作为资源保留。WXML 和 WXSS 源代码会被解析为版本化的、规范化的 JSON 块，然后进行哈希处理。WXML 块包含元素节点、文本节点和注释节点，排序后的属性、mustache 绑定以及与 Rust 的 `WxmlDirectives` 匹配的结构化控制流/事件指令。原始属性保持无损。Rust 解码器还对早期 v1 打包器生成的仅属性源块进行归一化处理；明确的指令和已评估的键/绑定元数据仍具权威性，因此不会重建重复项。WXSS 块使用 IR v2，包含选择器、声明（包括 `!important`）以及嵌套的 at-规则。每个导入都作为空体 at-规则存在于有序的 `rules` 数组中；旧版的 `imports` 数组保持为空。导入源位置和包含的组信息被保留，包括运行时在激活时会明确拒绝的放置位置。如 `@font-face` 等声明体仍与嵌套规则列表分离。解析 at-规则并不表示其执行或渲染被支持。清单模式仍保持 v1 以兼容旧版打包包；Rust 解码器继续读取旧版 WXSS IR v1。有关兼容性边界，请参见 [WXSS 合约](https://github.com/weapp-container/weapp-container/blob/c6c44bd2fd8cf855985784ee275212228c85a858/docs/wxss-ir.md)。`wxmlAst`/`wxssIr` 清单字段指向包含 `sha256:<digest>` 指针的这些块。来自应用/页面/组件配置的 `usingComponents` 条目将被输出为确定性关系记录。缺少可选的 `app.js` 会发出警告，而缺少或无效的 `app.json`、WXML 或 WXSS 则会报错。CommonJS 的 `require("./module")` 和 ESM 的 `import`/`export ... from` 引用将按词法扫描，并作为可选的 `modules[].dependencies` 数组输出，其中包含 `module:<path>` ID。相对路径、根路径相对路径以及生成的 `miniprogram_npm`/`node_modules` 路径将使用打包器使用的相同扩展名和 `index` 降级规则进行解析。无法解析到已生成模块的静态引用将产生 `ERR_UNDECLARED_MODULE_DEPENDENCY` 错误，并阻止打包操作；在依赖项提取之前生成的清单仍然有效，因为规范 JSON 中不会包含空的依赖项字段。
 
 AppService 的 `.js` 模块包含静态 `import` 或 `export` 声明时标记为 `esm`，其他 `.js` 模块仍标记为 `commonjs`。分类使用 JavaScript 解析器，因此注释、字符串、模板/正则表达式字面量、属性名和单独的动态 `import()` 不会触发 ESM 分类。无法解析的 `.js` 源码会在发布包之前产生包含 AppService 模块路径的 `ERR_INVALID_MANIFEST` 诊断。显式 `.mjs` 和 `.esm.js` 后缀仍为 ESM，`.cjs` 仍为 CommonJS，`.json` 仍为 JSON。模块原始字节不变，动态导入的支持范围不变。
 

@@ -6,7 +6,7 @@ summary: "历史交付与证据。来自 weapp-container/website 的版本化工
 route: "/docs/engineering/website/docs/archived-evidence/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "5925cfa8001368e21d6a37ddfb346e6d208cde3e"
+sourceCommit: "f670e603929d73e7f50dae5ac184185aba5d5138"
 sourcePath: "docs/archived-evidence.md"
 ---
 

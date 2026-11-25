@@ -6,7 +6,7 @@ summary: "container-engine-quickjs。来自 weapp-container/weapp-container 的�
 route: "/docs/engineering/weapp-container/crates/container-engine-quickjs/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "75e06c2b571d0507d334902ba1148eb3ca71d91c"
+sourceCommit: "c6c44bd2fd8cf855985784ee275212228c85a858"
 sourcePath: "crates/container-engine-quickjs/README.md"
 ---
 

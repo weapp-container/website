@@ -6,7 +6,7 @@ summary: "和谐展示。来自 weapp-container/website 的版本化工程说明
 route: "/docs/engineering/website/hosts/harmony/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "5925cfa8001368e21d6a37ddfb346e6d208cde3e"
+sourceCommit: "f670e603929d73e7f50dae5ac184185aba5d5138"
 sourcePath: "hosts/harmony/README.md"
 ---
 

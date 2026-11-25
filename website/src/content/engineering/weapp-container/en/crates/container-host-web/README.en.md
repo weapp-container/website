@@ -6,7 +6,7 @@ summary: "container-host-web. Versioned engineering reference from weapp-contain
 route: "/docs/engineering/weapp-container/crates/container-host-web/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "75e06c2b571d0507d334902ba1148eb3ca71d91c"
+sourceCommit: "c6c44bd2fd8cf855985784ee275212228c85a858"
 sourcePath: "crates/container-host-web/README.en.md"
 ---
 
@@ -18,7 +18,7 @@ sourcePath: "crates/container-host-web/README.en.md"
 Web lifecycle boundary. `load_manifest_json` validates and owns one shared
 `container-runtime::Session`; `dispatch_json` crosses WASM/JavaScript in complete
 bridge batches. `wasm,quickjs-native` builds a browser cdylib that executes the same portable
-modules inside QuickJS/WASM. See [`web-wasm` app example](https://github.com/weapp-container/weapp-container/blob/75e06c2b571d0507d334902ba1148eb3ca71d91c/examples/hosts/web-wasm/README.en.md)
+modules inside QuickJS/WASM. See [`web-wasm` app example](https://github.com/weapp-container/weapp-container/blob/c6c44bd2fd8cf855985784ee275212228c85a858/examples/hosts/web-wasm/README.en.md)
 for a static deployment and build command. `canvas-kit` remains a reserved
 rendering boundary; it does not attach a CanvasKit or GPU context. Capability
 metadata and native host tests do not establish browser conformance.

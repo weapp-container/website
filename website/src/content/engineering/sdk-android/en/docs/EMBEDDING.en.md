@@ -6,7 +6,7 @@ summary: "Android SDK preview. Versioned engineering reference from weapp-contai
 route: "/docs/engineering/sdk-android/docs/embedding/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "2320783281d2a69923d4b0079d32d1dda5a48b66"
+sourceCommit: "78377d5bcb1b5ff52c01769022cc3337437ae032"
 sourcePath: "docs/EMBEDDING.en.md"
 ---
 

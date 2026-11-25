@@ -6,7 +6,7 @@ summary: "SDK 源码构建指南。来自 weapp-container/weapp-container 的版
 route: "/docs/engineering/weapp-container/docs/sdk-source-build/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "75e06c2b571d0507d334902ba1148eb3ca71d91c"
+sourceCommit: "c6c44bd2fd8cf855985784ee275212228c85a858"
 sourcePath: "docs/sdk-source-build.md"
 ---
 

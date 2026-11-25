@@ -6,7 +6,7 @@ summary: "Open-source runtime integration. Versioned engineering reference from 
 route: "/docs/engineering/sdk-android/open_source/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "2320783281d2a69923d4b0079d32d1dda5a48b66"
+sourceCommit: "78377d5bcb1b5ff52c01769022cc3337437ae032"
 sourcePath: "OPEN_SOURCE.en.md"
 ---
 
@@ -17,7 +17,7 @@ sourcePath: "OPEN_SOURCE.en.md"
 
 
 The current core runtime and SDK source are Apache-2.0, with separately identified
-components retaining their licenses. See the [core source build guide](https://github.com/weapp-container/weapp-container/blob/75e06c2b571d0507d334902ba1148eb3ca71d91c/docs/sdk-repositories.en.md).
+components retaining their licenses. See the [core source build guide](https://github.com/weapp-container/weapp-container/blob/c6c44bd2fd8cf855985784ee275212228c85a858/docs/sdk-repositories.en.md).
 
 This repository's existing runtime lock describes previously built archives. Its
 versions, sizes, hashes, distribution profiles and download authorization remain

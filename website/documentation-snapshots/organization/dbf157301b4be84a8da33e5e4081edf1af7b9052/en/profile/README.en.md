@@ -48,4 +48,4 @@ Use the [core README](https://github.com/weapp-container/weapp-container/blob/ma
 
 Project source is published under Apache-2.0, with selected core crates retaining MIT OR Apache-2.0. Third-party components keep their own licenses. The LICENSE, NOTICE, and RUNTIME-LICENSE included with each repository or copy govern that copy.
 
-Historical runtime archives retain their original terms and hashes. Public source does not relicense those binaries or guarantee old download pins remain available. Prefer building matching public source; see the [migration documentation](https://container.weapp.dev/en/docs/engineering/weapp-container/docs/runtime-artifacts-migration/) for historical archive boundaries.
+Historical runtime archives retain their original terms and hashes. Public source does not relicense those binaries or guarantee old download pins remain available. Prefer building matching public source; see the [migration documentation](https://container.weapp.dev/en/docs/platforms/) for historical archive boundaries.

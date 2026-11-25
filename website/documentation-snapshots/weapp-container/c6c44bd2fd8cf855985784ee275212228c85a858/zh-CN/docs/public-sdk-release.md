@@ -9,7 +9,8 @@
 | 核心运行库 | GitHub `runtime-v0.1.0-preview.7.1` prerelease 可匿名下载 | 不是稳定版 |
 | DevTools | GitHub `devtools-v0.1.0-preview.7.2` prerelease 可匿名下载 | macOS 与 Windows 包未签名；不是稳定版 |
 | Android | Maven Central 坐标 `io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1` 可解析 | 仅预览版 |
-| React Native | npm `@weapp-container/react-native@0.1.0-preview.7.1` 可安装；Android 依赖可解析 | iOS 原生依赖的固定归档 URL 尚不可用 |
+| Contract | npm `@weapp-container/sdk-contract@0.1.0-preview.7.1` 可安装，`preview` dist-tag 已指向该版本 | `latest` 仍是历史 `0.1.0-preview.7.0`，不是稳定版 |
+| React Native | npm `@weapp-container/react-native@0.1.0-preview.7.1` 可安装，`preview` dist-tag 指向该版本；Android 依赖可解析 | `latest` 也指向预览版；iOS 原生依赖的固定归档 URL 尚不可用 |
 | Flutter | 七个 hosted package 的 `.7.1` 均已发布到 pub.dev | 各平台原生构建结果仍需按目标分别验证 |
 | iOS | 核心 prerelease 含 iOS SDK tarball | `sdk-ios` 的 SwiftPM 与 CocoaPods 固定归档 URL 返回 404；其独立 GitHub release 尚不存在 |
 | Desktop | 核心 prerelease 含 macOS、Linux、Windows SDK tarball | `sdk-desktop` 独立 GitHub release 尚不存在；公开 CocoaPods Specs 中的 macOS 归档 URL 返回 404 |
@@ -24,12 +25,16 @@ implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.
 npm install @weapp-container/react-native@0.1.0-preview.7.1
 ```
 
+```sh
+npm install @weapp-container/sdk-contract@0.1.0-preview.7.1
+```
+
 ```yaml
 dependencies:
   weapp_container: 0.1.0-preview.7.1
 ```
 
-Android、Flutter 和 React Native 包版本已通过 Maven Central、pub.dev、npm 的匿名元数据请求核对。iOS / Desktop 安装状态也检查了对应 GitHub release、CocoaPods Specs 和固定归档 URL。未观测到 CocoaPods Trunk 上的 `WeappContainer` 或 `WeappContainerDesktop` 条目。
+Android、Flutter、Contract 和 React Native 包版本已通过 Maven Central、pub.dev、npm 的匿名元数据请求核对。Contract 的 `preview` dist-tag 指向 `0.1.0-preview.7.1`，`latest` 仍保留历史 `0.1.0-preview.7.0`，因此当前只能使用精确版本或 `preview`。iOS / Desktop 安装状态也检查了对应 GitHub release、CocoaPods Specs 和固定归档 URL。未观测到 CocoaPods Trunk 上的 `WeappContainer` 或 `WeappContainerDesktop` 条目。
 
 ## 示例应用
 
@@ -75,6 +80,14 @@ Android、Flutter 和 React Native 包版本已通过 Maven Central、pub.dev、
 向受 Windows 信任的 CA 申请组织 Authenticode 代码签名证书，并按 CA 要求提交组织登记资料、联系人验证和 CSR。不同证书产品对私钥的存放方式不同，下单前书面确认私钥可以导出为包含私钥的 `.pfx`，因为当前 workflow 在临时 Windows runner 上直接导入 PFX。仅能通过硬件令牌或云签名服务调用的证书不能直接用于当前 workflow。证书签发后导出 PFX，并单独保存导出密码。
 
 ### SDK 注册源凭据
+
+按实际发布顺序准备凭据：
+
+1. **先发布 Android**：组织负责人在 Central Portal 验证 `io.github.weapp-container` 命名空间并生成 User Token；维护者在本地生成 GPG 密钥并公开发布公钥。把 User Token 写入 `sdk-android` 的 `MAVEN_CENTRAL_USERNAME` / `MAVEN_CENTRAL_PASSWORD`，把 ASCII-armored 私钥写入 `WEAPP_SIGNING_KEY`，有口令时再写入 `WEAPP_SIGNING_PASSWORD`。
+2. **再发布 iOS / Desktop Pod**：账号所有者运行 `pod trunk register`，完成邮件验证后从 `~/.netrc` 读取 `trunk.cocoapods.org` 的 password 字段。将同一个 Trunk token 分别写入 `sdk-ios` 和 `sdk-desktop` 的 `COCOAPODS_TRUNK_TOKEN`。两个仓库的 token secret 相互独立配置。
+3. **发布 Contract / React Native npm**：首次创建包时由拥有 npm 发布权限的维护者登录并完成 2FA，使用 `npm publish --access public --tag preview`。包创建后，在 npm 包设置中绑定准确的 GitHub 仓库和 workflow，后续由 OIDC 发布，不再申请长期 npm token。
+4. **发布 Flutter pub.dev**：每个包首次发布由包 owner 完成人工登录；包存在后，在 pub.dev 的 Automated publishing 中绑定 `weapp-container/sdk-flutter`、发布 workflow 和包名，后续使用 GitHub OIDC，不保存 pub.dev token。
+5. **签名 DevTools**：Apple Developer ID、App Store Connect API key 和 Windows Authenticode 证书只能由对应组织账号或证书机构签发。它们分别用于 macOS 签名、公证和 Windows 签名，不能用 GPG 或 DevTools 更新密钥替代。
 
 - **Maven Central（`sdk-android`）**：在 Central Portal 验证命名空间 `io.github.weapp-container`，然后从账户设置生成 **User Token**。将 token 的 username/password 分别作为 `MAVEN_CENTRAL_USERNAME`、`MAVEN_CENTRAL_PASSWORD`。它们是 CI 发布凭据，不是 Central Portal 登录密码。另用 GnuPG 生成可用于分离签名的 OpenPGP 密钥，将公钥发布到公开 keyserver，并把 ASCII-armored 私钥设为 `WEAPP_SIGNING_KEY`；私钥有口令时再设置 `WEAPP_SIGNING_PASSWORD`。Android workflow 在 `sdk-android` 仓库读取这些 Actions secrets。
 - **历史运行库私有归档**：只有 manifest 指向冻结历史版本时才需要 `WEAPP_CONTAINER_RUNTIME_TOKEN`。先请仓库维护者授予 `weapp-container/runtime-artifacts-private-archive` 读取权限，再创建仅对该仓库有 **Contents: read** 权限的 fine-grained GitHub token，并通过环境变量注入。当前 preview.7.1 和源码构建不需要它。

@@ -6,7 +6,7 @@ summary: "DOM 文本编辑开发示例。来自 weapp-container/weapp-container 
 route: "/docs/engineering/weapp-container/examples/apps/text-controls-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "75e06c2b571d0507d334902ba1148eb3ca71d91c"
+sourceCommit: "c6c44bd2fd8cf855985784ee275212228c85a858"
 sourcePath: "examples/apps/text-controls-app/README.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "Weapp Container。来自 weapp-container/.github 的版本化工程说
 route: "/docs/engineering/organization/profile/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/.github"
-sourceCommit: "fdab9ba4e4c69c84d8d1b5096c945da994745f34"
+sourceCommit: "dbf157301b4be84a8da33e5e4081edf1af7b9052"
 sourcePath: "profile/README.md"
 ---
 
@@ -60,4 +60,4 @@ node fixtures/make-acceptance-pack.mjs --out ../hello-pack
 
 自有源码以 Apache-2.0 公开，少数核心 crate 保留 MIT OR Apache-2.0；第三方组件遵循各自许可。具体以每个仓库和获得的副本所附 LICENSE、NOTICE 及 RUNTIME-LICENSE 为准。
 
-历史运行库归档保留原有许可与哈希，公开源码不重新授权旧二进制，也不保证旧下载 pin 可用。当前接入优先从匹配公开源码构建；历史迁移与归档边界见[迁移文档](https://container.weapp.dev/docs/engineering/weapp-container/docs/runtime-artifacts-migration/)。
+历史运行库归档保留原有许可与哈希，公开源码不重新授权旧二进制，也不保证旧下载 pin 可用。当前接入优先从匹配公开源码构建；历史迁移与归档边界见[迁移文档](https://container.weapp.dev/docs/platforms/)。

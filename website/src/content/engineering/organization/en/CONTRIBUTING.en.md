@@ -6,7 +6,7 @@ summary: "Contributing to Weapp Container. Versioned engineering reference from 
 route: "/docs/engineering/organization/contributing/"
 locale: "en"
 sourceRepository: "weapp-container/.github"
-sourceCommit: "fdab9ba4e4c69c84d8d1b5096c945da994745f34"
+sourceCommit: "dbf157301b4be84a8da33e5e4081edf1af7b9052"
 sourcePath: "CONTRIBUTING.en.md"
 ---
 

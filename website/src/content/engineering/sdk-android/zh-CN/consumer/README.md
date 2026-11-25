@@ -6,7 +6,7 @@ summary: "Android SDK Reference App。来自 weapp-container/sdk-android 的版�
 route: "/docs/engineering/sdk-android/consumer/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "2320783281d2a69923d4b0079d32d1dda5a48b66"
+sourceCommit: "78377d5bcb1b5ff52c01769022cc3337437ae032"
 sourcePath: "consumer/README.md"
 ---
 

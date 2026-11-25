@@ -6,7 +6,7 @@ summary: "Android Wi-Fi。来自 weapp-container/sdk-android 的版本化工程�
 route: "/docs/engineering/sdk-android/examples/host-services/wifi-apis/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "2320783281d2a69923d4b0079d32d1dda5a48b66"
+sourceCommit: "78377d5bcb1b5ff52c01769022cc3337437ae032"
 sourcePath: "examples/host-services/WIFI-APIS.md"
 ---
 
