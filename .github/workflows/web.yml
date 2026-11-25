@@ -89,6 +89,40 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Wait for deployed stylesheet assets
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy
+        run: |
+          node --input-type=module <<'NODE'
+          const origin = 'https://container.weapp.dev';
+          const deadline = Date.now() + 120_000;
+          let last;
+          while (Date.now() < deadline) {
+            try {
+              const home = await fetch(`${origin}/`, { cache: 'no-store' });
+              const html = await home.text();
+              const stylesheets = [...html.matchAll(/(?:href|src)=["']([^"']+\.css(?:\?[^"']*)?)["']/g)]
+                .map(match => new URL(match[1], origin).href);
+              const checks = await Promise.all(stylesheets.map(async url => {
+                const response = await fetch(url, { cache: 'no-store' });
+                return {
+                  url,
+                  status: response.status,
+                  contentType: response.headers.get('content-type'),
+                };
+              }));
+              last = { home: home.status, stylesheets: checks };
+              if (home.ok && stylesheets.length > 0 && checks.every(check => check.status === 200 && check.contentType?.includes('text/css'))) {
+                console.log(JSON.stringify({ status: 'ready', ...last }));
+                process.exit(0);
+              }
+            } catch (error) {
+              last = { error: String(error) };
+            }
+            await new Promise(resolve => setTimeout(resolve, 3_000));
+          }
+          console.error(JSON.stringify({ status: 'timed-out', ...last }));
+          process.exit(1);
+          NODE
       - name: Live browser acceptance
         if: github.event_name == 'workflow_dispatch' && inputs.deploy
         run: |
