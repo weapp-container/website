@@ -6,7 +6,7 @@ summary: "container-runtime。来自 weapp-container/weapp-container 的版本�
 route: "/docs/engineering/weapp-container/crates/container-runtime/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077"
+sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
 sourcePath: "crates/container-runtime/README.md"
 ---
 
@@ -21,7 +21,7 @@ sourcePath: "crates/container-runtime/README.md"
 - **View**：`ViewState` 记录修订、失效以及帧/事件状态。
 - **Rendering**：`SkiaPageBackend` 负责 Skia 预处理和候选项验收。它将已评估的 `ViewDocument` 实际化，而不进行 JS 评估或持有呈现权限。DOM 保留其浏览器的 CSS/几何信息/回执路径。`SessionConfig::page_render_mode` 默认为 `Raster`；编译渲染器的功能决定了软件渲染与原生 Skia 渲染的区别。外部帧和原生 GPU 模式具有独立的明确呈现合约。
 
-Skia 页面对象仅在显式的具体或绘制边界处初始化。`renderer_if_initialized`、`page_render_mode`、`render_revision` 和 `renderer_backend` 会观察现有对象或其已验证的配置，而不会构造新的对象。普通的 DOM 加载、空快照检查以及解绑/重置操作都不会初始化页面渲染器。旧版 `renderer()` 会显式初始化 Skia；`renderer_mut()` 在暴露无限制的具体突变之前也会无效化浏览器呈现。这两个获取函数均不会授予浏览器呈现回执、几何授权或输入权限。Canvas2D 在页面初始化前使用独立的 `CanvasService`，然后在首次显式访问页面时，将该精确的命令/快照/字体所有权传递给具体渲染器。后续操作使用当前存储的渲染器；整个渲染器的替换无法恢复已退役的页面前存储。参见 [后端边界](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/dual-renderer/skia-backend-boundary.md)。
+Skia 页面对象仅在显式的具体或绘制边界处初始化。`renderer_if_initialized`、`page_render_mode`、`render_revision` 和 `renderer_backend` 会观察现有对象或其已验证的配置，而不会构造新的对象。普通的 DOM 加载、空快照检查以及解绑/重置操作都不会初始化页面渲染器。旧版 `renderer()` 会显式初始化 Skia；`renderer_mut()` 在暴露无限制的具体突变之前也会无效化浏览器呈现。这两个获取函数均不会授予浏览器呈现回执、几何授权或输入权限。Canvas2D 在页面初始化前使用独立的 `CanvasService`，然后在首次显式访问页面时，将该精确的命令/快照/字体所有权传递给具体渲染器。后续操作使用当前存储的渲染器；整个渲染器的替换无法恢复已退役的页面前存储。参见 [后端边界](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/dual-renderer/skia-backend-boundary.md)。
 
 宿主绑定通过 `container_bridge::BridgeEnvelope` 调用 `Session::dispatch`。
 该方法始终返回一个 `BridgeBatch`；协议、能力、渲染和取消失败的错误以结构化响应信封形式返回，使用稳定的桥接错误码。`dispatch_result` 可供需要故障边界来处理会话创建错误的绑定使用。
@@ -56,7 +56,7 @@ Skia 页面对象仅在显式的具体或绘制边界处初始化。`renderer_if
 `Component.triggerEvent` 能力以及在选定的隔离环境中发布的单个会话事件图。直接监听器和嵌套的自定义发射在同一个 JavaScript 执行周期内运行，保留本地详情对象的身份。捕获、冒泡和组合是可选的；传播在组件边界处停止，除非进行了组合，且 catch 监听器会阻止后续处理器。该事件图在生命周期/输入回调之前可用，且不需要渲染帧。监听器别名共享指针事件的拼写规则。保存的固定 SDK 生命周期比较 oracle 仅涵盖别名优先级和连字符/下划线名称；传播选项、详情身份、同步顺序和生命周期发射仍为本地合约，待官方差分证据确认后生效。有关精确证据范围，请参见 `docs/api-runtime-conformance.md`。
 
 数据集和标记元数据保留了 WXML 已评估的 JSON 值，使用一个投影来表示原生树和管理组件事件图。选择器字段、观察器数据集和坐标输入读取已提交的元数据；已识别的联系人通过后续数据补丁保留 touchstart 快照。字面量和传统帧字符串永远不会被解析为 JSON。有关 Rust/wire 兼容性变更、null/存在限制以及剩余的官方合规工作，请参见
-[事件元数据](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/event-metadata.md)
+[事件元数据](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/event-metadata.md)
 
 宿主 `data.patch.batch` 请求在提交相同批次到 AppService/View 之前，更新 JavaScript 引擎中选定的实时 Page 实例。
 具体的页面 ID 用于区分重复的路由实例。引擎镜像不会调用 `setData`、观察者或回调函数，也不会生成第二个补丁事件。点号键和方括号数组索引共享核心的带类型路径契约；错误的路径或未知页面在镜像更改之前就会失败。这证明了内部桥接的不变性，而非协议 `delete` 操作的官方 DevTools 等效性。模板/样式清单的替换保留了该状态；完整会话重启会重置该状态。
@@ -68,13 +68,13 @@ Skia 页面对象仅在显式的具体或绘制边界处初始化。`renderer_if
 在基于清单的提交中省略 `data` 时，将使用当前页面的 AppService 数据，包括已接受的 `setData` 效果。显式指定的 `data` 值仍会作为覆盖。内联 `style` 和样式表声明共享一个级联结果：重要性、内联/选择器特异性以及源顺序决定了计算样式查询、布局、绘制和点击检测所使用的值。这些是本地可移植的协议；完整的 WXSS 和官方运行时等效性仍为部分实现。
 
 布局声明在级联之前会经过验证并展开简写形式。
-在排版确定后，输入的块级/弹性容器尺寸会保留包含块的百分比和auto值，供共享的渲染器求解器使用。这包括增长/缩小/基线、换行、对齐、边距以及最小/最大约束。非法的不支持值会拒绝该候选方案，而不是静默地绘制另一个布局。参见 [布局合约](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/layout-flow.md)。
+在排版确定后，输入的块级/弹性容器尺寸会保留包含块的百分比和auto值，供共享的渲染器求解器使用。这包括增长/缩小/基线、换行、对齐、边距以及最小/最大约束。非法的不支持值会拒绝该候选方案，而不是静默地绘制另一个布局。参见 [布局合约](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/layout-flow.md)。
 
-WXSS IR v2 保留了导入位置和条件组。在级联之前，运行时会在每个位置展开前置的本地导入，并将媒体条件与帧的逻辑视口进行对比。匹配的普通规则保持源顺序；不匹配的组不会渗入元素样式。宽度/高度、方向和长宽比查询使用文档中定义的可移植子集。活动的 `@supports`、未知的 at-规则以及延迟/嵌套导入返回 `ERR_UNSUPPORTED_CAPABILITY`。字体和关键帧元数据被保留，但不实现字体加载或动画。旧版 v1 的导入仍会在其所有者的规则之前展开，且无法恢复丢失的源位置或组上下文。本地 `.wxss` 和 `.css` 资源使用相同的解析器，与打包器保持一致。有关查询语义和资源失败的详情，请参见 [WXSS 合约](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/wxss-ir.md)。
+WXSS IR v2 保留了导入位置和条件组。在级联之前，运行时会在每个位置展开前置的本地导入，并将媒体条件与帧的逻辑视口进行对比。匹配的普通规则保持源顺序；不匹配的组不会渗入元素样式。宽度/高度、方向和长宽比查询使用文档中定义的可移植子集。活动的 `@supports`、未知的 at-规则以及延迟/嵌套导入返回 `ERR_UNSUPPORTED_CAPABILITY`。字体和关键帧元数据被保留，但不实现字体加载或动画。旧版 v1 的导入仍会在其所有者的规则之前展开，且无法恢复丢失的源位置或组上下文。本地 `.wxss` 和 `.css` 资源使用相同的解析器，与打包器保持一致。有关查询语义和资源失败的详情，请参见 [WXSS 合约](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/wxss-ir.md)。
 
-Solid WXSS 边框现在会独立地将宽度/样式/颜色边框投影到共享的渲染模型中。CSS content-box 是 WXSS 的默认值；显式设置 border-box、padding、currentColor/继承以及 padding 边缘的溢出裁剪会传递给布局、像素和输入。其他合法的边框样式会拒绝候选帧，而不是假装绘制实线边框。之前被接受的帧在被拒绝后仍会保留。有关支持的值、旧版帧默认值以及剩余的 oracle/宿主差距，请参见 [边框合约](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/wxss-borders.md)。
+Solid WXSS 边框现在会独立地将宽度/样式/颜色边框投影到共享的渲染模型中。CSS content-box 是 WXSS 的默认值；显式设置 border-box、padding、currentColor/继承以及 padding 边缘的溢出裁剪会传递给布局、像素和输入。其他合法的边框样式会拒绝候选帧，而不是假装绘制实线边框。之前被接受的帧在被拒绝后仍会保留。有关支持的值、旧版帧默认值以及剩余的 oracle/宿主差距，请参见 [边框合约](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/wxss-borders.md)。
 
-支持原生的会话拥有一个独立的视图引擎，用于批量渲染 WXML/WXS。经过验证的视图模块永远不会进入 AppService。保留的渲染票据可防止组件发现重复执行有状态的工作，销毁操作会释放精确的范围。对 WXS 文档/程序的编辑会重启会话；仅样式预览会复用缓存的 AST。没有模块元数据的旧版 WXS 仍不支持。有关视图合约的预算、故障和方言限制，请参见 [视图合约](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/isolated-view-engine.md)。
+支持原生的会话拥有一个独立的视图引擎，用于批量渲染 WXML/WXS。经过验证的视图模块永远不会进入 AppService。保留的渲染票据可防止组件发现重复执行有状态的工作，销毁操作会释放精确的范围。对 WXS 文档/程序的编辑会重启会话；仅样式预览会复用缓存的 AST。没有模块元数据的旧版 WXS 仍不支持。有关视图合约的预算、故障和方言限制，请参见 [视图合约](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/isolated-view-engine.md)。
 
 开发验证工具独立于生产运行时运行。
 兼容性声明需要版本化行为和符合性证据。

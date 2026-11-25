@@ -6,7 +6,7 @@ summary: "运行库发行工具。来自 weapp-container/weapp-container 的版�
 route: "/docs/engineering/weapp-container/tools/runtime-artifacts/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077"
+sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
 sourcePath: "tools/runtime-artifacts/README.md"
 ---
 
@@ -34,7 +34,7 @@ pnpm runtime:package -- \
 
 `--target` 可传逗号分隔的明确目标，省略时选择输入目录已有的受支持目标。SDK 包使用 `--component android-sdk|ios-sdk|desktop-sdk --platform <平台> --arch <架构> --install-dir <已验证安装目录>`；通用包还须用 `--architectures` 列出真实切片。完整选项见 `pnpm runtime:package -- --help`。
 
-输出包括 `manifest.json`、`provenance.json`、`SHA256SUMS` 和归档。相同版本可在本地增量添加目标，但同名归档不能改变字节。版本、ABI 和审核过的头文件/许可哈希位于 [policy.json](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/tools/runtime-artifacts/policy.json)，测试会与核心发行版本及独立 contract 同步校验。接口变更时先审核这些身份，再生成新的发行物。
+输出包括 `manifest.json`、`provenance.json`、`SHA256SUMS` 和归档。相同版本可在本地增量添加目标，但同名归档不能改变字节。版本、ABI 和审核过的头文件/许可哈希位于 [policy.json](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/tools/runtime-artifacts/policy.json)，测试会与核心发行版本及独立 contract 同步校验。接口变更时先审核这些身份，再生成新的发行物。
 
 <a id="verification-and-release"></a>
 ## 验证与发布

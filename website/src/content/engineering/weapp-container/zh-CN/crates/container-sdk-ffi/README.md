@@ -6,7 +6,7 @@ summary: "Weapp 容器 C ABI v1。来自 weapp-container/weapp-container 的版�
 route: "/docs/engineering/weapp-container/crates/container-sdk-ffi/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077"
+sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
 sourcePath: "crates/container-sdk-ffi/README.md"
 ---
 

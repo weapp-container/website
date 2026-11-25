@@ -6,7 +6,7 @@ summary: "`container-manifest`. Versioned engineering reference from weapp-conta
 route: "/docs/engineering/weapp-container/tools/container-manifest/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077"
+sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
 sourcePath: "tools/container-manifest/README.en.md"
 ---
 
@@ -76,7 +76,7 @@ that the runtime will explicitly reject when active. Declaration bodies such
 as `@font-face` stay separate from nested rule lists. Parsing an at-rule does
 not claim that its execution or rendering is supported. The manifest schema
 remains v1 for legacy packs; the Rust decoder continues to read legacy WXSS IR v1. See
-[the WXSS contract](https://github.com/weapp-container/weapp-container/blob/0d1c2c9d225dfa06cdbb3c31effe2b3b0a1ac077/docs/wxss-ir.en.md) for compatibility boundaries.
+[the WXSS contract](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/wxss-ir.en.md) for compatibility boundaries.
 The `wxmlAst`/`wxssIr` manifest fields point to those blobs with
 `sha256:<digest>` pointers. `usingComponents` entries from app/page/component
 config are emitted as deterministic relation records. Missing optional

@@ -6,7 +6,7 @@ summary: "私人展示包装机。来自 weapp-container/website 的版本化工
 route: "/docs/engineering/website/tools/toolchain/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "7a55b4eff3fcfdffc7498ff6656c99d2f87bdceb"
+sourceCommit: "e59de86f90a392f83399bbcd48db77f461c26ca9"
 sourcePath: "tools/TOOLCHAIN.md"
 ---
 
