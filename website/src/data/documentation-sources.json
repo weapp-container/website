@@ -45,15 +45,15 @@
     },
     {
       "repository": "weapp-container/.github",
-      "commit": "13f62d60214dcba89e49fe988397cbd02c931613",
-      "catalog": "website/documentation-snapshots/organization/13f62d60214dcba89e49fe988397cbd02c931613/documentation.json",
+      "commit": "f074bbba1f71465329b934c7d09e02b06419e3bf",
+      "catalog": "website/documentation-snapshots/organization/f074bbba1f71465329b934c7d09e02b06419e3bf/documentation.json",
       "catalogSha256": "b03c95eb6c112bb8543a68c042f0bc10e24baf31670093c64fdef89ee85072e9"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
-      "catalog": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/documentation.json",
-      "catalogSha256": "20b081230433b0c99c3399b664900d7d85b738ab1fa17bb60f328456f62c178e"
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
+      "catalog": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/documentation.json",
+      "catalogSha256": "6dc6a2761a8ea0beca049037ae036d8d489b75f3659413f5307254c991b11c03"
     }
   ],
   "pages": [
@@ -2891,657 +2891,657 @@
     },
     {
       "repository": "weapp-container/.github",
-      "commit": "13f62d60214dcba89e49fe988397cbd02c931613",
+      "commit": "f074bbba1f71465329b934c7d09e02b06419e3bf",
       "path": "profile/README.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/organization/profile/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/organization/13f62d60214dcba89e49fe988397cbd02c931613/zh-CN/profile/README.md",
+      "source": "website/documentation-snapshots/organization/f074bbba1f71465329b934c7d09e02b06419e3bf/zh-CN/profile/README.md",
       "sourceSha256": "5ea766b754511660e36aeec9d415e4fb28b44ef3dc2906348f583cf442a32039",
       "output": "website/src/content/engineering/organization/zh-CN/profile/README.md",
-      "renderedSha256": "1c9178d055e1c14986c22e642b1e50098d560a312b188016e30443722a61e610"
+      "renderedSha256": "100eecc61206e5fb1b17e482f63ecfce06f20d1b7b9fe84fb09762156379de98"
     },
     {
       "repository": "weapp-container/.github",
-      "commit": "13f62d60214dcba89e49fe988397cbd02c931613",
+      "commit": "f074bbba1f71465329b934c7d09e02b06419e3bf",
       "path": "profile/README.en.md",
       "locale": "en",
       "route": "/docs/engineering/organization/profile/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/organization/13f62d60214dcba89e49fe988397cbd02c931613/en/profile/README.en.md",
+      "source": "website/documentation-snapshots/organization/f074bbba1f71465329b934c7d09e02b06419e3bf/en/profile/README.en.md",
       "sourceSha256": "38b770c8176875f0198703f65e4ce25dc16953714ad2f7107a01c0bb8f8e4e13",
       "output": "website/src/content/engineering/organization/en/profile/README.en.md",
-      "renderedSha256": "b85f9f04a0cbcd2dba1cfdc2e86f7e4e37fbba6e914ea7cd58c4375cd4257de1"
+      "renderedSha256": "1c85b05df91f61ca30b26b09224c61e557c14fa13407a1fa376df6c91c6bccd2"
     },
     {
       "repository": "weapp-container/.github",
-      "commit": "13f62d60214dcba89e49fe988397cbd02c931613",
+      "commit": "f074bbba1f71465329b934c7d09e02b06419e3bf",
       "path": "tools/documentation/README.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/organization/tools/documentation/index/",
       "section": "tools",
-      "source": "website/documentation-snapshots/organization/13f62d60214dcba89e49fe988397cbd02c931613/zh-CN/tools/documentation/README.md",
+      "source": "website/documentation-snapshots/organization/f074bbba1f71465329b934c7d09e02b06419e3bf/zh-CN/tools/documentation/README.md",
       "sourceSha256": "6c0d12dd12a6cd4a1076e912f2a09d959772638769da314e76d1708cc7c5a64e",
       "output": "website/src/content/engineering/organization/zh-CN/tools/documentation/README.md",
-      "renderedSha256": "ceff1985aea7be5d5c04bcd9602edc9a44b4837c79ae9767c55c555d4362947c"
+      "renderedSha256": "295feaacb1d847e5c0ef48518b902a50210eb502523e614dbf57f3c741bbed46"
     },
     {
       "repository": "weapp-container/.github",
-      "commit": "13f62d60214dcba89e49fe988397cbd02c931613",
+      "commit": "f074bbba1f71465329b934c7d09e02b06419e3bf",
       "path": "tools/documentation/README.en.md",
       "locale": "en",
       "route": "/docs/engineering/organization/tools/documentation/index/",
       "section": "tools",
-      "source": "website/documentation-snapshots/organization/13f62d60214dcba89e49fe988397cbd02c931613/en/tools/documentation/README.en.md",
+      "source": "website/documentation-snapshots/organization/f074bbba1f71465329b934c7d09e02b06419e3bf/en/tools/documentation/README.en.md",
       "sourceSha256": "0771ea3d888cddc15444f452964da24b74e517aefd1f162d1de2af965f19d7fa",
       "output": "website/src/content/engineering/organization/en/tools/documentation/README.en.md",
-      "renderedSha256": "f27a29ab7151c9e2ae0a9a8f9d675e1d669a7262684e17afbd47080f839da727"
+      "renderedSha256": "df31d411da10dd17964a3e821b130dd920d9be4297807d5fd6926e69f95a69dd"
     },
     {
       "repository": "weapp-container/.github",
-      "commit": "13f62d60214dcba89e49fe988397cbd02c931613",
+      "commit": "f074bbba1f71465329b934c7d09e02b06419e3bf",
       "path": "CONTRIBUTING.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/organization/contributing/",
       "section": "overview",
-      "source": "website/documentation-snapshots/organization/13f62d60214dcba89e49fe988397cbd02c931613/zh-CN/CONTRIBUTING.md",
+      "source": "website/documentation-snapshots/organization/f074bbba1f71465329b934c7d09e02b06419e3bf/zh-CN/CONTRIBUTING.md",
       "sourceSha256": "9d2b130b2ade5dcb970db187938e4d512868642f54e9cd65f8bc4e6e6c212e07",
       "output": "website/src/content/engineering/organization/zh-CN/CONTRIBUTING.md",
-      "renderedSha256": "949ed48d5d5a4714296cfe34cafa3120eedb1311e0b4c0055879ff6bc6ad4700"
+      "renderedSha256": "9aec99f75d8c5813bd482bd48bda7c8670ce9569a920faa2725355aaed2bf33d"
     },
     {
       "repository": "weapp-container/.github",
-      "commit": "13f62d60214dcba89e49fe988397cbd02c931613",
+      "commit": "f074bbba1f71465329b934c7d09e02b06419e3bf",
       "path": "CONTRIBUTING.en.md",
       "locale": "en",
       "route": "/docs/engineering/organization/contributing/",
       "section": "overview",
-      "source": "website/documentation-snapshots/organization/13f62d60214dcba89e49fe988397cbd02c931613/en/CONTRIBUTING.en.md",
+      "source": "website/documentation-snapshots/organization/f074bbba1f71465329b934c7d09e02b06419e3bf/en/CONTRIBUTING.en.md",
       "sourceSha256": "46dcc6d12944c819ddb7f4a9750b0e4bce83792555dea89cb96622d6751911c7",
       "output": "website/src/content/engineering/organization/en/CONTRIBUTING.en.md",
-      "renderedSha256": "2815af6d88434c3bfa9413ade14aed10c6e43417fa654e5f17e12132e21fcb9a"
+      "renderedSha256": "ebcfbc90e277509868b834a0a31c04799a75133b222c17236e12179dae36e1b7"
     },
     {
       "repository": "weapp-container/.github",
-      "commit": "13f62d60214dcba89e49fe988397cbd02c931613",
+      "commit": "f074bbba1f71465329b934c7d09e02b06419e3bf",
       "path": "SECURITY.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/organization/security/",
       "section": "overview",
-      "source": "website/documentation-snapshots/organization/13f62d60214dcba89e49fe988397cbd02c931613/zh-CN/SECURITY.md",
+      "source": "website/documentation-snapshots/organization/f074bbba1f71465329b934c7d09e02b06419e3bf/zh-CN/SECURITY.md",
       "sourceSha256": "d1ce809a018f9e6a9c47d24f9f2870c6edb6b39e7c2a95e23583d646ade07d1e",
       "output": "website/src/content/engineering/organization/zh-CN/SECURITY.md",
-      "renderedSha256": "95120d70e19c2b0ac0ee60ac88941f62d1b5e4a9847e3a9590e4a44048e081b0"
+      "renderedSha256": "9b4edfaf57062aaf0460ef219c179581e0a896e6989fc351c59802750087faea"
     },
     {
       "repository": "weapp-container/.github",
-      "commit": "13f62d60214dcba89e49fe988397cbd02c931613",
+      "commit": "f074bbba1f71465329b934c7d09e02b06419e3bf",
       "path": "SECURITY.en.md",
       "locale": "en",
       "route": "/docs/engineering/organization/security/",
       "section": "overview",
-      "source": "website/documentation-snapshots/organization/13f62d60214dcba89e49fe988397cbd02c931613/en/SECURITY.en.md",
+      "source": "website/documentation-snapshots/organization/f074bbba1f71465329b934c7d09e02b06419e3bf/en/SECURITY.en.md",
       "sourceSha256": "aa6626d450e0f0cdd2d40f5cba243102481a52ff70b019f283a18d52b3982261",
       "output": "website/src/content/engineering/organization/en/SECURITY.en.md",
-      "renderedSha256": "5f9167219510c39cc2a4eb48e36b555dee6e25658f9a546abd50c9a3ae836a7e"
+      "renderedSha256": "57538cb1f06fede66b6d1affffb9dd23567eb8432077afba32aa399ed9ad2e91"
     },
     {
       "repository": "weapp-container/.github",
-      "commit": "13f62d60214dcba89e49fe988397cbd02c931613",
+      "commit": "f074bbba1f71465329b934c7d09e02b06419e3bf",
       "path": "CODE_OF_CONDUCT.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/organization/code_of_conduct/",
       "section": "overview",
-      "source": "website/documentation-snapshots/organization/13f62d60214dcba89e49fe988397cbd02c931613/zh-CN/CODE_OF_CONDUCT.md",
+      "source": "website/documentation-snapshots/organization/f074bbba1f71465329b934c7d09e02b06419e3bf/zh-CN/CODE_OF_CONDUCT.md",
       "sourceSha256": "147525dd23582787357617008ab7cbab5212d0eda20e1719489c78c389aa2a08",
       "output": "website/src/content/engineering/organization/zh-CN/CODE_OF_CONDUCT.md",
-      "renderedSha256": "a45292820ff01ecc9e4c1d7f2e6c10c0d07f13691848102ea5a814d347e7d987"
+      "renderedSha256": "fc60cded93588396730658dbdb986b522f959be31f0cf317d870470ef0a8b713"
     },
     {
       "repository": "weapp-container/.github",
-      "commit": "13f62d60214dcba89e49fe988397cbd02c931613",
+      "commit": "f074bbba1f71465329b934c7d09e02b06419e3bf",
       "path": "CODE_OF_CONDUCT.en.md",
       "locale": "en",
       "route": "/docs/engineering/organization/code_of_conduct/",
       "section": "overview",
-      "source": "website/documentation-snapshots/organization/13f62d60214dcba89e49fe988397cbd02c931613/en/CODE_OF_CONDUCT.en.md",
+      "source": "website/documentation-snapshots/organization/f074bbba1f71465329b934c7d09e02b06419e3bf/en/CODE_OF_CONDUCT.en.md",
       "sourceSha256": "87aa91efedcc2d6dd8a4bb9d4c71c415b5c08f2bef4300a0d3ed3eb9cd477435",
       "output": "website/src/content/engineering/organization/en/CODE_OF_CONDUCT.en.md",
-      "renderedSha256": "f8c44238b3a86bd7c721fad9a5394b12f94761ea8e57df729cb6bb3733bb757f"
+      "renderedSha256": "c6a736f02889812398adc5e9d8cd61181af61bcb1a0873d61a727d9627f1553c"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "CODE_OF_CONDUCT.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/code_of_conduct/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/CODE_OF_CONDUCT.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/CODE_OF_CONDUCT.md",
       "sourceSha256": "3919ea2d9508eec5822d83511fbf8e4f225a63d9ac0944342a00136c12b15fe6",
       "output": "website/src/content/engineering/website/zh-CN/CODE_OF_CONDUCT.md",
-      "renderedSha256": "b80c04003714e84520efb5ae4fd7b2cd3b95673ee717ae4a391ff3eaa0f8e8c5"
+      "renderedSha256": "0acf90e03daeba1844112b2b282aca176dd8d7cbd4343e609dd7bccd0d5d99d2"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "CODE_OF_CONDUCT.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/code_of_conduct/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/CODE_OF_CONDUCT.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/CODE_OF_CONDUCT.en.md",
       "sourceSha256": "b840ff4d919283589f3922f0418ca2ff0547b0a97864abf340d3e607874e8cc1",
       "output": "website/src/content/engineering/website/en/CODE_OF_CONDUCT.en.md",
-      "renderedSha256": "bd60d8b7fd9773450be9e9a0efc35656f897a4cc1fcb7d5a158cafc1bc0ae261"
+      "renderedSha256": "e1954b6169615aecca8c6da9c347a45a8a26a03c27b34d7f121e8b8207bff064"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "CONTRIBUTING.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/contributing/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/CONTRIBUTING.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/CONTRIBUTING.md",
       "sourceSha256": "aa630fb87007b24581fa4b41b4d6a63dbbaf0e6c9ba1d1381320e2ad91ac8203",
       "output": "website/src/content/engineering/website/zh-CN/CONTRIBUTING.md",
-      "renderedSha256": "48240ceb6aae47c6833a90f168216aeafa78b7f9f3a2b648da8f84e394a97bda"
+      "renderedSha256": "bf81a0b187cc7e98167915fd6e68359cb20133ec15c2f3c36587689b736784ef"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "CONTRIBUTING.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/contributing/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/CONTRIBUTING.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/CONTRIBUTING.en.md",
       "sourceSha256": "84dd120dee4e9ccd2d7533d82be34720956875bc8830f5ecc7e50916b8974e26",
       "output": "website/src/content/engineering/website/en/CONTRIBUTING.en.md",
-      "renderedSha256": "073e17c0b57ec972f13a99770a14928cd171c63546be592796d6f017180b0a5c"
+      "renderedSha256": "521114f7b0130ede47ef295ccda862457ad7b968f4c08bb04ab404e815e840b9"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "README.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/README.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/README.md",
       "sourceSha256": "81fab0c378dbafbfb21f6bdb58e0d72a75144b8368cbe6ee08a2696255d59e87",
       "output": "website/src/content/engineering/website/zh-CN/README.md",
-      "renderedSha256": "1a548b860382d683368595d0a0aacb226b11ae197b3bf46b69c5773ab267724a"
+      "renderedSha256": "169ea4f2d9be716f5eeb7965063ae19fc7fb05998d006a2a393fa4274fa797cb"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "README.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/README.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/README.en.md",
       "sourceSha256": "863745a3771cdb6ec81467c2e050d0e4cac75ffb05dac07721401da9933c038f",
       "output": "website/src/content/engineering/website/en/README.en.md",
-      "renderedSha256": "c608b069763141a14bab4ffb9ece62b97b8dea13b1a8cbe8dc4d4aee6badd5c0"
+      "renderedSha256": "c0be1f374cf55d43161d5e938709b509af11c0175e675a98ee1ec7e3084dd233"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "SECURITY.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/security/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/SECURITY.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/SECURITY.md",
       "sourceSha256": "e7145ec40af48df2189f331c12dfd47ce8fe5163d73bcf1e9d05943afa324155",
       "output": "website/src/content/engineering/website/zh-CN/SECURITY.md",
-      "renderedSha256": "68f6aba0a787dc1b653ddce239b91a6d4e17fa3c50f369c8af40fffb162de1db"
+      "renderedSha256": "322a20f1bd53366f352200c984414e33df2c9cf37da3c3f159bd350d9b8668c6"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "SECURITY.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/security/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/SECURITY.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/SECURITY.en.md",
       "sourceSha256": "0c667c368886ec122abe7fd3cc3bfaca9a72aca7889379aab84c52a130611568",
       "output": "website/src/content/engineering/website/en/SECURITY.en.md",
-      "renderedSha256": "0f2306769ffa0fae54324790adc09100f6fdc252188c4c3cd1db7499b7befd26"
+      "renderedSha256": "5d005ab4157dc47e7024aeb01ae68f87aa3e69f9ff3b52a58e7ad65a0b2bb294"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/archived-evidence.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/docs/archived-evidence/",
       "section": "validation",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/docs/archived-evidence.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/docs/archived-evidence.md",
       "sourceSha256": "542981dfaf836c48cec579b8a4270f0af1d5f5fdf19121aaeea5d19a10dec714",
       "output": "website/src/content/engineering/website/zh-CN/docs/archived-evidence.md",
-      "renderedSha256": "d6ac05a8a3c61571be89dccef5dc113c44bc15fa945dc56f03532662c7984464"
+      "renderedSha256": "7aa68308de405b8bf22e20fe36801ddd8a18342e43f4b6e44143c7388da22deb"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/archived-evidence.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/docs/archived-evidence/",
       "section": "validation",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/docs/archived-evidence.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/docs/archived-evidence.en.md",
       "sourceSha256": "5169be4dc47eff659d8cfe0eb7e9b0f8489f5860cfe237a257ea6325eb34ebdf",
       "output": "website/src/content/engineering/website/en/docs/archived-evidence.en.md",
-      "renderedSha256": "5b6d5903d0c27c2041874c11ee5fd7a2a9b532f42829a4b8666da5ece2fc6a1c"
+      "renderedSha256": "8171d360983ae0a828eac7634eb6dd2cda042f1fcdb8142c396e17a16884fe39"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/deployment.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/docs/deployment/",
       "section": "runtime",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/docs/deployment.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/docs/deployment.md",
       "sourceSha256": "76cdc462641648646174191c85b7b0d036de3bca317f4a490f6ec77858261e9d",
       "output": "website/src/content/engineering/website/zh-CN/docs/deployment.md",
-      "renderedSha256": "7f61041df4358512e8abcb23e50dd4a6960174bd6b39d5b3f5336d200af287e5"
+      "renderedSha256": "724b3e572edb014c6cef84083ee966aa5ccf3585aee490831d823a4d728823a4"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/deployment.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/docs/deployment/",
       "section": "runtime",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/docs/deployment.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/docs/deployment.en.md",
       "sourceSha256": "38f77edbf95069433a872455e61f608cb3e691ef478a4b91645159328ccb0670",
       "output": "website/src/content/engineering/website/en/docs/deployment.en.md",
-      "renderedSha256": "b0433687dd9145e9c80d43c2a85b2f1071ece8368d571ea0a91df7548df0f1d5"
+      "renderedSha256": "a5921f5102c64d5dc282de053315238a37c2497c229cbd18727613c03ac8f6e2"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/devices.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/docs/devices/",
       "section": "runtime",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/docs/devices.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/docs/devices.md",
       "sourceSha256": "c5b9ed064e2287ace41b7f93ad5d88ccc138e60a4841b2a2eef3664ae5d7a26c",
       "output": "website/src/content/engineering/website/zh-CN/docs/devices.md",
-      "renderedSha256": "971c3042da2c8a725d5f931249d47f6ae427ccad959996c34da3999ed041a474"
+      "renderedSha256": "095288635d0ce5d9c091c0f70e9381be326b90923c9784f7219f7a9995994cdc"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/devices.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/docs/devices/",
       "section": "runtime",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/docs/devices.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/docs/devices.en.md",
       "sourceSha256": "0fc7e01e19615b3015ca0be384d16f55033c2ce89d1e352355c5fdf6ce6ae309",
       "output": "website/src/content/engineering/website/en/docs/devices.en.md",
-      "renderedSha256": "143902cbe20f7fca1e0093852b9adcdaae5e1d000cd498d844664029aba1648b"
+      "renderedSha256": "f8ac025a7380b8c4ba565b20ed93965af836ea1aa3261a90d0df7c9361fc9b8a"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/duo-fullscreen-verification.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/docs/duo-fullscreen-verification/",
       "section": "runtime",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/docs/duo-fullscreen-verification.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/docs/duo-fullscreen-verification.md",
       "sourceSha256": "491f111eb46df0ea0ae5d0050fa6376f17bdacbd7e63eb6f9329eb3f2c408f63",
       "output": "website/src/content/engineering/website/zh-CN/docs/duo-fullscreen-verification.md",
-      "renderedSha256": "7c1e5a82a0b07dac3b9f4969e4e3e84f3c3cd5eaa163e30c944f29a7c8035be0"
+      "renderedSha256": "ee36ed93504c34116dd63903b17092b935b9a25130000033c300513637d47ccf"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/duo-fullscreen-verification.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/docs/duo-fullscreen-verification/",
       "section": "runtime",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/docs/duo-fullscreen-verification.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/docs/duo-fullscreen-verification.en.md",
       "sourceSha256": "c9364f7490124335d6b83f81483dc95e09bc205ceca7bd909f255adcd44c5806",
       "output": "website/src/content/engineering/website/en/docs/duo-fullscreen-verification.en.md",
-      "renderedSha256": "62acee243ff431ad714b0aaf5b589c86ef866924b52f9f84446afd6dea7cc254"
+      "renderedSha256": "7e9a7688b4fca6a6e3c655da719c2721c059fa8595dad1b82a2c35c98b88f8e3"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/duo-verification.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/docs/duo-verification/",
       "section": "runtime",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/docs/duo-verification.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/docs/duo-verification.md",
       "sourceSha256": "2814cb06f54303c8c9e5e7453f993448244db6c8b6f1fea145eeb62e491875d9",
       "output": "website/src/content/engineering/website/zh-CN/docs/duo-verification.md",
-      "renderedSha256": "c9a23d0ddcca304e783d45d8496b618ea1eeb550c5942221ad1ceb760e30774d"
+      "renderedSha256": "6e301bb7b2f7dcc2839d25914c9f72e8f5a455181405ea7165e176aec75b9f6d"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/duo-verification.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/docs/duo-verification/",
       "section": "runtime",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/docs/duo-verification.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/docs/duo-verification.en.md",
       "sourceSha256": "a2decee4d1cad2f7c1b1a7761dd8080961958f1a87c75588168b0ad6edaf995f",
       "output": "website/src/content/engineering/website/en/docs/duo-verification.en.md",
-      "renderedSha256": "15faec553ac2f93328c07ec7c80853f63119a0a767a0accdd128d8bb609831b3"
+      "renderedSha256": "1563da3439c543a5e670295756298fdb779d79ef94a132c339a0a47d55f1a8bd"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/platforms.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/docs/platforms/",
       "section": "runtime",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/docs/platforms.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/docs/platforms.md",
       "sourceSha256": "2822548a26b645a70083602eee1995d4e9eef43404e04702410e2e2c173ed2d7",
       "output": "website/src/content/engineering/website/zh-CN/docs/platforms.md",
-      "renderedSha256": "e0284b49af49414d72bc452e536dfd66a5a523ac9beebb7881e6f9f5745aa3a7"
+      "renderedSha256": "cf8d729627c19282b534f233f50833ce781afbe9ffc45c4b0f6ef571f3026d1d"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/platforms.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/docs/platforms/",
       "section": "runtime",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/docs/platforms.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/docs/platforms.en.md",
       "sourceSha256": "add2966119e17429ce7eebb3ab3b343a1c0906b71b2a06d557ea7aac4fda2e7c",
       "output": "website/src/content/engineering/website/en/docs/platforms.en.md",
-      "renderedSha256": "a2460adfd31d035a43b3220c002d45c5e72d5939ce4e7d19603c6a662a865638"
+      "renderedSha256": "c5abf3c1b92c699093e0231b65fa8c5db4426677bafface95ea9f26efcc42fd9"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/showcase-performance.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/docs/showcase-performance/",
       "section": "validation",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/docs/showcase-performance.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/docs/showcase-performance.md",
       "sourceSha256": "b35750c03b0fc29a6c14e466737401aa58850112815f699eb420c46cbb81dde2",
       "output": "website/src/content/engineering/website/zh-CN/docs/showcase-performance.md",
-      "renderedSha256": "76ea040490b6e93b620cc55564ad93e6c891e605f647759b3245ca36b601cc94"
+      "renderedSha256": "7dfb1db9616cfb82cbe6ebbdfcb05e3b471153b6431ae69c0cacec54d7913187"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "docs/showcase-performance.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/docs/showcase-performance/",
       "section": "validation",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/docs/showcase-performance.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/docs/showcase-performance.en.md",
       "sourceSha256": "51719feffc054ee9d3c53f3dc3939886258f98e6c94f7a4feff6b9d9e153b3ba",
       "output": "website/src/content/engineering/website/en/docs/showcase-performance.en.md",
-      "renderedSha256": "5111ed4c09a79ab73caaa9aa8d21f8d5e99de63974ae429e6e9596ffcb851ed2"
+      "renderedSha256": "d4edb387a96dc99d2797e0b5a5539411c02ab707fb475d3c75684057a081b3ed"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "hosts/flutter/README.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/hosts/flutter/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/hosts/flutter/README.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/hosts/flutter/README.md",
       "sourceSha256": "2ae9ead299ec6d349cc5938d18a2977b9ae9f0c854bb36a70e4c4b0dc1bdecda",
       "output": "website/src/content/engineering/website/zh-CN/hosts/flutter/README.md",
-      "renderedSha256": "a21337adc6f437273ba57356dd8ac7ab384e6d4db0fc52d625c9cb02982e235e"
+      "renderedSha256": "d71e3924329a371337ae630fae08d89030473820596c29a7350ec56b40b31067"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "hosts/flutter/README.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/hosts/flutter/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/hosts/flutter/README.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/hosts/flutter/README.en.md",
       "sourceSha256": "53bc228d97faae082fe612523e7abe7477eb6f08a9724f60797f9cb15f8da48a",
       "output": "website/src/content/engineering/website/en/hosts/flutter/README.en.md",
-      "renderedSha256": "f5fd05cdc31e3ecce8e831d64b087fc70e0cfab5f15675014073464ef6203e80"
+      "renderedSha256": "e13231550a7f2bf9b54b167dc781901a9b2c85e2947386e9442033a3bbf63ebc"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "hosts/harmony/README.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/hosts/harmony/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/hosts/harmony/README.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/hosts/harmony/README.md",
       "sourceSha256": "7ace1ffa8e0ac5b2e54449c66301a3c520fef4ae05745d944725c84da0eda25e",
       "output": "website/src/content/engineering/website/zh-CN/hosts/harmony/README.md",
-      "renderedSha256": "976666deb6e75b75ed718959895cb65d285deb8ca1c422a3a72c3679747aa1f3"
+      "renderedSha256": "f695a74c5314bee766c0934c9e3c8b57f0f48cafc308ad31e4062bac05546336"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "hosts/harmony/README.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/hosts/harmony/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/hosts/harmony/README.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/hosts/harmony/README.en.md",
       "sourceSha256": "b92448dd8ae48553ade163e11b7d41d93ef3e9301950ff161cfad2c7688ab346",
       "output": "website/src/content/engineering/website/en/hosts/harmony/README.en.md",
-      "renderedSha256": "d5cc4a540e70c954064829c670d867d28431d0adbf15dc8122706a0c5708af88"
+      "renderedSha256": "baccc55faadd5a2d386c9a721c9c97b08ea40c5f69a6b0e223056e3f923ecb45"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "hosts/native-android/README.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/hosts/native-android/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/hosts/native-android/README.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/hosts/native-android/README.md",
       "sourceSha256": "be4a844fd9a57af3e2f7c6fb6cef4314a3cbc55d9582fb5d0625724faf43cc5b",
       "output": "website/src/content/engineering/website/zh-CN/hosts/native-android/README.md",
-      "renderedSha256": "a0494b7215e472b933b071cd09d633fb8d54befefe11c26ac94b999e5fcbb59d"
+      "renderedSha256": "612580004e024de79393981b3fde69d30f8a2704d106b250eec66846d7232218"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "hosts/native-android/README.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/hosts/native-android/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/hosts/native-android/README.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/hosts/native-android/README.en.md",
       "sourceSha256": "614b6981b1a6187878c220473d759654ba3efff3897bea7fb58341454f0f61fe",
       "output": "website/src/content/engineering/website/en/hosts/native-android/README.en.md",
-      "renderedSha256": "28968be34db83fed270033498c9610060dd65f6053a93c25b159530efd89c92e"
+      "renderedSha256": "4a102822cf083a94d6096274c29545328b8073a57c62957f5b4b9b80e820064f"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "hosts/native-desktop/README.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/hosts/native-desktop/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/hosts/native-desktop/README.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/hosts/native-desktop/README.md",
       "sourceSha256": "8317e4123919c6f7dacad646635f0444bad7332a2196bad1db837c00642a1802",
       "output": "website/src/content/engineering/website/zh-CN/hosts/native-desktop/README.md",
-      "renderedSha256": "cfaac7985ac9d66e0b67ed36a68afd9a29a140a808f1c2bebf99a633078a4ade"
+      "renderedSha256": "f376ab0b5955dd400d16de2a509206ed8fcaa525453f5e916c019c6a625e447b"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "hosts/native-desktop/README.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/hosts/native-desktop/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/hosts/native-desktop/README.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/hosts/native-desktop/README.en.md",
       "sourceSha256": "61326adbce5137c4207fc392ac1dbcecf80d65a49c1ff0a21677f62d03209774",
       "output": "website/src/content/engineering/website/en/hosts/native-desktop/README.en.md",
-      "renderedSha256": "bce5bfb146e8c24655c941303b2258b616c51925e66d3c29a415259b80824052"
+      "renderedSha256": "15ebcac6106f4b96b4a36457a4dd5d02c4aa1531a969f144571f63cfdd62e2f5"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "hosts/native-ios/README.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/hosts/native-ios/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/hosts/native-ios/README.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/hosts/native-ios/README.md",
       "sourceSha256": "3ff4c55dfc532e74df1d798a80f1e8b36f554ece8edde461085eeae03436529b",
       "output": "website/src/content/engineering/website/zh-CN/hosts/native-ios/README.md",
-      "renderedSha256": "bffd847f895c4c809d0da5ca69e99bb00b4c47b3f7e3a10723c9d8a72ab592fc"
+      "renderedSha256": "1af554a1535b274ab8df5d6b2e026e8daaf48294922541ed2dc72690226766e4"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "hosts/native-ios/README.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/hosts/native-ios/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/hosts/native-ios/README.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/hosts/native-ios/README.en.md",
       "sourceSha256": "d934a859b4079041db21093be0709f56206d179c56bcc08a85293d7197d38676",
       "output": "website/src/content/engineering/website/en/hosts/native-ios/README.en.md",
-      "renderedSha256": "1a792a0d5800f48b6a9ba9866d05e4f815160f05f178fbd7fd68162163ff6536"
+      "renderedSha256": "5dce1753ff712f9369e3618c2045a3e569e1d62cd0aa3270b5c953da9081d7bf"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "hosts/react-native/README.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/hosts/react-native/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/hosts/react-native/README.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/hosts/react-native/README.md",
       "sourceSha256": "04ccda3717ee0a910a93336c15c27063cdb6610bbe3550b3251bdff5e994e47a",
       "output": "website/src/content/engineering/website/zh-CN/hosts/react-native/README.md",
-      "renderedSha256": "4aa78f52067c3010a01d9fa00026c57a879f24231cec5af64f671c43d0e19ebb"
+      "renderedSha256": "a56177748acfc75d2f3fdc729759248ef8b7c1a1cdc4806f4fcc367ddfe73bda"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "hosts/react-native/README.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/hosts/react-native/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/hosts/react-native/README.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/hosts/react-native/README.en.md",
       "sourceSha256": "7c28019749919b198d9e1b19c8508d86b4b7e39407a038e0d1ed04cc20dac549",
       "output": "website/src/content/engineering/website/en/hosts/react-native/README.en.md",
-      "renderedSha256": "f1c976c4cf743ea8d642c0b657750a4f5a35a59fdeaf83c20913a7e8c22aba58"
+      "renderedSha256": "55f335663520bd0b0fc020e68a6f4375aaad9aeceefa6e9d56e22e2a5c676970"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "miniapp/BRIDGE.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/miniapp/bridge/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/miniapp/BRIDGE.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/miniapp/BRIDGE.md",
       "sourceSha256": "0379d95a450a258fe702367c8ba6bb5a173d4ac8839e8f365559ec52eb4928f6",
       "output": "website/src/content/engineering/website/zh-CN/miniapp/BRIDGE.md",
-      "renderedSha256": "1e0f6065be1721b87cc9580643a80471b4adc954993337ae77f361c85be1aa03"
+      "renderedSha256": "801eddeee0cc98a9be24f2e5088416881f67aa7683a7d6065ed91d09bb69f3b5"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "miniapp/BRIDGE.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/miniapp/bridge/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/miniapp/BRIDGE.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/miniapp/BRIDGE.en.md",
       "sourceSha256": "921ac506c68a5d88e9196fd458bd08a252f13ac75f49170933bc55071091263d",
       "output": "website/src/content/engineering/website/en/miniapp/BRIDGE.en.md",
-      "renderedSha256": "49bfcb052d9163dbacf50efa711e8b26e747d2fd1b09d594d438fc2bfacafed5"
+      "renderedSha256": "79b7d4bce907fbb40dc5be1d765c3ddfbfde5734daacf8ad071496a2cb059338"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "miniapp/README.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/miniapp/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/miniapp/README.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/miniapp/README.md",
       "sourceSha256": "e58322ad3a4a15b8a0419a2fe12714de8c7347f0c925ed5ebba94dd6926e60ad",
       "output": "website/src/content/engineering/website/zh-CN/miniapp/README.md",
-      "renderedSha256": "49d1c30fb25338847f4734a159a25723bac64f29205ba981425b5fe88506322d"
+      "renderedSha256": "ce7356eba087f1fd21b323a11330d5e2deb46d433f6c4009db2681828f108359"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "miniapp/README.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/miniapp/index/",
       "section": "overview",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/miniapp/README.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/miniapp/README.en.md",
       "sourceSha256": "c7d939d0c618a0deb388cb6707d0de6072aa1bedb03fe68f9c0fa68e2af1d51b",
       "output": "website/src/content/engineering/website/en/miniapp/README.en.md",
-      "renderedSha256": "3dfb68d5a4b4c3c77c6b79953cc23c8883950946f168fdde9796261d5233d803"
+      "renderedSha256": "989340e5b488bb3266565107006dcb5e5ae9bcc3ef8c527dff81f51df9064ab6"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "tools/TOOLCHAIN.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/tools/toolchain/",
       "section": "tools",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/tools/TOOLCHAIN.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/tools/TOOLCHAIN.md",
       "sourceSha256": "7dbd88d590a46d8a61fc94de8b5a210febf344c0ccdaabbc278e7c863cdd5639",
       "output": "website/src/content/engineering/website/zh-CN/tools/TOOLCHAIN.md",
-      "renderedSha256": "897e775faa7d150c58167710684d447537228c4b7ad46a3d9d5d911d172def3c"
+      "renderedSha256": "6f5f66163a5df5b2c708f8b26efb097735c0362de6ca45872b9ad73661f15985"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "tools/TOOLCHAIN.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/tools/toolchain/",
       "section": "tools",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/tools/TOOLCHAIN.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/tools/TOOLCHAIN.en.md",
       "sourceSha256": "885ebd1962e51022bfe65e3de3bb7af4378704fa2bd89e07c0d6ca6c448a7a3a",
       "output": "website/src/content/engineering/website/en/tools/TOOLCHAIN.en.md",
-      "renderedSha256": "39de31b625064d5ec1b14a631f3639b51244fff26b901bd333c39f0a4bc1154b"
+      "renderedSha256": "37a8ab411a4555bb8678b1256cd8626f842b232f1f32a27db532bdef76fe2f9b"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "tools/documentation/README.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/tools/documentation/index/",
       "section": "tools",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/tools/documentation/README.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/tools/documentation/README.md",
       "sourceSha256": "6c0d12dd12a6cd4a1076e912f2a09d959772638769da314e76d1708cc7c5a64e",
       "output": "website/src/content/engineering/website/zh-CN/tools/documentation/README.md",
-      "renderedSha256": "fa636217d8ab1367d987d52770d5c8328bbd259ffeb6ffb07ca78da609c0ea6f"
+      "renderedSha256": "43e48a7b68a43d55296b62ea6e308e7580828c2d9e36294c8ed1a9f24a6d3d2e"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "tools/documentation/README.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/tools/documentation/index/",
       "section": "tools",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/tools/documentation/README.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/tools/documentation/README.en.md",
       "sourceSha256": "0771ea3d888cddc15444f452964da24b74e517aefd1f162d1de2af965f19d7fa",
       "output": "website/src/content/engineering/website/en/tools/documentation/README.en.md",
-      "renderedSha256": "6524ac2281e7973cf7c6754edd7b5431404fad2df047dd9c5b9617f2ae1a1c3d"
+      "renderedSha256": "a9fea9ad6cae55845fe522f7a5ec99c1a7d33b42cd63e97299794c41bfaace53"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "tools/DOCUMENTATION.md",
       "locale": "zh-CN",
       "route": "/docs/engineering/website/tools/documentation/",
       "section": "tools",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/zh-CN/tools/DOCUMENTATION.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/zh-CN/tools/DOCUMENTATION.md",
       "sourceSha256": "cef16fce7e9a5c4c2f6d240a262fab4d3ac718c00930f7a8d57b279f8e110bc2",
       "output": "website/src/content/engineering/website/zh-CN/tools/DOCUMENTATION.md",
-      "renderedSha256": "b566c0de835655975ff99368de942bbd16f3abf68d8fec54c315316a1b3615ca"
+      "renderedSha256": "c2584151f70af514fa8ce212cc469a8f4a3cec0effe5bd7d0c0405da2d83ad06"
     },
     {
       "repository": "weapp-container/website",
-      "commit": "c43b35173270e8e18b9a74c6430211eff8c83cef",
+      "commit": "1efd10866e4902854e3a82eeabfa5613c2f61e3b",
       "path": "tools/DOCUMENTATION.en.md",
       "locale": "en",
       "route": "/docs/engineering/website/tools/documentation/",
       "section": "tools",
-      "source": "website/documentation-snapshots/website/c43b35173270e8e18b9a74c6430211eff8c83cef/en/tools/DOCUMENTATION.en.md",
+      "source": "website/documentation-snapshots/website/1efd10866e4902854e3a82eeabfa5613c2f61e3b/en/tools/DOCUMENTATION.en.md",
       "sourceSha256": "118e5021cfaef238cd3cd2d51f97413d950d3771254c9d0efa29df90976e3aa6",
       "output": "website/src/content/engineering/website/en/tools/DOCUMENTATION.en.md",
-      "renderedSha256": "bad151577456213812c135387c20629f01dbca099386d6ee92d7e5a65e83285b"
+      "renderedSha256": "7192d051c054e27843a5f0b94c3b97ad83b842f77dfb93e03c61969272eee45d"
     }
   ],
   "assets": [
     {
       "repository": "weapp-container/.github",
-      "commit": "13f62d60214dcba89e49fe988397cbd02c931613",
+      "commit": "f074bbba1f71465329b934c7d09e02b06419e3bf",
       "path": "profile/assets/weapp-container.svg",
       "output": "documentation/e9cc10702f6ab5856a0b21dfa0f1f7f77aaecceb8b2c914a39b079f53fae5c84.svg",
       "sha256": "e9cc10702f6ab5856a0b21dfa0f1f7f77aaecceb8b2c914a39b079f53fae5c84"

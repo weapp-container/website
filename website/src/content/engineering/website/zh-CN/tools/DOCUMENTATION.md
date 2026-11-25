@@ -6,7 +6,7 @@ summary: "文档内容与双语网站维护。来自 weapp-container/website 的
 route: "/docs/engineering/website/tools/documentation/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "c43b35173270e8e18b9a74c6430211eff8c83cef"
+sourceCommit: "1efd10866e4902854e3a82eeabfa5613c2f61e3b"
 sourcePath: "tools/DOCUMENTATION.md"
 ---
 

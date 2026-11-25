@@ -6,7 +6,7 @@ summary: "Community code of conduct. Versioned engineering reference from weapp-
 route: "/docs/engineering/organization/code_of_conduct/"
 locale: "en"
 sourceRepository: "weapp-container/.github"
-sourceCommit: "13f62d60214dcba89e49fe988397cbd02c931613"
+sourceCommit: "f074bbba1f71465329b934c7d09e02b06419e3bf"
 sourcePath: "CODE_OF_CONDUCT.en.md"
 ---
 

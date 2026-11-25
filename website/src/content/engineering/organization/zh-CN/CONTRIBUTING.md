@@ -6,7 +6,7 @@ summary: "参与 Weapp Container。来自 weapp-container/.github 的版本化�
 route: "/docs/engineering/organization/contributing/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/.github"
-sourceCommit: "13f62d60214dcba89e49fe988397cbd02c931613"
+sourceCommit: "f074bbba1f71465329b934c7d09e02b06419e3bf"
 sourcePath: "CONTRIBUTING.md"
 ---
 

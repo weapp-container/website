@@ -6,7 +6,7 @@ summary: "社区行为准则。来自 weapp-container/.github 的版本化工程
 route: "/docs/engineering/organization/code_of_conduct/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/.github"
-sourceCommit: "13f62d60214dcba89e49fe988397cbd02c931613"
+sourceCommit: "f074bbba1f71465329b934c7d09e02b06419e3bf"
 sourcePath: "CODE_OF_CONDUCT.md"
 ---
 

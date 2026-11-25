@@ -6,7 +6,7 @@ summary: "全端演示与历史产物接入。来自 weapp-container/website 的
 route: "/docs/engineering/website/docs/platforms/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "c43b35173270e8e18b9a74c6430211eff8c83cef"
+sourceCommit: "1efd10866e4902854e3a82eeabfa5613c2f61e3b"
 sourcePath: "docs/platforms.md"
 ---
 
