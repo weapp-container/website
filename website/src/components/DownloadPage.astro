@@ -8,21 +8,25 @@ const locale = localeFromPath(Astro.url.pathname);
 const t = (value: string) => locale === 'en' ? copy[value.trim() as keyof typeof copy] || value : value;
 const href = (value: string) => localizedPath(value, locale);
 const labels = {
-  'macos-universal': ['macOS universal', 'Apple Silicon and Intel Macs', 'macOS'],
+  'macos-arm64': ['macOS arm64', 'Apple Silicon', 'macOS'],
+  'macos-x86_64': ['macOS x86_64', 'Intel Mac', 'macOS'],
   'linux-x86_64': ['Linux x86_64', 'Ubuntu 22.04 or 24.04', 'Linux'],
   'windows-x86_64': ['Windows x86_64', 'Windows 10 or later', 'Windows'],
 };
 const formatSize = (size: number) => `${(size / 1_000_000).toFixed(1)} MB`;
 const installerFormats = {
-  'macos-universal': 'DMG',
+  'macos-arm64': 'DMG',
+  'macos-x86_64': 'DMG',
   'linux-x86_64': 'DEB',
   'windows-x86_64': 'MSI',
 };
 const installInstructions = {
-  'macos-universal': '打开 DMG，将应用拖到“应用程序”文件夹。',
+  'macos-arm64': 'Apple Silicon Mac 请使用此版本。打开 DMG，将应用拖到“应用程序”文件夹。',
+  'macos-x86_64': 'Intel Mac 请使用此版本。打开 DMG，将应用拖到“应用程序”文件夹。',
   'linux-x86_64': '使用 Debian 或 Ubuntu 软件安装器打开 DEB 文件。',
   'windows-x86_64': '运行 MSI 安装程序，并按提示完成安装。',
 };
+const macArchitectures = new Set(['macos-arm64', 'macos-x86_64']);
 ---
 <Layout title={t("下载 DevTools · Weapp Container")} description={t("下载可直接运行的 Weapp Container DevTools，支持 macOS、Linux 和 Windows。")}>
   <section class="section-wrap page-intro download-intro">
@@ -33,17 +37,19 @@ const installInstructions = {
   </section>
   <section class="section-wrap downloads-section" aria-labelledby="downloads-heading">
     <div class="section-heading"><h2 id="downloads-heading">{t("选择你的运行平台")}</h2><p>{t("浏览器会直接下载可安装文件，不需要打开 GitHub Release 页面。安装包包含模拟器、Node.js、固定版 weapp-vite 和 renderer assets。")}</p></div>
+    <p class="download-architecture-status" role="status" aria-live="polite" data-architecture-status data-recommendation-template={t("浏览器识别到 {architecture}，已标记匹配的 macOS 安装包。")}>{t("请选择适合你 Mac 处理器的安装包。Safari 和未提供可靠架构信息的浏览器会同时显示两个选项。")}</p>
     <div class="download-list">
       {release.platforms.map(platformRelease => {
         const [name, detail, platform] = labels[platformRelease.id as keyof typeof labels];
         const installerFormat = installerFormats[platformRelease.id as keyof typeof installerFormats];
         const installer = platformRelease.installer;
-        return <article class="download-item" data-platform={platformRelease.id}>
+        return <article class="download-item" data-platform={platformRelease.id} data-architecture={macArchitectures.has(platformRelease.id) ? platformRelease.id : undefined}>
           <div class="download-item-copy">
             <p class="download-platform">{platform}</p>
             <h3>{t(name)}</h3>
             <p>{t(detail)}</p>
             <p>{t(installInstructions[platformRelease.id as keyof typeof installInstructions])}</p>
+            {macArchitectures.has(platformRelease.id) && <p class="download-recommendation" data-recommendation hidden>{t("适合这台 Mac")}</p>}
             <code>{installer.filename}</code>
           </div>
           <div class="download-item-action">
@@ -64,3 +70,19 @@ const installInstructions = {
     <a class="button secondary" href={href("/docs/start/")}>{t("查看快速开始")} <span aria-hidden="true">→</span></a>
   </section>
 </Layout>
+<script>
+  import { detectMacArchitecture } from '../data/client-architecture.mjs';
+
+  const architecture = await detectMacArchitecture();
+  if (architecture) {
+    const recommended = document.querySelector<HTMLElement>(`[data-architecture="${architecture}"]`);
+    const status = document.querySelector<HTMLElement>('[data-architecture-status]');
+    const recommendation = recommended?.querySelector<HTMLElement>('[data-recommendation]');
+    const architectureName = recommended?.querySelector('h3')?.textContent;
+    if (recommended && recommendation && status && architectureName) {
+      recommended.dataset.recommended = 'true';
+      recommendation.hidden = false;
+      status.textContent = status.dataset.recommendationTemplate?.replace('{architecture}', architectureName) || status.textContent;
+    }
+  }
+</script>

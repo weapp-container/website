@@ -50,6 +50,10 @@ try {
 
   await page.goto(new URL('/docs/', base).href, { waitUntil: 'domcontentloaded' });
   await page.goto(new URL('/downloads/', base).href, { waitUntil: 'domcontentloaded' });
+  const downloadBody = await page.locator('body').textContent();
+  assert.equal(await page.locator('article[data-platform="macos-arm64"]').count(), 1);
+  assert.equal(await page.locator('article[data-platform="macos-x86_64"]').count(), 1);
+  assert.equal(await page.locator('a[href*=".tar.gz"], a[href*=".zip"]').count(), 0, 'Download page exposes a portable archive');
   for (const platform of devtoolsRelease.platforms) {
     const platformItem = page.locator(`article[data-platform="${platform.id}"]`);
     assert.equal(await platformItem.count(), 1, `Missing download row for ${platform.id}`);
@@ -60,6 +64,33 @@ try {
       assert.ok((await page.locator('body').textContent()).includes(asset.sha256), `Missing hash for ${asset.filename}`);
     }
   }
+  const fallbackContext = await browser.newContext({ viewport: { width: 1365, height: 960 }, reducedMotion: 'reduce', colorScheme: 'light' });
+  await fallbackContext.addInitScript(() => {
+    Object.defineProperty(navigator, 'userAgentData', { configurable: true, value: undefined });
+  });
+  const fallbackPage = await fallbackContext.newPage();
+  await fallbackPage.goto(new URL('/downloads/', base).href, { waitUntil: 'domcontentloaded' });
+  assert.match(await fallbackPage.locator('body').textContent(), /请选择适合你 Mac 处理器的安装包/);
+  assert.equal(await fallbackPage.locator('[data-architecture][data-recommended="true"]').count(), 0);
+  assert.equal(await fallbackPage.locator('[data-recommendation]:visible').count(), 0);
+  await fallbackContext.close();
+  const recommendationContext = await browser.newContext({ viewport: { width: 1365, height: 960 }, reducedMotion: 'reduce', colorScheme: 'light' });
+  await recommendationContext.addInitScript(() => {
+    Object.defineProperty(navigator, 'userAgentData', {
+      configurable: true,
+      value: {
+        platform: 'macOS',
+        getHighEntropyValues: async () => ({ architecture: 'arm', bitness: '64' }),
+      },
+    });
+  });
+  const recommendationPage = await recommendationContext.newPage();
+  await recommendationPage.goto(new URL('/downloads/', base).href, { waitUntil: 'domcontentloaded' });
+  await recommendationPage.locator('[data-architecture="macos-arm64"][data-recommended="true"]').waitFor();
+  assert.equal(await recommendationPage.locator('[data-architecture="macos-x86_64"][data-recommended="true"]').count(), 0);
+  assert.match(await recommendationPage.locator('[data-architecture-status]').textContent(), /macOS arm64/);
+  await recommendationContext.close();
+  record('download-architecture-recommendation', 'Browsers without architecture hints keep both choices and a reliable Chromium hint marks arm64');
   await page.screenshot({ path: resolve(output, 'downloads-desktop.png'), fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   const downloadsLayout = await page.evaluate(() => ({ width: document.documentElement.scrollWidth, viewport: window.innerWidth }));

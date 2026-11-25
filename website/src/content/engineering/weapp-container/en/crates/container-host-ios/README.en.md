@@ -6,7 +6,7 @@ summary: "container-host-ios. Versioned engineering reference from weapp-contain
 route: "/docs/engineering/weapp-container/crates/container-host-ios/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
+sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
 sourcePath: "crates/container-host-ios/README.en.md"
 ---
 
@@ -81,7 +81,7 @@ including display-link/observer cleanup and Metal drain/detach before unload.
 It supports one pointer/tap; touch target capture, multi-touch/long-press,
 native scrolling, text-input composition, accessibility and complete iOS
 window/display observation remain outside this implementation. See
-[`docs/ios-portable-pack.md`](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/docs/ios-portable-pack.en.md) for embedding
+[`docs/ios-portable-pack.md`](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/docs/ios-portable-pack.en.md) for embedding
 and validation contracts.
 
 `weapp_container_ios_host_render_snapshot` returns one JSON `RenderSnapshot` after a

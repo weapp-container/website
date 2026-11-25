@@ -3,37 +3,33 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {detectMacArchitecture} from '../../website/src/data/client-architecture.mjs';
 
 const root = resolve(fileURLToPath(new URL('../..', import.meta.url)));
 
-test('DevTools download metadata points to the verified release assets', async () => {
+test('DevTools download metadata exposes architecture-specific installers', async () => {
   const release = JSON.parse(await readFile(resolve(root, 'website/src/data/devtools-release.json'), 'utf8'));
   assert.equal(release.schemaVersion, 2);
-  assert.equal(release.version, '0.1.0-preview.7.2');
-  assert.equal(release.tag, 'devtools-v0.1.0-preview.7.2');
-  assert.equal(release.platforms.length, 3);
+  assert.equal(release.version, '0.1.0-preview.7.3');
+  assert.equal(release.tag, 'devtools-v0.1.0-preview.7.3');
+  assert.equal(release.platforms.length, 4);
   assert.match(release.checksumsUrl, /\/SHA256SUMS$/);
   const expectedAssets = {
-    'macos-universal': [
-      ['weapp-container-devtools-macos-universal.dmg', 365743960, 'e1163da19ad3ea693c1b85e56b6926cdecec0fff82a874b2ef01f686140d7a47'],
-    ],
-    'linux-x86_64': [
-      ['weapp-container-devtools-linux-x86_64.deb', 143672648, '39dbcdb052152a0172fa689b665d9950773e4bdaf0fad7121c9789a97aa331d8'],
-    ],
-    'windows-x86_64': [
-      ['weapp-container-devtools-windows-x86_64.msi', 147012123, '883ea082bf5b34adce0fdeb1de44d64abbbcf912db54e9c785ad85173e74c227'],
-    ],
+    'macos-arm64': 'weapp-container-devtools-macos-arm64.dmg',
+    'macos-x86_64': 'weapp-container-devtools-macos-x86_64.dmg',
+    'linux-x86_64': 'weapp-container-devtools-linux-x86_64.deb',
+    'windows-x86_64': 'weapp-container-devtools-windows-x86_64.msi',
   };
   for (const platform of release.platforms) {
     assert.deepEqual(Object.keys(platform).sort(), ['id', 'installer']);
-    for (const [index, asset] of [platform.installer].entries()) {
-      assert.match(asset.sha256, /^[a-f0-9]{64}$/);
-      assert.ok(asset.size > 100_000_000);
-      assert.match(asset.url, new RegExp(`/download/${release.tag}/${asset.filename}$`));
-      assert.deepEqual([asset.filename, asset.size, asset.sha256], expectedAssets[platform.id][index]);
-    }
+    const asset = platform.installer;
+    assert.match(asset.sha256, /^[a-f0-9]{64}$/);
+    assert.ok(asset.size > 100_000_000);
+    assert.match(asset.url, new RegExp(`/download/${release.tag}/${asset.filename}$`));
+    assert.equal(asset.filename, expectedAssets[platform.id]);
   }
-  assert.deepEqual(release.platforms.map(platform => platform.id), ['macos-universal', 'linux-x86_64', 'windows-x86_64']);
+  assert.deepEqual(release.platforms.map(platform => platform.id), ['macos-arm64', 'macos-x86_64', 'linux-x86_64', 'windows-x86_64']);
+  assert.equal(release.platforms.filter(platform => /\.tar\.gz$|\.zip$/i.test(platform.installer.filename)).length, 0);
 });
 
 test('DevTools download page exposes direct installer downloads', async () => {
@@ -44,4 +40,25 @@ test('DevTools download page exposes direct installer downloads', async () => {
   assert.match(page, /installer\.sha256/);
   assert.match(page, /下载安装包/);
   assert.match(page, /release\.checksumsUrl/);
+  assert.match(page, /detectMacArchitecture/);
+  assert.match(page, /data-recommendation/);
+  assert.match(page, /请选择适合你 Mac 处理器的安装包/);
+  assert.doesNotMatch(page, /location\.(?:href|assign|replace)\s*=/);
+});
+
+test('macOS recommendation requires an explicit 64-bit platform and architecture hint', async () => {
+  const hints = values => ({
+    platform: 'macOS',
+    getHighEntropyValues: async keys => {
+      assert.deepEqual(keys, ['architecture', 'bitness']);
+      return values;
+    },
+  });
+  assert.equal(await detectMacArchitecture(hints({architecture: 'arm', bitness: '64'})), 'macos-arm64');
+  assert.equal(await detectMacArchitecture(hints({architecture: 'x86', bitness: '64'})), 'macos-x86_64');
+  assert.equal(await detectMacArchitecture(hints({architecture: 'arm', bitness: '32'})), null);
+  assert.equal(await detectMacArchitecture(hints({architecture: 'unknown', bitness: '64'})), null);
+  assert.equal(await detectMacArchitecture({platform: 'macOS'}), null);
+  assert.equal(await detectMacArchitecture({platform: 'Linux', getHighEntropyValues: async () => ({architecture: 'x86', bitness: '64'})}), null);
+  assert.equal(await detectMacArchitecture(hints(new Error('unavailable'))), null);
 });

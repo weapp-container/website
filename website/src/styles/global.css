@@ -37,11 +37,14 @@
 .download-version{margin-top:18px!important;font-size:13px!important}
 .download-version strong{color:var(--text)}
 .downloads-section{padding-bottom:85px}
+.download-architecture-status{margin:-17px 0 24px;font-size:12px}
 .download-list{border-top:1px solid var(--line)}
-.download-item{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line)}
+.download-item{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center;padding:30px 0 30px 14px;border-bottom:1px solid var(--line);border-left:3px solid transparent}
+.download-item[data-recommended=true]{border-left-color:var(--accent);background:var(--accent-soft)}
 .download-platform{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:650}
 .download-item h3{font-size:24px;margin-top:6px}
 .download-item-copy>p:not(.download-platform){font-size:13px;margin-top:6px}
+.download-item-copy>.download-recommendation{color:var(--accent);font-weight:650}
 .download-item-copy>code{display:block;margin-top:16px;color:var(--muted);font-size:11px;overflow-wrap:anywhere}
 .download-item-action{text-align:right}
 .download-item-action .button{min-width:150px}

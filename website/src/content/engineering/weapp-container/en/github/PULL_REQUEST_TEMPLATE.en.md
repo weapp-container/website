@@ -6,7 +6,7 @@ summary: ".github/PULL_REQUEST_TEMPLATE.en.md. Versioned engineering reference f
 route: "/docs/engineering/weapp-container/github/pull_request_template/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
+sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
 sourcePath: ".github/PULL_REQUEST_TEMPLATE.en.md"
 ---
 

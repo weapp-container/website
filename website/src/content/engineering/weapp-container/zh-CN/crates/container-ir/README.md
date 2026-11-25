@@ -6,7 +6,7 @@ summary: "container-ir。来自 weapp-container/weapp-container 的版本化工�
 route: "/docs/engineering/weapp-container/crates/container-ir/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
+sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
 sourcePath: "crates/container-ir/README.md"
 ---
 
@@ -24,7 +24,7 @@ sourcePath: "crates/container-ir/README.md"
 
 `decode_wxss` 和 `validate_wxss` 接受 v1 和 v2。v1 的单独导入列表中不包含足够的信息来重建源代码顺序或包含条件。v2 拒绝了模糊的非空导入列表以及包含声明或嵌套子元素的导入规则。Blob 版本独立于外部清单模式版本，后者仍为 1。
 
-选择器级联会跳过未解析的规则组子树。运行时必须首先解析导入并展开匹配的条件组；否则，假的媒体分支和关键帧选择器可能意外变成普通元素样式。Rust 和 JavaScript 压缩工具共享标准 JSON 测试数据。有关条件求值和剩余解析/运行时边界，请参见 [WXSS 合约](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/docs/wxss-ir.md)。
+选择器级联会跳过未解析的规则组子树。运行时必须首先解析导入并展开匹配的条件组；否则，假的媒体分支和关键帧选择器可能意外变成普通元素样式。Rust 和 JavaScript 压缩工具共享标准 JSON 测试数据。有关条件求值和剩余解析/运行时边界，请参见 [WXSS 合约](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/docs/wxss-ir.md)。
 
 <a id="border-declarations-and-cascade"></a>
 ## 边界声明和级联

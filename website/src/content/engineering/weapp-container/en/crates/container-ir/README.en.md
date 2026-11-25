@@ -6,7 +6,7 @@ summary: "container-ir. Versioned engineering reference from weapp-container/wea
 route: "/docs/engineering/weapp-container/crates/container-ir/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
+sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
 sourcePath: "crates/container-ir/README.en.md"
 ---
 
@@ -37,7 +37,7 @@ The selector cascade skips unresolved at-rule subtrees. The runtime must first
 resolve imports and flatten matching conditional groups; false media branches
 and keyframe selectors cannot accidentally become ordinary element styles.
 Rust and the JavaScript packer share canonical JSON fixtures. See
-[the WXSS contract](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/docs/wxss-ir.en.md) for conditional evaluation and
+[the WXSS contract](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/docs/wxss-ir.en.md) for conditional evaluation and
 remaining parser/runtime boundaries.
 
 <a id="边界声明和级联"></a>

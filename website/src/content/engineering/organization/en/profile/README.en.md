@@ -6,7 +6,7 @@ summary: "Weapp Container. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/organization/profile/index/"
 locale: "en"
 sourceRepository: "weapp-container/.github"
-sourceCommit: "fdab9ba4e4c69c84d8d1b5096c945da994745f34"
+sourceCommit: "dbf157301b4be84a8da33e5e4081edf1af7b9052"
 sourcePath: "profile/README.en.md"
 ---
 
@@ -60,4 +60,4 @@ Use the [core README](/en/docs/engineering/weapp-container/index/) to prepare No
 
 Project source is published under Apache-2.0, with selected core crates retaining MIT OR Apache-2.0. Third-party components keep their own licenses. The LICENSE, NOTICE, and RUNTIME-LICENSE included with each repository or copy govern that copy.
 
-Historical runtime archives retain their original terms and hashes. Public source does not relicense those binaries or guarantee old download pins remain available. Prefer building matching public source; see the [migration documentation](https://container.weapp.dev/en/docs/engineering/weapp-container/docs/runtime-artifacts-migration/) for historical archive boundaries.
+Historical runtime archives retain their original terms and hashes. Public source does not relicense those binaries or guarantee old download pins remain available. Prefer building matching public source; see the [migration documentation](https://container.weapp.dev/en/docs/platforms/) for historical archive boundaries.

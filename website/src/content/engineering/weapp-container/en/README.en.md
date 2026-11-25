@@ -6,7 +6,7 @@ summary: "Weapp Container. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/weapp-container/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
+sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
 sourcePath: "README.en.md"
 ---
 
@@ -50,13 +50,15 @@ Each package includes `weapp-devtools.json` with source, compiler, Node, compati
 
 The current GitHub prerelease macOS and Windows installers are not platform-signed, so the first launch may show an operating-system warning. Download only from the matching GitHub Release and compare the file with the `SHA256SUMS` entry published there before removing the download marker.
 
-On macOS, open the `.dmg`, drag `Weapp Container DevTools.app` to Applications, then run:
+On macOS, choose the `.dmg` that matches the processor architecture. Choose `macos-arm64` for Apple Silicon and `macos-x86_64` for Intel Macs. Open the DMG, drag `Weapp Container DevTools.app` to Applications, then run:
 
 ```sh
-shasum -a 256 "$HOME/Downloads/weapp-container-devtools-macos-universal.dmg"
+shasum -a 256 "$HOME/Downloads/weapp-container-devtools-macos-arm64.dmg"
 xattr -dr com.apple.quarantine "/Applications/Weapp Container DevTools.app"
 open "/Applications/Weapp Container DevTools.app"
 ```
+
+The website marks the matching DMG when the browser exposes a reliable architecture hint. Safari and browsers without a reliable hint show both options for manual selection. Portable `.tar.gz` and `.zip` archives remain in the GitHub Release, while the website exposes only directly installable DMG, DEB, and MSI packages.
 
 `xattr` removes only this app's macOS quarantine metadata. It does not create a signature or notarization. Replace the path when the app is installed elsewhere. Do not disable Gatekeeper globally to run a prerelease.
 
@@ -80,7 +82,7 @@ cargo run -p container-simulator --features quickjs-native -- \
   run --pack ./artifacts/game --snapshot ./artifacts/game/snapshot.json
 ```
 
-This path requires `game.json` and `game.js`. It does not decrypt platform packages. The portable game runtime provides a Canvas 2D subset, frame scheduling, and normalized host events through `game.event` for touch, keyboard, sensor, audio interruption and memory warnings. App visibility uses `app.lifecycle`; viewport updates resize the game Canvas and notify `wx.onWindowResize`. Event payloads follow [`schemas/game-event-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/schemas/game-event-v1.schema.json). API support remains capability-negotiated. Official DevTools, GPU and device parity remain unverified.
+This path requires `game.json` and `game.js`. It does not decrypt platform packages. The portable game runtime provides a Canvas 2D subset, frame scheduling, and normalized host events through `game.event` for touch, keyboard, sensor, audio interruption and memory warnings. App visibility uses `app.lifecycle`; viewport updates resize the game Canvas and notify `wx.onWindowResize`. Event payloads follow [`schemas/game-event-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/schemas/game-event-v1.schema.json). API support remains capability-negotiated. Official DevTools, GPU and device parity remain unverified.
 
 ## Open-source mini-program examples
 
@@ -99,7 +101,7 @@ pnpm simulator:dev:smoke -- \
   --project examples/apps/community/miniprogram-demo-text
 ```
 
-Replace `miniprogram-demo-text` with `ant-design-button` or `taro-blended` for the other samples. See [`examples/apps/community/README.en.md`](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/examples/apps/community/README.en.md) for the complete sample list, commands, and source records.
+Replace `miniprogram-demo-text` with `ant-design-button` or `taro-blended` for the other samples. See [`examples/apps/community/README.en.md`](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/examples/apps/community/README.en.md) for the complete sample list, commands, and source records.
 
 To keep the simulator running in a browser:
 
@@ -110,4 +112,4 @@ cargo run -p container-simulator --features quickjs-native -- \
 
 ## License
 
-Apache-2.0. See [NOTICE](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/NOTICE) and [SECURITY](/en/docs/engineering/weapp-container/security/).
+Apache-2.0. See [NOTICE](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/NOTICE) and [SECURITY](/en/docs/engineering/weapp-container/security/).

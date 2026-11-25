@@ -6,7 +6,7 @@ summary: "container-host-android。来自 weapp-container/weapp-container 的版
 route: "/docs/engineering/weapp-container/crates/container-host-android/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
+sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
 sourcePath: "crates/container-host-android/README.md"
 ---
 

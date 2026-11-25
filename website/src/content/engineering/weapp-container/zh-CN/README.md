@@ -6,7 +6,7 @@ summary: "Weapp Container。来自 weapp-container/weapp-container 的版本化�
 route: "/docs/engineering/weapp-container/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "391aad49843fdd739164628b2c07f3409d78c773"
+sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
 sourcePath: "README.md"
 ---
 
@@ -50,13 +50,15 @@ Android、iOS、React Native、Flutter 与 Desktop 的 reference consumer 位于
 
 当前 GitHub prerelease 的 macOS 和 Windows 安装包没有平台签名，首次启动可能显示系统警告。只从对应 GitHub Release 下载，并先用发布页的 `SHA256SUMS` 核对文件哈希。确认来源和哈希后，可以按平台移除下载隔离标记。
 
-macOS 先打开 `.dmg`，将 `Weapp Container DevTools.app` 拖到 Applications，再执行：
+macOS 按处理器架构选择对应的 `.dmg`，Apple Silicon 选择 `macos-arm64`，Intel Mac 选择 `macos-x86_64`。打开 DMG，将 `Weapp Container DevTools.app` 拖到 Applications，再执行：
 
 ```sh
-shasum -a 256 "$HOME/Downloads/weapp-container-devtools-macos-universal.dmg"
+shasum -a 256 "$HOME/Downloads/weapp-container-devtools-macos-arm64.dmg"
 xattr -dr com.apple.quarantine "/Applications/Weapp Container DevTools.app"
 open "/Applications/Weapp Container DevTools.app"
 ```
+
+网站下载页会在浏览器提供可靠架构提示时标记匹配的 DMG。Safari 以及未提供可靠架构提示的浏览器会同时显示两个选项，请按 Mac 的处理器架构手动选择。便携 `.tar.gz` 与 `.zip` 仍保留在 GitHub Release 中，但网站只提供可直接安装的 DMG、DEB 和 MSI。
 
 `xattr` 只会移除这个应用的 macOS quarantine 元数据，不会创建签名或公证。应用安装在其他目录时，替换为实际路径。不要为了运行预览版而全局关闭 Gatekeeper。
 
@@ -80,7 +82,7 @@ cargo run -p container-simulator --features quickjs-native -- \
   run --pack ./artifacts/game --snapshot ./artifacts/game/snapshot.json
 ```
 
-运行时提供 Canvas 2D 子集和 requestAnimationFrame。宿主通过平台无关的 `game.event` 提交规范化触摸、键盘、传感器、音频中断和内存告警事件。显示/隐藏沿用 `app.lifecycle`，viewport 更新会调整游戏 Canvas 并通知 `wx.onWindowResize`。事件载荷见 [game-event-v1.schema.json](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/schemas/game-event-v1.schema.json)。小游戏 API 仍按清单和宿主能力协商，官方 DevTools、GPU 与设备一致性尚未验证。
+运行时提供 Canvas 2D 子集和 requestAnimationFrame。宿主通过平台无关的 `game.event` 提交规范化触摸、键盘、传感器、音频中断和内存告警事件。显示/隐藏沿用 `app.lifecycle`，viewport 更新会调整游戏 Canvas 并通知 `wx.onWindowResize`。事件载荷见 [game-event-v1.schema.json](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/schemas/game-event-v1.schema.json)。小游戏 API 仍按清单和宿主能力协商，官方 DevTools、GPU 与设备一致性尚未验证。
 
 ## 开源小程序示例
 
@@ -99,7 +101,7 @@ pnpm simulator:dev:smoke -- \
   --project examples/apps/community/miniprogram-demo-text
 ```
 
-另外两个样例将命令中的 `miniprogram-demo-text` 分别替换为 `ant-design-button` 和 `taro-blended`。样例列表、逐项命令和来源见 [`examples/apps/community/README.md`](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/examples/apps/community/README.md)。
+另外两个样例将命令中的 `miniprogram-demo-text` 分别替换为 `ant-design-button` 和 `taro-blended`。样例列表、逐项命令和来源见 [`examples/apps/community/README.md`](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/examples/apps/community/README.md)。
 
 在浏览器中保持模拟器运行：
 
@@ -110,4 +112,4 @@ cargo run -p container-simulator --features quickjs-native -- \
 
 ## 许可证
 
-Apache-2.0。请阅读 [NOTICE](https://github.com/weapp-container/weapp-container/blob/391aad49843fdd739164628b2c07f3409d78c773/NOTICE) 和 [SECURITY.md](/docs/engineering/weapp-container/security/)。
+Apache-2.0。请阅读 [NOTICE](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/NOTICE) 和 [SECURITY.md](/docs/engineering/weapp-container/security/)。
