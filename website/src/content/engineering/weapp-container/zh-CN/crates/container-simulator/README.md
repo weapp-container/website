@@ -6,7 +6,7 @@ summary: "container-simulator。来自 weapp-container/weapp-container 的版本
 route: "/docs/engineering/weapp-container/crates/container-simulator/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
+sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
 sourcePath: "crates/container-simulator/README.md"
 ---
 
@@ -15,28 +15,28 @@ sourcePath: "crates/container-simulator/README.md"
 **简体中文** · [English](/en/docs/engineering/weapp-container/crates/container-simulator/index/)
 
 
-明确的 [现代 JS/TS View 配置文件](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/modern-view.md) 支持在独立运行域中运行同步 ES2022。运行示例时请使用 `dev --project examples/apps/modern-view-app --surface web`；仅现代功能的编辑会独立重新打包，可执行代码的变更将重启会话。传统 WXS 保留其自身的语义和兼容性证据。
+明确的 [现代 JS/TS View 配置文件](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/modern-view.md) 支持在独立运行域中运行同步 ES2022。运行示例时请使用 `dev --project examples/apps/modern-view-app --surface web`；仅现代功能的编辑会独立重新打包，可执行代码的变更将重启会话。传统 WXS 保留其自身的语义和兼容性证据。
 
 `container-simulator` 是一个本地、确定性的开发工具，用于打包的 `weapp-vite` 应用程序。它加载与原生/网页宿主相同的 `manifest.json` 和内容寻址的 blob，然后通过批处理桥接消息驱动一个 `container-host-common::HostSession`。
 
-原生 QuickJS/V8 会话在独立的 View 运行时中评估声明的 WXS，保留页面/组件状态和整个文档的渲染批处理。样式重新加载会复用已评估的工作；WXS 文档/程序变更将重启会话。没有 View 模块元数据的旧版包仍不支持。有关执行和方言限制，请参见[隔离的 View 合约](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/isolated-view-engine.md)。
+原生 QuickJS/V8 会话在独立的 View 运行时中评估声明的 WXS，保留页面/组件状态和整个文档的渲染批处理。样式重新加载会复用已评估的工作；WXS 文档/程序变更将重启会话。没有 View 模块元数据的旧版包仍不支持。有关执行和方言限制，请参见[隔离的 View 合约](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/isolated-view-engine.md)。
 
 旨在提供快速开发反馈和可重现的合规性测试环境。绿色模拟器报告是无界面的证据；它不能认证官方微信开发者工具、GPU 绘制表面、模拟器或物理设备。
 
-`web::DevRasterWebSession` 是一个独立的、明确的库入口，用于在单个运行时中实现有票软件的 Raster HTTP/SSE/ACK/input 功能。实验性示例 `serve_dev_raster` 拥有独立的端口和清理机制。它不启用正常 CLI，不将旧版 HTML 附加到二进制帧 v2，也不提供浏览器/GPU 验收。详见 [严格协议、限制和生命周期](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/dev-raster-http.md)。
+`web::DevRasterWebSession` 是一个独立的、明确的库入口，用于在单个运行时中实现有票软件的 Raster HTTP/SSE/ACK/input 功能。实验性示例 `serve_dev_raster` 拥有独立的端口和清理机制。它不启用正常 CLI，不将旧版 HTML 附加到二进制帧 v2，也不提供浏览器/GPU 验收。详见 [严格协议、限制和生命周期](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/dev-raster-http.md)。
 
 <a id="browser-runtime-preparation-for-embedding"></a>
 ## 浏览器运行时嵌入准备
 
-`DevConfig.browser_runtime` 显式将 `BrowserWorker` 监控器配置为静态准备一个独立固定完成的 Worker 生产者。监控器拥有有界输入副本、工具、有限任务和原始验证的资源字节。`BrowserRuntimePrepared` 仅报告静态就绪状态；`runtimeReady` 和 `presentedReady` 仍为 false。释放资源借用人，并重试 `try_shutdown()` 直至确认清理完成。示例命令 `cargo run -p container-simulator --example prepare_browser_runtime -- <project> <producer> <pins.json>` 驱动此实际监控器路径。参见 [输入固定点、限制和生命周期](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/dual-renderer/browser-dev-artifacts.md)。此操作不会启用浏览器监控 CLI 或启动 Worker/浏览器。
+`DevConfig.browser_runtime` 显式将 `BrowserWorker` 监控器配置为静态准备一个独立固定完成的 Worker 生产者。监控器拥有有界输入副本、工具、有限任务和原始验证的资源字节。`BrowserRuntimePrepared` 仅报告静态就绪状态；`runtimeReady` 和 `presentedReady` 仍为 false。释放资源借用人，并重试 `try_shutdown()` 直至确认清理完成。示例命令 `cargo run -p container-simulator --example prepare_browser_runtime -- <project> <producer> <pins.json>` 驱动此实际监控器路径。参见 [输入固定点、限制和生命周期](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/dual-renderer/browser-dev-artifacts.md)。此操作不会启用浏览器监控 CLI 或启动 Worker/浏览器。
 
 设置 `DevConfig.managed_browser_sources = true` 可以使用显式拥有的编译器 → 原始输入 → 可移植输入流水线，并在同一个artifact ledger中运行。
 该示例在pin文件之后接受 `--owned-sources` 参数，并等待验证的 `PortableReady`。此配置需要冻结的供应商编译器、QuickJS、独立的运行时pin以及没有 `container.config.json` 的项目；它明确拒绝自定义构建器和现代View输入。当新构建失败时，之前的有效包仍会被保留为拥有状态。在父进程清理前，监视器/进程屏障和实际输入借阅者必须完成清空；清理失败可重试。
-该配置为根/输入/工具、一个运行时、两个原始输入和两个可移植输出保留逻辑容量，并包含一个有限的artifact任务。它不接受浏览器站点或阶段。参见 [拥有源准备](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/dual-renderer/browser-source-preparation.md)。
+该配置为根/输入/工具、一个运行时、两个原始输入和两个可移植输出保留逻辑容量，并包含一个有限的artifact任务。它不接受浏览器站点或阶段。参见 [拥有源准备](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/dual-renderer/browser-source-preparation.md)。
 
 `DevConfig.managed_browser_stages = true` 此外还允许在同一账本上执行实际的
 `stage-pack` 任务。`begin_browser_stage` 在观察源之后借取当前拥有的可移植生成版本；`poll_browser_stage` 返回一个已验证的静态 `StageArtifact`。`browser_stage_resource` 借取原始捕获的字节和费用。两个阶段槽位包含已退化的站点，其主体仍被借取；释放主体并重试退化/关闭操作。
-可执行示例为 `prepare_browser_stage`。该配置不启用 HTTP、浏览器 CLI、Worker 执行或呈现。参见 [消费阶段](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/dual-renderer/browser-consuming-stage.md)。
+可执行示例为 `prepare_browser_stage`。该配置不启用 HTTP、浏览器 CLI、Worker 执行或呈现。参见 [消费阶段](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/dual-renderer/browser-consuming-stage.md)。
 
 ## CLI
 
@@ -57,7 +57,7 @@ cargo run -p container-simulator -- \
   --report artifacts/simulator/report.json
 ```
 
-schema v4 小游戏包使用相同的 simulator 入口。启动时不会创建页面路由，`game.js` 的 `wx.createCanvas()` 使用独立的 `game` Canvas 表面，报告和 `--snapshot` 会读取该表面。宿主通过平台无关的 `game.event` 提交规范化触摸、键盘、传感器、音频中断和内存告警事件。显示/隐藏沿用 `app.lifecycle`，viewport 更新会自动调整游戏 Canvas 并触发 `wx.onWindowResize`。载荷格式见 [game-event-v1.schema.json](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/schemas/game-event-v1.schema.json)。旧版 `game.touch` 仍可用于触摸事件。
+schema v4 小游戏包使用相同的 simulator 入口。启动时不会创建页面路由，`game.js` 的 `wx.createCanvas()` 使用独立的 `game` Canvas 表面，报告和 `--snapshot` 会读取该表面。宿主通过平台无关的 `game.event` 提交规范化触摸、键盘、传感器、音频中断和内存告警事件。显示/隐藏沿用 `app.lifecycle`，viewport 更新会自动调整游戏 Canvas 并触发 `wx.onWindowResize`。载荷格式见 [game-event-v1.schema.json](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/schemas/game-event-v1.schema.json)。旧版 `game.touch` 仍可用于触摸事件。
 
 ```sh
 pnpm container:pack -- ./game-dist --game --out ./artifacts/game
@@ -97,7 +97,7 @@ pnpm submodule:verify
 
 使用 `vendor/weapp-vite/package.json` 中声明的 Node 和 pnpm 版本。
 单独安装根包不会构建供应商编译器。详见
-[准备说明](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/simulator.md#开发态监督器)。
+[准备说明](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/simulator.md#开发态监督器)。
 
 `dev` 通过一个独立的公共 API 适配器启动了固定化的 weapp-vite 监听器。
 该适配器在构建完成事件期间冻结输出，并发布版本回执。监督器仅打包这些不可变的快照，并通过本地绘制表面提供最新验证的版本：
@@ -167,11 +167,11 @@ cargo run --release -p container-simulator -- \
 Skia 需要一个已完成的 Worker 生产者，其独立的 pin 指定为 `"renderer": "canvaskit"`；请使用其对应的 `--browser-runtime-dir` 和 `--browser-runtime-pins` 配对。WebView 可接受独立 pin 的软件或 CanvasKit 生产者。原始的 `serve_browser_dev` 示例保持其 WebView 启动配置。
 
 这些明确的 QuickJS Worker 配置支持 `--route`、对象 `--data-json` 和整数 `--viewport`（每边最多 4096，默认 375×667）。
-它们不需要原生 QuickJS 功能，也不读取保存的远程呈现偏好设置。Skia 支持 `--render-scale auto|1|1.5|2|3|4`（默认为 auto，由拥有预览的显示密度决定，并上限为 2）。其精确的物理帧目标与逻辑视口和模拟 `pixelRatio` 无关；被拒绝的目标预算会保留已接受的目标。WebView 使用浏览器密度，并拒绝显式渲染缩放。浏览器模式下的 Skia 在启动时仅解析一次 auto。对于浏览器模式，未实现实时设置面板、移动显示器后自动调整密度以及目标帧率控制。以下远程模式的控制并不表示支持浏览器功能。两种模式均拒绝渲染器 `auto`、显式 `--fps`、渲染器资源及其环境覆盖、自定义 `--wv-bin`、现代 View 配置、V8、原生绘制表面和软件模式，启动前均不启用观察器。默认的 `auto + remote` 行为保持不变。每次原始运行都会保留自己的 `runs/<runId>/browser-dev-summary.json`，因此连续启动可重用输出根目录而不会覆盖证据。在停止时请保持原始预览窗口打开；刷新或崩溃接管功能未实现。详情请参见 [浏览器开发](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/dual-renderer/browser-dev-loop.md)。
+它们不需要原生 QuickJS 功能，也不读取保存的远程呈现偏好设置。Skia 支持 `--render-scale auto|1|1.5|2|3|4`（默认为 auto，由拥有预览的显示密度决定，并上限为 2）。其精确的物理帧目标与逻辑视口和模拟 `pixelRatio` 无关；被拒绝的目标预算会保留已接受的目标。WebView 使用浏览器密度，并拒绝显式渲染缩放。浏览器模式下的 Skia 在启动时仅解析一次 auto。对于浏览器模式，未实现实时设置面板、移动显示器后自动调整密度以及目标帧率控制。以下远程模式的控制并不表示支持浏览器功能。两种模式均拒绝渲染器 `auto`、显式 `--fps`、渲染器资源及其环境覆盖、自定义 `--wv-bin`、现代 View 配置、V8、原生绘制表面和软件模式，启动前均不启用观察器。默认的 `auto + remote` 行为保持不变。每次原始运行都会保留自己的 `runs/<runId>/browser-dev-summary.json`，因此连续启动可重用输出根目录而不会覆盖证据。在停止时请保持原始预览窗口打开；刷新或崩溃接管功能未实现。详情请参见 [浏览器开发](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/dual-renderer/browser-dev-loop.md)。
 
 Browser 面板分别报告 Worker/runtime 和渲染器。Skia 的 `submitted` 回执描述一次有界的本地 WebGL2 图像提交；`accepted` 还要求匹配当前调度器证明、逻辑表面、页面和视口。诊断不授予输入权限。硬件身份保持 `unknown`，GPU 完成状态为 `not-waited`：普通提交不会等待物理 GPU 完成。已有 DOM 开发证据不能验证新的 Skia CLI 路径；实际冒烟、硬件和性能结果仍需独立验收证据。
 
-原生 WebView（`desktop|both`），以及使用 `--software` 的 `webview` 仍明确失败。DOM SelectorQuery 有一个明确协商的有限实现，等待原生/浏览器验证；远程初始启动仍不支持。DOM 相交/滚动命令适配器以及部分 CSS/组件仍不支持。参见 [查询限制](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/dual-renderer/browser-selector-queries.md)。重新加载预检验证 IR 和资源；稍后的仅浏览器准备失败会保留之前图像，并暂停已失效的输入。它不会回滚任意 JS 效果，也不会承诺实时清单回滚。参见 [事务边界](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/dual-renderer/browser-presentation.md) 以及 `docs/dual-renderer/` 中的冻结目标检查清单。
+原生 WebView（`desktop|both`），以及使用 `--software` 的 `webview` 仍明确失败。DOM SelectorQuery 有一个明确协商的有限实现，等待原生/浏览器验证；远程初始启动仍不支持。DOM 相交/滚动命令适配器以及部分 CSS/组件仍不支持。参见 [查询限制](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/dual-renderer/browser-selector-queries.md)。重新加载预检验证 IR 和资源；稍后的仅浏览器准备失败会保留之前图像，并暂停已失效的输入。它不会回滚任意 JS 效果，也不会承诺实时清单回滚。参见 [事务边界](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/dual-renderer/browser-presentation.md) 以及 `docs/dual-renderer/` 中的冻结目标检查清单。
 
 <a id="web-resolution-and-presentation"></a>
 ### 网页解析和呈现
@@ -188,7 +188,7 @@ UTF-8 JSON 元数据长度，元数据，然后是紧密打包的直alpha RGBA8�
 逻辑/物理尺寸，步长，字节长度，以及测量的绘制/读回耗时 `renderMs`。`frameId` 是会话传输序列；`sourceFrameId` 保留原生 ID，`renderRevision` 在滚动/密度重绘制时递增，无需新的源帧 ID。源 Skia 预乘 alpha 仅转换一次；零 alpha 的 RGB 被清空。客户端共享不可变的编码缓冲区，而 `/api/snapshot` 仅在需要时对原始预乘 JSON 进行编码。SSE 仅保留小帧元数据。旧客户端体以及源/呈现缓冲区共享 64 MiB 的缓存预算，包括过渡容量；慢客户端无法无限增长内存。非阻塞套接字就绪推进有界写入，无需每 256 KiB 固定等待 16 ms。
 
 `GET /api/presentation` 返回包含 `revision`、`generation`、`logicalWidth`、`logicalHeight`、`renderScale`、`effectiveScale` 和 `fps` 的 v1 配置。
-通过 POST 发送包含当前 `revision` 和可选的 `requestId`/`devicePixelRatio` 的补丁；HTTP 202 仅表示回执。稍后的 `presentation` SSE 事件在运行时线程应用后携带 `{requestId,ok,presentation,error?}`。返回过期的修订版本将返回 409。客户端保留一个正在传输的帧和一个最新的 RAF 候选帧，拒绝过时的会话/版本帧，并在逻辑几何发生变化时暂停旧图像输入。有关字段和预算详情，请参见 [完整 Web 协议](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/simulator.md#开发态监督器)。
+通过 POST 发送包含当前 `revision` 和可选的 `requestId`/`devicePixelRatio` 的补丁；HTTP 202 仅表示回执。稍后的 `presentation` SSE 事件在运行时线程应用后携带 `{requestId,ok,presentation,error?}`。返回过期的修订版本将返回 409。客户端保留一个正在传输的帧和一个最新的 RAF 候选帧，拒绝过时的会话/版本帧，并在逻辑几何发生变化时暂停旧图像输入。有关字段和预算详情，请参见 [完整 Web 协议](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/simulator.md#开发态监督器)。
 
 每个启动原子性地保留自己的运行命名空间和会话 ID。重用输出目录会保留之前版本的生成结果；并发运行拥有独立的暂存和发布路径。默认编译器将其输出写入自己的 `.build-output`，同时保留项目的普通 `dist`。同一运行内的版本号会递增。
 
@@ -197,7 +197,7 @@ JavaScript、JSON、路由、应用配置、组件或依赖变更会重启会话
 WXS、源码/图结构变更以及文档本地别名变更也属于重启输入，即使没有自定义组件。旧的内联声明和 `.wxs` 资源会被检查为可执行输入。
 打包器将 WXS 存储在独立的基于内容寻址的 `viewScripts` 图结构和模板 `wxsModules` 绑定中；这些内容不会进入 AppService 的模块加载器。源字节和图结构会被验证，内联脚本体将作为原始文本保留。一个隔离的 View 域会在原生 QuickJS/V8 构建中以整个文档批次的方式评估声明的 WXS 和 WXML。没有经过验证的模块图的旧版包将报错 `ERR_UNSUPPORTED_CAPABILITY`；缺少选定提供者的将报错 `ERR_ENGINE`。失败的候选将保留上一个运行的包。具有语法感知的静态图遍历阶段能够区分除法、正则表达式、注释和转义标识符；单独的 WXS 语言编译器将对不支持的格式报错 `ERR_UNSUPPORTED_WXS_SYNTAX`。WXML/WXS 输入必须是有效的 UTF-8。
 
-独立的原生 QuickJS/V8 `ViewEngine` 适配器现在提供批处理执行、作用域/文档模块所有权以及超时/取消处置。运行时将它们连接到 WXML 评估。有关支持的子集、测试和剩余官方行为证据，请参见 [执行合约](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/isolated-view-engine.md)；本地原生测试无法建立完整的 WXS、DevTools、GPU 或设备一致性。
+独立的原生 QuickJS/V8 `ViewEngine` 适配器现在提供批处理执行、作用域/文档模块所有权以及超时/取消处置。运行时将它们连接到 WXML 评估。有关支持的子集、测试和剩余官方行为证据，请参见 [执行合约](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/isolated-view-engine.md)；本地原生测试无法建立完整的 WXS、DevTools、GPU 或设备一致性。
 
 对于包含组件作用域脚本模块或 `usingComponents` 声明的包，
 当 WXML 编辑内容的节点形状、指令、结构模板/导入/包含或自定义组件输入发生变化时，也会重新启动。
@@ -307,7 +307,7 @@ let response = simulator.dispatch_json(r#"{
 
 `HostSession` 仍然是运行时状态的唯一拥有者。`Simulator` 仅拥有包数据块、请求排序和归一化追踪，因此 Android、iOS、Harmony、桌面和 Web 示例可以使用相同的启动和分发合约。
 
-[Rust 应用示例](/docs/engineering/weapp-container/examples/apps/embed-runner/index/) 使用一个 pack 目录。[Web 示例](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/examples/hosts/web/README.md) 通过 `/embed` 共享开发监督者的验证 pack/会话。原生示例有独立的资源入口点：Android 加载 `app/src/main/assets/portable-pack`，Harmony 加载 `entry/src/main/resources/rawfile`；其 README 文件描述了 pack 同步命令。iOS Swift Package 和 UIKit `ios-app` 的烟雾测试仍使用内联固定数据，因此业务应用必须提供 bundle manifest/module/blob 的加载。有关确切路径，请参见[宿主入口点](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/docs/simulator.md#app-植入边界)。
+[Rust 应用示例](/docs/engineering/weapp-container/examples/apps/embed-runner/index/) 使用一个 pack 目录。[Web 示例](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/examples/hosts/web/README.md) 通过 `/embed` 共享开发监督者的验证 pack/会话。原生示例有独立的资源入口点：Android 加载 `app/src/main/assets/portable-pack`，Harmony 加载 `entry/src/main/resources/rawfile`；其 README 文件描述了 pack 同步命令。iOS Swift Package 和 UIKit `ios-app` 的烟雾测试仍使用内联固定数据，因此业务应用必须提供 bundle manifest/module/blob 的加载。有关确切路径，请参见[宿主入口点](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/docs/simulator.md#app-植入边界)。
 
 默认的 Android 原生构建没有 QuickJS 提供者。它会验证包并提交模块字节，然后在执行时返回明确的 `ERR_ENGINE`。在该环境中运行真正的小程序仍需要可用的 Android 引擎构建和独立的设备验证；仅凭包或绘制表面的烟雾测试无法证明具备该能力。
 

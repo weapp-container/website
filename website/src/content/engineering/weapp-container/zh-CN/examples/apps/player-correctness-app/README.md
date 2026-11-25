@@ -6,7 +6,7 @@ summary: "开发播放器正确性测试套件（预览版.5 源码）。来自 
 route: "/docs/engineering/weapp-container/examples/apps/player-correctness-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
+sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
 sourcePath: "examples/apps/player-correctness-app/README.md"
 ---
 

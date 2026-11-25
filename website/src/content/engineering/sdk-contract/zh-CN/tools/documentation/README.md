@@ -6,7 +6,7 @@ summary: "双语文档维护。来自 weapp-container/sdk-contract 的版本化�
 route: "/docs/engineering/sdk-contract/tools/documentation/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "083742acfbfea6e56136ddebfecb9d0d1d7d3781"
+sourceCommit: "d83fc43b38f7ac774b0a19698911ed3f76b910a5"
 sourcePath: "tools/documentation/README.md"
 ---
 

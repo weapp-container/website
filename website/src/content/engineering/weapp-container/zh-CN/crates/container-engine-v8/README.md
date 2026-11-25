@@ -6,7 +6,7 @@ summary: "container-engine-v8。来自 weapp-container/weapp-container 的版本
 route: "/docs/engineering/weapp-container/crates/container-engine-v8/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
+sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
 sourcePath: "crates/container-engine-v8/README.md"
 ---
 

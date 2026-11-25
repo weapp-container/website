@@ -6,7 +6,7 @@ summary: "Dev Player chrome 修复工具。来自 weapp-container/weapp-containe
 route: "/docs/engineering/weapp-container/examples/apps/player-chrome-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
+sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
 sourcePath: "examples/apps/player-chrome-app/README.md"
 ---
 

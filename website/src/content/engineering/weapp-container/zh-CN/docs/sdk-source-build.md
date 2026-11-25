@@ -6,7 +6,7 @@ summary: "SDK 源码构建指南。来自 weapp-container/weapp-container 的版
 route: "/docs/engineering/weapp-container/docs/sdk-source-build/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
+sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
 sourcePath: "docs/sdk-source-build.md"
 ---
 
@@ -37,6 +37,7 @@ portable pack 必须是运行库支持的格式。普通小程序源目录不能
 | Desktop | CMake 3.21+、C++17、目标系统工具链 | [Desktop SDK README](/docs/engineering/sdk-desktop/index/#获取运行库并构建) · [consumer](/docs/engineering/sdk-desktop/consumer/index/) |
 | Flutter | Flutter 3.47.7、Dart 3.3+、目标平台工具链 | [Flutter SDK README](/docs/engineering/sdk-flutter/index/#2-生成分发包并运行示例) · [example app](/docs/engineering/sdk-flutter/example/index/) |
 | React Native | Node.js 24、React Native 0.88、Android 或 Apple 原生工具链 | [React Native SDK README](/docs/engineering/sdk-react-native/index/#从源码生成分发包) · [example app](/docs/engineering/sdk-react-native/example/index/) |
+| Contract C ABI | CMake 3.21+、目标系统 C 编译器 | [Contract SDK README](/docs/engineering/sdk-contract/index/) · [C ABI host example](/docs/engineering/sdk-contract/examples/consumer/index/) |
 
 核心仓库没有 `pnpm sdk:build:*` 命令。源码构建由 runtime、license collector 和各 SDK 的包装层工具分步完成。下面给出可复制的 Android、iOS 和 macOS arm64 示例，其他目标使用对应的 Rust target 和平台工具链。
 
@@ -95,6 +96,21 @@ flutter pub get
 flutter analyze lib
 flutter run -d <device-id>
 ```
+
+### Contract C ABI
+
+Contract 示例消费本机编译的 C ABI 静态库。以下命令以 Apple Silicon macOS 为例，其他目标使用对应的 Rust target 和生成目录：
+
+```sh
+node scripts/sdk-native-build.mjs --target aarch64-apple-darwin --out artifacts/sdk/native
+cmake -S sdk/contract/examples/consumer -B artifacts/sdk/contract-consumer \
+  -DWEAPP_CONTAINER_SDK_INCLUDE_DIR="$PWD/artifacts/sdk/native/aarch64-apple-darwin" \
+  -DWEAPP_CONTAINER_SDK_LIBRARY="$PWD/artifacts/sdk/native/aarch64-apple-darwin/libweapp_container_sdk.a"
+cmake --build artifacts/sdk/contract-consumer --config Release
+artifacts/sdk/contract-consumer/contract_consumer "$PWD/artifacts/hello-pack"
+```
+
+该命令行消费者会验证 ABI、注册并完成示例主机方法、等待首帧并检查像素缓冲区，最后等待会话关闭事件。Contract SDK 定义原生宿主接口，不提供平台 UI。
 
 各 SDK 页面包含完整的平台参数、安装结构、宿主服务和生命周期用法。先执行最小目标构建，再运行 consumer；编译通过不代表设备、GPU 或性能验收通过。
 

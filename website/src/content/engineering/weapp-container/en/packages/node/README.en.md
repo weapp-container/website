@@ -6,7 +6,7 @@ summary: "@weapp-container/node. Versioned engineering reference from weapp-cont
 route: "/docs/engineering/weapp-container/packages/node/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
+sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
 sourcePath: "packages/node/README.en.md"
 ---
 

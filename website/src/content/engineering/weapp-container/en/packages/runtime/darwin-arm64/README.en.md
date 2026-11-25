@@ -6,7 +6,7 @@ summary: "@weapp-container/runtime-darwin-arm64. Versioned engineering reference
 route: "/docs/engineering/weapp-container/packages/runtime/darwin-arm64/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
+sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
 sourcePath: "packages/runtime/darwin-arm64/README.en.md"
 ---
 

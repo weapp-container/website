@@ -6,7 +6,7 @@ summary: "SDK Source Build Guide. Versioned engineering reference from weapp-con
 route: "/docs/engineering/weapp-container/docs/sdk-source-build/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
+sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
 sourcePath: "docs/sdk-source-build.en.md"
 ---
 
@@ -37,6 +37,7 @@ A portable pack must use a format supported by the runtime. An ordinary mini-pro
 | Desktop | CMake 3.21+, C++17, target-system toolchain | [Desktop SDK README](/en/docs/engineering/sdk-desktop/index/#obtain-runtime-and-build) · [consumer](/en/docs/engineering/sdk-desktop/consumer/index/) |
 | Flutter | Flutter 3.47.7, Dart 3.3+, target-platform toolchain | [Flutter SDK README](/en/docs/engineering/sdk-flutter/index/#2-build-a-distribution-and-run-the-example) · [example app](/en/docs/engineering/sdk-flutter/example/index/) |
 | React Native | Node.js 24, React Native 0.88, Android or Apple native toolchain | [React Native SDK README](/en/docs/engineering/sdk-react-native/index/#build-a-distribution-from-source) · [example app](/en/docs/engineering/sdk-react-native/example/index/) |
+| Contract C ABI | CMake 3.21+, target-system C compiler | [Contract SDK README](/en/docs/engineering/sdk-contract/index/) · [C ABI host example](/en/docs/engineering/sdk-contract/examples/consumer/index/) |
 
 The core repository has no `pnpm sdk:build:*` commands. Source builds use the runtime builder, license collector, and each SDK wrapper's build tool as separate steps. The following copyable examples cover Android, iOS, and macOS arm64. Use the matching Rust target and platform toolchain for other targets.
 
@@ -95,6 +96,21 @@ flutter pub get
 flutter analyze lib
 flutter run -d <device-id>
 ```
+
+### Contract C ABI
+
+The Contract example consumes a C ABI static library built for the local target. The following commands use Apple Silicon macOS. Use the matching Rust target and output directory for another platform:
+
+```sh
+node scripts/sdk-native-build.mjs --target aarch64-apple-darwin --out artifacts/sdk/native
+cmake -S sdk/contract/examples/consumer -B artifacts/sdk/contract-consumer \
+  -DWEAPP_CONTAINER_SDK_INCLUDE_DIR="$PWD/artifacts/sdk/native/aarch64-apple-darwin" \
+  -DWEAPP_CONTAINER_SDK_LIBRARY="$PWD/artifacts/sdk/native/aarch64-apple-darwin/libweapp_container_sdk.a"
+cmake --build artifacts/sdk/contract-consumer --config Release
+artifacts/sdk/contract-consumer/contract_consumer "$PWD/artifacts/hello-pack"
+```
+
+This command-line consumer checks the ABI, registers and completes the sample host method, waits for a frame and inspects its pixels, then waits for the session's close event. Contract defines native host interfaces and does not provide a platform UI.
 
 Each SDK page describes platform flags, installation layout, host services, and lifecycle handling. Run the smallest relevant build before the consumer example. Compilation alone does not establish device, GPU, or performance acceptance.
 

@@ -6,7 +6,7 @@ summary: "Weapp Container。来自 weapp-container/weapp-container 的版本化�
 route: "/docs/engineering/weapp-container/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "38b7b90f673b57162e0b9bfc754afd6c9cf42b46"
+sourceCommit: "ee009375e8c26d14f66a6799d4dca992d28c3e85"
 sourcePath: "README.md"
 ---
 
@@ -38,6 +38,7 @@ Android、iOS、React Native、Flutter 与 Desktop 的 reference consumer 位于
 - [React Native 示例应用](/docs/engineering/sdk-react-native/example/index/)
 - [Flutter 示例应用](/docs/engineering/sdk-flutter/example/index/)
 - [Desktop 消费示例](/docs/engineering/sdk-desktop/consumer/index/)
+- [Contract C ABI 宿主示例](/docs/engineering/sdk-contract/examples/consumer/index/)
 
 ## DevTools 下载预览
 
@@ -55,7 +56,7 @@ cargo run -p container-simulator --features quickjs-native -- \
   run --pack ./artifacts/game --snapshot ./artifacts/game/snapshot.json
 ```
 
-运行时提供 Canvas 2D 子集和 requestAnimationFrame。宿主通过平台无关的 `game.event` 提交规范化触摸、键盘、传感器、音频中断和内存告警事件。显示/隐藏沿用 `app.lifecycle`，viewport 更新会调整游戏 Canvas 并通知 `wx.onWindowResize`。事件载荷见 [game-event-v1.schema.json](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/schemas/game-event-v1.schema.json)。小游戏 API 仍按清单和宿主能力协商，官方 DevTools、GPU 与设备一致性尚未验证。
+运行时提供 Canvas 2D 子集和 requestAnimationFrame。宿主通过平台无关的 `game.event` 提交规范化触摸、键盘、传感器、音频中断和内存告警事件。显示/隐藏沿用 `app.lifecycle`，viewport 更新会调整游戏 Canvas 并通知 `wx.onWindowResize`。事件载荷见 [game-event-v1.schema.json](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/schemas/game-event-v1.schema.json)。小游戏 API 仍按清单和宿主能力协商，官方 DevTools、GPU 与设备一致性尚未验证。
 
 ## 开源小程序示例
 
@@ -72,7 +73,7 @@ pnpm simulator:dev:smoke -- \
   --project examples/apps/community/official-text
 ```
 
-另外两个样例将命令中的 `official-text` 分别替换为 `ant-design-button` 和 `taro-blended`。样例列表、逐项命令和来源见 [`examples/apps/community/README.md`](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/examples/apps/community/README.md)。
+另外两个样例将命令中的 `official-text` 分别替换为 `ant-design-button` 和 `taro-blended`。样例列表、逐项命令和来源见 [`examples/apps/community/README.md`](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/examples/apps/community/README.md)。
 
 在浏览器中保持模拟器运行：
 
@@ -83,4 +84,4 @@ cargo run -p container-simulator --features quickjs-native -- \
 
 ## 许可证
 
-Apache-2.0。请阅读 [NOTICE](https://github.com/weapp-container/weapp-container/blob/38b7b90f673b57162e0b9bfc754afd6c9cf42b46/NOTICE) 和 [SECURITY.md](/docs/engineering/weapp-container/security/)。
+Apache-2.0。请阅读 [NOTICE](https://github.com/weapp-container/weapp-container/blob/ee009375e8c26d14f66a6799d4dca992d28c3e85/NOTICE) 和 [SECURITY.md](/docs/engineering/weapp-container/security/)。
