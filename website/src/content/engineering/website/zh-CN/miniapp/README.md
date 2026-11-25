@@ -6,7 +6,7 @@ summary: "一包七宿主。来自 weapp-container/website 的版本化工程说
 route: "/docs/engineering/website/miniapp/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "939e8a42a14b7866e8ad7c788e45a5447e0bf307"
+sourceCommit: "c45989e7ca2d2a3881ef7b837fab8577e7ed906c"
 sourcePath: "miniapp/README.md"
 ---
 

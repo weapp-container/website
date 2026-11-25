@@ -6,7 +6,7 @@ summary: "DOM Text Editing Development Example. Versioned engineering reference 
 route: "/docs/engineering/weapp-container/examples/apps/text-controls-app/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "6a8377db1e809377d567a472f4c740b20f9335af"
+sourceCommit: "835ab59a8f6dfcce42699decac0e8ea65922c65d"
 sourcePath: "examples/apps/text-controls-app/README.en.md"
 ---
 

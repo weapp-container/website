@@ -6,7 +6,7 @@ summary: "双语文档维护。来自 weapp-container/weapp-container 的版本�
 route: "/docs/engineering/weapp-container/tools/documentation/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "6a8377db1e809377d567a472f4c740b20f9335af"
+sourceCommit: "835ab59a8f6dfcce42699decac0e8ea65922c65d"
 sourcePath: "tools/documentation/README.md"
 ---
 

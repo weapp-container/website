@@ -6,7 +6,7 @@ summary: "SDK Maintainer Source Build Guide. Versioned engineering reference fro
 route: "/docs/engineering/weapp-container/docs/sdk-source-build/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "6a8377db1e809377d567a472f4c740b20f9335af"
+sourceCommit: "835ab59a8f6dfcce42699decac0e8ea65922c65d"
 sourcePath: "docs/sdk-source-build.en.md"
 ---
 
@@ -18,11 +18,11 @@ This guide is for SDK maintainers and release contributors who modify wrappers, 
 
 The core repository pins the Android, iOS, Desktop, Flutter, React Native, and Contract SDK submodules. Maintainers build runtimes from one core revision and validate the platform wrapper with the matching consumer example in its SDK README.
 
-## Check Out the Source and Create a Portable Pack
+## Create a Portable Pack in an Existing Source Workspace
+
+Maintainers should use an already prepared `weapp-container` source workspace and run the commands below from the directory for the pinned core revision. Application developers do not need this workspace.
 
 ```sh
-git clone --recurse-submodules https://github.com/weapp-container/weapp-container.git
-cd weapp-container
 corepack enable
 pnpm install --frozen-lockfile
 node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack

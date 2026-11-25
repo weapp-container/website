@@ -6,7 +6,7 @@ summary: "container-host-common. Versioned engineering reference from weapp-cont
 route: "/docs/engineering/weapp-container/crates/container-host-common/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "6a8377db1e809377d567a472f4c740b20f9335af"
+sourceCommit: "835ab59a8f6dfcce42699decac0e8ea65922c65d"
 sourcePath: "crates/container-host-common/README.en.md"
 ---
 

@@ -6,7 +6,7 @@ summary: ".github/PULL_REQUEST_TEMPLATE.md。来自 weapp-container/weapp-contai
 route: "/docs/engineering/weapp-container/github/pull_request_template/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "6a8377db1e809377d567a472f4c740b20f9335af"
+sourceCommit: "835ab59a8f6dfcce42699decac0e8ea65922c65d"
 sourcePath: ".github/PULL_REQUEST_TEMPLATE.md"
 ---
 
