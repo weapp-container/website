@@ -6,7 +6,7 @@ summary: "Weapp Container. Versioned engineering reference from weapp-container/
 route: "/docs/engineering/weapp-container/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
+sourceCommit: "df595d6768dc1dfb70fa6c93f834b12751b4637d"
 sourcePath: "README.en.md"
 ---
 
@@ -18,7 +18,15 @@ An independent open-source portable runtime for loading mini-program-shaped page
 
 This community-developed project is not affiliated with, officially authorized or endorsed by, or commercially partnered with Tencent/WeChat, Ant Group/Alipay, or their platforms and services. Platform names, marks, and API identifiers describe compatibility targets or upstream sample sources. All rights in those marks remain with their respective owners. Third-party open-source code is distributed under the licenses included with each component.
 
-## Quick start
+## Download and use
+
+Use the desktop DevTools from the [download page](https://container.weapp.dev/downloads/). Choose the installer for your operating system and processor, then open an existing mini-program project. You can also try fixed samples in the [online demo](https://container.weapp.dev/) without downloading project source.
+
+For application integration, start with the public SDK package or release archive for your platform. See the [SDK release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/).
+
+## Repository development checks
+
+These commands are for maintainers and contributors, not required to install or preview the application.
 
 ```sh
 pnpm install
@@ -31,7 +39,7 @@ The Node bindings consume source directories or prebuilt portable packs. Callers
 
 ## Native SDK Examples and Release Status
 
-Reference consumers for Android, iOS, React Native, Flutter, and Desktop live in the `sdk/` submodules. They cover pack loading, sessions, views, messages, navigation, storage, and lifecycle ownership. Public registries currently provide the `0.1.0-preview.7.1` prerelease, and no stable version is available. See the [SDK release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/), [source build guide](/en/docs/engineering/weapp-container/docs/sdk-source-build/), and each SDK README for installation status, limitations, and runnable examples.
+Reference consumers for Android, iOS, React Native, Flutter, and Desktop live in the `sdk/` submodules. They cover pack loading, sessions, views, messages, navigation, storage, and lifecycle ownership. Public registries currently provide the `0.1.0-preview.7.1` prerelease, and no stable version is available. See the [SDK release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/) and each SDK README for normal installation methods, limitations, and runnable examples. The [source build guide](/en/docs/engineering/weapp-container/docs/sdk-source-build/) is for SDK maintainers rebuilding release artifacts.
 
 - [Android example app](/en/docs/engineering/sdk-android/consumer/index/)
 - [iOS UIKit example app](/en/docs/engineering/sdk-ios/examples/consumer/index/)
@@ -82,7 +90,7 @@ cargo run -p container-simulator --features quickjs-native -- \
   run --pack ./artifacts/game --snapshot ./artifacts/game/snapshot.json
 ```
 
-This path requires `game.json` and `game.js`. It does not decrypt platform packages. The portable game runtime provides a Canvas 2D subset, frame scheduling, and normalized host events through `game.event` for touch, keyboard, sensor, audio interruption and memory warnings. App visibility uses `app.lifecycle`; viewport updates resize the game Canvas and notify `wx.onWindowResize`. Event payloads follow [`schemas/game-event-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/schemas/game-event-v1.schema.json). API support remains capability-negotiated. Official DevTools, GPU and device parity remain unverified.
+This path requires `game.json` and `game.js`. It does not decrypt platform packages. The portable game runtime provides a Canvas 2D subset, frame scheduling, and normalized host events through `game.event` for touch, keyboard, sensor, audio interruption and memory warnings. App visibility uses `app.lifecycle`; viewport updates resize the game Canvas and notify `wx.onWindowResize`. Event payloads follow [`schemas/game-event-v1.schema.json`](https://github.com/weapp-container/weapp-container/blob/df595d6768dc1dfb70fa6c93f834b12751b4637d/schemas/game-event-v1.schema.json). API support remains capability-negotiated. Official DevTools, GPU and device parity remain unverified.
 
 ## Open-source mini-program examples
 
@@ -101,7 +109,7 @@ pnpm simulator:dev:smoke -- \
   --project examples/apps/community/miniprogram-demo-text
 ```
 
-Replace `miniprogram-demo-text` with `ant-design-button` or `taro-blended` for the other samples. See [`examples/apps/community/README.en.md`](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/examples/apps/community/README.en.md) for the complete sample list, commands, and source records.
+Replace `miniprogram-demo-text` with `ant-design-button` or `taro-blended` for the other samples. See [`examples/apps/community/README.en.md`](https://github.com/weapp-container/weapp-container/blob/df595d6768dc1dfb70fa6c93f834b12751b4637d/examples/apps/community/README.en.md) for the complete sample list, commands, and source records.
 
 To keep the simulator running in a browser:
 
@@ -112,4 +120,4 @@ cargo run -p container-simulator --features quickjs-native -- \
 
 ## License
 
-Apache-2.0. See [NOTICE](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/NOTICE) and [SECURITY](/en/docs/engineering/weapp-container/security/).
+Apache-2.0. See [NOTICE](https://github.com/weapp-container/weapp-container/blob/df595d6768dc1dfb70fa6c93f834b12751b4637d/NOTICE) and [SECURITY](/en/docs/engineering/weapp-container/security/).

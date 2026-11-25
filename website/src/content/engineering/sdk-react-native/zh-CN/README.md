@@ -6,7 +6,7 @@ summary: "Weapp Container React Native SDK。来自 weapp-container/sdk-react-na
 route: "/docs/engineering/sdk-react-native/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "65d27dcce691a69342c4196f1c46c95dc8977a0f"
+sourceCommit: "2183694b8c914729e8de77439e11bf351cc28373"
 sourcePath: "README.md"
 ---
 
@@ -17,7 +17,7 @@ sourcePath: "README.md"
 <a id="public-distribution-candidate-preview7"></a>
 ## 公开发行候选：preview.7
 
-`0.1.0-preview.7.1` 已发布到 npm，Android Maven 依赖也可匿名解析。它仍是预览版，没有稳定版。当前 React Native iOS Pod 所依赖的独立 iOS SDK 归档 URL 不可用，因此公开安装目前限于 Android；iOS 请使用源码构建流程。发行渠道状态见[SDK 发行状态](/docs/engineering/weapp-container/docs/public-sdk-release/)。
+`0.1.0-preview.7.1` 已发布到 npm，Android Maven 依赖也可匿名解析。它仍是预览版，没有稳定版。当前 React Native iOS Pod 所依赖的 iOS SDK 归档 URL 不可用，因此已发布版本目前仅支持 Android 原生构建；iOS 支持需等待配套归档发布。发行渠道状态见[SDK 发行状态](/docs/engineering/weapp-container/docs/public-sdk-release/)。
 
 版本 `0.1.0-preview.7.1`；React Native 0.88 新架构，Android API 26+ / Java 17，iOS 16+。安装公开预览：
 
@@ -25,43 +25,20 @@ sourcePath: "README.md"
 npm install @weapp-container/react-native@0.1.0-preview.7.1
 ```
 
-Android 从 Maven Central 获取 `io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1`。npm 包可以安装，但其 iOS Pod 依赖的固定 SDK 归档当前返回 404，不能据此完成 iOS 原生构建。iOS 用户应按下方源码构建指南生成配套 XCFramework 和 Pod。Android 普通安装无需 Node 准备命令、Rust 或兄弟 SDK checkout。
-
-<a id="reviewed-source-build-checkout"></a>
-### 已复核的源码构建版本
-
-```sh
-git clone https://github.com/weapp-container/sdk-react-native.git sdk-react-native-source
-cd sdk-react-native-source
-git checkout 7565c32125b8e4a76ec4e17213f773ef6fc64e93
-```
-
-
+Android 从 Maven Central 获取 `io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1`。npm 包可以安装，但其 iOS Pod 依赖的固定 SDK 归档当前不可用，不能完成 iOS 原生构建。普通应用应只在 Android 使用当前预览版；iOS 原生支持尚未发布。Android 普通安装无需 Rust 或兄弟 SDK checkout。
 
 [开发文档](https://container.weapp.dev/docs/) · [源码构建](/docs/engineering/weapp-container/docs/sdk-source-build/) · [API 与协议](/docs/engineering/sdk-contract/index/)
 
 在 React Native 应用中嵌入原生小程序容器，支持 Android 与 iOS，使用 Fabric 组件和 TurboModule。通过 TypeScript Controller 加载 pack、导航、收发消息和管理会话。
 
-包名：`@weapp-container/react-native`；已复核源码示例版本：`0.1.0-preview.7.1`；原生 ABI：`1`。本仓库提供 Apache-2.0 许可的接入层，运行库从公开核心源码构建，或使用另行核验的配套归档。
+包名：`@weapp-container/react-native`；示例与 npm 预览版本：`0.1.0-preview.7.1`；原生 ABI：`1`。本仓库提供 Apache-2.0 许可的接入层。普通应用使用公开预览包和 Android Maven 依赖；源码构建与归档准备属于 SDK 维护流程。
 
 > 当前源码与默认公开锁均使用 preview.7.1。准备工具默认读取 `runtime-artifacts.0.1.0-preview.7.1.lock.json`；`runtime-artifacts.lock.json` 仅保留历史 preview.5.3 输入。自定义本地归档仍须通过 `--manifest` 指定同版本审核锁。npm 与 Android Maven 预览包已公开，iOS 原生归档尚未发布。
 
 <a id="start-from-current-source"></a>
-## 从当前源码开始
+## 维护者源码构建
 
-首次接入优先使用公开的核心仓库及其固定 SDK 提交，不需要历史归档的下载 token：
-
-```sh
-git clone --recurse-submodules https://github.com/weapp-container/weapp-container.git
-cd weapp-container
-corepack enable
-pnpm install --frozen-lockfile
-node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
-```
-
-随后按[源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)准备目标平台的运行库和 notices，再用本仓库的构建工具生成接入包。平台工具链仍是必要依赖；npm `.7.1` 与 Android Maven 依赖可获取，但 iOS Podspec 引用的 SDK 归档当前不可用。已有原生小程序或框架构建产物可以由独立 portable pack 工具打包，不要求 weapp-vite。
-
-下面保留独立 SDK 的安装、视图与生命周期说明。涉及 `prepare-runtime` / `prepare-native` 的命令属于显式归档路径，必须使用核验过的配套 manifest；历史默认锁可能无法下载，详见文末说明。
+普通 Android 应用直接安装上面的 npm 包。只有维护 SDK、生成 iOS 配套原生依赖或更新发行清单时，才按[源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)准备源码和目标工具链。npm `.7.1` 与 Android Maven 依赖可获取，但 iOS Podspec 引用的 SDK 归档当前不可用。
 
 <a id="requirements"></a>
 ## 环境要求
@@ -74,20 +51,20 @@ node sdk/contract/fixtures/make-acceptance-pack.mjs --out artifacts/hello-pack
 | Android | API 26+；arm64-v8a、x86_64；Android SDK、JDK、Gradle 工具链 |
 | iOS | iOS 16+；arm64 真机、arm64/x86_64 模拟器；macOS、Xcode、CocoaPods |
 
+当前公开预览尚不能构建 iOS 原生应用，因为 Podspec 引用的配套 SDK 归档尚未发布。
+
 <a id="1-install-the-sdk"></a>
 ## 1. 安装 SDK
 
-如果已获得带原生依赖的 SDK 分发包，在你的 React Native 应用中安装本地归档：
+在 React Native 应用中安装已发布的 npm 预览包：
 
 ```sh
-npm install /absolute/packages/weapp-container-react-native-0.1.0-preview.7.1.tgz
-cd ios
-pod install
+npm install @weapp-container/react-native@0.1.0-preview.7.1
 ```
 
-该归档包含原生 SDK 和对应 notices，使用它不需要核心源码或 Rust 工具链。Android 应用只启用 `arm64-v8a,x86_64`，iOS deployment target 设为 `16.0` 或更高。
+Android 使用公开 Maven 依赖并可按下方示例构建。当前预览的 iOS Pod 依赖归档尚不可用，因此不要在 iOS 上执行 `pod install` 来接入此版本。Android 应用只启用 `arm64-v8a,x86_64`。
 
-如果需要从本仓库生成分发包，请按文末的“从源码生成分发包”操作。
+需要生成自定义分发包时，请先阅读文末面向维护者的“从源码生成分发包”。
 
 <a id="2-create-a-session-and-register-host-methods"></a>
 ## 2. 创建会话与注册宿主方法
@@ -145,7 +122,7 @@ await controller.sendMessage({type: 'refresh'});
 await controller.back();
 ```
 
-pack 需要符合运行库格式，不能直接传入普通小程序源码目录。完整的 React 页面挂载与资源打包示例见 [example/App.tsx](https://github.com/weapp-container/sdk-react-native/blob/65d27dcce691a69342c4196f1c46c95dc8977a0f/example/App.tsx) 和[独立示例生成器](https://github.com/weapp-container/sdk-react-native/blob/65d27dcce691a69342c4196f1c46c95dc8977a0f/tools/create-consumer.mjs)。
+pack 需要符合运行库格式，不能直接传入普通小程序源码目录。完整的 React 页面挂载与资源打包示例见 [example/App.tsx](https://github.com/weapp-container/sdk-react-native/blob/2183694b8c914729e8de77439e11bf351cc28373/example/App.tsx) 和[独立示例生成器](https://github.com/weapp-container/sdk-react-native/blob/2183694b8c914729e8de77439e11bf351cc28373/tools/create-consumer.mjs)。
 
 <a id="session-lifecycle"></a>
 ## 会话生命周期
@@ -163,19 +140,16 @@ await controller.flushStorage();
 await controller.close();
 ```
 
-在 React effect 中创建会话时，处理“组件已卸载但 create 尚未完成”的情况：新建成功后检查组件状态，已卸载则立即关闭。Effect cleanup 不能返回 Promise，应将异步关闭交给会话管理逻辑，并在下次创建前等待它完成。关闭失败时保留 Controller 供重试。完整实现可参考 [example/App.tsx](https://github.com/weapp-container/sdk-react-native/blob/65d27dcce691a69342c4196f1c46c95dc8977a0f/example/App.tsx)。
+在 React effect 中创建会话时，处理“组件已卸载但 create 尚未完成”的情况：新建成功后检查组件状态，已卸载则立即关闭。Effect cleanup 不能返回 Promise，应将异步关闭交给会话管理逻辑，并在下次创建前等待它完成。关闭失败时保留 Controller 供重试。完整实现可参考 [example/App.tsx](https://github.com/weapp-container/sdk-react-native/blob/2183694b8c914729e8de77439e11bf351cc28373/example/App.tsx)。
 
 宿主方法只接收和返回 JSON 可表示的值。异步操作应观察 `AbortSignal`，在取消后终止对应工作；可抛出导出的 `HostError`，返回 `permission_denied`、`unsupported` 等明确错误代码。
 
-需要登录、账号、网络或设备 API 时，在 `load()` 前调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。宿主负责网络 origin 白名单和系统权限，受限 Showcase 的编译时策略继续生效。配置、账号切换和完整类型见 [src/index.tsx](https://github.com/weapp-container/sdk-react-native/blob/65d27dcce691a69342c4196f1c46c95dc8977a0f/src/index.tsx) 与 [CONTRACT.md](/docs/engineering/sdk-react-native/contract/)。
+需要登录、账号、网络或设备 API 时，在 `load()` 前调用 `configureHostServices`，再按需调用 `installNativeDeviceApis`。宿主负责网络 origin 白名单和系统权限，受限 Showcase 的编译时策略继续生效。配置、账号切换和完整类型见 [src/index.tsx](https://github.com/weapp-container/sdk-react-native/blob/2183694b8c914729e8de77439e11bf351cc28373/src/index.tsx) 与 [CONTRACT.md](/docs/engineering/sdk-react-native/contract/)。
 
 <a id="build-a-distribution-from-source"></a>
 ## 从源码生成分发包
 
 ```sh
-git clone https://github.com/weapp-container/sdk-react-native.git
-cd sdk-react-native
-git checkout 7565c32125b8e4a76ec4e17213f773ef6fc64e93
 npm install --ignore-scripts
 npm run typecheck
 node tools/prepare-native.mjs --platform android --arch universal \
@@ -214,16 +188,16 @@ node tools/create-consumer.mjs \
 <a id="documentation-and-licensing"></a>
 ## 更多资料与许可
 
-- [公开 API](https://github.com/weapp-container/sdk-react-native/blob/65d27dcce691a69342c4196f1c46c95dc8977a0f/src/index.tsx) · [协议与能力协商](/docs/engineering/sdk-react-native/contract/)
-- [完整示例](https://github.com/weapp-container/sdk-react-native/blob/65d27dcce691a69342c4196f1c46c95dc8977a0f/example/App.tsx) · [示例运行说明](/docs/engineering/sdk-react-native/example/index/)
+- [公开 API](https://github.com/weapp-container/sdk-react-native/blob/2183694b8c914729e8de77439e11bf351cc28373/src/index.tsx) · [协议与能力协商](/docs/engineering/sdk-react-native/contract/)
+- [完整示例](https://github.com/weapp-container/sdk-react-native/blob/2183694b8c914729e8de77439e11bf351cc28373/example/App.tsx) · [示例运行说明](/docs/engineering/sdk-react-native/example/index/)
 - [公共类型和 C ABI](/docs/engineering/sdk-contract/index/)
 
-接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-react-native/blob/65d27dcce691a69342c4196f1c46c95dc8977a0f/LICENSE)。运行库与第三方组件遵循分发归档中的 `RUNTIME-LICENSE` 和 notices；源码开源不授予私有运行库下载权或额外的商用权利。
+接入层源码使用 [Apache-2.0](https://github.com/weapp-container/sdk-react-native/blob/2183694b8c914729e8de77439e11bf351cc28373/LICENSE)。运行库与第三方组件遵循分发归档中的 `RUNTIME-LICENSE` 和 notices；源码开源不授予私有运行库下载权或额外的商用权利。
 
 <a id="historical-archives-and-migration"></a>
 ## 历史归档与迁移
 
-运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
+运行库发行工具已迁入 [核心仓库](https://github.com/weapp-container/weapp-container/blob/df595d6768dc1dfb70fa6c93f834b12751b4637d/tools/runtime-artifacts)。新清单使用核心仓库的精确版本 Release；用 `--manifest` 显式选取。更新后的下载器把旧锁中的 `runtime-artifacts` 标识定向到私有的 `weapp-container/runtime-artifacts-private-archive`，仅允许九个冻结版本，保留原版本、哈希及随附许可，回执记录实际存储库。旧版下载器需升级；同名新仓库只保留停更工具源码。无跨仓库回退，私有档案仍需读取权限，源码许可不代表历史发行物公开可用。
 
 核心运行时与 SDK 自有源码采用 Apache-2.0，可按[主仓库源码构建说明](/docs/engineering/weapp-container/docs/sdk-source-build/)构建当前运行库。现有预编译归档保留原许可、访问要求及精确版本和哈希锁；本次源码更新不发布替代二进制。
 

@@ -6,7 +6,7 @@ summary: "iOS 交互固定装置。来自 weapp-container/weapp-container 的版
 route: "/docs/engineering/weapp-container/examples/apps/ios-interaction-app/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
+sourceCommit: "df595d6768dc1dfb70fa6c93f834b12751b4637d"
 sourcePath: "examples/apps/ios-interaction-app/README.md"
 ---
 

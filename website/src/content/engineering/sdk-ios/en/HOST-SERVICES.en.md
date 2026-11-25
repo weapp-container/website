@@ -6,7 +6,7 @@ summary: "iOS Host Capabilities. Versioned engineering reference from weapp-cont
 route: "/docs/engineering/sdk-ios/host-services/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "92bd5d889a7c6838e61492857f6c7c7899bf5c14"
+sourceCommit: "b5f8807a592173621130c929ecae085d30e302a3"
 sourcePath: "HOST-SERVICES.en.md"
 ---
 

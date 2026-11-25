@@ -6,7 +6,7 @@ summary: "SDK Contract C ABI 消费示例。来自 weapp-container/sdk-contract 
 route: "/docs/engineering/sdk-contract/examples/consumer/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "d83fc43b38f7ac774b0a19698911ed3f76b910a5"
+sourceCommit: "cc8be250c040a6e74e503744cbdce52be5a4e379"
 sourcePath: "examples/consumer/README.md"
 ---
 
@@ -50,4 +50,4 @@ artifacts/sdk/contract-consumer/contract_consumer "$PWD/artifacts/contract-pack"
 - `frame_acquire`、`frame_info` 和 `frame_release` 展示帧引用的独立生命周期。
 - `sendMessage` 展示宿主向小程序发送 JSON 消息的入口。
 
-示例仅实现 fixture 所需的 `native.echo`，生产宿主需要为其暴露的方法提供真实实现，遵循 deadline 与取消事件，并持续处理 `storageFlushed` 和 `closed`。关闭前先分离 GPU surface。完整字段与线程约束见 [CONTRACT.md](/docs/engineering/sdk-contract/contract/) 和 [C ABI 头文件](https://github.com/weapp-container/sdk-contract/blob/d83fc43b38f7ac774b0a19698911ed3f76b910a5/include/weapp_container_sdk.h)。
+示例仅实现 fixture 所需的 `native.echo`，生产宿主需要为其暴露的方法提供真实实现，遵循 deadline 与取消事件，并持续处理 `storageFlushed` 和 `closed`。关闭前先分离 GPU surface。完整字段与线程约束见 [CONTRACT.md](/docs/engineering/sdk-contract/contract/) 和 [C ABI 头文件](https://github.com/weapp-container/sdk-contract/blob/cc8be250c040a6e74e503744cbdce52be5a4e379/include/weapp_container_sdk.h)。

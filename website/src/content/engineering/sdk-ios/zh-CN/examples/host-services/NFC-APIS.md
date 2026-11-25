@@ -6,7 +6,7 @@ summary: "iOS NFC。来自 weapp-container/sdk-ios 的版本化工程说明。"
 route: "/docs/engineering/sdk-ios/examples/host-services/nfc-apis/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-ios"
-sourceCommit: "92bd5d889a7c6838e61492857f6c7c7899bf5c14"
+sourceCommit: "b5f8807a592173621130c929ecae085d30e302a3"
 sourcePath: "examples/host-services/NFC-APIS.md"
 ---
 

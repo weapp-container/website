@@ -6,7 +6,7 @@ summary: "weapp_container_macos. Versioned engineering reference from weapp-cont
 route: "/docs/engineering/sdk-flutter/weapp_container_macos/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "078c413c183bdea1686fe4886963dfdcc914ab00"
+sourceCommit: "ae47e1e4cf25d95a457ab5bcf4d2381d01b3785b"
 sourcePath: "weapp_container_macos/README.en.md"
 ---
 

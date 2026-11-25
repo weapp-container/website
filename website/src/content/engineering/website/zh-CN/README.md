@@ -6,7 +6,7 @@ summary: "Weapp 容器网站。来自 weapp-container/website 的版本化工程
 route: "/docs/engineering/website/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "a22dc08e5edbfb700d9c222fd4ca6298c37a52cd"
+sourceCommit: "c43b35173270e8e18b9a74c6430211eff8c83cef"
 sourcePath: "README.md"
 ---
 
@@ -80,7 +80,7 @@ GitHub 手动部署需要 `CLOUDFLARE_API_TOKEN` 与 `CLOUDFLARE_ACCOUNT_ID`，�
 <a id="license-and-historical-releases"></a>
 ## 许可与历史发行
 
-自有源码采用 Apache-2.0，见 [LICENSE](https://github.com/weapp-container/website/blob/a22dc08e5edbfb700d9c222fd4ca6298c37a52cd/LICENSE) 与 [NOTICE](https://github.com/weapp-container/website/blob/a22dc08e5edbfb700d9c222fd4ca6298c37a52cd/NOTICE)。核心和 SDK 源码有各自许可。当前固定公开演示携带 Noncommercial Runtime License，其二进制不因网站源码开源而变为 Apache-2.0 发行物。
+自有源码采用 Apache-2.0，见 [LICENSE](https://github.com/weapp-container/website/blob/c43b35173270e8e18b9a74c6430211eff8c83cef/LICENSE) 与 [NOTICE](https://github.com/weapp-container/website/blob/c43b35173270e8e18b9a74c6430211eff8c83cef/NOTICE)。核心和 SDK 源码有各自许可。当前固定公开演示携带 Noncommercial Runtime License，其二进制不因网站源码开源而变为 Apache-2.0 发行物。
 
 历史 Release 保留原版本、哈希与随附条款，并存储于私有归档；更新后的下载工具精确映射冻结的旧版本。源码访问、归档下载与再分发授权分别判断，见[平台说明](/docs/engineering/website/docs/platforms/)。
 

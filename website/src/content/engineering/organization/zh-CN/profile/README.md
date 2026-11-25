@@ -6,7 +6,7 @@ summary: "Weapp Container。来自 weapp-container/.github 的版本化工程说
 route: "/docs/engineering/organization/profile/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/.github"
-sourceCommit: "dbf157301b4be84a8da33e5e4081edf1af7b9052"
+sourceCommit: "13f62d60214dcba89e49fe988397cbd02c931613"
 sourcePath: "profile/README.md"
 ---
 
@@ -25,15 +25,14 @@ sourcePath: "profile/README.md"
 <a id="getting-started"></a>
 ## 开始使用
 
-先生成一个独立测试包，无需安装小程序框架或 npm 依赖：
+先安装公开的 Contract 工具包并生成独立测试包：
 
 ```sh
-git clone https://github.com/weapp-container/sdk-contract.git
-cd sdk-contract
-node fixtures/make-acceptance-pack.mjs --out ../hello-pack
+npm install @weapp-container/sdk-contract@0.1.0-preview.7.1
+node --input-type=module -e "import { makeAcceptancePack } from '@weapp-container/sdk-contract/fixtures'; makeAcceptancePack('./hello-pack')"
 ```
 
-然后选择宿主，按接入指南从公开源码构建匹配运行库，将 SDK 视图加入应用并加载 `hello-pack/`。自己的原生小程序通过[独立打包工具](https://container.weapp.dev/docs/pack/)生成相同格式。在线演示只运行固定包，不能接收任意上传。
+然后选择宿主，按接入指南安装对应的公开 SDK 包或平台归档，将 SDK 视图加入应用并加载 `hello-pack/`。自己的原生小程序通过[独立打包工具](https://container.weapp.dev/docs/pack/)生成相同格式。在线演示只运行固定包，不能接收任意上传。
 
 <a id="integrations"></a>
 ## 选择接入入口
@@ -60,4 +59,4 @@ node fixtures/make-acceptance-pack.mjs --out ../hello-pack
 
 自有源码以 Apache-2.0 公开，少数核心 crate 保留 MIT OR Apache-2.0；第三方组件遵循各自许可。具体以每个仓库和获得的副本所附 LICENSE、NOTICE 及 RUNTIME-LICENSE 为准。
 
-历史运行库归档保留原有许可与哈希，公开源码不重新授权旧二进制，也不保证旧下载 pin 可用。当前接入优先从匹配公开源码构建；历史迁移与归档边界见[迁移文档](https://container.weapp.dev/docs/platforms/)。
+历史运行库归档保留原有许可与哈希，公开源码不重新授权旧二进制，也不保证旧下载 pin 可用。当前接入优先使用公开 SDK 发行物；需要修改 SDK 或重建运行库时，再阅读对应的维护者源码构建指南。历史迁移与归档边界见[迁移文档](https://container.weapp.dev/docs/engineering/weapp-container/docs/runtime-artifacts-migration/)。

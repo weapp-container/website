@@ -6,7 +6,7 @@ summary: "Android 宿主服务指南。来自 weapp-container/sdk-android 的版
 route: "/docs/engineering/sdk-android/examples/host-services/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-android"
-sourceCommit: "78377d5bcb1b5ff52c01769022cc3337437ae032"
+sourceCommit: "b655c610f08f9dfcaae5d32b108971b7ebbdace6"
 sourcePath: "examples/host-services/README.md"
 ---
 
@@ -21,4 +21,4 @@ sourcePath: "examples/host-services/README.md"
 | [Wi-Fi API](/docs/engineering/sdk-android/examples/host-services/wifi-apis/) | 支持的方法、系统权限、连接确认和网络路由边界 |
 | [NFC API](/docs/engineering/sdk-android/examples/host-services/nfc-apis/) | Tag 技术对象、原生 I/O、取消和资源清理边界 |
 
-实现代码可从 [AndroidWifiApis.kt](https://github.com/weapp-container/sdk-android/blob/78377d5bcb1b5ff52c01769022cc3337437ae032/library/src/main/java/com/sonofmagic/weapp/container/sdk/AndroidWifiApis.kt) 和 [AndroidNfcTerminal.kt](https://github.com/weapp-container/sdk-android/blob/78377d5bcb1b5ff52c01769022cc3337437ae032/library/src/main/java/com/sonofmagic/weapp/container/sdk/AndroidNfcTerminal.kt) 开始阅读。它们展示 SDK 内部适配方式，不能代替宿主应用自己的权限、生命周期和目标设备验收。
+实现代码可从 [AndroidWifiApis.kt](https://github.com/weapp-container/sdk-android/blob/b655c610f08f9dfcaae5d32b108971b7ebbdace6/library/src/main/java/com/sonofmagic/weapp/container/sdk/AndroidWifiApis.kt) 和 [AndroidNfcTerminal.kt](https://github.com/weapp-container/sdk-android/blob/b655c610f08f9dfcaae5d32b108971b7ebbdace6/library/src/main/java/com/sonofmagic/weapp/container/sdk/AndroidNfcTerminal.kt) 开始阅读。它们展示 SDK 内部适配方式，不能代替宿主应用自己的权限、生命周期和目标设备验收。

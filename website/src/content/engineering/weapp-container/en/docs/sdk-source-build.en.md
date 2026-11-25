@@ -1,20 +1,22 @@
 ---
 id: "docs/engineering/weapp-container/docs/sdk-source-build"
-title: "SDK Source Build Guide"
+title: "SDK Maintainer Source Build Guide"
 section: "Project and maintenance"
-summary: "SDK Source Build Guide. Versioned engineering reference from weapp-container/weapp-container."
+summary: "SDK Maintainer Source Build Guide. Versioned engineering reference from weapp-container/weapp-container."
 route: "/docs/engineering/weapp-container/docs/sdk-source-build/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
+sourceCommit: "df595d6768dc1dfb70fa6c93f834b12751b4637d"
 sourcePath: "docs/sdk-source-build.en.md"
 ---
 
-# SDK Source Build Guide
+# SDK Maintainer Source Build Guide
 
 [简体中文](/docs/engineering/weapp-container/docs/sdk-source-build/) · **English**
 
-The core repository pins the Android, iOS, Desktop, Flutter, React Native, and Contract SDK submodules. For an initial integration, build the runtime from one core revision and validate the platform wrapper with the matching consumer example in its SDK README.
+This guide is for SDK maintainers and release contributors who modify wrappers, rebuild runtimes, or produce release archives. Application developers should start with the [public SDK releases](/en/docs/engineering/weapp-container/docs/public-sdk-release/), using the published package-manager dependency or prebuilt archive for their platform. A core source checkout is not required for normal use.
+
+The core repository pins the Android, iOS, Desktop, Flutter, React Native, and Contract SDK submodules. Maintainers build runtimes from one core revision and validate the platform wrapper with the matching consumer example in its SDK README.
 
 ## Check Out the Source and Create a Portable Pack
 

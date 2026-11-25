@@ -1,20 +1,22 @@
 ---
 id: "docs/engineering/weapp-container/docs/sdk-source-build"
-title: "SDK 源码构建指南"
+title: "SDK 维护者源码构建指南"
 section: "项目与维护"
-summary: "SDK 源码构建指南。来自 weapp-container/weapp-container 的版本化工程说明。"
+summary: "SDK 维护者源码构建指南。来自 weapp-container/weapp-container 的版本化工程说明。"
 route: "/docs/engineering/weapp-container/docs/sdk-source-build/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
+sourceCommit: "df595d6768dc1dfb70fa6c93f834b12751b4637d"
 sourcePath: "docs/sdk-source-build.md"
 ---
 
-# SDK 源码构建指南
+# SDK 维护者源码构建指南
 
 **简体中文** · [English](/en/docs/engineering/weapp-container/docs/sdk-source-build/)
 
-核心仓库固定了 Android、iOS、Desktop、Flutter、React Native 和 Contract SDK 子模块。首次接入建议从同一核心提交构建运行库，并使用 SDK README 中对应的消费示例验证平台封装。
+本指南仅供 SDK 维护者和发行贡献者使用，用于修改封装、重建运行库或生成发行归档。普通应用应从[公开 SDK 发行物](/docs/engineering/weapp-container/docs/public-sdk-release/)开始，直接使用已发布的包管理器依赖或预编译归档，不需要下载核心仓库源码。
+
+核心仓库固定了 Android、iOS、Desktop、Flutter、React Native 和 Contract SDK 子模块。维护者从同一核心提交构建运行库，并使用 SDK README 中对应的消费示例验证平台封装。
 
 ## 准备源码与 portable pack
 

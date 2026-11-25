@@ -43,12 +43,14 @@ hello-pack/
 
 The packaging tool independently reads the WeChat mini-program directory and requires `app.json`, JS/WXML/WXSS of pages and components, and their reference resources. The native mini-program directory can be imported directly; other frameworks first use their own build commands to generate these files. Weapp Container access does not require changing the project framework.
 
-Application developers do not need to download the core source. Install the matching tool from the [DevTools downloads page](https://container.weapp.dev/downloads/), choose an existing mini-program project, and start the Web Player or Desktop Player. The command-line form is:
+Application developers do not need to download the core source. Install the matching tool from the [DevTools downloads page](https://container.weapp.dev/downloads/). Preview uses the pinned weapp-vite compiler included in the installer; projects need `project.config.json`, `app.json`, at least one page, and installed project dependencies. The command-line form is:
 
 ```bash
 bin/weapp-devtools dev --project /absolute/path/to/project --surface web
 bin/weapp-devtools dev --project /absolute/path/to/project --surface desktop
 ```
+
+On Windows, use `bin\weapp-devtools.cmd` with the same arguments.
 
 The DevTools installer includes a pinned compiler, `container-pack`, and Node.js. The macOS app bundle root is `Weapp Container DevTools.app/Contents/Resources`, Debian/Ubuntu installs to `/opt/weapp-container-devtools`, and the Windows MSI installs to `%LOCALAPPDATA%\Weapp Container DevTools`. For a portable archive, use its extracted `weapp-container-devtools` directory. When a native SDK needs your own build output, use the bundled Node.js and `tools/container-manifest/bin/container-pack.mjs` to create a portable pack. No core repository or submodule setup is required.
 
@@ -66,7 +68,7 @@ $devToolsRoot = Join-Path $env:LOCALAPPDATA 'Weapp Container DevTools'
 & "$devToolsRoot\node\node.exe" "$devToolsRoot\tools\container-manifest\bin\container-pack.mjs" 'C:\path\weapp-output' --out 'C:\path\portable-pack'
 ```
 
-Installation only requires the tool dependencies of this repository, and there is no need to initialize the `vendor/weapp-vite` submodule. If there is TypeScript or framework-specific syntax in the input, it should be compiled into a mini-program build output first. The compatibility range of specific templates, plug-ins and APIs still needs to be accepted according to [Component Compatibility](/en/docs/components/) and [API Record](/en/docs/api/).
+DevTools provides a pinned preview compiler and packer, so there is no separate packer installation or source download. For another framework, run its build command first, then use the bundled `container-pack` to convert the mini-program output. Check the supported template, plug-in, and API range against [Component Compatibility](/en/docs/components/) and [API Record](/en/docs/api/).
 The command checks dependency closures, transforms templates and styles, generates content hashes, and outputs `manifest.json`, `blobs/`, `capability-matrix.json`, and `diagnostics.json`. Handle errors in diagnostics first, and then put the complete output into the host resource directory.
 
 **Why does the v1 manifest still use `weapp-vite` in `compiler.name`?**

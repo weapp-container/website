@@ -602,8 +602,8 @@
         "repository": "weapp-container/website",
         "path": "website/src/content/guides/pack.md"
       },
-      "reviewedChineseSummary": "配置与 portable pack；包里有什么；先试一个现成示例；打包现有小程序；加载前校验；能力和权限协商；完整与部分支持",
-      "reviewedChineseSha256": "79560a3e0238f01f2cf537212131e8fb4865b09775b68477416c4f560ac35fec",
+      "reviewedChineseSummary": "普通用户通过 DevTools 下载页获取桌面工具，使用内置编译器预览并用内置 container-pack 生成 portable pack",
+      "reviewedChineseSha256": "9f8c486501368ab23e64ad644a073d3657dd4c34c797169dcde442d3cdb99c10",
       "route": "/docs/pack/",
       "legacyHeadingIds": [
         "capabilities",

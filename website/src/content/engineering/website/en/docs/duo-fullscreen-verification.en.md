@@ -6,7 +6,7 @@ summary: "Duo full-screen historical acceptance summary. Versioned engineering r
 route: "/docs/engineering/website/docs/duo-fullscreen-verification/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "a22dc08e5edbfb700d9c222fd4ca6298c37a52cd"
+sourceCommit: "c43b35173270e8e18b9a74c6430211eff8c83cef"
 sourcePath: "docs/duo-fullscreen-verification.en.md"
 ---
 

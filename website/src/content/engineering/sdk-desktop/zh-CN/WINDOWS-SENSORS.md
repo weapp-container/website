@@ -6,7 +6,7 @@ summary: "Windows 传感器。来自 weapp-container/sdk-desktop 的版本化工
 route: "/docs/engineering/sdk-desktop/windows-sensors/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "c04a228fa235fd9c010f4055de6a089233dc585c"
+sourceCommit: "14d6055e77eb1be7e2d2d4ae43e313ab7daba50c"
 sourcePath: "WINDOWS-SENSORS.md"
 ---
 

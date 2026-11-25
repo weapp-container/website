@@ -6,7 +6,7 @@ summary: "Swift/UIKit 主机。来自 weapp-container/website 的版本化工程
 route: "/docs/engineering/website/hosts/native-ios/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "a22dc08e5edbfb700d9c222fd4ca6298c37a52cd"
+sourceCommit: "c43b35173270e8e18b9a74c6430211eff8c83cef"
 sourcePath: "hosts/native-ios/README.md"
 ---
 

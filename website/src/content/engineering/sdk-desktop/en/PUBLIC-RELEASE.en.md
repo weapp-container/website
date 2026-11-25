@@ -6,7 +6,7 @@ summary: "Public preview release 0.1.0-preview.7.1. Versioned engineering refere
 route: "/docs/engineering/sdk-desktop/public-release/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-desktop"
-sourceCommit: "c04a228fa235fd9c010f4055de6a089233dc585c"
+sourceCommit: "14d6055e77eb1be7e2d2d4ae43e313ab7daba50c"
 sourcePath: "PUBLIC-RELEASE.en.md"
 ---
 

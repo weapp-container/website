@@ -6,7 +6,7 @@ summary: "Flutter desktop native support. Versioned engineering reference from w
 route: "/docs/engineering/sdk-flutter/native_desktop/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "078c413c183bdea1686fe4886963dfdcc914ab00"
+sourceCommit: "ae47e1e4cf25d95a457ab5bcf4d2381d01b3785b"
 sourcePath: "native_desktop/README.en.md"
 ---
 

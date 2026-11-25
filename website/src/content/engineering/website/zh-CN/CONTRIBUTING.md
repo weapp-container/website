@@ -6,7 +6,7 @@ summary: "参与开发。来自 weapp-container/website 的版本化工程说明
 route: "/docs/engineering/website/contributing/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/website"
-sourceCommit: "a22dc08e5edbfb700d9c222fd4ca6298c37a52cd"
+sourceCommit: "c43b35173270e8e18b9a74c6430211eff8c83cef"
 sourcePath: "CONTRIBUTING.md"
 ---
 

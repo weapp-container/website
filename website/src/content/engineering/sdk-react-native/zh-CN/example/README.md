@@ -6,7 +6,7 @@ summary: "独立的 React Native 消费者。来自 weapp-container/sdk-react-na
 route: "/docs/engineering/sdk-react-native/example/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-react-native"
-sourceCommit: "65d27dcce691a69342c4196f1c46c95dc8977a0f"
+sourceCommit: "2183694b8c914729e8de77439e11bf351cc28373"
 sourcePath: "example/README.md"
 ---
 

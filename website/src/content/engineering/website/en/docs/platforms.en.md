@@ -6,7 +6,7 @@ summary: "Full-end demonstration and access to historical products. Versioned en
 route: "/docs/engineering/website/docs/platforms/"
 locale: "en"
 sourceRepository: "weapp-container/website"
-sourceCommit: "a22dc08e5edbfb700d9c222fd4ca6298c37a52cd"
+sourceCommit: "c43b35173270e8e18b9a74c6430211eff8c83cef"
 sourcePath: "docs/platforms.en.md"
 ---
 
@@ -16,7 +16,7 @@ sourcePath: "docs/platforms.en.md"
 [简体中文](/docs/engineering/website/docs/platforms/) · **English**
 
 
-What is currently public is the source code. The following installation commands reproduce historical precompiled candidates and still require corresponding private archive permissions; they do not constitute a new open source binary release. Source code execution starts from [Core README](/en/docs/engineering/weapp-container/index/). For each SDK source code construction, see [SDK Description](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/docs/sdk-repositories.en.md). The platform status has not been revalidated against the current open source source code.
+Application developers can download the directly runnable desktop tool from the [DevTools downloads page](https://container.weapp.dev/downloads/) and select a published package or platform archive from the [public SDK release status](/en/docs/engineering/weapp-container/docs/public-sdk-release/). Installation and preview do not require a source checkout. This page records maintainer workflows for native builds, historical Showcase artifacts, and platform acceptance. Some frozen archives require separate authorization and do not indicate that an SDK is currently available for public installation.
 
 Seven systems use a unified portable pack format: basic interaction, product details and specifications, shopping bags, receipt information, simulated checkout, ordering, and order records. Each host adapter only loads the exact pack candidates for which it was compiled and bundled; each end is upgraded and accepted independently. Business data is only saved locally and is not connected to external services or an order backend. Web runs WASM within a browser Dedicated Worker; native hosting uses each host's native views.
 

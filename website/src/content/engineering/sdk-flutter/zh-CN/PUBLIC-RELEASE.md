@@ -6,7 +6,7 @@ summary: "公开预览发行 0.1.0-preview.7.1。来自 weapp-container/sdk-flut
 route: "/docs/engineering/sdk-flutter/public-release/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "078c413c183bdea1686fe4886963dfdcc914ab00"
+sourceCommit: "ae47e1e4cf25d95a457ab5bcf4d2381d01b3785b"
 sourcePath: "PUBLIC-RELEASE.md"
 ---
 

@@ -6,7 +6,7 @@ summary: "Weapp Container。来自 weapp-container/weapp-container 的版本化�
 route: "/docs/engineering/weapp-container/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
+sourceCommit: "df595d6768dc1dfb70fa6c93f834b12751b4637d"
 sourcePath: "README.md"
 ---
 
@@ -18,7 +18,15 @@ sourcePath: "README.md"
 
 本项目由社区独立开发，与 Tencent/WeChat、Ant Group/Alipay 及其平台、品牌或服务不存在隶属、官方授权、背书或商业合作关系。文中的平台名称、商标与 API 标识仅用于说明兼容目标或上游样例来源，相关权利归各自权利人所有。本仓库另含按随附许可证分发的第三方开源代码。
 
-## 快速开始
+## 下载使用
+
+直接使用桌面 DevTools：打开[下载页](https://container.weapp.dev/downloads/)，选择适合系统与处理器的安装包，然后在工具中打开已有的小程序项目。也可打开[在线演示](https://container.weapp.dev/)体验固定样例，无需下载项目源码。
+
+在应用中集成时，从对应平台的公开 SDK 包或发行归档开始，见下方[SDK 发行状态](/docs/engineering/weapp-container/docs/public-sdk-release/)。
+
+## 仓库开发检查
+
+下面的命令面向维护和贡献者，不是普通应用的安装或预览步骤。
 
 ```sh
 pnpm install
@@ -31,7 +39,7 @@ Node 绑定只消费源码目录或已生成的 portable pack。编译器、宿�
 
 ## Native SDK 示例与发行状态
 
-Android、iOS、React Native、Flutter 与 Desktop 的 reference consumer 位于 `sdk/` 子模块中，包含 pack 加载、会话、视图、消息、导航、存储和生命周期用法。公开注册源当前提供 `0.1.0-preview.7.1` 预览包，尚无稳定版本。各平台安装状态、限制和示例运行步骤见[SDK 发行状态](/docs/engineering/weapp-container/docs/public-sdk-release/)、[源码构建指南](/docs/engineering/weapp-container/docs/sdk-source-build/)及各 SDK README。
+Android、iOS、React Native、Flutter 与 Desktop 的 reference consumer 位于 `sdk/` 子模块中，包含 pack 加载、会话、视图、消息、导航、存储和生命周期用法。公开注册源当前提供 `0.1.0-preview.7.1` 预览包，尚无稳定版本。各平台的普通安装方式、限制和示例运行步骤见[SDK 发行状态](/docs/engineering/weapp-container/docs/public-sdk-release/)及各 SDK README。[源码构建指南](/docs/engineering/weapp-container/docs/sdk-source-build/)只适用于维护 SDK 或重建发行物。
 
 - [Android 示例应用](/docs/engineering/sdk-android/consumer/index/)
 - [iOS UIKit 示例应用](/docs/engineering/sdk-ios/examples/consumer/index/)
@@ -82,7 +90,7 @@ cargo run -p container-simulator --features quickjs-native -- \
   run --pack ./artifacts/game --snapshot ./artifacts/game/snapshot.json
 ```
 
-运行时提供 Canvas 2D 子集和 requestAnimationFrame。宿主通过平台无关的 `game.event` 提交规范化触摸、键盘、传感器、音频中断和内存告警事件。显示/隐藏沿用 `app.lifecycle`，viewport 更新会调整游戏 Canvas 并通知 `wx.onWindowResize`。事件载荷见 [game-event-v1.schema.json](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/schemas/game-event-v1.schema.json)。小游戏 API 仍按清单和宿主能力协商，官方 DevTools、GPU 与设备一致性尚未验证。
+运行时提供 Canvas 2D 子集和 requestAnimationFrame。宿主通过平台无关的 `game.event` 提交规范化触摸、键盘、传感器、音频中断和内存告警事件。显示/隐藏沿用 `app.lifecycle`，viewport 更新会调整游戏 Canvas 并通知 `wx.onWindowResize`。事件载荷见 [game-event-v1.schema.json](https://github.com/weapp-container/weapp-container/blob/df595d6768dc1dfb70fa6c93f834b12751b4637d/schemas/game-event-v1.schema.json)。小游戏 API 仍按清单和宿主能力协商，官方 DevTools、GPU 与设备一致性尚未验证。
 
 ## 开源小程序示例
 
@@ -101,7 +109,7 @@ pnpm simulator:dev:smoke -- \
   --project examples/apps/community/miniprogram-demo-text
 ```
 
-另外两个样例将命令中的 `miniprogram-demo-text` 分别替换为 `ant-design-button` 和 `taro-blended`。样例列表、逐项命令和来源见 [`examples/apps/community/README.md`](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/examples/apps/community/README.md)。
+另外两个样例将命令中的 `miniprogram-demo-text` 分别替换为 `ant-design-button` 和 `taro-blended`。样例列表、逐项命令和来源见 [`examples/apps/community/README.md`](https://github.com/weapp-container/weapp-container/blob/df595d6768dc1dfb70fa6c93f834b12751b4637d/examples/apps/community/README.md)。
 
 在浏览器中保持模拟器运行：
 
@@ -112,4 +120,4 @@ cargo run -p container-simulator --features quickjs-native -- \
 
 ## 许可证
 
-Apache-2.0。请阅读 [NOTICE](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/NOTICE) 和 [SECURITY.md](/docs/engineering/weapp-container/security/)。
+Apache-2.0。请阅读 [NOTICE](https://github.com/weapp-container/weapp-container/blob/df595d6768dc1dfb70fa6c93f834b12751b4637d/NOTICE) 和 [SECURITY.md](/docs/engineering/weapp-container/security/)。

@@ -6,7 +6,7 @@ summary: "SDK Contract C ABI Consumer. Versioned engineering reference from weap
 route: "/docs/engineering/sdk-contract/examples/consumer/index/"
 locale: "en"
 sourceRepository: "weapp-container/sdk-contract"
-sourceCommit: "d83fc43b38f7ac774b0a19698911ed3f76b910a5"
+sourceCommit: "cc8be250c040a6e74e503744cbdce52be5a4e379"
 sourcePath: "examples/consumer/README.en.md"
 ---
 
@@ -50,4 +50,4 @@ The process writes each `takeEvents` JSON value to stdout, prints first-frame di
 - `frame_acquire`, `frame_info`, and `frame_release` show the independent frame reference lifetime.
 - `sendMessage` shows the host-to-mini-app JSON entry point.
 
-The sample implements only the fixture's `native.echo`. Production hosts must provide real implementations for exposed methods, honor deadlines and cancellation events, and drain `storageFlushed` and `closed`. Detach a GPU surface before closing. See [CONTRACT.md](/en/docs/engineering/sdk-contract/contract/) and the [C ABI header](https://github.com/weapp-container/sdk-contract/blob/d83fc43b38f7ac774b0a19698911ed3f76b910a5/include/weapp_container_sdk.h) for the complete fields and thread rules.
+The sample implements only the fixture's `native.echo`. Production hosts must provide real implementations for exposed methods, honor deadlines and cancellation events, and drain `storageFlushed` and `closed`. Detach a GPU surface before closing. See [CONTRACT.md](/en/docs/engineering/sdk-contract/contract/) and the [C ABI header](https://github.com/weapp-container/sdk-contract/blob/cc8be250c040a6e74e503744cbdce52be5a4e379/include/weapp_container_sdk.h) for the complete fields and thread rules.

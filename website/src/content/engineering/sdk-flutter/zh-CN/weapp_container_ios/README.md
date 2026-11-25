@@ -6,7 +6,7 @@ summary: "Weapp 容器 iOS 实现。来自 weapp-container/sdk-flutter 的版本
 route: "/docs/engineering/sdk-flutter/weapp_container_ios/index/"
 locale: "zh-CN"
 sourceRepository: "weapp-container/sdk-flutter"
-sourceCommit: "078c413c183bdea1686fe4886963dfdcc914ab00"
+sourceCommit: "ae47e1e4cf25d95a457ab5bcf4d2381d01b3785b"
 sourcePath: "weapp_container_ios/README.md"
 ---
 

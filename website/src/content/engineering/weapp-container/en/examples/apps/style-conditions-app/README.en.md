@@ -6,7 +6,7 @@ summary: "WXSS condition fixture. Versioned engineering reference from weapp-con
 route: "/docs/engineering/weapp-container/examples/apps/style-conditions-app/index/"
 locale: "en"
 sourceRepository: "weapp-container/weapp-container"
-sourceCommit: "01f964108edc97a7d084484509a4df26d658fdd5"
+sourceCommit: "df595d6768dc1dfb70fa6c93f834b12751b4637d"
 sourcePath: "examples/apps/style-conditions-app/README.en.md"
 ---
 
@@ -27,7 +27,7 @@ cargo run -p container-simulator -- dev --project examples/apps/style-conditions
 at `.` lets the compiler's output cleanup remove its own input. This sample
 uses the same pinned compiler and source/output boundary as the reference app;
 it needs no subpackage or chunk changes. The dual-engine validation command
-and compiler provenance requirements are in [the WXSS guide](https://github.com/weapp-container/weapp-container/blob/01f964108edc97a7d084484509a4df26d658fdd5/docs/wxss-ir.en.md#reproduce-the-native-sample).
+and compiler provenance requirements are in [the WXSS guide](https://github.com/weapp-container/weapp-container/blob/df595d6768dc1dfb70fa6c93f834b12751b4637d/docs/wxss-ir.en.md#reproduce-the-native-sample).
 
 The panel is red at 100×200, blue at 200×100, and green at 200×200. A conditional
 local import colors the second square at widths of at least 150 logical pixels.
