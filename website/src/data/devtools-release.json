@@ -1,48 +1,48 @@
 {
   "schemaVersion": 3,
-  "version": "0.1.0-preview.7.3",
-  "tag": "devtools-v0.1.0-preview.7.3",
+  "version": "0.1.0-preview.7.4",
+  "tag": "devtools-v0.1.0-preview.7.4",
   "manifestUrl": "https://download.container.weapp.dev/devtools/latest.json",
-  "checksumsUrl": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.3/SHA256SUMS",
+  "checksumsUrl": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.4/SHA256SUMS",
   "platforms": [
     {
       "id": "macos-arm64",
       "installer": {
         "filename": "weapp-container-devtools-macos-arm64.dmg",
-        "size": 255468052,
-        "sha256": "587648377bcb294657fd9b129b53072f7296277488510c29cacbbaaf9fdfe62b",
-        "url": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.3/weapp-container-devtools-macos-arm64.dmg",
-        "githubUrl": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.3/weapp-container-devtools-macos-arm64.dmg"
+        "size": 264062835,
+        "sha256": "8b1fcaeaf855ca98aed3281fb4181aa5f54028c5243ebc5396be8b4d18c3044b",
+        "url": "https://download.container.weapp.dev/devtools/releases/devtools-v0.1.0-preview.7.4/weapp-container-devtools-macos-arm64.dmg",
+        "githubUrl": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.4/weapp-container-devtools-macos-arm64.dmg"
       }
     },
     {
       "id": "macos-x86_64",
       "installer": {
         "filename": "weapp-container-devtools-macos-x86_64.dmg",
-        "size": 261996474,
-        "sha256": "880dda1660681c6b54acb4718e9e7ac62d0c45154d65269d278505be5bbffc3f",
-        "url": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.3/weapp-container-devtools-macos-x86_64.dmg",
-        "githubUrl": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.3/weapp-container-devtools-macos-x86_64.dmg"
+        "size": 263343042,
+        "sha256": "f9ec7071ebf97afc956f05b04685426e598f41cc1a1812b454864203c61b863f",
+        "url": "https://download.container.weapp.dev/devtools/releases/devtools-v0.1.0-preview.7.4/weapp-container-devtools-macos-x86_64.dmg",
+        "githubUrl": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.4/weapp-container-devtools-macos-x86_64.dmg"
       }
     },
     {
       "id": "linux-x86_64",
       "installer": {
         "filename": "weapp-container-devtools-linux-x86_64.deb",
-        "size": 143681108,
-        "sha256": "bad6307053287711c0a0be7dd7119649927a1a769a77e21817e5d86ae6d39834",
-        "url": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.3/weapp-container-devtools-linux-x86_64.deb",
-        "githubUrl": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.3/weapp-container-devtools-linux-x86_64.deb"
+        "size": 146508878,
+        "sha256": "e0442ac9e72cb35e668b5ca9e095f72271257a058c599ac6a1ddef12dd9bad54",
+        "url": "https://download.container.weapp.dev/devtools/releases/devtools-v0.1.0-preview.7.4/weapp-container-devtools-linux-x86_64.deb",
+        "githubUrl": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.4/weapp-container-devtools-linux-x86_64.deb"
       }
     },
     {
       "id": "windows-x86_64",
       "installer": {
         "filename": "weapp-container-devtools-windows-x86_64.msi",
-        "size": 147130864,
-        "sha256": "f0ec1293d9b016200decaa6f2a0dea71b153804e4306e95ccb94f0256483557e",
-        "url": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.3/weapp-container-devtools-windows-x86_64.msi",
-        "githubUrl": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.3/weapp-container-devtools-windows-x86_64.msi"
+        "size": 151431345,
+        "sha256": "be9d7e2207ee3892fc65431818d6107dd7cac28cd2c9572ad0ebb938dfa5b54d",
+        "url": "https://download.container.weapp.dev/devtools/releases/devtools-v0.1.0-preview.7.4/weapp-container-devtools-windows-x86_64.msi",
+        "githubUrl": "https://github.com/weapp-container/weapp-container/releases/download/devtools-v0.1.0-preview.7.4/weapp-container-devtools-windows-x86_64.msi"
       }
     }
   ]
