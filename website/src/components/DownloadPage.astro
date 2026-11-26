@@ -33,7 +33,7 @@ const macArchitectures = new Set(['macos-arm64', 'macos-x86_64']);
     <p class="eyebrow">{t("下载调试工具")}</p>
     <h1>{t("直接下载 Weapp Container DevTools")}</h1>
     <p>{t("下载后即可安装图形调试工具并启动 Web Player 或 Desktop Player。")}</p>
-    <p class="download-version">{t("当前版本")}: <strong>{release.version}</strong> · {t("预览版")}</p>
+    <p class="download-version" data-release-manifest={release.manifestUrl}>{t("当前版本")}: <strong data-release-version>{release.version}</strong> · {t("预览版")}</p>
   </section>
   <section class="section-wrap downloads-section" aria-labelledby="downloads-heading">
     <div class="section-heading"><h2 id="downloads-heading">{t("选择你的运行平台")}</h2><p>{t("浏览器会直接下载可安装文件，不需要打开 GitHub Release 页面。安装包包含模拟器、Node.js、固定版 weapp-vite 和 renderer assets。")}</p></div>
@@ -53,16 +53,17 @@ const macArchitectures = new Set(['macos-arm64', 'macos-x86_64']);
             <code>{installer.filename}</code>
           </div>
           <div class="download-item-action">
-            <a class="button primary download-installer" href={installer.url} aria-label={`${t("下载安装包")} ${t(name)}`}>{t("下载安装包")} ({installerFormat}) <span aria-hidden="true">↓</span></a>
-            <p>{formatSize(installer.size)} · SHA-256</p>
-            <code class="download-hash">{installer.sha256}</code>
+            <a class="button primary download-installer" data-installer-download={platformRelease.id} href={installer.url} aria-label={`${t("下载安装包")} ${t(name)}`}>{t("下载安装包")} ({installerFormat}) <span aria-hidden="true">↓</span></a>
+            <p data-installer-size={platformRelease.id}>{formatSize(installer.size)} · SHA-256</p>
+            <code class="download-hash" data-installer-sha256={platformRelease.id}>{installer.sha256}</code>
+            <a class="text-link download-github-fallback" data-installer-github={platformRelease.id} href={installer.githubUrl || installer.url}>{t("GitHub 备用下载")}</a>
           </div>
         </article>;
       })}
     </div>
     <div class="download-footer">
       <p>{t("下载前请使用发布页的 SHA256SUMS 核对文件哈希。预览版安装包可能触发系统安全提示。")}</p>
-      <a class="text-link" href={release.checksumsUrl}>{t("下载 SHA256SUMS")} <span aria-hidden="true">↓</span></a>
+      <a class="text-link" data-checksums-download href={release.checksumsUrl}>{t("下载 SHA256SUMS")} <span aria-hidden="true">↓</span></a>
     </div>
     <div class="download-preview-help">
       <div class="section-heading">
@@ -101,6 +102,60 @@ Start-Process "$env:USERPROFILE\Downloads\weapp-container-devtools-windows-x86_6
 </Layout>
 <script>
   import { detectMacArchitecture } from '../data/client-architecture.mjs';
+
+  const knownPlatforms = new Set(['macos-arm64', 'macos-x86_64', 'linux-x86_64', 'windows-x86_64']);
+  const manifestUrl = document.querySelector<HTMLElement>('[data-release-manifest]')?.dataset.releaseManifest;
+
+  try {
+    if (!manifestUrl) throw new Error('Latest release manifest URL is missing');
+    const publicBase = new URL(manifestUrl).origin;
+    const response = await fetch(manifestUrl, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`Latest release manifest returned ${response.status}`);
+    const latest = await response.json();
+    if (latest.schemaVersion !== 3 || latest.tag !== `devtools-v${latest.version}` || !Array.isArray(latest.platforms)) {
+      throw new Error('Latest release manifest has an unsupported shape');
+    }
+    const platforms = new Map(latest.platforms.map(platform => [platform.id, platform]));
+    if (platforms.size !== knownPlatforms.size || [...knownPlatforms].some(id => !platforms.has(id))) {
+      throw new Error('Latest release manifest has an unexpected platform set');
+    }
+    const checksumsUrl = new URL(latest.checksumsUrl);
+    if (checksumsUrl.origin !== 'https://github.com' || !checksumsUrl.pathname.endsWith(`/${latest.tag}/SHA256SUMS`)) {
+      throw new Error('Latest release manifest has an invalid checksum URL');
+    }
+
+    for (const id of knownPlatforms) {
+      const platform = platforms.get(id);
+      const installer = platform.installer;
+      const item = document.querySelector<HTMLElement>(`.download-item[data-platform="${id}"]`);
+      const download = item?.querySelector<HTMLAnchorElement>('[data-installer-download]');
+      const fallback = item?.querySelector<HTMLAnchorElement>('[data-installer-github]');
+      const size = item?.querySelector<HTMLElement>('[data-installer-size]');
+      const sha256 = item?.querySelector<HTMLElement>('[data-installer-sha256]');
+      const url = new URL(installer.url);
+      const githubUrl = new URL(installer.githubUrl);
+      if (!item || !download || !fallback || !size || !sha256
+        || url.origin !== publicBase || !url.pathname.startsWith(`/devtools/releases/${latest.tag}/`)
+        || githubUrl.origin !== 'https://github.com'
+        || !/^[a-f0-9]{64}$/.test(installer.sha256)
+        || !Number.isSafeInteger(installer.size) || installer.size <= 0) {
+        throw new Error(`Latest release manifest has invalid installer metadata for ${id}`);
+      }
+      download.href = url.href;
+      fallback.href = githubUrl.href;
+      size.textContent = `${(installer.size / 1_000_000).toFixed(1)} MB · SHA-256`;
+      sha256.textContent = installer.sha256;
+    }
+
+    const version = document.querySelector<HTMLElement>('[data-release-version]');
+    const checksums = document.querySelector<HTMLAnchorElement>('[data-checksums-download]');
+    if (version && checksums) {
+      version.textContent = latest.version;
+      checksums.href = checksumsUrl.href;
+    }
+  } catch (error) {
+    console.warn('Latest DevTools release metadata could not be loaded', error);
+  }
 
   const architecture = await detectMacArchitecture();
   if (architecture) {
