@@ -38,10 +38,12 @@ const apiGroups = inventory.apis.map(api => ({...api, href: href(`/docs/api/${ap
       </details>
     </aside>
     <div class="docs-main-column">
-      <nav class="docs-breadcrumbs" aria-label={locale === 'en' ? 'Breadcrumbs' : '面包屑导航'}><a href={href('/docs/')}>{text.docs}</a><span aria-hidden="true">/</span><span>{title}</span></nav>
-      <article id="docs-content" class="docs-article"><slot /></article>
+      <div class="docs-main-body">
+        <nav class="docs-breadcrumbs" aria-label={locale === 'en' ? 'Breadcrumbs' : '面包屑导航'}><a href={href('/docs/')}>{text.docs}</a><span aria-hidden="true">/</span><span>{title}</span></nav>
+        <article id="docs-content" class="docs-article"><slot /></article>
+        <footer class="docs-article-footer"><a href={href('/docs/troubleshooting/')}>{text.troubleshooting}</a><a href="https://github.com/weapp-container/sdk-contract" target="_blank" rel="noreferrer">{text.contract} ↗</a></footer>
+      </div>
       <nav id="docs-page-outline" class="docs-page-outline" aria-label={text.toc} hidden><strong>{text.toc}</strong><ul></ul></nav>
-      <footer class="docs-article-footer"><a href={href('/docs/troubleshooting/')}>{text.troubleshooting}</a><a href="https://github.com/weapp-container/sdk-contract" target="_blank" rel="noreferrer">{text.contract} ↗</a></footer>
     </div>
   </div>
 </Layout>
