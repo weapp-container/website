@@ -5,7 +5,8 @@ import copy from '../data/marketing-copy.json';
 import release from '../data/devtools-release.json';
 
 const locale = localeFromPath(Astro.url.pathname);
-const t = (value: string) => locale === 'en' ? copy[value.trim() as keyof typeof copy] || value : value;
+const isEn = locale === 'en';
+const t = (value: string) => isEn ? copy[value.trim() as keyof typeof copy] || value : value;
 const href = (value: string) => localizedPath(value, locale);
 const labels = {
   'macos-arm64': ['macOS arm64', 'Apple Silicon', 'macOS'],
@@ -29,79 +30,185 @@ const installInstructions = {
 const macArchitectures = new Set(['macos-arm64', 'macos-x86_64']);
 ---
 <Layout title={t("下载 DevTools · Weapp Container")} description={t("下载可直接运行的 Weapp Container DevTools，支持 macOS、Linux 和 Windows。")}>
-  <section class="section-wrap page-intro download-intro">
-    <p class="eyebrow">{t("下载调试工具")}</p>
-    <h1>{t("直接下载 Weapp Container DevTools")}</h1>
-    <p>{t("下载后即可安装图形调试工具并启动 Web Player 或 Desktop Player。")}</p>
-    <p class="download-version" data-release-manifest={release.manifestUrl}>{t("当前版本")}: <strong data-release-version>{release.version}</strong> · {t("预览版")}</p>
+  <section class="section-wrap sp-intro download-intro">
+    <div class="sp-intro-grid">
+      <div>
+        <p class="eyebrow"><span class="status-dot"></span><span>{t("下载调试工具")} · DIRECT INSTALLER</span></p>
+        <h1 class="sp-h1">{t("直接下载 Weapp Container DevTools")}</h1>
+        <p class="sp-lead">{t("下载后即可安装图形调试工具并启动 Web Player 或 Desktop Player。")}</p>
+      </div>
+      <div class="sp-version-pill download-version" data-release-manifest={release.manifestUrl}>
+        <span>{t("当前版本")}:</span>
+        <strong data-release-version>{release.version}</strong>
+        <span style="color:var(--accent);">· {t("预览版")}</span>
+      </div>
+    </div>
+
+    <p class="dl-arch-bar download-architecture-status" role="status" aria-live="polite" data-architecture-status data-recommendation-template={t("浏览器识别到 {architecture}，已标记匹配的 macOS 安装包。")}>
+      {t("请选择适合你 Mac 处理器的安装包。Safari 和未提供可靠架构信息的浏览器会同时显示两个选项。")}
+    </p>
   </section>
-  <section class="section-wrap downloads-section" aria-labelledby="downloads-heading">
-    <div class="section-heading"><h2 id="downloads-heading">{t("选择你的运行平台")}</h2><p>{t("浏览器会直接下载可安装文件，不需要打开 GitHub Release 页面。安装包包含模拟器、Node.js、固定版 weapp-vite 和 renderer assets。")}</p></div>
-    <p class="download-architecture-status" role="status" aria-live="polite" data-architecture-status data-recommendation-template={t("浏览器识别到 {architecture}，已标记匹配的 macOS 安装包。")}>{t("请选择适合你 Mac 处理器的安装包。Safari 和未提供可靠架构信息的浏览器会同时显示两个选项。")}</p>
-    <div class="download-list">
+
+  <section class="section-wrap downloads-section" aria-labelledby="downloads-heading" style="padding-top:24px;">
+    <div style="margin-bottom:18px;">
+      <h2 id="downloads-heading" style="font-size:20px;margin-bottom:6px;">{t("选择你的运行平台")}</h2>
+      <p style="font-size:13.5px;">{t("浏览器会直接下载可安装文件，不需要打开 GitHub Release 页面。安装包包含模拟器、Node.js、固定版 weapp-vite 和 renderer assets。")}</p>
+    </div>
+
+    <div class="dl-grid download-list">
       {release.platforms.map(platformRelease => {
         const [name, detail, platform] = labels[platformRelease.id as keyof typeof labels];
         const installerFormat = installerFormats[platformRelease.id as keyof typeof installerFormats];
         const installer = platformRelease.installer;
-        return <article class="download-item" data-platform={platformRelease.id} data-architecture={macArchitectures.has(platformRelease.id) ? platformRelease.id : undefined}>
-          <div class="download-item-copy">
-            <p class="download-platform">{platform}</p>
-            <h3>{t(name)}</h3>
-            <p>{t(detail)}</p>
-            <p>{t(installInstructions[platformRelease.id as keyof typeof installInstructions])}</p>
-            {macArchitectures.has(platformRelease.id) && <p class="download-recommendation" data-recommendation hidden>{t("适合这台 Mac")}</p>}
-            <code>{installer.filename}</code>
-          </div>
-          <div class="download-item-action">
-            <a class="button primary download-installer" data-installer-download={platformRelease.id} href={installer.url} aria-label={`${t("下载安装包")} ${t(name)}`}>{t("下载安装包")} ({installerFormat}) <span aria-hidden="true">↓</span></a>
-            <p data-installer-size={platformRelease.id}>{formatSize(installer.size)} · SHA-256</p>
-            <code class="download-hash" data-installer-sha256={platformRelease.id}>{installer.sha256}</code>
-            <a class="text-link download-github-fallback" data-installer-github={platformRelease.id} href={installer.githubUrl || installer.url}>{t("GitHub 备用下载")}</a>
-          </div>
-        </article>;
+        return (
+          <article class="download-item" data-platform={platformRelease.id} data-architecture={macArchitectures.has(platformRelease.id) ? platformRelease.id : undefined}>
+            <div class="download-item-copy">
+              <div class="dl-card-head">
+                <div>
+                  <p class="download-platform">{platform} · {t(detail)}</p>
+                  <h3>{t(name)}</h3>
+                </div>
+                {macArchitectures.has(platformRelease.id) && <p class="download-recommendation" data-recommendation hidden>{t("适合这台 Mac")}</p>}
+              </div>
+              <p class="dl-card-desc">{t(installInstructions[platformRelease.id as keyof typeof installInstructions])}</p>
+            </div>
+            <div class="download-item-action" style="display:grid;gap:10px;">
+              <div class="dl-file-meta">
+                <code>{installer.filename}</code>
+                <span data-installer-size={platformRelease.id}>{formatSize(installer.size)} · SHA-256</span>
+              </div>
+              <div class="dl-hash-row">
+                <span>SHA-256</span>
+                <code class="download-hash" data-installer-sha256={platformRelease.id}>{installer.sha256}</code>
+                <button class="dl-copy-mini" type="button" data-copy-sha={platformRelease.id}>{isEn ? 'Copy' : '复制'}</button>
+              </div>
+              <div class="dl-card-actions">
+                <a class="button primary download-installer" data-installer-download={platformRelease.id} href={installer.url} aria-label={`${t("下载安装包")} ${t(name)}`} style="min-height:38px;font-size:13px;">
+                  {t("下载安装包")} ({installerFormat}) <span aria-hidden="true">↓</span>
+                </a>
+                <a class="text-link download-github-fallback" data-installer-github={platformRelease.id} href={installer.githubUrl || installer.url} style="font-size:12.5px;">
+                  {t("GitHub 备用下载")} ↗
+                </a>
+              </div>
+            </div>
+          </article>
+        );
       })}
     </div>
+
     <div class="download-footer">
       <p>{t("下载前请使用发布页的 SHA256SUMS 核对文件哈希。预览版安装包可能触发系统安全提示。")}</p>
-      <a class="text-link" data-checksums-download href={release.checksumsUrl}>{t("下载 SHA256SUMS")} <span aria-hidden="true">↓</span></a>
+      <a class="header-pill-btn" data-checksums-download href={release.checksumsUrl}>{t("下载 SHA256SUMS")} <span aria-hidden="true">↓</span></a>
     </div>
-    <div class="download-preview-help">
-      <div class="section-heading">
-        <h2>{t("首次启动预览版")}</h2>
-        <p>{t("预览版尚未完成平台签名与公证。先核对 SHA-256，再按你的系统完成一次性启动设置。")}</p>
+
+    <!-- First-launch unsigned preview guide -->
+    <div class="dl-guide-card download-preview-help">
+      <div class="dl-guide-head">
+        <div>
+          <h2 style="font-size:16px;margin-bottom:3px;">{t("首次启动预览版")}</h2>
+          <p style="font-size:12.5px;">{t("预览版尚未完成平台签名与公证。先核对 SHA-256，再按你的系统完成一次性启动设置。")}</p>
+        </div>
+        <div class="pb-seg" role="tablist" id="dl-preview-seg">
+          <span class="pb-seg-thumb" id="dl-preview-thumb"></span>
+          <button type="button" role="tab" aria-selected="true" data-os="mac">{t("macOS 未签名预览版")}</button>
+          <button type="button" role="tab" aria-selected="false" data-os="win">{t("Windows 未签名预览版")}</button>
+        </div>
       </div>
-      <div class="download-preview-grid">
-        <article class="download-preview-item">
-          <p class="download-platform">macOS</p>
-          <h3>{t("macOS 未签名预览版")}</h3>
-          <p>{t("将 DMG 中的应用拖到“应用程序”文件夹后，在终端执行以下命令。Apple Silicon 使用 arm64，Intel Mac 使用 x86_64。")}</p>
-          <pre><code># Apple Silicon
+
+      <div class="dl-guide-body">
+        <div data-os-panel="mac" style="display:grid;gap:12px;">
+          <p style="font-size:13px;">{t("将 DMG 中的应用拖到“应用程序”文件夹后，在终端执行以下命令。Apple Silicon 使用 arm64，Intel Mac 使用 x86_64。")}</p>
+          <div class="dl-terminal">
+            <div class="dl-terminal-top">
+              <span>macOS · shasum + xattr</span>
+              <button class="dl-copy-mini" type="button" data-copy-pre>{isEn ? 'Copy' : '复制'}</button>
+            </div>
+            <pre><code># Apple Silicon
 shasum -a 256 "$HOME/Downloads/weapp-container-devtools-macos-arm64.dmg"
 # Intel Mac
 shasum -a 256 "$HOME/Downloads/weapp-container-devtools-macos-x86_64.dmg"
 xattr -dr com.apple.quarantine "/Applications/Weapp Container DevTools.app"
 open "/Applications/Weapp Container DevTools.app"</code></pre>
-          <p class="download-preview-note">{t("xattr 只会移除这个应用的 quarantine 元数据，不会创建签名或公证。不要全局关闭 Gatekeeper。")}</p>
-        </article>
-        <article class="download-preview-item">
-          <p class="download-platform">Windows</p>
-          <h3>{t("Windows 未签名预览版")}</h3>
-          <p>{t("先核对 MSI 文件哈希，再在 PowerShell 中移除下载文件的 Zone Identifier 并启动安装程序。")}</p>
-          <pre><code>Get-FileHash "$env:USERPROFILE\Downloads\weapp-container-devtools-windows-x86_64.msi" -Algorithm SHA256
+          </div>
+          <p class="sp-warn-note download-preview-note">{t("xattr 只会移除这个应用的 quarantine 元数据，不会创建签名或公证。不要全局关闭 Gatekeeper。")}</p>
+        </div>
+
+        <div data-os-panel="win" hidden style="display:none;gap:12px;">
+          <p style="font-size:13px;">{t("先核对 MSI 文件哈希，再在 PowerShell 中移除下载文件的 Zone Identifier 并启动安装程序。")}</p>
+          <div class="dl-terminal">
+            <div class="dl-terminal-top">
+              <span>Windows PowerShell · Get-FileHash + Unblock-File</span>
+              <button class="dl-copy-mini" type="button" data-copy-pre>{isEn ? 'Copy' : '复制'}</button>
+            </div>
+            <pre><code>Get-FileHash "$env:USERPROFILE\Downloads\weapp-container-devtools-windows-x86_64.msi" -Algorithm SHA256
 Unblock-File -Path "$env:USERPROFILE\Downloads\weapp-container-devtools-windows-x86_64.msi"
 Start-Process "$env:USERPROFILE\Downloads\weapp-container-devtools-windows-x86_64.msi"</code></pre>
-          <p class="download-preview-note">{t("SmartScreen 仍然提示时，确认来源和哈希后选择 More info > Run anyway。不要全局关闭 Defender 或 SmartScreen。")}</p>
-        </article>
+          </div>
+          <p class="sp-warn-note download-preview-note">{t("SmartScreen 仍然提示时，确认来源和哈希后选择 More info > Run anyway。不要全局关闭 Defender 或 SmartScreen。")}</p>
+        </div>
       </div>
     </div>
   </section>
-  <section class="section-wrap download-next-steps">
-    <div><h2>{t("准备开始调试？")}</h2><p>{t("查看启动命令和项目要求，再选择 Web Player 或 Desktop Player。")}</p></div>
-    <a class="button secondary" href={href("/docs/start/")}>{t("查看快速开始")} <span aria-hidden="true">→</span></a>
+
+  <section class="section-wrap">
+    <div class="sp-next-strip download-next-steps">
+      <div>
+        <h2>{t("准备开始调试？")}</h2>
+        <p>{t("查看启动命令和项目要求，再选择 Web Player 或 Desktop Player。")}</p>
+      </div>
+      <a class="button secondary" href={href("/docs/start/")}>{t("查看快速开始")} <span aria-hidden="true">→</span></a>
+    </div>
   </section>
 </Layout>
 <script>
   import { detectMacArchitecture } from '../data/client-architecture.mjs';
+
+  // Copy SHA-256 & terminal snippets
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-sha]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.copySha;
+      const hash = document.querySelector<HTMLElement>(`[data-installer-sha256="${id}"]`)?.textContent?.trim();
+      if (!hash) return;
+      const orig = btn.textContent;
+      navigator.clipboard?.writeText(hash).catch(() => {});
+      btn.classList.add('is-copied');
+      btn.textContent = document.documentElement.lang === 'en' ? 'Copied' : '已复制';
+      setTimeout(() => { btn.classList.remove('is-copied'); btn.textContent = orig; }, 1400);
+    });
+  });
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-pre]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const code = btn.closest('.dl-terminal')?.querySelector('pre')?.textContent?.trim();
+      if (!code) return;
+      const orig = btn.textContent;
+      navigator.clipboard?.writeText(code).catch(() => {});
+      btn.classList.add('is-copied');
+      btn.textContent = document.documentElement.lang === 'en' ? 'Copied' : '已复制';
+      setTimeout(() => { btn.classList.remove('is-copied'); btn.textContent = orig; }, 1400);
+    });
+  });
+
+  // Unsigned preview OS segmented toggle
+  const seg = document.getElementById('dl-preview-seg');
+  const thumb = document.getElementById('dl-preview-thumb');
+  const segBtns = seg ? [...seg.querySelectorAll<HTMLButtonElement>('button')] : [];
+  const panels = [...document.querySelectorAll<HTMLElement>('[data-os-panel]')];
+  const moveThumb = (b?: HTMLButtonElement) => {
+    if (!thumb || !b) return;
+    thumb.style.width = `${b.offsetWidth}px`;
+    thumb.style.transform = `translateX(${b.offsetLeft - 3}px)`;
+  };
+  if (segBtns[0]) moveThumb(segBtns[0]);
+  segBtns.forEach(btn => btn.addEventListener('click', () => {
+    const os = btn.dataset.os;
+    segBtns.forEach(b => b.setAttribute('aria-selected', b === btn ? 'true' : 'false'));
+    moveThumb(btn);
+    panels.forEach(p => {
+      const active = p.dataset.osPanel === os;
+      p.hidden = !active;
+      p.style.display = active ? 'grid' : 'none';
+    });
+  }));
 
   const knownPlatforms = new Set(['macos-arm64', 'macos-x86_64', 'linux-x86_64', 'windows-x86_64']);
   const manifestUrl = document.querySelector<HTMLElement>('[data-release-manifest]')?.dataset.releaseManifest;
@@ -115,7 +222,7 @@ Start-Process "$env:USERPROFILE\Downloads\weapp-container-devtools-windows-x86_6
     if (latest.schemaVersion !== 3 || latest.tag !== `devtools-v${latest.version}` || !Array.isArray(latest.platforms)) {
       throw new Error('Latest release manifest has an unsupported shape');
     }
-    const platforms = new Map(latest.platforms.map(platform => [platform.id, platform]));
+    const platforms = new Map<string, any>(latest.platforms.map((platform: any) => [platform.id, platform]));
     if (platforms.size !== knownPlatforms.size || [...knownPlatforms].some(id => !platforms.has(id))) {
       throw new Error('Latest release manifest has an unexpected platform set');
     }

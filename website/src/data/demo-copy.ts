@@ -41,7 +41,13 @@ const english: Record<string, string> = {
   '这里运行的是真实容器。所有商品和订单仅供演示，状态保存在当前设备。': 'This runs the actual container. Products and orders are samples; state is stored on this device.',
   '查看接入方式': 'Integration guide', '交互演示': ' interactive demo', '正在准备演示…': 'Preparing demo…',
   '重新加载': 'Reload', '重新启动当前演示': 'Restart current demo', '重新开始': 'Restart',
+  '本地状态已保存，运行容器已安全退出。': 'Local state saved and the container exited cleanly.',
+  '重新打开演示': 'Reopen demo',
   '内屏': 'Inner display', '外屏': 'Outer display', '屏幕': 'Display', '主屏': 'Main display',
   '展开内屏': 'Unfolded inner display', '折叠外屏': 'Folded outer display', '网页预览': 'Browser preview',
+  '0° 正视': '0° Flat', '3D 左侧': '3D Left', '3D 右侧': '3D Right', '180° 背面': '180° Back',
+  '3D 视角控制': '3D camera controls', '机身外观': 'Chassis finish', '重播 3D 展示': 'Replay 3D intro',
+  '点击切换视角或拖拽旋转，双击回正': 'Click to cycle angles, drag to rotate, double-click to reset',
+  '0° 正视可直接操作容器；切到 3D 视角后可拖拽旋转，双击回正': '0° flat lets you interact directly; switch to 3D to drag-orbit, double-click to reset',
 };
 export const demoText = (locale: Locale, value: string) => locale === 'en' ? english[value] || value : value;

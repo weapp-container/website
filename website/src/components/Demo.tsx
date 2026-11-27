@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowClockwise, ArrowSquareOut, Check, Monitor, ShoppingBag, Coffee, HandTap, WarningCircle } from '@phosphor-icons/react';
+import { ArrowClockwise, ArrowSquareOut, Check, Cube, Monitor, Play, ShoppingBag, Coffee, HandTap, WarningCircle } from '@phosphor-icons/react';
 import { DEVICE_REGISTRY, deviceGeometry, fitDeviceScale, parseDeviceSelection, renderScaleForDisplay, runtimeSelectionSearch, sameDeviceSelection, selectionSearch, type DeviceSelection } from '../../shared/showcase-devices.mjs';
 import {requestShowcaseOwner} from '../../shared/showcase-owner-channel.mjs';
 import {attachShowcaseScrollBoundary} from '../../shared/showcase-scroll-boundary.mjs';
@@ -26,14 +26,22 @@ const parseLoadProgress = (value: unknown): LoadProgress | null => {
   return {stage: progress.stage as DemoLoadStage, step: progress.step, total: progress.total};
 };
 type Owner = {scene: string; selection: DeviceSelection; revision: number};
+type PoseKey = 'flat' | 'left' | 'right' | 'back';
+type FinishKey = 'titanium' | 'silver' | 'graphite' | 'jade';
+
+const POSES: Record<PoseKey, {rx: number; ry: number}> = {
+  flat: { rx: 0, ry: 0 },
+  left: { rx: 7, ry: -22 },
+  right: { rx: 7, ry: 22 },
+  back: { rx: 4, ry: 180 },
+};
+const POSE_ORDER: PoseKey[] = ['left', 'right', 'back', 'flat'];
 
 export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
   const t = (value: string) => demoText(locale, value);
   const [scene, setScene] = useState('shop');
   const [selection, setSelection] = useState<DeviceSelection>(DEVICE_REGISTRY.defaultSelection);
   const [displaySelection, setDisplaySelection] = useState<DeviceSelection>(DEVICE_REGISTRY.defaultSelection);
-  // Source selection belongs to an owner, while folding and rotation belong to
-  // that owner's metrics. Changing metrics must never navigate the iframe.
   const [owner, setOwner] = useState<Owner | null>(null);
   const [runtime, setRuntime] = useState<{ entry: string } | null>(null);
   const [error, setError] = useState('');
@@ -45,6 +53,25 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
   const [layoutMeasured, setLayoutMeasured] = useState(false);
   const [devicePixelRatio, setDevicePixelRatio] = useState(1);
   const [ownerDensity, setOwnerDensity] = useState<{revision: number; scale: 1 | 1.5 | 2} | null>(null);
+
+  // 3D Hardware Stage State (defaults flat under reduced motion so geometry checks remain exact)
+  const [finish, setFinish] = useState<FinishKey>('jade');
+  const [pose, setPose] = useState<PoseKey | null>('flat');
+  const [is3DActive, setIs3DActive] = useState(false);
+  const [angleLabel, setAngleLabel] = useState('0°');
+  const [morphAnim, setMorphAnim] = useState<'none' | 'fold-in' | 'fold-out' | 'rotate'>('none');
+  const rigRef = useRef<HTMLDivElement>(null);
+  const introPlayed = useRef(false);
+  const morphTimer = useRef(0);
+  const animState = useRef({
+    curRx: 0, curRy: 0, targetRx: 0, targetRy: 0,
+    hoverRx: 0, hoverRy: 0, targetHoverRx: 0, targetHoverRy: 0,
+    velX: 0, velY: 0, dragging: false, raf: 0,
+    dragStart: null as null | {x: number; y: number; rx: number; ry: number},
+    lastPtr: null as null | {x: number; y: number; t: number},
+    moved: false, lastClick: 0, cycleIdx: 0, introTimer: 0,
+  });
+
   const transition = useRef(false);
   const densityTransition = useRef(false);
   const targetDensity = useRef(1);
@@ -66,6 +93,236 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
     setLoadProgress(current => next.step >= current.step
       ? {stage, step: next.step, total: 5}
       : current);
+  };
+
+  // 3D Physics Engine (rAF spring + hover micro-tilt + inertia, exact 1:1 scale when settled at 0°)
+  const sync3DVisuals = () => {
+    const el = rigRef.current;
+    if (!el) return;
+    const st = animState.current;
+    const rx = st.curRx + st.hoverRx;
+    const ry = st.curRy + st.hoverRy;
+    const normY = ((ry % 360) + 540) % 360 - 180;
+    const settledFlat = !st.dragging
+      && Math.hypot(rx, normY) < 0.8
+      && Math.hypot(st.targetRx, ((st.targetRy % 360) + 540) % 360 - 180) < 0.8
+      && Math.hypot(st.targetHoverRx, st.targetHoverRy) < 0.2;
+
+    el.style.setProperty('--rx', `${rx.toFixed(2)}deg`);
+    el.style.setProperty('--ry', `${ry.toFixed(2)}deg`);
+    el.style.setProperty('--glare-x', `${(50 + Math.max(-45, Math.min(45, normY * 1.15))).toFixed(1)}%`);
+    el.style.setProperty('--glare-op', settledFlat ? '0' : `${Math.min(0.82, 0.22 + Math.min(1, Math.abs(normY) / 40) * 0.56).toFixed(2)}`);
+    el.style.setProperty('--rim-shift', `${(50 + Math.max(-42, Math.min(42, normY * 1.2))).toFixed(1)}%`);
+    el.style.setProperty('--shadow-x', `${Math.max(-34, Math.min(34, -normY * 0.65)).toFixed(1)}px`);
+    el.style.setProperty('--shadow-scale', `${(1 - Math.min(0.28, Math.abs(Math.sin((normY * Math.PI) / 180)) * 0.26)).toFixed(3)}`);
+
+    if (settledFlat) {
+      el.style.transform = '';
+      setIs3DActive(false);
+      setAngleLabel('0°');
+    } else {
+      // Scale gently to 0.86 in 3D orbit so wide foldables never clip the stage badges or floating dock
+      el.style.transform = `scale3d(0.86, 0.86, 0.86) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+      setIs3DActive(true);
+      const yInt = Math.round(normY);
+      const xInt = Math.round(rx);
+      setAngleLabel(`Y ${yInt >= 0 ? '+' : ''}${yInt}° / X ${xInt >= 0 ? '+' : ''}${xInt}°`);
+    }
+  };
+
+  const ensure3DTick = () => {
+    const st = animState.current;
+    if (st.raf) return;
+    const step = () => {
+      if (!st.dragging) {
+        if (Math.abs(st.velX) > 0.04 || Math.abs(st.velY) > 0.04) {
+          st.targetRx = Math.max(-38, Math.min(38, st.targetRx + st.velX));
+          st.targetRy += st.velY;
+          st.velX *= 0.88;
+          st.velY *= 0.88;
+        } else {
+          st.velX = 0;
+          st.velY = 0;
+        }
+        st.curRx += (st.targetRx - st.curRx) * 0.13;
+        st.curRy += (st.targetRy - st.curRy) * 0.13;
+      }
+      st.hoverRx += (st.targetHoverRx - st.hoverRx) * 0.14;
+      st.hoverRy += (st.targetHoverRy - st.hoverRy) * 0.14;
+      sync3DVisuals();
+      const active = st.dragging
+        || Math.abs(st.velX) > 0.04
+        || Math.abs(st.velY) > 0.04
+        || Math.abs(st.targetRx - st.curRx) > 0.04
+        || Math.abs(st.targetRy - st.curRy) > 0.04
+        || Math.abs(st.targetHoverRx - st.hoverRx) > 0.02
+        || Math.abs(st.targetHoverRy - st.hoverRy) > 0.02;
+      if (active) {
+        st.raf = requestAnimationFrame(step);
+      } else {
+        st.curRx = st.targetRx;
+        st.curRy = st.targetRy;
+        st.hoverRx = st.targetHoverRx;
+        st.hoverRy = st.targetHoverRy;
+        st.raf = 0;
+        sync3DVisuals();
+      }
+    };
+    st.raf = requestAnimationFrame(step);
+  };
+
+  const goToPose = (nextPose: PoseKey) => {
+    const st = animState.current;
+    window.clearTimeout(st.introTimer);
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const p = POSES[nextPose];
+    st.velX = 0;
+    st.velY = 0;
+    if (nextPose === 'flat') {
+      st.targetHoverRx = 0;
+      st.targetHoverRy = 0;
+      st.hoverRx = 0;
+      st.hoverRy = 0;
+    }
+    const curMod = ((st.curRy % 360) + 540) % 360 - 180;
+    let deltaY = p.ry - curMod;
+    if (deltaY > 180) deltaY -= 360;
+    if (deltaY < -180) deltaY += 360;
+    st.targetRx = p.rx;
+    st.targetRy = st.curRy + deltaY;
+    if (reduced) {
+      st.curRx = st.targetRx;
+      st.curRy = st.targetRy;
+    }
+    st.cycleIdx = POSE_ORDER.indexOf(nextPose);
+    setPose(nextPose);
+    ensure3DTick();
+  };
+
+  const replayIntroSweep = () => {
+    const st = animState.current;
+    window.clearTimeout(st.introTimer);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      goToPose('flat');
+      return;
+    }
+    st.velX = 0;
+    st.velY = 0;
+    st.hoverRx = 0;
+    st.hoverRy = 0;
+    st.targetHoverRx = 0;
+    st.targetHoverRy = 0;
+    st.curRx = 8;
+    st.curRy = -24;
+    st.targetRx = 8;
+    st.targetRy = -24;
+    setPose('left');
+    sync3DVisuals();
+    st.introTimer = window.setTimeout(() => goToPose('flat'), 760);
+  };
+
+  // Play A1 3D entrance sweep once live container reaches ready state (so users see the sweep clearly!)
+  useEffect(() => {
+    if (startupComplete && !introPlayed.current && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      introPlayed.current = true;
+      replayIntroSweep();
+    }
+  }, [startupComplete]);
+
+  useEffect(() => () => {
+    window.clearTimeout(animState.current.introTimer);
+    window.clearTimeout(morphTimer.current);
+    if (animState.current.raf) cancelAnimationFrame(animState.current.raf);
+  }, []);
+
+  const triggerMorphAnim = (kind: 'fold-in' | 'fold-out' | 'rotate') => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    window.clearTimeout(morphTimer.current);
+    setMorphAnim(kind);
+    morphTimer.current = window.setTimeout(() => setMorphAnim('none'), 540);
+  };
+
+  const handleStageHoverMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const st = animState.current;
+    if (!is3DActive || st.dragging || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    st.targetHoverRy = (((e.clientX - rect.left) / rect.width) * 2 - 1) * 4.5;
+    st.targetHoverRx = -(((e.clientY - rect.top) / rect.height) * 2 - 1) * 3.2;
+    ensure3DTick();
+  };
+  const handleStageHoverLeave = () => {
+    const st = animState.current;
+    if (st.targetHoverRx === 0 && st.targetHoverRy === 0) return;
+    st.targetHoverRx = 0;
+    st.targetHoverRy = 0;
+    ensure3DTick();
+  };
+
+  const handle3DPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return;
+    const target = e.target as HTMLElement | null;
+    // At 0° flat, clicks inside the live screen belong to the mini-program; clicking the metallic rim enters 3D!
+    if (!is3DActive) {
+      if (target?.closest('.demo-device-screen')) return;
+      goToPose('left');
+      return;
+    }
+    const st = animState.current;
+    window.clearTimeout(st.introTimer);
+    st.velX = 0;
+    st.velY = 0;
+    st.targetHoverRx = 0;
+    st.targetHoverRy = 0;
+    st.dragStart = { x: e.clientX, y: e.clientY, rx: st.curRx, ry: st.curRy };
+    st.lastPtr = { x: e.clientX, y: e.clientY, t: performance.now() };
+    st.moved = false;
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+  const handle3DPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const st = animState.current;
+    if (!st.dragStart || !st.lastPtr) return;
+    const dx = e.clientX - st.dragStart.x;
+    const dy = e.clientY - st.dragStart.y;
+    if (Math.hypot(dx, dy) > 5) {
+      if (!st.moved) {
+        st.moved = true;
+        st.dragging = true;
+        rigRef.current?.classList.add('is-dragging');
+      }
+      const now = performance.now();
+      const dt = Math.max(8, now - st.lastPtr.t);
+      st.velX = (-(e.clientY - st.lastPtr.y) * 0.28 / dt) * 14;
+      st.velY = ((e.clientX - st.lastPtr.x) * 0.44 / dt) * 14;
+      st.lastPtr = { x: e.clientX, y: e.clientY, t: now };
+      st.curRx = Math.max(-38, Math.min(38, st.dragStart.rx - dy * 0.28));
+      st.curRy = st.dragStart.ry + dx * 0.44;
+      st.targetRx = st.curRx;
+      st.targetRy = st.curRy;
+      setPose(null);
+      ensure3DTick();
+    }
+  };
+  const handle3DPointerUp = () => {
+    const st = animState.current;
+    if (!st.dragStart) return;
+    rigRef.current?.classList.remove('is-dragging');
+    const wasMoved = st.moved;
+    st.dragging = false;
+    st.dragStart = null;
+    if (!wasMoved) {
+      const now = performance.now();
+      if (now - st.lastClick < 310) {
+        st.lastClick = 0;
+        goToPose('flat');
+      } else {
+        st.lastClick = now;
+        st.cycleIdx = (st.cycleIdx + 1) % POSE_ORDER.length;
+        goToPose(POSE_ORDER[st.cycleIdx]);
+      }
+    } else {
+      ensure3DTick();
+    }
   };
 
   useEffect(() => {
@@ -99,8 +356,6 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
         if (event.data.state === 'error') setError('演示启动失败，请重新启动。');
       }
     };
-    // pagehide retires the iframe's native owner even when the browser caches
-    // this document. A history restore must rebuild from URL + persisted state.
     const restore = (event: PageTransitionEvent) => { if (event.persisted) location.reload(); };
     window.addEventListener('message', listener);
     window.addEventListener('pageshow', restore);
@@ -112,8 +367,6 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
     };
   }, []);
   useEffect(() => {
-    // The height cap comes from the viewport, never from this auto-sized stage.
-    // Observing stage height would feed the scaled height back into the next fit.
     const heightLimit = () => Math.max(1, Math.min(window.innerHeight * (window.innerWidth < 768 ? .70 : .72), window.innerWidth < 768 ? 640 : 760));
     const measure = () => {
       const next = {width: Math.max(1, viewport.current?.clientWidth ?? 1), height: heightLimit()};
@@ -250,9 +503,7 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
           childObserver = new MutationObserver(inspect);
           childObserver.observe(root, {attributes: true, attributeFilter: ['data-state', 'data-input-enabled'], childList: true, subtree: true});
         }
-      } catch {
-        // The iframe can be between navigation and same-origin document creation.
-      }
+      } catch {}
     };
     iframe.addEventListener('load', inspect);
     const timer = window.setInterval(inspect, 75);
@@ -270,43 +521,191 @@ export default function Demo({locale = 'zh-CN'}: {locale?: Locale}) {
     return () => window.cancelAnimationFrame(frameId);
   }, [ready, loadProgress.step, startupComplete]);
   const startupLoading = !error && !startupComplete && (status === 'preparing' || status === 'loading' || (ready && loadProgress.step >= 5));
-  return <section className="section-wrap demo-workspace">
+
+  const phoneW = (geometry.screen.width + 20) * scale;
+  const phoneH = (geometry.screen.height + 20) * scale;
+  const isUnfolded = displaySelection.device === 'iphone-duo' && displaySelection.display === 'inner';
+  const isFoldedStack = displaySelection.device === 'iphone-duo' && displaySelection.display === 'outer';
+
+  const toggleFoldDisplay = () => {
+    if (model.displays.length <= 1 || switching || !ready) return;
+    const nextDisplay = selection.display === 'inner' ? 'outer' : 'inner';
+    if (is3DActive) goToPose('flat');
+    triggerMorphAnim(nextDisplay === 'outer' ? 'fold-in' : 'fold-out');
+    resizeDevice({...selection, display: nextDisplay});
+  };
+
+  return <section className="demo-workspace">
     <aside className="demo-sidebar">
-      <div className="scene-tabs" role="tablist" aria-label={t('演示场景')}>{scenes.map(item => { const Icon = item.icon; return <button key={item.id} role="tab" aria-selected={scene === item.id} disabled={switching || !ready} className={scene === item.id ? 'scene-tab active' : 'scene-tab'} onClick={() => chooseScene(item.id)}><Icon size={23} weight="duotone" /><span><strong>{t(item.title)}</strong><small>{t(item.subtitle)}</small></span></button>; })}</div>
+      <div>
+        <div className="demo-group-k"><span>{t('演示场景')}</span><span>3 SCENES</span></div>
+        <div className="scene-tabs" role="tablist" aria-label={t('演示场景')}>{scenes.map(item => { const Icon = item.icon; return <button key={item.id} role="tab" aria-selected={scene === item.id} disabled={switching || !ready} className={scene === item.id ? 'scene-tab active' : 'scene-tab'} onClick={() => chooseScene(item.id)}><Icon size={20} weight="duotone" /><span><strong>{t(item.title)}</strong><small>{t(item.subtitle)}</small></span></button>; })}</div>
+      </div>
+
       <fieldset className="device-controls" disabled={switching || !ready}>
         <legend>{t('选择体验设备')}</legend>
         <DeviceSelect locale={locale} selection={selection} disabled={switching || !ready} onSelect={chooseDevice} />
         <div className="device-display-controls">
-          {model.displays.length > 1 && <button type="button" className="device-fold" onClick={() => resizeDevice({...selection, display: selection.display === 'inner' ? 'outer' : 'inner'})}>{selection.display === 'inner' ? t('折叠屏幕') : t('展开屏幕')}</button>}
-          <button type="button" className="device-rotate" aria-label={t('旋转屏幕')} onClick={() => resizeDevice({...selection, rotation: selection.rotation === 0 ? 90 : 0})}><ArrowClockwise size={17} /><span>{t('旋转屏幕')}</span></button>
+          {model.displays.length > 1 && <button type="button" className="device-fold" onClick={toggleFoldDisplay}>{selection.display === 'inner' ? t('折叠屏幕') : t('展开屏幕')}</button>}
+          <button type="button" className="device-rotate" aria-label={t('旋转屏幕')} onClick={() => {
+            if (is3DActive) goToPose('flat');
+            triggerMorphAnim('rotate');
+            resizeDevice({...selection, rotation: selection.rotation === 0 ? 90 : 0});
+          }}><ArrowClockwise size={16} /><span>{t('旋转屏幕')}</span></button>
         </div>
       </fieldset>
-      <div className="scene-details"><h2>{t(active.title)}</h2>{active.items.map(item => <p key={item}><Check size={16} />{t(item)}</p>)}</div>
-      <div className="demo-note"><Monitor size={21} /><p>{t('这里运行的是真实容器。所有商品和订单仅供演示，状态保存在当前设备。')}</p></div>
-      <a className="text-link" href={localizedPath('/guide/', locale)}>{t('查看接入方式')}<ArrowSquareOut size={16} /></a>
+
+      <div className="scene-details">
+        <h2>{t(active.title)}</h2>
+        {active.items.map(item => <p key={item}><Check size={15} />{t(item)}</p>)}
+      </div>
+
+      <div className="demo-note"><Monitor size={19} /><p>{t('这里运行的是真实容器。所有商品和订单仅供演示，状态保存在当前设备。')}</p></div>
+      <a className="text-link" href={localizedPath('/docs/integrations/', locale)}>{t('查看接入方式')}<ArrowSquareOut size={15} /></a>
     </aside>
+
     <div className="demo-stage" aria-busy={switching}>
-      <div className="device-caption"><strong>{geometry.label}</strong><span>{t(geometry.displayLabel)} · {geometry.screen.width} × {geometry.screen.height}</span></div>
-      <div className="device-fit-area" ref={viewport} style={{height: (geometry.screen.height + 20) * scale}}>
-        <div className="phone-area" style={{width: (geometry.screen.width + 20) * scale, height: (geometry.screen.height + 20) * scale}}>
-          <div className={`demo-device${displaySelection.device === 'iphone-duo' && displaySelection.display === 'inner' ? ' device-unfolded' : ''}`} style={{width: geometry.screen.width + 20, height: geometry.screen.height + 20, transform: `scale(${scale})`}}>
-            <div className="demo-device-screen" ref={screen} style={{width: geometry.screen.width, height: geometry.screen.height}}>
-              {runtime && owner && ownerDensity?.revision === owner.revision && <iframe ref={frame} key={owner.revision} title={`${t(active.title)}${t('交互演示')}`} src={`${runtime.entry}${runtimeSelectionSearch(owner.scene, owner.selection, ownerDensity.scale)}`} width={geometry.viewport.width} height={geometry.viewport.height} style={{left: 0, top: 0, width: geometry.viewport.width, height: geometry.viewport.height, pointerEvents: switching ? 'none' : undefined}} inert={switching || !!error} sandbox="allow-scripts allow-same-origin" allow="" />}
-              {geometry.safeArea.top >= 20 && <div className="device-safe-top" aria-hidden="true" style={{height: geometry.safeArea.top}}><span>9:41</span><span>•••</span></div>}
-              {geometry.safeArea.bottom >= 12 && <div className="device-safe-bottom" aria-hidden="true" style={{height: geometry.safeArea.bottom}}><span /></div>}
-              {startupLoading && <div className="demo-loading" role="status" aria-live="polite" data-demo-progress>
-                <p>{t(demoLoadProgress[loadProgress.stage].label)}</p>
-                <div className="demo-progress-track" role="progressbar" aria-label={t('演示启动进度')} aria-valuemin={1} aria-valuemax={loadProgress.total} aria-valuenow={loadProgress.step} aria-valuetext={`${t(demoLoadProgress[loadProgress.stage].label)} (${loadProgress.step} / ${loadProgress.total})`}>
-                  <span style={{width: `${loadProgress.step / loadProgress.total * 100}%`}} />
+      <div className="device-caption">
+        <div className="device-caption-pill">
+          <strong>{geometry.label}</strong>
+          <span>·</span>
+          <span>{t(geometry.displayLabel)} · {geometry.screen.width} × {geometry.screen.height}</span>
+        </div>
+        <div className="device-angle-badge">
+          <Cube size={13} />
+          <span>{is3DActive ? `3D · ${angleLabel}` : t('0° 正视')}</span>
+        </div>
+      </div>
+
+      <div className="device-fit-area" ref={viewport} style={{height: phoneH}} onPointerMove={handleStageHoverMove} onPointerLeave={handleStageHoverLeave}>
+        <div className="phone-area" style={{width: phoneW, height: phoneH}}>
+          <div
+            ref={rigRef}
+            className={`phone-3d-rig hw3d-device${is3DActive ? ' is-3d-mode' : ''}${isFoldedStack ? ' is-folded-stack' : ''}${morphAnim === 'fold-in' ? ' is-folding-in' : morphAnim === 'fold-out' ? ' is-folding-out' : morphAnim === 'rotate' ? ' is-rotating-screen' : ''}`}
+            data-finish={finish}
+            style={{ ['--rad' as string]: isUnfolded ? '18px' : '24px' }}
+            onPointerDown={handle3DPointerDown}
+            onPointerMove={handle3DPointerMove}
+            onPointerUp={handle3DPointerUp}
+            onPointerCancel={handle3DPointerUp}
+          >
+            {/* 3D Extruded Metallic Sides + Frosted Back Face (visible when rotated in 3D) */}
+            <div className="phone-3d-extras" aria-hidden="true">
+              <div className="hw3d-shadow" />
+              <div className="hw3d-slice s1" />
+              <div className="hw3d-slice s2" />
+              <div className="hw3d-slice s3" />
+              <div className="hw3d-slice s4" />
+              <div className="hw3d-side hw3d-side-left">
+                <span className="hw3d-antenna a-top" />
+                <span className="hw3d-btn rb-action" />
+                <span className="hw3d-btn rb-vol1" />
+                <span className="hw3d-btn rb-vol2" />
+                <span className="hw3d-antenna a-bot" />
+              </div>
+              <div className="hw3d-side hw3d-side-right">
+                <span className="hw3d-antenna a-top" />
+                <span className="hw3d-btn rb-power" />
+                <span className="hw3d-antenna a-bot" />
+              </div>
+              <div className="hw3d-side hw3d-side-top" />
+              <div className="hw3d-side hw3d-side-bottom">
+                <span className="hw3d-spk"><i /><i /><i /></span>
+                <span className="hw3d-usbc" />
+                <span className="hw3d-spk"><i /><i /><i /><i /></span>
+              </div>
+              <div className="hw3d-back">
+                <div className="hw3d-cam">
+                  <div className="hw3d-lens" />
+                  <div className="hw3d-flash-col"><span className="hw3d-flash" /><span className="hw3d-lidar" /></div>
+                  <div className="hw3d-lens" />
+                  <div className="hw3d-lens" />
                 </div>
-                <small>{loadProgress.step} / {loadProgress.total}</small>
-              </div>}
+                <div className="hw3d-back-brand">
+                  <img src="/favicon.svg" width="32" height="32" alt="" />
+                  <span>WEAPP CONTAINER</span>
+                </div>
+                <div className="hw3d-back-foot">{geometry.label.toUpperCase()} · QUICKJS / SKIA</div>
+              </div>
+            </div>
+
+            {/* Live Scaled Device Frame (exact geometry.screen + 20 for browser-smoke.mjs) */}
+            <div
+              className={`demo-device${isUnfolded ? ' device-unfolded' : ''}`}
+              style={{
+                width: geometry.screen.width + 20,
+                height: geometry.screen.height + 20,
+                transform: is3DActive ? `translateZ(8px) scale(${scale})` : `scale(${scale})`,
+              }}
+            >
+              <div className="demo-device-screen" ref={screen} style={{width: geometry.screen.width, height: geometry.screen.height}}>
+                {runtime && owner && ownerDensity?.revision === owner.revision && <iframe ref={frame} key={owner.revision} title={`${t(active.title)}${t('交互演示')}`} src={`${runtime.entry}${runtimeSelectionSearch(owner.scene, owner.selection, ownerDensity.scale)}`} width={geometry.viewport.width} height={geometry.viewport.height} style={{left: 0, top: 0, width: geometry.viewport.width, height: geometry.viewport.height, pointerEvents: switching || is3DActive ? 'none' : undefined}} inert={switching || !!error} sandbox="allow-scripts allow-same-origin" allow="" />}
+                {is3DActive && <div className="demo-3d-shield" />}
+                {is3DActive && <div className="hw3d-sheen" aria-hidden="true" />}
+                {geometry.safeArea.top >= 20 && <div className="device-safe-top" aria-hidden="true" style={{height: geometry.safeArea.top}}><span>9:41</span><span>•••</span></div>}
+                {geometry.safeArea.bottom >= 12 && <div className="device-safe-bottom" aria-hidden="true" style={{height: geometry.safeArea.bottom}}><span /></div>}
+                {status === 'closed' && !error && <div className="demo-closed-screen" role="status" aria-live="polite">
+                  <div className="demo-closed-card">
+                    <img src="/favicon.svg" width="32" height="32" alt="" />
+                    <strong>{statusText.closed[locale === 'en' ? 1 : 0]}</strong>
+                    <p>{t('本地状态已保存，运行容器已安全退出。')}</p>
+                    <button type="button" className="demo-closed-btn" disabled={switching || !runtime} onClick={() => chooseScene(scene, true)}>
+                      <ArrowClockwise size={15} />
+                      <span>{t('重新打开演示')}</span>
+                    </button>
+                  </div>
+                </div>}
+                {startupLoading && <div className="demo-loading" role="status" aria-live="polite" data-demo-progress>
+                  <p>{t(demoLoadProgress[loadProgress.stage].label)}</p>
+                  <div className="demo-progress-track" role="progressbar" aria-label={t('演示启动进度')} aria-valuemin={1} aria-valuemax={loadProgress.total} aria-valuenow={loadProgress.step} aria-valuetext={`${t(demoLoadProgress[loadProgress.stage].label)} (${loadProgress.step} / ${loadProgress.total})`}>
+                    <span style={{width: `${loadProgress.step / loadProgress.total * 100}%`}} />
+                  </div>
+                  <small>{loadProgress.step} / {loadProgress.total}</small>
+                </div>}
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Apple-Style Centered Floating Capsule Dock */}
+      <div className="demo-dock-wrap">
+        <div className="hw3d-dock" role="toolbar" aria-label={t('3D 视角控制')}>
+          <button type="button" className={`hw3d-dock-btn${pose === 'flat' ? ' is-active' : ''}`} onClick={() => goToPose('flat')}>{t('0° 正视')}</button>
+          <button type="button" className={`hw3d-dock-btn${pose === 'left' ? ' is-active' : ''}`} onClick={() => goToPose('left')}>{t('3D 左侧')}</button>
+          <button type="button" className={`hw3d-dock-btn${pose === 'right' ? ' is-active' : ''}`} onClick={() => goToPose('right')}>{t('3D 右侧')}</button>
+          <button type="button" className={`hw3d-dock-btn${pose === 'back' ? ' is-active' : ''}`} onClick={() => goToPose('back')}>{t('180° 背面')}</button>
+          {model.displays.length > 1 && <>
+            <span className="hw3d-dock-sep" aria-hidden="true" />
+            <button type="button" className="hw3d-dock-btn" disabled={switching || !ready} onClick={toggleFoldDisplay}>
+              {selection.display === 'inner' ? t('外屏') : t('内屏')}
+            </button>
+          </>}
+          <span className="hw3d-dock-sep" aria-hidden="true" />
+          <div className="hw3d-swatches" role="group" aria-label={t('机身外观')}>
+            {(['titanium', 'silver', 'graphite', 'jade'] as FinishKey[]).map(f => (
+              <button
+                key={f}
+                type="button"
+                className={`hw3d-swatch${finish === f ? ' is-active' : ''}`}
+                data-finish={f}
+                aria-label={f}
+                aria-pressed={finish === f}
+                onClick={() => setFinish(f)}
+              />
+            ))}
+          </div>
+          <span className="hw3d-dock-sep" aria-hidden="true" />
+          <button type="button" className="hw3d-dock-btn" onClick={replayIntroSweep} title={t('重播 3D 展示')}><Play size={11} weight="fill" /><span>3D</span></button>
+        </div>
+        <p className="demo-dock-hint">{t('0° 正视可直接操作容器；切到 3D 视角后可拖拽旋转，双击回正')}</p>
+      </div>
+
       {error && <div className="demo-error" role="alert"><WarningCircle size={28} /><p>{t(error)}</p><button className="button secondary" disabled={switching} onClick={() => location.assign(`${localizedPath('/demo/', locale)}${selectionSearch(scene, selection)}`)}>{t('重新加载')}</button></div>}
-      <div className="demo-toolbar"><span role="status">{statusText[status][locale === 'en' ? 1 : 0]}</span><button aria-label={t('重新启动当前演示')} disabled={switching || !runtime || (!ready && status !== 'closed')} onClick={() => chooseScene(scene, true)}><ArrowClockwise size={18} />{t('重新开始')}</button></div>
+      <div className="demo-toolbar">
+        <span className="demo-status-pill" role="status"><span className="status-dot" aria-hidden="true" />{statusText[status][locale === 'en' ? 1 : 0]}</span>
+        <button aria-label={t('重新启动当前演示')} disabled={switching || !runtime || (!ready && status !== 'closed')} onClick={() => chooseScene(scene, true)}><ArrowClockwise size={15} />{t('重新开始')}</button>
+      </div>
     </div>
   </section>;
 }

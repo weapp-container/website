@@ -9,7 +9,8 @@ const href = (value: string) => localizedPath(value, locale);
 const is404 = /\/404(?:\.html|\/)?$/.test(path);
 const pagePath = (language: string) => is404 ? language === 'en' ? '/en/404/' : '/404.html' : localizedPath(path, language);
 const alternate = pagePath(locale === 'en' ? 'zh-CN' : 'en');
-const nav = [['/docs/', text.docs], ['/demo/', text.demo], ['/platforms/', text.platforms], ['/guide/', text.guide], ['/downloads/', text.downloads]];
+const nav = [['/docs/', text.docs], ['/demo/', text.demo], ['/platforms/', text.platforms]];
+const mobileNav = [...nav, ['/downloads/', text.downloads]];
 ---
 <!doctype html>
 <html lang={locale}>
@@ -34,26 +35,55 @@ const nav = [['/docs/', text.docs], ['/demo/', text.demo], ['/platforms/', text.
   </head>
   <body>
     <a class="skip-link" href="#content">{text.skip}</a>
-    <header class="site-header">
-      <a class="brand" href={href('/')} aria-label={`Weapp Container ${text.home}`}><img src="/favicon.svg" width="30" height="30" alt="" /><span>Weapp <strong>Container</strong></span></a>
-      <nav aria-label={text.mainNav}>
-        {nav.map(([route, label]) => <a href={href(route)} aria-current={path.startsWith(href(route)) ? 'page' : undefined}>{label}</a>)}
-      </nav>
-      <details class="mobile-menu">
-        <summary aria-label={text.menu} title={text.menu}><span aria-hidden="true"></span></summary>
-        <nav aria-label={text.mobileNav}>
+    <div class="site-header-bar">
+      <header class="site-header">
+        <a class="brand" href={href('/')} aria-label={`Weapp Container ${text.home}`}>
+          <img src="/favicon.svg" width="24" height="24" alt="" />
+          <span>Weapp <strong>Container</strong></span>
+        </a>
+        <nav aria-label={text.mainNav}>
           {nav.map(([route, label]) => <a href={href(route)} aria-current={path.startsWith(href(route)) ? 'page' : undefined}>{label}</a>)}
         </nav>
-      </details>
-      <a class="language-switch" data-language-switch href={alternate} lang={locale === 'en' ? 'zh-CN' : 'en'} hreflang={locale === 'en' ? 'zh-CN' : 'en'}>{locale === 'en' ? '中文' : 'English'}</a>
-      <button class="theme-toggle" id="theme-toggle" aria-label={text.theme} title={text.theme}><span aria-hidden="true">◐</span></button>
-    </header>
+        <details class="mobile-menu">
+          <summary aria-label={text.menu} title={text.menu}><span aria-hidden="true"></span></summary>
+          <nav aria-label={text.mobileNav}>
+            {mobileNav.map(([route, label]) => <a href={href(route)} aria-current={path.startsWith(href(route)) ? 'page' : undefined}>{label}</a>)}
+          </nav>
+        </details>
+        <div class="header-tools">
+          <a class="header-ghost-btn header-github-link" href="https://github.com/weapp-container" target="_blank" rel="noreferrer">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="3" x2="6" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg>
+            <span>GitHub</span>
+          </a>
+          <a class="language-switch" data-language-switch href={alternate} lang={locale === 'en' ? 'zh-CN' : 'en'} hreflang={locale === 'en' ? 'zh-CN' : 'en'}>{locale === 'en' ? '中文' : 'EN'}</a>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label={text.theme} title={text.theme}><span aria-hidden="true">◐</span></button>
+          <span class="header-tools-sep" aria-hidden="true"></span>
+          <a class="header-download-btn" href={href('/downloads/')} aria-current={path.startsWith(href('/downloads/')) ? 'page' : undefined}>
+            <span class="hdl-main">
+              <svg class="hdl-ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <g class="hdl-arrow"><path d="M8 2.5v7.2"></path><path d="M4.8 6.8L8 10l3.2-3.2"></path></g>
+                <path d="M2.8 12.8h10.4"></path>
+              </svg>
+              <span>{text.downloads}</span>
+            </span>
+            <span class="hdl-os" id="header-dl-os">DevTools</span>
+          </a>
+        </div>
+      </header>
+    </div>
     <main id="content"><slot /></main>
-    <footer class="site-footer">
-      <a class="brand" href={href('/')}><img src="/favicon.svg" width="26" height="26" alt="" /><span>Weapp Container</span></a>
-      <p>{text.tagline}</p>
-      <div><a href={href('/docs/licensing/')}>{text.license}</a><a href="https://github.com/weapp-container/website" target="_blank" rel="noreferrer">{text.source} ↗</a><span>© {new Date().getFullYear()} Weapp Container</span></div>
-    </footer>
+    <div class="site-footer-wrap">
+      <footer class="site-footer">
+        <a class="brand" href={href('/')}><img src="/favicon.svg" width="22" height="22" alt="" /><span>Weapp Container</span></a>
+        <p>{text.tagline}</p>
+        <div>
+          <a href={href('/docs/licensing/')}>{text.license}</a>
+          <a href="https://github.com/weapp-container/weapp-container" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="https://github.com/weapp-container/website" target="_blank" rel="noreferrer">{text.source} ↗</a>
+          <span>© {new Date().getFullYear()} Weapp Container</span>
+        </div>
+      </footer>
+    </div>
     <script>
       document.querySelectorAll<HTMLAnchorElement>('[data-language-switch]').forEach(link => {
         const target = new URL(link.href);
@@ -61,11 +91,53 @@ const nav = [['/docs/', text.docs], ['/demo/', text.demo], ['/platforms/', text.
         target.hash = location.hash;
         link.href = target.href;
       });
-      document.querySelector('#theme-toggle')?.addEventListener('click', () => {
-        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.dataset.theme = next;
-        try { localStorage.setItem('showcase-theme', next); } catch {}
-      });
+      (() => {
+        const btn = document.querySelector<HTMLButtonElement>('#theme-toggle');
+        if (!btn) return;
+        let fallbackTimer = 0;
+        const applyTheme = (next: string) => {
+          document.documentElement.dataset.theme = next;
+          try { localStorage.setItem('showcase-theme', next); } catch {}
+        };
+        btn.addEventListener('click', (event) => {
+          const root = document.documentElement;
+          const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+          const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+          const startVT = (document as any).startViewTransition?.bind(document);
+
+          if (!reduced && startVT) {
+            const rect = btn.getBoundingClientRect();
+            const x = event.clientX || (rect.left + rect.width / 2);
+            const y = event.clientY || (rect.top + rect.height / 2);
+            const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+            const transition = startVT(() => applyTheme(next));
+            transition.ready.then(() => {
+              root.animate(
+                { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`] },
+                { duration: 420, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', pseudoElement: '::view-transition-new(root)' }
+              );
+            }).catch(() => {});
+            return;
+          }
+
+          if (!reduced) {
+            clearTimeout(fallbackTimer);
+            root.classList.add('theme-transitioning');
+            applyTheme(next);
+            fallbackTimer = window.setTimeout(() => root.classList.remove('theme-transitioning'), 280);
+          } else {
+            applyTheme(next);
+          }
+        });
+      })();
+      (() => {
+        const el = document.getElementById('header-dl-os');
+        if (!el) return;
+        const p = ((navigator as any).userAgentData?.platform || navigator.platform || navigator.userAgent || '').toLowerCase();
+        if (p.includes('mac')) el.textContent = 'macOS';
+        else if (p.includes('win')) el.textContent = 'Windows';
+        else if (p.includes('linux')) el.textContent = 'Linux';
+      })();
     </script>
   </body>
 </html>

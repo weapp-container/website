@@ -1,36 +1,769 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import {localeFromPath, localizedPath, ui} from '../data/i18n.mjs';
+import {localeFromPath, localizedPath} from '../data/i18n.mjs';
 import copy from '../data/marketing-copy.json';
+import status from '../../../platforms/status.json';
+import release from '../data/devtools-release.json';
+import bottleImg from '../../../miniapp/assets/bottle.jpg';
+import headphonesImg from '../../../miniapp/assets/headphones.jpg';
+import bagImg from '../../../miniapp/assets/bag.jpg';
+import coffeeImg from '../../../miniapp/assets/coffee.jpg';
+import saladImg from '../../../miniapp/assets/salad.jpg';
+import pizzaImg from '../../../miniapp/assets/pizza.jpg';
+
 const locale = localeFromPath(Astro.url.pathname);
-const t = (value: string) => locale === 'en' ? copy[value.trim() as keyof typeof copy] || value : value;
+const isEn = locale === 'en';
+const t = (value: string) => isEn ? copy[value.trim() as keyof typeof copy] || value : value;
 const href = (value: string) => localizedPath(value, locale);
+
+const sdks = [
+  {
+    id: 'android',
+    label: 'Android',
+    repo: 'weapp-container/sdk-android',
+    tier: 'Maven Central',
+    warn: false,
+    sub: isEn ? 'Kotlin Session & Native View for Android arm64-v8a / x86_64.' : 'Kotlin Session 与原生 View，面向 Android arm64-v8a / x86_64。',
+    badge: 'Maven Central · 0.1.0-preview.7.1',
+    file: isEn ? 'build.gradle.kts · Dependency & minimal setup' : 'build.gradle.kts · 依赖与最小接入',
+    copy: 'implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1")',
+    code: `dependencies {\n  implementation("io.github.weapp-container:weapp-container-android:0.1.0-preview.7.1")\n}\n\nval session = WeappContainerSession.create(context, config)\nsession.load(packDir)`,
+    note: isEn ? 'Published on Maven Central. Verified on Android emulator with signed release build.' : '当前状态：已公开发布至 Maven Central，模拟器构建、安装、运行及 Release 签名已验证。',
+    doc: href('/docs/integrations/android/'),
+  },
+  {
+    id: 'flutter',
+    label: 'Flutter',
+    repo: 'weapp-container/sdk-flutter',
+    tier: 'pub.dev',
+    warn: false,
+    sub: isEn ? 'weapp_container Controller & Widget with 7 hosted packages on pub.dev.' : 'weapp_container Controller 与 Widget，7 个托管包已发布至 pub.dev。',
+    badge: 'pub.dev · 0.1.0-preview.7.1',
+    file: isEn ? 'pubspec.yaml · Install & minimal setup' : 'pubspec.yaml · 安装与最小接入',
+    copy: 'weapp_container: 0.1.0-preview.7.1',
+    code: `dependencies:\n  weapp_container: 0.1.0-preview.7.1\n\nfinal controller = await WeappContainerController.create(config);\nawait controller.load(packPath);`,
+    note: isEn ? '7 hosted packages are on pub.dev; check per-target native archive availability before shipping.' : '当前状态：7 个托管包已发至 pub.dev，各平台原生构建与归档可用性请按目标平台核对。',
+    doc: href('/docs/integrations/flutter/'),
+  },
+  {
+    id: 'rn',
+    label: 'React Native',
+    repo: 'weapp-container/sdk-react-native',
+    tier: isEn ? 'npm · Android' : 'npm · Android',
+    warn: true,
+    sub: isEn ? 'Fabric View & TurboModules for React Native New Architecture.' : 'Fabric View 与 TurboModules，面向 React Native 新架构。',
+    badge: isEn ? 'npm · Android public build' : 'npm · Android 公开构建',
+    file: isEn ? 'package.json · npm install' : 'package.json · npm 安装',
+    copy: 'npm install @weapp-container/react-native@0.1.0-preview.7.1',
+    code: `npm install @weapp-container/react-native@0.1.0-preview.7.1\n\nconst controller = await WeappContainerController.create(config);\nawait controller.load({ type: 'asset', path: 'hello-pack' });`,
+    note: isEn ? 'Android native dependency resolves publicly; pinned iOS archive URL is not live yet.' : '当前限制：Android 原生依赖可解析；iOS 原生依赖的固定归档 URL 尚不可用。',
+    doc: href('/docs/integrations/react-native/'),
+  },
+  {
+    id: 'ios',
+    label: 'iOS',
+    repo: 'weapp-container/sdk-ios',
+    tier: 'Core Tarball',
+    warn: true,
+    sub: isEn ? 'Swift Concurrency & UIKit view wrapper for iOS 16.0+.' : 'Swift Session 与 UIKit 视图封装，面向 iOS 16.0+。',
+    badge: 'Core Prerelease Tarball',
+    file: isEn ? 'Swift · Prebuilt archive setup' : 'Swift · 预编译归档接入',
+    copy: 'https://github.com/weapp-container/weapp-container/releases',
+    code: `// Download the iOS SDK tarball from core prerelease and verify SHA-256\nlet session = try WeappContainerSession(config: config)\ntry await session.load(packURL: localPackURL)`,
+    note: isEn ? 'SwiftPM / CocoaPods pinned archive URLs are not live yet; use the core prerelease tarball.' : '当前限制：SwiftPM 与 CocoaPods 固定归档 URL 暂未发布，请使用核心 prerelease 预编译归档。',
+    doc: href('/docs/integrations/ios/'),
+  },
+  {
+    id: 'desktop',
+    label: 'C++ Desktop',
+    repo: 'weapp-container/sdk-desktop',
+    tier: 'Core Tarball',
+    warn: true,
+    sub: isEn ? 'C++17 Session & native child view for macOS AppKit / Windows / Linux GTK.' : 'C++17 Session 与原生子视图，支持 macOS AppKit / Windows / Linux。',
+    badge: 'Core Prerelease Tarball',
+    file: isEn ? 'C++17 · Prebuilt archive setup' : 'C++17 · 预编译归档接入',
+    copy: 'https://github.com/weapp-container/weapp-container/releases',
+    code: `// Download the Desktop SDK tarball for your target OS\nweapp::Status status;\nauto session = weapp::Session::create(config, status);\nsession->load(packDirectory, options);`,
+    note: isEn ? 'macOS AppKit is locally verified; check platform status for Windows and Linux boundaries.' : '当前限制：macOS AppKit 已本机验证，Windows 与 Linux 请核对全端进展页实测边界。',
+    doc: href('/docs/integrations/desktop/'),
+  },
+  {
+    id: 'contract',
+    label: 'SDK Contract',
+    repo: 'weapp-container/sdk-contract',
+    tier: 'npm @preview',
+    warn: false,
+    sub: isEn ? 'Shared TypeScript bridge types, C ABI contract, and portable test pack fixtures (not a runtime SDK).' : '共享 TypeScript 协议声明、C ABI 契约与 portable 测试包工具（非运行库 SDK）。',
+    badge: isEn ? 'npm @preview · Contract & fixtures' : 'npm @preview · 协议与测试工具',
+    file: isEn ? 'Terminal · Generate standard hello-pack' : 'Terminal · 生成标准 hello-pack 测试包',
+    copy: 'npm install --save-dev @weapp-container/sdk-contract@0.1.0-preview.7.1',
+    code: `npm install --save-dev @weapp-container/sdk-contract@0.1.0-preview.7.1\nnode --input-type=module -e "import { makeAcceptancePack } from '@weapp-container/sdk-contract/fixtures'; makeAcceptancePack('./hello-pack')"`,
+    note: isEn ? 'Specify 0.1.0-preview.7.1 or preview tag explicitly; contains contracts and test fixtures only.' : '使用提醒：请显式指定 0.1.0-preview.7.1；本包仅含协议与测试工具，不包含原生运行库。',
+    doc: href('/docs/pack/'),
+  },
+];
+
+const statusLabels: Record<string, string> = isEn
+  ? {
+      passed: 'Passed', pending: 'Pending', blocked: 'Blocked', 'not-run': 'Not run',
+      unsigned: 'Unsigned', 'not-required': 'N/A', 'emulator-verified': 'Emulator',
+      'simulator-verified': 'Simulator', 'device-verified': 'Device',
+      'desktop-verified': 'Desktop', 'local-verified': 'Local',
+      'runner-bundle-verified': 'Runner', partial: 'Partial',
+      'release-signed': 'Signed', 'verified-release-key': 'Release key',
+      'unsigned-simulator': 'Unsigned', 'consumer-verified': 'Verified',
+    }
+  : {
+      passed: '已通过', pending: '待验证', blocked: '待条件就绪', 'not-run': '未执行',
+      unsigned: '待签名', 'not-required': '不适用', 'emulator-verified': '模拟器已验证',
+      'simulator-verified': '模拟器已验证', 'device-verified': '真机已验证',
+      'desktop-verified': '桌面运行已验证', 'local-verified': '本机已验证',
+      'runner-bundle-verified': 'Runner 已验证', partial: '部分通过',
+      'release-signed': 'Release 已签名', 'verified-release-key': 'Release 签名已验证',
+      'unsigned-simulator': '真机待签名', 'consumer-verified': '独立消费者已验证',
+    };
+
+const evTone = (val: string) => {
+  if (['passed', 'emulator-verified', 'device-verified', 'desktop-verified', 'local-verified', 'runner-bundle-verified', 'release-signed', 'verified-release-key', 'consumer-verified'].includes(val)) return 'pb-ev-ok';
+  if (['simulator-verified', 'partial', 'pending', 'unsigned', 'unsigned-simulator', 'blocked'].includes(val)) return 'pb-ev-warn';
+  return 'pb-ev-muted';
+};
+
+const sdkGroups = [
+  { label: isEn ? 'Public package registries' : '公开发布可安装', items: sdks.slice(0, 3) },
+  { label: isEn ? 'Core prerelease archives' : '归档与源码接入', items: sdks.slice(3, 5) },
+  { label: isEn ? 'Shared contract & fixtures' : '共享协议与测试工具', items: sdks.slice(5) },
+];
 ---
 <Layout>
-  <section class="hero section-wrap">
-    <div class="hero-copy">
-      <p class="eyebrow">WEAPP CONTAINER</p>
-      <h1>{t("小程序，")}<br />{t("运行在更多地方。")}</h1>
-      <p class="hero-intro">{t("把熟悉的小程序体验带到浏览器、手机与桌面。")}<br class="desktop-break" />{t("一份页面与业务逻辑，连接不同的原生宿主。")}</p>
-      <div class="hero-actions"><a class="button primary" href={href("/demo/")}>{t("打开在线演示 ")}<span aria-hidden="true">↗</span></a><a class="text-link" href={href("/guide/")}>{t("了解如何接入 ")}<span aria-hidden="true">→</span></a><a class="text-link" href={href("/downloads/")}>{t("下载调试工具")}<span aria-hidden="true">↓</span></a></div>
+  <!-- SECTION 1: OPTION C UNIFIED IMMERSIVE HERO (Headline + Scene Switcher + Manifest Spec + Floating 3D Phone) -->
+  <div class="pb-hero-band">
+    <section class="pb-hero-stage section-wrap">
+      <div class="pb-hero-left">
+        <div class="pb-meta-line">
+          <span class="pb-seal-pulse" id="hero-seal-dot"></span>
+          <span><b>{release.version}</b> · Apache-2.0 · {isEn ? '7 host platforms validated' : '7 端宿主实测'}</span>
+        </div>
+
+        <h1 class="pb-hero-h1">
+          {isEn ? 'One portable pack,' : '一份小程序包，'}<span class="pb-h1-sub">{isEn ? 'running natively across hosts.' : '原生运行在更多宿主。'}</span>
+        </h1>
+
+        <p class="pb-hero-lead">
+          {isEn
+            ? 'Rust core drives an isolated JS runtime and unified Skia renderer — no system WebView required — running the exact same pack across Web, mobile, and desktop.'
+            : 'Rust 核心驱动独立 JS 环境与统一 Skia 渲染管线，不依赖系统 WebView，同一份包跨 Web、移动与桌面原生运行。'}
+        </p>
+
+        <div class="pb-hero-actions">
+          <a class="button primary" id="hero-primary-cta" href={href('/demo/?scene=shop')}>
+            <span id="hero-primary-cta-text">{isEn ? 'Open live demo (Shop)' : '打开浏览器演示（商城）'}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <div class="pb-seg pb-hero-seg" role="tablist" aria-label={isEn ? 'Switch demo scene' : '切换真实演示场景'} id="hero-scene-seg">
+            <span class="pb-seg-thumb" id="hero-scene-thumb"></span>
+            <button type="button" role="tab" aria-selected="true" data-scene="shop">{t('商城')}</button>
+            <button type="button" role="tab" aria-selected="false" data-scene="order">{t('点单')}</button>
+            <button type="button" role="tab" aria-selected="false" data-scene="basic">{t('基础能力')}</button>
+          </div>
+        </div>
+
+        <div class="pb-spec-strip" aria-label={isEn ? 'Portable Pack manifest' : 'Portable Pack 清单'}>
+          <div class="pb-spec-head">
+            <span>PACK MANIFEST · restricted-showcase</span>
+            <span class="pb-accent-text" id="hero-manifest-route">/pages/shop/index</span>
+          </div>
+          <div class="pb-spec-grid">
+            <div class="pb-spec-item">
+              <span>packRoot</span>
+              <strong>f64a4760…807e5b5</strong>
+            </div>
+            <div class="pb-spec-item">
+              <span>engine</span>
+              <strong>Rust Core · QuickJS / V8</strong>
+            </div>
+            <div class="pb-spec-item">
+              <span>renderer</span>
+              <strong>Skia / GLES · CanvasKit</strong>
+            </div>
+            <div class="pb-spec-item">
+              <span>hostBridge</span>
+              <strong>{isEn ? 'invoke() · 29 API groups' : 'invoke() · 29 组小程序 API'}</strong>
+            </div>
+          </div>
+          <div class="pb-spec-foot">
+            <span id="hero-scene-desc"><strong>{t('商城')}</strong> — {t('商品、规格、地址与模拟结算。')}</span>
+            <code id="hero-cta-code">{href('/demo/?scene=shop')}</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sculpted 3D Interactive Phone floating in spotlight (3D canvas isolated from micro-dock) -->
+      <div class="pb-hero-right" id="hero-3d-wrap">
+        <div class="pb-3d-canvas" id="hero-3d-stage">
+          <div class="hw3d-device is-3d-active" id="hero-3d-phone" data-finish="jade" style="width:282px;height:538px;--rad:42px;--rx:6deg;--ry:-18deg;" aria-label={t('Weapp Container 商城演示真实运行截图')}>
+            <div class="hw3d-shadow"></div>
+            <div class="hw3d-slice s1" aria-hidden="true"></div>
+            <div class="hw3d-slice s2" aria-hidden="true"></div>
+            <div class="hw3d-slice s3" aria-hidden="true"></div>
+            <div class="hw3d-slice s4" aria-hidden="true"></div>
+            <div class="hw3d-side hw3d-side-left">
+              <span class="hw3d-antenna a-top"></span>
+              <span class="hw3d-btn rb-action"></span>
+              <span class="hw3d-btn rb-vol1"></span>
+              <span class="hw3d-btn rb-vol2"></span>
+              <span class="hw3d-antenna a-bot"></span>
+            </div>
+            <div class="hw3d-side hw3d-side-right">
+              <span class="hw3d-antenna a-top"></span>
+              <span class="hw3d-btn rb-power"></span>
+              <span class="hw3d-antenna a-bot"></span>
+            </div>
+            <div class="hw3d-side hw3d-side-top"></div>
+            <div class="hw3d-side hw3d-side-bottom">
+              <span class="hw3d-spk"><i></i><i></i><i></i></span>
+              <span class="hw3d-usbc"></span>
+              <span class="hw3d-spk"><i></i><i></i><i></i><i></i></span>
+            </div>
+            <div class="hw3d-back">
+              <div class="hw3d-cam">
+                <div class="hw3d-lens"></div>
+                <div class="hw3d-flash-col"><span class="hw3d-flash"></span><span class="hw3d-lidar"></span></div>
+                <div class="hw3d-lens"></div>
+                <div class="hw3d-lens"></div>
+              </div>
+              <div class="hw3d-back-brand">
+                <img src="/favicon.svg" width="32" height="32" alt="" />
+                <span>WEAPP CONTAINER</span>
+              </div>
+              <div class="hw3d-back-foot">RUST CORE · SKIA</div>
+            </div>
+
+            <div class="hw3d-front">
+              <div class="hw3d-bezel">
+                <div class="hw3d-screen">
+                  <div class="hw3d-sheen"></div>
+                  <div class="pb-ios-status" aria-hidden="true">
+                    <span>9:41</span>
+                    <div class="pb-island"></div>
+                    <div class="pb-status-icons">
+                      <svg width="12" height="9" viewBox="0 0 12 9" fill="currentColor"><rect x="0" y="5" width="2" height="4" rx=".6"/><rect x="3" y="3.5" width="2" height="5.5" rx=".6"/><rect x="6" y="2" width="2" height="7" rx=".6"/><rect x="9" y="0" width="2" height="9" rx=".6"/></svg>
+                      <svg width="18" height="9" viewBox="0 0 20 10"><rect x=".6" y=".8" width="16.4" height="8.4" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.1"/><rect x="2.2" y="2.3" width="12.5" height="5.4" rx="1" fill="currentColor"/><path d="M18.2 3.4v3.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                    </div>
+                  </div>
+
+                  <!-- Scene 1: Shop (real product photography) -->
+                  <div class="pb-mini-scene is-active" data-hscene="shop">
+                    <div class="mp-top">
+                      <span class="mp-brand-mark"><b>M</b>MORROW</span>
+                      <span class="mp-capsule" aria-hidden="true">•••<span class="mp-capsule-sep"></span>⊙</span>
+                    </div>
+                    <div class="mp-search"><span>{isEn ? 'Search items...' : '搜索商品、规格…'}</span></div>
+                    <div class="mp-pills">
+                      <span class="mp-pill is-on">{isEn ? 'All' : '全部'}</span>
+                      <span class="mp-pill">{isEn ? 'Daily' : '日常'}</span>
+                      <span class="mp-pill">{isEn ? 'Audio' : '音频'}</span>
+                    </div>
+                    <div class="mp-hero-prod">
+                      <div class="mp-hero-img-wrap hero-device">
+                        <img src={bottleImg.src} width={bottleImg.width} height={bottleImg.height} alt={t('日常用品的产品摄影')} loading="eager" />
+                        <span class="mp-photo-tag">{isEn ? 'Featured' : '精选'}</span>
+                      </div>
+                      <div class="mp-hero-info">
+                        <div><strong>{isEn ? 'Insulated Bottle' : '保温杯 · 350ml'}</strong><span class="mp-sub">MORROW · 304</span></div>
+                        <div style="display:flex;align-items:center;gap:5px;"><span class="mp-price">¥129</span><span class="mp-plus">+</span></div>
+                      </div>
+                    </div>
+                    <div class="mp-grid-2">
+                      <div class="mp-mini-card">
+                        <img src={headphonesImg.src} width={headphonesImg.width} height={headphonesImg.height} alt="" loading="lazy" />
+                        <div class="mp-mini-card-body"><strong>{isEn ? 'Headphones' : '无线音频'}</strong><div class="mp-row"><span class="mp-price">¥499</span><span class="mp-plus">+</span></div></div>
+                      </div>
+                      <div class="mp-mini-card">
+                        <img src={bagImg.src} width={bagImg.width} height={bagImg.height} alt="" loading="lazy" />
+                        <div class="mp-mini-card-body"><strong>{isEn ? 'Daypack' : '日常背包'}</strong><div class="mp-row"><span class="mp-price">¥269</span><span class="mp-plus">+</span></div></div>
+                      </div>
+                    </div>
+                    <div class="mp-tabbar" aria-hidden="true"><span class="is-on">{isEn ? 'Home' : '首页'}</span><span>{isEn ? 'Shop' : '商城'}</span><span>{isEn ? 'Cart' : '购物袋'}</span><span>{isEn ? 'Order' : '订单'}</span></div>
+                  </div>
+
+                  <!-- Scene 2: Order -->
+                  <div class="pb-mini-scene" data-hscene="order">
+                    <div class="mp-top">
+                      <span class="mp-brand-mark"><b>D</b>{isEn ? 'Daily Table' : '日日餐食'}</span>
+                      <span class="mp-capsule" aria-hidden="true">•••<span class="mp-capsule-sep"></span>⊙</span>
+                    </div>
+                    <div class="mp-order-hero">
+                      <img src={coffeeImg.src} width={coffeeImg.width} height={coffeeImg.height} alt={t('咖啡与餐食的演示场景')} loading="lazy" />
+                      <div><span style="font-family:var(--font-mono);font-size:8px;opacity:.88;">DAILY TABLE</span><strong style="display:block;font-size:12px;">{t('来一杯，刚刚好。')}</strong></div>
+                    </div>
+                    <div class="mp-pills"><span class="mp-pill is-on">{isEn ? 'Menu' : '菜单'}</span><span class="mp-pill">{isEn ? 'Coffee' : '咖啡'}</span><span class="mp-pill">{isEn ? 'Food' : '餐食'}</span></div>
+                    <div class="mp-order-item"><img src={coffeeImg.src} width={coffeeImg.width} height={coffeeImg.height} alt="" loading="lazy" /><div><strong style="font-size:10px;display:block;">{isEn ? 'Oat Latte' : '手冲咖啡'}</strong><span class="mp-sub">500ml</span><div class="mp-price">¥26</div></div><span class="mp-plus">+</span></div>
+                    <div class="mp-order-item"><img src={saladImg.src} width={saladImg.width} height={saladImg.height} alt="" loading="lazy" /><div><strong style="font-size:10px;display:block;">{isEn ? 'Garden Bowl' : '轻食餐品'}</strong><span class="mp-sub">{isEn ? 'Fresh' : '精选'}</span><div class="mp-price">¥42</div></div><span class="mp-plus">+</span></div>
+                    <div class="mp-order-item"><img src={pizzaImg.src} width={pizzaImg.width} height={pizzaImg.height} alt="" loading="lazy" /><div><strong style="font-size:10px;display:block;">{isEn ? 'Flatbread' : '热食餐品'}</strong><span class="mp-sub">{isEn ? 'Hot' : '当日'}</span><div class="mp-price">¥58</div></div><span class="mp-plus">+</span></div>
+                    <div class="mp-cart-bar"><span>2 · <strong>¥68</strong></span><span class="mp-cart-btn">{isEn ? 'Checkout' : '结算'}</span></div>
+                    <div class="mp-tabbar" aria-hidden="true"><span>{isEn ? 'Home' : '首页'}</span><span class="is-on">{isEn ? 'Order' : '点单'}</span><span>{isEn ? 'List' : '订单'}</span><span>{isEn ? 'Me' : '我的'}</span></div>
+                  </div>
+
+                  <!-- Scene 3: Basic -->
+                  <div class="pb-mini-scene" data-hscene="basic">
+                    <div class="mp-top">
+                      <span class="mp-brand-mark"><b>W</b>{t('基础能力')}</span>
+                      <span class="mp-capsule" aria-hidden="true">•••<span class="mp-capsule-sep"></span>⊙</span>
+                    </div>
+                    <div><div class="mp-h">{t('小交互，也认真。')}</div><div class="mp-sub">{t('点击、滚动、组件、存储与宿主输入。')}</div></div>
+                    <div class="mp-metric-box">
+                      <div><strong style="font-size:10px;display:block;">setData</strong><span class="mp-sub">QuickJS</span></div>
+                      <div class="mp-stepper"><span>−</span>12<span>+</span></div>
+                    </div>
+                    <div class="mp-card">
+                      <div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:10px;">{isEn ? 'Native Input Bridge' : '原生文字输入桥接'}</strong><span class="mp-badge"><i></i>BRIDGE</span></div>
+                      <div class="mp-input-mock"><span>{isEn ? 'Host text editor' : '系统输入框'}</span><span style="color:#087951;font-family:var(--font-mono);font-size:8.5px;">IME</span></div>
+                    </div>
+                    <div class="mp-metric-box">
+                      <div><strong style="font-size:10px;display:block;">Storage</strong><span class="mp-sub">flushStorage</span></div>
+                      <span class="mp-badge"><i></i>SYNC</span>
+                    </div>
+                    <div class="mp-card" style="margin-top:auto;background:#13201a;color:#e8f0ec;">
+                      <div style="font-family:var(--font-mono);font-size:8.5px;color:#73cf9d;">weappContainer.invoke()</div>
+                      <div style="font-size:9px;opacity:.88;">scroll · storage · host input</div>
+                    </div>
+                    <div class="mp-tabbar" aria-hidden="true"><span class="is-on">{isEn ? 'Core' : '能力'}</span><span>{isEn ? 'Shop' : '商城'}</span><span>{isEn ? 'Order' : '点单'}</span><span>{isEn ? 'Host' : '宿主'}</span></div>
+                  </div>
+
+                  <div class="pb-home-ind" aria-hidden="true"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+        <!-- Compact Hero 3D Micro-Dock (Sibling outside perspective container so 3D plane never blocks clicks) -->
+        <div class="pb-hero-dock" role="toolbar" aria-label={isEn ? '3D phone controls' : '3D 视角与外观控制'}>
+          <button class="pb-hero-dock-btn" type="button" data-hpose="flat">0°</button>
+          <button class="pb-hero-dock-btn is-active" type="button" data-hpose="left">3D</button>
+          <button class="pb-hero-dock-btn" type="button" data-hpose="back">{isEn ? 'Back' : '背面'}</button>
+          <span class="pb-hero-dock-sep" aria-hidden="true"></span>
+          <div class="hw3d-swatches">
+            <button class="hw3d-swatch" type="button" data-finish="titanium" aria-label="Natural Titanium"></button>
+            <button class="hw3d-swatch" type="button" data-finish="silver" aria-label="Silver"></button>
+            <button class="hw3d-swatch" type="button" data-finish="graphite" aria-label="Graphite"></button>
+            <button class="hw3d-swatch is-active" type="button" data-finish="jade" aria-label="Jade"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SECTION 2: ARCHITECTURE PIPELINE FLOW (Scroll-triggered & Interactive Replay) -->
+  <section class="pb-sec section-wrap" data-reveal>
+    <div class="pb-sec-head">
+      <div>
+        <p class="pb-sec-kicker">ARCHITECTURE FLOW</p>
+        <h2 class="pb-sec-title">{t('页面相同，宿主各有所长。')}</h2>
+        <p class="pb-sec-sub">{t('业务运行在独立的 JavaScript 环境，页面交给统一渲染管线，文字输入交给熟悉的系统控件。')}</p>
+      </div>
+      <a class="text-link" href={href('/docs/architecture/')}>{isEn ? 'Read architecture →' : '阅读运行架构 →'}</a>
     </div>
-    <div class="hero-visual">
-      <div class="hero-device"><img src="/media/demo-shop.png" width="750" height="1440" alt={t("Weapp Container 商城演示真实运行截图")} fetchpriority="high" /><span class="device-camera" aria-hidden="true"></span></div>
-      <div class="hero-caption"><span class="caption-mark" aria-hidden="true">↗</span><div><strong>{t("从一次点击开始")}</strong><p>{t("浏览、加购、下单，亲手体验。")}</p></div></div>
+    <div class="pb-pipe-grid" id="home-pipe-grid">
+      <article class="pb-pipe-step is-lit" data-pipe-step="0">
+        <div class="pb-pipe-tag"><span>PACK · manifest.json</span><span>01</span></div>
+        <h3>{t('一份小程序')}</h3>
+        <p>{isEn ? 'Package native WXML/WXSS/JS or framework outputs into a content-addressed portable pack with SHA-256 blobs.' : '原生小程序或已有框架产物打包为含 manifest 与 sha256 资源的便携包，保留原有开发工具。'}</p>
+        <div class="pb-pipe-code">blobs/sha256/f64a4760… + manifest.json</div>
+      </article>
+      <article class="pb-pipe-step is-lit" data-pipe-step="1">
+        <div class="pb-pipe-tag"><span>RUNTIME · Rust + QuickJS/V8</span><span>02</span></div>
+        <h3>Weapp Container</h3>
+        <p>{isEn ? 'Rust core drives an isolated JS engine while Skia / GLES renders pages consistently across hosts.' : 'Rust 核心在独立 JS 环境执行业务代码，页面布局与绘制交由统一 Skia 渲染管线，不依赖系统 WebView。'}</p>
+        <div class="pb-pipe-code">QuickJS / V8 → Skia / CanvasKit</div>
+      </article>
+      <article class="pb-pipe-step is-lit" data-pipe-step="2">
+        <div class="pb-pipe-tag"><span>HOST · weappContainer.invoke</span><span>03</span></div>
+        <h3>{t('不同的宿主')}</h3>
+        <p>{isEn ? 'Text input, storage persistence, permissions, and native capabilities stay under host app control with explicit errors.' : '文字输入、存储持久化、权限与业务能力全部交还宿主应用控制，不伪造未支持能力的结果。'}</p>
+        <div class="pb-pipe-code">registerHostMethod() · flushStorage() · close()</div>
+      </article>
     </div>
   </section>
-  <section class="platform-strip section-wrap" aria-label={t("目标运行平台")}><span>{t("面向七个宿主")}</span><div><span>Web</span><span>Android</span><span>iOS</span><span>HarmonyOS</span><span>macOS</span><span>Windows</span><span>Linux</span></div><a href={href("/platforms/")}>{t("查看验证进展 →")}</a></section>
-  <section class="section-wrap experience-section">
-    <div class="section-heading"><h2>{t("不止能看，还能操作。")}</h2><p>{t("三个演示场景，共用一份真实小程序产物。")}</p></div>
-    <div class="experience-grid">
-      <a class="experience experience-shop" href={href("/demo/?scene=shop")}><div class="experience-copy"><span class="experience-tag">{t("商城")}</span><h3>{t("把喜欢的东西")}<br />{t("加入购物车。")}</h3><p>{t("商品、规格、地址与模拟结算。")}</p><span class="round-arrow" aria-hidden="true">↗</span></div><img src="/media/shop-editorial.jpg" width="840" height="720" alt={t("日常用品的产品摄影")} loading="lazy" /></a>
-      <a class="experience experience-order" href={href("/demo/?scene=order")}><img src="/media/coffee-editorial.jpg" width="640" height="600" alt={t("咖啡与餐食的演示场景")} loading="lazy" /><div class="experience-copy"><span class="experience-tag">{t("点单")}</span><h3>{t("来一杯，刚刚好。")}</h3><p>{t("选菜单、调规格、写备注，等一份模拟订单。")}</p><span class="round-arrow" aria-hidden="true">↗</span></div></a>
-      <a class="experience experience-basic" href={href("/demo/?scene=basic")}><div class="experience-copy"><span class="experience-tag">{t("基础能力")}</span><h3>{t("小交互，也认真。")}</h3><p>{t("点击、滚动、组件、存储与宿主输入。")}</p><span class="round-arrow" aria-hidden="true">↗</span></div><img src="/media/demo-basic.png" width="750" height="1440" alt={t("基础能力演示真实截图")} loading="lazy" /></a>
+
+  <!-- SECTION 3: GETTING STARTED & 6-REPO SDK WORKBENCH -->
+  <section class="pb-sec section-wrap" id="sdks" data-reveal>
+    <div class="pb-sec-head">
+      <div>
+        <p class="pb-sec-kicker">{isEn ? 'GETTING STARTED · WEAPP-CONTAINER SDK · 0.1.0-preview.7.1' : '开始接入 · 组织内 6 个公开仓库 · 0.1.0-preview.7.1'}</p>
+        <h2 class="pb-sec-title">{isEn ? 'Start from one portable pack, integrate by real release status.' : '从一份小程序包开始接入，按真实分发状态选用 SDK。'}</h2>
+        <p class="pb-sec-sub">{isEn ? 'Choose a host SDK, verify the runtime archive and portable pack, then wire the session into your app lifecycle.' : '选择目标宿主 SDK，准备经过校验的运行库与 portable pack，再将会话与原生视图接入应用生命周期。'}</p>
+      </div>
+      <a class="text-link" href={href('/docs/start/')}>{t('打开快速开始')} →</a>
+    </div>
+
+    <div class="pb-sdk-grid">
+      <div class="pb-sdk-list" role="tablist" aria-label={isEn ? 'SDK repositories' : '选择宿主 SDK'} id="home-sdk-tabs">
+        {sdkGroups.map(group => (
+          <div class="pb-sdk-group">
+            <div class="pb-sdk-group-label">{group.label}</div>
+            {group.items.map(sdk => (
+              <button
+                type="button"
+                role="tab"
+                class="pb-sdk-btn"
+                aria-selected={sdk.id === 'android' ? 'true' : 'false'}
+                data-sdk-id={sdk.id}
+              >
+                <div>
+                  <strong>{sdk.label}</strong>
+                  <small>{sdk.repo.replace('weapp-container/', '')}</small>
+                </div>
+                <span class={`pb-sdk-tier${sdk.warn ? ' is-warn' : ''}`}>{sdk.tier}</span>
+              </button>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <div class="pb-sdk-panel" id="home-sdk-panel">
+        <div class="pb-sdk-head">
+          <div>
+            <h3 id="home-sdk-title">{sdks[0].repo}</h3>
+            <p id="home-sdk-sub">{sdks[0].sub}</p>
+          </div>
+          <span class="pb-sdk-tier" id="home-sdk-badge">{sdks[0].badge}</span>
+        </div>
+
+        <div class="dl-terminal">
+          <div class="dl-terminal-top">
+            <span id="home-sdk-file">{sdks[0].file}</span>
+            <button class="dl-copy-mini" type="button" id="home-sdk-copy">{isEn ? 'Copy command' : '复制'}</button>
+          </div>
+          <pre><code id="home-sdk-code">{sdks[0].code}</code></pre>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+          <p class="muted" id="home-sdk-note" style="max-width:560px;">{sdks[0].note}</p>
+          <a class="text-link" id="home-sdk-doc" href={sdks[0].doc}>{isEn ? 'Read integration guide →' : '查看接入文档 →'}</a>
+        </div>
+      </div>
     </div>
   </section>
-  <section class="section-wrap architecture-section">
-    <div class="section-heading"><h2>{t("页面相同，宿主各有所长。")}</h2><p>{t("业务运行在独立的 JavaScript 环境，页面交给统一渲染管线，文字输入交给熟悉的系统控件。")}</p></div>
-    <div class="architecture"><div><span class="arch-symbol">{ }</span><h3>{t("一份小程序")}</h3><p>{t("WXML、WXSS 与业务 JavaScript")}</p></div><span class="arch-line" aria-hidden="true">→</span><div><img src="/favicon.svg" width="46" height="46" alt="" /><h3>Weapp Container</h3><p>{t("QuickJS 运行时与 Skia 渲染")}</p></div><span class="arch-line" aria-hidden="true">→</span><div><span class="arch-symbol">▣</span><h3>{t("不同的宿主")}</h3><p>{t("Web、原生、Flutter 与 React Native")}</p></div></div>
+
+  <!-- SECTION 4: 7-PLATFORM PRECISION EVIDENCE LEDGER -->
+  <section class="pb-sec section-wrap" data-reveal>
+    <div class="pb-sec-head">
+      <div>
+        <p class="pb-sec-kicker">VERIFIED EVIDENCE · platforms/status.json ({status.updatedAt})</p>
+        <h2 class="pb-sec-title">{t('面向七个宿主')}</h2>
+        <p class="pb-sec-sub">{isEn ? 'Build, installation, runtime, and signing results are recorded separately for each target.' : '构建、安装、运行与签名状态按端独立记录，不以编译通过代替完整验收。'}</p>
+      </div>
+      <a class="text-link" href={href('/platforms/')}>{t('查看验证进展 →')}</a>
+    </div>
+
+    <div class="pb-table-wrap">
+      <table class="pb-table">
+        <thead>
+          <tr>
+            <th>{isEn ? 'Platform' : '运行平台'}</th>
+            <th>{isEn ? 'Build' : '构建'}</th>
+            <th>{isEn ? 'Install' : '安装'}</th>
+            <th>{isEn ? 'Runtime' : '运行'}</th>
+            <th>{isEn ? 'Signing' : '签名'}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {status.platforms.map((item: any) => (
+            <tr>
+              <td>
+                <span class="pb-plat-name">{item.name}</span>
+                <span class="pb-plat-arch">{item.architecture}</span>
+              </td>
+              <td class={evTone(item.build)}>{statusLabels[item.build] || item.build}</td>
+              <td class={evTone(item.install)}>{statusLabels[item.install] || item.install}</td>
+              <td class={evTone(item.runtime)}>{statusLabels[item.runtime] || item.runtime}</td>
+              <td class={evTone(item.signing)}>{statusLabels[item.signing] || item.signing}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pb-ev-mobile-cards">
+      {status.platforms.map((item: any) => (
+        <article class="pb-ev-mcard">
+          <div class="pb-ev-mcard-top">
+            <strong class="pb-plat-name">{item.name}</strong>
+            <span class="pb-plat-arch">{item.architecture.split('/')[0].trim()}</span>
+          </div>
+          <div class="pb-ev-mcard-grid">
+            <div><span>{isEn ? 'Build' : '构建'}</span><strong class={evTone(item.build)}>{statusLabels[item.build] || item.build}</strong></div>
+            <div><span>{isEn ? 'Install' : '安装'}</span><strong class={evTone(item.install)}>{statusLabels[item.install] || item.install}</strong></div>
+            <div><span>{isEn ? 'Runtime' : '运行'}</span><strong class={evTone(item.runtime)}>{statusLabels[item.runtime] || item.runtime}</strong></div>
+            <div><span>{isEn ? 'Signing' : '签名'}</span><strong class={evTone(item.signing)}>{statusLabels[item.signing] || item.signing}</strong></div>
+          </div>
+        </article>
+      ))}
+    </div>
   </section>
-  <section class="section-wrap closing-section"><div><h2>{t("先体验，再决定怎么接入。")}</h2><p>{t("无需安装。打开浏览器，试一次完整流程。")}</p></div><div class="closing-actions"><a class="button secondary" href={href("/downloads/")}>{t("下载调试工具")}<span aria-hidden="true">↓</span></a><a class="button primary" href={href("/demo/")}>{t("开始体验 ↗")}</a></div></section>
+
+  <!-- SECTION 5: CLOSING INTEGRATION ENTRY (No duplicate links to /demo/ or /downloads/) -->
+  <section class="section-wrap" data-reveal>
+    <div class="sp-next-strip">
+      <div>
+        <h2>{t('准备将容器接入你的应用？')}</h2>
+        <p>{isEn ? 'Read per-platform integration guides covering Android, iOS, Desktop, Flutter, and React Native.' : '查看 Android、iOS、C++ 桌面、Flutter 与 React Native 的完整宿主集成说明。'}</p>
+      </div>
+      <a class="button primary" href={href('/docs/integrations/')}>{t('浏览集成指南 →')}</a>
+    </div>
+  </section>
+
+  <script define:vars={{sdks, isEn, demoBase: href('/demo/')}}>
+    // 1. Hero 3-Scene Segmented Switcher synced with primary CTA & 3D Phone Screen
+    const sceneInfo = {
+      shop: {
+        name: isEn ? 'Shop' : '商城',
+        route: '/pages/shop/index',
+        desc: isEn ? '<strong>Shop</strong> — Products, variants, addresses, and simulated checkout.' : '<strong>商城</strong> — 商品、规格、地址与模拟结算。',
+      },
+      order: {
+        name: isEn ? 'Order' : '点单',
+        route: '/pages/order/index',
+        desc: isEn ? '<strong>Order</strong> — Choose items, adjust options, add notes, and follow a simulated order.' : '<strong>点单</strong> — 选菜单、调规格、写备注，等一份模拟订单。',
+      },
+      basic: {
+        name: isEn ? 'Fundamentals' : '基础能力',
+        route: '/pages/basic/index',
+        desc: isEn ? '<strong>Fundamentals</strong> — Clicks, scrolling, components, storage, and host-native input.' : '<strong>基础能力</strong> — 点击、滚动、组件、存储与宿主输入。',
+      },
+    };
+    const seg = document.getElementById('hero-scene-seg');
+    const thumb = document.getElementById('hero-scene-thumb');
+    const segBtns = seg ? [...seg.querySelectorAll('button')] : [];
+    const hViews = [...document.querySelectorAll('[data-hscene]')];
+    function moveThumb(b) {
+      if (!thumb || !b) return;
+      thumb.style.width = `${b.offsetWidth}px`;
+      thumb.style.transform = `translateX(${b.offsetLeft - 4}px)`;
+    }
+    if (segBtns[0]) moveThumb(segBtns[0]);
+    window.addEventListener('resize', () => moveThumb(seg?.querySelector('[aria-selected="true"]')));
+    const sealDot = document.getElementById('hero-seal-dot');
+    const routeEl = document.getElementById('hero-manifest-route');
+    const descEl = document.getElementById('hero-scene-desc');
+    segBtns.forEach(btn => btn.addEventListener('click', () => {
+      const k = btn.dataset.scene;
+      const d = sceneInfo[k];
+      if (!d) return;
+      segBtns.forEach(b => b.setAttribute('aria-selected', b === btn ? 'true' : 'false'));
+      moveThumb(btn);
+      hViews.forEach(v => v.classList.toggle('is-active', v.dataset.hscene === k));
+      routeEl?.classList.add('pb-is-updating');
+      descEl?.classList.add('pb-is-updating');
+      requestAnimationFrame(() => {
+        if (routeEl) routeEl.textContent = d.route;
+        if (descEl) descEl.innerHTML = d.desc;
+        requestAnimationFrame(() => {
+          routeEl?.classList.remove('pb-is-updating');
+          descEl?.classList.remove('pb-is-updating');
+        });
+      });
+      const target = `${demoBase}?scene=${k}`;
+      document.getElementById('hero-cta-code').textContent = target;
+      const cta = document.getElementById('hero-primary-cta');
+      cta.href = target;
+      document.getElementById('hero-primary-cta-text').textContent = isEn
+        ? `Open live demo (${d.name})`
+        : `打开浏览器演示（${d.name}）`;
+      if (sealDot) {
+        sealDot.classList.remove('is-flash');
+        void sealDot.offsetWidth;
+        sealDot.classList.add('is-flash');
+        setTimeout(() => sealDot.classList.remove('is-flash'), 260);
+      }
+    }));
+
+    // 2. Hero 3D Phone Interactive Physics (hover micro-tilt, drag inertia, click pose cycle, double-click reset)
+    const wrap = document.getElementById('hero-3d-wrap');
+    const stage = document.getElementById('hero-3d-stage');
+    const phone = document.getElementById('hero-3d-phone');
+    if (wrap && stage && phone) {
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const poses = { flat: { rx: 0, ry: 0 }, left: { rx: 6, ry: -18 }, back: { rx: 4, ry: 180 } };
+      const order = ['left', 'back', 'flat'];
+      const poseBtns = [...wrap.querySelectorAll('[data-hpose]')];
+      const swatches = [...wrap.querySelectorAll('.hw3d-swatch')];
+      let targetRx = reduced ? 0 : 6, targetRy = reduced ? 0 : -18;
+      let curRx = targetRx, curRy = targetRy, hoverRx = 0, hoverRy = 0, tHoverRx = 0, tHoverRy = 0;
+      let velX = 0, velY = 0, isDragging = false, dragStart = null, lastPtr = null, moved = false, raf = null;
+      let cycleIdx = reduced ? 2 : 0, lastClick = 0;
+
+      const render = () => {
+        const rx = curRx + hoverRx, ry = curRy + hoverRy;
+        phone.style.setProperty('--rx', `${rx.toFixed(2)}deg`);
+        phone.style.setProperty('--ry', `${ry.toFixed(2)}deg`);
+        const normY = ((ry % 360) + 540) % 360 - 180;
+        const flat = Math.hypot(rx, normY) < 2.2 && !isDragging;
+        phone.style.setProperty('--glare-x', `${(50 + Math.max(-45, Math.min(45, normY * 1.15))).toFixed(1)}%`);
+        phone.style.setProperty('--glare-op', flat ? '0.08' : '0.68');
+        phone.style.setProperty('--rim-shift', `${(50 + Math.max(-42, Math.min(42, normY * 1.2))).toFixed(1)}%`);
+        phone.style.setProperty('--shadow-x', `${Math.max(-32, Math.min(32, -normY * 0.6)).toFixed(1)}px`);
+      };
+      const tick = () => {
+        if (!isDragging) {
+          if (Math.abs(velX) > 0.04 || Math.abs(velY) > 0.04) {
+            targetRx = Math.max(-36, Math.min(36, targetRx + velX));
+            targetRy += velY;
+            velX *= 0.88; velY *= 0.88;
+          } else { velX = 0; velY = 0; }
+          curRx += (targetRx - curRx) * 0.14;
+          curRy += (targetRy - curRy) * 0.14;
+        }
+        hoverRx += (tHoverRx - hoverRx) * 0.14;
+        hoverRy += (tHoverRy - hoverRy) * 0.14;
+        render();
+        if (isDragging || Math.abs(velX) > 0.04 || Math.abs(velY) > 0.04 || Math.abs(targetRx - curRx) > 0.03 || Math.abs(targetRy - curRy) > 0.03 || Math.abs(tHoverRx - hoverRx) > 0.02 || Math.abs(tHoverRy - hoverRy) > 0.02) {
+          raf = requestAnimationFrame(tick);
+        } else { curRx = targetRx; curRy = targetRy; hoverRx = tHoverRx; hoverRy = tHoverRy; render(); raf = null; }
+      };
+      const goPose = k => {
+        const p = poses[k]; if (!p) return;
+        velX = 0; velY = 0;
+        const curMod = ((curRy % 360) + 540) % 360 - 180;
+        let dY = p.ry - curMod;
+        if (dY > 180) dY -= 360; if (dY < -180) dY += 360;
+        targetRx = p.rx; targetRy = curRy + dY;
+        if (reduced) { curRx = targetRx; curRy = targetRy; }
+        cycleIdx = order.indexOf(k);
+        poseBtns.forEach(b => b.classList.toggle('is-active', b.dataset.hpose === k));
+        if (!raf) raf = requestAnimationFrame(tick);
+      };
+      poseBtns.forEach(b => b.addEventListener('click', e => { e.stopPropagation(); goPose(b.dataset.hpose); }));
+      swatches.forEach(b => b.addEventListener('click', e => {
+        e.stopPropagation();
+        phone.dataset.finish = b.dataset.finish;
+        swatches.forEach(x => x.classList.toggle('is-active', x === b));
+      }));
+      stage.addEventListener('pointermove', e => {
+        if (isDragging || reduced) return;
+        const r = stage.getBoundingClientRect();
+        tHoverRy = (((e.clientX - r.left) / r.width) * 2 - 1) * 4.5;
+        tHoverRx = -(((e.clientY - r.top) / r.height) * 2 - 1) * 3.2;
+        if (!raf) raf = requestAnimationFrame(tick);
+      });
+      stage.addEventListener('pointerleave', () => { tHoverRx = 0; tHoverRy = 0; if (!raf) raf = requestAnimationFrame(tick); });
+      stage.addEventListener('pointerdown', e => {
+        if (e.button !== 0 || e.target.closest('button, a, .pb-hero-dock')) return;
+        velX = 0; velY = 0; dragStart = { x: e.clientX, y: e.clientY, rx: curRx, ry: curRy };
+        lastPtr = { x: e.clientX, y: e.clientY, t: performance.now() }; moved = false;
+        stage.setPointerCapture(e.pointerId);
+      });
+      stage.addEventListener('pointermove', e => {
+        if (!dragStart) return;
+        const dx = e.clientX - dragStart.x, dy = e.clientY - dragStart.y;
+        if (Math.hypot(dx, dy) > 5) {
+          if (!moved) { moved = true; isDragging = true; tHoverRx = 0; tHoverRy = 0; stage.classList.add('is-dragging'); }
+          const now = performance.now(), dt = Math.max(8, now - lastPtr.t);
+          velX = (-(e.clientY - lastPtr.y) * 0.28 / dt) * 14;
+          velY = ((e.clientX - lastPtr.x) * 0.44 / dt) * 14;
+          lastPtr = { x: e.clientX, y: e.clientY, t: now };
+          curRx = Math.max(-36, Math.min(36, dragStart.rx - dy * 0.28));
+          curRy = dragStart.ry + dx * 0.44;
+          targetRx = curRx; targetRy = curRy;
+          poseBtns.forEach(b => b.classList.remove('is-active'));
+          if (!raf) raf = requestAnimationFrame(tick);
+        }
+      });
+      const endDrag = () => {
+        if (!dragStart) return;
+        stage.classList.remove('is-dragging');
+        const wasMoved = moved; isDragging = false; dragStart = null;
+        if (!wasMoved) {
+          const now = performance.now();
+          if (now - lastClick < 310) { lastClick = 0; goPose('flat'); }
+          else { lastClick = now; goPose(order[(cycleIdx + 1) % order.length]); }
+        } else if (!raf) raf = requestAnimationFrame(tick);
+      };
+      stage.addEventListener('pointerup', endDrag);
+      stage.addEventListener('pointercancel', endDrag);
+      if (reduced) goPose('flat'); else render();
+    }
+
+    // 3. 6-Repo SDK Workbench Switcher (with panel crossfade)
+    const sdkMap = Object.fromEntries(sdks.map(s => [s.id, s]));
+    const sdkBtns = [...document.querySelectorAll('#home-sdk-tabs .pb-sdk-btn')];
+    const sdkPanel = document.getElementById('home-sdk-panel');
+    let currentCmd = sdks[0].copy;
+    const sdkCopyBtn = document.getElementById('home-sdk-copy');
+    sdkBtns.forEach(btn => btn.addEventListener('click', () => {
+      const d = sdkMap[btn.dataset.sdkId]; if (!d) return;
+      sdkBtns.forEach(b => b.setAttribute('aria-selected', b === btn ? 'true' : 'false'));
+      document.getElementById('home-sdk-title').textContent = d.repo;
+      document.getElementById('home-sdk-sub').textContent = d.sub;
+      const badge = document.getElementById('home-sdk-badge');
+      badge.textContent = d.badge;
+      badge.classList.toggle('is-warn', d.warn);
+      document.getElementById('home-sdk-file').textContent = d.file;
+      document.getElementById('home-sdk-code').textContent = d.code;
+      document.getElementById('home-sdk-note').textContent = d.note;
+      document.getElementById('home-sdk-doc').href = d.doc;
+      currentCmd = d.copy;
+      sdkCopyBtn.classList.remove('is-copied');
+      sdkCopyBtn.textContent = isEn ? 'Copy command' : '复制';
+      if (sdkPanel) {
+        sdkPanel.classList.remove('is-switching');
+        void sdkPanel.offsetWidth;
+        sdkPanel.classList.add('is-switching');
+      }
+    }));
+    sdkCopyBtn?.addEventListener('click', () => {
+      if (navigator.clipboard) navigator.clipboard.writeText(currentCmd).catch(() => {});
+      sdkCopyBtn.classList.add('is-copied');
+      sdkCopyBtn.textContent = isEn ? 'Copied' : '已复制';
+      setTimeout(() => { sdkCopyBtn.classList.remove('is-copied'); sdkCopyBtn.textContent = isEn ? 'Copy command' : '复制'; }, 1500);
+    });
+
+    // 4. Section 2 Pipeline Flow (auto-replays sequential top beam whenever scrolled into view)
+    const pipeGrid = document.getElementById('home-pipe-grid');
+    const pipeSteps = [...document.querySelectorAll('[data-pipe-step]')];
+    let pipeTimers = [];
+    const clearPipeTimers = () => {
+      pipeTimers.forEach(clearTimeout);
+      pipeTimers = [];
+    };
+    const playPipeline = () => {
+      clearPipeTimers();
+      pipeSteps.forEach(el => el.classList.remove('is-lit'));
+      pipeSteps.forEach((el, i) => {
+        pipeTimers.push(setTimeout(() => el.classList.add('is-lit'), 120 + i * 260));
+      });
+    };
+
+    // 5. Progressive Scroll-Reveal & Scroll-Triggered Pipeline Replay
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+      document.documentElement.classList.add('has-reveal');
+      const revealEls = [...document.querySelectorAll('[data-reveal]')];
+      const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      revealEls.forEach(el => revealObs.observe(el));
+
+      if (pipeGrid && pipeSteps.length) {
+        pipeSteps.forEach(el => el.classList.remove('is-lit'));
+        const pipeObs = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              playPipeline();
+            } else {
+              clearPipeTimers();
+              pipeSteps.forEach(el => el.classList.remove('is-lit'));
+            }
+          });
+        }, { threshold: 0.2 });
+        pipeObs.observe(pipeGrid);
+      }
+    }
+  </script>
 </Layout>

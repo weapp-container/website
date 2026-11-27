@@ -1,0 +1,454 @@
+/*
+ * Weapp Container — Shared Sculpted 3D Hardware Chassis & Apple-Style Capsule Dock
+ * Used by both Homepage Hero 3D Phone and /demo/ Live WASM 3D Device Stage.
+ */
+
+/* 4 Metallic Chassis Finish Palettes (titanium | silver | graphite | jade) */
+.hw3d-device {
+  position: relative;
+  transform-style: preserve-3d;
+  --rx: 0deg;
+  --ry: 0deg;
+  --thick: 16px;
+  --half-t: 8px;
+  --rad: 36px;
+  --glare-x: 42%;
+  --glare-angle: 116deg;
+  --glare-op: 0.08;
+  --rim-shift: 45%;
+  --shadow-x: 0px;
+  --shadow-scale: 1;
+
+  /* Default finish: graphite */
+  --f-front-1: #48524d;
+  --f-front-2: #171c19;
+  --f-front-3: #2f3834;
+  --f-rail-hi: #66736c;
+  --f-rail-mid: #2a322e;
+  --f-rail-lo: #141916;
+  --f-btn-hi: #7a8780;
+  --f-btn-lo: #232a27;
+  --f-back-1: #262e2a;
+  --f-back-2: #161b18;
+  --f-back-3: #202824;
+  --f-cam-bg: rgba(10, 14, 12, 0.74);
+  --f-cam-ring: #3c4641;
+  --f-back-ink: rgba(232, 240, 236, 0.42);
+  --f-back-foot: rgba(232, 240, 236, 0.25);
+  --f-rim-glow: rgba(255, 255, 255, 0.28);
+}
+
+.hw3d-device.is-3d-active {
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+}
+
+.hw3d-device[data-finish='titanium'] {
+  --f-front-1: #dcd6ca;
+  --f-front-2: #8c867c;
+  --f-front-3: #beb8ac;
+  --f-rail-hi: #eee9df;
+  --f-rail-mid: #a7a095;
+  --f-rail-lo: #6c675e;
+  --f-btn-hi: #f2eee6;
+  --f-btn-lo: #837d73;
+  --f-back-1: #aba499;
+  --f-back-2: #857f75;
+  --f-back-3: #999288;
+  --f-cam-bg: rgba(112, 106, 97, 0.76);
+  --f-cam-ring: #d6d0c4;
+  --f-back-ink: rgba(28, 26, 23, 0.44);
+  --f-back-foot: rgba(28, 26, 23, 0.30);
+  --f-rim-glow: rgba(255, 252, 245, 0.56);
+}
+
+.hw3d-device[data-finish='silver'] {
+  --f-front-1: #f5f8f6;
+  --f-front-2: #b4beba;
+  --f-front-3: #e0e6e3;
+  --f-rail-hi: #ffffff;
+  --f-rail-mid: #c5ceca;
+  --f-rail-lo: #8b9590;
+  --f-btn-hi: #ffffff;
+  --f-btn-lo: #9ba5a0;
+  --f-back-1: #e4eae7;
+  --f-back-2: #c5ceca;
+  --f-back-3: #d7dfdc;
+  --f-cam-bg: rgba(190, 200, 196, 0.74);
+  --f-cam-ring: #f2f6f4;
+  --f-back-ink: rgba(19, 32, 26, 0.40);
+  --f-back-foot: rgba(19, 32, 26, 0.28);
+  --f-rim-glow: rgba(255, 255, 255, 0.72);
+}
+
+.hw3d-device[data-finish='jade'] {
+  --f-front-1: #3b6350;
+  --f-front-2: #11221a;
+  --f-front-3: #244435;
+  --f-rail-hi: #66a385;
+  --f-rail-mid: #234535;
+  --f-rail-lo: #0e1e17;
+  --f-btn-hi: #70b090;
+  --f-btn-lo: #1b3629;
+  --f-back-1: #203b2e;
+  --f-back-2: #102019;
+  --f-back-3: #183025;
+  --f-cam-bg: rgba(11, 24, 18, 0.78);
+  --f-cam-ring: #44725b;
+  --f-back-ink: rgba(162, 224, 192, 0.44);
+  --f-back-foot: rgba(162, 224, 192, 0.26);
+  --f-rim-glow: rgba(160, 240, 200, 0.36);
+}
+
+/* Reactive Grounded Floor Shadow */
+.hw3d-shadow {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: -22px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(19, 32, 26, 0.24) 0%, rgba(19, 32, 26, 0.06) 48%, rgba(19, 32, 26, 0) 74%);
+  transform: translateX(var(--shadow-x)) scaleX(var(--shadow-scale)) rotateX(88deg) translateZ(-22px);
+  pointer-events: none;
+}
+:root[data-theme='dark'] .hw3d-shadow {
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.16) 46%, rgba(0, 0, 0, 0) 74%);
+}
+
+/* Front Metallic Chamfered Face (Hero 3D Phone) */
+.hw3d-front {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(var(--half-t));
+  backface-visibility: hidden;
+  padding: 8px;
+  border-radius: var(--rad);
+  background: linear-gradient(140deg, var(--f-front-1) 0%, var(--f-front-2) 48%, var(--f-front-3) 100%);
+  box-shadow:
+    0 0 0 1px var(--f-rim-glow) inset,
+    0 1px 0 0 rgba(255, 255, 255, 0.24) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.48);
+}
+.hw3d-bezel {
+  width: 100%;
+  height: 100%;
+  background: #060807;
+  border-radius: calc(var(--rad) - 6px);
+  padding: 5px;
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.07) inset;
+}
+.hw3d-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--rad) - 10px);
+  overflow: hidden;
+  position: relative;
+  background: #f8faf8;
+  color: #13201a;
+}
+
+/* Moving Diagonal Specular Glass Reflection */
+.hw3d-sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    var(--glare-angle),
+    rgba(255, 255, 255, 0) calc(var(--glare-x) - 24%),
+    rgba(255, 255, 255, 0.22) calc(var(--glare-x) - 4%),
+    rgba(255, 255, 255, 0.05) calc(var(--glare-x) + 8%),
+    rgba(255, 255, 255, 0) calc(var(--glare-x) + 26%)
+  );
+  opacity: var(--glare-op);
+}
+
+/* Back Face (Frosted Glass + Pro Triple Camera Island + Etched Logo) */
+.hw3d-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg) translateZ(var(--half-t));
+  backface-visibility: hidden;
+  border-radius: var(--rad);
+  background: linear-gradient(155deg, var(--f-back-1) 0%, var(--f-back-2) 52%, var(--f-back-3) 100%);
+  box-shadow:
+    0 0 0 1px var(--f-rim-glow) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.48);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+.hw3d-cam {
+  align-self: flex-start;
+  width: 88px;
+  height: 88px;
+  border-radius: 22px;
+  background: var(--f-cam-bg);
+  border: 1px solid var(--f-rim-glow);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  padding: 9px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+  place-items: center;
+}
+.hw3d-lens {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 34%, #314857 0%, #0d141a 46%, #050708 70%, #1c2421 100%);
+  border: 2.5px solid var(--f-cam-ring);
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.78), 0 2px 6px rgba(0, 0, 0, 0.42);
+  position: relative;
+}
+.hw3d-lens::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 7px;
+  width: 5.5px;
+  height: 5.5px;
+  border-radius: 50%;
+  background: rgba(132, 224, 186, 0.45);
+}
+.hw3d-flash-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+}
+.hw3d-flash {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff7d6 0%, #d8be88 68%, #6d5b3e 100%);
+}
+.hw3d-lidar {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #080b0a;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+.hw3d-back-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  color: var(--f-back-ink);
+}
+.hw3d-back-brand img {
+  width: 32px;
+  height: 32px;
+  opacity: 0.48;
+  filter: grayscale(0.35);
+}
+.hw3d-back-brand span {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+.hw3d-back-foot {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  color: var(--f-back-foot);
+  letter-spacing: 0.08em;
+}
+
+/* Watertight Rounded-Corner Extrusion Slices (fills curved 3D corners seamlessly with zero protruding fins) */
+.hw3d-slice {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--rad);
+  pointer-events: none;
+  background: linear-gradient(
+    145deg,
+    var(--f-rail-hi) 0%,
+    var(--f-rail-mid) 46%,
+    var(--f-rail-lo) 100%
+  );
+  box-shadow: inset 0 0 0 1px var(--f-rim-glow);
+}
+.hw3d-slice.s1 { transform: translateZ(calc(var(--half-t) * 0.68)); }
+.hw3d-slice.s2 { transform: translateZ(calc(var(--half-t) * 0.24)); }
+.hw3d-slice.s3 { transform: translateZ(calc(var(--half-t) * -0.24)); }
+.hw3d-slice.s4 { transform: translateZ(calc(var(--half-t) * -0.68)); }
+
+/* 4 Extruded Metallic Brushed Titanium Sides (strictly bounded by var(--rad) so straight edges never poke past corners) */
+.hw3d-side {
+  position: absolute;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    var(--f-rail-lo) 0%,
+    var(--f-rail-mid) calc(var(--rim-shift) - 24%),
+    var(--f-rail-hi) var(--rim-shift),
+    var(--f-rail-mid) calc(var(--rim-shift) + 22%),
+    var(--f-rail-lo) 100%
+  );
+}
+.hw3d-side-left {
+  top: var(--rad);
+  bottom: var(--rad);
+  left: 0;
+  width: var(--thick);
+  transform-origin: left center;
+  transform: translateZ(var(--half-t)) rotateY(90deg);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px var(--f-rim-glow);
+}
+.hw3d-side-right {
+  top: var(--rad);
+  bottom: var(--rad);
+  right: 0;
+  width: var(--thick);
+  transform-origin: right center;
+  transform: translateZ(var(--half-t)) rotateY(-90deg);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px var(--f-rim-glow);
+}
+.hw3d-side-top {
+  left: var(--rad);
+  right: var(--rad);
+  top: 0;
+  height: var(--thick);
+  transform-origin: top center;
+  transform: translateZ(var(--half-t)) rotateX(-90deg);
+  background: linear-gradient(90deg, var(--f-rail-lo), var(--f-rail-hi) var(--rim-shift), var(--f-rail-lo));
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px var(--f-rim-glow);
+}
+.hw3d-side-bottom {
+  left: var(--rad);
+  right: var(--rad);
+  bottom: 0;
+  height: var(--thick);
+  transform-origin: bottom center;
+  transform: translateZ(var(--half-t)) rotateX(90deg);
+  background: linear-gradient(90deg, var(--f-rail-lo), var(--f-rail-hi) var(--rim-shift), var(--f-rail-lo));
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px var(--f-rim-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.hw3d-antenna {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.28);
+}
+.hw3d-antenna.a-top { top: 28px; }
+.hw3d-antenna.a-bot { bottom: 32px; }
+.hw3d-usbc {
+  width: 24px;
+  height: 5.5px;
+  border-radius: 99px;
+  background: #060807;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+}
+.hw3d-spk { display: inline-flex; gap: 2.5px; }
+.hw3d-spk i { width: 2.5px; height: 2.5px; border-radius: 50%; background: rgba(0, 0, 0, 0.65); }
+
+.hw3d-btn {
+  position: absolute;
+  left: 3.5px;
+  width: 9px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--f-btn-hi), var(--f-btn-lo));
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.hw3d-btn.rb-action { top: 58px; height: 20px; }
+.hw3d-btn.rb-vol1 { top: 92px; height: 38px; }
+.hw3d-btn.rb-vol2 { top: 140px; height: 38px; }
+.hw3d-btn.rb-power { top: 106px; height: 54px; }
+
+/* Metallic Finish Swatches */
+.hw3d-swatches {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.hw3d-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  padding: 0;
+  transition: transform 140ms var(--ease), box-shadow 140ms var(--ease);
+}
+.hw3d-swatch:hover { transform: scale(1.14); }
+.hw3d-swatch.is-active {
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 3.5px var(--accent);
+}
+.hw3d-swatch[data-finish='titanium'] { background: linear-gradient(135deg, #e0dad0, #8f897f); }
+.hw3d-swatch[data-finish='silver']   { background: linear-gradient(135deg, #f7faf8, #bcc5c1); border-color: rgba(19, 32, 26, 0.24); }
+.hw3d-swatch[data-finish='graphite'] { background: linear-gradient(135deg, #4a534f, #171c19); }
+.hw3d-swatch[data-finish='jade']     { background: linear-gradient(135deg, #4b876a, #11241b); }
+
+/* Apple-Style Floating Capsule Dock */
+.hw3d-dock {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 12px 30px rgba(19, 32, 26, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+:root[data-theme='dark'] .hw3d-dock {
+  background: rgba(19, 26, 23, 0.84);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+.hw3d-dock-btn {
+  height: 28px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-sec);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  transition: background 140ms var(--ease), color 140ms var(--ease);
+}
+.hw3d-dock-btn:hover { background: var(--surface-soft); color: var(--text); }
+.hw3d-dock-btn.is-active {
+  background: var(--accent);
+  color: var(--inverse);
+  font-weight: 600;
+}
+.hw3d-dock-sep {
+  width: 1px;
+  height: 15px;
+  background: var(--line-strong);
+  margin: 0 2px;
+}
+.hw3d-dock-finish-lbl {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--muted);
+  min-width: 52px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hw3d-swatch,
+  .hw3d-dock-btn { transition: none; }
+}
